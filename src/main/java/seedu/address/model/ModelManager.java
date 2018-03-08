@@ -83,7 +83,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
     @Override
-    public void deleteTag(Tag toDelete) throws TagNotFoundException{
+    public void deleteTag(Tag toDelete) throws TagNotFoundException {
         addressBook.deleteTag(toDelete);
     }
     //=========== Filtered Person List Accessors =============================================================

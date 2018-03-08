@@ -97,10 +97,8 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Deletes {@code toDelete} tag from every person in internalList
      */
-    public void deleteTagFromPersons(Tag toDelete)
-    {
-        for (Person person : internalList)
-        {
+    public void deleteTagFromPersons(Tag toDelete) {
+        for (Person person : internalList) {
             person.deleteTag(toDelete);
         }
     }

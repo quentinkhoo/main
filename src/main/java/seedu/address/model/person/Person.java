@@ -58,6 +58,12 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags.toSet());
     }
+    /**
+     * Deletes (@code toDelete) tag
+     */
+    public void deleteTag(Tag toDelete) {
+        tags.delete(toDelete);
+    }
 
     @Override
     public boolean equals(Object other) {

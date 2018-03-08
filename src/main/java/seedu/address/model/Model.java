@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * The API of the Model component.
@@ -25,7 +27,6 @@ public interface Model {
 
     /** Adds the given person */
     void addPerson(Person person) throws DuplicatePersonException;
-
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      *
@@ -44,5 +45,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-
+    /**
+     * Deletes given tag from system
+     */
+    void deleteTag(Tag toDelete)throws TagNotFoundException;
 }

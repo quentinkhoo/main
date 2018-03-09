@@ -49,16 +49,25 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         colorTag(person);
-        //person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    /**
+     *
+     * Creates tag labels for person
+     */
     private void colorTag(Person person) {
-        person.getTags().forEach(tag -> { Label tagLabel = new Label(tag.tagName);
-                tagLabel.getStyleClass().add(getTagColorStyle(tag.tagName));
-                tags.getChildren().add(tagLabel);
-                });
+        person.getTags().forEach(tag -> {
+            Label tagLabel = new Label(tag.tagName);
+            tagLabel.getStyleClass().add(getTagColorStyle(tag.tagName));
+            tags.getChildren().add(tagLabel);
+        });
     }
 
+    /**
+     *
+     * @param tagName
+     * @return Colour in the array
+     */
     private String getTagColorStyle(String tagName) {
         // Hash the tag name to get the corresponding colour
         return LABEL_COLOR[Math.abs(tagName.hashCode()) % LABEL_COLOR.length];

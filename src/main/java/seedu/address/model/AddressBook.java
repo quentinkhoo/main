@@ -157,12 +157,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Deletes {@code AddressBook} from all person and UniqueTagList
      */
     public void deleteTag(Tag toDelete) throws TagNotFoundException {
-        if(tags.contains(toDelete)) {
+        if (tags.contains(toDelete)) {
             tags.delete(toDelete);
             persons.deleteTagFromPersons(toDelete);
-        }
-        else
-        {
+        } else {
             throw new TagNotFoundException();
         }
     }

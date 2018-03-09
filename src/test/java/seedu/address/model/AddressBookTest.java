@@ -1,8 +1,10 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.TypicalPersons.*;
-
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,7 +28,9 @@ public class AddressBookTest {
     public ExpectedException thrown = ExpectedException.none();
 
 
-    private final AddressBook addressBookWithAliceAndBob = new AddressBookBuilder().withPerson(ALICE).withPerson(BOB).build();
+    private final AddressBook addressBookWithAliceAndBob =
+            new AddressBookBuilder().withPerson(ALICE).withPerson(BOB).build();
+
 
     private final AddressBook addressBook = new AddressBook();
 
@@ -72,11 +76,12 @@ public class AddressBookTest {
         addressBook.getTagList().remove(0);
     }
     @Test
-    public void deleteTag_UsedByMultiplePersons_tagDeleted() throws Exception {
+    public void deleteTag_usedByMultiplePersons_tagDeleted() throws Exception {
         Person amyWithFriendTag = new PersonBuilder(AMY).withTags("Friend").build();
         Person bobWithFriendTag = new PersonBuilder(BOB).withTags("Friend").build();
 
-        AddressBook addressBook = new AddressBookBuilder().withPerson(amyWithFriendTag).withPerson(bobWithFriendTag).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(amyWithFriendTag)
+                .withPerson(bobWithFriendTag).build();
         UserPrefs userPrefs = new UserPrefs();
 
         ModelManager modelManager = new ModelManager(addressBook, userPrefs);
@@ -85,9 +90,10 @@ public class AddressBookTest {
         Person amyNoFriendTag = new PersonBuilder(AMY).withTags().build();
         Person bobNoFriendTag = new PersonBuilder(BOB).withTags().build();
 
-        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(amyNoFriendTag).withPerson(bobNoFriendTag).build();
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(amyNoFriendTag)
+                .withPerson(bobNoFriendTag).build();
 
-        assertEquals(new ModelManager(expectedAddressBook,userPrefs),modelManager);
+        assertEquals(new ModelManager(expectedAddressBook, userPrefs), modelManager);
     }
     /**
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.

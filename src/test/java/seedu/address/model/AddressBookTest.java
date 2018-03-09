@@ -1,8 +1,7 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,11 +17,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+
+    private final AddressBook addressBookWithAliceAndBob = new AddressBookBuilder().withPerson(ALICE).withPerson(BOB).build();
 
     private final AddressBook addressBook = new AddressBook();
 
@@ -67,7 +71,24 @@ public class AddressBookTest {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getTagList().remove(0);
     }
+    @Test
+    public void deleteTag_UsedByMultiplePersons_tagDeleted() throws Exception {
+        Person amyWithFriendTag = new PersonBuilder(AMY).withTags("Friend").build();
+        Person bobWithFriendTag = new PersonBuilder(BOB).withTags("Friend").build();
 
+        AddressBook addressBook = new AddressBookBuilder().withPerson(amyWithFriendTag).withPerson(bobWithFriendTag).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
+        modelManager.deleteTag(new Tag("Friend"));
+
+        Person amyNoFriendTag = new PersonBuilder(AMY).withTags().build();
+        Person bobNoFriendTag = new PersonBuilder(BOB).withTags().build();
+
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(amyNoFriendTag).withPerson(bobNoFriendTag).build();
+
+        assertEquals(new ModelManager(expectedAddressBook,userPrefs),modelManager);
+    }
     /**
      * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
      */

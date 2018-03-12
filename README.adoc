@@ -1,4 +1,4 @@
-= Address Book (Level 4)
+= Investigapptor
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2103JAN2018-F14-B3/main[image:https://travis-ci.org/CS2103JAN2018-F14-B3/main.svg?branch=master[Build Status]]
@@ -15,19 +15,32 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* This is a desktop Address Book application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as the main programming language.
-* It is *written in OOP fashion*. It provides a *reasonably well-written* code example that is *significantly bigger* (around 6 KLoC)than what students usually write in beginner-level SE modules.
-* What's different from https://github.com/se-edu/addressbook-level3[level 3]:
-** A more sophisticated GUI that includes a list  panel and an in-built Browser.
-** More test cases, including automated GUI testing.
-** Support for _Build Automation_ using Gradle and for _Continuous Integration_ using Travis CI.
+Investigapptor is a one-stop solution for investigators to make managing cases as simple, straightforward, and efficient as possible.
+
+== Why use Investigapptor?
+
+Our primary goals are:
+
+* Streamline the complex investigations process
+* Maximise workflow efficiency through use of electronic input
+* Eradicate risks associated with paper-based processing
+* Offer a fuss-free and seamless user experience
+
+== What can Investigapptor do?
+
+Investigapptor is currently in its early stages of development. Below are some are the features that you can expect:
+
+* Overview of investigators and cases
+* Assign cases to investigators
+* Assess key information of a case
+* Categorise cases with labels
+
+Note that Investigapptor is a desktop application with a GUI, but most of the user interactions happen using a CLI (Command Line Interface).
 
 == Site Map
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 

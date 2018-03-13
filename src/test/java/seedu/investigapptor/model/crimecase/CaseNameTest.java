@@ -32,10 +32,10 @@ public class CaseNameTest {
         assertFalse(CaseName.isValidCaseName("peter*")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(CaseName.isValidCaseName("peter jack")); // alphabets only
+        assertTrue(CaseName.isValidCaseName("jack the ripper")); // alphabets only
         assertTrue(CaseName.isValidCaseName("12345")); // numbers only
-        assertTrue(CaseName.isValidCaseName("peter the 2nd")); // alphanumeric characters
-        assertTrue(CaseName.isValidCaseName("Capital Tan")); // with capital letters
-        assertTrue(CaseName.isValidCaseName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(CaseName.isValidCaseName("jack the ripper number 2")); // alphanumeric characters
+        assertTrue(CaseName.isValidCaseName("Capital Jack")); // with capital letters
+        assertTrue(CaseName.isValidCaseName("Jack The Ripper Junior 2nd")); // long names
     }
 }

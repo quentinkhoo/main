@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Investigapptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
@@ -9,26 +9,26 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code Investigapptor ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private Investigapptor investigapptor;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        investigapptor = new Investigapptor();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(Investigapptor investigapptor) {
+        this.investigapptor = investigapptor;
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Person} to the {@code Investigapptor} that we are building.
      */
     public AddressBookBuilder withPerson(Person person) {
         try {
-            addressBook.addPerson(person);
+            investigapptor.addPerson(person);
         } catch (DuplicatePersonException dpe) {
             throw new IllegalArgumentException("person is expected to be unique.");
         }
@@ -36,18 +36,18 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Parses {@code tagName} into a {@code Tag} and adds it to the {@code AddressBook} that we are building.
+     * Parses {@code tagName} into a {@code Tag} and adds it to the {@code Investigapptor} that we are building.
      */
     public AddressBookBuilder withTag(String tagName) {
         try {
-            addressBook.addTag(new Tag(tagName));
+            investigapptor.addTag(new Tag(tagName));
         } catch (IllegalValueException ive) {
             throw new IllegalArgumentException("tagName is expected to be valid.");
         }
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public Investigapptor build() {
+        return investigapptor;
     }
 }

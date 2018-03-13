@@ -8,13 +8,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Investigapptor;
+import seedu.address.model.ReadOnlyInvestigapptor;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable Investigapptor that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "investigapptor")
 public class XmlSerializableAddressBook {
 
     @XmlElement
@@ -34,27 +34,27 @@ public class XmlSerializableAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableAddressBook(ReadOnlyInvestigapptor src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this addressbook into the model's {@code AddressBook} object.
+     * Converts this addressbook into the model's {@code Investigapptor} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public Investigapptor toModelType() throws IllegalValueException {
+        Investigapptor investigapptor = new Investigapptor();
         for (XmlAdaptedTag t : tags) {
-            addressBook.addTag(t.toModelType());
+            investigapptor.addTag(t.toModelType());
         }
         for (XmlAdaptedPerson p : persons) {
-            addressBook.addPerson(p.toModelType());
+            investigapptor.addPerson(p.toModelType());
         }
-        return addressBook;
+        return investigapptor;
     }
 
     @Override

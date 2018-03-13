@@ -1,0 +1,29 @@
+package seedu.investigapptor.logic.parser;
+
+import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.investigapptor.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.investigapptor.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import org.junit.Test;
+
+import seedu.investigapptor.logic.commands.SelectCommand;
+
+/**
+ * Test scope: similar to {@code DeleteCommandParserTest}.
+ * @see DeleteCommandParserTest
+ */
+public class SelectCommandParserTest {
+
+    private SelectCommandParser parser = new SelectCommandParser();
+
+    @Test
+    public void parse_validArgs_returnsSelectCommand() {
+        assertParseSuccess(parser, "1", new SelectCommand(INDEX_FIRST_PERSON));
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+    }
+}

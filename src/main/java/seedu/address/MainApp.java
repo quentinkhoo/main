@@ -61,7 +61,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        InvestigapptorStorage investigapptorStorage = new XmlInvestigapptorStorage(userPrefs.getInvestigapptorFilePath());
+        InvestigapptorStorage investigapptorStorage = new
+                XmlInvestigapptorStorage(userPrefs.getInvestigapptorFilePath());
         storage = new StorageManager(investigapptorStorage, userPrefsStorage);
 
         initLogging(config);

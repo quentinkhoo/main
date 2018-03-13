@@ -15,7 +15,7 @@ import seedu.address.model.ReadOnlyInvestigapptor;
  * An Immutable Investigapptor that is serializable to XML format
  */
 @XmlRootElement(name = "investigapptor")
-public class XmlSerializableAddressBook {
+public class XmlSerializableInvestigapptor {
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
@@ -23,10 +23,10 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedTag> tags;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableInvestigapptor.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableInvestigapptor() {
         persons = new ArrayList<>();
         tags = new ArrayList<>();
     }
@@ -34,14 +34,14 @@ public class XmlSerializableAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyInvestigapptor src) {
+    public XmlSerializableInvestigapptor(ReadOnlyInvestigapptor src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this addressbook into the model's {@code Investigapptor} object.
+     * Converts this investigapptor into the model's {@code Investigapptor} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
@@ -63,11 +63,11 @@ public class XmlSerializableAddressBook {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableInvestigapptor)) {
             return false;
         }
 
-        XmlSerializableAddressBook otherAb = (XmlSerializableAddressBook) other;
+        XmlSerializableInvestigapptor otherAb = (XmlSerializableInvestigapptor) other;
         return persons.equals(otherAb.persons) && tags.equals(otherAb.tags);
     }
 }

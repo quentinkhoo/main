@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.Investigapptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
@@ -61,18 +61,18 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code Investigapptor} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Investigapptor getTypicalInvestigapptor() {
+        Investigapptor ia = new Investigapptor();
         for (Person person : getTypicalPersons()) {
             try {
-                ab.addPerson(person);
+                ia.addPerson(person);
             } catch (DuplicatePersonException e) {
                 throw new AssertionError("not possible");
             }
         }
-        return ab;
+        return ia;
     }
 
     public static List<Person> getTypicalPersons() {

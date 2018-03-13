@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<investigapptor>
     <!-- Person with invalid name field -->
     <persons>
         <name>Ha!ns Mu@ster</name>
@@ -7,4 +7,4 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
     </persons>
-</addressbook>
+</investigapptor>

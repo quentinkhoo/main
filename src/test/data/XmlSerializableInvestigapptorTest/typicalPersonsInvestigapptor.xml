@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- AddressBook save file which contains the same Person values as in
-{@code TypicalPersons#getTypicalAddressBook()}-->
-<addressbook>
+<!-- Investigapptor save file which contains the same Person values as in
+{@code TypicalPersons#getTypicalInvestigapptor()}-->
+<investigapptor>
     <persons>
         <name>Alice Pauline</name>
         <phone>85355255</phone>
@@ -49,4 +49,4 @@
     </persons>
     <tags>friends</tags>
     <tags>owesMoney</tags>
-</addressbook>
+</investigapptor>

@@ -7,26 +7,26 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building Investigapptor objects.
  * Example usage: <br>
- *     {@code Investigapptor ab = new AddressBookBuilder().withPerson("John", "Doe").withTag("Friend").build();}
+ *     {@code Investigapptor ab = new InvestigapptorBuilder().withPerson("John", "Doe").withTag("Friend").build();}
  */
-public class AddressBookBuilder {
+public class InvestigapptorBuilder {
 
     private Investigapptor investigapptor;
 
-    public AddressBookBuilder() {
+    public InvestigapptorBuilder() {
         investigapptor = new Investigapptor();
     }
 
-    public AddressBookBuilder(Investigapptor investigapptor) {
+    public InvestigapptorBuilder(Investigapptor investigapptor) {
         this.investigapptor = investigapptor;
     }
 
     /**
      * Adds a new {@code Person} to the {@code Investigapptor} that we are building.
      */
-    public AddressBookBuilder withPerson(Person person) {
+    public InvestigapptorBuilder withPerson(Person person) {
         try {
             investigapptor.addPerson(person);
         } catch (DuplicatePersonException dpe) {
@@ -38,7 +38,7 @@ public class AddressBookBuilder {
     /**
      * Parses {@code tagName} into a {@code Tag} and adds it to the {@code Investigapptor} that we are building.
      */
-    public AddressBookBuilder withTag(String tagName) {
+    public InvestigapptorBuilder withTag(String tagName) {
         try {
             investigapptor.addTag(new Tag(tagName));
         } catch (IllegalValueException ive) {

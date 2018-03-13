@@ -4,48 +4,49 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Investigapptor;
+import seedu.address.model.ReadOnlyInvestigapptor;
 
 /**
- * Represents a storage for {@link seedu.address.model.AddressBook}.
+ * Represents a storage for {@link Investigapptor}.
  */
-public interface AddressBookStorage {
+public interface InvestigapptorStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    String getAddressBookFilePath();
+    String getInvestigapptorFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns Investigapptor data as a {@link ReadOnlyInvestigapptor}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyInvestigapptor> readInvestigapptor() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getInvestigapptorFilePath()
      */
-    Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
-     * @param addressBook cannot be null.
+     * Saves the given {@link ReadOnlyInvestigapptor} to the storage.
+     * @param investigapptor cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveInvestigapptor(ReadOnlyInvestigapptor investigapptor) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAddressBook)
+     * @see #saveInvestigapptor(ReadOnlyInvestigapptor)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException;
+    void saveInvestigapptor(ReadOnlyInvestigapptor investigapptor, String filePath) throws IOException;
 
     /**
-     * Creates a backup of the given {@link ReadOnlyAddressBook} to the storage.
-     * @param addressBook cannot be null.
+     * Creates a backup of the given {@link ReadOnlyInvestigapptor} to the storage.
+     * @param investigapptor cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void backupInvestigapptor(ReadOnlyInvestigapptor investigapptor) throws IOException;
 
 }

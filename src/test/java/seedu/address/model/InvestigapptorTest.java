@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalInvestigapptor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,38 +20,38 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.InvestigapptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class InvestigapptorTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
 
-    private final AddressBook addressBookWithAliceAndBob =
-            new AddressBookBuilder().withPerson(ALICE).withPerson(BOB).build();
+    private final Investigapptor investigapptorWithAliceAndBob =
+            new InvestigapptorBuilder().withPerson(ALICE).withPerson(BOB).build();
 
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Investigapptor investigapptor = new Investigapptor();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), investigapptor.getPersonList());
+        assertEquals(Collections.emptyList(), investigapptor.getTagList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.resetData(null);
+        investigapptor.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyInvestigapptor_replacesData() {
+        Investigapptor newData = getTypicalInvestigapptor();
+        investigapptor.resetData(newData);
+        assertEquals(newData, investigapptor);
     }
 
     @Test
@@ -59,51 +59,51 @@ public class AddressBookTest {
         // Repeat ALICE twice
         List<Person> newPersons = Arrays.asList(ALICE, ALICE);
         List<Tag> newTags = new ArrayList<>(ALICE.getTags());
-        AddressBookStub newData = new AddressBookStub(newPersons, newTags);
+        InvestigapptorStub newData = new InvestigapptorStub(newPersons, newTags);
 
         thrown.expect(AssertionError.class);
-        addressBook.resetData(newData);
+        investigapptor.resetData(newData);
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getPersonList().remove(0);
+        investigapptor.getPersonList().remove(0);
     }
 
     @Test
     public void getTagList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getTagList().remove(0);
+        investigapptor.getTagList().remove(0);
     }
     @Test
     public void deleteTag_usedByMultiplePersons_tagDeleted() throws Exception {
         Person amyWithFriendTag = new PersonBuilder(AMY).withTags("Friend").build();
         Person bobWithFriendTag = new PersonBuilder(BOB).withTags("Friend").build();
 
-        AddressBook addressBook = new AddressBookBuilder().withPerson(amyWithFriendTag)
+        Investigapptor investigapptor = new InvestigapptorBuilder().withPerson(amyWithFriendTag)
                 .withPerson(bobWithFriendTag).build();
         UserPrefs userPrefs = new UserPrefs();
 
-        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
+        ModelManager modelManager = new ModelManager(investigapptor, userPrefs);
         modelManager.deleteTag(new Tag("Friend"));
 
         Person amyNoFriendTag = new PersonBuilder(AMY).withTags().build();
         Person bobNoFriendTag = new PersonBuilder(BOB).withTags().build();
 
-        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(amyNoFriendTag)
+        Investigapptor expectedInvestigapptor = new InvestigapptorBuilder().withPerson(amyNoFriendTag)
                 .withPerson(bobNoFriendTag).build();
 
-        assertEquals(new ModelManager(expectedAddressBook, userPrefs), modelManager);
+        assertEquals(new ModelManager(expectedInvestigapptor, userPrefs), modelManager);
     }
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyInvestigapptor whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class InvestigapptorStub implements ReadOnlyInvestigapptor {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<? extends Tag> tags) {
+        InvestigapptorStub(Collection<Person> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }

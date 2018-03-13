@@ -109,7 +109,8 @@ public class XmlInvestigapptorStorageTest {
      */
     private void saveInvestigapptor(ReadOnlyInvestigapptor investigapptor, String filePath) {
         try {
-            new XmlInvestigapptorStorage(filePath).saveInvestigapptor(investigapptor, addToTestDataPathIfNotNull(filePath));
+            new XmlInvestigapptorStorage(filePath).saveInvestigapptor(investigapptor,
+                                                                        addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

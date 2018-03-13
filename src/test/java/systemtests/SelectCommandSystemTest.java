@@ -53,7 +53,7 @@ public class SelectCommandSystemTest extends InvestigapptorSystemTest {
 
         /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 
-        /* Case: filtered person list, select index within bounds of investigapptor book but out of bounds of person list
+        /* Case: filtered person list, select index within bounds of investigapptor but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);

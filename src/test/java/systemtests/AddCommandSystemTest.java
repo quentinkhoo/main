@@ -60,7 +60,7 @@ public class AddCommandSystemTest extends InvestigapptorSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a person without tags to a non-empty investigapptor book, command with leading spaces and trailing spaces
+        /* Case: add a person without tags to a non-empty investigapptor, command with leading and trailing spaces
          * -> added
          */
         Person toAdd = AMY;
@@ -86,21 +86,23 @@ public class AddCommandSystemTest extends InvestigapptorSystemTest {
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a person with all fields same as another person in the investigapptor book except phone -> added */
+        /* Case: add a person with all fields same as another person in the investigapptor except phone -> added */
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a person with all fields same as another person in the investigapptor book except email -> added */
+        /* Case: add a person with all fields same as another person in the investigapptor except email -> added */
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a person with all fields same as another person in the investigapptor book except investigapptor -> added */
+        /* Case: add a person with all fields same as another person in the investigapptor except investigapptor
+        -> added
+        */
         toAdd = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_FRIEND).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_BOB

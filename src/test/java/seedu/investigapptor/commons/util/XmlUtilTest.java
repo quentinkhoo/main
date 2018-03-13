@@ -70,7 +70,8 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        Investigapptor dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableInvestigapptor.class).toModelType();
+        Investigapptor dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableInvestigapptor.class).
+                                        toModelType();
         assertEquals(9, dataFromFile.getPersonList().size());
         assertEquals(0, dataFromFile.getTagList().size());
     }
@@ -125,7 +126,8 @@ public class XmlUtilTest {
         TEMP_FILE.createNewFile();
         XmlSerializableInvestigapptor dataToWrite = new XmlSerializableInvestigapptor(new Investigapptor());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableInvestigapptor dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableInvestigapptor.class);
+        XmlSerializableInvestigapptor dataFromFile = XmlUtil.getDataFromFile(
+                                                        TEMP_FILE, XmlSerializableInvestigapptor.class);
         assertEquals(dataToWrite, dataFromFile);
 
         InvestigapptorBuilder builder = new InvestigapptorBuilder(new Investigapptor());

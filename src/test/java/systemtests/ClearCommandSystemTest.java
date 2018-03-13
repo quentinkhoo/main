@@ -18,8 +18,8 @@ public class ClearCommandSystemTest extends InvestigapptorSystemTest {
     public void clear() {
         final Model defaultModel = getModel();
 
-        /* Case: clear non-empty investigapptor book, command with leading spaces and trailing alphanumeric characters and
-         * spaces -> cleared
+        /* Case: clear non-empty investigapptor, command with leading spaces and trailing alphanumeric characters
+         * and spaces -> cleared
          */
         assertCommandSuccess("   " + ClearCommand.COMMAND_WORD + " ab12   ");
         assertSelectedCardUnchanged();

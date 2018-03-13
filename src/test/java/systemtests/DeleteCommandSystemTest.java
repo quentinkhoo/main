@@ -65,7 +65,7 @@ public class DeleteCommandSystemTest extends InvestigapptorSystemTest {
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
         assertCommandSuccess(index);
 
-        /* Case: filtered person list, delete index within bounds of investigapptor book but out of bounds of person list
+        /* Case: filtered person list, delete index within bounds of investigapptor but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);

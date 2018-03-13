@@ -35,7 +35,7 @@ public class DescriptionTest {
         assertTrue(CaseName.isValidCaseName("jack the ripper")); // alphabets only
         assertTrue(CaseName.isValidCaseName("12345")); // numbers only
         assertTrue(CaseName.isValidCaseName("rape at geylang 8.")); // alphanumeric characters
-        assertTrue(CaseName.isValidCaseName("10000 packets of drugs at Geylang")); // with capital letters and dollar sign
+        assertTrue(CaseName.isValidCaseName("10000 packets of drugs at Geylang")); // with capital letters
         assertTrue(CaseName.isValidCaseName("Jack The Ripper Junior 2nd")); // long names
     }
 }

@@ -10,15 +10,9 @@ import static seedu.investigapptor.commons.util.AppUtil.checkArgument;
 public class Description {
 
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "Crime case descriptions should begin with alphanumeric characters,"
-            + " and only contain alphanumeric characters, spaces, periods throughout "
-            + "and it should not be blank";
+            "Crime case descriptions should not be blank";
 
-    /*
-     * The first character of the description must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String DESCRIPTION_VALIDATION_REGEX = ".*[a-zA-Z0-9].*";
+    public static final String CASE_NAME_VALIDATION_REGEX = "[\\p{Graph}][\\p{Graph}]*";
 
     public final String description;
 
@@ -37,7 +31,7 @@ public class Description {
      * Returns true if a given string is a valid case description.
      */
     public static boolean isValidDescription(String test) {
-        return test.matches(DESCRIPTION_VALIDATION_REGEX);
+        return test.trim() != null && !test.trim().isEmpty();
     }
 
     @Override

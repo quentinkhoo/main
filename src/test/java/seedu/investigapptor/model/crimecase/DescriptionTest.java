@@ -15,7 +15,7 @@ public class DescriptionTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
+    public void constructor_invalidDescription_throwsIllegalArgumentException() {
         String invalidDescription = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription));
     }
@@ -28,14 +28,12 @@ public class DescriptionTest {
         // invalid description
         assertFalse(Description.isValidDescription("")); // empty string
         assertFalse(Description.isValidDescription(" ")); // spaces only
-        assertFalse(Description.isValidDescription("^")); // only non-alphanumeric characters
-        assertFalse(Description.isValidDescription("peter*")); // contains non acceptable alphanumeric characters
 
         // valid description
-        assertTrue(CaseName.isValidCaseName("jack the ripper")); // alphabets only
-        assertTrue(CaseName.isValidCaseName("12345")); // numbers only
-        assertTrue(CaseName.isValidCaseName("rape at geylang 8.")); // alphanumeric characters
-        assertTrue(CaseName.isValidCaseName("10000 packets of drugs at Geylang")); // with capital letters
-        assertTrue(CaseName.isValidCaseName("Jack The Ripper Junior 2nd")); // long names
+        assertTrue(Description.isValidDescription("jack the ripper")); // alphabets only
+        assertTrue(Description.isValidDescription("12345")); // numbers only
+        assertTrue(Description.isValidDescription("rape at geylang 8.")); // alphanumeric and special characters
+        assertTrue(Description.isValidDescription("10000 packets of drugs at Geylang")); // with capital letters
+        assertTrue(Description.isValidDescription("Jack The Ripper Junior 2nd")); // long descriptions
     }
 }

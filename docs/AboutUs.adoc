@@ -3,53 +3,43 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
-{empty} +
+Investigapptor was developed by the CS2103T AY17/18 F14-B# Team. +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
-
-Role: Project Advisor
-
-'''
-
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
-
-Role: Team Lead +
-Responsibilities: UI
-
-'''
-
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Quentin Khoo
+image::quentinkhoo.jpg[width="150", align="left"]
+{empty}[https://github.com/quentinkhoo[github]] [<<quentinkhoo#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: Documentation, Logic, Deliverables and Deadlines +
 
 '''
 
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+=== Leow Wei Ching
+image::leowweiching.jpg[width="150", align="left"]
+{empty}[http://github.com/leowweiching[github]] [<<leowweiching#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Dev Ops + Threading
+Responsibilities: Documentation, Storage, Deliverables and Deadlines +
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Marcus Chen
+image::marcus-cxc.jpg[width="150", align="left"]
+{empty}[http://github.com/marcus-cxc[github]] [<<marcus-cxc#, portfolio>>]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: Documentation, Model, Deliverables and Deadlines +
+
+'''
+
+=== Poh Kai Jun
+image::pkaijun.jpg[width="150", align="left"]
+{empty}[http://github.com/pkaijun[github]] [<<pkaijun#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Documentation, UI, Deliverables and Deadlines +
 
 '''

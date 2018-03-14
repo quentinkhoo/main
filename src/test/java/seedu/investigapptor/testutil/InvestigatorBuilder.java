@@ -1,11 +1,16 @@
 package seedu.investigapptor.testutil;
 
-import seedu.investigapptor.model.person.*;
-import seedu.investigapptor.model.tag.Tag;
-import seedu.investigapptor.model.util.SampleDataUtil;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import seedu.investigapptor.model.person.Address;
+import seedu.investigapptor.model.person.Email;
+import seedu.investigapptor.model.person.Investigator;
+import seedu.investigapptor.model.person.Name;
+import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.Phone;
+import seedu.investigapptor.model.tag.Tag;
+import seedu.investigapptor.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -54,7 +59,7 @@ public class InvestigatorBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public InvestigatorBuilder withTags(String ... tags) {
+    public InvestigatorBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }

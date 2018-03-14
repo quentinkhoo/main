@@ -1,16 +1,17 @@
 package seedu.investigapptor.testutil;
 
-import seedu.investigapptor.model.crimecase.*;
-import seedu.investigapptor.model.person.*;
-import seedu.investigapptor.model.tag.Tag;
-import seedu.investigapptor.model.tag.UniqueTagList;
-import seedu.investigapptor.model.util.SampleDataUtil;
+import static seedu.investigapptor.testutil.TypicalPersons.POLICE;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import static seedu.investigapptor.testutil.PersonBuilder.DEFAULT_EMAIL;
-import static seedu.investigapptor.testutil.TypicalPersons.POLICE;
+import seedu.investigapptor.model.crimecase.CaseName;
+import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.StartDate;
+import seedu.investigapptor.model.crimecase.Status;
+import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.tag.Tag;
+import seedu.investigapptor.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.

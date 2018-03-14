@@ -29,11 +29,13 @@ import seedu.investigapptor.testutil.PersonBuilder;
 
 public class InvestigapptorTest {
 
-    private final Investigapptor investigapptorWithAliceAndBob =
-            new InvestigapptorBuilder().withPerson(ALICE).withPerson(BOB).build();
-    private final Investigapptor investigapptor = new Investigapptor();
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+
+    private final Investigapptor investigapptor = new Investigapptor();
+
+
 
     @Test
     public void constructor() {
@@ -88,7 +90,7 @@ public class InvestigapptorTest {
     }
 
     @Test
-    public void getCrimeCase_checkAddAndReturn_AddCase() throws Exception {
+    public void getCrimeCase_checkAddAndReturn_addCase() throws Exception {
         Investigator investigatorAlice = new InvestigatorBuilder().build();
         CrimeCase testCase = new CrimeCaseBuilder().build();
         investigatorAlice.addCrimeCase(testCase);

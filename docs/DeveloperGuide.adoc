@@ -801,18 +801,72 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
-|Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|Priority |As an ... |I want to ... |So that I can...
+|`* * *` |investigator |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |investigator |add a new investigator |have more variety of investigators to assign to cases
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |investigator |add a new case |allow the app to help me monitor the case
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |investigator |edit an investigator |update his/her phone if necessary
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |investigator |edit an investigator |update his/her address if necessary
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |investigator |edit an investigator |update his/her email if necessary
+
+|`* * *` |investigator |edit a case |update description of the case if necessary
+
+|`* * *` |investigator |edit a case |update the tags of the case if necessary
+
+|`* * *` |investigator |edit a case |close a case when its over
+
+|`* * *` |investigator |edit a case |reopen a case if necessary
+
+|`* * *` |investigator |view an investigator |view their name
+
+|`* * *` |investigator |view an investigator |view their email
+
+|`* * *` |investigator |view an investigator |view their phone
+
+|`* * *` |investigator |view an investigator |view their address
+
+|`* * *` |investigator |view a case |view its name
+
+|`* * *` |investigator |view a case |view its description
+
+|`* * *` |investigator |view a case |view its start date
+
+|`* * *` |investigator |view a case |view its status
+
+|`* * *` |investigator |view a case |view its end date
+
+|`* * *` |investigator |delete an investigator |remove retired investigators
+
+|`* * *` |investigator |delete a case |easier manage the list of cases
+
+|`* * *` |investigator |find an investigator by name |locate details of investigator without having to go through the entire list
+
+|`* * *` |investigator |find a case by name |locate details of case without having to go through the entire list
+
+|`* *` |investigator |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone unauthorized from seeing them by accident
+
+|`* *` |investigator |automatically assign an investigator to a case |not have to manually assign an investigator
+
+|`*` |higher ranked investigator |have a password |have a form of hierarchy
+
+|`*` |investigator |add a witness |add witnesses to a case
+
+|`*` |investigator |add a suspect |add suspects to a case
+
+|`*` |investigator |add evidence |add evidence to a case
+
+|`*` |investigator |add case witnesses |classify witnesses under certain cases
+
+|`*` |investigator |add case suspects |classify suspects under certain cases
+
+|`*` |investigator |add case evidences |classify evidences under certain cases
+
+|`*` |investigator with many investigators in my team |sort investigators by name |locate an investigator easily
 |=======================================================================
 
 _{More to be added}_
@@ -820,7 +874,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `Investigapptor` and the *Actor* is the `investigator`, unless specified otherwise)
 
 [discrete]
 === Use case: Delete person

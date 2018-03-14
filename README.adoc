@@ -49,5 +49,6 @@ Note that Investigapptor is a desktop application with a GUI, but most of the us
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
 * Libraries used: https://github.com/TomasMikula/EasyBind[EasyBind], https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit4[JUnit4]
+* This code was modified from the https://github.com/se-edu/addressbook-level4[AddressBook-Level4 project], which was created by the https://github.com/se-edu/[SE-EDU] initiative
 
 == Licence : link:LICENSE[MIT]

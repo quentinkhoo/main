@@ -13,11 +13,14 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-F14-B3/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+`Investigapptor` (IA) is desktop application for a team of investigators to easily manage criminal cases that have been
+delegated to them. {More to be added subsequently}
+
+`Investigapptor v1.5` is available for Windows, Mac OS X, Linux and Unix operating systems
 
 == Quick Start
 
@@ -243,6 +246,20 @@ Alias: `ex`
 
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
+
+=== Adding a witness `[coming in v2.0]`
+
+=== Adding a suspect `[coming in v2.0]`
+
+=== Adding evidence files `[coming in v2.0]`
+
+=== Setting up chain of custody `[coming in v2.0]`
+
+=== Entering commands in other languages `[coming in v2.0]`
+
+=== Adding any person via scanner `[coming in v2.0]`
+
+=== Exporting case information into a PDF file `[coming in v2.0]`
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`

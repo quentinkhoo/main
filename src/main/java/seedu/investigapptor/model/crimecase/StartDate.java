@@ -28,7 +28,7 @@ public class StartDate {
     public final String date;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code date}.
      *
      * @param date A valid date.
      */

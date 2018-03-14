@@ -15,6 +15,9 @@ public class Investigator extends Person {
 
     private UniqueCrimeCaseList crimeCases;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Investigator(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         crimeCases = new UniqueCrimeCaseList();

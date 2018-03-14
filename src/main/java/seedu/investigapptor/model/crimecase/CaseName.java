@@ -10,7 +10,7 @@ import static seedu.investigapptor.commons.util.AppUtil.checkArgument;
 public class CaseName {
 
     public static final String MESSAGE_CASE_NAME_CONSTRAINTS =
-            "Crime case names should be alphanumeric, separated by underscores and not be blank";
+            "Crime case names should be alphanumeric, and not be blank";
 
     public static final String CASE_NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 

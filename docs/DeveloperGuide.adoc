@@ -14,7 +14,11 @@ endif::[]
 
 By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
+== Introduction
+
+
 == Setting up
+Follow the instructions below to set up and configure `Investigapptor` project files on your computer
 
 === Prerequisites
 

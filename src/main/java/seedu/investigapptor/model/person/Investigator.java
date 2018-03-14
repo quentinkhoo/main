@@ -1,5 +1,6 @@
 package seedu.investigapptor.model.person;
 
+import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.tag.Tag;
@@ -23,6 +24,9 @@ public class Investigator extends Person {
         crimeCases.add(caseToAdd);
     }
 
+    public ObservableList<CrimeCase> getCrimeCases(){
+        return crimeCases.asObservableList();
+    }
     public void removeCrimeCase(CrimeCase caseToRemove) {
         crimeCases.remove(caseToRemove);
     }

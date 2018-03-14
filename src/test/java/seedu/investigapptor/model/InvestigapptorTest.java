@@ -18,10 +18,11 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.Investigator;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.tag.Tag;
-import seedu.investigapptor.testutil.Assert;
+import seedu.investigapptor.testutil.CrimeCaseBuilder;
 import seedu.investigapptor.testutil.InvestigapptorBuilder;
 import seedu.investigapptor.testutil.InvestigatorBuilder;
 import seedu.investigapptor.testutil.PersonBuilder;
@@ -88,6 +89,16 @@ public class InvestigapptorTest {
         ObservableList<Person> testList = FXCollections.observableArrayList();
         testList.add(investigatorAlice);
         assertEquals(investigapptor.getPersonList(), testList);
+    }
+
+    @Test
+    public void getCrimeCase_checkAddAndReturn_AddCase() throws Exception {
+        Investigator investigatorAlice = new InvestigatorBuilder().build();
+        CrimeCase testCase = new CrimeCaseBuilder().build();
+        investigatorAlice.addCrimeCase(testCase);
+        ObservableList<CrimeCase> testList = FXCollections.observableArrayList();
+        testList.add(testCase);
+        assertEquals(investigatorAlice.getCrimeCases(), testList);
     }
 
     @Test

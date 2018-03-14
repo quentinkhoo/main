@@ -1,17 +1,25 @@
 package seedu.investigapptor.model.crimecase;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.investigapptor.commons.exceptions.DuplicateDataException;
-import seedu.investigapptor.commons.util.CollectionUtil;
+import static java.util.Objects.requireNonNull;
+import static seedu.investigapptor.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.investigapptor.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.investigapptor.commons.exceptions.DuplicateDataException;
+import seedu.investigapptor.commons.util.CollectionUtil;
 
+
+/**
+ * A list of CrimeCases that enforces uniqueness between its elements and does not allow nulls.
+ * Supports a minimal set of list operations.
+ *
+ * @see CrimeCase#equals(Object)
+ * @see CollectionUtil#elementsAreUnique(Collection)
+ */
 public class UniqueCrimeCaseList implements Iterable<CrimeCase> {
 
     private final ObservableList<CrimeCase> internalList = FXCollections.observableArrayList();

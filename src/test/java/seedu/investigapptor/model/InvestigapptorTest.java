@@ -29,15 +29,11 @@ import seedu.investigapptor.testutil.PersonBuilder;
 
 public class InvestigapptorTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-
     private final Investigapptor investigapptorWithAliceAndBob =
             new InvestigapptorBuilder().withPerson(ALICE).withPerson(BOB).build();
-
-
     private final Investigapptor investigapptor = new Investigapptor();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void constructor() {

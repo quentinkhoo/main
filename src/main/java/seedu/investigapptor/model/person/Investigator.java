@@ -1,11 +1,11 @@
 package seedu.investigapptor.model.person;
 
+import java.util.Set;
+
 import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.tag.Tag;
-
-import java.util.Set;
 
 /**
  * Represents a Investigator in the investigapptor book.
@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public class Investigator extends Person {
 
-    UniqueCrimeCaseList crimeCases;
+    private UniqueCrimeCaseList crimeCases;
 
     public Investigator(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         super(name, phone, email, address, tags);
@@ -24,9 +24,10 @@ public class Investigator extends Person {
         crimeCases.add(caseToAdd);
     }
 
-    public ObservableList<CrimeCase> getCrimeCases(){
+    public ObservableList<CrimeCase> getCrimeCases() {
         return crimeCases.asObservableList();
     }
+
     public void removeCrimeCase(CrimeCase caseToRemove) {
         crimeCases.remove(caseToRemove);
     }

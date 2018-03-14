@@ -92,7 +92,7 @@ public class UniqueTagList implements Iterable<Tag> {
         assert CollectionUtil.elementsAreUnique(internalList);
     }
     /**
-     * Deletes a from the list.
+     * Deletes a tag from the list.
      *
      */
     public void delete(Tag toDelete) {

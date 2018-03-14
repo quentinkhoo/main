@@ -18,9 +18,12 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.investigapptor.model.person.Investigator;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.tag.Tag;
+import seedu.investigapptor.testutil.Assert;
 import seedu.investigapptor.testutil.InvestigapptorBuilder;
+import seedu.investigapptor.testutil.InvestigatorBuilder;
 import seedu.investigapptor.testutil.PersonBuilder;
 
 public class InvestigapptorTest {
@@ -76,6 +79,17 @@ public class InvestigapptorTest {
         thrown.expect(UnsupportedOperationException.class);
         investigapptor.getTagList().remove(0);
     }
+
+    @Test
+    public void getPersonList_addInvestigator_addSuccessful() {
+        Investigator investigatorAlice = new InvestigatorBuilder().build();
+        Investigapptor investigapptor = new InvestigapptorBuilder().withPerson(investigatorAlice)
+                .build();
+        ObservableList<Person> testList = FXCollections.observableArrayList();
+        testList.add(investigatorAlice);
+        assertEquals(investigapptor.getPersonList(), testList);
+    }
+
     @Test
     public void deleteTag_usedByMultiplePersons_tagDeleted() throws Exception {
         Person amyWithFriendTag = new PersonBuilder(AMY).withTags("Friend").build();
@@ -96,6 +110,7 @@ public class InvestigapptorTest {
 
         assertEquals(new ModelManager(expectedInvestigapptor, userPrefs), modelManager);
     }
+
     /**
      * A stub ReadOnlyInvestigapptor whose persons and tags lists can violate interface constraints.
      */

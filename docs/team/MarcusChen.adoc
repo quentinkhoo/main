@@ -1,4 +1,4 @@
-= Poh Kai Jun - Project Portfolio
+= Marcus Chen - Project Portfolio
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
@@ -20,10 +20,18 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
 * *Minor enhancement*:
-** modified `AddCommand` to `RegisterInvestigatorCommand`
-** modified `SelectCommand` to `SelectInvestigatorCommand`
-** modified `EditCommand` to `EditInvestigatorCommand`
-
+** Implemented Investigator:
++
+Investigator class extends the Person class with an addtional variable that stores the investigators cases
+** Implemented UniqueCrimeCase class
++
+UniqueCrimeCase stores and manages multiple cases as well as ensure that they are all unique
+** Implemented CrimeCaseBuilder class
++
+CrimeCaseBuilder used in JUnit testing to help build CrimeCase
+** Implemented InvestigatorBuilder class
++
+InvestigatorBuilder used in JUnit testing to help build CrimeCase
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:

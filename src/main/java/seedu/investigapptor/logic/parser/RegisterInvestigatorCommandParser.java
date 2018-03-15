@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
-import seedu.investigapptor.logic.commands.AddCommand;
+import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
@@ -21,22 +21,22 @@ import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new RegisterInvestigatorCommand object
  */
-public class AddCommandParser implements Parser<AddCommand> {
+public class RegisterInvestigatorCommandParser implements Parser<RegisterInvestigatorCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the RegisterInvestigatorCommand
+     * and returns an RegisterInvestigatorCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public RegisterInvestigatorCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterInvestigatorCommand.MESSAGE_USAGE));
         }
 
         try {
@@ -48,7 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             Person person = new Person(name, phone, email, address, tagList);
 
-            return new AddCommand(person);
+            return new RegisterInvestigatorCommand(person);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }

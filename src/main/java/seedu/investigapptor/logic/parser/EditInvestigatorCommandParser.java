@@ -15,22 +15,22 @@ import java.util.Set;
 
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
-import seedu.investigapptor.logic.commands.EditCommand;
-import seedu.investigapptor.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
+import seedu.investigapptor.logic.commands.EditInvestigatorCommand.EditPersonDescriptor;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditInvestigatorCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditInvestigatorCommandParser implements Parser<EditInvestigatorCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditInvestigatorCommand
+     * and returns an EditInvestigatorCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditInvestigatorCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
@@ -40,7 +40,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditInvestigatorCommand.MESSAGE_USAGE));
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -55,10 +55,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditInvestigatorCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditInvestigatorCommand(index, editPersonDescriptor);
     }
 
     /**

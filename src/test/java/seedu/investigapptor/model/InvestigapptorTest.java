@@ -19,7 +19,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.person.Investigator;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.testutil.CrimeCaseBuilder;

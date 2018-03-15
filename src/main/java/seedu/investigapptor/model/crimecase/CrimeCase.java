@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.investigapptor.model.person.Investigator;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
 

@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.investigapptor.model.Investigapptor;
-import seedu.investigapptor.model.person.Investigator;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 

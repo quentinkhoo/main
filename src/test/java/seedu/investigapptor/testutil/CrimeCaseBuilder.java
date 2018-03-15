@@ -9,7 +9,7 @@ import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
-import seedu.investigapptor.model.person.Investigator;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.util.SampleDataUtil;
 

@@ -3,7 +3,6 @@ package seedu.investigapptor.model.person.investigator;
 import java.util.Collections;
 import java.util.Set;
 
-import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.person.Address;

@@ -21,6 +21,8 @@ import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
+import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
@@ -125,6 +127,13 @@ public class RegisterInvestigatorCommandTest {
                 throws DuplicatePersonException {
             fail("This method should not be called.");
         }
+
+        @Override
+        public void addCrimeCase(CrimeCase crimecase)
+                throws DuplicateCrimeCaseException {
+            fail("This method should not be called.");
+        }
+
         @Override
         public void deleteTag(Tag toDelete)
                 throws TagNotFoundException {
@@ -138,7 +147,18 @@ public class RegisterInvestigatorCommandTest {
         }
 
         @Override
+        public ObservableList<CrimeCase> getFilteredCrimeCaseList() {
+            fail("This method should not be called.");
+            return null;
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCrimeCaseList(Predicate<CrimeCase> predicate) {
             fail("This method should not be called.");
         }
     }

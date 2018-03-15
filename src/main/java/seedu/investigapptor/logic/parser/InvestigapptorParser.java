@@ -6,7 +6,6 @@ import static seedu.investigapptor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.investigapptor.logic.commands.AddCommand;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.DeleteCommand;
@@ -17,7 +16,8 @@ import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.HistoryCommand;
 import seedu.investigapptor.logic.commands.ListCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
-import seedu.investigapptor.logic.commands.SelectCommand;
+import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 
@@ -48,16 +48,16 @@ public class InvestigapptorParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-        case AddCommand.COMMAND_ALIAS:
-            return new AddCommandParser().parse(arguments);
+        case RegisterInvestigatorCommand.COMMAND_WORD:
+        case RegisterInvestigatorCommand.COMMAND_ALIAS:
+            return new RegisterInvestigatorCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
         case EditCommand.COMMAND_ALIAS:
             return new EditCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_ALIAS:
+        case SelectInvestigatorCommand.COMMAND_WORD:
+        case SelectInvestigatorCommand.COMMAND_ALIAS:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:

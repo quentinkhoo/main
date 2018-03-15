@@ -13,7 +13,7 @@ import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 import seedu.investigapptor.logic.commands.DeleteCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
-import seedu.investigapptor.logic.commands.SelectCommand;
+import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.ui.BrowserPanel;
 import seedu.investigapptor.ui.StatusBarFooter;
 
@@ -60,7 +60,7 @@ public class HelpCommandSystemTest extends InvestigapptorSystemTest {
         getMainWindowHandle().focus();
 
         // assert that while the help window is open the UI updates correctly for a command execution
-        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        executeCommand(SelectInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.SHOWING_HELP_MESSAGE, getResultDisplay().getText());

@@ -15,7 +15,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.investigapptor.logic.commands.AddCommand;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.DeleteCommand;
 import seedu.investigapptor.logic.commands.EditCommand;
@@ -26,7 +25,8 @@ import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.HistoryCommand;
 import seedu.investigapptor.logic.commands.ListCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
-import seedu.investigapptor.logic.commands.SelectCommand;
+import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
@@ -44,15 +44,17 @@ public class InvestigapptorParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
+                parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new RegisterInvestigatorCommand(person), command);
     }
 
     @Test
     public void parseCommand_addAlias() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAliasAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
+                parser.parseCommand(PersonUtil.getAliasAddCommand(person));
+        assertEquals(new RegisterInvestigatorCommand(person), command);
     }
 
     @Test
@@ -179,16 +181,16 @@ public class InvestigapptorParserTest {
 
     @Test
     public void parseCommand_select() throws Exception {
-        SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+        SelectInvestigatorCommand command = (SelectInvestigatorCommand) parser.parseCommand(
+                SelectInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new SelectInvestigatorCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_selectAlias() throws Exception {
-        SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_ALIAS + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+        SelectInvestigatorCommand command = (SelectInvestigatorCommand) parser.parseCommand(
+                SelectInvestigatorCommand.COMMAND_ALIAS + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new SelectInvestigatorCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

@@ -3,12 +3,11 @@ package seedu.investigapptor.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.investigapptor.model.person.investigator.Investigator;
+import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
-import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
 

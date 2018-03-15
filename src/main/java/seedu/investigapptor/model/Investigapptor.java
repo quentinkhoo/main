@@ -11,13 +11,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
+import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.UniquePersonList;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
-import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
-import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
 import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
@@ -120,27 +120,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
 
     /**
-     *  Updates the master tag list to include tags in {@code person} that are not in the list.
-     *  @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
-     *  list.
-     */
-    private Person syncWithMasterTagList(Person person) {
-        final UniqueTagList personTags = new UniqueTagList(person.getTags());
-        tags.mergeFrom(personTags);
-
-        // Create map with values = tag object references in the master list
-        // used for checking person tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
-
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        return new Person(
-                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
-    }
-
-    /**
      * Removes {@code key} from this {@code Investigapptor}.
      * @throws PersonNotFoundException if the {@code key} is not in this {@code Investigapptor}.
      */
@@ -169,6 +148,45 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         cases.add(crimecase);
     }
 
+    //// tag-level operations
+
+    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
+        tags.add(t);
+    }
+
+    /**
+     * Deletes {@code Investigapptor} from all person and UniqueTagList
+     */
+    public void deleteTag(Tag toDelete) throws TagNotFoundException {
+        if (tags.contains(toDelete)) {
+            tags.delete(toDelete);
+            persons.deleteTagFromPersons(toDelete);
+        } else {
+            throw new TagNotFoundException();
+        }
+    }
+
+    /**
+     *  Updates the master tag list to include tags in {@code person} that are not in the list.
+     *  @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
+     *  list.
+     */
+    private Person syncWithMasterTagList(Person person) {
+        final UniqueTagList personTags = new UniqueTagList(person.getTags());
+        tags.mergeFrom(personTags);
+
+        // Create map with values = tag object references in the master list
+        // used for checking person tag references
+        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        tags.forEach(tag -> masterTagObjects.put(tag, tag));
+
+        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        return new Person(
+                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
+    }
+
     /**
      *  Updates the master tag list to include tags in {@code crimecase} that are not in the list.
      *  @return a copy of this {@code crimecase} such that every tag in this case points to a Tag object in the master
@@ -187,25 +205,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         final Set<Tag> correctTagReferences = new HashSet<>();
         crimecaseTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new CrimeCase(
-                crimecase.getCaseName(), crimecase.getDescription(), crimecase.getCurrentInvestigator(), crimecase.getStartDate(), crimecase.getStatus(), correctTagReferences);
-    }
-
-    //// tag-level operations
-
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
-        tags.add(t);
-    }
-
-    /**
-     * Deletes {@code Investigapptor} from all person and UniqueTagList
-     */
-    public void deleteTag(Tag toDelete) throws TagNotFoundException {
-        if (tags.contains(toDelete)) {
-            tags.delete(toDelete);
-            persons.deleteTagFromPersons(toDelete);
-        } else {
-            throw new TagNotFoundException();
-        }
+                crimecase.getCaseName(), crimecase.getDescription(), crimecase.getCurrentInvestigator(),
+                crimecase.getStartDate(), crimecase.getStatus(), correctTagReferences);
     }
     //// util methods
 

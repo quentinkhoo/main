@@ -10,10 +10,10 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.logic.commands.AddCaseCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
-import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.StartDate;
@@ -31,7 +31,8 @@ public class AddCaseCommandParser implements Parser<AddCaseCommand> {
      */
     public AddCaseCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR, PREFIX_START_DATE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR,
+                        PREFIX_START_DATE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR, PREFIX_START_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {

@@ -12,11 +12,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.investigapptor.commons.core.ComponentManager;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
+import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
-import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
 

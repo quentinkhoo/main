@@ -10,14 +10,13 @@ import java.util.Set;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.commons.util.StringUtil;
+import seedu.investigapptor.model.crimecase.CaseName;
+import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Phone;
-import seedu.investigapptor.model.crimecase.CaseName;
-import seedu.investigapptor.model.crimecase.Description;
-import seedu.investigapptor.model.crimecase.StartDate;
-import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.tag.Tag;
 
 /**

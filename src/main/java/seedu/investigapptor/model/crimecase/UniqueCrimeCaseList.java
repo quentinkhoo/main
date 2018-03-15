@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.investigapptor.commons.util.CollectionUtil;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
-import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 
 
 /**

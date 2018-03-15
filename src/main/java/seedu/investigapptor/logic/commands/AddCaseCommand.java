@@ -7,20 +7,20 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
+import java.util.Set;
+
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
+import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.tag.Tag;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * Adds a case to the investigapptor book.
@@ -61,7 +61,8 @@ public class AddCaseCommand extends UndoableCommand {
     /**
      * Creates an AddCaseCommand to add the specified {@code CrimeCase}
      */
-    public AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set<Tag> tagList) {
+    public AddCaseCommand(CaseName name, Description description, Index investigatorIndex,
+                          StartDate startDate, Set<Tag> tagList) {
         requireNonNull(name);
         requireNonNull(description);
         requireNonNull(investigatorIndex);
@@ -104,7 +105,8 @@ public class AddCaseCommand extends UndoableCommand {
     private CrimeCase createCrimeCase(Person investigatorToAdd) {
         assert investigatorToAdd != null;
 
-        return new CrimeCase(this.name, this.description, investigatorToAdd, this.startDate, new Status(), this.tagList);
+        return new CrimeCase(this.name, this.description, investigatorToAdd,
+                this.startDate, new Status(), this.tagList);
     }
 
     @Override

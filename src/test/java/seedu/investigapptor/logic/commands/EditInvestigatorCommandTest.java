@@ -33,7 +33,8 @@ import seedu.investigapptor.testutil.EditPersonDescriptorBuilder;
 import seedu.investigapptor.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditInvestigatorCommand.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
+ * and unit tests for EditInvestigatorCommand.
  */
 public class EditInvestigatorCommandTest {
 
@@ -76,7 +77,8 @@ public class EditInvestigatorCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditInvestigatorCommand editInvestigatorCommand = prepareCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
+        EditInvestigatorCommand editInvestigatorCommand = prepareCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditInvestigatorCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);

@@ -61,8 +61,8 @@ public class EditInvestigatorCommandSystemTest extends InvestigapptorSystemTest 
          * -> edited
          */
         Index index = INDEX_FIRST_PERSON;
-        String command = " " + EditInvestigatorCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
-                + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
+        String command = " " + EditInvestigatorCommand.COMMAND_WORD + "  " + index.getOneBased() + "  "
+                + NAME_DESC_BOB + "  " + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
         Person editedPerson = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedPerson);
@@ -80,8 +80,8 @@ public class EditInvestigatorCommandSystemTest extends InvestigapptorSystemTest 
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a person with new values same as existing values -> edited */
-        command = EditInvestigatorCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        command = EditInvestigatorCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit some fields -> edited */
@@ -124,8 +124,8 @@ public class EditInvestigatorCommandSystemTest extends InvestigapptorSystemTest 
         showAllPersons();
         index = INDEX_FIRST_PERSON;
         selectPerson(index);
-        command = EditInvestigatorCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
+        command = EditInvestigatorCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new person's name
         assertCommandSuccess(command, index, AMY, index);
@@ -154,37 +154,37 @@ public class EditInvestigatorCommandSystemTest extends InvestigapptorSystemTest 
                 EditInvestigatorCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
-        assertCommandFailure(EditInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_NAME_DESC,
-                Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure(EditInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        assertCommandFailure(EditInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PHONE_DESC,
-                Phone.MESSAGE_PHONE_CONSTRAINTS);
+        assertCommandFailure(EditInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + INVALID_PHONE_DESC, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        assertCommandFailure(EditInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_EMAIL_DESC,
-                Email.MESSAGE_EMAIL_CONSTRAINTS);
+        assertCommandFailure(EditInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + INVALID_EMAIL_DESC, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid investigapptor -> rejected */
-        assertCommandFailure(EditInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_ADDRESS_DESC,
-                Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        assertCommandFailure(EditInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        assertCommandFailure(EditInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_TAG_DESC,
-                Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertCommandFailure(EditInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a person with new values same as another person's values -> rejected */
         executeCommand(PersonUtil.getAddCommand(BOB));
         assertTrue(getModel().getInvestigapptor().getPersonList().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
-        command = EditInvestigatorCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        command = EditInvestigatorCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: edit a person with new values same as another person's values but with different tags -> rejected */
-        command = EditInvestigatorCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
+        command = EditInvestigatorCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
@@ -219,7 +219,8 @@ public class EditInvestigatorCommandSystemTest extends InvestigapptorSystemTest 
         }
 
         assertCommandSuccess(command, expectedModel,
-                String.format(EditInvestigatorCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), expectedSelectedCardIndex);
+                String.format(EditInvestigatorCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson),
+                expectedSelectedCardIndex);
     }
 
     /**

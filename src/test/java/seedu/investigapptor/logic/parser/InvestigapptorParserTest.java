@@ -87,7 +87,8 @@ public class InvestigapptorParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditInvestigatorCommand command = (EditInvestigatorCommand) parser.parseCommand(EditInvestigatorCommand.COMMAND_WORD + " "
+        EditInvestigatorCommand command = (EditInvestigatorCommand)
+                parser.parseCommand(EditInvestigatorCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getPersonDetails(person));
         assertEquals(new EditInvestigatorCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
@@ -96,7 +97,8 @@ public class InvestigapptorParserTest {
     public void parseCommand_editAlias() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditInvestigatorCommand command = (EditInvestigatorCommand) parser.parseCommand(EditInvestigatorCommand.COMMAND_ALIAS + " "
+        EditInvestigatorCommand command = (EditInvestigatorCommand)
+                parser.parseCommand(EditInvestigatorCommand.COMMAND_ALIAS + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getPersonDetails(person));
         assertEquals(new EditInvestigatorCommand(INDEX_FIRST_PERSON, descriptor), command);
     }

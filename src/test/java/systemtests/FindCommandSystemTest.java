@@ -14,7 +14,7 @@ import java.util.List;
 import org.junit.Test;
 
 import seedu.investigapptor.commons.core.index.Index;
-import seedu.investigapptor.logic.commands.DeleteCommand;
+import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.FindCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
@@ -81,7 +81,7 @@ public class FindCommandSystemTest extends InvestigapptorSystemTest {
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: find same persons in investigapptor book after deleting 1 of them -> 1 person found */
-        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
+        executeCommand(DeleteInvestigatorCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getInvestigapptor().getPersonList().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();

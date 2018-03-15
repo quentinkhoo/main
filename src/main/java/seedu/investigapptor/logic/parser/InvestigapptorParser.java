@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.Command;
-import seedu.investigapptor.logic.commands.DeleteCommand;
+import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditCommand;
 import seedu.investigapptor.logic.commands.ExitCommand;
 import seedu.investigapptor.logic.commands.FindCommand;
@@ -60,9 +60,9 @@ public class InvestigapptorParser {
         case SelectInvestigatorCommand.COMMAND_ALIAS:
             return new SelectCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-        case DeleteCommand.COMMAND_ALIAS:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteInvestigatorCommand.COMMAND_WORD:
+        case DeleteInvestigatorCommand.COMMAND_ALIAS:
+            return new DeleteInvestigatorCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS:

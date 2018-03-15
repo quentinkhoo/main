@@ -73,7 +73,7 @@ public class InvestigatorCard extends UiPart<Region> {
     private void colorCase(Investigator investigator) {
         investigator.getCrimeCases().forEach(CrimeCase -> {
             Label caseLabel = new Label(CrimeCase.getCaseName().crimeCaseName);
-            caseLabel.getStyleClass().add(getTagColorStyle(CrimeCase.getCaseName().crimeCaseName));
+            caseLabel.getStyleClass().add(getCaseColorStyle(CrimeCase.getCaseName().crimeCaseName));
             crimeCaseList.getChildren().add(caseLabel);
         });
     }

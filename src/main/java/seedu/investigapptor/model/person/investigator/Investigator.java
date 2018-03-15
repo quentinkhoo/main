@@ -1,8 +1,8 @@
 package seedu.investigapptor.model.person.investigator;
 
-import java.util.Collections;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.person.Address;
@@ -36,8 +36,8 @@ public class Investigator extends Person {
      * Returns an immutable crime case set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<CrimeCase> getCrimeCases() {
-        return Collections.unmodifiableSet(crimeCases.toSet());
+    public ObservableList<CrimeCase> getCrimeCases() {
+        return crimeCases.asObservableList();
     }
 
     public void removeCrimeCase(CrimeCase caseToRemove) {

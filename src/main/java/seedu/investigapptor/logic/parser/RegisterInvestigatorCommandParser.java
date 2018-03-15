@@ -36,7 +36,8 @@ public class RegisterInvestigatorCommandParser implements Parser<RegisterInvesti
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterInvestigatorCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RegisterInvestigatorCommand.MESSAGE_USAGE));
         }
 
         try {

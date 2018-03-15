@@ -33,7 +33,7 @@ public class DescriptionTest {
         assertTrue(Description.isValidDescription("jack the ripper")); // alphabets only
         assertTrue(Description.isValidDescription("12345")); // numbers only
         assertTrue(Description.isValidDescription("rape at geylang 8.")); // alphanumeric and special characters
-        assertTrue(Description.isValidDescription("10000 packets of drugs at Geylang")); // with capital letters
+        assertTrue(Description.isValidDescription("$10000 worth of drugs at Geylang")); // with capital letters
         assertTrue(Description.isValidDescription("Jack The Ripper Junior 2nd")); // long descriptions
     }
 }

@@ -918,11 +918,22 @@ _{More to be added}_
 [appendix]
 == Glossary
 
+[[investigator]] Investigator::
+A person that carries out investigation to discover the truth
+
+[[investigation]] Investigation::
+A formal and systematic examination
+
+[[crimecase]] CrimeCase::
+A situation that has occurred that is against the law/rules
+
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
+
+_{More to be added}_
 
 [appendix]
 == Product Survey

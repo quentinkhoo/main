@@ -31,13 +31,13 @@ import seedu.investigapptor.model.tag.Tag;
 /**
  * Edits the details of an existing person in the investigapptor book.
  */
-public class EditCommand extends UndoableCommand {
+public class EditInvestigatorCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "edit";
-    public static final String COMMAND_ALIAS = "e";
+    public static final String COMMAND_WORD = "editInvestigator";
+    public static final String COMMAND_ALIAS = "eI";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the last person listing. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the investigator identified "
+            + "by the index number used in the last listing of investigators. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -49,9 +49,9 @@ public class EditCommand extends UndoableCommand {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Investigator: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the investigapptor book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This investigator already exists in investigapptor.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -63,7 +63,7 @@ public class EditCommand extends UndoableCommand {
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditInvestigatorCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -120,12 +120,12 @@ public class EditCommand extends UndoableCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditInvestigatorCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditInvestigatorCommand e = (EditInvestigatorCommand) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor)
                 && Objects.equals(personToEdit, e.personToEdit);

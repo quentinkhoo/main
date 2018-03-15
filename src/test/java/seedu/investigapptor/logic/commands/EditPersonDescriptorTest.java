@@ -12,7 +12,7 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_HUSB
 
 import org.junit.Test;
 
-import seedu.investigapptor.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.investigapptor.logic.commands.EditInvestigatorCommand.EditPersonDescriptor;
 import seedu.investigapptor.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {

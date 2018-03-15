@@ -52,6 +52,13 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns the only value of {@code prefix}.
+     */
+    public String getOnlyValue(Prefix prefix) {
+        return getValue(prefix).orElse("");
+    }
+
+    /**
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {

@@ -10,6 +10,7 @@ import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.Phone;
+import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -28,7 +29,7 @@ public class Investigator extends Person {
         crimeCases = new UniqueCrimeCaseList();
     }
 
-    public void addCrimeCase(CrimeCase caseToAdd) throws UniqueCrimeCaseList.DuplicateCrimeCaseException {
+    public void addCrimeCase(CrimeCase caseToAdd) throws DuplicateCrimeCaseException {
         crimeCases.add(caseToAdd);
     }
 

@@ -2,6 +2,7 @@ package seedu.investigapptor.model;
 
 import javafx.collections.ObservableList;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -14,6 +15,12 @@ public interface ReadOnlyInvestigapptor {
      * This list will not contain any duplicate persons.
      */
     ObservableList<Person> getPersonList();
+
+    /**
+     * Returns an unmodifiable view of the cases list.
+     * This list will not contain any duplicate cases.
+     */
+    ObservableList<CrimeCase> getCrimeCaseList();
 
     /**
      * Returns an unmodifiable view of the tags list.

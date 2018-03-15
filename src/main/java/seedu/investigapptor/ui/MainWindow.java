@@ -19,6 +19,7 @@ import seedu.investigapptor.commons.events.ui.ExitAppRequestEvent;
 import seedu.investigapptor.commons.events.ui.ShowHelpRequestEvent;
 import seedu.investigapptor.logic.Logic;
 import seedu.investigapptor.model.UserPrefs;
+import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
  * The Main Window. Provides the basic application layout containing

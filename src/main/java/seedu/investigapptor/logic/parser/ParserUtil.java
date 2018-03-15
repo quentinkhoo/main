@@ -14,6 +14,10 @@ import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Phone;
+import seedu.investigapptor.model.crimecase.CaseName;
+import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.StartDate;
+import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -138,6 +142,80 @@ public class ParserUtil {
     public static Optional<Email> parseEmail(Optional<String> email) throws IllegalValueException {
         requireNonNull(email);
         return email.isPresent() ? Optional.of(parseEmail(email.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code CaseName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code name} is invalid.
+     */
+    public static CaseName parseCaseName(String name) throws IllegalValueException {
+        requireNonNull(name);
+        String trimmedCaseName = name.trim();
+        if (!CaseName.isValidCaseName(trimmedCaseName)) {
+            throw new IllegalValueException(CaseName.MESSAGE_CASE_NAME_CONSTRAINTS);
+        }
+        return new CaseName(trimmedCaseName);
+    }
+
+    /**
+     * Parses a {@code Optional<String> name} into an {@code Optional<CaseName>} if {@code name} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<CaseName> parseCaseName(Optional<String> name) throws IllegalValueException {
+        requireNonNull(name);
+        return name.isPresent() ? Optional.of(parseCaseName(name.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String investigapptor} into an {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code investigapptor} is invalid.
+     */
+    public static Description parseDescription(String description) throws IllegalValueException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new IllegalValueException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code Optional<String> investigapptor} into an {@code Optional<StartDa>}
+     * if {@code investigapptor} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Description> parseDescription(Optional<String> description) throws IllegalValueException {
+        requireNonNull(description);
+        return description.isPresent() ? Optional.of(parseDescription(description.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String investigapptor} into an {@code StartDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code investigapptor} is invalid.
+     */
+    public static StartDate parseStartDate(String startDate) throws IllegalValueException {
+        requireNonNull(startDate);
+        String trimmedStartDate = startDate.trim();
+        if (!StartDate.isValidDate(trimmedStartDate)) {
+            throw new IllegalValueException(StartDate.MESSAGE_DATE_CONSTRAINTS);
+        }
+        return new StartDate(trimmedStartDate);
+    }
+
+    /**
+     * Parses a {@code Optional<String> investigapptor} into an {@code Optional<StartDate>}
+     * if {@code investigapptor} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<StartDate> parseStartDate(Optional<String> startDate) throws IllegalValueException {
+        requireNonNull(startDate);
+        return startDate.isPresent() ? Optional.of(parseStartDate(startDate.get())) : Optional.empty();
     }
 
     /**

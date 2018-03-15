@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.investigapptor.model.person.investigator.Investigator;
+import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
 
@@ -16,7 +17,7 @@ public class CrimeCase {
 
     private final CaseName name;
     private final Description description;
-    private final Investigator currentInvestigator;
+    private final Person currentInvestigator;
     private final StartDate startDate;
     private final Status status;
 
@@ -25,7 +26,7 @@ public class CrimeCase {
     /**
      * Every field must be present and not null
      */
-    public CrimeCase(CaseName name, Description description, Investigator currentInvestigator,
+    public CrimeCase(CaseName name, Description description, Person currentInvestigator,
                      StartDate startDate, Status status, Set<Tag> tags) {
         this.name = name;
         this.description = description;
@@ -43,7 +44,7 @@ public class CrimeCase {
         return description;
     }
 
-    public Investigator getCurrentInvestigator() {
+    public Person getCurrentInvestigator() {
         return currentInvestigator;
     }
 

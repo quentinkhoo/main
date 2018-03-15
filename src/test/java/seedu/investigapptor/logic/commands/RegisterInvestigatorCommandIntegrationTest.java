@@ -16,9 +16,9 @@ import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code RegisterInvestigatorCommand}.
  */
-public class AddCommandIntegrationTest {
+public class RegisterInvestigatorCommandIntegrationTest {
 
     private Model model;
 
@@ -35,20 +35,22 @@ public class AddCommandIntegrationTest {
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(prepareCommand(validPerson, model), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+                String.format(RegisterInvestigatorCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getInvestigapptor().getPersonList().get(0);
-        assertCommandFailure(prepareCommand(personInList, model), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(prepareCommand(personInList, model), model,
+                RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     /**
-     * Generates a new {@code AddCommand} which upon execution, adds {@code person} into the {@code model}.
+     * Generates a new {@code RegisterInvestigatorCommand} which upon execution,
+     * adds {@code person} into the {@code model}.
      */
-    private AddCommand prepareCommand(Person person, Model model) {
-        AddCommand command = new AddCommand(person);
+    private RegisterInvestigatorCommand prepareCommand(Person person, Model model) {
+        RegisterInvestigatorCommand command = new RegisterInvestigatorCommand(person);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }

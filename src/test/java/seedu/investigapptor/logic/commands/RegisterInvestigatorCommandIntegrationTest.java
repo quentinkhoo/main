@@ -41,11 +41,13 @@ public class RegisterInvestigatorCommandIntegrationTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getInvestigapptor().getPersonList().get(0);
-        assertCommandFailure(prepareCommand(personInList, model), model, RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(prepareCommand(personInList, model), model,
+                RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     /**
-     * Generates a new {@code RegisterInvestigatorCommand} which upon execution, adds {@code person} into the {@code model}.
+     * Generates a new {@code RegisterInvestigatorCommand} which upon execution,
+     * adds {@code person} into the {@code model}.
      */
     private RegisterInvestigatorCommand prepareCommand(Person person, Model model) {
         RegisterInvestigatorCommand command = new RegisterInvestigatorCommand(person);

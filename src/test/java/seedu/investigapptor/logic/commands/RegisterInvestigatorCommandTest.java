@@ -46,7 +46,8 @@ public class RegisterInvestigatorCommandTest {
 
         CommandResult commandResult = getAddCommandForPerson(validPerson, modelStub).execute();
 
-        assertEquals(String.format(RegisterInvestigatorCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
+        assertEquals(String.format(RegisterInvestigatorCommand.MESSAGE_SUCCESS, validPerson),
+                commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 

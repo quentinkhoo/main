@@ -18,16 +18,16 @@ import org.junit.rules.ExpectedException;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.DeleteCommand;
 import seedu.investigapptor.logic.commands.EditCommand;
+import seedu.investigapptor.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.investigapptor.logic.commands.ExitCommand;
 import seedu.investigapptor.logic.commands.FindCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.HistoryCommand;
 import seedu.investigapptor.logic.commands.ListCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
-import seedu.investigapptor.logic.commands.SelectCommand;
 import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.SelectCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
-import seedu.investigapptor.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
 import seedu.investigapptor.model.person.Person;
@@ -44,14 +44,16 @@ public class InvestigapptorParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
+                parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new RegisterInvestigatorCommand(person), command);
     }
 
     @Test
     public void parseCommand_addAlias() throws Exception {
         Person person = new PersonBuilder().build();
-        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand) parser.parseCommand(PersonUtil.getAliasAddCommand(person));
+        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
+                parser.parseCommand(PersonUtil.getAliasAddCommand(person));
         assertEquals(new RegisterInvestigatorCommand(person), command);
     }
 

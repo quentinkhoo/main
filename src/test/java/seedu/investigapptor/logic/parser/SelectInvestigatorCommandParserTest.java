@@ -15,7 +15,7 @@ import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
  */
 public class SelectInvestigatorCommandParserTest {
 
-    private SelectCommandParser parser = new SelectCommandParser();
+    private SelectInvestigatorCommandParser parser = new SelectInvestigatorCommandParser();
 
     @Test
     public void parse_validArgs_returnsSelectCommand() {

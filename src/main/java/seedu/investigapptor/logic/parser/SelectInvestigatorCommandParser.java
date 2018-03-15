@@ -10,7 +10,7 @@ import seedu.investigapptor.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new SelectInvestigatorCommand object
  */
-public class SelectCommandParser implements Parser<SelectInvestigatorCommand> {
+public class SelectInvestigatorCommandParser implements Parser<SelectInvestigatorCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SelectInvestigatorCommand

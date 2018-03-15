@@ -52,7 +52,7 @@ public class DeleteCommand extends UndoableCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
         }
 
         personToDelete = lastShownList.get(targetIndex.getZeroBased());

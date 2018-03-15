@@ -35,7 +35,7 @@ import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.FindCommand;
 import seedu.investigapptor.logic.commands.ListCommand;
-import seedu.investigapptor.logic.commands.SelectCommand;
+import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.testutil.TypicalPersons;
@@ -156,7 +156,7 @@ public abstract class InvestigapptorSystemTest {
      * Selects the person at {@code index} of the displayed list.
      */
     protected void selectPerson(Index index) {
-        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
+        executeCommand(SelectInvestigatorCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
     }
 

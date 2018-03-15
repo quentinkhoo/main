@@ -5,14 +5,14 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>AddressBook Level 4 - User Guide</title>
+<title>INVESTIGAPPTOR - User Guide</title>
 <link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
 </head>
 <body class="article">
 <div id="header">
-<h1>AddressBook Level 4 - User Guide</h1>
+<h1>INVESTIGAPPTOR - User Guide</h1>
 </div>
 <div id="content">
 <div id="preamble">
@@ -29,12 +29,12 @@
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></li>
+<li><a href="#registering-an-investigator-code-registerinvestigator-code">3.2. Registering an investigator: <code>registerInvestigator</code></a></li>
 <li><a href="#listing-all-persons-code-list-code">3.3. Listing all persons : <code>list</code></a></li>
 <li><a href="#editing-a-person-code-edit-code">3.4. Editing a person : <code>edit</code></a></li>
 <li><a href="#locating-persons-by-name-code-find-code">3.5. Locating persons by name: <code>find</code></a></li>
 <li><a href="#deleting-a-person-code-delete-code">3.6. Deleting a person : <code>delete</code></a></li>
-<li><a href="#selecting-a-person-code-select-code">3.7. Selecting a person : <code>select</code></a></li>
+<li><a href="#selecting-an-investigator-code-selectinvestigator-code">3.7. Selecting an investigator : <code>selectInvestigator</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></li>
@@ -166,11 +166,11 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></h3>
+<h3 id="registering-an-investigator-code-registerinvestigator-code"><a class="link" href="#registering-an-investigator-code-registerinvestigator-code">3.2. Registering an investigator: <code>registerInvestigator</code></a></h3>
 <div class="paragraph">
-<p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
-Alias: <code>a</code></p>
+<p>Registers an investigator to the application<br>
+Format: <code>registerInvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
+Alias: <code>regInvest</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -190,10 +190,13 @@ A person can have any number of tags (including 0)
 <div class="ulist">
 <ul>
 <li>
-<p><code>add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01</code></p>
+<p><code>registerInvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/newComer</code></p>
 </li>
 <li>
-<p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal</code></p>
+<p><code>registerInvestigator n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567</code></p>
+</li>
+<li>
+<p><code>regInvest n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567</code></p>
 </li>
 </ul>
 </div>
@@ -341,18 +344,18 @@ Deletes the 1st person in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-person-code-select-code"><a class="link" href="#selecting-a-person-code-select-code">3.7. Selecting a person : <code>select</code></a></h3>
+<h3 id="selecting-an-investigator-code-selectinvestigator-code"><a class="link" href="#selecting-an-investigator-code-selectinvestigator-code">3.7. Selecting an investigator : <code>selectInvestigator</code></a></h3>
 <div class="paragraph">
 <p>Selects the person identified by the index number used in the last person listing.<br>
-Format: <code>select INDEX</code><br>
-Alias: <code>s</code></p>
+Format: <code>selectInvestigator INDEX</code><br>
+Alias: <code>selectInvest</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the person and loads the Google search page the person at the specified <code>INDEX</code>.</p>
+<p>Selects the investigator and loads the details of the investigator at the specified <code>INDEX</code>.</p>
 </li>
 <li>
 <p>The index refers to the index number shown in the most recent listing.</p>
@@ -371,13 +374,17 @@ Alias: <code>s</code></p>
 <ul>
 <li>
 <p><code>list</code><br>
-<code>select 2</code><br>
-Selects the 2nd person in the address book.</p>
+<code>selectInvestigator 2</code><br>
+Selects the 2nd person in the results of the <code>list</code> command.</p>
 </li>
 <li>
 <p><code>find Betsy</code><br>
-<code>select 1</code><br>
+<code>selectInvest 1</code><br>
 Selects the 1st person in the results of the <code>find</code> command.</p>
+</li>
+<li>
+<p><code>selectInvestigator 3</code><br>
+Selects the 3rd person in the listed panel list.</p>
 </li>
 </ul>
 </div>
@@ -601,7 +608,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-15 06:55:58 UTC
+Last updated 2018-03-15 15:35:58 UTC
 </div>
 </div>
 </body>

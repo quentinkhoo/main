@@ -25,7 +25,8 @@ public class SelectInvestigatorCommandSystemTest extends InvestigapptorSystemTes
         /* Case: select the first card in the person list, command with leading spaces and trailing spaces
          * -> selected
          */
-        String command = "   " + SelectInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "   ";
+        String command = "   " + SelectInvestigatorCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + "   ";
         assertCommandSuccess(command, INDEX_FIRST_PERSON);
 
         /* Case: select the last card in the person list -> selected */
@@ -58,7 +59,8 @@ public class SelectInvestigatorCommandSystemTest extends InvestigapptorSystemTes
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getInvestigapptor().getPersonList().size();
-        assertCommandFailure(SelectInvestigatorCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+        assertCommandFailure(SelectInvestigatorCommand.COMMAND_WORD + " "
+                + invalidIndex, MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
 
         /* Case: filtered person list, select index within bounds of investigapptor book and person list -> selected */
         Index validIndex = Index.fromOneBased(1);
@@ -78,7 +80,8 @@ public class SelectInvestigatorCommandSystemTest extends InvestigapptorSystemTes
 
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredPersonList().size() + 1;
-        assertCommandFailure(SelectInvestigatorCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+        assertCommandFailure(SelectInvestigatorCommand.COMMAND_WORD + " "
+                + invalidIndex, MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(SelectInvestigatorCommand.COMMAND_WORD + " abc",

@@ -126,14 +126,14 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Deleting a person : `delete`
+=== Deleting an investigator : `deleteInvestigator`
 
 Deletes the specified person from the address book. +
-Format: `delete INDEX` +
-Alias: `d`
+Format: `deleteInvestigator INDEX` +
+Alias: `dI`
 
 ****
-* Deletes the person at the specified `INDEX`.
+* Deletes the investigator at the specified `INDEX`.
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -141,11 +141,11 @@ Alias: `d`
 Examples:
 
 * `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
+`deleteInvestigator 2` +
+Deletes the 2nd investigator in the address book.
 * `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+`dI 1` +
+Deletes the 1st investigator in the results of the `find` command.
 
 === Selecting an investigator : `selectInvestigator`
 

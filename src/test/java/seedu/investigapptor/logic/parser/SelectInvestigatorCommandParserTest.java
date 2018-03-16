@@ -10,8 +10,8 @@ import org.junit.Test;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 
 /**
- * Test scope: similar to {@code DeleteCommandParserTest}.
- * @see DeleteCommandParserTest
+ * Test scope: similar to {@code DeleteInvestigatorCommandParserTest}.
+ * @see DeleteInvestigatorCommandParserTest
  */
 public class SelectInvestigatorCommandParserTest {
 

@@ -24,23 +24,25 @@ public class UndoCommandTest {
     private static final UndoRedoStack EMPTY_STACK = new UndoRedoStack();
 
     private final Model model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
-    private final DeleteCommand deleteCommandOne = new DeleteCommand(INDEX_FIRST_PERSON);
-    private final DeleteCommand deleteCommandTwo = new DeleteCommand(INDEX_FIRST_PERSON);
+    private final DeleteInvestigatorCommand deleteInvestigatorCommandOne =
+            new DeleteInvestigatorCommand(INDEX_FIRST_PERSON);
+    private final DeleteInvestigatorCommand deleteInvestigatorCommandTwo =
+            new DeleteInvestigatorCommand(INDEX_FIRST_PERSON);
 
     @Before
     public void setUp() {
-        deleteCommandOne.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);
-        deleteCommandTwo.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);
+        deleteInvestigatorCommandOne.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);
+        deleteInvestigatorCommandTwo.setData(model, EMPTY_COMMAND_HISTORY, EMPTY_STACK);
     }
 
     @Test
     public void execute() throws Exception {
         UndoRedoStack undoRedoStack = prepareStack(
-                Arrays.asList(deleteCommandOne, deleteCommandTwo), Collections.emptyList());
+                Arrays.asList(deleteInvestigatorCommandOne, deleteInvestigatorCommandTwo), Collections.emptyList());
         UndoCommand undoCommand = new UndoCommand();
         undoCommand.setData(model, EMPTY_COMMAND_HISTORY, undoRedoStack);
-        deleteCommandOne.execute();
-        deleteCommandTwo.execute();
+        deleteInvestigatorCommandOne.execute();
+        deleteInvestigatorCommandTwo.execute();
 
         // multiple commands in undoStack
         Model expectedModel = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());

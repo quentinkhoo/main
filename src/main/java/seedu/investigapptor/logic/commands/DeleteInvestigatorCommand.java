@@ -14,23 +14,23 @@ import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
 /**
  * Deletes a person identified using it's last displayed index from the investigapptor book.
  */
-public class DeleteCommand extends UndoableCommand {
+public class DeleteInvestigatorCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "delete";
-    public static final String COMMAND_ALIAS = "d";
+    public static final String COMMAND_WORD = "deleteInvestigator";
+    public static final String COMMAND_ALIAS = "dI";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the last person listing.\n"
+            + ": Deletes the investigator identified by the index number used in the last listing of investigators.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Investigator: %1$s";
 
     private final Index targetIndex;
 
     private Person personToDelete;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteInvestigatorCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -41,7 +41,7 @@ public class DeleteCommand extends UndoableCommand {
         try {
             model.deletePerson(personToDelete);
         } catch (PersonNotFoundException pnfe) {
-            throw new AssertionError("The target person cannot be missing");
+            throw new AssertionError("The target investigator cannot be missing");
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
@@ -61,8 +61,8 @@ public class DeleteCommand extends UndoableCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && this.targetIndex.equals(((DeleteCommand) other).targetIndex) // state check
-                && Objects.equals(this.personToDelete, ((DeleteCommand) other).personToDelete));
+                || (other instanceof DeleteInvestigatorCommand // instanceof handles nulls
+                && this.targetIndex.equals(((DeleteInvestigatorCommand) other).targetIndex) // state check
+                && Objects.equals(this.personToDelete, ((DeleteInvestigatorCommand) other).personToDelete));
     }
 }

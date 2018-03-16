@@ -24,6 +24,8 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 ** modified `SelectCommand` to `SelectInvestigatorCommand`
 ** modified `EditCommand` to `EditInvestigatorCommand`
 
+** modified `DeleteCommand` to `DeleteInvestigatorCommand`
+
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:

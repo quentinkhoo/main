@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.investigapptor.logic.commands.ClearCommand;
-import seedu.investigapptor.logic.commands.DeleteCommand;
+import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand.EditPersonDescriptor;
 import seedu.investigapptor.logic.commands.ExitCommand;
@@ -71,16 +71,16 @@ public class InvestigapptorParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        DeleteInvestigatorCommand command = (DeleteInvestigatorCommand) parser.parseCommand(
+                DeleteInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteInvestigatorCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_deleteAlias() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_ALIAS + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        DeleteInvestigatorCommand command = (DeleteInvestigatorCommand) parser.parseCommand(
+                DeleteInvestigatorCommand.COMMAND_ALIAS + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteInvestigatorCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

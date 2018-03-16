@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
-import seedu.investigapptor.logic.commands.DeleteCommand;
+import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.ui.BrowserPanel;
@@ -69,7 +69,7 @@ public class HelpCommandSystemTest extends InvestigapptorSystemTest {
 
         // assert that the status bar too is updated correctly while the help window is open
         // note: the select command tested above does not update the status bar
-        executeCommand(DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        executeCommand(DeleteInvestigatorCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertNotEquals(StatusBarFooter.SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }
 

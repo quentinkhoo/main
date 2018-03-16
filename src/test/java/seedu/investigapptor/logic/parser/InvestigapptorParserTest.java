@@ -17,8 +17,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
-import seedu.investigapptor.logic.commands.EditCommand;
-import seedu.investigapptor.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
+import seedu.investigapptor.logic.commands.EditInvestigatorCommand.EditPersonDescriptor;
 import seedu.investigapptor.logic.commands.ExitCommand;
 import seedu.investigapptor.logic.commands.FindCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
@@ -87,18 +87,20 @@ public class InvestigapptorParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditInvestigatorCommand command = (EditInvestigatorCommand)
+                parser.parseCommand(EditInvestigatorCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getPersonDetails(person));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditInvestigatorCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
     public void parseCommand_editAlias() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_ALIAS + " "
+        EditInvestigatorCommand command = (EditInvestigatorCommand)
+                parser.parseCommand(EditInvestigatorCommand.COMMAND_ALIAS + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getPersonDetails(person));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditInvestigatorCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

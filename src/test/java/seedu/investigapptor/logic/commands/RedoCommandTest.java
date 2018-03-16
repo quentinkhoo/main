@@ -25,8 +25,10 @@ public class RedoCommandTest {
     private static final UndoRedoStack EMPTY_STACK = new UndoRedoStack();
 
     private final Model model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
-    private final DeleteInvestigatorCommand deleteInvestigatorCommandOne = new DeleteInvestigatorCommand(INDEX_FIRST_PERSON);
-    private final DeleteInvestigatorCommand deleteInvestigatorCommandTwo = new DeleteInvestigatorCommand(INDEX_SECOND_PERSON);
+    private final DeleteInvestigatorCommand deleteInvestigatorCommandOne
+            = new DeleteInvestigatorCommand(INDEX_FIRST_PERSON);
+    private final DeleteInvestigatorCommand deleteInvestigatorCommandTwo
+            = new DeleteInvestigatorCommand(INDEX_SECOND_PERSON);
 
     @Before
     public void setUp() throws Exception {

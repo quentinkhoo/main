@@ -32,7 +32,8 @@ public class DeleteInvestigatorCommandSystemTest extends InvestigapptorSystemTes
 
         /* Case: delete the first person in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteInvestigatorCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
+        String command = "     " + DeleteInvestigatorCommand.COMMAND_WORD + "      "
+                + INDEX_FIRST_PERSON.getOneBased() + "       ";
         Person deletedPerson = removePerson(expectedModel, INDEX_FIRST_PERSON);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
@@ -127,7 +128,8 @@ public class DeleteInvestigatorCommandSystemTest extends InvestigapptorSystemTes
     }
 
     /**
-     * Deletes the person at {@code toDelete} by creating a default {@code DeleteInvestigatorCommand} using {@code toDelete} and
+     * Deletes the person at {@code toDelete} by creating a default {@code DeleteInvestigatorCommand}
+     * using {@code toDelete} and
      * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
      * @see DeleteInvestigatorCommandSystemTest#assertCommandSuccess(String, Model, String)
      */
@@ -137,7 +139,8 @@ public class DeleteInvestigatorCommandSystemTest extends InvestigapptorSystemTes
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
 
         assertCommandSuccess(
-                DeleteInvestigatorCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);
+                DeleteInvestigatorCommand.COMMAND_WORD + " " + toDelete.getOneBased(),
+                expectedModel, expectedResultMessage);
     }
 
     /**

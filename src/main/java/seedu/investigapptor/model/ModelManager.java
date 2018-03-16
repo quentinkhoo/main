@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.investigapptor.commons.core.ComponentManager;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
+import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
@@ -27,7 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final Investigapptor investigapptor;
     private final FilteredList<Person> filteredPersons;
-
+    private final FilteredList<CrimeCase> filteredCrimeCases;
     /**
      * Initializes a ModelManager with the given investigapptor and userPrefs.
      */
@@ -39,6 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.investigapptor = new Investigapptor(investigapptor);
         filteredPersons = new FilteredList<>(this.investigapptor.getPersonList());
+        filteredCrimeCases = new FilteredList<>(this.investigapptor.getCrimeCaseList());
     }
 
     public ModelManager() {
@@ -82,6 +85,13 @@ public class ModelManager extends ComponentManager implements Model {
         investigapptor.updatePerson(target, editedPerson);
         indicateInvestigapptorChanged();
     }
+
+    @Override
+    public synchronized void addCrimeCase(CrimeCase crimecase) throws DuplicateCrimeCaseException {
+        investigapptor.addCrimeCase(crimecase);
+        updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
+        indicateInvestigapptorChanged();
+    }
     @Override
     public void deleteTag(Tag toDelete) throws TagNotFoundException {
         investigapptor.deleteTag(toDelete);
@@ -103,6 +113,23 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Cases List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code CrimeCase} backed by the internal list of
+     * {@code investigapptor}
+     */
+    @Override
+    public ObservableList<CrimeCase> getFilteredCrimeCaseList() {
+        return FXCollections.unmodifiableObservableList(filteredCrimeCases);
+    }
+
+    @Override
+    public void updateFilteredCrimeCaseList(Predicate<CrimeCase> predicate) {
+        requireNonNull(predicate);
+        filteredCrimeCases.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -118,7 +145,8 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return investigapptor.equals(other.investigapptor)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredCrimeCases.equals(other.filteredCrimeCases);
     }
 
 }

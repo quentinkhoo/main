@@ -6,6 +6,7 @@ import static seedu.investigapptor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.investigapptor.logic.commands.AddCaseCommand;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
@@ -51,6 +52,10 @@ public class InvestigapptorParser {
         case RegisterInvestigatorCommand.COMMAND_WORD:
         case RegisterInvestigatorCommand.COMMAND_ALIAS:
             return new RegisterInvestigatorCommandParser().parse(arguments);
+
+        case AddCaseCommand.COMMAND_WORD:
+        case AddCaseCommand.COMMAND_ALIAS:
+            return new AddCaseCommandParser().parse(arguments);
 
         case EditInvestigatorCommand.COMMAND_WORD:
         case EditInvestigatorCommand.COMMAND_ALIAS:

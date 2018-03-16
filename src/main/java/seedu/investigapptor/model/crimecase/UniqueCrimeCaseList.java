@@ -9,8 +9,8 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.investigapptor.commons.exceptions.DuplicateDataException;
 import seedu.investigapptor.commons.util.CollectionUtil;
+import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 
 
 /**
@@ -130,14 +130,5 @@ public class UniqueCrimeCaseList implements Iterable<CrimeCase> {
     public int hashCode() {
         assert CollectionUtil.elementsAreUnique(internalList);
         return internalList.hashCode();
-    }
-
-    /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
-     */
-    public static class DuplicateCrimeCaseException extends DuplicateDataException {
-        protected DuplicateCrimeCaseException() {
-            super("Operation would result in duplicate cases");
-        }
     }
 }

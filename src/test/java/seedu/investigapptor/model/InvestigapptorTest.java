@@ -125,6 +125,7 @@ public class InvestigapptorTest {
      */
     private static class InvestigapptorStub implements ReadOnlyInvestigapptor {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<CrimeCase> cases = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
         InvestigapptorStub(Collection<Person> persons, Collection<? extends Tag> tags) {
@@ -135,6 +136,11 @@ public class InvestigapptorTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<CrimeCase> getCrimeCaseList() {
+            return cases;
         }
 
         @Override

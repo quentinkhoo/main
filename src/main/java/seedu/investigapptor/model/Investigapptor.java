@@ -11,6 +11,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
+import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.UniquePersonList;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
@@ -26,6 +29,7 @@ import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
 public class Investigapptor implements ReadOnlyInvestigapptor {
 
     private final UniquePersonList persons;
+    private final UniqueCrimeCaseList cases;
     private final UniqueTagList tags;
 
     /*
@@ -37,6 +41,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      */
     {
         persons = new UniquePersonList();
+        cases = new UniqueCrimeCaseList();
         tags = new UniqueTagList();
     }
 
@@ -115,6 +120,53 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
 
     /**
+     * Removes {@code key} from this {@code Investigapptor}.
+     * @throws PersonNotFoundException if the {@code key} is not in this {@code Investigapptor}.
+     */
+    public boolean removePerson(Person key) throws PersonNotFoundException {
+        if (persons.remove(key)) {
+            return true;
+        } else {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    //// case-level operations
+
+    /**
+     * Adds a case to the investigapptor book.
+     * Also checks the new case's tags and updates {@link #tags} with any new tags found,
+     * and updates the Tag objects in the person to point to those in {@link #tags}.
+     *
+     * @throws DuplicateCrimeCaseException if an equivalent case already exists.
+     */
+    public void addCrimeCase(CrimeCase c) throws DuplicateCrimeCaseException {
+        CrimeCase crimecase = syncWithMasterTagList(c);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any case
+        // in the case list.
+        cases.add(crimecase);
+    }
+
+    //// tag-level operations
+
+    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
+        tags.add(t);
+    }
+
+    /**
+     * Deletes {@code Investigapptor} from all person and UniqueTagList
+     */
+    public void deleteTag(Tag toDelete) throws TagNotFoundException {
+        if (tags.contains(toDelete)) {
+            tags.delete(toDelete);
+            persons.deleteTagFromPersons(toDelete);
+        } else {
+            throw new TagNotFoundException();
+        }
+    }
+
+    /**
      *  Updates the master tag list to include tags in {@code person} that are not in the list.
      *  @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
      *  list.
@@ -136,33 +188,25 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
 
     /**
-     * Removes {@code key} from this {@code Investigapptor}.
-     * @throws PersonNotFoundException if the {@code key} is not in this {@code Investigapptor}.
+     *  Updates the master tag list to include tags in {@code crimecase} that are not in the list.
+     *  @return a copy of this {@code crimecase} such that every tag in this case points to a Tag object in the master
+     *  list.
      */
-    public boolean removePerson(Person key) throws PersonNotFoundException {
-        if (persons.remove(key)) {
-            return true;
-        } else {
-            throw new PersonNotFoundException();
-        }
-    }
+    private CrimeCase syncWithMasterTagList(CrimeCase crimecase) {
+        final UniqueTagList crimecaseTags = new UniqueTagList(crimecase.getTags());
+        tags.mergeFrom(crimecaseTags);
 
-    //// tag-level operations
+        // Create map with values = tag object references in the master list
+        // used for checking case tag references
+        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        tags.forEach(tag -> masterTagObjects.put(tag, tag));
 
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
-        tags.add(t);
-    }
-
-    /**
-     * Deletes {@code Investigapptor} from all person and UniqueTagList
-     */
-    public void deleteTag(Tag toDelete) throws TagNotFoundException {
-        if (tags.contains(toDelete)) {
-            tags.delete(toDelete);
-            persons.deleteTagFromPersons(toDelete);
-        } else {
-            throw new TagNotFoundException();
-        }
+        // Rebuild the list of case tags to point to the relevant tags in the master tag list.
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        crimecaseTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        return new CrimeCase(
+                crimecase.getCaseName(), crimecase.getDescription(), crimecase.getCurrentInvestigator(),
+                crimecase.getStartDate(), crimecase.getStatus(), correctTagReferences);
     }
     //// util methods
 
@@ -175,6 +219,11 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asObservableList();
+    }
+
+    @Override
+    public ObservableList<CrimeCase> getCrimeCaseList() {
+        return cases.asObservableList();
     }
 
     @Override

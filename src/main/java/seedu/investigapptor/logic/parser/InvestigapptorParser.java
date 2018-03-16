@@ -58,7 +58,7 @@ public class InvestigapptorParser {
 
         case SelectInvestigatorCommand.COMMAND_WORD:
         case SelectInvestigatorCommand.COMMAND_ALIAS:
-            return new SelectCommandParser().parse(arguments);
+            return new SelectInvestigatorCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS:

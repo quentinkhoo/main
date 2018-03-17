@@ -9,45 +9,52 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.investigapptor.commons.core.LogsCenter;
+import seedu.investigapptor.commons.events.ui.InvestigatorPanelSelectionChangedEvent;
 import seedu.investigapptor.commons.events.ui.JumpToListRequestEvent;
 import seedu.investigapptor.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
  * Panel containing the list of persons.
  */
 public class InvestigatorListPanel extends UiPart<Region> {
     private static final String FXML = "InvestigatorListPanel.fxml";
-    private static final String panelHeader = "Investigators";
+    private static final String PANEL_HEADER = "Investigators";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<PersonCard> personListView;
+    private ListView<InvestigatorCard> investigatorListView;
 
-    public InvestigatorListPanel(ObservableList<Person> personList) {
+    @FXML
+    private Label investigatorListPanelHeader;
+
+    public InvestigatorListPanel(ObservableList<Investigator> investigatorList) {
         super(FXML);
-        setConnections(personList);
+        investigatorListPanelHeader.setText(PANEL_HEADER);
+        setConnections(investigatorList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Person> personList) {
-        ObservableList<PersonCard> mappedList = EasyBind.map(
-                personList, (person) -> new PersonCard(person, personList.indexOf(person) + 1));
-        personListView.setItems(mappedList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+    private void setConnections(ObservableList<Investigator> investigatorList) {
+        ObservableList<InvestigatorCard> mappedList = EasyBind.map(
+                investigatorList, (investigator) -> new InvestigatorCard(investigator, investigatorList.indexOf(investigator) + 1));
+        investigatorListView.setItems(mappedList);
+        investigatorListView.setCellFactory(listView -> new InvestigatorListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        investigatorListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new InvestigatorPanelSelectionChangedEvent(newValue));
                     }
                 });
     }
@@ -57,8 +64,8 @@ public class InvestigatorListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            investigatorListView.scrollTo(index);
+            investigatorListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -71,17 +78,17 @@ public class InvestigatorListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<PersonCard> {
+    class InvestigatorListViewCell extends ListCell<InvestigatorCard> {
 
         @Override
-        protected void updateItem(PersonCard person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(InvestigatorCard investigator, boolean empty) {
+            super.updateItem(investigator, empty);
 
-            if (empty || person == null) {
+            if (empty || investigator == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(person.getRoot());
+                setGraphic(investigator.getRoot());
             }
         }
     }

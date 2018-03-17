@@ -15,6 +15,7 @@ import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
 import seedu.investigapptor.model.tag.Tag;
@@ -29,6 +30,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final Investigapptor investigapptor;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Investigator> filteredInvestigators;
     private final FilteredList<CrimeCase> filteredCrimeCases;
     /**
      * Initializes a ModelManager with the given investigapptor and userPrefs.
@@ -41,6 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.investigapptor = new Investigapptor(investigapptor);
         filteredPersons = new FilteredList<>(this.investigapptor.getPersonList());
+        filteredInvestigators = new FilteredList<>(this.investigapptor.getInvestigatorList());
         filteredCrimeCases = new FilteredList<>(this.investigapptor.getCrimeCaseList());
     }
 
@@ -105,6 +108,15 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code investigapptor}
+     */
+    @Override
+    public ObservableList<Investigator> getFilteredInvestigatorList() {
+        return FXCollections.unmodifiableObservableList(filteredInvestigators);
     }
 
     @Override

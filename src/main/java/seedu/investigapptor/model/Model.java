@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
 import seedu.investigapptor.model.tag.Tag;
@@ -49,7 +50,7 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered investigator list */
-    //ObservableList<Investigator> getFilteredInvestigatorList();
+    ObservableList<Investigator> getFilteredInvestigatorList();
 
     /** Returns an unmodifiable view of the filtered case list */
     ObservableList<CrimeCase> getFilteredCrimeCaseList();

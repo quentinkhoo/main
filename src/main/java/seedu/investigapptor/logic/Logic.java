@@ -5,6 +5,7 @@ import seedu.investigapptor.logic.commands.CommandResult;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
  * API of the Logic component
@@ -21,6 +22,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of persons */
+    ObservableList<Investigator> getFilteredInvestigatorList();
 
     /** Returns an unmodifiable view of the filtered list of investigators */
     //ObservableList<Investigator> getFilteredInvestigatorList();

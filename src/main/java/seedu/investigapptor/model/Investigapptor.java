@@ -18,6 +18,8 @@ import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.UniquePersonList;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
+import seedu.investigapptor.model.person.investigator.Investigator;
+import seedu.investigapptor.model.person.investigator.UniqueInvestigatorList;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
 import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
@@ -29,6 +31,7 @@ import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
 public class Investigapptor implements ReadOnlyInvestigapptor {
 
     private final UniquePersonList persons;
+    private final UniqueInvestigatorList investigators;
     private final UniqueCrimeCaseList cases;
     private final UniqueTagList tags;
 
@@ -41,6 +44,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      */
     {
         persons = new UniquePersonList();
+        investigators = new UniqueInvestigatorList();
         cases = new UniqueCrimeCaseList();
         tags = new UniqueTagList();
     }
@@ -219,6 +223,10 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asObservableList();
+    }
+
+    public ObservableList<Investigator> getInvestigatorList() {
+        return investigators.asObservableInvestigatorList();
     }
 
     @Override

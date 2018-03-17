@@ -11,14 +11,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.UniquePersonList;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
-import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.investigator.UniqueInvestigatorList;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
@@ -65,6 +66,10 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         this.persons.setPersons(persons);
     }
 
+    public void setInvestigators(List<Investigator> investigators) throws DuplicatePersonException {
+        this.investigators.setInvestigators(investigators);
+    }
+
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
     }
@@ -75,12 +80,12 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public void resetData(ReadOnlyInvestigapptor newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
-        List<Person> syncedPersonList = newData.getPersonList().stream()
+        List<Person> syncedInvestigatorList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
 
         try {
-            setPersons(syncedPersonList);
+            setPersons(syncedInvestigatorList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("Investigapptors should not have duplicate persons");
         }
@@ -192,6 +197,28 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
 
     /**
+     *  Updates the master tag list to include tags in {@code investigator} that are not in the list.
+     *  @return a copy of this {@code investigator} such that every tag in this investigator points to a Tag object in the master
+     *  list.
+     */
+    private Investigator syncWithMasterTagList(Investigator investigator) {
+        final UniqueTagList investigatorTags = new UniqueTagList(investigator.getTags());
+        tags.mergeFrom(investigatorTags);
+
+        // Create map with values = tag object references in the master list
+        // used for checking person tag references
+        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+        tags.forEach(tag -> masterTagObjects.put(tag, tag));
+
+        // Rebuild the list of investigator tags to point to the relevant tags in the master tag list.
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        investigatorTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        return new Investigator(
+                investigator.getName(), investigator.getPhone(), investigator.getEmail(), investigator.getAddress(),
+                investigator.getCrimeCases(), correctTagReferences);
+    }
+
+    /**
      *  Updates the master tag list to include tags in {@code crimecase} that are not in the list.
      *  @return a copy of this {@code crimecase} such that every tag in this case points to a Tag object in the master
      *  list.
@@ -225,8 +252,9 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         return persons.asObservableList();
     }
 
+    @Override
     public ObservableList<Investigator> getInvestigatorList() {
-        return investigators.asObservableInvestigatorList();
+        return investigators.asObservableList();
     }
 
     @Override

@@ -35,7 +35,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private InvestigatorListPanel investigatorListPanel;
+    private PersonListPanel investigatorListPanel;
     private Config config;
     private UserPrefs prefs;
 
@@ -119,7 +119,7 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        investigatorListPanel = new InvestigatorListPanel(logic.getFilteredInvestigatorList());
+        investigatorListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(investigatorListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
@@ -181,7 +181,7 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public InvestigatorListPanel getInvestigatorListPanel() {
+    public PersonListPanel getInvestigatorListPanel() {
         return this.investigatorListPanel;
     }
 

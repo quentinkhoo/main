@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import seedu.investigapptor.commons.util.CollectionUtil;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 
-
 /**
  * A list of CrimeCases that enforces uniqueness between its elements and does not allow nulls.
  * Supports a minimal set of list operations.
@@ -28,6 +27,17 @@ public class UniqueCrimeCaseList implements Iterable<CrimeCase> {
      * Constructs empty CrimeCaseList.
      */
     public UniqueCrimeCaseList() {
+    }
+
+    /**
+     * Creates a UniqueTagList using given tags.
+     * Enforces no nulls.
+     */
+    public UniqueCrimeCaseList(ObservableList<CrimeCase> crimeCases) {
+        requireAllNonNull(crimeCases);
+        internalList.addAll(crimeCases);
+
+        assert CollectionUtil.elementsAreUnique(internalList);
     }
 
     /**

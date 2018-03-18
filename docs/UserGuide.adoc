@@ -71,6 +71,7 @@ Alias: `regInvest`
 
 [TIP]
 A person can have any number of tags (including 0)
+* Tags are alphanumeric without spaces
 
 Examples:
 
@@ -125,6 +126,29 @@ Examples:
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
+
+=== Locating investigators by category/team: `findTags`
+
+Find investigators whose tags contain any of the given keywords. +
+Format: `findTags KEYWORD [MORE_KEYWORDS]` +
+Alias: `ft`
+
+****
+* The search is case insensitive. e.g `teamA` will match `teama`
+* Only the tags are searched.
+* Only full words will be matched e.g. `teamA` will not match `teamyA`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+e.g. `teamA teamB` will return investigators that contain the tag 'teamA' or 'teamB'
+****
+
+Examples:
+
+* `findTags teamA` +
+Returns investigator(s) with tag `teamA`
+* `find teamA new teamb` +
+Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
+* `ft teamc newbie a` +
+Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 
 === Deleting an investigator : `deleteInvestigator`
 

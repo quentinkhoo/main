@@ -19,6 +19,7 @@ import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
+import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.tag.Tag;
 
@@ -105,7 +106,8 @@ public class AddCaseCommand extends UndoableCommand {
     private CrimeCase createCrimeCase(Person investigatorToAdd) {
         assert investigatorToAdd != null;
 
-        return new CrimeCase(this.name, this.description, investigatorToAdd,
+        Name investigatorToAddName = investigatorToAdd.getName();
+        return new CrimeCase(this.name, this.description, investigatorToAddName,
                 this.startDate, new Status(), this.tagList);
     }
 

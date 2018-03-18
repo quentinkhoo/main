@@ -8,18 +8,22 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import javafx.collections.ObservableList;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
+import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
  * JAXB-friendly version of the Person.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedInvestigator {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -35,16 +39,17 @@ public class XmlAdaptedPerson {
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
-    /**
-     * Constructs an XmlAdaptedPerson.
-     * This is the no-arg constructor that is required by JAXB.
-     */
-    public XmlAdaptedPerson() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * Constructs an XmlAdaptedInvestigator.
+     * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedInvestigator() {}
+
+    /**
+     * Constructs an {@code XmlAdaptedInvestigator} with the given investigator details.
+     */
+    public XmlAdaptedInvestigator(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,9 +62,9 @@ public class XmlAdaptedPerson {
     /**
      * Converts a given Person into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedInvestigator
      */
-    public XmlAdaptedPerson(Person source) {
+    public XmlAdaptedInvestigator(Investigator source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -75,10 +80,10 @@ public class XmlAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+    public Investigator toModelType() throws IllegalValueException {
+        final List<Tag> investigatorTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            investigatorTags.add(tag.toModelType());
         }
 
         if (this.name == null) {
@@ -113,8 +118,8 @@ public class XmlAdaptedPerson {
         }
         final Address address = new Address(this.address);
 
-        final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, email, address, tags);
+        final Set<Tag> tags = new HashSet<>(investigatorTags);
+        return new Investigator(name, phone, email, address, tags);
     }
 
     @Override
@@ -123,15 +128,15 @@ public class XmlAdaptedPerson {
             return true;
         }
 
-        if (!(other instanceof XmlAdaptedPerson)) {
+        if (!(other instanceof XmlAdaptedInvestigator)) {
             return false;
         }
 
-        XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(email, otherPerson.email)
-                && Objects.equals(address, otherPerson.address)
-                && tagged.equals(otherPerson.tagged);
+        XmlAdaptedInvestigator otherInvestigator = (XmlAdaptedInvestigator) other;
+        return Objects.equals(name, otherInvestigator.name)
+                && Objects.equals(phone, otherInvestigator.phone)
+                && Objects.equals(email, otherInvestigator.email)
+                && Objects.equals(address, otherInvestigator.address)
+                && tagged.equals(otherInvestigator.tagged);
     }
 }

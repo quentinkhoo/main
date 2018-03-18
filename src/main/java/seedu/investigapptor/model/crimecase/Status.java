@@ -27,6 +27,13 @@ public class Status {
         }
     }
 
+    /**
+     * Returns true if a given string is a valid case status.
+     */
+    public static boolean isValidStatus(String test) {
+        return test.trim() != null && !test.trim().isEmpty();
+    }
+
     @Override
     public String toString() {
         return this.status;

@@ -24,6 +24,14 @@ public class Investigator extends Person {
     /**
      * Every field must be present and not null.
      */
+    public Investigator(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        super(name, phone, email, address, tags);
+        this.crimeCases = new UniqueCrimeCaseList();
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
     public Investigator(Name name, Phone phone, Email email, Address address, ObservableList<CrimeCase> crimeCases,
                         Set<Tag> tags) {
         super(name, phone, email, address, tags);

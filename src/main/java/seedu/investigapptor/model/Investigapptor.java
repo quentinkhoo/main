@@ -10,6 +10,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.sun.xml.internal.ws.policy.spi.AssertionCreationException;
+
 import javafx.collections.ObservableList;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
@@ -70,6 +72,10 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         this.investigators.setInvestigators(investigators);
     }
 
+    public void setCrimeCases(List<CrimeCase> crimeCases) throws DuplicateCrimeCaseException {
+        this.cases.setCrimeCases(crimeCases);
+    }
+
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
     }
@@ -80,16 +86,83 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public void resetData(ReadOnlyInvestigapptor newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
-        List<Person> syncedInvestigatorList = newData.getPersonList().stream()
+        List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-
+        List<Investigator> syncedInvestigatorList = newData.getInvestigatorList().stream()
+                .map(this::syncWithMasterTagList)
+                .collect(Collectors.toList());
+        List<CrimeCase> syncedCrimeCaseList = newData.getCrimeCaseList().stream()
+                .map(this::syncWithMasterTagList)
+                .collect(Collectors.toList());
         try {
-            setPersons(syncedInvestigatorList);
+            setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("Investigapptors should not have duplicate persons");
         }
+
+        try {
+            setInvestigators(syncedInvestigatorList);
+        } catch (DuplicatePersonException e) {
+            throw new AssertionError("Investigapptors should not have duplicate investigators");
+        }
+
+        try {
+            setCrimeCases(syncedCrimeCaseList);
+        } catch (DuplicateCrimeCaseException e) {
+            throw new AssertionError("Investigapptors should not have duplicate crime cases");
+        }
     }
+    //// investigator-level operations
+
+    /**
+     * Adds a investigator to the investigapptor book.
+     * Also checks the new investigator's tags and updates {@link #tags} with any new tags found,
+     * and updates the Tag objects in the person to point to those in {@link #tags}.
+     *
+     * @throws DuplicatePersonException if an equivalent person already exists.
+     */
+    public void addInvestigator(Investigator i) throws DuplicatePersonException {
+        Investigator investigator = syncWithMasterTagList(i);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // in the investigator list.
+        persons.add(investigator);
+    }
+
+    /**
+     * Replaces the given person {@code target} in the list with {@code editedInvestigator}.
+     * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedInvestigator}.
+     *
+     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     *      another existing person in the list.
+     * @throws PersonNotFoundException if {@code target} could not be found in the list.
+     *
+     * @see #syncWithMasterTagList(Person)
+     */
+    public void updateInvestigator(Investigator target, Investigator editedInvestigator)
+            throws DuplicatePersonException, PersonNotFoundException {
+        requireNonNull(editedInvestigator);
+
+        Investigator syncedEditedInvestigator = syncWithMasterTagList(editedInvestigator);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // in the person list.
+        investigators.setInvestigator(target, syncedEditedInvestigator);
+    }
+
+    /**
+     * Removes {@code key} from this {@code Investigapptor}.
+     * @throws PersonNotFoundException if the {@code key} is not in this {@code Investigapptor}.
+     */
+    public boolean removeInvestigator(Investigator key) throws PersonNotFoundException {
+        if (investigators.remove(key)) {
+            return true;
+        } else {
+            throw new PersonNotFoundException();
+        }
+    }
+
     //// person-level operations
 
     /**
@@ -272,6 +345,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         return other == this // short circuit if same object
                 || (other instanceof Investigapptor // instanceof handles nulls
                 && this.persons.equals(((Investigapptor) other).persons)
+                && this.investigators.equals(((Investigapptor) other).investigators)
+                && this.cases.equals(((Investigapptor) other).cases)
                 && this.tags.equalsOrderInsensitive(((Investigapptor) other).tags));
     }
 

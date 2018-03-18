@@ -18,7 +18,7 @@ import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 public class XmlSerializableInvestigapptor {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedInvestigator> investigators;
     @XmlElement
     private List<XmlAdaptedTag> tags;
 
@@ -27,7 +27,7 @@ public class XmlSerializableInvestigapptor {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableInvestigapptor() {
-        persons = new ArrayList<>();
+        investigators = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -36,7 +36,7 @@ public class XmlSerializableInvestigapptor {
      */
     public XmlSerializableInvestigapptor(ReadOnlyInvestigapptor src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        investigators.addAll(src.getInvestigatorList().stream().map(XmlAdaptedInvestigator::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
@@ -44,14 +44,14 @@ public class XmlSerializableInvestigapptor {
      * Converts this investigapptor into the model's {@code Investigapptor} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
+     * {@code XmlAdaptedInvestigator} or {@code XmlAdaptedTag}.
      */
     public Investigapptor toModelType() throws IllegalValueException {
         Investigapptor investigapptor = new Investigapptor();
         for (XmlAdaptedTag t : tags) {
             investigapptor.addTag(t.toModelType());
         }
-        for (XmlAdaptedPerson p : persons) {
+        for (XmlAdaptedInvestigator p : investigators) {
             investigapptor.addPerson(p.toModelType());
         }
         return investigapptor;
@@ -68,6 +68,6 @@ public class XmlSerializableInvestigapptor {
         }
 
         XmlSerializableInvestigapptor otherAb = (XmlSerializableInvestigapptor) other;
-        return persons.equals(otherAb.persons) && tags.equals(otherAb.tags);
+        return investigators.equals(otherAb.investigators) && tags.equals(otherAb.tags);
     }
 }

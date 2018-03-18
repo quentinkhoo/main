@@ -832,8 +832,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |investigator |edit a case |reopen a case if necessary
 
-|`* * *` |investigator |view my cases |to know what what are the cases that is assigned  
-
 |`* * *` |investigator |view an investigator |view their name
 
 |`* * *` |investigator |view an investigator |view their email

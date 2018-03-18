@@ -10,6 +10,7 @@ import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
+import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
  * Deletes a person identified using it's last displayed index from the investigapptor book.
@@ -28,7 +29,7 @@ public class DeleteInvestigatorCommand extends UndoableCommand {
 
     private final Index targetIndex;
 
-    private Person personToDelete;
+    private Investigator investigatorToDelete;
 
     public DeleteInvestigatorCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -37,25 +38,25 @@ public class DeleteInvestigatorCommand extends UndoableCommand {
 
     @Override
     public CommandResult executeUndoableCommand() {
-        requireNonNull(personToDelete);
+        requireNonNull(investigatorToDelete);
         try {
-            model.deletePerson(personToDelete);
+            model.deleteInvestigator(investigatorToDelete);
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("The target investigator cannot be missing");
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, investigatorToDelete));
     }
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Investigator> lastShownList = model.getFilteredInvestigatorList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
         }
 
-        personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        investigatorToDelete = lastShownList.get(targetIndex.getZeroBased());
     }
 
     @Override
@@ -63,6 +64,6 @@ public class DeleteInvestigatorCommand extends UndoableCommand {
         return other == this // short circuit if same object
                 || (other instanceof DeleteInvestigatorCommand // instanceof handles nulls
                 && this.targetIndex.equals(((DeleteInvestigatorCommand) other).targetIndex) // state check
-                && Objects.equals(this.personToDelete, ((DeleteInvestigatorCommand) other).personToDelete));
+                && Objects.equals(this.investigatorToDelete, ((DeleteInvestigatorCommand) other).investigatorToDelete));
     }
 }

@@ -6,7 +6,7 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_INVESTIGATORS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,10 +22,10 @@ import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -54,62 +54,62 @@ public class EditInvestigatorCommand extends UndoableCommand {
     public static final String MESSAGE_DUPLICATE_PERSON = "This investigator already exists in investigapptor.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditInvestigatorDescriptor editInvestigatorDescriptor;
 
-    private Person personToEdit;
-    private Person editedPerson;
+    private Investigator investigatorToEdit;
+    private Investigator editedInvestigator;
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param editInvestigatorDescriptor details to edit the person with
      */
-    public EditInvestigatorCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditInvestigatorCommand(Index index, EditInvestigatorDescriptor editInvestigatorDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editInvestigatorDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editInvestigatorDescriptor = new EditInvestigatorDescriptor(editInvestigatorDescriptor);
     }
 
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         try {
-            model.updatePerson(personToEdit, editedPerson);
+            model.updateInvestigator(investigatorToEdit, editedInvestigator);
         } catch (DuplicatePersonException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } catch (PersonNotFoundException pnfe) {
-            throw new AssertionError("The target person cannot be missing");
+            throw new AssertionError("The target investigator cannot be missing");
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        model.updateFilteredInvestigatorList(PREDICATE_SHOW_ALL_INVESTIGATORS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedInvestigator));
     }
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Investigator> lastShownList = model.getFilteredInvestigatorList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
         }
 
-        personToEdit = lastShownList.get(index.getZeroBased());
-        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        investigatorToEdit = lastShownList.get(index.getZeroBased());
+        editedInvestigator = createEditedPerson(investigatorToEdit, editInvestigatorDescriptor);
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code investigatorToEdit}
+     * edited with {@code editInvestigatorDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Investigator createEditedPerson(Investigator personToEdit, EditInvestigatorDescriptor editInvestigatorDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editInvestigatorDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = editInvestigatorDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = editInvestigatorDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Address updatedAddress = editInvestigatorDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Set<Tag> updatedTags = editInvestigatorDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Investigator(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -127,28 +127,28 @@ public class EditInvestigatorCommand extends UndoableCommand {
         // state check
         EditInvestigatorCommand e = (EditInvestigatorCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor)
-                && Objects.equals(personToEdit, e.personToEdit);
+                && editInvestigatorDescriptor.equals(e.editInvestigatorDescriptor)
+                && Objects.equals(investigatorToEdit, e.investigatorToEdit);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * Stores the details to edit the investigator with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class EditInvestigatorDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditInvestigatorDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditInvestigatorDescriptor(EditInvestigatorDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -220,12 +220,12 @@ public class EditInvestigatorCommand extends UndoableCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditInvestigatorDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditInvestigatorDescriptor e = (EditInvestigatorDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())

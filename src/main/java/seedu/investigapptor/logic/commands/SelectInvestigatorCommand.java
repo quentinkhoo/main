@@ -8,6 +8,7 @@ import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.events.ui.JumpToListRequestEvent;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
  * Selects a person identified using it's last displayed index from the investigapptor book.
@@ -33,7 +34,7 @@ public class SelectInvestigatorCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Investigator> lastShownList = model.getFilteredInvestigatorList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);

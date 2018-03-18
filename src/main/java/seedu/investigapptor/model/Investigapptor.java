@@ -33,7 +33,6 @@ import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
  */
 public class Investigapptor implements ReadOnlyInvestigapptor {
 
-    private final UniquePersonList persons;
     private final UniqueInvestigatorList investigators;
     private final UniqueCrimeCaseList cases;
     private final UniqueTagList tags;
@@ -46,7 +45,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
         investigators = new UniqueInvestigatorList();
         cases = new UniqueCrimeCaseList();
         tags = new UniqueTagList();
@@ -63,10 +61,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
 
     //// list overwrite operations
-
-    public void setPersons(List<Person> persons) throws DuplicatePersonException {
-        this.persons.setPersons(persons);
-    }
 
     public void setInvestigators(List<Investigator> investigators) throws DuplicatePersonException {
         this.investigators.setInvestigators(investigators);
@@ -86,21 +80,12 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public void resetData(ReadOnlyInvestigapptor newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
-        List<Person> syncedPersonList = newData.getPersonList().stream()
-                .map(this::syncWithMasterTagList)
-                .collect(Collectors.toList());
         List<Investigator> syncedInvestigatorList = newData.getInvestigatorList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
         List<CrimeCase> syncedCrimeCaseList = newData.getCrimeCaseList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-        try {
-            setPersons(syncedPersonList);
-        } catch (DuplicatePersonException e) {
-            throw new AssertionError("Investigapptors should not have duplicate persons");
-        }
-
         try {
             setInvestigators(syncedInvestigatorList);
         } catch (DuplicatePersonException e) {
@@ -127,18 +112,18 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the investigator list.
-        persons.add(investigator);
+        investigators.add(investigator);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedInvestigator}.
+     * Replaces the given investigator {@code target} in the list with {@code editedInvestigator}.
      * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedInvestigator}.
      *
      * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
      *      another existing person in the list.
      * @throws PersonNotFoundException if {@code target} could not be found in the list.
      *
-     * @see #syncWithMasterTagList(Person)
+     * @see #syncWithMasterTagList(Investigator)
      */
     public void updateInvestigator(Investigator target, Investigator editedInvestigator)
             throws DuplicatePersonException, PersonNotFoundException {
@@ -162,57 +147,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
             throw new PersonNotFoundException();
         }
     }
-
-    //// person-level operations
-
-    /**
-     * Adds a person to the investigapptor book.
-     * Also checks the new person's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the person to point to those in {@link #tags}.
-     *
-     * @throws DuplicatePersonException if an equivalent person already exists.
-     */
-    public void addPerson(Person p) throws DuplicatePersonException {
-        Person person = syncWithMasterTagList(p);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
-        persons.add(person);
-    }
-
-    /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedPerson}.
-     *
-     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws PersonNotFoundException if {@code target} could not be found in the list.
-     *
-     * @see #syncWithMasterTagList(Person)
-     */
-    public void updatePerson(Person target, Person editedPerson)
-            throws DuplicatePersonException, PersonNotFoundException {
-        requireNonNull(editedPerson);
-
-        Person syncedEditedPerson = syncWithMasterTagList(editedPerson);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
-        persons.setPerson(target, syncedEditedPerson);
-    }
-
-    /**
-     * Removes {@code key} from this {@code Investigapptor}.
-     * @throws PersonNotFoundException if the {@code key} is not in this {@code Investigapptor}.
-     */
-    public boolean removePerson(Person key) throws PersonNotFoundException {
-        if (persons.remove(key)) {
-            return true;
-        } else {
-            throw new PersonNotFoundException();
-        }
-    }
-
     //// case-level operations
 
     /**
@@ -242,31 +176,10 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public void deleteTag(Tag toDelete) throws TagNotFoundException {
         if (tags.contains(toDelete)) {
             tags.delete(toDelete);
-            persons.deleteTagFromPersons(toDelete);
+            investigators.deleteTagFromInvestigators(toDelete);
         } else {
             throw new TagNotFoundException();
         }
-    }
-
-    /**
-     *  Updates the master tag list to include tags in {@code person} that are not in the list.
-     *  @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
-     *  list.
-     */
-    private Person syncWithMasterTagList(Person person) {
-        final UniqueTagList personTags = new UniqueTagList(person.getTags());
-        tags.mergeFrom(personTags);
-
-        // Create map with values = tag object references in the master list
-        // used for checking person tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
-
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        return new Person(
-                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
     }
 
     /**
@@ -316,13 +229,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return investigators.asObservableList().size() + " investigators, " + tags.asObservableList().size() +  " tags";
         // TODO: refine later
-    }
-
-    @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asObservableList();
     }
 
     @Override
@@ -344,7 +252,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Investigapptor // instanceof handles nulls
-                && this.persons.equals(((Investigapptor) other).persons)
                 && this.investigators.equals(((Investigapptor) other).investigators)
                 && this.cases.equals(((Investigapptor) other).cases)
                 && this.tags.equalsOrderInsensitive(((Investigapptor) other).tags));
@@ -353,6 +260,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        return Objects.hash(investigators, cases, tags);
     }
 }

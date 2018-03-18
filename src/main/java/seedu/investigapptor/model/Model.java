@@ -17,7 +17,7 @@ import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Investigator> PREDICATE_SHOW_ALL_INVESTIGATORS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<CrimeCase> PREDICATE_SHOW_ALL_CASES = unused -> true;
@@ -29,10 +29,10 @@ public interface Model {
     ReadOnlyInvestigapptor getInvestigapptor();
 
     /** Deletes the given person. */
-    void deletePerson(Person target) throws PersonNotFoundException;
+    void deleteInvestigator(Investigator target) throws PersonNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Person person) throws DuplicatePersonException;
+    void addInvestigator(Investigator investigator) throws DuplicatePersonException;
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      *
@@ -40,14 +40,11 @@ public interface Model {
      *      another existing person in the list.
      * @throws PersonNotFoundException if {@code target} could not be found in the list.
      */
-    void updatePerson(Person target, Person editedPerson)
+    void updateInvestigator(Investigator target, Investigator editedInvestigator)
             throws DuplicatePersonException, PersonNotFoundException;
 
     /** Adds the given case */
     void addCrimeCase(CrimeCase crimecase) throws DuplicateCrimeCaseException;
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered investigator list */
     ObservableList<Investigator> getFilteredInvestigatorList();
@@ -59,7 +56,7 @@ public interface Model {
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredInvestigatorList(Predicate<Investigator> predicate);
 
     /**
      * Updates the filter of the filtered case list to filter by the given {@code predicate}.

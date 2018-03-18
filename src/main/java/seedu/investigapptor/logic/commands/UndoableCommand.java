@@ -2,7 +2,7 @@ package seedu.investigapptor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.investigapptor.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_INVESTIGATORS;
 
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.Investigapptor;
@@ -38,7 +38,7 @@ public abstract class UndoableCommand extends Command {
     protected final void undo() {
         requireAllNonNull(model, previousInvestigapptor);
         model.resetData(previousInvestigapptor);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredInvestigatorList(PREDICATE_SHOW_ALL_INVESTIGATORS);
     }
 
     /**
@@ -53,7 +53,7 @@ public abstract class UndoableCommand extends Command {
             throw new AssertionError("The command has been successfully executed previously; "
                     + "it should not fail now");
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredInvestigatorList(PREDICATE_SHOW_ALL_INVESTIGATORS);
     }
 
     @Override

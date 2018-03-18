@@ -16,7 +16,7 @@ import java.util.Set;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
-import seedu.investigapptor.logic.commands.EditInvestigatorCommand.EditPersonDescriptor;
+import seedu.investigapptor.logic.commands.EditInvestigatorCommand.EditInvestigatorDescriptor;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.tag.Tag;
 
@@ -44,7 +44,7 @@ public class EditInvestigatorCommandParser implements Parser<EditInvestigatorCom
                     EditInvestigatorCommand.MESSAGE_USAGE));
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditInvestigatorDescriptor editPersonDescriptor = new EditInvestigatorDescriptor();
         try {
             ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)).ifPresent(editPersonDescriptor::setName);
             ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).ifPresent(editPersonDescriptor::setPhone);

@@ -18,6 +18,7 @@ import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.Phone;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -47,9 +48,9 @@ public class RegisterInvestigatorCommandParser implements Parser<RegisterInvesti
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            Person person = new Person(name, phone, email, address, tagList);
+            Investigator investigator = new Investigator(name, phone, email, address, tagList);
 
-            return new RegisterInvestigatorCommand(person);
+            return new RegisterInvestigatorCommand(investigator);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }

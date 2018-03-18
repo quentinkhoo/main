@@ -13,6 +13,7 @@ import java.util.Set;
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
+import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.Description;
@@ -21,6 +22,7 @@ import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -90,7 +92,7 @@ public class AddCaseCommand extends UndoableCommand {
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Investigator> lastShownList = model.getFilteredInvestigatorList();
 
         if (investigatorIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);

@@ -10,6 +10,7 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
+import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
  * Adds a person to the investigapptor book.
@@ -37,21 +38,21 @@ public class RegisterInvestigatorCommand extends UndoableCommand {
     public static final String MESSAGE_SUCCESS = "New investigator registered: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "Investigator already exists in the investigapptor";
 
-    private final Person toAdd;
+    private final Investigator toAdd;
 
     /**
      * Creates an RegisterInvestigatorCommand to add the specified {@code Person}
      */
-    public RegisterInvestigatorCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public RegisterInvestigatorCommand(Investigator investigator) {
+        requireNonNull(investigator);
+        toAdd = investigator;
     }
 
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         try {
-            model.addPerson(toAdd);
+            model.addInvestigator(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (DuplicatePersonException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

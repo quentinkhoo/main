@@ -11,7 +11,6 @@ import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.parser.InvestigapptorParser;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.Model;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**

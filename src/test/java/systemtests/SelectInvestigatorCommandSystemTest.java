@@ -7,7 +7,7 @@ import static seedu.investigapptor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND
 import static seedu.investigapptor.logic.commands.SelectInvestigatorCommand.MESSAGE_SELECT_PERSON_SUCCESS;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.investigapptor.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
-import static seedu.investigapptor.testutil.TypicalPersons.getTypicalPersons;
+import static seedu.investigapptor.testutil.TypicalPersons.getTypicalInvestigtors;
 
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class SelectInvestigatorCommandSystemTest extends InvestigapptorSystemTes
         assertCommandSuccess(command, INDEX_FIRST_PERSON);
 
         /* Case: select the last card in the person list -> selected */
-        Index personCount = Index.fromOneBased(getTypicalPersons().size());
+        Index personCount = Index.fromOneBased(getTypicalInvestigtors().size());
         command = SelectInvestigatorCommand.COMMAND_WORD + " " + personCount.getOneBased();
         assertCommandSuccess(command, personCount);
 

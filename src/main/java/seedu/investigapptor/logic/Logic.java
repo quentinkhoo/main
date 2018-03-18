@@ -4,7 +4,6 @@ import javafx.collections.ObservableList;
 import seedu.investigapptor.logic.commands.CommandResult;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**

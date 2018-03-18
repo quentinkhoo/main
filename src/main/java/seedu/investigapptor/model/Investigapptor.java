@@ -10,18 +10,13 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.sun.xml.internal.ws.policy.spi.AssertionCreationException;
-
 import javafx.collections.ObservableList;
-import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
-import seedu.investigapptor.model.person.Person;
-import seedu.investigapptor.model.person.UniquePersonList;
-import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.investigator.UniqueInvestigatorList;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
@@ -184,8 +179,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
 
     /**
      *  Updates the master tag list to include tags in {@code investigator} that are not in the list.
-     *  @return a copy of this {@code investigator} such that every tag in this investigator points to a Tag object in the master
-     *  list.
+     *  @return a copy of this {@code investigator} such that every tag in this investigator points to
+     *  a Tag object in the master list.
      */
     private Investigator syncWithMasterTagList(Investigator investigator) {
         final UniqueTagList investigatorTags = new UniqueTagList(investigator.getTags());

@@ -100,7 +100,8 @@ public class EditInvestigatorCommand extends UndoableCommand {
      * Creates and returns a {@code Person} with the details of {@code investigatorToEdit}
      * edited with {@code editInvestigatorDescriptor}.
      */
-    private static Investigator createEditedPerson(Investigator personToEdit, EditInvestigatorDescriptor editInvestigatorDescriptor) {
+    private static Investigator createEditedPerson(Investigator personToEdit,
+                                                   EditInvestigatorDescriptor editInvestigatorDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editInvestigatorDescriptor.getName().orElse(personToEdit.getName());

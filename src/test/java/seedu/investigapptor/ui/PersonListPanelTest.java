@@ -3,7 +3,7 @@ package seedu.investigapptor.ui;
 import static org.junit.Assert.assertEquals;
 import static seedu.investigapptor.testutil.EventsUtil.postNow;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.investigapptor.testutil.TypicalPersons.getTypicalPersons;
+import static seedu.investigapptor.testutil.TypicalPersons.getTypicalInvestigtors;
 import static seedu.investigapptor.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import static seedu.investigapptor.ui.testutil.GuiTestAssert.assertCardEquals;
 
@@ -19,7 +19,7 @@ import seedu.investigapptor.model.person.Person;
 
 public class PersonListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =
-            FXCollections.observableList(getTypicalPersons());
+            FXCollections.observableList(getTypicalInvestigtors());
 
     private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PERSON);
 

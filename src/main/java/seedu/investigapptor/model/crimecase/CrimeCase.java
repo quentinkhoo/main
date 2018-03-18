@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.investigapptor.model.person.Name;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
 

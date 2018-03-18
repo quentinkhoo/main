@@ -2,7 +2,6 @@ package seedu.investigapptor.model;
 
 import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 

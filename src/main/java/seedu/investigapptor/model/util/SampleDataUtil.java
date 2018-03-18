@@ -8,7 +8,6 @@ import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.investigator.Investigator;

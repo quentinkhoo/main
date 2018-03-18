@@ -8,7 +8,6 @@ import java.util.Objects;
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
 import seedu.investigapptor.model.person.investigator.Investigator;
 

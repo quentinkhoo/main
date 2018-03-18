@@ -16,7 +16,6 @@ import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;

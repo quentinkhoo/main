@@ -7,7 +7,6 @@ import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.events.ui.JumpToListRequestEvent;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**

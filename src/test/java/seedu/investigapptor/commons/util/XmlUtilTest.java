@@ -19,7 +19,7 @@ import seedu.investigapptor.storage.XmlAdaptedInvestigator;
 import seedu.investigapptor.storage.XmlAdaptedTag;
 import seedu.investigapptor.storage.XmlSerializableInvestigapptor;
 import seedu.investigapptor.testutil.InvestigapptorBuilder;
-import seedu.investigapptor.testutil.PersonBuilder;
+import seedu.investigapptor.testutil.InvestigatorBuilder;
 import seedu.investigapptor.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -72,7 +72,7 @@ public class XmlUtilTest {
     public void getDataFromFile_validFile_validResult() throws Exception {
         Investigapptor dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableInvestigapptor.class)
                                         .toModelType();
-        assertEquals(9, dataFromFile.getPersonList().size());
+        assertEquals(9, dataFromFile.getInvestigatorList().size());
         assertEquals(0, dataFromFile.getTagList().size());
     }
 
@@ -132,7 +132,7 @@ public class XmlUtilTest {
 
         InvestigapptorBuilder builder = new InvestigapptorBuilder(new Investigapptor());
         dataToWrite = new XmlSerializableInvestigapptor(
-                builder.withPerson(new PersonBuilder().build()).withTag("Friends").build());
+                builder.withInvestigator(new InvestigatorBuilder().build()).withTag("Friends").build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableInvestigapptor.class);
@@ -140,7 +140,8 @@ public class XmlUtilTest {
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedInvestigator}
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to
+     * {@code XmlAdaptedInvestigator}
      * objects.
      */
     @XmlRootElement(name = "person")

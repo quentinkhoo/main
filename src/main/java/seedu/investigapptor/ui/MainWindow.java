@@ -186,7 +186,9 @@ public class MainWindow extends UiPart<Stage> {
         return this.personListPanel;
     }
 
-    public InvestigatorListPanel getInvestigatorListPanel() { return this.investigatorListPanel; }
+    public InvestigatorListPanel getInvestigatorListPanel() {
+        return this.investigatorListPanel;
+    }
 
     void releaseResources() {
         browserPanel.freeResources();

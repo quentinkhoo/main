@@ -16,12 +16,10 @@ import javafx.scene.layout.Region;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.ui.InvestigatorPanelSelectionChangedEvent;
 import seedu.investigapptor.commons.events.ui.JumpToListRequestEvent;
-import seedu.investigapptor.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of investigators.
  */
 public class InvestigatorListPanel extends UiPart<Region> {
     private static final String FXML = "InvestigatorListPanel.fxml";
@@ -43,7 +41,8 @@ public class InvestigatorListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<Investigator> investigatorList) {
         ObservableList<InvestigatorCard> mappedList = EasyBind.map(
-                investigatorList, (investigator) -> new InvestigatorCard(investigator, investigatorList.indexOf(investigator) + 1));
+                investigatorList, (investigator) -> new InvestigatorCard(investigator,
+                        investigatorList.indexOf(investigator) + 1));
         investigatorListView.setItems(mappedList);
         investigatorListView.setCellFactory(listView -> new InvestigatorListViewCell());
         setEventHandlerForSelectionChangeEvent();

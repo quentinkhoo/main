@@ -2,8 +2,8 @@ package seedu.investigapptor.testutil;
 
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.model.Investigapptor;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -26,9 +26,9 @@ public class InvestigapptorBuilder {
     /**
      * Adds a new {@code Person} to the {@code Investigapptor} that we are building.
      */
-    public InvestigapptorBuilder withPerson(Person person) {
+    public InvestigapptorBuilder withInvestigator(Investigator investigator) {
         try {
-            investigapptor.addPerson(person);
+            investigapptor.addInvestigator(investigator);
         } catch (DuplicatePersonException dpe) {
             throw new IllegalArgumentException("person is expected to be unique.");
         }

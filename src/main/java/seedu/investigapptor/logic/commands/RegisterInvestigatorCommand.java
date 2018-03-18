@@ -8,7 +8,6 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
-import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.investigator.Investigator;
 

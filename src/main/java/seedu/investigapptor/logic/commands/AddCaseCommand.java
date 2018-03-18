@@ -13,7 +13,6 @@ import java.util.Set;
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
-import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.Description;

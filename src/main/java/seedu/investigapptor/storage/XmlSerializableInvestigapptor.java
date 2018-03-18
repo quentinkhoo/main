@@ -39,7 +39,8 @@ public class XmlSerializableInvestigapptor {
      */
     public XmlSerializableInvestigapptor(ReadOnlyInvestigapptor src) {
         this();
-        investigators.addAll(src.getInvestigatorList().stream().map(XmlAdaptedInvestigator::new).collect(Collectors.toList()));
+        investigators.addAll(src.getInvestigatorList().stream()
+                .map(XmlAdaptedInvestigator::new).collect(Collectors.toList()));
         crimeCases.addAll(src.getCrimeCaseList().stream().map(XmlAdaptedCrimeCase::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }

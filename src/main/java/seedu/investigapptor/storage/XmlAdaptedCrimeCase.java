@@ -8,20 +8,13 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import javafx.collections.ObservableList;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
-import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
-import seedu.investigapptor.model.person.Address;
-import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
-import seedu.investigapptor.model.person.Person;
-import seedu.investigapptor.model.person.investigator.Investigator;
-import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -96,7 +89,8 @@ public class XmlAdaptedCrimeCase {
         }
 
         if (this.caseName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, CaseName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CaseName.class.getSimpleName()));
         }
         if (!Name.isValidName(this.caseName)) {
             throw new IllegalValueException(CaseName.MESSAGE_CASE_NAME_CONSTRAINTS);
@@ -104,7 +98,8 @@ public class XmlAdaptedCrimeCase {
         final CaseName caseName = new CaseName(this.caseName);
 
         if (this.description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(this.description)) {
             throw new IllegalValueException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
@@ -118,7 +113,8 @@ public class XmlAdaptedCrimeCase {
         final Name currentInvestigator = new Name(this.currentInvestigator);
 
         if (this.startDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StartDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StartDate.class.getSimpleName()));
         }
         if (!StartDate.isValidDate(this.startDate)) {
             throw new IllegalValueException(StartDate.MESSAGE_DATE_CONSTRAINTS);

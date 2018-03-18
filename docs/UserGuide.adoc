@@ -70,23 +70,44 @@ Format: `registerInvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...
 Alias: `regInvest`
 
 [TIP]
-A person can have any number of tags (including 0)
+An investigator can have any number of tags (including 0)
 
 Examples:
 
-* `registerInvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/newComer`
+* `registerInvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/newcomer`
 * `registerInvestigator n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
 * `regInvest n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
 
-=== Listing all persons : `list`
+=== Adding a case: `addCase`
 
-Shows a list of all persons in the address book. +
+Adds a case to the application +
+Format: `addCase n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+Alias: `aC`
+
+[TIP]
+A case can have any number of tags (including 0)
+
+Examples:
+
+* `addCase n/Geylang Rape d/Rape at geylang i/John Doe s/12/05/1994 t/Rape t/prostitution`
+* `addCase n/Bedok Riot i/Tan Ah Kow s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
+* `aC n/Geylang Rape d/Rape at geylang i/John Doe s/12/05/1994`
+
+=== Listing all investigators : `listInvestigator`
+
+Shows a list of all investigators in the Investigapptor. +
 Format: `list` +
-Alias: `l`
+Alias: `lI`
+
+=== Listing all cases : `listCase`
+
+Shows a list of all cases in the Investigapptor. +
+Format: `listCase` +
+Alias: `lC`
 
 === Editing an investigator : `editInvestigator`
 
-Edits an existing person in the address book. +
+Edits an existing investigator in the Investigapptor. +
 Format: `editInvestigator INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 Alias: `eI`
 
@@ -95,7 +116,7 @@ Alias: `eI`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
@@ -105,11 +126,32 @@ Edits the phone number and email address of the 1st investigator to be `91234567
 * `eI 2 n/Betsy Crower t/` +
 Edits the name of the 2nd investigator to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Editing a case : `editCase`
 
-Finds persons whose names contain any of the given keywords. +
+Edits an existing case in the Investigapptor. +
+Format: `editCase INDEX [n/NAME] [d/DESCRIPTION] [i/INVESTIGATOR] [sd/STARTDATE] [s/STATUS] [t/TAG]...` +
+Alias: `eC`
+
+****
+* Edits the case at the specified `INDEX`. The index refers to the index number shown in the last listing of investigators. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `editCase 1 d/some description i/John Doe` +
+Edits the description and investigator of the 1st case to be `some description` and `John Doe@` respectively.
+* `eC 2 i/Betsy Crower t/` +
+Edits the investigator of the 2nd case to be `Betsy Crower` and clears all existing tags.
+
+=== Locating investigators by name: `findInvestigator`
+
+Finds investigators whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]` +
-Alias: `f`
+Alias: `fI`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -121,10 +163,31 @@ Alias: `f`
 
 Examples:
 
-* `find John` +
+* `findInvestigator John` +
 Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `fI Betsy Tim John` +
+Returns any investigators having names `Betsy`, `Tim`, or `John`
+
+=== Locating cases by name: `findCase`
+
+Finds cases whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]` +
+Alias: `fC`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `findCase SPF` +
+Returns `SPF Murder` and `SPF rape`
+* `findCase murder rape arson` +
+Returns any cases having names `murder`, `rape`, or `arson`
 
 === Deleting an investigator : `deleteInvestigator`
 
@@ -140,12 +203,33 @@ Alias: `dI`
 
 Examples:
 
-* `list` +
+* `listInvestigator` +
 `deleteInvestigator 2` +
 Deletes the 2nd investigator in the address book.
-* `find Betsy` +
+* `findInvestigator Betsy` +
 `dI 1` +
-Deletes the 1st investigator in the results of the `find` command.
+Deletes the 1st investigator in the results of the `findInvestigator` command.
+
+=== Deleting a case : `deleteCase`
+
+Deletes the specified case from the address book. +
+Format: `deleteCase INDEX` +
+Alias: `dC`
+
+****
+* Deletes the investigator at the specified `INDEX`.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `listCase` +
+`deleteCase 2` +
+Deletes the 2nd case in the address book.
+* `findCase Arson` +
+`dC 1` +
+Deletes the 1st case in the results of the `findCase` command.
 
 === Selecting an investigator : `selectInvestigator`
 
@@ -164,11 +248,34 @@ Examples:
 * `list` +
 `selectInvestigator 2` +
 Selects the 2nd person in the results of the `list` command.
-* `find Betsy` +
+* `findInvestigator Betsy` +
 `selectInvest 1` +
 Selects the 1st person in the results of the `find` command.
 * `selectInvestigator 3` +
 Selects the 3rd person in the listed panel list.
+
+=== Selecting a case : `selectCase`
+
+Selects the case identified by the index number used in the last case listing. +
+Format: `selectCase INDEX` +
+Alias: `sC`
+
+****
+* Selects the case and loads the details of the case at the specified `INDEX`.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `listCase` +
+`selectCase 2` +
+Selects the 2nd case in the results of the `listCase` command.
+* `findCase murder` +
+`selectCase 1` +
+Selects the 1st case in the results of the `findCase` command.
+* `sC 3` +
+Selects the 3rd case in the listed panel listCase.
 
 === Listing entered commands : `history`
 

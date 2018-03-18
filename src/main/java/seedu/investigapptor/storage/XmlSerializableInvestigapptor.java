@@ -20,6 +20,8 @@ public class XmlSerializableInvestigapptor {
     @XmlElement
     private List<XmlAdaptedInvestigator> investigators;
     @XmlElement
+    private List<XmlAdaptedCrimeCase> crimeCases;
+    @XmlElement
     private List<XmlAdaptedTag> tags;
 
     /**
@@ -28,6 +30,7 @@ public class XmlSerializableInvestigapptor {
      */
     public XmlSerializableInvestigapptor() {
         investigators = new ArrayList<>();
+        crimeCases = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -37,6 +40,7 @@ public class XmlSerializableInvestigapptor {
     public XmlSerializableInvestigapptor(ReadOnlyInvestigapptor src) {
         this();
         investigators.addAll(src.getInvestigatorList().stream().map(XmlAdaptedInvestigator::new).collect(Collectors.toList()));
+        crimeCases.addAll(src.getCrimeCaseList().stream().map(XmlAdaptedCrimeCase::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
@@ -51,8 +55,11 @@ public class XmlSerializableInvestigapptor {
         for (XmlAdaptedTag t : tags) {
             investigapptor.addTag(t.toModelType());
         }
-        for (XmlAdaptedInvestigator p : investigators) {
-            investigapptor.addPerson(p.toModelType());
+        for (XmlAdaptedInvestigator i : investigators) {
+            investigapptor.addInvestigator(i.toModelType());
+        }
+        for (XmlAdaptedCrimeCase c : crimeCases) {
+            investigapptor.addCrimeCase(c.toModelType());
         }
         return investigapptor;
     }
@@ -67,7 +74,7 @@ public class XmlSerializableInvestigapptor {
             return false;
         }
 
-        XmlSerializableInvestigapptor otherAb = (XmlSerializableInvestigapptor) other;
-        return investigators.equals(otherAb.investigators) && tags.equals(otherAb.tags);
+        XmlSerializableInvestigapptor otherIa = (XmlSerializableInvestigapptor) other;
+        return investigators.equals(otherIa.investigators) && tags.equals(otherIa.tags);
     }
 }

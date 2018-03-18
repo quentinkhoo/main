@@ -25,7 +25,7 @@ import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Investigator.
  */
 public class XmlAdaptedCrimeCase {
 

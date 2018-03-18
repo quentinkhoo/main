@@ -78,20 +78,20 @@ Examples:
 * `registerInvestigator n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
 * `regInvest n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
 
-=== Adding a case: `addCase`
+=== Adding a case: `create`
 
 Adds a case to the application +
-Format: `addCase n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-Alias: `aC`
+Format: `create [n/CASE_NAME] [d/DESCRIPTION] [i/INDEX] [s/START_DATE] [t/TAG]...` +
+Alias: `c`
 
 [TIP]
 A case can have any number of tags (including 0)
 
 Examples:
 
-* `addCase n/Geylang Rape d/Rape at geylang i/John Doe s/12/05/1994 t/Rape t/prostitution`
-* `addCase n/Bedok Riot i/Tan Ah Kow s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
-* `aC n/Geylang Rape d/Rape at geylang i/John Doe s/12/05/1994`
+* `create n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
+* `create n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
+* `c n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
 
 === Listing all investigators : `listInvestigator`
 

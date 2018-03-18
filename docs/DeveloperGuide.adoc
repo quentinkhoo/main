@@ -966,8 +966,8 @@ Use case resumes at step 3.
 *MSS*
 
 1.  Investigapptor shows a list of persons
-2.  User add a case to select investigator by index with case information
-3.  Case is added to investigator
+2.  User requests to add a new case by keying in case details and specifying an investigator from the list
+3.  Investigapptor creates a new case
 +
 Use case ends.
 

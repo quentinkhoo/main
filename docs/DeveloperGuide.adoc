@@ -796,13 +796,30 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Feature Contribution*:
 
-* Leow Wei Ching
-* Marcus Chen
-* Poh Kai Jun
-** Created a `findtags` commad
-*** This feature helps the investigators to filter out investigators that are in a certain team/category according
+* *Leow Wei Ching*
+** *Major enhancement*: Support for adding, editing, and deleting cases
+*** This enhancement allows users to manage cases.
+** *Minor enhancement*: Support data encryption
+*** This would allow for an added layer of security and prevent viewing of data outside the application.
+
+* *Marcus Chen*
+** *Major enhancement*: Implement suspects and witness into investigapptor
+*** This feature allows investigator to easily view suspects and witness related to the cases they are investigating
+** *Minor enhancement*: Implement `backup` command
+*** This feature helps the investigator to create a separate save file of the current state of the investigapptor and name it.
+
+* *Poh Kai Jun*
+** *Major Enhancement*: Support for evidence package (Add, Delete, Update, View, Search)
+*** This feature allows cases to store evidences details related to the case.
+** *Minor Enhancement*: Implement `findtags` command(s)
+*** This feature helps the users to filter out investigators/cases that are in a certain team/category according
 to their search input.
-* Quentin Khoo
+
+* *Quentin Khoo*
+** *Major enhancement*: Support notifying investigators when they get assigned a case
+*** This would allow for investigators to be aware when they get assigned a case to solve.
+** *Minor enhancement*: Add command aliases for most commands
+*** These aliases can be used in place of the full commands for the investigator's convenience.
 
 [appendix]
 == User Stories

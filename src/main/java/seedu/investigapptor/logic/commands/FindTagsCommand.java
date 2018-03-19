@@ -2,6 +2,10 @@ package seedu.investigapptor.logic.commands;
 
 import seedu.investigapptor.model.person.investigator.TagContainsKeywordsPredicate;
 
+/**
+ * Finds and lists all investigators in investigapptor whose tags contains any of the argument keywords.
+ * Keyword matching is not case-sensitive.
+ */
 public class FindTagsCommand extends Command {
 
     public static final String COMMAND_WORD = "findtags";

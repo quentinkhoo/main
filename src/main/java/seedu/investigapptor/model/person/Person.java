@@ -67,7 +67,7 @@ public class Person {
      */
     public Set<String> getTagsRaw() {
         Set<String> rawTags = new HashSet<>();
-        for(Tag s : tags) {
+        for (Tag s : tags) {
             rawTags.add(s.getRawString().toLowerCase());
         }
 

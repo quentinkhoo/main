@@ -1,13 +1,16 @@
 package seedu.investigapptor.logic.parser;
 
+import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.Arrays;
+
 import seedu.investigapptor.logic.commands.FindTagsCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.person.investigator.TagContainsKeywordsPredicate;
 
-import java.util.Arrays;
-
-import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+/**
+ * Parses input arguments and creates a new FindTagsCommand object
+ */
 public class FindTagsCommandParser implements Parser<FindTagsCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindTagsCommandParser

@@ -54,6 +54,8 @@ public class Tag {
     /**
      * Get the raw tag string
      */
-    public String getRawString() { return tagName; }
+    public String getRawString() {
+        return tagName;
+    }
 
 }

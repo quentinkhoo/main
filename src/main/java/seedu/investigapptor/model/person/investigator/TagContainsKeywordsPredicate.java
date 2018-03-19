@@ -1,9 +1,9 @@
 package seedu.investigapptor.model.person.investigator;
 
-import seedu.investigapptor.model.person.Person;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.investigapptor.model.person.Person;
 
 /**
  * Tests that a {@code Person}'s {@code Tags} matches any of the keywords given.

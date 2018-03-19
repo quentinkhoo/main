@@ -61,6 +61,18 @@ public class AddCaseCommand extends UndoableCommand {
     /**
      * Creates an AddCaseCommand to add the specified {@code CrimeCase}
      */
+    public AddCaseCommand(CrimeCase crimeCase) {
+        requireNonNull(crimeCase);
+        toAdd = crimeCase;
+    }
+
+    /**
+     * @param name of the case to be added
+     * @param description of the case to be added
+     * @param investigatorIndex of the investigator to be added
+     * @param startDate of the case to be added
+     * @param tagList of the case to be added
+     */
     public AddCaseCommand(CaseName name, Description description, Index investigatorIndex,
                           StartDate startDate, Set<Tag> tagList) {
         requireNonNull(name);
@@ -89,14 +101,18 @@ public class AddCaseCommand extends UndoableCommand {
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        if (investigatorIndex != null) {
+            List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (investigatorIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+            System.out.print(investigatorIndex);
+
+            if (investigatorIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+            }
+
+            investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
+            toAdd = createCrimeCase(investigatorToAdd);
         }
-
-        investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
-        toAdd = createCrimeCase(investigatorToAdd);
     }
 
     /**

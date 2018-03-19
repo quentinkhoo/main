@@ -20,7 +20,7 @@ import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddCaseCommand object
  */
 public class AddCaseCommandParser implements Parser<AddCaseCommand> {
 

@@ -137,14 +137,14 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
         /* Case: add a duplicate person -> rejected */
-        command = PersonUtil.getAddCommand(HOON);
+        command = PersonUtil.getRegCommand(HOON);
         assertCommandFailure(command, RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate person except with different tags -> rejected */
         // "friends" is an existing tag used in the default model, see TypicalPersons#ALICE
         // This test will fail if a new tag that is not in the model is used, see the bug documented in
         // Investigapptor#addPerson(Person)
-        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = PersonUtil.getRegCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: missing name -> rejected */
@@ -213,7 +213,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
      * @see InvestigapptorSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Person toAdd) {
-        assertCommandSuccess(PersonUtil.getAddCommand(toAdd), toAdd);
+        assertCommandSuccess(PersonUtil.getRegCommand(toAdd), toAdd);
     }
 
     /**

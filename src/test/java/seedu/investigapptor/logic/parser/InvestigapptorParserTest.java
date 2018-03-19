@@ -42,18 +42,18 @@ public class InvestigapptorParserTest {
     private final InvestigapptorParser parser = new InvestigapptorParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_reg() throws Exception {
         Person person = new PersonBuilder().build();
         RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
-                parser.parseCommand(PersonUtil.getAddCommand(person));
+                parser.parseCommand(PersonUtil.getRegCommand(person));
         assertEquals(new RegisterInvestigatorCommand(person), command);
     }
 
     @Test
-    public void parseCommand_addAlias() throws Exception {
+    public void parseCommand_regAlias() throws Exception {
         Person person = new PersonBuilder().build();
         RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
-                parser.parseCommand(PersonUtil.getAliasAddCommand(person));
+                parser.parseCommand(PersonUtil.getAliasRegCommand(person));
         assertEquals(new RegisterInvestigatorCommand(person), command);
     }
 

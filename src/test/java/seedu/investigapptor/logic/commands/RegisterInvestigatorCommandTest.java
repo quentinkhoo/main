@@ -163,7 +163,7 @@ public class RegisterInvestigatorCommandTest {
         }
 
         @Override
-        public void backUpInvestigapptor(String fileName){
+        public void backUpInvestigapptor(String fileName) {
             fail("This method should not be called.");
         }
     }

@@ -98,7 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
         investigapptor.deleteTag(toDelete);
     }
     @Override
-    public void backUpInvestigapptor(String fileName){
+    public void backUpInvestigapptor(String fileName) {
         raise(new InvestigapptorBackupEvent(investigapptor, fileName));
     }
     //=========== Filtered Person List Accessors =============================================================

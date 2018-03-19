@@ -794,6 +794,16 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Value proposition*: maximise workflow efficiency through use of electronic input
 
+*Feature Contribution*:
+
+* Leow Wei Ching
+* Marcus Chen
+* Poh Kai Jun
+** Created a `findtags` commad
+*** This feature helps the investigators to filter out investigators that are in a certain team/category according
+to their search input.
+* Quentin Khoo
+
 [appendix]
 == User Stories
 

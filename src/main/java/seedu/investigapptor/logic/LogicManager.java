@@ -11,6 +11,7 @@ import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.parser.InvestigapptorParser;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.Model;
+import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.Person;
 
 /**
@@ -48,6 +49,11 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<CrimeCase> getFilteredCrimeCaseList() {
+        return model.getFilteredCrimeCaseList();
     }
 
     @Override

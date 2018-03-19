@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.investigapptor.commons.core.ComponentManager;
 import seedu.investigapptor.commons.core.LogsCenter;
+import seedu.investigapptor.commons.events.model.InvestigapptorBackupEvent;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
@@ -95,6 +96,10 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteTag(Tag toDelete) throws TagNotFoundException {
         investigapptor.deleteTag(toDelete);
+    }
+    @Override
+    public void backUpInvestigapptor(String fileName){
+        raise(new InvestigapptorBackupEvent(investigapptor, fileName));
     }
     //=========== Filtered Person List Accessors =============================================================
 

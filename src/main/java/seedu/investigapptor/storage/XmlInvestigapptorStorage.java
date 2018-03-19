@@ -80,7 +80,7 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
     }
 
     @Override
-    public void backupInvestigapptor(ReadOnlyInvestigapptor investigapptor) throws IOException {
+    public void backupInvestigapptor(ReadOnlyInvestigapptor investigapptor, String fileName) throws IOException {
         saveInvestigapptor(investigapptor, filePath + ".backup");
     }
 

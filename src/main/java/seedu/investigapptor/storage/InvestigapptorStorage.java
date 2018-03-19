@@ -45,8 +45,9 @@ public interface InvestigapptorStorage {
     /**
      * Creates a backup of the given {@link ReadOnlyInvestigapptor} to the storage.
      * @param investigapptor cannot be null.
+     * @param fileName
      * @throws IOException if there was any problem writing to the file.
      */
-    void backupInvestigapptor(ReadOnlyInvestigapptor investigapptor) throws IOException;
+    void backupInvestigapptor(ReadOnlyInvestigapptor investigapptor, String fileName) throws IOException;
 
 }

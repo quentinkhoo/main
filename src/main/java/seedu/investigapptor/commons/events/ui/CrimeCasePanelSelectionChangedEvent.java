@@ -2,7 +2,6 @@ package seedu.investigapptor.commons.events.ui;
 
 import seedu.investigapptor.commons.events.BaseEvent;
 import seedu.investigapptor.ui.CrimeCaseCard;
-import seedu.investigapptor.ui.PersonCard;
 
 /**
  * Represents a selection change in the Person List Panel

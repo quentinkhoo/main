@@ -123,8 +123,8 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        //personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        //personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         crimeCaseListPanel = new CrimeCaseListPanel(logic.getFilteredCrimeCaseList());
         crimeCaseListPanelPlaceholder.getChildren().add(crimeCaseListPanel.getRoot());

@@ -798,8 +798,10 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 * Leow Wei Ching
 * Marcus Chen
+** Implemented `backup` command
+*** This feature helps the investigator to create a separate save file of the current state of the investigapptor and name it.
 * Poh Kai Jun
-** Created a `findtags` commad
+** Created a `findtags` command
 *** This feature helps the investigators to filter out investigators that are in a certain team/category according
 to their search input.
 * Quentin Khoo
@@ -869,6 +871,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |investigator |add a suspect |add suspects to a case
 
 |`*` |investigator |add evidence |add evidence to a case
+
+|`*` |investigator |create a backup |to restore to past states
 
 |`*` |investigator |add case witnesses |classify witnesses under certain cases
 
@@ -1012,6 +1016,22 @@ Use case resumes at step 2.
 +
 Use case ends.
 
+=== Use case: Display Help
+
+*MSS*
+
+1.  User types in the new backup's name
+
+2.  Success message appears
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Backup's name is not alphanumerical
++
+Use case resumes at step 1
 
 _{More to be added}_
 

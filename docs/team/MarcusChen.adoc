@@ -20,6 +20,9 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
 * *Minor enhancement*:
+** Implemented Backup command:
++
+Allows user to create and name a backup of the current state of the investigapptor.
 ** Implemented Investigator:
 +
 Investigator class extends the Person class with an addtional variable that stores the investigators cases

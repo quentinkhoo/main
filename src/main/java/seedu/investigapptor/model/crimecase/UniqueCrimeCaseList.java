@@ -5,6 +5,7 @@ import static seedu.investigapptor.commons.util.CollectionUtil.requireAllNonNull
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -46,6 +47,19 @@ public class UniqueCrimeCaseList implements Iterable<CrimeCase> {
         requireAllNonNull(tags);
         internalList.setAll(tags);
         assert CollectionUtil.elementsAreUnique(internalList);
+    }
+
+    public void setCrimeCases(UniqueCrimeCaseList replacement) {
+        this.internalList.setAll(replacement.internalList);
+    }
+
+    public void setCrimeCases(List<CrimeCase> crimeCases) throws DuplicateCrimeCaseException {
+        requireAllNonNull(crimeCases);
+        final UniqueCrimeCaseList replacement = new UniqueCrimeCaseList();
+        for (final CrimeCase crimeCase : crimeCases) {
+            replacement.add(crimeCase);
+        }
+        setCrimeCases(replacement);
     }
 
     /**

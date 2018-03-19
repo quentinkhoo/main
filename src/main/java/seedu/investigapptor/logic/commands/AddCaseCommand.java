@@ -27,8 +27,8 @@ import seedu.investigapptor.model.tag.Tag;
  */
 public class AddCaseCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "addCase";
-    public static final String COMMAND_ALIAS = "aC";
+    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_ALIAS = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a case to the investigapptor book. "
             + "Parameters: "

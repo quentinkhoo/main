@@ -61,6 +61,10 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         this.persons.setPersons(persons);
     }
 
+    public void setCrimeCases(List<CrimeCase> cases) throws DuplicateCrimeCaseException {
+        this.cases.setCrimeCases(cases);
+    }
+
     public void setTags(Set<Tag> tags) {
         this.tags.setTags(tags);
     }
@@ -79,6 +83,16 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("Investigapptors should not have duplicate persons");
+        }
+
+        List<CrimeCase> syncedCrimeCaseList = newData.getCrimeCaseList().stream()
+                .map(this::syncWithMasterTagList)
+                .collect(Collectors.toList());
+
+        try {
+            setCrimeCases(syncedCrimeCaseList);
+        } catch (DuplicateCrimeCaseException e) {
+            throw new AssertionError("Investigapptors should not have duplicate cases");
         }
     }
     //// person-level operations

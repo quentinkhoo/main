@@ -84,7 +84,7 @@ public class CrimeCaseCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof InvestigatorCard)) {
+        if (!(other instanceof CrimeCaseCard)) {
             return false;
         }
 

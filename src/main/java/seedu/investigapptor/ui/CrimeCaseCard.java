@@ -48,7 +48,7 @@ public class CrimeCaseCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(crimeCase.getCaseName().toString());
         description.setText(crimeCase.getDescription().toString());
-        startDate.setText(crimeCase.getStartDate().toString());
+        startDate.setText(crimeCase.getStartDate().date);
         status.setText(crimeCase.getStatus().toString());
         currentInvestigator.setText(crimeCase.getCurrentInvestigator().getName().fullName);
         colorTag(crimeCase);

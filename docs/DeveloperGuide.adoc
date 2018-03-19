@@ -798,7 +798,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 * Leow Wei Ching
 * Marcus Chen
-** Implemented `backup` command
+** Minor enhancement: Implemented `backup` command
 *** This feature helps the investigator to create a separate save file of the current state of the investigapptor and name it.
 * Poh Kai Jun
 ** Created a `findtags` command

@@ -3,9 +3,9 @@ package seedu.investigapptor.logic.commands;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.showCaseAtIndex;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.investigapptor.testutil.TypicalCrimeCases.getTypicalCrimeCaseInvestigapptor;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.investigapptor.testutil.TypicalPersons.getTypicalInvestigapptor;
-import static seedu.investigapptor.testutil.TypicalCrimeCases.getTypicalCrimeCaseInvestigapptor;
 
 import org.junit.Before;
 import org.junit.Test;

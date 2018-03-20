@@ -40,8 +40,8 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with investigapptor book: " + investigapptor + " and user prefs " + userPrefs);
 
         this.investigapptor = new Investigapptor(investigapptor);
-        filteredPersons = new FilteredList<>(this.investigapptor.getPersonList());
         filteredCrimeCases = new FilteredList<>(this.investigapptor.getCrimeCaseList());
+        filteredPersons = new FilteredList<>(this.investigapptor.getPersonList());
     }
 
     public ModelManager() {

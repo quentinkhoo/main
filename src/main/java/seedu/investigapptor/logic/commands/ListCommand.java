@@ -4,7 +4,9 @@ import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_CASES;
 import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.investigapptor.commons.core.EventsCenter;
+import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.events.ui.SwapTabEvent;
+import seedu.investigapptor.logic.commands.exceptions.CommandException;
 
 /**
  * Lists all persons in the investigapptor book to the user.
@@ -27,7 +29,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws CommandException {
         switch (listType) {
         case "cases":
             model.updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
@@ -40,7 +42,7 @@ public class ListCommand extends Command {
             break;
 
         default:
-            break;
+            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, listType));

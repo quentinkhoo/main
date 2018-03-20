@@ -14,7 +14,7 @@ import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseExcepti
 import seedu.investigapptor.model.tag.Tag;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of crimecases that enforces uniqueness between its elements and does not allow nulls.
  * <p>
  * Supports a minimal set of list operations.
  *

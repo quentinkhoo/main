@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.investigapptor.logic.commands.AddCaseCommand;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
@@ -29,8 +30,11 @@ import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
+import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.testutil.CrimeCaseBuilder;
+import seedu.investigapptor.testutil.CrimeCaseUtil;
 import seedu.investigapptor.testutil.EditPersonDescriptorBuilder;
 import seedu.investigapptor.testutil.PersonBuilder;
 import seedu.investigapptor.testutil.PersonUtil;
@@ -40,6 +44,22 @@ public class InvestigapptorParserTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private final InvestigapptorParser parser = new InvestigapptorParser();
+
+    @Test
+    public void parseCommand_add() throws Exception {
+        CrimeCase crimeCase = new CrimeCaseBuilder().build();
+        AddCaseCommand command = (AddCaseCommand)
+                parser.parseCommand(CrimeCaseUtil.getAddCommand(crimeCase));
+        assertEquals(new AddCaseCommand(crimeCase), command);
+    }
+
+    @Test
+    public void parseCommand_addAlias() throws Exception {
+        CrimeCase crimeCase = new CrimeCaseBuilder().build();
+        AddCaseCommand command = (AddCaseCommand)
+                parser.parseCommand(CrimeCaseUtil.getAliasAddCommand(crimeCase));
+        assertEquals(new AddCaseCommand(crimeCase), command);
+    }
 
     @Test
     public void parseCommand_reg() throws Exception {

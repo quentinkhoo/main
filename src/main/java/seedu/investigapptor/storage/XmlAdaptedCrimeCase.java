@@ -108,9 +108,6 @@ public class XmlAdaptedCrimeCase {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Person.class.getSimpleName()));
         }
-        /*if (!Person.isValidPerson(this.investigator)) {
-            throw new IllegalValueException(Person.MESSAGE_PHONE_CONSTRAINTS);
-        }*/
         final Person investigator = this.investigator.toModelType();
 
         if (this.startDate == null) {

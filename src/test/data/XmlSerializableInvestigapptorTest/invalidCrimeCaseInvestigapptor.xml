@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<investigapptor>
+    <!-- Case with invalid startDate field -->
+    <cases>
+        <name>Project Zero</name>
+        <description>This is a sample description for Project Zero</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>23/108/17</startDate>
+        <status>close</status>
+        <tagged>Murder</tagged>
+    </cases>
+</investigapptor>

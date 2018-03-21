@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_INVESTIGATOR;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -35,13 +35,13 @@ public class AddCaseCommand extends UndoableCommand {
             + PREFIX_NAME + "NAME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_INVESTIGATOR + "INDEX (must be a positive integer) "
-            + PREFIX_START_DATE + "START DATE "
+            + PREFIX_STARTDATE + "START DATE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Project Magic "
             + PREFIX_DESCRIPTION + "Kidnapping of 6 year-old John Doe "
             + PREFIX_INVESTIGATOR + "1 "
-            + PREFIX_START_DATE + "25/12/2017 "
+            + PREFIX_STARTDATE + "25/12/2017 "
             + PREFIX_TAG + "Homicide "
             + PREFIX_TAG + "Missing Persons";
 
@@ -103,8 +103,6 @@ public class AddCaseCommand extends UndoableCommand {
     protected void preprocessUndoableCommand() throws CommandException {
         if (investigatorIndex != null) {
             List<Person> lastShownList = model.getFilteredPersonList();
-
-            System.out.print(investigatorIndex);
 
             if (investigatorIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);

@@ -840,6 +840,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |investigator |view an investigator |view their address
 
+|`* * *` |investigator |view all investigators on the team|choose who to assign to a case
+
 |`* * *` |investigator |view a case |view its name
 
 |`* * *` |investigator |view a case |view its description
@@ -849,6 +851,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |investigator |view a case |view its status
 
 |`* * *` |investigator |view a case |view its end date
+
+|`* * *` |investigator |view all cases assigned to the team|see their details
 
 |`* * *` |investigator |delete an investigator |remove retired investigators
 

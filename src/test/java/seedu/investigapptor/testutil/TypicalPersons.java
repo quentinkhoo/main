@@ -44,7 +44,8 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
-    public static final Person POLICE = new PersonBuilder().withName("Police").build();
+    public static final Investigator POLICE = new InvestigatorBuilder().withName("Police").build();
+
     public static final Person SIR_LIM = new PersonBuilder().withName("Chao Lim")
             .withPhone("91672345").withEmail("limck@investiagency.com").withAddress("20th Street")
             .withTags("teamA", "new").build();
@@ -74,8 +75,6 @@ public class TypicalPersons {
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
     public static final String KEYWORD_MATCHING_TEAMA = "TEAMA"; // A keyword that matches TEAMA
     public static final String KEYWORD_MATCHING_TEAMB = "teamB"; // A keyword that matches TEAMB
-    public static final String KEYWORD_MATCHING_NEW = "new"; // A keyword that matches NEW
-    public static final String KEYWORD_MATCHING_EXPERIENCED = "experienced"; // A keyword that matches EXPERIENCED
 
     private TypicalPersons() {} // prevents instantiation
 
@@ -95,6 +94,7 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE,
+                SIR_LIM, MDM_ONG, SIR_CHONG, SIR_LOO));
     }
 }

@@ -66,9 +66,10 @@ public class FindInvestTagsCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        FindInvestTagsCommand command = prepareCommand("teamB");
-        assertCommandSuccess(command, expectedMessage, Arrays.asList(SIR_CHONG, MDM_ONG));
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String userInput = "teamB new".toLowerCase();  // Tags are converted to lowercase during comparison
+        FindInvestTagsCommand command = prepareCommand(userInput);
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(SIR_LIM, MDM_ONG, SIR_CHONG));
     }
 
     /**

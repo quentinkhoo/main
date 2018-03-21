@@ -21,14 +21,14 @@ public class FindInvestTagsCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
+    public void parse_validArgs_returnsFindInvestTagsCommand() {
+        // no leading and trailing whitespaces. arguments are lowercase as comparison is lowercase based
         FindInvestTagsCommand expectedFindCommand =
-                new FindInvestTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList("teamA", "new")));
-        assertParseSuccess(parser, "teamA new", expectedFindCommand);
+                new FindInvestTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList("teama", "new")));
+        assertParseSuccess(parser, "teama new", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n teamA \n \t new  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n teama \n \t new  \t", expectedFindCommand);
     }
 
 }

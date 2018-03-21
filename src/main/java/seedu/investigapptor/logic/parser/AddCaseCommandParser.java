@@ -4,7 +4,7 @@ import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_INVESTIGATOR;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -20,7 +20,7 @@ import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddCaseCommand object
  */
 public class AddCaseCommandParser implements Parser<AddCaseCommand> {
 
@@ -32,9 +32,9 @@ public class AddCaseCommandParser implements Parser<AddCaseCommand> {
     public AddCaseCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR,
-                        PREFIX_START_DATE, PREFIX_TAG);
+                        PREFIX_STARTDATE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR, PREFIX_START_DATE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR, PREFIX_STARTDATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCaseCommand.MESSAGE_USAGE));
         }
@@ -43,7 +43,7 @@ public class AddCaseCommandParser implements Parser<AddCaseCommand> {
             CaseName name = ParserUtil.parseCaseName(argMultimap.getValue(PREFIX_NAME)).get();
             Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)).get();
             Index investigatorIndex = ParserUtil.parseIndex(argMultimap.getOnlyValue(PREFIX_INVESTIGATOR));
-            StartDate startDate = ParserUtil.parseStartDate(argMultimap.getValue(PREFIX_START_DATE)).get();
+            StartDate startDate = ParserUtil.parseStartDate(argMultimap.getValue(PREFIX_STARTDATE)).get();
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             return new AddCaseCommand(name, description, investigatorIndex, startDate, tagList);

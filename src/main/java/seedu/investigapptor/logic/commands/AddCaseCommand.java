@@ -4,10 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_INVESTIGATOR;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.investigapptor.commons.core.Messages;
@@ -35,13 +36,13 @@ public class AddCaseCommand extends UndoableCommand {
             + PREFIX_NAME + "NAME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_INVESTIGATOR + "INDEX (must be a positive integer) "
-            + PREFIX_START_DATE + "START DATE "
+            + PREFIX_STARTDATE + "START DATE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Project Magic "
             + PREFIX_DESCRIPTION + "Kidnapping of 6 year-old John Doe "
             + PREFIX_INVESTIGATOR + "1 "
-            + PREFIX_START_DATE + "25/12/2017 "
+            + PREFIX_STARTDATE + "25/12/2017 "
             + PREFIX_TAG + "Homicide "
             + PREFIX_TAG + "Missing Persons";
 
@@ -54,12 +55,22 @@ public class AddCaseCommand extends UndoableCommand {
     private StartDate startDate;
     private Set<Tag> tagList;
 
-    private Person investigatorToAdd;
-
     private CrimeCase toAdd;
 
     /**
      * Creates an AddCaseCommand to add the specified {@code CrimeCase}
+     */
+    public AddCaseCommand(CrimeCase crimeCase) {
+        requireNonNull(crimeCase);
+        toAdd = crimeCase;
+    }
+
+    /**
+     * @param name of the case to be added
+     * @param description of the case to be added
+     * @param investigatorIndex of the investigator to be added
+     * @param startDate of the case to be added
+     * @param tagList of the case to be added
      */
     public AddCaseCommand(CaseName name, Description description, Index investigatorIndex,
                           StartDate startDate, Set<Tag> tagList) {
@@ -89,14 +100,16 @@ public class AddCaseCommand extends UndoableCommand {
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        if (investigatorIndex != null) {
+            List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (investigatorIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+            if (investigatorIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+            }
+
+            Person investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
+            toAdd = createCrimeCase(investigatorToAdd);
         }
-
-        investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
-        toAdd = createCrimeCase(investigatorToAdd);
     }
 
     /**
@@ -111,9 +124,18 @@ public class AddCaseCommand extends UndoableCommand {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddCaseCommand // instanceof handles nulls
-                && toAdd.equals(((AddCaseCommand) other).toAdd));
-    }
 
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddCaseCommand)) {
+            return false;
+        }
+
+        // state check
+        return Objects.equals(toAdd, ((AddCaseCommand) other).toAdd);
+    }
 }

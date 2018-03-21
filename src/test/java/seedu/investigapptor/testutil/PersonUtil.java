@@ -15,16 +15,16 @@ import seedu.investigapptor.model.person.Person;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an reg command string for adding the {@code person}.
      */
-    public static String getAddCommand(Person person) {
+    public static String getRegCommand(Person person) {
         return RegisterInvestigatorCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an reg command string for adding the {@code person}.
      */
-    public static String getAliasAddCommand(Person person) {
+    public static String getAliasRegCommand(Person person) {
         return RegisterInvestigatorCommand.COMMAND_ALIAS + " " + getPersonDetails(person);
     }
 

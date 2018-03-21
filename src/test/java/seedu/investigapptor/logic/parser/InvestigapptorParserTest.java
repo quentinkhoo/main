@@ -15,6 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.investigapptor.logic.commands.AddCaseCommand;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
@@ -29,8 +30,11 @@ import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
+import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.testutil.CrimeCaseBuilder;
+import seedu.investigapptor.testutil.CrimeCaseUtil;
 import seedu.investigapptor.testutil.EditPersonDescriptorBuilder;
 import seedu.investigapptor.testutil.PersonBuilder;
 import seedu.investigapptor.testutil.PersonUtil;
@@ -44,16 +48,37 @@ public class InvestigapptorParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
-                parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new RegisterInvestigatorCommand(person), command);
+        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(person).build();
+        AddCaseCommand command = (AddCaseCommand)
+                parser.parseCommand(CrimeCaseUtil.getAddCommand(crimeCase) + "i/" + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new AddCaseCommand(crimeCase.getCaseName(), crimeCase.getDescription(),
+                INDEX_FIRST_PERSON, crimeCase.getStartDate(), crimeCase.getTags()), command);
     }
 
     @Test
     public void parseCommand_addAlias() throws Exception {
         Person person = new PersonBuilder().build();
+        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(person).build();
+        AddCaseCommand command = (AddCaseCommand)
+                parser.parseCommand(CrimeCaseUtil.getAliasAddCommand(crimeCase)
+                        + "i/" + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new AddCaseCommand(crimeCase.getCaseName(), crimeCase.getDescription(),
+                INDEX_FIRST_PERSON, crimeCase.getStartDate(), crimeCase.getTags()), command);
+    }
+
+    @Test
+    public void parseCommand_reg() throws Exception {
+        Person person = new PersonBuilder().build();
         RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
-                parser.parseCommand(PersonUtil.getAliasAddCommand(person));
+                parser.parseCommand(PersonUtil.getRegCommand(person));
+        assertEquals(new RegisterInvestigatorCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_regAlias() throws Exception {
+        Person person = new PersonBuilder().build();
+        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
+                parser.parseCommand(PersonUtil.getAliasRegCommand(person));
         assertEquals(new RegisterInvestigatorCommand(person), command);
     }
 

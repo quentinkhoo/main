@@ -4,9 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_INVESTIGATOR;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -30,6 +33,8 @@ import seedu.investigapptor.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+
+    /* Person util */
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -64,7 +69,6 @@ public class CommandTestUtil {
 
     public static final EditInvestigatorCommand.EditPersonDescriptor DESC_AMY;
     public static final EditInvestigatorCommand.EditPersonDescriptor DESC_BOB;
-
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -73,6 +77,37 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+    /* CrimeCase Util */
+
+    public static final String VALID_CASENAME_APPLE = "Project Apple";
+    public static final String VALID_CASENAME_BANANA = "Project Banana";
+    public static final String VALID_DESCRIPTION_APPLE = "Description for Project Apple.";
+    public static final String VALID_DESCRIPTION_BANANA = "Description for Project Banana.";
+    public static final String VALID_INVESTIGATOR_APPLE = "1";
+    public static final String VALID_INVESTIGATOR_BANANA = "2";
+    public static final String VALID_STARTDATE_APPLE = "31/12/2017";
+    public static final String VALID_STARTDATE_BANANA = "4/03/1998";
+    public static final String VALID_TAG_FRAUD = "Fraud";
+    public static final String VALID_TAG_MURDER = "Murder";
+
+    public static final String CASENAME_DESC_APPLE = " " + PREFIX_NAME + VALID_CASENAME_APPLE;
+    public static final String CASENAME_DESC_BANANA = " " + PREFIX_NAME + VALID_CASENAME_BANANA;
+    public static final String DESCRIPTION_DESC_APPLE = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_APPLE;
+    public static final String DESCRIPTION_DESC_BANANA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BANANA;
+    public static final String INVESTIGATOR_DESC_APPLE = " " + PREFIX_INVESTIGATOR + VALID_INVESTIGATOR_APPLE;
+    public static final String INVESTIGATOR_DESC_BANANA = " " + PREFIX_INVESTIGATOR + VALID_INVESTIGATOR_BANANA;
+    public static final String STARTDATE_DESC_APPLE = " " + PREFIX_STARTDATE + VALID_STARTDATE_APPLE;
+    public static final String STARTDATE_DESC_BANANA = " " + PREFIX_STARTDATE + VALID_STARTDATE_BANANA;
+    public static final String TAG_DESC_FRAUD = " " + PREFIX_TAG + VALID_TAG_FRAUD;
+    public static final String TAG_DESC_MURDER = " " + PREFIX_TAG + VALID_TAG_MURDER;
+
+    public static final String INVALID_CASENAME_DESC = " " + PREFIX_NAME + "Yellow&"; // '&' not allowed in names
+    public static final String INVALID_DESCRIPTION_DESC = " "
+            + PREFIX_DESCRIPTION + ""; // empty string not allowed for descriptions
+    public static final String INVALID_INVESTIGATOR_DESC = " "
+            + PREFIX_INVESTIGATOR + "-5"; // negative index
+    public static final String INVALID_STARTDATE_DESC = " "
+            + PREFIX_STARTDATE + "132/11/17"; // is not a valid date
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -137,7 +172,7 @@ public class CommandTestUtil {
         final String[] splitName = crimeCase.getCaseName().crimeCaseName.split("\\s+");
         model.updateFilteredCrimeCaseList(new CaseNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredCrimeCaseList().size());
+        assertEquals(7, model.getFilteredCrimeCaseList().size());
     }
 
     /**

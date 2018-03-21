@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Investigapptor save file which contains the same CrimeCase values as in
+{@code TypicalCrimeCases#getTypicalInvestigapptor()}-->
+<investigapptor>
+    <cases>
+        <name>Project Alfa</name>
+        <description>Murder on the orient express</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>10/11/2015</startDate>
+        <status>close</status>
+        <tagged>Murder</tagged>
+    </cases>
+    <cases>
+        <name>Project Bravo</name>
+        <description>Crooked house</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>12/03/2016</startDate>
+        <status>open</status>
+        <tagged>Kidnap</tagged>
+        <tagged>Homicide</tagged>
+    </cases>
+    <cases>
+        <name>Project Charlie</name>
+        <description>ABC murders</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>18/01/2012</startDate>
+        <status>open</status>
+        <status>close</status>
+    </cases>
+    <cases>
+        <name>Project Delta</name>
+        <description>Peril at End House</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>27/11/1999</startDate>
+        <status>open</status>
+    </cases>
+    <cases>
+        <name>Project Echo</name>
+        <description>A study in scarlet</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>23/11/1965</startDate>
+        <status>open</status>
+    </cases>
+    <cases>
+        <name>Project Foxtrot</name>
+        <description>The sign of the four</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>09/07/2017</startDate>
+        <status>close</status>
+    </cases>
+    <cases>
+        <name>Project Golf</name>
+        <description>The hound of the baskervilles</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>02/08/2017</startDate>
+        <status>open</status>
+    </cases>
+</investigapptor>

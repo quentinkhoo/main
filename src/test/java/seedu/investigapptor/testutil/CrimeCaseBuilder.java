@@ -1,7 +1,5 @@
 package seedu.investigapptor.testutil;
 
-import static seedu.investigapptor.testutil.TypicalPersons.POLICE;
-
 import java.util.Set;
 
 import seedu.investigapptor.model.crimecase.CaseName;
@@ -37,7 +35,7 @@ public class CrimeCaseBuilder {
         status = new Status();
         startDate = new StartDate(DEFAULT_DATE);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
-        currentInvestigator = new InvestigatorBuilder(POLICE).build();
+        currentInvestigator = new PersonBuilder().withName("Detective Holmes").build();
 
     }
 
@@ -54,7 +52,7 @@ public class CrimeCaseBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code CrimeCase} that we are building.
+     * Sets the {@code CaseName} of the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder withName(String name) {
         this.name = new CaseName(name);
@@ -74,6 +72,22 @@ public class CrimeCaseBuilder {
      */
     public CrimeCaseBuilder withDescription(String description) {
         this.description = new Description(description);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Person} of the {@code CrimeCase} that we are building.
+     */
+    public CrimeCaseBuilder withInvestigator(Person investigator) {
+        this.currentInvestigator = investigator;
+        return this;
+    }
+
+    /**
+     * Toggles the {@code Status} of the {@code CrimeCase} that we are building.
+     */
+    public CrimeCaseBuilder toggleStatus() {
+        this.status.toggleCase();
         return this;
     }
 

@@ -3,9 +3,7 @@ package seedu.investigapptor.logic.commands;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.showCaseAtIndex;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.investigapptor.testutil.TypicalCrimeCases.getTypicalCrimeCaseInvestigapptor;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.investigapptor.testutil.TypicalPersons.getTypicalInvestigapptor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +13,8 @@ import seedu.investigapptor.logic.UndoRedoStack;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.ModelManager;
 import seedu.investigapptor.model.UserPrefs;
+import seedu.investigapptor.testutil.TypicalCrimeCases;
+import seedu.investigapptor.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -30,13 +30,13 @@ public class ListCommandTest {
 
     @Before
     public void setUp() {
-        investigatorModel = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
+        investigatorModel = new ModelManager(TypicalPersons.getTypicalInvestigapptor(), new UserPrefs());
         expectedInvestigatorModel = new ModelManager(investigatorModel.getInvestigapptor(), new UserPrefs());
 
         listCommandInvestigators = new ListCommand("investigators");
         listCommandInvestigators.setData(investigatorModel, new CommandHistory(), new UndoRedoStack());
 
-        crimeCaseModel = new ModelManager(getTypicalCrimeCaseInvestigapptor(), new UserPrefs());
+        crimeCaseModel = new ModelManager(TypicalCrimeCases.getTypicalInvestigapptor(), new UserPrefs());
         expectedCrimeCaseModel = new ModelManager(crimeCaseModel.getInvestigapptor(), new UserPrefs());
 
         listCommandCases = new ListCommand("cases");

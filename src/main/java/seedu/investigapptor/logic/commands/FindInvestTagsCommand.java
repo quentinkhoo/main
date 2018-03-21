@@ -6,10 +6,10 @@ import seedu.investigapptor.model.person.investigator.TagContainsKeywordsPredica
  * Finds and lists all investigators in investigapptor whose tags contains any of the argument keywords.
  * Keyword matching is not case-sensitive.
  */
-public class FindTagsCommand extends Command {
+public class FindInvestTagsCommand extends Command {
 
-    public static final String COMMAND_WORD = "findtags";
-    public static final String COMMAND_ALIAS = "ft";
+    public static final String COMMAND_WORD = "findInvestTags";
+    public static final String COMMAND_ALIAS = "fit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds investigators whose tags contain any of "
             + "the specified keywords and displays them as a list with index numbers.\n"
@@ -18,7 +18,7 @@ public class FindTagsCommand extends Command {
 
     private final TagContainsKeywordsPredicate predicate;
 
-    public FindTagsCommand(TagContainsKeywordsPredicate predicate) {
+    public FindInvestTagsCommand(TagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -31,7 +31,7 @@ public class FindTagsCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindTagsCommand // instanceof handles nulls
-                && this.predicate.equals(((FindTagsCommand) other).predicate)); // state check
+                || (other instanceof FindInvestTagsCommand // instanceof handles nulls
+                && this.predicate.equals(((FindInvestTagsCommand) other).predicate)); // state check
     }
 }

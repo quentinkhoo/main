@@ -70,4 +70,7 @@ public interface Model {
      * Deletes given tag from system
      */
     void deleteTag(Tag toDelete)throws TagNotFoundException;
+
+    /** Save Investigapptor information as a new name */
+    void backUpInvestigapptor(String fileName);
 }

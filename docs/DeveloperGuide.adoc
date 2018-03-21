@@ -887,6 +887,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |investigator |add evidence |add evidence to a case
 
+|`*` |investigator |create a backup |to restore to past states
+
 |`*` |investigator |add case witnesses |classify witnesses under certain cases
 
 |`*` |investigator |add case suspects |classify suspects under certain cases
@@ -1029,6 +1031,22 @@ Use case resumes at step 2.
 +
 Use case ends.
 
+=== Use case: Display Help
+
+*MSS*
+
+1.  User types in the new backup's name
+
+2.  Success message appears
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Backup's name is not alphanumerical
++
+Use case resumes at step 1
 
 _{More to be added}_
 

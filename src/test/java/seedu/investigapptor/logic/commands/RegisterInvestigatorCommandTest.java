@@ -161,6 +161,11 @@ public class RegisterInvestigatorCommandTest {
         public void updateFilteredCrimeCaseList(Predicate<CrimeCase> predicate) {
             fail("This method should not be called.");
         }
+
+        @Override
+        public void backUpInvestigapptor(String fileName) {
+            fail("This method should not be called.");
+        }
     }
 
     /**

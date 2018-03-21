@@ -52,11 +52,11 @@ public class XmlSerializableInvestigapptor {
      */
     public Investigapptor toModelType() throws IllegalValueException {
         Investigapptor investigapptor = new Investigapptor();
-        for (XmlAdaptedCrimeCase c : cases) {
-            investigapptor.addCrimeCase(c.toModelType());
-        }
         for (XmlAdaptedTag t : tags) {
             investigapptor.addTag(t.toModelType());
+        }
+        for (XmlAdaptedCrimeCase c : cases) {
+            investigapptor.addCrimeCase(c.toModelType());
         }
         for (XmlAdaptedPerson p : persons) {
             investigapptor.addPerson(p.toModelType());

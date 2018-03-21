@@ -75,25 +75,23 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public void resetData(ReadOnlyInvestigapptor newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
+        List<CrimeCase> syncedCrimeCaseList = newData.getCrimeCaseList().stream()
+                .map(this::syncWithMasterTagList)
+                .collect(Collectors.toList());
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("Investigapptors should not have duplicate persons");
         }
-
-        List<CrimeCase> syncedCrimeCaseList = newData.getCrimeCaseList().stream()
-                .map(this::syncWithMasterTagList)
-                .collect(Collectors.toList());
-
         try {
             setCrimeCases(syncedCrimeCaseList);
         } catch (DuplicateCrimeCaseException e) {
             throw new AssertionError("Investigapptors should not have duplicate cases");
         }
+
     }
     //// person-level operations
 
@@ -175,6 +173,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         if (tags.contains(toDelete)) {
             tags.delete(toDelete);
             persons.deleteTagFromPersons(toDelete);
+            cases.deleteTagFromCrimeCases(toDelete);
         } else {
             throw new TagNotFoundException();
         }

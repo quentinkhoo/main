@@ -4,9 +4,11 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -17,6 +19,7 @@ import seedu.investigapptor.commons.core.GuiSettings;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.ui.ExitAppRequestEvent;
 import seedu.investigapptor.commons.events.ui.ShowHelpRequestEvent;
+import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.logic.Logic;
 import seedu.investigapptor.model.UserPrefs;
 
@@ -36,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    private CrimeCaseListPanel crimeCaseListPanel;
     private Config config;
     private UserPrefs prefs;
 
@@ -49,7 +53,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private TabPane listPanel;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane crimeCaseListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -122,6 +132,9 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        crimeCaseListPanel = new CrimeCaseListPanel(logic.getFilteredCrimeCaseList());
+        crimeCaseListPanelPlaceholder.getChildren().add(crimeCaseListPanel.getRoot());
+
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -183,6 +196,25 @@ public class MainWindow extends UiPart<Stage> {
 
     public PersonListPanel getPersonListPanel() {
         return this.personListPanel;
+    }
+
+    public CrimeCaseListPanel getCrimeCaseListPanel() {
+        return this.crimeCaseListPanel;
+    }
+
+    /**
+     * Changes to the {@code Tab} at the {@code index} and selects it.
+     */
+    private void changeTo(int index) {
+        Platform.runLater(() -> {
+            listPanel.getSelectionModel().select(index);
+        });
+    }
+
+    @Subscribe
+    private void handleSwapTabEvent(SwapTabEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        changeTo(event.targetIndex);
     }
 
     void releaseResources() {

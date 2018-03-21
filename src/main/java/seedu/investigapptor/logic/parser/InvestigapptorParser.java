@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.investigapptor.logic.commands.AddCaseCommand;
+import seedu.investigapptor.logic.commands.BackupCommand;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
@@ -79,7 +80,7 @@ public class InvestigapptorParser {
 
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_ALIAS:
@@ -100,6 +101,10 @@ public class InvestigapptorParser {
         case RedoCommand.COMMAND_WORD:
         case RedoCommand.COMMAND_ALIAS:
             return new RedoCommand();
+
+        case BackupCommand.COMMAND_WORD:
+        case BackupCommand.COMMAND_ALIAS:
+            return new BackupCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -141,6 +141,11 @@ public class AddCaseCommandTest {
         }
 
         @Override
+        public void backUpInvestigapptor(String fileName) {
+            fail("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             fail("This method should not be called.");
             return null;

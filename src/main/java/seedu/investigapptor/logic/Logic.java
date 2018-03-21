@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.investigapptor.logic.commands.CommandResult;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
+import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.Person;
 
 /**
@@ -22,8 +23,8 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered list of investigators */
-    //ObservableList<Investigator> getFilteredInvestigatorList();
+    /** Returns an unmodifiable view of the filtered clist of investigators */
+    ObservableList<CrimeCase> getFilteredCrimeCaseList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();

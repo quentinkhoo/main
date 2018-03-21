@@ -3,19 +3,19 @@ package seedu.investigapptor.model.crimecase;
 import static java.util.Objects.requireNonNull;
 import static seedu.investigapptor.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.investigapptor.commons.util.CollectionUtil;
+import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
-
+import seedu.investigapptor.model.tag.Tag;
 
 /**
- * A list of CrimeCases that enforces uniqueness between its elements and does not allow nulls.
+ * A list of crimecases that enforces uniqueness between its elements and does not allow nulls.
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see CrimeCase#equals(Object)
@@ -26,27 +26,60 @@ public class UniqueCrimeCaseList implements Iterable<CrimeCase> {
     private final ObservableList<CrimeCase> internalList = FXCollections.observableArrayList();
 
     /**
-     * Constructs empty CrimeCaseList.
+     * Returns true if the list contains an equivalent person as the given argument.
      */
-    public UniqueCrimeCaseList() {
+    public boolean contains(CrimeCase toCheck) {
+        requireNonNull(toCheck);
+        return internalList.contains(toCheck);
     }
 
     /**
-     * Returns all tags in this list as a Set.
-     * This set is mutable and change-insulated against the internal list.
+     * Adds a crimeCase to the list.
+     *
+     * @throws DuplicateCrimeCaseException if the person to add is a duplicate of an existing person in the list.
      */
-    public Set<CrimeCase> toSet() {
-        assert CollectionUtil.elementsAreUnique(internalList);
-        return new HashSet<>(internalList);
+    public void add(CrimeCase toAdd) throws DuplicateCrimeCaseException {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateCrimeCaseException();
+        }
+        internalList.add(toAdd);
     }
 
     /**
-     * Replaces the CrimeCases in this list with those in the argument tag list.
+     * Replaces the crimeCase {@code target} in the list with {@code editedCrimeCase}.
+     *
+     * @throws DuplicateCrimeCaseException if the replacement is equivalent to another existing crimecase in the list.
+     * @throws CrimeCaseNotFoundException  if {@code target} could not be found in the list.
      */
-    public void setCrimeCases(Set<CrimeCase> tags) {
-        requireAllNonNull(tags);
-        internalList.setAll(tags);
-        assert CollectionUtil.elementsAreUnique(internalList);
+    public void setCrimeCase(CrimeCase crimeCase, CrimeCase editedCrimeCase)
+            throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
+        requireNonNull(editedCrimeCase);
+
+        int index = internalList.indexOf(crimeCase);
+        if (index == -1) {
+            throw new CrimeCaseNotFoundException();
+        }
+
+        if (!crimeCase.equals(editedCrimeCase) && internalList.contains(editedCrimeCase)) {
+            throw new DuplicateCrimeCaseException();
+        }
+
+        internalList.set(index, editedCrimeCase);
+    }
+
+    /**
+     * Removes the equivalent person from the list.
+     *
+     * @throws CrimeCaseNotFoundException if no such person could be found in the list.
+     */
+    public boolean remove(CrimeCase toRemove) throws CrimeCaseNotFoundException {
+        requireNonNull(toRemove);
+        final boolean crimeCaseFoundAndDeleted = internalList.remove(toRemove);
+        if (!crimeCaseFoundAndDeleted) {
+            throw new CrimeCaseNotFoundException();
+        }
+        return crimeCaseFoundAndDeleted;
     }
 
     public void setCrimeCases(UniqueCrimeCaseList replacement) {
@@ -63,86 +96,35 @@ public class UniqueCrimeCaseList implements Iterable<CrimeCase> {
     }
 
     /**
-     * Ensures every tag in the argument list exists in this object.
+     * Deletes {@code toDelete} tag from every crimecase in internalList
      */
-    public void mergeFrom(UniqueCrimeCaseList from) {
-        final Set<CrimeCase> alreadyInside = this.toSet();
-        from.internalList.stream()
-                .filter(tag -> !alreadyInside.contains(tag))
-                .forEach(internalList::add);
-
-        assert CollectionUtil.elementsAreUnique(internalList);
-    }
-
-    /**
-     * Returns true if the list contains an equivalent CrimeCase as the given argument.
-     */
-    public boolean contains(CrimeCase toCheck) {
-        requireNonNull(toCheck);
-        return internalList.contains(toCheck);
-    }
-
-    /**
-     * Adds a CrimeCase to the list.
-     *
-     * @throws DuplicateCrimeCaseException if the CrimeCase to add is a duplicate of an existing CrimeCase in the list.
-     */
-    public void add(CrimeCase toAdd) throws DuplicateCrimeCaseException {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateCrimeCaseException();
+    public void deleteTagFromCrimeCases(Tag toDelete) {
+        for (CrimeCase crimeCase : internalList) {
+            crimeCase.deleteTag(toDelete);
         }
-        internalList.add(toAdd);
-
-        assert CollectionUtil.elementsAreUnique(internalList);
-    }
-
-    /**
-     * Removes a CrimeCase from the list.
-     */
-    public void remove(CrimeCase toDelete) {
-        requireNonNull(toDelete);
-        if (contains(toDelete)) {
-            internalList.remove(toDelete);
-        }
-        assert CollectionUtil.elementsAreUnique(internalList);
-    }
-
-    @Override
-    public Iterator<CrimeCase> iterator() {
-        assert CollectionUtil.elementsAreUnique(internalList);
-        return internalList.iterator();
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<CrimeCase> asObservableList() {
-        assert CollectionUtil.elementsAreUnique(internalList);
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
     @Override
+    public Iterator<CrimeCase> iterator() {
+        return internalList.iterator();
+    }
+
+    @Override
     public boolean equals(Object other) {
-        assert CollectionUtil.elementsAreUnique(internalList);
         return other == this // short circuit if same object
                 || (other instanceof UniqueCrimeCaseList // instanceof handles nulls
                 && this.internalList.equals(((UniqueCrimeCaseList) other).internalList));
     }
 
-    /**
-     * Returns true if the element in this list is equal to the elements in {@code other}.
-     * The elements do not have to be in the same order.
-     */
-    public boolean equalsOrderInsensitive(UniqueCrimeCaseList other) {
-        assert CollectionUtil.elementsAreUnique(internalList);
-        assert CollectionUtil.elementsAreUnique(other.internalList);
-        return this == other || new HashSet<>(this.internalList).equals(new HashSet<>(other.internalList));
-    }
-
     @Override
     public int hashCode() {
-        assert CollectionUtil.elementsAreUnique(internalList);
         return internalList.hashCode();
     }
 }

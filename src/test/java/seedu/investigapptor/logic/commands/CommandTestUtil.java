@@ -22,6 +22,8 @@ import seedu.investigapptor.logic.UndoRedoStack;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
+import seedu.investigapptor.model.crimecase.CaseNameContainsKeywordsPredicate;
+import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
@@ -157,6 +159,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * {@code model}'s investigapptor book.
+     */
+    public static void showCaseAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCrimeCaseList().size());
+
+        CrimeCase crimeCase = model.getFilteredCrimeCaseList().get(targetIndex.getZeroBased());
+        final String[] splitName = crimeCase.getCaseName().crimeCaseName.split("\\s+");
+        model.updateFilteredCrimeCaseList(new CaseNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(7, model.getFilteredCrimeCaseList().size());
     }
 
     /**

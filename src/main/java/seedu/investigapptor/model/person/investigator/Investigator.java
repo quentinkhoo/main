@@ -5,6 +5,7 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
+import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
@@ -41,7 +42,7 @@ public class Investigator extends Person {
         return crimeCases.asObservableList();
     }
 
-    public void removeCrimeCase(CrimeCase caseToRemove) {
+    public void removeCrimeCase(CrimeCase caseToRemove) throws CrimeCaseNotFoundException {
         crimeCases.remove(caseToRemove);
     }
 }

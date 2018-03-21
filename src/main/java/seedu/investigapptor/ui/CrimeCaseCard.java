@@ -10,9 +10,9 @@ import seedu.investigapptor.model.crimecase.CrimeCase;
 /**
  * An UI component that displays information of a {@code CaseCard}.
  */
-public class CaseCard extends UiPart<Region> {
+public class CrimeCaseCard extends UiPart<Region> {
 
-    private static final String FXML = "CrimeCaseList.fxml";
+    private static final String FXML = "CrimeCaseListCard.fxml";
     private static final String[] LABEL_COLOR = {"red", "yellow", "blue", "orange", "pink", "olive", "black"};
 
     /**
@@ -42,14 +42,15 @@ public class CaseCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public CaseCard(CrimeCase crimeCase, int displayedIndex) {
+    public CrimeCaseCard(CrimeCase crimeCase, int displayedIndex) {
         super(FXML);
         this.crimeCase = crimeCase;
         id.setText(displayedIndex + ". ");
         name.setText(crimeCase.getCaseName().toString());
         description.setText(crimeCase.getDescription().toString());
-        startDate.setText(crimeCase.getStartDate().toString());
+        startDate.setText(crimeCase.getStartDate().date);
         status.setText(crimeCase.getStatus().toString());
+        currentInvestigator.setText(crimeCase.getCurrentInvestigator().getName().fullName);
         colorTag(crimeCase);
     }
 
@@ -83,12 +84,12 @@ public class CaseCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof InvestigatorCard)) {
+        if (!(other instanceof CrimeCaseCard)) {
             return false;
         }
 
         // state check
-        CaseCard card = (CaseCard) other;
+        CrimeCaseCard card = (CrimeCaseCard) other;
         return id.getText().equals(card.id.getText())
                 && crimeCase.equals(card.crimeCase);
     }

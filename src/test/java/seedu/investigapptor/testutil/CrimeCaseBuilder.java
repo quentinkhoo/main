@@ -12,7 +12,7 @@ import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building CrimeCase objects.
  */
 public class CrimeCaseBuilder {
 
@@ -92,10 +92,26 @@ public class CrimeCaseBuilder {
     }
 
     /**
+     * Sets the {@code Status} of the {@code CrimeCase} that we are building.
+     */
+    public CrimeCaseBuilder withStatus(String status) {
+        this.status = new Status(status);
+        return this;
+    }
+
+    /**
      * Sets the {@code StartDate} of the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder withStartDate(String date) {
         this.startDate = new StartDate(date);
+        return this;
+    }
+
+    /**
+     * Sets the {@code currentInvestigator} of the {@code CrimeCase} that we are building.
+     */
+    public CrimeCaseBuilder withCurrentInvestigator(Person investigator) {
+        this.currentInvestigator = new PersonBuilder(investigator).build();
         return this;
     }
 

@@ -18,8 +18,10 @@ import seedu.investigapptor.testutil.TypicalPersons;
 public class XmlSerializableInvestigapptorTest {
 
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlSerializableInvestigapptorTest/");
-    private static final File TYPICAL_CRIMECASES_FILE = new File(TEST_DATA_FOLDER + "typicalCrimeCasesInvestigapptor.xml");
-    private static final File INVALID_CRIMECASE_FILE = new File(TEST_DATA_FOLDER + "invalidCrimeCaseInvestigapptor.xml");
+    private static final File TYPICAL_CRIMECASES_FILE = new File(TEST_DATA_FOLDER
+            + "typicalCrimeCasesInvestigapptor.xml");
+    private static final File INVALID_CRIMECASE_FILE = new File(TEST_DATA_FOLDER
+            + "invalidCrimeCaseInvestigapptor.xml");
     private static final File TYPICAL_PERSONS_FILE = new File(TEST_DATA_FOLDER + "typicalPersonsInvestigapptor.xml");
     private static final File INVALID_PERSON_FILE = new File(TEST_DATA_FOLDER + "invalidPersonInvestigapptor.xml");
     private static final File INVALID_TAG_FILE = new File(TEST_DATA_FOLDER + "invalidTagInvestigapptor.xml");

@@ -47,18 +47,23 @@ public class InvestigapptorParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        CrimeCase crimeCase = new CrimeCaseBuilder().build();
+        Person person = new PersonBuilder().build();
+        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(person).build();
         AddCaseCommand command = (AddCaseCommand)
-                parser.parseCommand(CrimeCaseUtil.getAddCommand(crimeCase));
-        assertEquals(new AddCaseCommand(crimeCase), command);
+                parser.parseCommand(CrimeCaseUtil.getAddCommand(crimeCase) + "i/" + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new AddCaseCommand(crimeCase.getCaseName(), crimeCase.getDescription(),
+                INDEX_FIRST_PERSON, crimeCase.getStartDate(), crimeCase.getTags()), command);
     }
 
     @Test
     public void parseCommand_addAlias() throws Exception {
-        CrimeCase crimeCase = new CrimeCaseBuilder().build();
+        Person person = new PersonBuilder().build();
+        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(person).build();
         AddCaseCommand command = (AddCaseCommand)
-                parser.parseCommand(CrimeCaseUtil.getAliasAddCommand(crimeCase));
-        assertEquals(new AddCaseCommand(crimeCase), command);
+                parser.parseCommand(CrimeCaseUtil.getAliasAddCommand(crimeCase)
+                        + "i/" + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new AddCaseCommand(crimeCase.getCaseName(), crimeCase.getDescription(),
+                INDEX_FIRST_PERSON, crimeCase.getStartDate(), crimeCase.getTags()), command);
     }
 
     @Test

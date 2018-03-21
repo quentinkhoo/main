@@ -1,7 +1,9 @@
 package seedu.investigapptor.logic.parser;
 
 import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.CASENAME_DESC_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.CASENAME_DESC_BANANA;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.DESCRIPTION_DESC_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.INVALID_CASENAME_DESC;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
@@ -9,29 +11,39 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.INVALID_STARTD
 import static seedu.investigapptor.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.INVESTIGATOR_DESC_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.STARTDATE_DESC_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.STARTDATE_DESC_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.TAG_DESC_FRAUD;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.TAG_DESC_MURDER;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_CASENAME_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_CASENAME_BANANA;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_DESCRIPTION_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_INVESTIGATOR_BANANA;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_STARTDATE_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_STARTDATE_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_FRAUD;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_MURDER;
 import static seedu.investigapptor.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.investigapptor.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+
+import java.util.Set;
 
 import org.junit.Test;
 
+import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.AddCaseCommand;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.tag.Tag;
+import seedu.investigapptor.model.util.SampleDataUtil;
 
 public class AddCaseCommandParserTest {
     private AddCaseCommandParser parser = new AddCaseCommandParser();
 
-    // The following commented tests requires further work
-    /*
     @Test
     public void parse_allFieldsPresent_success() {
 
@@ -83,10 +95,10 @@ public class AddCaseCommandParserTest {
                 new Description(VALID_DESCRIPTION_APPLE), targetIndex,
                 new StartDate(VALID_STARTDATE_APPLE), tag);
         assertParseSuccess(parser, CASENAME_DESC_APPLE + DESCRIPTION_DESC_APPLE
-                + " i/" + targetIndex.getOneBased() + STARTDATE_DESC_APPLE,
+                        + " i/" + targetIndex.getOneBased() + STARTDATE_DESC_APPLE,
                 expectedCommand);
     }
-    */
+
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,

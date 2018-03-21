@@ -8,6 +8,7 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.investigapptor.commons.core.Messages;
@@ -53,8 +54,6 @@ public class AddCaseCommand extends UndoableCommand {
     private Index investigatorIndex;
     private StartDate startDate;
     private Set<Tag> tagList;
-
-    private Person investigatorToAdd;
 
     private CrimeCase toAdd;
 
@@ -108,7 +107,7 @@ public class AddCaseCommand extends UndoableCommand {
                 throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
             }
 
-            investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
+            Person investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
             toAdd = createCrimeCase(investigatorToAdd);
         }
     }
@@ -125,9 +124,18 @@ public class AddCaseCommand extends UndoableCommand {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddCaseCommand // instanceof handles nulls
-                && toAdd.equals(((AddCaseCommand) other).toAdd));
-    }
 
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddCaseCommand)) {
+            return false;
+        }
+
+        // state check
+        return Objects.equals(toAdd, ((AddCaseCommand) other).toAdd);
+    }
 }

@@ -1,10 +1,8 @@
 package seedu.investigapptor.testutil;
 
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_INVESTIGATOR;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_STARTDATE;
-import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.investigapptor.logic.commands.AddCaseCommand;
@@ -36,9 +34,7 @@ public class CrimeCaseUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + crimeCase.getCaseName().crimeCaseName + " ");
         sb.append(PREFIX_DESCRIPTION + crimeCase.getDescription().description + " ");
-        sb.append(PREFIX_INVESTIGATOR + crimeCase.getCurrentInvestigator().toString() + " ");
         sb.append(PREFIX_STARTDATE + crimeCase.getStartDate().date + " ");
-        sb.append(PREFIX_STATUS + crimeCase.getStatus().toString() + " ");
         crimeCase.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();

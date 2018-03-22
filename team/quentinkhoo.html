@@ -252,9 +252,165 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<h3 id="password-feature"><a class="link" href="#password-feature">Password feature</a></h3>
+<div class="sect3">
+<h4 id="reason-for-implementation"><a class="link" href="#reason-for-implementation">Reason for implementation</a></h4>
+<div class="paragraph">
+<p>As Investigapptor is a computer software that will likely to be installed on a shared computer,
+a password prompt is necessary in order to deter non-authorized users of the Investigapptor from
+gaining access into the application.</p>
+</div>
+</div>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>To be updated</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-feature"><a class="link" href="#listing-feature">Listing feature</a></h3>
+<div class="sect3">
+<h4 id="reason-for-implementation-2"><a class="link" href="#reason-for-implementation-2">Reason for implementation</a></h4>
+<div class="paragraph">
+<p>Investigapptor allows for separate tab listing of cases and investigators on the user interface as it
+would provide visual aid for them in deciding which investigator to assign to which case. As an investigator who would
+want to list and view all currently registered investigators or assigned cases, the listing
+command would automatically swap between the 2 tabs respectively upon the listing input, bringing
+convenience to the investigator ultimately.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The investigators/cases tabs are created with a <code>PersonListPanel</code>
+and <code>CrimeCaseListPanel</code> respectively, which are the main classes
+in charge of displaying the details of the investigators or crime cases.
+The list investigators/cases command would then display the respective
+tabs depending on the list argument.</p>
+</div>
+<div class="paragraph">
+<p>A <code>PersonListPanel</code> constructor is created with a constructor:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PersonListPanel</span> <span class="directive">extends</span> UiPart&lt;<span class="predefined-type">Region</span>&gt; {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> PersonListPanel(ObservableList&lt;Person&gt; personList) {
+    <span class="comment">/// PersonListPanel code</span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>PersonListPanel</code> is then initialised in the MainWindow class
+by taking in an unmodifiable list of Person as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    personListPanel = <span class="keyword">new</span> PersonListPanel(logic.getFilteredPersonList());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A <code>CrimeCaseListPanel</code> constructor is created with a constructor:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">CrimeCaseListPanel</span> <span class="directive">extends</span> UiPart&lt;<span class="predefined-type">Region</span>&gt; {
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> CrimeCaseListPanel(ObservableList&lt;CrimeCase&gt; crimeCaseList) {
+    <span class="comment">/// CrimeCaseListPanel code</span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>CrimeCaseListPanel</code> is then initialised in the MainWindow class by taking in
+an unmodifiable list of CrimeCase as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">    crimeCaseListPanel = <span class="keyword">new</span> CrimeCaseListPanel(logic.getFilteredCrimeCaseList());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The list investigators/cases command is handled in the logic component
+by a <code>ListCommand</code> object which takes in a list type as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">ListCommand(<span class="predefined-type">String</span> listType);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Depending on the <code>listType</code> input, a different list would be returned
+to the <code>model</code> component and trigger for a <code>SwapTabEvent</code></p>
+</div>
+<div class="paragraph">
+<p>In the case of an 'investigators' <code>listType</code> input, the <code>model</code> gets
+updated as shown below</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            EventsCenter.getInstance().post(<span class="keyword">new</span> SwapTabEvent(<span class="integer">0</span>));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of an 'cases' <code>listType</code> input, the <code>model</code> gets
+updated as shown below</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">model.updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
+            EventsCenter.getInstance().post(<span class="keyword">new</span> SwapTabEvent(<span class="integer">1</span>));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="alternatives-considered"><a class="link" href="#alternatives-considered">Alternatives Considered</a></h4>
+<div class="sect4">
+<h5 id="aspect-design-of-list"><a class="link" href="#aspect-design-of-list">Aspect: Design of list</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (Current Choice)</strong>: Have the same <code>ListCommand</code> object
+for listing of investigators and cases.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to code and requires less <code>Class</code> files.</p>
+</li>
+<li>
+<p>Cons: Users have to type an extra space whenever they want to list something.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 </strong>: Separate into <code>ListInvestigators</code> and <code>ListCases</code>
+for listing of investigators and cases.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More object oriented style and can be treated as separate entities.</p>
+</li>
+<li>
+<p>Cons: Requires much more modifications when other types of listing come into
+play in future versions (i.e <code>Witness</code>, <code>Evidence</code>).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -563,7 +719,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-22 14:23:32 UTC
+Last updated 2018-03-22 14:24:51 UTC
 </div>
 </div>
 </body>

@@ -14,6 +14,7 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.RANK_DESC_CAP;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
@@ -65,7 +66,8 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
          */
         Investigator toAdd = AMY;
         String command = "   " + RegisterInvestigatorCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  "
-                + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+                + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   "
+                + RANK_DESC_CAP + " " + TAG_DESC_FRIEND + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -83,21 +85,21 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
         toAdd = new InvestigatorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
         command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
+                + RANK_DESC_CAP + " " + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the investigapptor except phone -> added */
         toAdd = new InvestigatorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
         command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
+                + RANK_DESC_CAP + " " + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the investigapptor except email -> added */
         toAdd = new InvestigatorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
         command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
+                + RANK_DESC_CAP + " " + ADDRESS_DESC_AMY + RANK_DESC_CAP + " " + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the investigapptor except investigapptor
@@ -106,7 +108,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
         toAdd = new InvestigatorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_FRIEND).build();
         command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
+                + RANK_DESC_CAP + " " + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty investigapptor book -> added */
@@ -116,7 +118,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
         /* Case: add a person with tags, command with parameters in random order -> added */
         toAdd = BOB;
         command = RegisterInvestigatorCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB
-                + NAME_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+                + RANK_DESC_CAP + " " + NAME_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person, missing tags -> added */
@@ -148,22 +150,26 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
         assertCommandFailure(command, RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: missing name -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        command = RegisterInvestigatorCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + RANK_DESC_CAP + " " ;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RegisterInvestigatorCommand.MESSAGE_USAGE));
 
         /* Case: missing phone -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + RANK_DESC_CAP + " " ;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RegisterInvestigatorCommand.MESSAGE_USAGE));
 
         /* Case: missing email -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY;
+        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+                + RANK_DESC_CAP + " " ;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RegisterInvestigatorCommand.MESSAGE_USAGE));
 
         /* Case: missing investigapptor -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + RANK_DESC_CAP + " ";
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RegisterInvestigatorCommand.MESSAGE_USAGE));
 
@@ -173,27 +179,27 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
 
         /* Case: invalid name -> rejected */
         command = RegisterInvestigatorCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+                + ADDRESS_DESC_AMY + RANK_DESC_CAP + " ";
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
         command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+                + ADDRESS_DESC_AMY + RANK_DESC_CAP + " ";
         assertCommandFailure(command, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
         command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC
-                + ADDRESS_DESC_AMY;
+                + ADDRESS_DESC_AMY + RANK_DESC_CAP + " ";
         assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid investigapptor -> rejected */
         command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + INVALID_ADDRESS_DESC;
+                + INVALID_ADDRESS_DESC + RANK_DESC_CAP + " ";
         assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + INVALID_TAG_DESC;
+                + ADDRESS_DESC_AMY + RANK_DESC_CAP + " " + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 

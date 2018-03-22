@@ -6,8 +6,22 @@ import static seedu.investigapptor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.investigapptor.logic.commands.*;
+import seedu.investigapptor.logic.commands.AddCaseCommand;
+
+import seedu.investigapptor.logic.commands.ClearCommand;
+import seedu.investigapptor.logic.commands.Command;
+import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
+import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
+import seedu.investigapptor.logic.commands.ExitCommand;
+import seedu.investigapptor.logic.commands.FindCommand;
 import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
+import seedu.investigapptor.logic.commands.HelpCommand;
+import seedu.investigapptor.logic.commands.HistoryCommand;
+import seedu.investigapptor.logic.commands.ListCommand;
+import seedu.investigapptor.logic.commands.RedoCommand;
+import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
+import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 
 /**

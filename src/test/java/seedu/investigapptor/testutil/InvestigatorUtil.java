@@ -19,20 +19,20 @@ public class InvestigatorUtil {
      * Returns an reg command string for adding the {@code investigator}.
      */
     public static String getRegCommand(Investigator investigator) {
-        return RegisterInvestigatorCommand.COMMAND_WORD + " " + getPersonDetails(investigator);
+        return RegisterInvestigatorCommand.COMMAND_WORD + " " + getInvestigatorDetails(investigator);
     }
 
     /**
      * Returns an reg command string for adding the {@code investigator}.
      */
     public static String getAliasRegCommand(Investigator investigator) {
-        return RegisterInvestigatorCommand.COMMAND_ALIAS + " " + getPersonDetails(investigator);
+        return RegisterInvestigatorCommand.COMMAND_ALIAS + " " + getInvestigatorDetails(investigator);
     }
 
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
-    public static String getPersonDetails(Investigator investigator) {
+    public static String getInvestigatorDetails(Investigator investigator) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + investigator.getName().fullName + " ");
         sb.append(PREFIX_PHONE + investigator.getPhone().value + " ");

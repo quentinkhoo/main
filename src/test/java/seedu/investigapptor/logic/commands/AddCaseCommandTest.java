@@ -28,71 +28,71 @@ import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
-import seedu.investigapptor.testutil.PersonBuilder;
+import seedu.investigapptor.testutil.CrimeCaseBuilder;
 
-public class RegisterInvestigatorCommandTest {
+public class AddCaseCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullCrimeCase_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new RegisterInvestigatorCommand(null);
+        new AddCaseCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_crimeCaseAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingCrimeCaseAdded modelStub = new ModelStubAcceptingCrimeCaseAdded();
+        CrimeCase validCrimeCase = new CrimeCaseBuilder().build();
 
-        CommandResult commandResult = getAddCommandForPerson(validPerson, modelStub).execute();
+        CommandResult commandResult = getAddCommandForCrimeCase(validCrimeCase, modelStub).execute();
 
-        assertEquals(String.format(RegisterInvestigatorCommand.MESSAGE_SUCCESS, validPerson),
+        assertEquals(String.format(AddCaseCommand.MESSAGE_SUCCESS, validCrimeCase),
                 commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validCrimeCase), modelStub.crimeCasesAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        ModelStub modelStub = new ModelStubThrowingDuplicatePersonException();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_duplicateCrimeCase_throwsCommandException() throws Exception {
+        ModelStub modelStub = new ModelStubThrowingDuplicateCrimeCaseException();
+        CrimeCase validCrimeCase = new CrimeCaseBuilder().build();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddCaseCommand.MESSAGE_DUPLICATE_CASE);
 
-        getAddCommandForPerson(validPerson, modelStub).execute();
+        getAddCommandForCrimeCase(validCrimeCase, modelStub).execute();
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        RegisterInvestigatorCommand addAliceCommand = new RegisterInvestigatorCommand(alice);
-        RegisterInvestigatorCommand addBobCommand = new RegisterInvestigatorCommand(bob);
+        CrimeCase projHappy = new CrimeCaseBuilder().withName("Project Happy").build();
+        CrimeCase projSad = new CrimeCaseBuilder().withName("Project Sad").build();
+        AddCaseCommand addProjHappyCommand = new AddCaseCommand(projHappy);
+        AddCaseCommand addProjSadCommand = new AddCaseCommand(projSad);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addProjHappyCommand.equals(addProjHappyCommand));
 
         // same values -> returns true
-        RegisterInvestigatorCommand addAliceCommandCopy = new RegisterInvestigatorCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCaseCommand addProjHappyCommandCopy = new AddCaseCommand(projHappy);
+        assertTrue(addProjHappyCommand.equals(addProjHappyCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addProjHappyCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addProjHappyCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different case -> returns false
+        assertFalse(addProjHappyCommand.equals(addProjSadCommand));
     }
 
     /**
-     * Generates a new RegisterInvestigatorCommand with the details of the given person.
+     * Generates a new AddCaseCommand with the details of the given case.
      */
-    private RegisterInvestigatorCommand getAddCommandForPerson(Person person, Model model) {
-        RegisterInvestigatorCommand command = new RegisterInvestigatorCommand(person);
+    private AddCaseCommand getAddCommandForCrimeCase(CrimeCase crimeCase, Model model) {
+        AddCaseCommand command = new AddCaseCommand(crimeCase);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }
@@ -141,6 +141,11 @@ public class RegisterInvestigatorCommandTest {
         }
 
         @Override
+        public void backUpInvestigapptor(String fileName) {
+            fail("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             fail("This method should not be called.");
             return null;
@@ -161,20 +166,15 @@ public class RegisterInvestigatorCommandTest {
         public void updateFilteredCrimeCaseList(Predicate<CrimeCase> predicate) {
             fail("This method should not be called.");
         }
-
-        @Override
-        public void backUpInvestigapptor(String fileName) {
-            fail("This method should not be called.");
-        }
     }
 
     /**
-     * A Model stub that always throw a DuplicatePersonException when trying to add a person.
+     * A Model stub that always throw a DuplicateCrimeCaseException when trying to add a case.
      */
-    private class ModelStubThrowingDuplicatePersonException extends ModelStub {
+    private class ModelStubThrowingDuplicateCrimeCaseException extends ModelStub {
         @Override
-        public void addPerson(Person person) throws DuplicatePersonException {
-            throw new DuplicatePersonException();
+        public void addCrimeCase(CrimeCase crimeCase) throws DuplicateCrimeCaseException {
+            throw new DuplicateCrimeCaseException();
         }
 
         @Override
@@ -184,15 +184,15 @@ public class RegisterInvestigatorCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the case being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingCrimeCaseAdded extends ModelStub {
+        final ArrayList<CrimeCase> crimeCasesAdded = new ArrayList<>();
 
         @Override
-        public void addPerson(Person person) throws DuplicatePersonException {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addCrimeCase(CrimeCase crimeCase) throws DuplicateCrimeCaseException {
+            requireNonNull(crimeCase);
+            crimeCasesAdded.add(crimeCase);
         }
 
         @Override

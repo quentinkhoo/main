@@ -54,4 +54,30 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">chicago ave</address>
     </persons>
+    <cases>
+        <name>Project Three</name>
+        <description>THREE!!</description>
+        <investigator>
+            <name>Charlotte Oliveiro</name>
+            <phone>93210283</phone>
+            <email>charlotte@example.com</email>
+            <address>Blk 11 Ang Mo Kio Street 74, #11-04</address>
+            <tagged>neighbours</tagged>
+        </investigator>
+        <startDate>16/08/2010</startDate>
+        <status>open</status>
+    </cases>
+    <cases>
+        <name>Other Three</name>
+        <description>THREE!!</description>
+        <investigator>
+            <name>Charlotte Oliveiro</name>
+            <phone>93210283</phone>
+            <email>charlotte@example.com</email>
+            <address>Blk 11 Ang Mo Kio Street 74, #11-04</address>
+            <tagged>neighbours</tagged>
+        </investigator>
+        <startDate>16/08/2010</startDate>
+        <status>open</status>
+    </cases>
 </investigapptor>

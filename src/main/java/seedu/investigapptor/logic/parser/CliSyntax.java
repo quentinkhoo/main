@@ -15,6 +15,7 @@ public class CliSyntax {
     /* Prefix definitions for crimecase */
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_INVESTIGATOR = new Prefix("i/");
-    public static final Prefix PREFIX_START_DATE = new Prefix("s/");
+    public static final Prefix PREFIX_STARTDATE = new Prefix("s/");
+    public static final Prefix PREFIX_STATUS = new Prefix("st/");
 
 }

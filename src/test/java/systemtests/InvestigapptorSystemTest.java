@@ -140,7 +140,7 @@ public abstract class InvestigapptorSystemTest {
      * Displays all persons in the investigapptor book.
      */
     protected void showAllPersons() {
-        executeCommand(ListCommand.COMMAND_WORD);
+        executeCommand(ListCommand.COMMAND_WORD + " investigators");
         assertEquals(getModel().getInvestigapptor().getPersonList().size(), getModel().getFilteredPersonList().size());
     }
 

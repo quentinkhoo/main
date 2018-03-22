@@ -1,7 +1,5 @@
 package seedu.investigapptor.testutil;
 
-import static seedu.investigapptor.testutil.TypicalPersons.POLICE;
-
 import java.util.Set;
 
 import seedu.investigapptor.model.crimecase.CaseName;
@@ -14,7 +12,7 @@ import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building CrimeCase objects.
  */
 public class CrimeCaseBuilder {
 
@@ -37,12 +35,12 @@ public class CrimeCaseBuilder {
         status = new Status();
         startDate = new StartDate(DEFAULT_DATE);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
-        currentInvestigator = new InvestigatorBuilder(POLICE).build();
+        currentInvestigator = new PersonBuilder().withName("Detective Holmes").build();
 
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the CrimeCaseBuilder with the data of {@code caseToCopy}.
      */
     public CrimeCaseBuilder(CrimeCase caseToCopy) {
         name = caseToCopy.getCaseName();
@@ -54,7 +52,7 @@ public class CrimeCaseBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code CaseName} of the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder withName(String name) {
         this.name = new CaseName(name);
@@ -62,7 +60,7 @@ public class CrimeCaseBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -70,7 +68,7 @@ public class CrimeCaseBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Description} of the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder withDescription(String description) {
         this.description = new Description(description);
@@ -78,7 +76,15 @@ public class CrimeCaseBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Person} of the {@code CrimeCase} that we are building.
+     */
+    public CrimeCaseBuilder withInvestigator(Person investigator) {
+        this.currentInvestigator = investigator;
+        return this;
+    }
+
+    /**
+     * Toggles the {@code Status} of the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder toggleStatus() {
         this.status.toggleCase();
@@ -86,10 +92,26 @@ public class CrimeCaseBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Status} of the {@code CrimeCase} that we are building.
+     */
+    public CrimeCaseBuilder withStatus(String status) {
+        this.status = new Status(status);
+        return this;
+    }
+
+    /**
+     * Sets the {@code StartDate} of the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder withStartDate(String date) {
         this.startDate = new StartDate(date);
+        return this;
+    }
+
+    /**
+     * Sets the {@code currentInvestigator} of the {@code CrimeCase} that we are building.
+     */
+    public CrimeCaseBuilder withCurrentInvestigator(Person investigator) {
+        this.currentInvestigator = new PersonBuilder(investigator).build();
         return this;
     }
 

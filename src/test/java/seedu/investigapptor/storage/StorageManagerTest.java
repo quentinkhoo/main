@@ -12,6 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.investigapptor.commons.events.model.InvestigapptorBackupEvent;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.commons.events.storage.DataSavingExceptionEvent;
 import seedu.investigapptor.model.Investigapptor;
@@ -80,7 +81,14 @@ public class StorageManagerTest {
         storage.handleInvestigapptorChangedEvent(new InvestigapptorChangedEvent(new Investigapptor()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
-
+    @Test
+    public void handleInvestigapptorBackupdEvent_exceptionThrown_eventRaised() {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlInvestigapptorStorageExceptionThrowingStub("dummy"),
+                new JsonUserPrefsStorage("dummy"));
+        storage.handleInvestigapptorBackupEvent(new InvestigapptorBackupEvent(new Investigapptor(), "dummy"));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
+    }
 
     /**
      * A Stub class to throw an exception when the save method is called

@@ -243,4 +243,18 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String type} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code tag} is invalid.
+     */
+    public static String parseType(String type) throws IllegalValueException {
+        String trimmedType = type.trim();
+        if (!trimmedType.equals("investigators") && !trimmedType.equals("cases")) {
+            throw new IllegalValueException(Tag.MESSAGE_TAG_CONSTRAINTS);
+        }
+        return trimmedType;
+    }
 }

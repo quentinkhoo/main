@@ -9,6 +9,7 @@ import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.person.investigator.Investigator;
+import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.util.SampleDataUtil;
 
@@ -21,12 +22,14 @@ public class InvestigatorBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_RANK = "3";
     public static final String DEFAULT_TAGS = "friends";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Rank rank;
     private Set<Tag> tags;
 
     public InvestigatorBuilder() {
@@ -34,6 +37,7 @@ public class InvestigatorBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        rank = new Rank(DEFAULT_RANK);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
     }
 
@@ -87,9 +91,15 @@ public class InvestigatorBuilder {
         this.email = new Email(email);
         return this;
     }
-
+    /**
+     * Sets the {@code Name} of the {@code Person} that we are building.
+     */
+    public InvestigatorBuilder withRank(String rank) {
+        this.rank = new Rank(rank);
+        return this;
+    }
     public Investigator build() {
-        return new Investigator(name, phone, email, address, tags);
+        return new Investigator(name, phone, email, address, rank, tags);
     }
 
 }

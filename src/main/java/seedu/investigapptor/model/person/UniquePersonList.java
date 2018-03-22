@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.investigapptor.commons.util.CollectionUtil;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -109,6 +110,32 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    public ObservableList<Investigator> investigatorList() {
+        Iterator irt = iterator();
+        ObservableList<Investigator> investigators = FXCollections.observableArrayList();
+        while (irt.hasNext()) {
+            Object element = irt.next();
+            if(element instanceof Investigator)
+            {
+                investigators.add((Investigator)element);
+            }
+        }
+        return investigators;
+    }
+
+    public ObservableList<Person> personOnlyList() {
+        Iterator irt = iterator();
+        ObservableList<Person> persons = FXCollections.observableArrayList();
+        while (irt.hasNext()) {
+            Object element = irt.next();
+            if(!(element instanceof Investigator))
+            {
+                persons.add((Person)element);
+            }
+        }
+        return persons;
     }
 
     @Override

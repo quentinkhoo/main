@@ -18,6 +18,7 @@ import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.UniquePersonList;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
 import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
@@ -196,6 +197,12 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // Rebuild the list of person tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        if(person instanceof Investigator) {
+            Set<CrimeCase> cases = new HashSet<>();
+            ((Investigator) person).getCrimeCases().forEach(crimeCase -> cases.add(crimeCase));
+            return new Investigator(person.getName(), person.getPhone(), person.getEmail(),
+                    person.getAddress(),((Investigator) person).getRank(), correctTagReferences, cases);
+        }
         return new Person(
                 person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
     }
@@ -232,6 +239,15 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asObservableList();
+    }
+
+    @Override
+    public ObservableList<Person> getPersonOnlyList() {
+        return persons.personOnlyList();
+    }
+    @Override
+    public ObservableList<Investigator> getInvestigatorList() {
+        return persons.investigatorList();
     }
 
     @Override

@@ -362,7 +362,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two * different things.
 // end::undoredo[]
 
-// tag::findinvesttags[]
+//tag::findinvesttags[]
 === Find investigators according to its tags feature
 ==== Reason for Implementation
 The purpose of having tags associated to an investigator is to store certain information such as the team he is in
@@ -427,9 +427,9 @@ whose tags matches the predicate keywords. The following segment shows the execu
 The result of the number of people listed will be shown under the `ResultDisplay` UI, and the investigators found
 in the `filteredPersonList` will be displayed under the `InvestigatorListPanel`.
 
-// end::findinvesttags[]
+//end::findinvesttags[]
 
-// tag::calendargraph[]
+//tag::calendargraph[]
 === Calendar/graph feature
 ==== Reason for implementation
 Hand-over of cases is critical in investigation processes and such information has to be documented down.
@@ -439,14 +439,14 @@ that has handled the case.
 ==== Current implementation
 Usage of CalendarFX (To be updated - coming in v2.0)
 
-// end::calendargraph[]
+//end::calendargraph[]
 
-// tag::dataencryption[]
+//tag::dataencryption[]
 === [Proposed] Data Encryption
 
 _{Explain here how the data encryption feature will be implemented}_
 
-// end::dataencryption[]
+//end::dataencryption[]
 
 === Logging
 

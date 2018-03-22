@@ -18,6 +18,7 @@ import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.UniquePersonList;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
 import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
@@ -45,7 +46,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         tags = new UniqueTagList();
     }
 
-    public Investigapptor() {}
+    public Investigapptor() {
+    }
 
     /**
      * Creates an Investigapptor using the Persons and Tags in the {@code toBeCopied}
@@ -115,9 +117,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedPerson}.
      *
      * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws PersonNotFoundException if {@code target} could not be found in the list.
-     *
+     *                                  another existing person in the list.
+     * @throws PersonNotFoundException  if {@code target} could not be found in the list.
      * @see #syncWithMasterTagList(Person)
      */
     public void updatePerson(Person target, Person editedPerson)
@@ -133,6 +134,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
 
     /**
      * Removes {@code key} from this {@code Investigapptor}.
+     *
      * @throws PersonNotFoundException if the {@code key} is not in this {@code Investigapptor}.
      */
     public boolean removePerson(Person key) throws PersonNotFoundException {
@@ -180,9 +182,10 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
 
     /**
-     *  Updates the master tag list to include tags in {@code person} that are not in the list.
-     *  @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
-     *  list.
+     * Updates the master tag list to include tags in {@code person} that are not in the list.
+     *
+     * @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
+     * list.
      */
     private Person syncWithMasterTagList(Person person) {
         final UniqueTagList personTags = new UniqueTagList(person.getTags());
@@ -196,14 +199,22 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // Rebuild the list of person tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        if (person instanceof Investigator) {
+            Set<CrimeCase> cases = new HashSet<>();
+            Investigator inv = (Investigator) person;
+            inv.getCrimeCases().forEach(crimeCase -> cases.add(crimeCase));
+            return new Investigator(person.getName(), person.getPhone(), person.getEmail(),
+                    person.getAddress(), ((Investigator) person).getRank(), correctTagReferences, cases);
+        }
         return new Person(
                 person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
     }
 
     /**
-     *  Updates the master tag list to include tags in {@code crimecase} that are not in the list.
-     *  @return a copy of this {@code crimecase} such that every tag in this case points to a Tag object in the master
-     *  list.
+     * Updates the master tag list to include tags in {@code crimecase} that are not in the list.
+     *
+     * @return a copy of this {@code crimecase} such that every tag in this case points to a Tag object in the master
+     * list.
      */
     private CrimeCase syncWithMasterTagList(CrimeCase crimecase) {
         final UniqueTagList crimecaseTags = new UniqueTagList(crimecase.getTags());
@@ -225,13 +236,23 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() + " tags";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asObservableList();
+    }
+
+    @Override
+    public ObservableList<Person> getPersonOnlyList() {
+        return persons.personOnlyList();
+    }
+
+    @Override
+    public ObservableList<Investigator> getInvestigatorList() {
+        return persons.investigatorList();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package seedu.investigapptor.model.person.investigator;
 
+import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -21,19 +22,47 @@ import seedu.investigapptor.model.tag.Tag;
 public class Investigator extends Person {
 
     private UniqueCrimeCaseList crimeCases;
-
+    private Rank rank;
     /**
      * Every field must be present and not null.
      */
-    public Investigator(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Investigator(Name name, Phone phone, Email email, Address address, Rank rank, Set<Tag> tags) {
         super(name, phone, email, address, tags);
+        this.rank = rank;
         crimeCases = new UniqueCrimeCaseList();
     }
-
+    public Investigator(Name name, Phone phone, Email email, Address address, Rank rank,
+                        Set<Tag> tags, Set<CrimeCase> cases) {
+        super(name, phone, email, address, tags);
+        this.rank = rank;
+        crimeCases = new UniqueCrimeCaseList(cases);
+    }
     public void addCrimeCase(CrimeCase caseToAdd) throws DuplicateCrimeCaseException {
         crimeCases.add(caseToAdd);
     }
+    /**
+     * Increase the investigator rank by one
+     */
+    public void promote() throws Exception {
+        rank.promote();
+    }
+    /**
+     * Decrease the investigator rank by one
+     */
+    public void demote() throws Exception {
+        rank.demote();
+    }
+    /**
+     * Returns rank in string
+     */
+    public Rank getRank() {
+        return rank;
+    }
 
+    @Override
+    public boolean isInvestigator() {
+        return true;
+    }
     /**
      * Returns an immutable crime case set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -44,5 +73,30 @@ public class Investigator extends Person {
 
     public void removeCrimeCase(CrimeCase caseToRemove) throws CrimeCaseNotFoundException {
         crimeCases.remove(caseToRemove);
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, phone, email, address, rank, tags, crimeCases);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append(" Phone: ")
+                .append(getPhone())
+                .append(" Email: ")
+                .append(getEmail())
+                .append(" Address: ")
+                .append(getAddress())
+                .append(" Rank: ")
+                .append(getRank())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
+        builder.append(" CrimeCases: ");
+        getCrimeCases().forEach(builder::append);
+        return builder.toString();
     }
 }

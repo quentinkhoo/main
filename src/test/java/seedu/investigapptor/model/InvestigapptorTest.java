@@ -127,7 +127,8 @@ public class InvestigapptorTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<CrimeCase> cases = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
-
+        private final ObservableList<Investigator> investigators = FXCollections.observableArrayList();
+        private final ObservableList<Person> personsOnly = FXCollections.observableArrayList();
         InvestigapptorStub(Collection<Person> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
@@ -146,6 +147,16 @@ public class InvestigapptorTest {
         @Override
         public ObservableList<Tag> getTagList() {
             return tags;
+        }
+
+        @Override
+        public ObservableList<Investigator> getInvestigatorList() {
+            return investigators;
+        }
+
+        @Override
+        public ObservableList<Person> getPersonOnlyList() {
+            return personsOnly;
         }
     }
 

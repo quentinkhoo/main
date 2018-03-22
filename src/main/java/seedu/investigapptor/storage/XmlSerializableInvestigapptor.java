@@ -23,6 +23,8 @@ public class XmlSerializableInvestigapptor {
     private List<XmlAdaptedPerson> persons;
     @XmlElement
     private List<XmlAdaptedTag> tags;
+    @XmlElement
+    private List<XmlAdaptedInvestigator> investigators;
 
     /**
      * Creates an empty XmlSerializableInvestigapptor.
@@ -31,6 +33,7 @@ public class XmlSerializableInvestigapptor {
     public XmlSerializableInvestigapptor() {
         cases = new ArrayList<>();
         persons = new ArrayList<>();
+        investigators = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -40,7 +43,9 @@ public class XmlSerializableInvestigapptor {
     public XmlSerializableInvestigapptor(ReadOnlyInvestigapptor src) {
         this();
         cases.addAll(src.getCrimeCaseList().stream().map(XmlAdaptedCrimeCase::new).collect(Collectors.toList()));
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(src.getPersonOnlyList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        investigators.addAll(src.getInvestigatorList().stream()
+                .map(XmlAdaptedInvestigator::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
     }
 
@@ -48,7 +53,7 @@ public class XmlSerializableInvestigapptor {
      * Converts this investigapptor into the model's {@code Investigapptor} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedCrimeCase}, {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
+     *                               {@code XmlAdaptedCrimeCase}, {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
      */
     public Investigapptor toModelType() throws IllegalValueException {
         Investigapptor investigapptor = new Investigapptor();
@@ -60,6 +65,9 @@ public class XmlSerializableInvestigapptor {
         }
         for (XmlAdaptedPerson p : persons) {
             investigapptor.addPerson(p.toModelType());
+        }
+        for (XmlAdaptedInvestigator i : investigators) {
+            investigapptor.addPerson(i.toModelType());
         }
         return investigapptor;
     }

@@ -13,7 +13,8 @@ import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.ModelManager;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.model.person.Person;
-import seedu.investigapptor.testutil.PersonBuilder;
+import seedu.investigapptor.model.person.investigator.Investigator;
+import seedu.investigapptor.testutil.InvestigatorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code RegisterInvestigatorCommand}.
@@ -29,7 +30,7 @@ public class RegisterInvestigatorCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() throws Exception {
-        Person validPerson = new PersonBuilder().build();
+        Investigator validPerson = new InvestigatorBuilder().build();
 
         Model expectedModel = new ModelManager(model.getInvestigapptor(), new UserPrefs());
         expectedModel.addPerson(validPerson);
@@ -42,7 +43,8 @@ public class RegisterInvestigatorCommandIntegrationTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getInvestigapptor().getPersonList().get(0);
         assertCommandFailure(prepareCommand(personInList, model), model,
-                RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
+                    RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
+
     }
 
     /**

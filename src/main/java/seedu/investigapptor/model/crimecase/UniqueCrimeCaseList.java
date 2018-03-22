@@ -5,6 +5,7 @@ import static seedu.investigapptor.commons.util.CollectionUtil.requireAllNonNull
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +25,15 @@ import seedu.investigapptor.model.tag.Tag;
 public class UniqueCrimeCaseList implements Iterable<CrimeCase> {
 
     private final ObservableList<CrimeCase> internalList = FXCollections.observableArrayList();
+
+    public UniqueCrimeCaseList(){}
+
+    public UniqueCrimeCaseList(Set<CrimeCase> cases) {
+        requireAllNonNull(cases);
+        internalList.addAll(cases);
+
+        assert CollectionUtil.elementsAreUnique(internalList);
+    }
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.

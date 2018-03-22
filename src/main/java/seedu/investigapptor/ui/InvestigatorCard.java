@@ -38,6 +38,8 @@ public class InvestigatorCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label rank;
+    @FXML
     private FlowPane crimeCaseList;
     @FXML
     private FlowPane tags;
@@ -50,6 +52,11 @@ public class InvestigatorCard extends UiPart<Region> {
         phone.setText(investigator.getPhone().value);
         address.setText(investigator.getAddress().value);
         email.setText(investigator.getEmail().value);
+        if (investigator instanceof Investigator) {
+            rank.setText((investigator).getRank().toString());
+        } else {
+            rank.setText("No Rank");
+        }
         colorCase(investigator);
         colorTag(investigator);
     }

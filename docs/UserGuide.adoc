@@ -152,7 +152,7 @@ Edits the investigator of the 2nd case to be `Betsy Crower` and clears all exist
 
 Finds investigators whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]` +
-Alias: `f`
+Alias: `fI`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -166,7 +166,7 @@ Examples:
 
 * `find John` +
 Returns `john` and `John Doe`
-* `f Betsy Tim John` +
+* `fI Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
 
 === Locating cases by name: `findCase [Coming in v1.3]`
@@ -213,7 +213,7 @@ Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 
-=== Locating investigators by category/team: `findInvestTags` `[Coming in v1.3]`
+=== Locating cases by category: `findCaseTags` `[Coming in v1.3]`
 
 === Deleting an investigator : `deleteInv`
 
@@ -250,7 +250,7 @@ Alias: `dC`
 
 Examples:
 
-* `list cases` +
+* `list case` +
 `deleteCase 2` +
 Deletes the 2nd case in the address book.
 * `findCase Arson` +
@@ -271,13 +271,13 @@ Alias: `selectInvest`
 
 Examples:
 
-* `list investigators` +
-`selectInvest 2` +
-Selects the 2nd person in the results of the `list investigators` command.
+* `list` +
+`selectInvestigator 2` +
+Selects the 2nd person in the results of the `list` command.
 * `find Betsy` +
-`selectInvestigator 1` +
+`selectInvest 1` +
 Selects the 1st person in the results of the `find` command.
-* `selectInvest 3` +
+* `selectInvestigator 3` +
 Selects the 3rd person in the listed panel list.
 
 === Selecting a case : `selectCase`
@@ -294,14 +294,14 @@ Alias: `sC`
 
 Examples:
 
-* `list cases` +
+* `list case` +
 `selectCase 2` +
-Selects the 2nd case in the results of the `list cases` command.
+Selects the 2nd case in the results of the `list case` command.
 * `findCase murder` +
 `selectCase 1` +
 Selects the 1st case in the results of the `findCase` command.
 * `sC 3` +
-Selects the 3rd case in the listed panel list cases.
+Selects the 3rd case in the listed panel list case.
 
 === Update password : `update password [Coming in v2.0]`
 Updates the current Investigapptor password to a new password
@@ -334,11 +334,11 @@ Undoable commands: those commands that modify the address book's content (`add`,
 Examples:
 
 * `delete 1` +
-`list investigators` +
+`list` +
 `undo` (reverses the `delete 1` command) +
 
 * `select 1` +
-`list investigators` +
+`list` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
@@ -426,7 +426,7 @@ e.g. `delete 3`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
-* *List* : `list investigators`
+* *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`

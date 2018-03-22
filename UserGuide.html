@@ -37,24 +37,25 @@
 <li><a href="#editing-a-case-code-editcase-code">3.7. Editing a case : <code>editCase</code></a></li>
 <li><a href="#locating-investigators-by-name-code-findinvestigator-code">3.8. Locating investigators by name: <code>findInvestigator</code></a></li>
 <li><a href="#locating-cases-by-name-code-findcase-code">3.9. Locating cases by name: <code>findCase</code></a></li>
-<li><a href="#deleting-an-investigator-code-deleteinvestigator-code">3.10. Deleting an investigator : <code>deleteInvestigator</code></a></li>
-<li><a href="#deleting-a-case-code-deletecase-code">3.11. Deleting a case : <code>deleteCase</code></a></li>
-<li><a href="#selecting-an-investigator-code-selectinvestigator-code">3.12. Selecting an investigator : <code>selectInvestigator</code></a></li>
-<li><a href="#selecting-a-case-code-selectcase-code">3.13. Selecting a case : <code>selectCase</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.14. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.15. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.16. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.17. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.18. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.19. Saving the data</a></li>
-<li><a href="#adding-a-witness-code-coming-in-v2-0-code">3.20. Adding a witness <code>[coming in v2.0]</code></a></li>
-<li><a href="#adding-a-suspect-code-coming-in-v2-0-code">3.21. Adding a suspect <code>[coming in v2.0]</code></a></li>
-<li><a href="#adding-evidence-files-code-coming-in-v2-0-code">3.22. Adding evidence files <code>[coming in v2.0]</code></a></li>
-<li><a href="#setting-up-chain-of-custody-code-coming-in-v2-0-code">3.23. Setting up chain of custody <code>[coming in v2.0]</code></a></li>
-<li><a href="#entering-commands-in-other-languages-code-coming-in-v2-0-code">3.24. Entering commands in other languages <code>[coming in v2.0]</code></a></li>
-<li><a href="#adding-any-person-via-scanner-code-coming-in-v2-0-code">3.25. Adding any person via scanner <code>[coming in v2.0]</code></a></li>
-<li><a href="#exporting-case-information-into-a-pdf-file-code-coming-in-v2-0-code">3.26. Exporting case information into a PDF file <code>[coming in v2.0]</code></a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#locating-investigators-by-category-team-code-findtags-code">3.10. Locating investigators by category/team: <code>findTags</code></a></li>
+<li><a href="#deleting-an-investigator-code-deleteinvestigator-code">3.11. Deleting an investigator : <code>deleteInvestigator</code></a></li>
+<li><a href="#deleting-a-case-code-deletecase-code">3.12. Deleting a case : <code>deleteCase</code></a></li>
+<li><a href="#selecting-an-investigator-code-selectinvestigator-code">3.13. Selecting an investigator : <code>selectInvestigator</code></a></li>
+<li><a href="#selecting-a-case-code-selectcase-code">3.14. Selecting a case : <code>selectCase</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.15. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.16. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.17. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.18. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.19. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.20. Saving the data</a></li>
+<li><a href="#adding-a-witness-code-coming-in-v2-0-code">3.21. Adding a witness <code>[coming in v2.0]</code></a></li>
+<li><a href="#adding-a-suspect-code-coming-in-v2-0-code">3.22. Adding a suspect <code>[coming in v2.0]</code></a></li>
+<li><a href="#adding-evidence-files-code-coming-in-v2-0-code">3.23. Adding evidence files <code>[coming in v2.0]</code></a></li>
+<li><a href="#setting-up-chain-of-custody-code-coming-in-v2-0-code">3.24. Setting up chain of custody <code>[coming in v2.0]</code></a></li>
+<li><a href="#entering-commands-in-other-languages-code-coming-in-v2-0-code">3.25. Entering commands in other languages <code>[coming in v2.0]</code></a></li>
+<li><a href="#adding-any-person-via-scanner-code-coming-in-v2-0-code">3.26. Adding any person via scanner <code>[coming in v2.0]</code></a></li>
+<li><a href="#exporting-case-information-into-a-pdf-file-code-coming-in-v2-0-code">3.27. Exporting case information into a PDF file <code>[coming in v2.0]</code></a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.28. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -186,6 +187,7 @@ Alias: <code>regInvest</code></p>
 </td>
 <td class="content">
 An investigator can have any number of tags (including 0)
+* Tags are alphanumeric without spaces
 </td>
 </tr>
 </table>
@@ -444,7 +446,55 @@ Returns any cases having names <code>murder</code>, <code>rape</code>, or <code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-investigator-code-deleteinvestigator-code"><a class="link" href="#deleting-an-investigator-code-deleteinvestigator-code">3.10. Deleting an investigator : <code>deleteInvestigator</code></a></h3>
+<h3 id="locating-investigators-by-category-team-code-findtags-code"><a class="link" href="#locating-investigators-by-category-team-code-findtags-code">3.10. Locating investigators by category/team: <code>findTags</code></a></h3>
+<div class="paragraph">
+<p>Find investigators whose tags contain any of the given keywords.<br>
+Format: <code>findTags KEYWORD [MORE_KEYWORDS]</code><br>
+Alias: <code>ft</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>teamA</code> will match <code>teama</code></p>
+</li>
+<li>
+<p>Only the tags are searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>teamA</code> will not match <code>teamyA</code></p>
+</li>
+<li>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search).
+e.g. <code>teamA teamB</code> will return investigators that contain the tag 'teamA' or 'teamB'</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findTags teamA</code><br>
+Returns investigator(s) with tag <code>teamA</code></p>
+</li>
+<li>
+<p><code>find teamA new teamb</code><br>
+Returns investigator(s) having tags <code>teamA</code>, <code>new</code>, OR <code>teamb</code></p>
+</li>
+<li>
+<p><code>ft teamc newbie a</code><br>
+Returns investigator(s) having tags <code>teamc</code>, <code>newbie</code>, OR <code>a</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-investigator-code-deleteinvestigator-code"><a class="link" href="#deleting-an-investigator-code-deleteinvestigator-code">3.11. Deleting an investigator : <code>deleteInvestigator</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified person from the address book.<br>
 Format: <code>deleteInvestigator INDEX</code><br>
@@ -486,7 +536,7 @@ Deletes the 1st investigator in the results of the <code>findInvestigator</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-case-code-deletecase-code"><a class="link" href="#deleting-a-case-code-deletecase-code">3.11. Deleting a case : <code>deleteCase</code></a></h3>
+<h3 id="deleting-a-case-code-deletecase-code"><a class="link" href="#deleting-a-case-code-deletecase-code">3.12. Deleting a case : <code>deleteCase</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified case from the address book.<br>
 Format: <code>deleteCase INDEX</code><br>
@@ -528,7 +578,7 @@ Deletes the 1st case in the results of the <code>findCase</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-an-investigator-code-selectinvestigator-code"><a class="link" href="#selecting-an-investigator-code-selectinvestigator-code">3.12. Selecting an investigator : <code>selectInvestigator</code></a></h3>
+<h3 id="selecting-an-investigator-code-selectinvestigator-code"><a class="link" href="#selecting-an-investigator-code-selectinvestigator-code">3.13. Selecting an investigator : <code>selectInvestigator</code></a></h3>
 <div class="paragraph">
 <p>Selects the person identified by the index number used in the last person listing.<br>
 Format: <code>selectInvestigator INDEX</code><br>
@@ -574,7 +624,7 @@ Selects the 3rd person in the listed panel list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-case-code-selectcase-code"><a class="link" href="#selecting-a-case-code-selectcase-code">3.13. Selecting a case : <code>selectCase</code></a></h3>
+<h3 id="selecting-a-case-code-selectcase-code"><a class="link" href="#selecting-a-case-code-selectcase-code">3.14. Selecting a case : <code>selectCase</code></a></h3>
 <div class="paragraph">
 <p>Selects the case identified by the index number used in the last case listing.<br>
 Format: <code>selectCase INDEX</code><br>
@@ -620,7 +670,7 @@ Selects the 3rd case in the listed panel listCase.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.14. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.15. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code>
@@ -642,7 +692,7 @@ Alias: <code>hist</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.15. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.16. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code><br>
@@ -688,7 +738,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.16. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.17. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code><br>
@@ -721,7 +771,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.17. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.18. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the address book.<br>
 Format: <code>clear</code><br>
@@ -729,7 +779,7 @@ Alias: <code>c</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.18. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.19. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code><br>
@@ -737,42 +787,42 @@ Alias: <code>ex</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.19. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.20. Saving the data</a></h3>
 <div class="paragraph">
 <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-witness-code-coming-in-v2-0-code"><a class="link" href="#adding-a-witness-code-coming-in-v2-0-code">3.20. Adding a witness <code>[coming in v2.0]</code></a></h3>
+<h3 id="adding-a-witness-code-coming-in-v2-0-code"><a class="link" href="#adding-a-witness-code-coming-in-v2-0-code">3.21. Adding a witness <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="adding-a-suspect-code-coming-in-v2-0-code"><a class="link" href="#adding-a-suspect-code-coming-in-v2-0-code">3.21. Adding a suspect <code>[coming in v2.0]</code></a></h3>
+<h3 id="adding-a-suspect-code-coming-in-v2-0-code"><a class="link" href="#adding-a-suspect-code-coming-in-v2-0-code">3.22. Adding a suspect <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="adding-evidence-files-code-coming-in-v2-0-code"><a class="link" href="#adding-evidence-files-code-coming-in-v2-0-code">3.22. Adding evidence files <code>[coming in v2.0]</code></a></h3>
+<h3 id="adding-evidence-files-code-coming-in-v2-0-code"><a class="link" href="#adding-evidence-files-code-coming-in-v2-0-code">3.23. Adding evidence files <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="setting-up-chain-of-custody-code-coming-in-v2-0-code"><a class="link" href="#setting-up-chain-of-custody-code-coming-in-v2-0-code">3.23. Setting up chain of custody <code>[coming in v2.0]</code></a></h3>
+<h3 id="setting-up-chain-of-custody-code-coming-in-v2-0-code"><a class="link" href="#setting-up-chain-of-custody-code-coming-in-v2-0-code">3.24. Setting up chain of custody <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="entering-commands-in-other-languages-code-coming-in-v2-0-code"><a class="link" href="#entering-commands-in-other-languages-code-coming-in-v2-0-code">3.24. Entering commands in other languages <code>[coming in v2.0]</code></a></h3>
+<h3 id="entering-commands-in-other-languages-code-coming-in-v2-0-code"><a class="link" href="#entering-commands-in-other-languages-code-coming-in-v2-0-code">3.25. Entering commands in other languages <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="adding-any-person-via-scanner-code-coming-in-v2-0-code"><a class="link" href="#adding-any-person-via-scanner-code-coming-in-v2-0-code">3.25. Adding any person via scanner <code>[coming in v2.0]</code></a></h3>
+<h3 id="adding-any-person-via-scanner-code-coming-in-v2-0-code"><a class="link" href="#adding-any-person-via-scanner-code-coming-in-v2-0-code">3.26. Adding any person via scanner <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="exporting-case-information-into-a-pdf-file-code-coming-in-v2-0-code"><a class="link" href="#exporting-case-information-into-a-pdf-file-code-coming-in-v2-0-code">3.26. Exporting case information into a PDF file <code>[coming in v2.0]</code></a></h3>
+<h3 id="exporting-case-information-into-a-pdf-file-code-coming-in-v2-0-code"><a class="link" href="#exporting-case-information-into-a-pdf-file-code-coming-in-v2-0-code">3.27. Exporting case information into a PDF file <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.27. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.28. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -838,7 +888,7 @@ e.g.<code>select 2</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-19 04:31:29 UTC
+Last updated 2018-03-22 14:23:32 UTC
 </div>
 </div>
 </body>

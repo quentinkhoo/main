@@ -83,7 +83,11 @@
 </li>
 <li><a href="#product-scope">Appendix B: Product Scope</a></li>
 <li><a href="#user-stories">Appendix C: User Stories</a></li>
-<li><a href="#use-cases">Appendix D: Use Cases</a></li>
+<li><a href="#use-cases">Appendix D: Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#use-case-display-help-2">D.1. Use case: Display Help</a></li>
+</ul>
+</li>
 <li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix F: Glossary</a></li>
 <li><a href="#product-survey">Appendix G: Product Survey</a></li>
@@ -1938,21 +1942,79 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Leow Wei Ching</p>
-</li>
-<li>
-<p>Marcus Chen</p>
-</li>
-<li>
-<p>Poh Kai Jun</p>
+<p><strong>Leow Wei Ching</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Created a <code>findtags</code> commad</p>
+<p><strong>Major enhancement</strong>: Support for adding, editing, and deleting cases</p>
 <div class="ulist">
 <ul>
 <li>
-<p>This feature helps the investigators to filter out investigators that are in a certain team/category according
+<p>This enhancement allows users to manage cases.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Support data encryption</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This would allow for an added layer of security and prevent viewing of data outside the application.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Marcus Chen</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: Implement suspects and witness into investigapptor</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This feature allows investigator to easily view suspects and witness related to the cases they are investigating</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Implement <code>backup</code> command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This feature helps the investigator to create a separate save file of the current state of the investigapptor and name it.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Poh Kai Jun</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major Enhancement</strong>: Support for evidence package (Add, Delete, Update, View, Search)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This feature allows cases to store evidences details related to the case.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor Enhancement</strong>: Implement <code>findtags</code> command(s)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This feature helps the users to filter out investigators/cases that are in a certain team/category according
 to their search input.</p>
 </li>
 </ul>
@@ -1962,7 +2024,31 @@ to their search input.</p>
 </div>
 </li>
 <li>
-<p>Quentin Khoo</p>
+<p><strong>Quentin Khoo</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: Support notifying investigators when they get assigned a case</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This would allow for investigators to be aware when they get assigned a case to solve.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>: Add command aliases for most commands</p>
+<div class="ulist">
+<ul>
+<li>
+<p>These aliases can be used in place of the full commands for the investigator&#8217;s convenience.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2077,6 +2163,12 @@ to their search input.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">investigator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view all investigators on the team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">choose who to assign to a case</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">investigator</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view a case</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view its name</p></td>
 </tr>
@@ -2103,6 +2195,18 @@ to their search input.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">investigator</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view a case</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view its end date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">investigator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find certain tag(s)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view who are under a certain team/category</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">investigator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">view all cases assigned to the team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see their details</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -2163,6 +2267,12 @@ to their search input.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">investigator</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add evidence</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add evidence to a case</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">investigator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create a backup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">to restore to past states</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
@@ -2442,8 +2552,40 @@ to their search input.</p>
 </li>
 </ol>
 </div>
+<div class="sect2">
+<h3 id="use-case-display-help-2"><a class="link" href="#use-case-display-help-2">D.1. Use case: Display Help</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User types in the new backup&#8217;s name</p>
+</li>
+<li>
+<p>Success message appears</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. Backup&#8217;s name is not alphanumerical</p>
+<div class="paragraph">
+<p>Use case resumes at step 1</p>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p><em>{More to be added}</em></p>
+</div>
 </div>
 </div>
 </div>
@@ -2659,7 +2801,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-19 04:31:29 UTC
+Last updated 2018-03-22 14:23:32 UTC
 </div>
 </div>
 </body>

@@ -20,11 +20,12 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
 * *Minor enhancement*:
-** modified `AddCommand` to `RegisterInvestigatorCommand`
-** modified `SelectCommand` to `SelectInvestigatorCommand`
-** modified `EditCommand` to `EditInvestigatorCommand`
-
-** modified `DeleteCommand` to `DeleteInvestigatorCommand`
+** Modified `AddCommand` to `RegisterInvestigatorCommand`
+** Modified `SelectCommand` to `SelectInvestigatorCommand`
+** Modified `EditCommand` to `EditInvestigatorCommand`
+** Modified `DeleteCommand` to `DeleteInvestigatorCommand`
+** Added new command `findtags`
+** Modified the GUI and layout of the application
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 

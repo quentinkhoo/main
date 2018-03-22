@@ -49,4 +49,36 @@
     </persons>
     <tags>friends</tags>
     <tags>owesMoney</tags>
+    <persons>
+        <name>Chao Lim</name>
+        <phone>91672345</phone>
+        <email>limck@investiagency.com</email>
+        <address>20th Street</address>
+        <tagged>teamA</tagged>
+        <tagged>new</tagged>
+    </persons>
+    <persons>
+        <name>Cally Ong</name>
+        <phone>90123489</phone>
+        <email>cong@investiagency.com</email>
+        <address>50th Street</address>
+        <tagged>teamB</tagged>
+        <tagged>new</tagged>
+    </persons>
+    <persons>
+        <name>Ka Chong</name>
+        <phone>80122469</phone>
+        <email>kchong@investiagency.com</email>
+        <address>80th Street</address>
+        <tagged>teamB</tagged>
+        <tagged>experienced</tagged>
+    </persons>
+    <persons>
+        <name>Andy Loo</name>
+        <phone>91126469</phone>
+        <email>aloo@investiagency.com</email>
+        <address>90th Street</address>
+        <tagged>teamA</tagged>
+        <tagged>experienced</tagged>
+    </persons>
 </investigapptor>

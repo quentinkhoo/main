@@ -51,4 +51,11 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    /**
+     * Get the raw tag string
+     */
+    public String getRawString() {
+        return tagName;
+    }
+
 }

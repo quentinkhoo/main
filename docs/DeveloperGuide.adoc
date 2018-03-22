@@ -869,6 +869,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |investigator |view a case |view its end date
 
+|`* * *` |investigator |find certain tag(s) |view who are under a certain team/category
+
 |`* * *` |investigator |view all cases assigned to the team|see their details
 
 |`* * *` |investigator |delete an investigator |remove retired investigators

@@ -12,13 +12,10 @@ import static seedu.investigapptor.testutil.TypicalPersons.SIR_LOO;
 
 import org.junit.Test;
 
-//import seedu.investigapptor.commons.core.index.Index;
-//import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.model.Model;
-//import seedu.investigapptor.model.tag.Tag;
 
 public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
 
@@ -70,7 +67,8 @@ public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case 4: find multiple investigators in investigapptor book, 2 keywords in reversed order -> 3 persons found */
+        /* Case 4: find multiple investigators in investigapptor book,
+        2 keywords in reversed order -> 3 persons found */
         command = FindInvestTagsCommand.COMMAND_WORD + " teamB new";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();

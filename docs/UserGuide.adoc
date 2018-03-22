@@ -40,7 +40,7 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
+* *`list investigators`* : lists all investigators
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
@@ -94,13 +94,13 @@ Examples:
 * `add n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
 * `a n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
 
-=== Listing all investigators : `listInvestigator`
+=== Listing all investigators : `list investigators [Since v1.2]`
 
 Shows a list of all investigators in the Investigapptor. +
 Format: `list` +
 Alias: `lI`
 
-=== Listing all cases : `listCase`
+=== Listing all cases : `list cases [Since v1.2]`
 
 Shows a list of all cases in the Investigapptor. +
 Format: `listCase` +
@@ -300,6 +300,11 @@ Selects the 2nd case in the results of the `listCase` command.
 Selects the 1st case in the results of the `findCase` command.
 * `sC 3` +
 Selects the 3rd case in the listed panel listCase.
+
+=== Update password : `update password [Coming in v2.0]`
+Updates the current Investigapptor password to a new password
+Format: `update password`
+Alias: `update pw`
 
 === Listing entered commands : `history`
 

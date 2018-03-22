@@ -485,6 +485,112 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+=== Investigator Class
+
+The `Investigator` package is a extended from the `Person` package, allowing it to handle the basic functions of a `Person` package while
+having additional properties required for an investigator. The additional properties are:
+
+* `Rank`
++
+Stores the rank of the investigator
+
+* `UniqueCrimeCaseList`
++
+Stores and manages all the CrimeCases which the investigator is in charge of.
+
+==== Model
+
+Currently the `Investigator` is upcasted and stored in the `Investigapptor` 's `UniquePersonList`.
+This is done on purpose to allow future enhancement that allows us to implement types of people such as suspects and witnesses. Storing them together makes it easier to use general
+functions.
+
+The code below is from the `syncWithMasterTagList` function. It shows that
+both Investigator and Person type are both return into the `UniquePersonList`.
+
+        if (person instanceof Investigator) {
+            Set<CrimeCase> cases = new HashSet<>();
+            Investigator inv = (Investigator) person;
+            inv.getCrimeCases().forEach(crimeCase -> cases.add(crimeCase));
+            return new Investigator(person.getName(), person.getPhone(), person.getEmail(),
+                    person.getAddress(), ((Investigator) person).getRank(), correctTagReferences, cases);
+        }
+        return new Person(
+                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
+
+==== Storage
+
+As Investigator has addition properties compared to Person, `XmlAdaptedInvestigator` is created to convert
+the `Investigator` into correct XML format. We had to also change the method of storing the in `Investigapptor`
+the different classes have to be converted and stored in the correct format. To accomplish this,
+two new methods were added which each return a person only list and a investigator only list to store them
+separately
+
+This function will return only `Investigator` in the list
+
+    public ObservableList<Investigator> investigatorList() {
+        Iterator irt = iterator();
+        ObservableList<Investigator> investigators = FXCollections.observableArrayList();
+        while (irt.hasNext()) {
+            Object element = irt.next();
+            if (element instanceof Investigator) {
+                investigators.add((Investigator) element);
+            }
+        }
+        return investigators;
+    }
+
+This function will only return `Person` in the list
+
+    public ObservableList<Person> personOnlyList() {
+        Iterator irt = iterator();
+        ObservableList<Person> persons = FXCollections.observableArrayList();
+        while (irt.hasNext()) {
+            Object element = irt.next();
+            if (!(element instanceof Investigator)) {
+                persons.add((Person) element);
+            }
+        }
+        return persons;
+    }
+
+As more type of people are added, more function to differentiate the UniquePersonList.
+
+=== Creating Backup
+
+As investigators may want to save the current state of the application before progressing, they can do this
+by using the backup command and typing in a name for the backup.
+
+eg: backup 3rdMarch
+
+The data is saved whenever an `InvestigapptorChangeedEvent` is raised in the Model component
+
+This method is commonly called after adding, editing of deleting any information
+
+    private void indicateInvestigapptorChanged() {
+            raise(new InvestigapptorChangedEvent(investigapptor));
+        }
+
+The event contains information which will be passed to Storage component to start the saving sequence.
+In order to create our own backup xml, additional information such as filename has to be passed in.
+Hence a new event `InvestigapptorBackupEvent` is create for this specific.
+
+    public void backUpInvestigapptor(String fileName) {
+        raise(new InvestigapptorBackupEvent(investigapptor, fileName));
+    }
+
+`backupInvestigapptor` is call when the investigator uses the backup command and event is raised, The
+`Storage` package will handle the event and create a new backup.
+
+    public void handleInvestigapptorBackupEvent(InvestigapptorBackupEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            backupInvestigapptor(event.data, event.fileName);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+
 == Documentation
 
 We use asciidoc for writing documentation.
@@ -991,6 +1097,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |investigator |add a suspect |add suspects to a case
 
 |`*` |investigator |add evidence |add evidence to a case
+
+|`*` |investigator |save the information |to review them in the future
 
 |`*` |investigator |create a backup |to restore to past states
 

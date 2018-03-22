@@ -235,6 +235,79 @@ Classes used by multiple components are in the `seedu.investigapptorbook.commons
 This section describes some noteworthy details on how certain features are implemented.
 
 // tag::undoredo[]
+=== Find investigators according to its tags feature
+==== Reason for Implementation
+The purpose of having tags associated to an investigator is to store certain information such as the team he is in
+and the level of his experience. One of the aims of Investigapptor is to provide ease in managing and retrieving information that is required.
+Hence, this implementation is in line with the aim where investigators that belongs to a certain team/category can be
+filtered out efficiently.
+
+Without this implementation, it is inefficient as the user may have to browse through *all* the listed investigators to find an investigator that belongs
+to a certain team/category.
+
+==== Current Implementation
+A command called `findInvestTags` was created under the logic component with the java class `FindInvestTagsCommand.java`. Additionally,
+a parser, `FindInvestTagsCommandParser.java` was being used to parse the arguments required for the command to work. This command
+will display the investigator(s) whose tags that matches with *ANY* of the arguments stated in the command.
+
+Under the main commands parser, `InvestigapptorParser.java`, a case scenario for `findInvestTags` alongside with its alias was being implemented.
+[source,java]
+----
+case FindInvestTagsCommand.COMMAND_WORD:
+case FindInvestTagsCommand.COMMAND_ALIAS:
+    return new FindInvestTagsCommandParser().parse(arguments);
+----
+
+The parser, `FindInvestTagsCommandParser()` will be invoked to parse the arguments specified by the user input with the following implementation.
+The comparison is done in lowercase to prevent any comparison errors due to case sensitivity.
+[source,java]
+----
+public FindInvestTagsCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindInvestTagsCommand.MESSAGE_USAGE));
+        }
+
+        String[] nameKeywords = trimmedArgs.toLowerCase().split("\\s+");
+
+        return new FindInvestTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+    }
+----
+
+While parsing the arguments, a `TagContainsKeywordsPredicate` object was created to test whether any keywords
+matches with any tags of the investigator(s). The comparison was implemented in the following code segment.
+[source,java]
+----
+public boolean test(Person person) {
+    return keywords.stream().anyMatch(person.getTagsRaw()::contains);
+}
+----
+
+After the parsing the arguments, a `FindInvestTagsCommand` object will be constructed with the `TagContainsKeywordPredicate`
+object as the attribute and returned to `InvestigapptorParser`.
+
+The `findInvestTags` command will then be executed and the observable list `filteredPersonList` will be updated with the investigators
+whose tags matches the predicate keywords. The following segment shows the execution code.
+[source,java]
+----
+ public CommandResult execute() {
+    model.updateFilteredPersonList(predicate);
+    return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
+}
+----
+
+The result of the number of people listed will be shown under the `ResultDisplay` UI, and the investigators found
+in the `filteredPersonList` will be displayed under the `InvestigatorListPanel`.
+
+=== Calendar/graph feature
+==== Reason for implementation
+Hand-over of cases is critical in investigation processes and such information has to be documented down.
+By having a calendar/graph for each case and investigator, it can provide a chronological flow of the investigators
+that has handled the case.
+
+==== Current implementation
+Usage of CalendarFX (To be updated - coming in v2.0)
+
 === Undo/Redo feature
 ==== Current Implementation
 
@@ -809,8 +882,8 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 *** This feature helps the investigator to create a separate save file of the current state of the investigapptor and name it.
 
 * *Poh Kai Jun*
-** *Major Enhancement*: Support for evidence package (Add, Delete, Update, View, Search)
-*** This feature allows cases to store evidences details related to the case.
+** *Major Enhancement*: Support for calendar and graph
+*** This feature allows an overview of the chronological flow of each case handover and number of cases handled by each investigator
 ** *Minor Enhancement*: Implement `findtags` command(s)
 *** This feature helps the users to filter out investigators/cases that are in a certain team/category according
 to their search input.

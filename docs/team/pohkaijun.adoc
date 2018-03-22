@@ -13,18 +13,19 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: implemented CalendarFX API
+** What it does:
+** Justification:
+** Highlights:
+** Credits:
 
 * *Minor enhancement*:
 ** Modified `AddCommand` to `RegisterInvestigatorCommand`
 ** Modified `SelectCommand` to `SelectInvestigatorCommand`
 ** Modified `EditCommand` to `EditInvestigatorCommand`
 ** Modified `DeleteCommand` to `DeleteInvestigatorCommand`
-** Added new command `findtags`
+** Added new command `FindInvestTagsCommand`
+** Added new command `FindCaseTagsCommand` [ongoing]
 ** Modified the GUI and layout of the application
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_

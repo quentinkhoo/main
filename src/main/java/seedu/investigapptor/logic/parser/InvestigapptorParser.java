@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.investigapptor.logic.commands.AddCaseCommand;
-
+import seedu.investigapptor.logic.commands.BackupCommand;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;

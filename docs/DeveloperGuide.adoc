@@ -912,10 +912,11 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 to their search input.
 
 * *Quentin Khoo*
-** *Major enhancement*: Support notifying investigators when they get assigned a case
-*** This would allow for investigators to be aware when they get assigned a case to solve.
-** *Minor enhancement*: Add command aliases for most commands
-*** These aliases can be used in place of the full commands for the investigator's convenience.
+** *Major enhancement*: Support access control by implementing a password prompt upon starting the application
+*** This would deter non-authorised users from accessing the application
+** *Minor enhancement*: Add UI support for listing investigators and crime cases
+*** This would provide convenience for the investigator in deciding which investigator to assign to which case depending
+on his or her expertise
 
 [appendix]
 == User Stories

@@ -213,7 +213,7 @@ Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 
-=== Locating investigators by category/team: `findInvestTags` `[coming in v1.3]`
+=== Locating cases by category: `findCaseTags` `[coming in v1.3]`
 
 === Deleting an investigator : `deleteInvestigator`
 

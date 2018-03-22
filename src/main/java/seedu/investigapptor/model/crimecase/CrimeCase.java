@@ -1,6 +1,7 @@
 package seedu.investigapptor.model.crimecase;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -62,6 +63,19 @@ public class CrimeCase {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags.toSet());
     }
+
+    /**
+     * Returns an immutable tag set of type String
+     */
+    public Set<String> getTagsRaw() {
+        Set<String> rawTags = new HashSet<>();
+        for (Tag s : tags) {
+            rawTags.add(s.getRawString().toLowerCase());
+        }
+
+        return rawTags;
+    }
+
     /**
      * Deletes (@code toDelete) tag
      */

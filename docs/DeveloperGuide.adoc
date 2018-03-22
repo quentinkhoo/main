@@ -634,6 +634,237 @@ This function will only return `Person` in the list
 
 As more type of people are added, more function to differentiate the UniquePersonList.
 
+=== CrimeCase Package
+
+The `CrimeCase` package consists of multiple classes used to contain information about a case.
+
+==== `CaseName` class +
+
+Stores a `String` that represents the name of the case. Provides utility methods to:
+* check the validity of the string to be stored
+* retrieve the string that is stored
+* obtain the hash code of the `CaseName` object
+
+    /**
+     * Constructs a {@code Name}.
+     *
+     * @param name A valid name.
+     */
+    public CaseName(String name)
+
+==== `Description` class +
+
+Stores a `String` that represents the description of the case. Provides utility methods to:
+* check the validity of the string to be stored
+* retrieve the string that is stored
+* obtain the hash code of the `Description` object
+
+    /**
+     * Constructs a {@code Description}.
+     *
+     * @param description A valid description.
+     */
+    public Description(String description)
+
+==== `StartDate` class +
+
+Stores a `String` that represents the start date of the case. Provides utility methods to:
+* check the validity of the string to be stored
+* retrieve the string that is stored
+* obtain the hash code of the `StartDate` object
+
+    /**
+     * Constructs a {@code date}.
+     *
+     * @param date A valid date.
+     */
+    public StartDate(String date)
+
+==== `Status` class +
+
+Stores a `String` that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called. Provides utility methods to:
+* toggle the status of the case
+* retrieve the string that is stored
+* obtain the hash code of the `Status` object
+
+    /**
+     * Constructs a {@code Status}.
+     *
+     */
+    public Status()
+
+==== `CrimeCase` class +
+
+Stores `CaseName`, `Description`, `Person`, `StartDate`, `Status`, and `UniqueTagList` objects to represent information of the case. Provides utility methods to retrieve the different objects, delete a tag, and obtain the hash code of the `CrimeCase` object.
+
+   /**
+     * Constructs a {@code CrimeCase}.
+     * Every field must be present and not null
+     */
+    public CrimeCase(CaseName name, Description description, Person currentInvestigator, StartDate startDate, Status status, Set<Tag> tags)
+
+=== Adding cases feature
+
+==== Current Implementation
+
+===== Logic
+
+* `AddCaseCommandParser`
+
+`AddCaseCommandParser` parses the given `String` of arguments in the context of the `AddCaseCommand` and returns an `AddCaseCommand` object for execution. A `ParseException` is thrown if the user input does not conform to the expected format.
+
+    public AddCaseCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR,
+                        PREFIX_STARTDATE, PREFIX_TAG);
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR, PREFIX_STARTDATE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCaseCommand.MESSAGE_USAGE));
+        }
+        ...
+    }
+
+* `AddCaseCommand`
+
+The `AddCaseCommand` that extends the `UndoableCommand` class is implemented with two overloaded constructors, either of which can be used depending on convenience:
+
+    /**
+     * Creates an AddCaseCommand to add the specified {@code CrimeCase}
+     */
+    public AddCaseCommand(CrimeCase crimeCase)
+
+    /**
+     * @param name of the case to be added
+     * @param description of the case to be added
+     * @param investigatorIndex of the investigator to be added
+     * @param startDate of the case to be added
+     * @param tagList of the case to be added
+     */
+    public AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set<Tag> tagList)
+
++
+
+Since `AddCaseCommand` extends `UndoableCommand`, after the constructor is called, the `preprocessUndoableCommand` and `executeUndoableCommand` methods are executed consecutively right after.
+
++
+
+If the `AddCaseCommand(CrimeCase crimeCase)` constructor is used, the logic in the `preprocessUndoableCommand` method is not executed.
+
++
+
+Note that the `AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set<Tag> tagList)` constructor above takes in an `Index` object as a parameter, which refers to the index number of the investigator as displayed in `PersonListPanel`.
+
++
+
+The `Person` object is retrieved based on the index and the created `CrimeCase` object is stored in `toAdd`:
+
+    @Override
+    protected void preprocessUndoableCommand() throws CommandException {
+        if (investigatorIndex != null) {
+            List<Person> lastShownList = model.getFilteredPersonList();
+            if (investigatorIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+            }
+            Person investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
+            toAdd = createCrimeCase(investigatorToAdd);
+        }
+    }
+
++
+
+The `executeUndoableCommand` then adds the `CrimeCase` object to the model and throws a `DuplicateCrimeCaseException` if there exists an identical object:
+
+    @Override
+    public CommandResult executeUndoableCommand() throws CommandException {
+        requireNonNull(model);
+        try {
+            model.addCrimeCase(toAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        } catch (DuplicateCrimeCaseException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_CASE);
+        }
+    }
+
+===== Storage
+
+Newly created cases are stored in the same file as the investigators, in xml format. `XmlAdaptedCrimeCases` is used to convert a `CrimeCase` object, or `String` parameters describing a `CrimeCase` object into an `XmlAdaptedCrimeCase` object for JAXB use (creating the XML).
+
+    /**
+     * Constructs an {@code XmlAdaptedCrimeCase} with the given case details.
+     */
+    public XmlAdaptedCrimeCase(String name, String description, XmlAdaptedPerson investigator, String startDate,
+                               String status, List<XmlAdaptedTag> tagged)
+
++
+
+Note that the investigator field uses an `XmlAdaptedPerson` object, which means that the the complete information from the `Person` object is duplicated within the `cases` tags in the XML file.
+
++
+
+Below is an example of how the cases and investigators are stored in the file:
+
+    <investigapptor>
+        <cases>
+        <cases>
+            <name>Project Test</name>
+            <description>test description</description>
+            <investigator>
+                <name>Bernice Yu</name>
+                <phone>99272758</phone>
+                <email>berniceyu@example.com</email>
+                <address>Blk 30 Lorong 3 Serangoon Gardens, #07-18</address>
+                <tagged>colleagues</tagged>
+                <tagged>friends</tagged>
+            </investigator>
+            <startDate>14/02/13</startDate>
+            <status>open</status>
+            <tagged>Murder</tagged>
+        </cases>
+        <cases>
+            <name>Project New</name>
+            <description>New project description</description>
+            <investigator>
+                <name>Irfan Ibrahim</name>
+                <phone>92492021</phone>
+                <email>irfan@example.com</email>
+                <address>Blk 47 Tampines Street 20, #17-35</address>
+                <tagged>classmates</tagged>
+            </investigator>
+            <startDate>23/11/2013</startDate>
+            <status>open</status>
+            <tagged>Homicide</tagged>
+            <tagged>Fraud</tagged>
+        </cases>
+        <persons>
+            <name>Alex Yeoh</name>
+            <phone>87438807</phone>
+            <email>alexyeoh@example.com</email>
+            <address>Blk 30 Geylang Street 29, #06-40</address>
+            <tagged>friends</tagged>
+        </persons>
+        <persons>
+            <name>Bernice Yu</name>
+            <phone>99272758</phone>
+            <email>berniceyu@example.com</email>
+            <address>Blk 30 Lorong 3 Serangoon Gardens, #07-18</address>
+            <tagged>colleagues</tagged>
+            <tagged>friends</tagged>
+        </persons>
+        <persons>
+            <name>Irfan Ibrahim</name>
+            <phone>92492021</phone>
+            <email>irfan@example.com</email>
+            <address>Blk 47 Tampines Street 20, #17-35</address>
+            <tagged>classmates</tagged>
+        </persons>
+        <tags>Homicide</tags>
+        <tags>colleagues</tags>
+        <tags>classmates</tags>
+        <tags>Fraud</tags>
+        <tags>Murder</tags>
+        <tags>friends</tags>
+    </investigapptor>
+
 === Creating Backup
 
 As investigators may want to save the current state of the application before progressing, they can do this

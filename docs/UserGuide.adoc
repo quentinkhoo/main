@@ -79,37 +79,37 @@ Examples:
 * `registerInvestigator n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
 * `regInvest n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
 
-=== Adding a case: `add`
+=== Adding a case: `addCase [Since v1.1]`
 
 Adds a case to the application +
-Format: `add [n/CASE_NAME] [d/DESCRIPTION] [i/INDEX] [s/START_DATE] [t/TAG]...` +
-Alias: `a`
+Format: `addCase [n/CASE_NAME] [d/DESCRIPTION] [i/INDEX] [s/START_DATE] [t/TAG]...` +
+Alias: `aC`
 
 [TIP]
 A case can have any number of tags (including 0)
 
 Examples:
 
-* `add n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
-* `add n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
-* `a n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
+* `addCase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
+* `addCase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
+* `aC n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
 
 === Listing all investigators : `list investigators [Since v1.2]`
 
 Shows a list of all investigators in the Investigapptor. +
-Format: `list` +
-Alias: `lI`
+Format: `list investigators` +
+Alias: `l investigators`
 
 === Listing all cases : `list cases [Since v1.2]`
 
 Shows a list of all cases in the Investigapptor. +
-Format: `listCase` +
-Alias: `lC`
+Format: `list cases` +
+Alias: `l cases`
 
-=== Editing an investigator : `editInvestigator`
+=== Editing an investigator : `editInv`
 
 Edits an existing investigator in the Investigapptor. +
-Format: `editInvestigator INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+Format: `editInv INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 Alias: `eI`
 
 ****
@@ -122,12 +122,12 @@ Alias: `eI`
 
 Examples:
 
-* `editInvestigator 1 p/91234567 e/johndoe@example.com` +
+* `editInv 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st investigator to be `91234567` and `johndoe@example.com` respectively.
 * `eI 2 n/Betsy Crower t/` +
 Edits the name of the 2nd investigator to be `Betsy Crower` and clears all existing tags.
 
-=== Editing a case : `editCase`
+=== Editing a case : `editCase [Coming in v1.4]`
 
 Edits an existing case in the Investigapptor. +
 Format: `editCase INDEX [n/NAME] [d/DESCRIPTION] [i/INVESTIGATOR] [sd/STARTDATE] [s/STATUS] [t/TAG]...` +
@@ -148,11 +148,11 @@ Edits the description and investigator of the 1st case to be `some description` 
 * `eC 2 i/Betsy Crower t/` +
 Edits the investigator of the 2nd case to be `Betsy Crower` and clears all existing tags.
 
-=== Locating investigators by name: `findInvestigator`
+=== Locating investigators by name: `find`
 
 Finds investigators whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]` +
-Alias: `fI`
+Alias: `f`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -164,15 +164,15 @@ Alias: `fI`
 
 Examples:
 
-* `findInvestigator John` +
+* `find John` +
 Returns `john` and `John Doe`
-* `fI Betsy Tim John` +
+* `f Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
 
-=== Locating cases by name: `findCase`
+=== Locating cases by name: `findCase [Coming in v1.3]`
 
 Finds cases whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]` +
+Format: `findCase KEYWORD [MORE_KEYWORDS]` +
 Alias: `fC`
 
 ****
@@ -190,7 +190,7 @@ Returns `SPF Murder` and `SPF rape`
 * `findCase murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
 
-=== Locating investigators by category/team: `findInvestTags` `[since v1.2]`
+=== Locating investigators by category/team: `findInvestTags` `[Since v1.2]`
 
 Find investigators whose tags contain any of the given keywords. +
 Format: `findTags KEYWORD [MORE_KEYWORDS]` +
@@ -213,12 +213,12 @@ Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 
-=== Locating investigators by category/team: `findInvestTags` `[coming in v1.3]`
+=== Locating investigators by category/team: `findInvestTags` `[Coming in v1.3]`
 
-=== Deleting an investigator : `deleteInvestigator`
+=== Deleting an investigator : `deleteInv`
 
 Deletes the specified person from the address book. +
-Format: `deleteInvestigator INDEX` +
+Format: `deleteInv INDEX` +
 Alias: `dI`
 
 ****
@@ -229,14 +229,14 @@ Alias: `dI`
 
 Examples:
 
-* `listInvestigator` +
-`deleteInvestigator 2` +
+* `list investigator` +
+`deleteInv 2` +
 Deletes the 2nd investigator in the address book.
-* `findInvestigator Betsy` +
+* `find Betsy` +
 `dI 1` +
-Deletes the 1st investigator in the results of the `findInvestigator` command.
+Deletes the 1st investigator in the results of the `find` command.
 
-=== Deleting a case : `deleteCase`
+=== Deleting a case : `deleteCase [Since v1.2]`
 
 Deletes the specified case from the address book. +
 Format: `deleteCase INDEX` +
@@ -250,7 +250,7 @@ Alias: `dC`
 
 Examples:
 
-* `listCase` +
+* `list cases` +
 `deleteCase 2` +
 Deletes the 2nd case in the address book.
 * `findCase Arson` +
@@ -271,13 +271,13 @@ Alias: `selectInvest`
 
 Examples:
 
-* `list` +
-`selectInvestigator 2` +
-Selects the 2nd person in the results of the `list` command.
-* `findInvestigator Betsy` +
-`selectInvest 1` +
+* `list investigators` +
+`selectInvest 2` +
+Selects the 2nd person in the results of the `list investigators` command.
+* `find Betsy` +
+`selectInvestigator 1` +
 Selects the 1st person in the results of the `find` command.
-* `selectInvestigator 3` +
+* `selectInvest 3` +
 Selects the 3rd person in the listed panel list.
 
 === Selecting a case : `selectCase`
@@ -294,14 +294,14 @@ Alias: `sC`
 
 Examples:
 
-* `listCase` +
+* `list cases` +
 `selectCase 2` +
-Selects the 2nd case in the results of the `listCase` command.
+Selects the 2nd case in the results of the `list cases` command.
 * `findCase murder` +
 `selectCase 1` +
 Selects the 1st case in the results of the `findCase` command.
 * `sC 3` +
-Selects the 3rd case in the listed panel listCase.
+Selects the 3rd case in the listed panel list cases.
 
 === Update password : `update password [Coming in v2.0]`
 Updates the current Investigapptor password to a new password
@@ -334,11 +334,11 @@ Undoable commands: those commands that modify the address book's content (`add`,
 Examples:
 
 * `delete 1` +
-`list` +
+`list investigators` +
 `undo` (reverses the `delete 1` command) +
 
 * `select 1` +
-`list` +
+`list investigators` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
@@ -388,24 +388,24 @@ Alias: `ex`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Adding a witness `[coming in v2.0]`
+=== Adding a witness `[Coming in v2.0]`
 
-=== Adding a suspect `[coming in v2.0]`
+=== Adding a suspect `[Coming in v2.0]`
 
-=== Adding evidence files `[coming in v2.0]`
+=== Adding evidence files `[Coming in v2.0]`
 
-=== Setting up chain of custody `[coming in v2.0]`
+=== Setting up chain of custody `[Coming in v2.0]`
 
-=== Entering commands in other languages `[coming in v2.0]`
+=== Entering commands in other languages `[Coming in v2.0]`
 
-=== Adding any person via scanner `[coming in v2.0]`
+=== Adding any person via scanner `[Coming in v2.0]`
 
-=== Exporting case information into a PDF file `[coming in v2.0]`
+=== Exporting case information into a PDF file `[Coming in v2.0]`
 
-=== Viewing cases and investigators in a calendar/graph format `[coming in v2.0]`
+=== Viewing cases and investigators in a calendar/graph format `[Coming in v2.0]`
 
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== Encrypting data files `[Coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
@@ -426,7 +426,7 @@ e.g. `delete 3`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
-* *List* : `list`
+* *List* : `list investigators`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`

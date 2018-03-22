@@ -33,9 +33,12 @@ import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.testutil.CrimeCaseBuilder;
 import seedu.investigapptor.testutil.CrimeCaseUtil;
 import seedu.investigapptor.testutil.EditPersonDescriptorBuilder;
+import seedu.investigapptor.testutil.InvestigatorBuilder;
+import seedu.investigapptor.testutil.InvestigatorUtil;
 import seedu.investigapptor.testutil.PersonBuilder;
 import seedu.investigapptor.testutil.PersonUtil;
 
@@ -68,18 +71,18 @@ public class InvestigapptorParserTest {
 
     @Test
     public void parseCommand_reg() throws Exception {
-        Person person = new PersonBuilder().build();
+        Investigator investigator = new InvestigatorBuilder().build();
         RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
-                parser.parseCommand(PersonUtil.getRegCommand(person));
-        assertEquals(new RegisterInvestigatorCommand(person), command);
+                parser.parseCommand(InvestigatorUtil.getRegCommand(investigator));
+        assertEquals(new RegisterInvestigatorCommand(investigator), command);
     }
 
     @Test
     public void parseCommand_regAlias() throws Exception {
-        Person person = new PersonBuilder().build();
+        Investigator investigator = new InvestigatorBuilder().build();
         RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
-                parser.parseCommand(PersonUtil.getAliasRegCommand(person));
-        assertEquals(new RegisterInvestigatorCommand(person), command);
+                parser.parseCommand(InvestigatorUtil.getAliasRegCommand(investigator));
+        assertEquals(new RegisterInvestigatorCommand(investigator), command);
     }
 
     @Test

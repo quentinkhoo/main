@@ -190,7 +190,7 @@ Returns `SPF Murder` and `SPF rape`
 * `findCase murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
 
-=== Locating investigators by category/team: `findInvestTags` `[since v1.2]`
+=== Locating investigators by category/team: `findInvestTags` `[Since v1.2]`
 
 Find investigators whose tags contain any of the given keywords. +
 Format: `findTags KEYWORD [MORE_KEYWORDS]` +

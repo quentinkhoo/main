@@ -63,11 +63,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Registering an investigator: `registerInvestigator`
+=== Registering an investigator: `addInv`
 
 Registers an investigator to the application +
-Format: `registerInvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-Alias: `regInvest`
+Format: `addInv n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+Alias: `aI`
 
 [TIP]
 An investigator can have any number of tags (including 0)
@@ -75,9 +75,9 @@ An investigator can have any number of tags (including 0)
 
 Examples:
 
-* `registerInvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/newcomer`
-* `registerInvestigator n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
-* `regInvest n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
+* `addInv n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/newcomer`
+* `addInv n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
+* `aI n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
 
 === Adding a case: `addCase [Since v1.1]`
 

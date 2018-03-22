@@ -5,6 +5,7 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_RANK;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -18,6 +19,8 @@ import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.Phone;
+import seedu.investigapptor.model.person.investigator.Investigator;
+import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -32,9 +35,9 @@ public class RegisterInvestigatorCommandParser implements Parser<RegisterInvesti
      */
     public RegisterInvestigatorCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RANK, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_RANK)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RegisterInvestigatorCommand.MESSAGE_USAGE));
@@ -45,11 +48,11 @@ public class RegisterInvestigatorCommandParser implements Parser<RegisterInvesti
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).get();
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get();
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
+            Rank rank = ParserUtil.parseRank(argMultimap.getValue(PREFIX_RANK)).get();
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            Person person = new Person(name, phone, email, address, tagList);
-
-            return new RegisterInvestigatorCommand(person);
+            Investigator investigator = new Investigator(name, phone, email, address, rank, tagList);
+            return new RegisterInvestigatorCommand(investigator);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }

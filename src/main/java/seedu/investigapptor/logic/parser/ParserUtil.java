@@ -17,6 +17,7 @@ import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Phone;
+import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -217,6 +218,29 @@ public class ParserUtil {
         return startDate.isPresent() ? Optional.of(parseStartDate(startDate.get())) : Optional.empty();
     }
 
+
+    /**
+     * Parses a {@code String rank} into a {@code Rank}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code rank} is invalid.
+     */
+    public static Rank parseRank(String rank) throws IllegalValueException {
+        requireNonNull(rank);
+        String trimmedRank = rank.trim();
+        if (!Rank.isValidRank(trimmedRank)) {
+            throw new IllegalValueException(Rank.MESSAGE_RANK_CONSTRAINTS);
+        }
+        return new Rank(trimmedRank);
+    }
+    /**
+     * Parses a {@code Optional<String> phone} into an {@code Optional<Phone>} if {@code phone} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Rank> parseRank(Optional<String> rank) throws IllegalValueException {
+        requireNonNull(rank);
+        return rank.isPresent() ? Optional.of(parseRank(rank.get())) : Optional.empty();
+    }
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.

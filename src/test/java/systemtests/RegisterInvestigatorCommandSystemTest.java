@@ -151,19 +151,19 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
 
         /* Case: missing name -> rejected */
         command = RegisterInvestigatorCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + RANK_DESC_CAP + " " ;
+                + RANK_DESC_CAP + " ";
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RegisterInvestigatorCommand.MESSAGE_USAGE));
 
         /* Case: missing phone -> rejected */
         command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + RANK_DESC_CAP + " " ;
+                + RANK_DESC_CAP + " ";
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RegisterInvestigatorCommand.MESSAGE_USAGE));
 
         /* Case: missing email -> rejected */
         command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
-                + RANK_DESC_CAP + " " ;
+                + RANK_DESC_CAP + " ";
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RegisterInvestigatorCommand.MESSAGE_USAGE));
 

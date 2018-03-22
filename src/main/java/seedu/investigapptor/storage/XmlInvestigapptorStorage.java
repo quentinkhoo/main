@@ -38,17 +38,18 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
 
     /**
      * Similar to {@link InvestigapptorStorage#readInvestigapptor()}
+     *
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
     public Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath) throws DataConversionException,
-                                                                                 FileNotFoundException {
+            FileNotFoundException {
         requireNonNull(filePath);
 
         File investigapptorFile = new File(filePath);
 
         if (!investigapptorFile.exists()) {
-            logger.info("Investigapptor file "  + investigapptorFile + " not found");
+            logger.info("Investigapptor file " + investigapptorFile + " not found");
             return Optional.empty();
         }
 
@@ -68,6 +69,7 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
 
     /**
      * Similar to {@link InvestigapptorStorage#saveInvestigapptor(ReadOnlyInvestigapptor)}
+     *
      * @param filePath location of the data. Cannot be null
      */
     public void saveInvestigapptor(ReadOnlyInvestigapptor investigapptor, String filePath) throws IOException {

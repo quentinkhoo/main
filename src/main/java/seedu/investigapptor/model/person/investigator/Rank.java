@@ -67,7 +67,9 @@ public class Rank {
      * Returns rank's value in string
      * @return
      */
-    public String getValue() { return String.valueOf(value); }
+    public String getValue() {
+        return String.valueOf(value);
+    }
     @Override
     public String toString() {
         switch (value) {

@@ -26,12 +26,12 @@ public class Investigator extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Investigator(Name name, Phone phone, Email email, Address address,Rank rank, Set<Tag> tags) {
+    public Investigator(Name name, Phone phone, Email email, Address address, Rank rank, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         this.rank = rank;
         crimeCases = new UniqueCrimeCaseList();
     }
-    public Investigator(Name name, Phone phone, Email email, Address address,Rank rank,
+    public Investigator(Name name, Phone phone, Email email, Address address, Rank rank,
                         Set<Tag> tags, Set<CrimeCase> cases) {
         super(name, phone, email, address, tags);
         this.rank = rank;
@@ -60,7 +60,9 @@ public class Investigator extends Person {
     }
 
     @Override
-    public boolean isInvestigator() { return true; }
+    public boolean isInvestigator() {
+        return true;
+    }
     /**
      * Returns an immutable crime case set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

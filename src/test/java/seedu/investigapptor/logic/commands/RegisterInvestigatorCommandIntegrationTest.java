@@ -15,7 +15,6 @@ import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.testutil.InvestigatorBuilder;
-import seedu.investigapptor.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code RegisterInvestigatorCommand}.

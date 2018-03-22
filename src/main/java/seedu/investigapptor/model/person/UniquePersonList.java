@@ -112,27 +112,31 @@ public class UniquePersonList implements Iterable<Person> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    /**
+     * Returns a list containing investigator as an unmodifiable {@code ObservableList}.
+     */
     public ObservableList<Investigator> investigatorList() {
         Iterator irt = iterator();
         ObservableList<Investigator> investigators = FXCollections.observableArrayList();
         while (irt.hasNext()) {
             Object element = irt.next();
-            if(element instanceof Investigator)
-            {
-                investigators.add((Investigator)element);
+            if (element instanceof Investigator) {
+                investigators.add((Investigator) element);
             }
         }
         return investigators;
     }
 
+    /**
+     * Returns a list containing person as an unmodifiable {@code ObservableList}.
+     */
     public ObservableList<Person> personOnlyList() {
         Iterator irt = iterator();
         ObservableList<Person> persons = FXCollections.observableArrayList();
         while (irt.hasNext()) {
             Object element = irt.next();
-            if(!(element instanceof Investigator))
-            {
-                persons.add((Person)element);
+            if (!(element instanceof Investigator)) {
+                persons.add((Person) element);
             }
         }
         return persons;

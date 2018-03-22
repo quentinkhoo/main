@@ -52,15 +52,16 @@ public class XmlAdaptedInvestigator {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedInvestigator(String name, String phone, String email, String address,String rank,
+    public XmlAdaptedInvestigator(String name, String phone, String email, String address, String rank,
                                   List<XmlAdaptedCrimeCase> caseList, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.rank = rank;
-        if(caseList != null)
+        if (caseList != null) {
             this.caseList = new ArrayList<>(caseList);
+        }
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -100,7 +101,7 @@ public class XmlAdaptedInvestigator {
 
         final List<CrimeCase> investigatorCases = new ArrayList<>();
         for (XmlAdaptedCrimeCase crimeCase: caseList) {
-            investigatorCases.add( crimeCase.toModelType());
+            investigatorCases.add(crimeCase.toModelType());
         }
         if (this.name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -144,10 +145,14 @@ public class XmlAdaptedInvestigator {
 
         final Set<Tag> tags = new HashSet<>(personTags);
         final Set<CrimeCase> crimeCases = new HashSet<>(investigatorCases);
-        return new Investigator(name, phone, email, address, rank, tags,crimeCases);
+        return new Investigator(name, phone, email, address, rank, tags, crimeCases);
     }
 
-
+    /**
+     * Compares if it is equal to another object
+     * @param other
+     * @return
+     */
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -162,7 +167,7 @@ public class XmlAdaptedInvestigator {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
-                && Objects.equals(rank,otherPerson.rank)
+                && Objects.equals(rank, otherPerson.rank)
                 && tagged.equals(otherPerson.tagged)
                 && caseList.equals(otherPerson.caseList);
     }

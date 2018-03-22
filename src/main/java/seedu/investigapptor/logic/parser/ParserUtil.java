@@ -281,5 +281,4 @@ public class ParserUtil {
         }
         return trimmedType;
     }
-    
 }

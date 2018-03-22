@@ -150,7 +150,9 @@ public class InvestigapptorTest {
         }
 
         @Override
-        public ObservableList<Investigator> getInvestigatorList() { return investigators; }
+        public ObservableList<Investigator> getInvestigatorList() {
+            return investigators;
+        }
 
         @Override
         public ObservableList<Person> getPersonOnlyList() {

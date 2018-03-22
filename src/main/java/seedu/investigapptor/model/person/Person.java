@@ -65,7 +65,9 @@ public class Person {
         tags.delete(toDelete);
     }
 
-    public boolean isInvestigator() { return false; }
+    public boolean isInvestigator() {
+        return false;
+    }
 
     @Override
     public boolean equals(Object other) {

@@ -190,7 +190,7 @@ Returns `SPF Murder` and `SPF rape`
 * `findCase murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
 
-=== Locating investigators by category/team: `findInvestTags` `[since v1.2]`
+=== Locating investigators by category/team: `findInvestTags` `[Since v1.2]`
 
 Find investigators whose tags contain any of the given keywords. +
 Format: `findTags KEYWORD [MORE_KEYWORDS]` +
@@ -213,7 +213,7 @@ Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 
-=== Locating investigators by category/team: `findInvestTags` `[coming in v1.3]`
+=== Locating cases by category: `findCaseTags` `[Coming in v1.3]`
 
 === Deleting an investigator : `deleteInvestigator`
 
@@ -388,24 +388,24 @@ Alias: `ex`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Adding a witness `[coming in v2.0]`
+=== Adding a witness `[Coming in v2.0]`
 
-=== Adding a suspect `[coming in v2.0]`
+=== Adding a suspect `[Coming in v2.0]`
 
-=== Adding evidence files `[coming in v2.0]`
+=== Adding evidence files `[Coming in v2.0]`
 
-=== Setting up chain of custody `[coming in v2.0]`
+=== Setting up chain of custody `[Coming in v2.0]`
 
-=== Entering commands in other languages `[coming in v2.0]`
+=== Entering commands in other languages `[Coming in v2.0]`
 
-=== Adding any person via scanner `[coming in v2.0]`
+=== Adding any person via scanner `[Coming in v2.0]`
 
-=== Exporting case information into a PDF file `[coming in v2.0]`
+=== Exporting case information into a PDF file `[Coming in v2.0]`
 
-=== Viewing cases and investigators in a calendar/graph format `[coming in v2.0]`
+=== Viewing cases and investigators in a calendar/graph format `[Coming in v2.0]`
 
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== Encrypting data files `[Coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]

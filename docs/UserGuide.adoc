@@ -63,11 +63,11 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Registering an investigator: `registerInvestigator`
+=== Registering an investigator: `addInv`
 
 Registers an investigator to the application +
-Format: `registerInvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-Alias: `regInvest`
+Format: `addInv n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+Alias: `aI`
 
 [TIP]
 An investigator can have any number of tags (including 0)
@@ -75,41 +75,41 @@ An investigator can have any number of tags (including 0)
 
 Examples:
 
-* `registerInvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/newcomer`
-* `registerInvestigator n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
-* `regInvest n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
+* `addInv n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/newcomer`
+* `addInv n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
+* `aI n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
 
-=== Adding a case: `add`
+=== Adding a case: `addCase [Since v1.1]`
 
 Adds a case to the application +
-Format: `add [n/CASE_NAME] [d/DESCRIPTION] [i/INDEX] [s/START_DATE] [t/TAG]...` +
-Alias: `a`
+Format: `addCase [n/CASE_NAME] [d/DESCRIPTION] [i/INDEX] [s/START_DATE] [t/TAG]...` +
+Alias: `aC`
 
 [TIP]
 A case can have any number of tags (including 0)
 
 Examples:
 
-* `add n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
-* `add n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
-* `a n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
+* `addCase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
+* `addCase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
+* `aC n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
 
 === Listing all investigators : `list investigators [Since v1.2]`
 
 Shows a list of all investigators in the Investigapptor. +
-Format: `list` +
-Alias: `lI`
+Format: `list investigators` +
+Alias: `l investigators`
 
 === Listing all cases : `list cases [Since v1.2]`
 
 Shows a list of all cases in the Investigapptor. +
-Format: `listCase` +
-Alias: `lC`
+Format: `list cases` +
+Alias: `l cases`
 
-=== Editing an investigator : `editInvestigator`
+=== Editing an investigator : `editInv`
 
 Edits an existing investigator in the Investigapptor. +
-Format: `editInvestigator INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+Format: `editInv INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 Alias: `eI`
 
 ****
@@ -122,12 +122,12 @@ Alias: `eI`
 
 Examples:
 
-* `editInvestigator 1 p/91234567 e/johndoe@example.com` +
+* `editInv 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st investigator to be `91234567` and `johndoe@example.com` respectively.
 * `eI 2 n/Betsy Crower t/` +
 Edits the name of the 2nd investigator to be `Betsy Crower` and clears all existing tags.
 
-=== Editing a case : `editCase`
+=== Editing a case : `editCase [Coming in v1.4]`
 
 Edits an existing case in the Investigapptor. +
 Format: `editCase INDEX [n/NAME] [d/DESCRIPTION] [i/INVESTIGATOR] [sd/STARTDATE] [s/STATUS] [t/TAG]...` +
@@ -148,7 +148,7 @@ Edits the description and investigator of the 1st case to be `some description` 
 * `eC 2 i/Betsy Crower t/` +
 Edits the investigator of the 2nd case to be `Betsy Crower` and clears all existing tags.
 
-=== Locating investigators by name: `findInvestigator`
+=== Locating investigators by name: `find`
 
 Finds investigators whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]` +
@@ -164,15 +164,15 @@ Alias: `fI`
 
 Examples:
 
-* `findInvestigator John` +
+* `find John` +
 Returns `john` and `John Doe`
 * `fI Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
 
-=== Locating cases by name: `findCase`
+=== Locating cases by name: `findCase [Coming in v1.3]`
 
 Finds cases whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]` +
+Format: `findCase KEYWORD [MORE_KEYWORDS]` +
 Alias: `fC`
 
 ****
@@ -215,10 +215,10 @@ Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 
 === Locating cases by category: `findCaseTags` `[Coming in v1.3]`
 
-=== Deleting an investigator : `deleteInvestigator`
+=== Deleting an investigator : `deleteInv`
 
 Deletes the specified person from the address book. +
-Format: `deleteInvestigator INDEX` +
+Format: `deleteInv INDEX` +
 Alias: `dI`
 
 ****
@@ -229,14 +229,14 @@ Alias: `dI`
 
 Examples:
 
-* `listInvestigator` +
-`deleteInvestigator 2` +
+* `list investigator` +
+`deleteInv 2` +
 Deletes the 2nd investigator in the address book.
-* `findInvestigator Betsy` +
+* `find Betsy` +
 `dI 1` +
-Deletes the 1st investigator in the results of the `findInvestigator` command.
+Deletes the 1st investigator in the results of the `find` command.
 
-=== Deleting a case : `deleteCase`
+=== Deleting a case : `deleteCase [Since v1.2]`
 
 Deletes the specified case from the address book. +
 Format: `deleteCase INDEX` +
@@ -250,7 +250,7 @@ Alias: `dC`
 
 Examples:
 
-* `listCase` +
+* `list case` +
 `deleteCase 2` +
 Deletes the 2nd case in the address book.
 * `findCase Arson` +
@@ -274,7 +274,7 @@ Examples:
 * `list` +
 `selectInvestigator 2` +
 Selects the 2nd person in the results of the `list` command.
-* `findInvestigator Betsy` +
+* `find Betsy` +
 `selectInvest 1` +
 Selects the 1st person in the results of the `find` command.
 * `selectInvestigator 3` +
@@ -294,14 +294,14 @@ Alias: `sC`
 
 Examples:
 
-* `listCase` +
+* `list case` +
 `selectCase 2` +
-Selects the 2nd case in the results of the `listCase` command.
+Selects the 2nd case in the results of the `list case` command.
 * `findCase murder` +
 `selectCase 1` +
 Selects the 1st case in the results of the `findCase` command.
 * `sC 3` +
-Selects the 3rd case in the listed panel listCase.
+Selects the 3rd case in the listed panel list case.
 
 === Update password : `update password [Coming in v2.0]`
 Updates the current Investigapptor password to a new password

@@ -48,9 +48,15 @@
 <li><a href="#password-feature">4.1. Password feature</a></li>
 <li><a href="#listing-feature">4.2. Listing feature</a></li>
 <li><a href="#undo-redo-feature">4.3. Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">4.4. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">4.5. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.6. Configuration</a></li>
+<li><a href="#find-investigators-according-to-its-tags-feature">4.4. Find investigators according to its tags feature</a></li>
+<li><a href="#calendar-graph-feature">4.5. Calendar/graph feature</a></li>
+<li><a href="#proposed-data-encryption">4.6. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">4.7. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.8. Configuration</a></li>
+<li><a href="#investigator-class">4.9. Investigator Class</a></li>
+<li><a href="#crimecase-package">4.10. CrimeCase Package</a></li>
+<li><a href="#adding-cases-feature">4.11. Adding cases feature</a></li>
+<li><a href="#creating-backup">4.12. Creating Backup</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -1041,20 +1047,120 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">4.4. [Proposed] Data Encryption</a></h3>
+<h3 id="find-investigators-according-to-its-tags-feature"><a class="link" href="#find-investigators-according-to-its-tags-feature">4.4. Find investigators according to its tags feature</a></h3>
+<div class="sect3">
+<h4 id="reason-for-implementation-3"><a class="link" href="#reason-for-implementation-3">4.4.1. Reason for Implementation</a></h4>
+<div class="paragraph">
+<p>The purpose of having tags associated to an investigator is to store certain information such as the team he is in
+and the level of his experience. One of the aims of Investigapptor is to provide ease in managing and retrieving information that is required.
+Hence, this implementation is in line with the aim where investigators that belongs to a certain team/category can be
+filtered out efficiently.</p>
+</div>
+<div class="paragraph">
+<p>Without this implementation, it is inefficient as the user may have to browse through <strong>all</strong> the listed investigators to find an investigator that belongs
+to a certain team/category.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">4.4.2. Current Implementation</a></h4>
+<div class="paragraph">
+<p>A command called <code>findInvestTags</code> was created under the logic component with the java class <code>FindInvestTagsCommand.java</code>. Additionally,
+a parser, <code>FindInvestTagsCommandParser.java</code> was being used to parse the arguments required for the command to work. This command
+will display the investigator(s) whose tags that matches with <strong>ANY</strong> of the arguments stated in the command.</p>
+</div>
+<div class="paragraph">
+<p>Under the main commands parser, <code>InvestigapptorParser.java</code>, a case scenario for <code>findInvestTags</code> alongside with its alias was being implemented.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="keyword">case</span> FindInvestTagsCommand.COMMAND_WORD:
+<span class="keyword">case</span> FindInvestTagsCommand.COMMAND_ALIAS:
+    <span class="keyword">return</span> <span class="keyword">new</span> FindInvestTagsCommandParser().parse(arguments);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The parser, <code>FindInvestTagsCommandParser()</code> will be invoked to parse the arguments specified by the user input with the following implementation.
+The comparison is done in lowercase to prevent any comparison errors due to case sensitivity.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> FindInvestTagsCommand parse(<span class="predefined-type">String</span> args) <span class="directive">throws</span> <span class="exception">ParseException</span> {
+        <span class="predefined-type">String</span> trimmedArgs = args.trim();
+        <span class="keyword">if</span> (trimmedArgs.isEmpty()) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">ParseException</span>(<span class="predefined-type">String</span>.format(MESSAGE_INVALID_COMMAND_FORMAT, FindInvestTagsCommand.MESSAGE_USAGE));
+        }
+
+        <span class="predefined-type">String</span><span class="type">[]</span> nameKeywords = trimmedArgs.toLowerCase().split(<span class="string"><span class="delimiter">&quot;</span><span class="char">\\</span><span class="content">s+</span><span class="delimiter">&quot;</span></span>);
+
+        <span class="keyword">return</span> <span class="keyword">new</span> FindInvestTagsCommand(<span class="keyword">new</span> TagContainsKeywordsPredicate(<span class="predefined-type">Arrays</span>.asList(nameKeywords)));
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>While parsing the arguments, a <code>TagContainsKeywordsPredicate</code> object was created to test whether any keywords
+matches with any tags of the investigator(s). The comparison was implemented in the following code segment.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">boolean</span> test(Person person) {
+    <span class="keyword">return</span> keywords.stream().anyMatch(person.getTagsRaw()::contains);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After the parsing the arguments, a <code>FindInvestTagsCommand</code> object will be constructed with the <code>TagContainsKeywordPredicate</code>
+object as the attribute and returned to <code>InvestigapptorParser</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>findInvestTags</code> command will then be executed and the observable list <code>filteredPersonList</code> will be updated with the investigators
+whose tags matches the predicate keywords. The following segment shows the execution code.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"> <span class="directive">public</span> CommandResult execute() {
+    model.updateFilteredPersonList(predicate);
+    <span class="keyword">return</span> <span class="keyword">new</span> CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The result of the number of people listed will be shown under the <code>ResultDisplay</code> UI, and the investigators found
+in the <code>filteredPersonList</code> will be displayed under the <code>InvestigatorListPanel</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calendar-graph-feature"><a class="link" href="#calendar-graph-feature">4.5. Calendar/graph feature</a></h3>
+<div class="sect3">
+<h4 id="reason-for-implementation-4"><a class="link" href="#reason-for-implementation-4">4.5.1. Reason for implementation</a></h4>
+<div class="paragraph">
+<p>Hand-over of cases is critical in investigation processes and such information has to be documented down.
+By having a calendar/graph for each case and investigator, it can provide a chronological flow of the investigators
+that has handled the case.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">4.5.2. Current implementation</a></h4>
+<div class="paragraph">
+<p>Usage of CalendarFX (To be updated - coming in v2.0)</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">4.6. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.5. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.7. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.6, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.8, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1085,9 +1191,467 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.6. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.8. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="investigator-class"><a class="link" href="#investigator-class">4.9. Investigator Class</a></h3>
+<div class="paragraph">
+<p>The <code>Investigator</code> package is a extended from the <code>Person</code> package, allowing it to handle the basic functions of a <code>Person</code> package while
+having additional properties required for an investigator. The additional properties are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Rank</code></p>
+<div class="paragraph">
+<p>Stores the rank of the investigator</p>
+</div>
+</li>
+<li>
+<p><code>UniqueCrimeCaseList</code></p>
+<div class="paragraph">
+<p>Stores and manages all the CrimeCases which the investigator is in charge of.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="model"><a class="link" href="#model">4.9.1. Model</a></h4>
+<div class="paragraph">
+<p>Currently the <code>Investigator</code> is upcasted and stored in the <code>Investigapptor</code> 's <code>UniquePersonList</code>.
+This is done on purpose to allow future enhancement that allows us to implement types of people such as suspects and witnesses. Storing them together makes it easier to use general
+functions.</p>
+</div>
+<div class="paragraph">
+<p>The code below is from the <code>syncWithMasterTagList</code> function. It shows that
+both Investigator and Person type are both return into the <code>UniquePersonList</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>if (person instanceof Investigator) {
+    Set&lt;CrimeCase&gt; cases = new HashSet&lt;&gt;();
+    Investigator inv = (Investigator) person;
+    inv.getCrimeCases().forEach(crimeCase -&gt; cases.add(crimeCase));
+    return new Investigator(person.getName(), person.getPhone(), person.getEmail(),
+            person.getAddress(), ((Investigator) person).getRank(), correctTagReferences, cases);
+}
+return new Person(
+        person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="storage"><a class="link" href="#storage">4.9.2. Storage</a></h4>
+<div class="paragraph">
+<p>As Investigator has addition properties compared to Person, <code>XmlAdaptedInvestigator</code> is created to convert
+the <code>Investigator</code> into correct XML format. We had to also change the method of storing the in <code>Investigapptor</code>
+the different classes have to be converted and stored in the correct format. To accomplish this,
+two new methods were added which each return a person only list and a investigator only list to store them
+separately</p>
+</div>
+<div class="paragraph">
+<p>This function will return only <code>Investigator</code> in the list</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>public ObservableList&lt;Investigator&gt; investigatorList() {
+    Iterator irt = iterator();
+    ObservableList&lt;Investigator&gt; investigators = FXCollections.observableArrayList();
+    while (irt.hasNext()) {
+        Object element = irt.next();
+        if (element instanceof Investigator) {
+            investigators.add((Investigator) element);
+        }
+    }
+    return investigators;
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This function will only return <code>Person</code> in the list</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>public ObservableList&lt;Person&gt; personOnlyList() {
+    Iterator irt = iterator();
+    ObservableList&lt;Person&gt; persons = FXCollections.observableArrayList();
+    while (irt.hasNext()) {
+        Object element = irt.next();
+        if (!(element instanceof Investigator)) {
+            persons.add((Person) element);
+        }
+    }
+    return persons;
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As more type of people are added, more function to differentiate the UniquePersonList.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="crimecase-package"><a class="link" href="#crimecase-package">4.10. CrimeCase Package</a></h3>
+<div class="paragraph">
+<p>The <code>CrimeCase</code> package consists of multiple classes used to contain information about a case.</p>
+</div>
+<div class="sect3">
+<h4 id="code-casename-code-class-br"><a class="link" href="#code-casename-code-class-br">4.10.1. <code>CaseName</code> class<br></a></h4>
+<div class="paragraph">
+<p>Stores a <code>String</code> that represents the name of the case. Provides utility methods to:
+* check the validity of the string to be stored
+* retrieve the string that is stored
+* obtain the hash code of the <code>CaseName</code> object</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/**
+ * Constructs a {@code Name}.
+ *
+ * @param name A valid name.
+ */
+public CaseName(String name)</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="code-description-code-class-br"><a class="link" href="#code-description-code-class-br">4.10.2. <code>Description</code> class<br></a></h4>
+<div class="paragraph">
+<p>Stores a <code>String</code> that represents the description of the case. Provides utility methods to:
+* check the validity of the string to be stored
+* retrieve the string that is stored
+* obtain the hash code of the <code>Description</code> object</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/**
+ * Constructs a {@code Description}.
+ *
+ * @param description A valid description.
+ */
+public Description(String description)</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="code-startdate-code-class-br"><a class="link" href="#code-startdate-code-class-br">4.10.3. <code>StartDate</code> class<br></a></h4>
+<div class="paragraph">
+<p>Stores a <code>String</code> that represents the start date of the case. Provides utility methods to:
+* check the validity of the string to be stored
+* retrieve the string that is stored
+* obtain the hash code of the <code>StartDate</code> object</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/**
+ * Constructs a {@code date}.
+ *
+ * @param date A valid date.
+ */
+public StartDate(String date)</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="code-status-code-class-br"><a class="link" href="#code-status-code-class-br">4.10.4. <code>Status</code> class<br></a></h4>
+<div class="paragraph">
+<p>Stores a <code>String</code> that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called. Provides utility methods to:
+* toggle the status of the case
+* retrieve the string that is stored
+* obtain the hash code of the <code>Status</code> object</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/**
+ * Constructs a {@code Status}.
+ *
+ */
+public Status()</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="code-crimecase-code-class-br"><a class="link" href="#code-crimecase-code-class-br">4.10.5. <code>CrimeCase</code> class<br></a></h4>
+<div class="paragraph">
+<p>Stores <code>CaseName</code>, <code>Description</code>, <code>Person</code>, <code>StartDate</code>, <code>Status</code>, and <code>UniqueTagList</code> objects to represent information of the case. Provides utility methods to retrieve the different objects, delete a tag, and obtain the hash code of the <code>CrimeCase</code> object.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/**
+  * Constructs a {@code CrimeCase}.
+  * Every field must be present and not null
+  */
+ public CrimeCase(CaseName name, Description description, Person currentInvestigator, StartDate startDate, Status status, Set&lt;Tag&gt; tags)</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-cases-feature"><a class="link" href="#adding-cases-feature">4.11. Adding cases feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">4.11.1. Current Implementation</a></h4>
+<div class="sect4">
+<h5 id="logic"><a class="link" href="#logic">Logic</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AddCaseCommandParser</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>AddCaseCommandParser</code> parses the given <code>String</code> of arguments in the context of the <code>AddCaseCommand</code> and returns an <code>AddCaseCommand</code> object for execution. A <code>ParseException</code> is thrown if the user input does not conform to the expected format.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>public AddCaseCommand parse(String args) throws ParseException {
+    ArgumentMultimap argMultimap =
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR,
+                    PREFIX_STARTDATE, PREFIX_TAG);
+    if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR, PREFIX_STARTDATE)
+            || !argMultimap.getPreamble().isEmpty()) {
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCaseCommand.MESSAGE_USAGE));
+    }
+    ...
+}</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>AddCaseCommand</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>AddCaseCommand</code> that extends the <code>UndoableCommand</code> class is implemented with two overloaded constructors, either of which can be used depending on convenience:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/**
+ * Creates an AddCaseCommand to add the specified {@code CrimeCase}
+ */
+public AddCaseCommand(CrimeCase crimeCase)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/**
+ * @param name of the case to be added
+ * @param description of the case to be added
+ * @param investigatorIndex of the investigator to be added
+ * @param startDate of the case to be added
+ * @param tagList of the case to be added
+ */
+public AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set&lt;Tag&gt; tagList)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="paragraph">
+<p>Since <code>AddCaseCommand</code> extends <code>UndoableCommand</code>, after the constructor is called, the <code>preprocessUndoableCommand</code> and <code>executeUndoableCommand</code> methods are executed consecutively right after.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="paragraph">
+<p>If the <code>AddCaseCommand(CrimeCase crimeCase)</code> constructor is used, the logic in the <code>preprocessUndoableCommand</code> method is not executed.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="paragraph">
+<p>Note that the <code>AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set&lt;Tag&gt; tagList)</code> constructor above takes in an <code>Index</code> object as a parameter, which refers to the index number of the investigator as displayed in <code>PersonListPanel</code>.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="paragraph">
+<p>The <code>Person</code> object is retrieved based on the index and the created <code>CrimeCase</code> object is stored in <code>toAdd</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@Override
+protected void preprocessUndoableCommand() throws CommandException {
+    if (investigatorIndex != null) {
+        List&lt;Person&gt; lastShownList = model.getFilteredPersonList();
+        if (investigatorIndex.getZeroBased() &gt;= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+        }
+        Person investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
+        toAdd = createCrimeCase(investigatorToAdd);
+    }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="paragraph">
+<p>The <code>executeUndoableCommand</code> then adds the <code>CrimeCase</code> object to the model and throws a <code>DuplicateCrimeCaseException</code> if there exists an identical object:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@Override
+public CommandResult executeUndoableCommand() throws CommandException {
+    requireNonNull(model);
+    try {
+        model.addCrimeCase(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    } catch (DuplicateCrimeCaseException e) {
+        throw new CommandException(MESSAGE_DUPLICATE_CASE);
+    }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="storage-2"><a class="link" href="#storage-2">Storage</a></h5>
+<div class="paragraph">
+<p>Newly created cases are stored in the same file as the investigators, in xml format. <code>XmlAdaptedCrimeCases</code> is used to convert a <code>CrimeCase</code> object, or <code>String</code> parameters describing a <code>CrimeCase</code> object into an <code>XmlAdaptedCrimeCase</code> object for JAXB use (creating the XML).</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/**
+ * Constructs an {@code XmlAdaptedCrimeCase} with the given case details.
+ */
+public XmlAdaptedCrimeCase(String name, String description, XmlAdaptedPerson investigator, String startDate,
+                           String status, List&lt;XmlAdaptedTag&gt; tagged)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="paragraph">
+<p>Note that the investigator field uses an <code>XmlAdaptedPerson</code> object, which means that the the complete information from the <code>Person</code> object is duplicated within the <code>cases</code> tags in the XML file.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="paragraph">
+<p>Below is an example of how the cases and investigators are stored in the file:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>&lt;investigapptor&gt;
+    &lt;cases&gt;
+    &lt;cases&gt;
+        &lt;name&gt;Project Test&lt;/name&gt;
+        &lt;description&gt;test description&lt;/description&gt;
+        &lt;investigator&gt;
+            &lt;name&gt;Bernice Yu&lt;/name&gt;
+            &lt;phone&gt;99272758&lt;/phone&gt;
+            &lt;email&gt;berniceyu@example.com&lt;/email&gt;
+            &lt;address&gt;Blk 30 Lorong 3 Serangoon Gardens, #07-18&lt;/address&gt;
+            &lt;tagged&gt;colleagues&lt;/tagged&gt;
+            &lt;tagged&gt;friends&lt;/tagged&gt;
+        &lt;/investigator&gt;
+        &lt;startDate&gt;14/02/13&lt;/startDate&gt;
+        &lt;status&gt;open&lt;/status&gt;
+        &lt;tagged&gt;Murder&lt;/tagged&gt;
+    &lt;/cases&gt;
+    &lt;cases&gt;
+        &lt;name&gt;Project New&lt;/name&gt;
+        &lt;description&gt;New project description&lt;/description&gt;
+        &lt;investigator&gt;
+            &lt;name&gt;Irfan Ibrahim&lt;/name&gt;
+            &lt;phone&gt;92492021&lt;/phone&gt;
+            &lt;email&gt;irfan@example.com&lt;/email&gt;
+            &lt;address&gt;Blk 47 Tampines Street 20, #17-35&lt;/address&gt;
+            &lt;tagged&gt;classmates&lt;/tagged&gt;
+        &lt;/investigator&gt;
+        &lt;startDate&gt;23/11/2013&lt;/startDate&gt;
+        &lt;status&gt;open&lt;/status&gt;
+        &lt;tagged&gt;Homicide&lt;/tagged&gt;
+        &lt;tagged&gt;Fraud&lt;/tagged&gt;
+    &lt;/cases&gt;
+    &lt;persons&gt;
+        &lt;name&gt;Alex Yeoh&lt;/name&gt;
+        &lt;phone&gt;87438807&lt;/phone&gt;
+        &lt;email&gt;alexyeoh@example.com&lt;/email&gt;
+        &lt;address&gt;Blk 30 Geylang Street 29, #06-40&lt;/address&gt;
+        &lt;tagged&gt;friends&lt;/tagged&gt;
+    &lt;/persons&gt;
+    &lt;persons&gt;
+        &lt;name&gt;Bernice Yu&lt;/name&gt;
+        &lt;phone&gt;99272758&lt;/phone&gt;
+        &lt;email&gt;berniceyu@example.com&lt;/email&gt;
+        &lt;address&gt;Blk 30 Lorong 3 Serangoon Gardens, #07-18&lt;/address&gt;
+        &lt;tagged&gt;colleagues&lt;/tagged&gt;
+        &lt;tagged&gt;friends&lt;/tagged&gt;
+    &lt;/persons&gt;
+    &lt;persons&gt;
+        &lt;name&gt;Irfan Ibrahim&lt;/name&gt;
+        &lt;phone&gt;92492021&lt;/phone&gt;
+        &lt;email&gt;irfan@example.com&lt;/email&gt;
+        &lt;address&gt;Blk 47 Tampines Street 20, #17-35&lt;/address&gt;
+        &lt;tagged&gt;classmates&lt;/tagged&gt;
+    &lt;/persons&gt;
+    &lt;tags&gt;Homicide&lt;/tags&gt;
+    &lt;tags&gt;colleagues&lt;/tags&gt;
+    &lt;tags&gt;classmates&lt;/tags&gt;
+    &lt;tags&gt;Fraud&lt;/tags&gt;
+    &lt;tags&gt;Murder&lt;/tags&gt;
+    &lt;tags&gt;friends&lt;/tags&gt;
+&lt;/investigapptor&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-backup"><a class="link" href="#creating-backup">4.12. Creating Backup</a></h3>
+<div class="paragraph">
+<p>As investigators may want to save the current state of the application before progressing, they can do this
+by using the backup command and typing in a name for the backup.</p>
+</div>
+<div class="paragraph">
+<p>eg: backup 3rdMarch</p>
+</div>
+<div class="paragraph">
+<p>The data is saved whenever an <code>InvestigapptorChangeedEvent</code> is raised in the Model component</p>
+</div>
+<div class="paragraph">
+<p>This method is commonly called after adding, editing of deleting any information</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>private void indicateInvestigapptorChanged() {
+        raise(new InvestigapptorChangedEvent(investigapptor));
+    }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The event contains information which will be passed to Storage component to start the saving sequence.
+In order to create our own backup xml, additional information such as filename has to be passed in.
+Hence a new event <code>InvestigapptorBackupEvent</code> is create for this specific.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>public void backUpInvestigapptor(String fileName) {
+    raise(new InvestigapptorBackupEvent(investigapptor, fileName));
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>backupInvestigapptor</code> is call when the investigator uses the backup command and event is raised, The
+<code>Storage</code> package will handle the event and create a new backup.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>public void handleInvestigapptorBackupEvent(InvestigapptorBackupEvent event) {
+    logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+    try {
+        backupInvestigapptor(event.data, event.fileName);
+    } catch (IOException e) {
+        raise(new DataSavingExceptionEvent(e));
+    }
+}</pre>
+</div>
 </div>
 </div>
 </div>
@@ -2158,11 +2722,11 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major Enhancement</strong>: Support for evidence package (Add, Delete, Update, View, Search)</p>
+<p><strong>Major Enhancement</strong>: Support for calendar and graph</p>
 <div class="ulist">
 <ul>
 <li>
-<p>This feature allows cases to store evidences details related to the case.</p>
+<p>This feature allows an overview of the chronological flow of each case handover and number of cases handled by each investigator</p>
 </li>
 </ul>
 </div>
@@ -2358,7 +2922,7 @@ on his or her expertise</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">investigator</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">find certain tag(s)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find investigators by tags</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">view who are under a certain team/category</p></td>
 </tr>
 <tr>
@@ -2432,6 +2996,12 @@ on his or her expertise</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">investigator</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add evidence</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">add evidence to a case</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">investigator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">save the information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">to review them in the future</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
@@ -2966,7 +3536,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-22 14:24:51 UTC
+Last updated 2018-03-24 18:35:52 UTC
 </div>
 </div>
 </body>

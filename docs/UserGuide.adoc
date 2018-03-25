@@ -17,10 +17,24 @@ By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Introduction
 
-`Investigapptor` (IA) is desktop application for a team of investigators to easily manage criminal cases that have been
-delegated to them. {More to be added subsequently}
+`Investigapptor` (IA) is desktop application for a team of
+investigators to easily manage crime cases that have been
+delegated to them.
 
-`Investigapptor v1.5` is available for Windows, Mac OS X, Linux and Unix operating systems
+`Investigapptor` comes with many useful features for investigators and
+their team members to easily manage and assign the most appropriate
+investigator to handle crime cases.
+
+`Investigapptor v1.5` is available for Windows, Mac OS X, Linux and Unix operating systems.
+
+To get started, go to <<Quick Start>> for information on how to set
+up `Investigapptor`.
+
+== About
+
+This user guide will provide you with the necessary information on how to use
+`Investigapptor`. Using this user guide, you will be able to
+understand the features of `Investigapptor` through examples.
 
 == Quick Start
 
@@ -31,9 +45,12 @@ Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Copy the file to the folder you want to use as the home folder for your `Investigapptor`.
+.  Double-click the file to start the app. The GUI should appear in a few seconds
+ as shown in _Figure 1_ below.
 +
+[.left]
+.Successful start up
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -42,7 +59,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * *`list investigators`* : lists all investigators
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* **`delete`**`3` : deletes the 3rd investigator shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.

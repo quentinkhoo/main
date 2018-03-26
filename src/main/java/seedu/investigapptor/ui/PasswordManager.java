@@ -14,6 +14,7 @@ import seedu.investigapptor.commons.events.ui.ValidPasswordEvent;
 import seedu.investigapptor.commons.util.StringUtil;
 import seedu.investigapptor.logic.Logic;
 import seedu.investigapptor.model.Model;
+import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.storage.Storage;
 
 /**
@@ -33,24 +34,26 @@ public class PasswordManager extends ComponentManager implements Ui {
     private Model model;
     private Logic logic;
     private Ui ui;
+    private UserPrefs prefs;
 
     private PasswordWindow passwordWindow;
     private Stage primaryStage;
 
-    public PasswordManager(Storage storage, Model model, Logic logic, Ui ui) {
+    public PasswordManager(Storage storage, Model model, Logic logic, Ui ui, UserPrefs prefs) {
         super();
         this.storage = storage;
         this.model = model;
         this.logic = logic;
         this.ui = ui;
+        this.prefs = prefs;
     }
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting UI...");
+        logger.info("Starting Password UI...");
         this.primaryStage = primaryStage;
         try {
-            PasswordWindow pw = new PasswordWindow(primaryStage, model, logic, storage);
+            PasswordWindow pw = new PasswordWindow(primaryStage, model, storage);
             pw.show();
             pw.fillInnerParts();
         } catch (Throwable e) {

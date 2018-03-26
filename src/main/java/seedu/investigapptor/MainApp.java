@@ -16,6 +16,7 @@ import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.core.Version;
 import seedu.investigapptor.commons.events.ui.ExitAppRequestEvent;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
+import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.commons.util.ConfigUtil;
 import seedu.investigapptor.commons.util.StringUtil;
 import seedu.investigapptor.logic.Logic;
@@ -96,6 +97,8 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample Investigapptor");
             }
             initialData = investigapptorOptional.orElseGet(SampleDataUtil::getSampleInvestigapptor);
+        } catch (WrongPasswordException wpe) {
+            initialData = new Investigapptor();
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Investigapptor");
             initialData = new Investigapptor();
@@ -186,14 +189,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting Investigapptor " + MainApp.VERSION);
-        PasswordManager passwordManager = new PasswordManager(storage, model, logic, ui);
+        PasswordManager passwordManager = new PasswordManager(storage, model, logic, ui, userPrefs);
         passwordManager.start(primaryStage);
-
-        //ui.start(primaryStage);
-
-
-
-
     }
 
 

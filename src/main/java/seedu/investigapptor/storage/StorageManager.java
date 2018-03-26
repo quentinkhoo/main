@@ -12,6 +12,8 @@ import seedu.investigapptor.commons.events.model.InvestigapptorBackupEvent;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.commons.events.storage.DataSavingExceptionEvent;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
+import seedu.investigapptor.commons.exceptions.WrongPasswordException;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.UserPrefs;
 
@@ -57,15 +59,29 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyInvestigapptor> readInvestigapptor() throws DataConversionException, IOException {
+    public Optional<ReadOnlyInvestigapptor> readInvestigapptor()
+            throws DataConversionException, IOException, WrongPasswordException {
         return readInvestigapptor(investigapptorStorage.getInvestigapptorFilePath());
     }
 
     @Override
+    public Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath, Password password)
+            throws DataConversionException, IOException, WrongPasswordException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return investigapptorStorage.readInvestigapptor(filePath, password);
+    }
+
+    @Override
     public Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath)
-            throws DataConversionException, IOException {
+            throws DataConversionException, IOException, WrongPasswordException {
         logger.fine("Attempting to read data from file: " + filePath);
         return investigapptorStorage.readInvestigapptor(filePath);
+    }
+
+    @Override
+    public Optional<ReadOnlyInvestigapptor> readInvestigapptor(Password password)
+            throws DataConversionException, IOException, WrongPasswordException {
+        return investigapptorStorage.readInvestigapptor(investigapptorStorage.getInvestigapptorFilePath(), password);
     }
 
     @Override

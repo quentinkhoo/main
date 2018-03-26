@@ -39,7 +39,6 @@ public class PasswordWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Model model;
     private Storage storage;
-    private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -53,14 +52,13 @@ public class PasswordWindow extends UiPart<Stage> {
     @FXML
     private StackPane resultDisplayPlaceholder;
 
-    public PasswordWindow(Stage primaryStage, Model model, Logic logic, Storage storage) {
+    public PasswordWindow(Stage primaryStage, Model model, Storage storage) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.model = model;
         this.storage = storage;
-        this.logic = logic;
 
         setTitle(TITLE);
         registerAsAnEventHandler(this);
@@ -107,7 +105,7 @@ public class PasswordWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        PasswordBox passwordBox = new PasswordBox(logic);
+        PasswordBox passwordBox = new PasswordBox(storage, model);
         commandBoxPlaceholder.getChildren().add(passwordBox.getRoot());
     }
 

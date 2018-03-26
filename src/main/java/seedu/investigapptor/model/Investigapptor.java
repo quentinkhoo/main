@@ -32,6 +32,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     private final UniquePersonList persons;
     private final UniqueCrimeCaseList cases;
     private final UniqueTagList tags;
+    private Password password;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -47,6 +48,11 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
 
     public Investigapptor() {
+        password = new Password();
+    }
+
+    public Investigapptor(String password) {
+        this.password = new Password(password);
     }
 
     /**
@@ -258,6 +264,29 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     @Override
     public ObservableList<CrimeCase> getCrimeCaseList() {
         return cases.asObservableList();
+    }
+
+    @Override
+    public Password getPassword() { return password; };
+
+    public void addPassword(Password password) throws UniqueTagList.DuplicateTagException {
+        this.password = password;
+    }
+
+    /**
+     * Updates the password of this {@code Investigapptor}.
+     * @param newPassword  will be the new password.
+     */
+    public void updatePassword (String newPassword) {
+        password.updatePassword(newPassword);
+    }
+
+    /**
+     * Updates the password of this {@code Investigapptor}.
+     * @param newPassword  will be the new password.
+     */
+    public void updatePassword (Password newPassword) {
+        password.updatePassword(newPassword);
     }
 
     @Override

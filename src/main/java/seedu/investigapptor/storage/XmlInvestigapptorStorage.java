@@ -11,7 +11,9 @@ import java.util.logging.Logger;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
+import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.commons.util.FileUtil;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 
 /**
@@ -36,6 +38,12 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
         return readInvestigapptor(filePath);
     }
 
+    @Override
+    public Optional<ReadOnlyInvestigapptor> readInvestigapptor(Password password)
+            throws DataConversionException, IOException, WrongPasswordException {
+        return readInvestigapptor(filePath, password);
+    }
+
     /**
      * Similar to {@link InvestigapptorStorage#readInvestigapptor()}
      *
@@ -53,7 +61,46 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
             return Optional.empty();
         }
 
+        File file = new File(filePath);
+
         XmlSerializableInvestigapptor xmlInvestigapptor = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        try {
+            return Optional.of(xmlInvestigapptor.toModelType());
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in " + investigapptorFile + ": " + ive.getMessage());
+            throw new DataConversionException(ive);
+        }
+    }
+
+    /**
+     * Similar to {@link InvestigapptorStorage#readInvestigapptor()}
+     *
+     * @param filePath location of the data. Cannot be null
+     * @throws DataConversionException if the file is not in the correct format.
+     */
+    public Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath, Password password)
+            throws DataConversionException, IOException, WrongPasswordException {
+        requireNonNull(filePath);
+        requireNonNull(password);
+
+        File investigapptorFile = new File(filePath);
+
+        if (!investigapptorFile.exists()) {
+            logger.info("Investigapptor file " + investigapptorFile + " not found");
+            return Optional.empty();
+        }
+        XmlSerializableInvestigapptor xmlInvestigapptor = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        try {
+            String currPassword = xmlInvestigapptor.toModelType().getPassword().getPassword();
+            String inputPassword = password.getPassword();
+            if (!currPassword.equals(inputPassword)) {
+                throw new WrongPasswordException("Invalid Password");
+            }
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in " + investigapptorFile + ": " + ive.getMessage());
+            throw new DataConversionException(ive);
+        }
+
         try {
             return Optional.of(xmlInvestigapptor.toModelType());
         } catch (IllegalValueException ive) {

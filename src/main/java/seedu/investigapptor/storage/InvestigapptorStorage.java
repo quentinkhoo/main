@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.investigapptor.commons.exceptions.DataConversionException;
+import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.model.Investigapptor;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 
 /**
@@ -23,12 +25,26 @@ public interface InvestigapptorStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyInvestigapptor> readInvestigapptor() throws DataConversionException, IOException;
+    Optional<ReadOnlyInvestigapptor> readInvestigapptor()
+            throws DataConversionException, IOException, WrongPasswordException;
 
     /**
      * @see #getInvestigapptorFilePath()
      */
-    Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath)
+            throws DataConversionException, IOException, WrongPasswordException;
+
+    /**
+     * @see #getInvestigapptorFilePath()
+     */
+    Optional<ReadOnlyInvestigapptor> readInvestigapptor(Password password)
+            throws DataConversionException, IOException, WrongPasswordException;
+
+    /**
+     * @see #getInvestigapptorFilePath()
+     */
+    Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath, Password password)
+            throws DataConversionException, IOException, WrongPasswordException;
 
     /**
      * Saves the given {@link ReadOnlyInvestigapptor} to the storage.

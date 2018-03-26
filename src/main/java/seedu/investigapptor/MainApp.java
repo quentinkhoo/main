@@ -32,6 +32,7 @@ import seedu.investigapptor.storage.Storage;
 import seedu.investigapptor.storage.StorageManager;
 import seedu.investigapptor.storage.UserPrefsStorage;
 import seedu.investigapptor.storage.XmlInvestigapptorStorage;
+import seedu.investigapptor.ui.PasswordManager;
 import seedu.investigapptor.ui.Ui;
 import seedu.investigapptor.ui.UiManager;
 
@@ -185,7 +186,10 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting Investigapptor " + MainApp.VERSION);
-        ui.start(primaryStage);
+        PasswordManager passwordManager = new PasswordManager(storage, model, logic, ui);
+        passwordManager.start(primaryStage);
+
+        //ui.start(primaryStage);
 
 
 

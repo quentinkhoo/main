@@ -43,10 +43,6 @@ public class PasswordWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
-    private CrimeCaseListPanel crimeCaseListPanel;
-    private Config config;
-    private UserPrefs prefs;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -55,22 +51,7 @@ public class PasswordWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
-
-    @FXML
-    private TabPane listPanel;
-
-    @FXML
-    private StackPane personListPanelPlaceholder;
-
-    @FXML
-    private StackPane crimeCaseListPanelPlaceholder;
-
-    @FXML
     private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane statusbarPlaceholder;
 
     public PasswordWindow(Stage primaryStage, Model model, Logic logic, Storage storage) {
         super(FXML, primaryStage);
@@ -87,10 +68,6 @@ public class PasswordWindow extends UiPart<Stage> {
 
     public Stage getPrimaryStage() {
         return primaryStage;
-    }
-
-    private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
     /**

@@ -99,7 +99,7 @@ public class PasswordBox extends UiPart<Region> {
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandInputChanged() {
+    private void handlePasswordInput() {
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             initHistory();

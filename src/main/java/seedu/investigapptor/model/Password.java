@@ -114,6 +114,23 @@ public class Password {
         return encodedHash;
     }
 
+    /**
+     * Checks if a password is null
+     * @param password
+     */
+    public static boolean isNullPassword(String password) {
+        return password == null;
+    }
+
+    /**
+     * Checks if an inputPassword is the currentPassword
+     * @param currentPassword
+     * @param inputPassword
+     */
+    public static boolean isCorrectPassword(String currentPassword, String inputPassword) {
+        return currentPassword.equals(inputPassword);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

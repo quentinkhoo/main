@@ -40,7 +40,7 @@ public class Password {
      * @param password
      */
     public Password(String password) {
-        requireNonNull(password);
+        //requireNonNull(password);
         this.password = password;
     }
 

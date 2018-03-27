@@ -1,6 +1,7 @@
 package seedu.investigapptor.storage;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.investigapptor.model.Password.DEFAULT_PASSWORD;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -91,9 +92,14 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
         }
         XmlSerializableInvestigapptor xmlInvestigapptor = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
         try {
-            String currPassword = xmlInvestigapptor.toModelType().getPassword().getPassword();
+            String currentPassword;
             String inputPassword = password.getPassword();
-            if (!currPassword.equals(inputPassword)) {
+            currentPassword = xmlInvestigapptor.toModelType().getPassword().getPassword();
+            if (currentPassword == null) {
+                currentPassword = DEFAULT_PASSWORD;
+            }
+            System.out.println("currPassword: " + currentPassword);
+            if (!currentPassword.equals(inputPassword)) {
                 throw new WrongPasswordException("Invalid Password");
             }
         } catch (IllegalValueException ive) {

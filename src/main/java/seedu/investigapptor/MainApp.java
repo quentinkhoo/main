@@ -189,7 +189,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting Investigapptor " + MainApp.VERSION);
-        PasswordManager passwordManager = new PasswordManager(storage, model, logic, ui, userPrefs);
+        PasswordManager passwordManager = new PasswordManager(storage, model, ui);
         passwordManager.start(primaryStage);
     }
 

@@ -6,6 +6,7 @@ https://ci.appveyor.com/project/quentinkhoo/main/branch/master[image:https://ci.
 https://coveralls.io/github/CS2103JAN2018-F14-B3/main?branch=master[image:https://coveralls.io/repos/github/CS2103JAN2018-F14-B3/main/badge.svg?branch=master[Coverage Status]]
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
+
 Investigapptor is a one-stop solution for investigators to make managing cases as simple, straightforward, and efficient as possible.
 
 ifdef::env-github[]

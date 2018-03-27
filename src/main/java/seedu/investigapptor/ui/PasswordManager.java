@@ -24,28 +24,20 @@ public class PasswordManager extends ComponentManager implements Ui {
 
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
-    public static final String FILE_OPS_ERROR_DIALOG_STAGE_TITLE = "File Op Error";
-    public static final String FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE = "Could not save data";
-    public static final String FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE = "Could not save data to file";
-
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
 
     private Storage storage;
     private Model model;
-    private Logic logic;
     private Ui ui;
-    private UserPrefs prefs;
 
     private PasswordWindow passwordWindow;
     private Stage primaryStage;
 
-    public PasswordManager(Storage storage, Model model, Logic logic, Ui ui, UserPrefs prefs) {
+    public PasswordManager(Storage storage, Model model, Ui ui) {
         super();
         this.storage = storage;
         this.model = model;
-        this.logic = logic;
         this.ui = ui;
-        this.prefs = prefs;
     }
 
     @Override

@@ -49,7 +49,7 @@ public class TypicalCrimeCases {
     public static final CrimeCase TWO = new CrimeCaseBuilder().withName("Project Two")
             .withDescription("Not so scary case").withStartDate("14/12/2016")
             .toggleStatus()
-            .withTags("Robbery", "Prank").build();
+            .withTags("Robbery", "Prank", "Kidnap").build();
     public static final CrimeCase THREE = new CrimeCaseBuilder().withName("Project Three")
             .withDescription("Supernatural Case").withStartDate("18/12/2016")
             .toggleStatus()
@@ -73,6 +73,10 @@ public class TypicalCrimeCases {
             .withDescription(VALID_DESCRIPTION_BANANA)
             .withStartDate(VALID_STARTDATE_BANANA).toggleStatus().withTags(VALID_TAG_MURDER, VALID_TAG_FRAUD)
             .build();
+
+    public static final String KEYWORD_MATCHING_HOMICIDE = "homicide"; // A keyword that matches homicide
+    public static final String KEYWORD_MATCHING_MURDER = "MURDER"; // A keyword that matches murder
+    public static final String KEYWORD_MATCHING_ROBBERY = "robbery"; // A keyword that matches robbery
 
     private TypicalCrimeCases() {} // prevents instantiation
 

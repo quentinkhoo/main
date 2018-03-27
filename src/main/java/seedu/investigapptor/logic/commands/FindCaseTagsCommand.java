@@ -28,7 +28,7 @@ public class FindCaseTagsCommand extends Command {
     public CommandResult execute() {
         model.updateFilteredCrimeCaseList(predicate);
         EventsCenter.getInstance().post(new SwapTabEvent(1));   // List results toggles to case tab
-        return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredCrimeCaseList().size()));
+        return new CommandResult(getMessageForCrimeListShownSummary(model.getFilteredCrimeCaseList().size()));
     }
 
     @Override

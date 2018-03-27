@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import static seedu.investigapptor.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.ALFA;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.BRAVO;
-import static seedu.investigapptor.testutil.TypicalCrimeCases.FOUR;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.ONE;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.THREE;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.TWO;
@@ -18,8 +17,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.investigapptor.commons.core.EventsCenter;
-import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.logic.CommandHistory;
 import seedu.investigapptor.logic.UndoRedoStack;
 import seedu.investigapptor.model.Investigapptor;
@@ -71,10 +68,10 @@ public class FindCaseTagsCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
-        String userInput = "Murder Homicide".toLowerCase();  // Tags are converted to lowercase during comparison
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 5);
+        String userInput = "Murder Kidnap".toLowerCase();  // Tags are converted to lowercase during comparison
         FindCaseTagsCommand command = prepareCommand(userInput);
-        assertCommandSuccess(command, expectedMessage, Arrays.asList(ALFA, BRAVO, ONE, THREE));
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(ALFA, BRAVO, ONE, TWO, THREE));
     }
 
     /**
@@ -99,7 +96,7 @@ public class FindCaseTagsCommandTest {
         CommandResult commandResult = command.execute();
 
         assertEquals(expectedMessage, commandResult.feedbackToUser);
-        assertEquals(expectedList, model.getFilteredPersonList());
+        assertEquals(expectedList, model.getFilteredCrimeCaseList());
         assertEquals(expectedInvestigapptor, model.getInvestigapptor());
     }
 }

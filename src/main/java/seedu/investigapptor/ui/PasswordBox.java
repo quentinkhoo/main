@@ -70,6 +70,7 @@ public class PasswordBox extends UiPart<Region> {
             CommandResult passwordResult = new CommandResult("An invalid password has been entered");
             passwordField.setText("");
             logger.info("Result: " + passwordResult.feedbackToUser);
+            raise(new NewResultAvailableEvent(passwordResult.feedbackToUser));
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Investigapptor");
             raise(new InvalidFileFormatEvent());

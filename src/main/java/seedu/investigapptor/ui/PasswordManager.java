@@ -10,6 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import seedu.investigapptor.commons.core.ComponentManager;
 import seedu.investigapptor.commons.core.LogsCenter;
+import seedu.investigapptor.commons.events.ui.InvalidFileFormatEvent;
 import seedu.investigapptor.commons.events.ui.ValidPasswordEvent;
 import seedu.investigapptor.commons.util.StringUtil;
 import seedu.investigapptor.logic.Logic;
@@ -95,4 +96,11 @@ public class PasswordManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         ui.start(primaryStage);
     }
+
+    @Subscribe
+    private void handleInvalidStorageFileEvent(InvalidFileFormatEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        ui.start(primaryStage);
+    }
+
 }

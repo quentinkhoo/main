@@ -64,8 +64,6 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
             return Optional.empty();
         }
 
-        File file = new File(filePath);
-
         XmlSerializableInvestigapptor xmlInvestigapptor = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
         try {
             return Optional.of(xmlInvestigapptor.toModelType());

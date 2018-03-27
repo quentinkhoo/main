@@ -49,6 +49,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
 
     public Investigapptor() {
         password = new Password();
+
     }
 
     public Investigapptor(String password) {
@@ -89,6 +90,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
+        updatePassword(newData.getPassword());
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
@@ -268,10 +270,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
 
     @Override
     public Password getPassword() { return password; };
-
-    public void addPassword(Password password) throws UniqueTagList.DuplicateTagException {
-        this.password = password;
-    }
 
     /**
      * Updates the password of this {@code Investigapptor}.

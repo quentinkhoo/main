@@ -88,6 +88,7 @@ public class XmlSerializableInvestigapptor {
         }
 
         XmlSerializableInvestigapptor otherAb = (XmlSerializableInvestigapptor) other;
-        return cases.equals(otherAb.cases) && persons.equals(otherAb.persons) && tags.equals(otherAb.tags);
+        return cases.equals(otherAb.cases) && persons.equals(otherAb.persons) && tags.equals(otherAb.tags)
+                && password.equals(otherAb.password);
     }
 }

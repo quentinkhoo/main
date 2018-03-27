@@ -40,7 +40,6 @@ public class Password {
      * @param password
      */
     public Password(String password) {
-        //requireNonNull(password);
         this.password = password;
     }
 
@@ -75,6 +74,7 @@ public class Password {
      * @return true if password is changed
      */
     public void updatePassword(Password newPassword) {
+        requireNonNull(newPassword);
         this.password = newPassword.getPassword();
     }
 

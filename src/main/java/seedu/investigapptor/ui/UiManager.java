@@ -64,9 +64,13 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Override
     public void stop() {
-        prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
-        mainWindow.hide();
-        mainWindow.releaseResources();
+        try {
+            prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
+            mainWindow.hide();
+            mainWindow.releaseResources();
+        } catch (NullPointerException npe) {
+            logger.info("Closing program without inputting password.");
+        }
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {

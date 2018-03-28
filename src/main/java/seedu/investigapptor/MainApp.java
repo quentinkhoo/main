@@ -24,7 +24,6 @@ import seedu.investigapptor.logic.LogicManager;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.ModelManager;
-import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.model.util.SampleDataUtil;

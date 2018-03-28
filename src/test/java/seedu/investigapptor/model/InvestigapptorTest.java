@@ -1,7 +1,6 @@
 package seedu.investigapptor.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static seedu.investigapptor.testutil.TypicalPersons.ALICE;
 import static seedu.investigapptor.testutil.TypicalPersons.AMY;
 import static seedu.investigapptor.testutil.TypicalPersons.BOB;
@@ -130,11 +129,12 @@ public class InvestigapptorTest {
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
         private final ObservableList<Investigator> investigators = FXCollections.observableArrayList();
         private final ObservableList<Person> personsOnly = FXCollections.observableArrayList();
+        private final Password password = new Password("password");
+
         InvestigapptorStub(Collection<Person> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }
-        private final Password password = new Password("password");
 
         @Override
         public ObservableList<Person> getPersonList() {

@@ -35,14 +35,6 @@ public class XmlAdaptedPassword {
         return new Password(currentPassword);
     }
 
-    /**
-     * Updates the password given a new password
-     * @param password is the password to be changed to
-     */
-    public void updatePassword(Password password) {
-        this.currentPassword = password.getPassword();
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

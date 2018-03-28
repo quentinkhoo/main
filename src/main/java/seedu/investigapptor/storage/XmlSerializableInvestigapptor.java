@@ -73,7 +73,7 @@ public class XmlSerializableInvestigapptor {
         for (XmlAdaptedInvestigator i : investigators) {
             investigapptor.addPerson(i.toModelType());
         }
-        investigapptor.updatePassword(password.toModelType());
+        investigapptor.setPassword(password.toModelType());
         return investigapptor;
     }
 

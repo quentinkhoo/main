@@ -1,27 +1,21 @@
 package seedu.investigapptor.ui;
 
 import java.io.IOException;
-import java.util.Optional;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.investigapptor.commons.core.LogsCenter;
-import seedu.investigapptor.commons.events.ui.ExitAppRequestEvent;
 import seedu.investigapptor.commons.events.ui.InvalidFileFormatEvent;
 import seedu.investigapptor.commons.events.ui.NewResultAvailableEvent;
 import seedu.investigapptor.commons.events.ui.ValidPasswordEvent;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
 import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.logic.commands.CommandResult;
-import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.Password;
-import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.storage.Storage;
 
 /**
@@ -52,8 +46,8 @@ public class PasswordBox extends UiPart<Region> {
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
-            default:
-                // let JavaFx handle the keypress
+        default:
+            // let JavaFx handle the keypress
         }
     }
 

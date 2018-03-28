@@ -2,7 +2,6 @@ package seedu.investigapptor.storage;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.investigapptor.model.Password.isCorrectPassword;
-import static seedu.investigapptor.model.Password.generatePasswordHash;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -92,7 +91,7 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
         XmlSerializableInvestigapptor xmlInvestigapptor = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
         try {
             String currentPassword = xmlInvestigapptor.toModelType().getPassword().getPassword();
-            String inputPassword = generatePasswordHash(Password.generatePasswordHash(password.getPassword()));
+            String inputPassword = Password.generatePasswordHash(password.getPassword());
             if (!isCorrectPassword(currentPassword, inputPassword)) {
                 throw new WrongPasswordException("Invalid password entered! Please try again.");
             }

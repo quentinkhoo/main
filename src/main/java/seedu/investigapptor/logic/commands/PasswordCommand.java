@@ -1,15 +1,11 @@
 package seedu.investigapptor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
-import static seedu.investigapptor.model.Password.MESSAGE_PASSWORD_CONSTRAINTS;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.investigapptor.model.Password.MESSAGE_PASSWORD_CONSTRAINTS;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.model.Password;

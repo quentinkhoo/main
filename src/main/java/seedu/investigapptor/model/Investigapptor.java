@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
-import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
@@ -46,10 +45,11 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         persons = new UniquePersonList();
         cases = new UniqueCrimeCaseList();
         tags = new UniqueTagList();
+        password = new Password();
     }
 
     public Investigapptor() {
-        password = new Password();
+
     }
 
     public Investigapptor(String password) {
@@ -57,7 +57,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
 
     /**
-     * Creates an Investigapptor using the Persons and Tags in the {@code toBeCopied}
+     * Creates an Investigapptor using the Investigators, CrimeCases, Password and Tags in the {@code toBeCopied}
      */
     public Investigapptor(ReadOnlyInvestigapptor toBeCopied) {
         this();
@@ -78,6 +78,14 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         this.tags.setTags(tags);
     }
 
+    public void setPassword(String password) {
+        this.password = new Password(password);
+    }
+
+    public void setPassword(Password oldPassword) {
+        this.password = oldPassword;
+    }
+
     /**
      * Resets the existing data of this {@code Investigapptor} with {@code newData}.
      */
@@ -90,7 +98,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-        updatePassword(newData.getPassword());
+        setPassword(newData.getPassword().getPassword());
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
@@ -240,6 +248,15 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
                 crimecase.getCaseName(), crimecase.getDescription(), crimecase.getCurrentInvestigator(),
                 crimecase.getStartDate(), crimecase.getStatus(), correctTagReferences);
     }
+    ///password level operations
+
+    /**
+     * Updates the password of this {@code Investigapptor}.
+     * @param newPassword  will be the new password.
+     */
+    public void updatePassword (Password newPassword) {
+        password.updatePassword(newPassword);
+    }
     //// util methods
 
     @Override
@@ -269,22 +286,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
 
     @Override
-    public Password getPassword() { return password; };
-
-    /**
-     * Updates the password of this {@code Investigapptor}.
-     * @param newPassword  will be the new password.
-     */
-    public void updatePassword (String newPassword) throws InvalidPasswordException {
-        password.updatePassword(newPassword);
-    }
-
-    /**
-     * Updates the password of this {@code Investigapptor}.
-     * @param newPassword  will be the new password.
-     */
-    public void updatePassword (Password newPassword) {
-        password.updatePassword(newPassword);
+    public Password getPassword() {
+        return password;
     }
 
     @Override

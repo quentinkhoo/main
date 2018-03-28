@@ -13,9 +13,7 @@ import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.ui.InvalidFileFormatEvent;
 import seedu.investigapptor.commons.events.ui.ValidPasswordEvent;
 import seedu.investigapptor.commons.util.StringUtil;
-import seedu.investigapptor.logic.Logic;
 import seedu.investigapptor.model.Model;
-import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.storage.Storage;
 
 /**

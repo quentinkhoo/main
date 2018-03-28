@@ -8,8 +8,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
-
 /**
  * Represents a Password in PartTimeManger
  * Store password as hashCode
@@ -20,7 +18,7 @@ public class Password {
             "Password should be at least 8 character and no spaces.";
 
     public static final String DEFAULT_PASSWORD = "password";
-    public static final String initialValue = "IV";
+    public static final String INITIAL_VALUE = "IV";
 
     /**
      * accept all password that do not have whitespaces and at least 8 characters.
@@ -53,29 +51,7 @@ public class Password {
     }
 
     /**
-     * check if passwordHash generated from the string is same as current passwordHash
-     * @param inputPassword
-     * @return true if same
-     */
-    public boolean isCorrectPassword(String inputPassword) {
-        return passwordHash.equals(generatePasswordHash(inputPassword));
-    }
-
-    /**
-     * Change password given a password
-     * @return true if password is changed
-     */
-    public void updatePassword(String newPassword) throws InvalidPasswordException {
-        if (isValidPassword(newPassword)) {
-            this.passwordHash = generatePasswordHash(newPassword);
-        } else {
-            throw new InvalidPasswordException(MESSAGE_PASSWORD_CONSTRAINTS);
-        }
-    }
-
-    /**
-     * Change password given a password
-     * @return true if password is changed
+     * updates an original password to a new password
      */
     public void updatePassword(Password newPassword) {
         requireNonNull(newPassword);
@@ -83,7 +59,7 @@ public class Password {
     }
 
     /**
-     * Create passwordHash when password is entered in plain text
+     * creates a password hash when password is entered in plain text
      * @param password
      */
     public void createPasswordHash(String password) {
@@ -96,7 +72,7 @@ public class Password {
     }
 
     /**
-     * Generate passwordHash given a string password
+     * Generate password hash given a password string
      * @param password
      * @return passwordHash in String
      */
@@ -104,7 +80,7 @@ public class Password {
         String encodedHash = null;
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            digest.update(initialValue.getBytes());
+            digest.update(INITIAL_VALUE.getBytes());
             if (!isNull(password)) {
                 byte[] byteHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
                 encodedHash = Base64.getEncoder().encodeToString(byteHash);

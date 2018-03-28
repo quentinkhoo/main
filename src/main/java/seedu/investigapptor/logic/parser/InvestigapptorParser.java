@@ -13,6 +13,7 @@ import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
 import seedu.investigapptor.logic.commands.ExitCommand;
+import seedu.investigapptor.logic.commands.FindCaseCommand;
 import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
 import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
@@ -51,13 +52,13 @@ public class InvestigapptorParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case RegisterInvestigatorCommand.COMMAND_WORD:
-        case RegisterInvestigatorCommand.COMMAND_ALIAS:
-            return new RegisterInvestigatorCommandParser().parse(arguments);
-
         case AddCaseCommand.COMMAND_WORD:
         case AddCaseCommand.COMMAND_ALIAS:
             return new AddCaseCommandParser().parse(arguments);
+
+        case RegisterInvestigatorCommand.COMMAND_WORD:
+        case RegisterInvestigatorCommand.COMMAND_ALIAS:
+            return new RegisterInvestigatorCommandParser().parse(arguments);
 
         case EditInvestigatorCommand.COMMAND_WORD:
         case EditInvestigatorCommand.COMMAND_ALIAS:
@@ -74,6 +75,10 @@ public class InvestigapptorParser {
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
+
+        case FindCaseCommand.COMMAND_WORD:
+        case FindCaseCommand.COMMAND_ALIAS:
+            return new FindCaseCommandParser().parse(arguments);
 
         case FindInvestigatorCommand.COMMAND_WORD:
         case FindInvestigatorCommand.COMMAND_ALIAS:

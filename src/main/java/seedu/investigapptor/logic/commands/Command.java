@@ -15,6 +15,15 @@ public abstract class Command {
     protected UndoRedoStack undoRedoStack;
 
     /**
+     * Constructs a feedback message to summarise an operation that displayed a listing of cases.
+     *
+     * @param displaySize used to generate summary
+     * @return summary message for persons displayed
+     */
+    public static String getMessageForCrimeCaseListShownSummary(int displaySize) {
+        return String.format(Messages.MESSAGE_CASES_LISTED_OVERVIEW, displaySize);
+    }
+    /**
      * Constructs a feedback message to summarise an operation that displayed a listing of persons.
      *
      * @param displaySize used to generate summary

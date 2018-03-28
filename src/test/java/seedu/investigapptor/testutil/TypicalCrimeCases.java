@@ -26,13 +26,13 @@ public class TypicalCrimeCases {
             .withDescription("Murder on the orient express").withStartDate("10/11/2015")
             .toggleStatus()
             .withTags("Murder").build();
-    public static final CrimeCase BRAVO = new CrimeCaseBuilder().withName("Project Bravo")
+    public static final CrimeCase BRAVO = new CrimeCaseBuilder().withName("Project Bravo Johnny")
             .withDescription("Crooked house")
             .withStartDate("12/03/2016")
             .withTags("Kidnap", "Homicide").build();
     public static final CrimeCase CHARLIE = new CrimeCaseBuilder().withName("Project Charlie").toggleStatus()
             .withStartDate("18/01/2012").withDescription("ABC murders").build();
-    public static final CrimeCase DELTA = new CrimeCaseBuilder().withName("Project Delta")
+    public static final CrimeCase DELTA = new CrimeCaseBuilder().withName("Project Delta Johnny")
             .withStartDate("27/11/1999").withDescription("Peril at End House").build();
     public static final CrimeCase ECHO = new CrimeCaseBuilder().withName("Project Echo")
             .withStartDate("23/11/1965").withDescription("A study in scarlet").build();
@@ -55,6 +55,8 @@ public class TypicalCrimeCases {
             .withDescription(VALID_DESCRIPTION_BANANA)
             .withStartDate(VALID_STARTDATE_BANANA).toggleStatus().withTags(VALID_TAG_MURDER, VALID_TAG_FRAUD)
             .build();
+
+    public static final String KEYWORD_MATCHING_JOHNNY = "Johnny"; // A keyword that matches JOHNNY
 
     private TypicalCrimeCases() {} // prevents instantiation
 

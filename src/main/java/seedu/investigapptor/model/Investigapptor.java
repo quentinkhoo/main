@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
+import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.UniquePersonList;
@@ -160,6 +161,19 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // This can cause the tags master list to have additional tags that are not tagged to any case
         // in the case list.
         cases.add(crimecase);
+    }
+
+    /**
+     * Removes {@code key} from this {@code Investigapptor}.
+     *
+     * @throws CrimeCaseNotFoundException if the {@code key} is not in this {@code Investigapptor}.
+     */
+    public boolean removeCrimeCase(CrimeCase key) throws CrimeCaseNotFoundException {
+        if (cases.remove(key)) {
+            return true;
+        } else {
+            throw new CrimeCaseNotFoundException();
+        }
     }
 
     //// tag-level operations

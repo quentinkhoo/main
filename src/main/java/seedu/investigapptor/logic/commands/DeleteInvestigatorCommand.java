@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.investigapptor.commons.core.EventsCenter;
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
+import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
@@ -40,6 +42,7 @@ public class DeleteInvestigatorCommand extends UndoableCommand {
         requireNonNull(personToDelete);
         try {
             model.deletePerson(personToDelete);
+            EventsCenter.getInstance().post(new SwapTabEvent(0));
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("The target investigator cannot be missing");
         }

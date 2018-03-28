@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import seedu.investigapptor.commons.core.Config;
 import seedu.investigapptor.commons.core.GuiSettings;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
+import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.commons.util.FileUtil;
 import seedu.investigapptor.commons.util.XmlUtil;
 import seedu.investigapptor.model.Investigapptor;
@@ -76,6 +77,8 @@ public class TestApp extends MainApp {
     public Investigapptor readStorageInvestigapptor() {
         try {
             return new Investigapptor(storage.readInvestigapptor().get());
+        } catch (WrongPasswordException wpe) {
+            throw new AssertionError("Invalid password");
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the Investigapptor format.");
         } catch (IOException ioe) {

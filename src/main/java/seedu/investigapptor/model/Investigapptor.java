@@ -50,7 +50,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
 
     public Investigapptor() {
         password = new Password();
-
     }
 
     public Investigapptor(String password) {

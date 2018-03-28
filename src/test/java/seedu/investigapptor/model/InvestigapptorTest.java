@@ -1,6 +1,7 @@
 package seedu.investigapptor.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static seedu.investigapptor.testutil.TypicalPersons.ALICE;
 import static seedu.investigapptor.testutil.TypicalPersons.AMY;
 import static seedu.investigapptor.testutil.TypicalPersons.BOB;
@@ -133,6 +134,7 @@ public class InvestigapptorTest {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }
+        private final Password password = new Password("password");
 
         @Override
         public ObservableList<Person> getPersonList() {
@@ -157,6 +159,11 @@ public class InvestigapptorTest {
         @Override
         public ObservableList<Person> getPersonOnlyList() {
             return personsOnly;
+        }
+
+        @Override
+        public Password getPassword() {
+            return password;
         }
     }
 

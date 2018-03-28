@@ -21,7 +21,7 @@ import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand.EditPersonDescriptor;
 import seedu.investigapptor.logic.commands.ExitCommand;
-import seedu.investigapptor.logic.commands.FindCommand;
+import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.HistoryCommand;
 import seedu.investigapptor.logic.commands.ListCommand;
@@ -146,17 +146,17 @@ public class InvestigapptorParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindInvestigatorCommand command = (FindInvestigatorCommand) parser.parseCommand(
+                FindInvestigatorCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindInvestigatorCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_findAlias() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_ALIAS + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindInvestigatorCommand command = (FindInvestigatorCommand) parser.parseCommand(
+                FindInvestigatorCommand.COMMAND_ALIAS + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindInvestigatorCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

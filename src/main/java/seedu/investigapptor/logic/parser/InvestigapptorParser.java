@@ -13,8 +13,8 @@ import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
 import seedu.investigapptor.logic.commands.ExitCommand;
-import seedu.investigapptor.logic.commands.FindCommand;
 import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
+import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.HistoryCommand;
 import seedu.investigapptor.logic.commands.ListCommand;
@@ -75,9 +75,9 @@ public class InvestigapptorParser {
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-        case FindCommand.COMMAND_ALIAS:
-            return new FindCommandParser().parse(arguments);
+        case FindInvestigatorCommand.COMMAND_WORD:
+        case FindInvestigatorCommand.COMMAND_ALIAS:
+            return new FindInvestigatorCommandParser().parse(arguments);
 
         case FindInvestTagsCommand.COMMAND_WORD:
         case FindInvestTagsCommand.COMMAND_ALIAS:

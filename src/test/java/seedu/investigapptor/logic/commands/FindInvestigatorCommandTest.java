@@ -25,9 +25,9 @@ import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
 import seedu.investigapptor.model.person.Person;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindInvestigatorCommand}.
  */
-public class FindCommandTest {
+public class FindInvestigatorCommandTest {
     private Model model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
 
     @Test
@@ -37,14 +37,14 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindInvestigatorCommand findFirstCommand = new FindInvestigatorCommand(firstPredicate);
+        FindInvestigatorCommand findSecondCommand = new FindInvestigatorCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindInvestigatorCommand findFirstCommandCopy = new FindInvestigatorCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -60,23 +60,23 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        FindCommand command = prepareCommand(" ");
+        FindInvestigatorCommand command = prepareCommand(" ");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        FindCommand command = prepareCommand("Kurz Elle Kunz");
+        FindInvestigatorCommand command = prepareCommand("Kurz Elle Kunz");
         assertCommandSuccess(command, expectedMessage, Arrays.asList(CARL, ELLE, FIONA));
     }
 
     /**
-     * Parses {@code userInput} into a {@code FindCommand}.
+     * Parses {@code userInput} into a {@code FindInvestigatorCommand}.
      */
-    private FindCommand prepareCommand(String userInput) {
-        FindCommand command =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
+    private FindInvestigatorCommand prepareCommand(String userInput) {
+        FindInvestigatorCommand command =
+                new FindInvestigatorCommand(new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }
@@ -87,7 +87,7 @@ public class FindCommandTest {
      *     - the {@code FilteredList<Person>} is equal to {@code expectedList}<br>
      *     - the {@code Investigapptor} in model remains the same after executing the {@code command}
      */
-    private void assertCommandSuccess(FindCommand command, String expectedMessage, List<Person> expectedList) {
+    private void assertCommandSuccess(FindInvestigatorCommand command, String expectedMessage, List<Person> expectedList) {
         Investigapptor expectedInvestigapptor = new Investigapptor(model.getInvestigapptor());
         CommandResult commandResult = command.execute();
 

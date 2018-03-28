@@ -6,10 +6,10 @@ import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
  * Finds and lists all persons in investigapptor book whose name contains any of the argument keywords.
  * Keyword matching is case sensitive.
  */
-public class FindCommand extends Command {
+public class FindInvestigatorCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
-    public static final String COMMAND_ALIAS = "f";
+    public static final String COMMAND_WORD = "findInv";
+    public static final String COMMAND_ALIAS = "fI";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
@@ -18,7 +18,7 @@ public class FindCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindInvestigatorCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -31,7 +31,7 @@ public class FindCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
-                && this.predicate.equals(((FindCommand) other).predicate)); // state check
+                || (other instanceof FindInvestigatorCommand // instanceof handles nulls
+                && this.predicate.equals(((FindInvestigatorCommand) other).predicate)); // state check
     }
 }

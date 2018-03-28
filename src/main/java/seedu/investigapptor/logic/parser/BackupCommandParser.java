@@ -7,13 +7,13 @@ import seedu.investigapptor.logic.parser.exceptions.ParseException;
 
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new BackupCommand command
  */
 public class BackupCommandParser implements Parser<BackupCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the BackupCommand
-     * and returns an FindCommand object for execution.
+     * and returns an BackupCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public BackupCommand parse(String args) throws ParseException {

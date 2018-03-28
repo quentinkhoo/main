@@ -7,6 +7,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
+
 /**
  * Represents a Password in PartTimeManger
  * Store password as hashCode
@@ -16,8 +18,7 @@ public class Password {
     public static final String MESSAGE_PASSWORD_CONSTRAINTS =
             "Password should be at least 8 character and no spaces.";
 
-    public static final String DEFAULT_PASSWORD =
-            "password";
+    public static final String DEFAULT_PASSWORD = "password";
 
     /**
      * accept all password that do not have whitespaces and at least 8 characters.
@@ -65,8 +66,12 @@ public class Password {
      * Change password given a password
      * @return true if password is changed
      */
-    public void updatePassword(String newPassword) {
-        this.password = newPassword;
+    public void updatePassword(String newPassword) throws InvalidPasswordException {
+        if (isValidPassword(newPassword)) {
+            this.password = newPassword;
+        } else {
+            throw new InvalidPasswordException(MESSAGE_PASSWORD_CONSTRAINTS);
+        }
     }
 
     /**

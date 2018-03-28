@@ -94,9 +94,6 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
         try {
             String currentPassword = xmlInvestigapptor.toModelType().getPassword().getPassword();
             String inputPassword = password.getPassword();
-            if (storageFileHasPassword(filePath)) {
-                currentPassword = DEFAULT_PASSWORD;
-            }
             if (!isCorrectPassword(currentPassword, inputPassword)) {
                 throw new WrongPasswordException("Invalid password entered! Please try again.");
             }
@@ -109,17 +106,6 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
             return Optional.of(xmlInvestigapptor.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + investigapptorFile + ": " + ive.getMessage());
-            throw new DataConversionException(ive);
-        }
-    }
-
-    private boolean storageFileHasPassword(String filePath) throws DataConversionException, FileNotFoundException {
-        XmlSerializableInvestigapptor xmlInvestigapptor = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
-        try {
-            String currentPassword = xmlInvestigapptor.toModelType().getPassword().getPassword();
-            return isNullPassword(currentPassword);
-        } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + xmlInvestigapptor + ": " + ive.getMessage());
             throw new DataConversionException(ive);
         }
     }

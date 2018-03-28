@@ -24,6 +24,7 @@ import seedu.investigapptor.logic.LogicManager;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.ModelManager;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.model.util.SampleDataUtil;
@@ -52,6 +53,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    private boolean hasPassword;
 
 
     @Override
@@ -69,6 +71,8 @@ public class MainApp extends Application {
 
         initLogging(config);
 
+        hasPassword = true;
+
         model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model);
@@ -76,6 +80,7 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+
     }
 
     private String getApplicationParameter(String parameterName) {
@@ -97,6 +102,12 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample Investigapptor");
             }
             initialData = investigapptorOptional.orElseGet(SampleDataUtil::getSampleInvestigapptor);
+            String currentPasswordHash = initialData.getPassword().getPassword();
+            if (currentPasswordHash == null) {
+                hasPassword = false;
+            } else {
+                hasPassword = true;
+            }
         } catch (WrongPasswordException wpe) {
             initialData = new Investigapptor();
         } catch (DataConversionException e) {
@@ -188,9 +199,14 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting Investigapptor " + MainApp.VERSION);
-        PasswordManager passwordManager = new PasswordManager(storage, model, ui);
-        passwordManager.start(primaryStage);
+        if (hasPassword) {
+            logger.info("Starting Investigapptor " + MainApp.VERSION);
+            PasswordManager passwordManager = new PasswordManager(storage, model, ui);
+            passwordManager.start(primaryStage);
+        } else {
+            logger.info("Starting Investigapptor " + MainApp.VERSION);
+            ui.start(primaryStage);
+        }
     }
 
 

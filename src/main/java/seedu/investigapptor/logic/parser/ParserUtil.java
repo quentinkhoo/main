@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.commons.util.StringUtil;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.StartDate;
@@ -269,10 +270,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String type} into a {@code Tag}.
+     * Parses a {@code String type} into a {@code type}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws IllegalValueException if the given {@code tag} is invalid.
+     * @throws IllegalValueException if the given {@code type} is invalid.
      */
     public static String parseType(String type) throws IllegalValueException {
         String trimmedType = type.trim();
@@ -280,5 +281,19 @@ public class ParserUtil {
             throw new IllegalValueException(Tag.MESSAGE_TAG_CONSTRAINTS);
         }
         return trimmedType;
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code email} is invalid.
+     */
+    public static Password parsePassword(String password) throws IllegalValueException {
+        requireNonNull(password);
+        if (!Password.isValidPassword(password)) {
+            throw new IllegalValueException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
+        }
+        return new Password(password);
     }
 }

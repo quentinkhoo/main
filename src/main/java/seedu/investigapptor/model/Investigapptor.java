@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
@@ -275,7 +276,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      * Updates the password of this {@code Investigapptor}.
      * @param newPassword  will be the new password.
      */
-    public void updatePassword (String newPassword) {
+    public void updatePassword (String newPassword) throws InvalidPasswordException {
         password.updatePassword(newPassword);
     }
 

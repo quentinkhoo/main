@@ -87,7 +87,8 @@ public class FindInvestigatorCommandTest {
      *     - the {@code FilteredList<Person>} is equal to {@code expectedList}<br>
      *     - the {@code Investigapptor} in model remains the same after executing the {@code command}
      */
-    private void assertCommandSuccess(FindInvestigatorCommand command, String expectedMessage, List<Person> expectedList) {
+    private void assertCommandSuccess(FindInvestigatorCommand command,
+                                      String expectedMessage, List<Person> expectedList) {
         Investigapptor expectedInvestigapptor = new Investigapptor(model.getInvestigapptor());
         CommandResult commandResult = command.execute();
 

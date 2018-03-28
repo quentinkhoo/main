@@ -26,7 +26,8 @@ public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
          */
         String command = "   " + FindInvestTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TEAMA + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setFilteredPersonList(expectedModel, SIR_LIM, SIR_LOO); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setFilteredPersonList(expectedModel,
+                SIR_LIM, SIR_LOO); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -42,8 +43,10 @@ public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
          * we are finding
          * -> 2 persons found
          */
-        command = "   " + FindInvestTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TEAMB + "   ";
-        ModelHelper.setFilteredPersonList(expectedModel, MDM_ONG, SIR_CHONG); // first names of Benson and Daniel are "Meier"
+        command = "   " + FindInvestTagsCommand.COMMAND_WORD + " "
+                + KEYWORD_MATCHING_TEAMB + "   ";
+        ModelHelper.setFilteredPersonList(expectedModel,
+                MDM_ONG, SIR_CHONG); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

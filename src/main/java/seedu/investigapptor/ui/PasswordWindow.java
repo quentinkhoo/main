@@ -100,7 +100,7 @@ public class PasswordWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        PasswordBox passwordBox = new PasswordBox(storage, model);
+        PasswordBox passwordBox = new PasswordBox(storage);
         commandBoxPlaceholder.getChildren().add(passwordBox.getRoot());
     }
 

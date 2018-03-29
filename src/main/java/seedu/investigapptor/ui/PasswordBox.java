@@ -28,16 +28,13 @@ public class PasswordBox extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Storage storage;
-    private final Model model;
 
     @FXML
     private PasswordField passwordField;
 
-    public PasswordBox(Storage storage, Model model) {
+    public PasswordBox(Storage storage) {
         super(FXML);
-
         this.storage = storage;
-        this.model = model;
     }
 
     /**
@@ -58,7 +55,7 @@ public class PasswordBox extends UiPart<Region> {
     private void handlePasswordInput() {
         String input = passwordField.getText();
         try {
-            storage.readInvestigapptor(new Password(input));
+            storage.readInvestigapptorWithPassword(new Password(input));
             raise(new ValidPasswordEvent());
         } catch (WrongPasswordException wpe) {
             CommandResult passwordResult = new CommandResult("An invalid password has been entered");

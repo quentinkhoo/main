@@ -199,7 +199,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         if (hasPassword) {
-            logger.info("Starting Investigapptor " + MainApp.VERSION);
+            logger.info("Starting Password Prompt " + MainApp.VERSION);
             PasswordManager passwordManager = new PasswordManager(storage, model, ui);
             passwordManager.start(primaryStage);
         } else {

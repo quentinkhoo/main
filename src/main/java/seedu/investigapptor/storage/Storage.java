@@ -31,10 +31,6 @@ public interface Storage extends InvestigapptorStorage, UserPrefsStorage {
             throws DataConversionException, IOException, WrongPasswordException;
 
     @Override
-    Optional<ReadOnlyInvestigapptor> readInvestigapptor(Password password)
-            throws DataConversionException, IOException, WrongPasswordException;
-
-    @Override
     void saveInvestigapptor(ReadOnlyInvestigapptor investigapptor) throws IOException;
 
     @Override

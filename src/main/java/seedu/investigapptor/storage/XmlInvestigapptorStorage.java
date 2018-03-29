@@ -40,9 +40,9 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
     }
 
     @Override
-    public Optional<ReadOnlyInvestigapptor> readInvestigapptor(Password password)
+    public Optional<ReadOnlyInvestigapptor> readInvestigapptorWithPassword(Password password)
             throws DataConversionException, IOException, WrongPasswordException {
-        return readInvestigapptor(filePath, password);
+        return checkInvestigapptorPassword(filePath, password);
     }
 
     /**
@@ -77,7 +77,7 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath, Password password)
+    public Optional<ReadOnlyInvestigapptor> checkInvestigapptorPassword(String filePath, Password password)
             throws DataConversionException, IOException, WrongPasswordException {
         requireNonNull(filePath);
         requireNonNull(password);

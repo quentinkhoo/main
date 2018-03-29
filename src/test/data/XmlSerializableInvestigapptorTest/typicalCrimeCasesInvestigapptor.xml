@@ -17,7 +17,7 @@
         <tagged>Murder</tagged>
     </cases>
     <cases>
-        <name>Project Bravo</name>
+        <name>Project Bravo Johnny</name>
         <description>Crooked house</description>
         <investigator>
             <name>Detective Holmes</name>
@@ -46,7 +46,7 @@
         <status>close</status>
     </cases>
     <cases>
-        <name>Project Delta</name>
+        <name>Project Delta Johnny</name>
         <description>Peril at End House</description>
         <investigator>
             <name>Detective Holmes</name>

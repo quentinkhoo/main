@@ -21,7 +21,8 @@ import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand.EditPersonDescriptor;
 import seedu.investigapptor.logic.commands.ExitCommand;
-import seedu.investigapptor.logic.commands.FindCommand;
+import seedu.investigapptor.logic.commands.FindCaseCommand;
+import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.HistoryCommand;
 import seedu.investigapptor.logic.commands.ListCommand;
@@ -30,6 +31,7 @@ import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
+import seedu.investigapptor.model.crimecase.CaseNameContainsKeywordsPredicate;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
 import seedu.investigapptor.model.person.Person;
@@ -144,19 +146,35 @@ public class InvestigapptorParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findCase() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindCaseCommand command = (FindCaseCommand) parser.parseCommand(
+                FindCaseCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCaseCommand(new CaseNameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
-    public void parseCommand_findAlias() throws Exception {
+    public void parseCommand_findCaseAlias() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_ALIAS + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindCaseCommand command = (FindCaseCommand) parser.parseCommand(
+                FindCaseCommand.COMMAND_ALIAS + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCaseCommand(new CaseNameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findInvestigator() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindInvestigatorCommand command = (FindInvestigatorCommand) parser.parseCommand(
+                FindInvestigatorCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindInvestigatorCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findInvestigatorAlias() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindInvestigatorCommand command = (FindInvestigatorCommand) parser.parseCommand(
+                FindInvestigatorCommand.COMMAND_ALIAS + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindInvestigatorCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

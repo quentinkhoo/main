@@ -13,6 +13,7 @@ import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
 import seedu.investigapptor.logic.commands.ExitCommand;
+import seedu.investigapptor.logic.commands.FindCaseCommand;
 import seedu.investigapptor.logic.commands.FindCaseTagsCommand;
 import seedu.investigapptor.logic.commands.FindCommand;
 import seedu.investigapptor.logic.commands.FindInvestTagsCommand;

@@ -76,7 +76,7 @@ public class TypicalCrimeCases {
 
     public static final String KEYWORD_MATCHING_HOMICIDE = "homicide"; // A keyword that matches homicide
     public static final String KEYWORD_MATCHING_MURDER = "MURDER"; // A keyword that matches murder
-    public static final String KEYWORD_MATCHING_ROBBERY = "robbery"; // A keyword that matches robbery
+    public static final String KEYWORD_MATCHING_JOHNNY = "Johnny"; // A keyword that matches JOHNNY
 
     private TypicalCrimeCases() {} // prevents instantiation
 

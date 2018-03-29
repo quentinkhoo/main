@@ -70,7 +70,7 @@ public class MainApp extends Application {
 
         initLogging(config);
 
-        hasPassword = true;
+        hasPassword = false;
 
         model = initModelManager(storage, userPrefs);
 

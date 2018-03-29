@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.investigapptor.commons.events.ui.InvalidFileFormatEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
@@ -45,11 +46,10 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         persons = new UniquePersonList();
         cases = new UniqueCrimeCaseList();
         tags = new UniqueTagList();
-        password = new Password();
     }
 
     public Investigapptor() {
-
+        this.password = new Password();
     }
 
     public Investigapptor(String password) {
@@ -98,7 +98,11 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-        setPassword(newData.getPassword().getPassword());
+        try {
+            setPassword(newData.getPassword().getPassword());
+        } catch (NullPointerException npe) {
+            ;
+        }
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
@@ -254,7 +258,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      * Updates the password of this {@code Investigapptor}.
      * @param newPassword  will be the new password.
      */
-    public void updatePassword (Password newPassword) {
+    public void updatePassword(Password newPassword) {
         password.updatePassword(newPassword);
     }
     //// util methods

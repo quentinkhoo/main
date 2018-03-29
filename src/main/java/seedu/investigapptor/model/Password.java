@@ -17,7 +17,6 @@ public class Password {
     public static final String MESSAGE_PASSWORD_CONSTRAINTS =
             "Password should be at least 8 character and no spaces.";
 
-    public static final String DEFAULT_PASSWORD = "password";
     public static final String INITIAL_VALUE = "IV";
 
     /**
@@ -31,15 +30,15 @@ public class Password {
      * constructor for default password
      */
     public Password() {
-        createPasswordHash(DEFAULT_PASSWORD);
+
     }
 
     /**
      * use this if hashcode is known
-     * @param passwordHash
+     * @param password
      */
-    public Password(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public Password(String password) {
+        this.passwordHash = password;
     }
 
     /**
@@ -56,15 +55,6 @@ public class Password {
     public void updatePassword(Password newPassword) {
         requireNonNull(newPassword);
         this.passwordHash = generatePasswordHash(newPassword.getPassword());
-    }
-
-    /**
-     * creates a password hash when password is entered in plain text
-     * @param password
-     */
-    public void createPasswordHash(String password) {
-        requireNonNull(password);
-        this.passwordHash = generatePasswordHash(password);
     }
 
     public String getPassword() {

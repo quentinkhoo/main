@@ -3,7 +3,7 @@ package seedu.investigapptor.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.investigapptor.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.investigapptor.commons.core.Messages.MESSAGE_CASES_LISTED_OVERVIEW;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.ALFA;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.BRAVO;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.ONE;
@@ -61,14 +61,14 @@ public class FindCaseTagsCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_CASES_LISTED_OVERVIEW, 0);
         FindCaseTagsCommand command = prepareCommand(" ");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 5);
+        String expectedMessage = String.format(MESSAGE_CASES_LISTED_OVERVIEW, 5);
         String userInput = "Murder Kidnap".toLowerCase();  // Tags are converted to lowercase during comparison
         FindCaseTagsCommand command = prepareCommand(userInput);
         assertCommandSuccess(command, expectedMessage, Arrays.asList(ALFA, BRAVO, ONE, TWO, THREE));

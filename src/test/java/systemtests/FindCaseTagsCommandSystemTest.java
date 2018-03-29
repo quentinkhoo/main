@@ -26,7 +26,7 @@ public class FindCaseTagsCommandSystemTest extends InvestigapptorSystemTest {
          */
         String command = "   " + FindCaseTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MURDER + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setCrimeCaseFilteredList(expectedModel, ALFA, ONE, THREE); // these three cases contain the tag "murder"
+        ModelHelper.setCrimeCaseFilteredList(expectedModel, ALFA, ONE, THREE); //three cases contain the tag "murder"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -38,7 +38,7 @@ public class FindCaseTagsCommandSystemTest extends InvestigapptorSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case 2 (homicide): find multiple cases in investigapptor book, command with leading spaces and trailing spaces
+        /* Case 2 (homicide): find multiple cases in investigapptor book, command with leading spaces and trailing space
          * we are finding
          * -> 2 cases found
          */

@@ -15,7 +15,6 @@ import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
 import seedu.investigapptor.logic.commands.ExitCommand;
 import seedu.investigapptor.logic.commands.FindCaseCommand;
 import seedu.investigapptor.logic.commands.FindCaseTagsCommand;
-import seedu.investigapptor.logic.commands.FindCommand;
 import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
 import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;

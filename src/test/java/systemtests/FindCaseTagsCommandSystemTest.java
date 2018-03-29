@@ -1,90 +1,87 @@
 package systemtests;
 
-//import static org.junit.Assert.assertFalse;
-import static seedu.investigapptor.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.investigapptor.commons.core.Messages.MESSAGE_CASES_LISTED_OVERVIEW;
 import static seedu.investigapptor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.investigapptor.testutil.TypicalPersons.KEYWORD_MATCHING_TEAMA;
-import static seedu.investigapptor.testutil.TypicalPersons.KEYWORD_MATCHING_TEAMB;
-import static seedu.investigapptor.testutil.TypicalPersons.MDM_ONG;
-import static seedu.investigapptor.testutil.TypicalPersons.SIR_CHONG;
-import static seedu.investigapptor.testutil.TypicalPersons.SIR_LIM;
-import static seedu.investigapptor.testutil.TypicalPersons.SIR_LOO;
+import static seedu.investigapptor.testutil.TypicalCrimeCases.ALFA;
+import static seedu.investigapptor.testutil.TypicalCrimeCases.BRAVO;
+import static seedu.investigapptor.testutil.TypicalCrimeCases.KEYWORD_MATCHING_HOMICIDE;
+import static seedu.investigapptor.testutil.TypicalCrimeCases.KEYWORD_MATCHING_MURDER;
+import static seedu.investigapptor.testutil.TypicalCrimeCases.ONE;
+import static seedu.investigapptor.testutil.TypicalCrimeCases.THREE;
+import static seedu.investigapptor.testutil.TypicalCrimeCases.TWO;
 
 import org.junit.Test;
 
-import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
+import seedu.investigapptor.logic.commands.FindCaseTagsCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.model.Model;
 
-public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
+public class FindCaseTagsCommandSystemTest extends InvestigapptorSystemTest {
 
     @Test
     public void find() {
-        /* Case 1 (teamA): find multiple persons in investigapptor book, command with leading spaces and trailing spaces
-         * -> 2 persons found
+        /* Case 1 (murder): find multiple cases in investigapptor book, command with leading spaces and trailing spaces
+         * -> 3 cases found
          */
-        String command = "   " + FindInvestTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TEAMA + "   ";
+        String command = "   " + FindCaseTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MURDER + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setFilteredPersonList(expectedModel,
-                SIR_LIM, SIR_LOO); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setCrimeCaseFilteredList(expectedModel, ALFA, ONE, THREE); //three cases contain the tag "murder"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case 1 (teamA): repeat previous findInvestTag command where person list is displaying the investigators
+        /* Case 1 (murder): repeat previous findCaseTag command where crimecase list is displaying the cases
          * we are finding
-         * -> 2 persons found
+         * -> 3 cases found
          */
-        command = FindInvestTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TEAMA;
+        command = FindCaseTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MURDER;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case 2 (teamB): find multiple persons in investigapptor book, command with leading spaces and trailing spaces
+        /* Case 2 (homicide): find multiple cases in investigapptor book, command with leading spaces and trailing space
          * we are finding
-         * -> 2 persons found
+         * -> 2 cases found
          */
-        command = "   " + FindInvestTagsCommand.COMMAND_WORD + " "
-                + KEYWORD_MATCHING_TEAMB + "   ";
-        ModelHelper.setFilteredPersonList(expectedModel,
-                MDM_ONG, SIR_CHONG); // first names of Benson and Daniel are "Meier"
+        command = "   " + FindCaseTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_HOMICIDE + "   ";
+        ModelHelper.setCrimeCaseFilteredList(expectedModel, BRAVO, ONE); // these two cases contain the tag "homicide"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case 2 (teamB): repeat previous findInvestTag command where person list is displaying the investigators
+        /* Case 2 (homicide): repeat previous findCaseTag command where crimecase list is displaying the cases
          * we are finding
-         * -> 2 persons found
+         * -> 3 cases found
          */
-        command = FindInvestTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TEAMB;
+        command = FindCaseTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_HOMICIDE;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find person where person list is not displaying the person we are finding -> 1 person found */
         /*command = FindInvestTagsCommand.COMMAND_WORD + " Carl";
-        ModelHelper.setFilteredPersonList(expectedModel, CARL);
+        ModelHelper.setCrimeCaseFilteredList(expectedModel, CARL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();*/
 
-        /* Case 3: find multiple investigators in investigapptor book, 2 keywords -> 3 persons found */
-        command = FindInvestTagsCommand.COMMAND_WORD + " new teamB";
-        ModelHelper.setFilteredPersonList(expectedModel, SIR_LIM, MDM_ONG, SIR_CHONG);
+        /* Case 3: find multiple cases in investigapptor book, 2 keywords -> 3 cases found */
+        command = FindCaseTagsCommand.COMMAND_WORD + " murder kidnap";
+        ModelHelper.setCrimeCaseFilteredList(expectedModel, ALFA, BRAVO, ONE, TWO, THREE);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case 4: find multiple investigators in investigapptor book,
-        2 keywords in reversed order -> 3 persons found */
-        command = FindInvestTagsCommand.COMMAND_WORD + " teamB new";
+        /* Case 4: find multiple cases in investigapptor book,
+        2 keywords in reversed order -> 3 cases found */
+        command = FindCaseTagsCommand.COMMAND_WORD + " kidnap murder";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in investigapptor book, 2 keywords with 1 repeat -> 3 persons found */
-        command = FindInvestTagsCommand.COMMAND_WORD + " teamB new teamB";
+        /* Case: find multiple cases in investigapptor book, 2 keywords with 1 repeat -> 3 cases found */
+        command = FindCaseTagsCommand.COMMAND_WORD + " kidnap murder kidnap";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple persons in investigapptor book, 2 matching keywords and 1 non-matching keyword
          * -> 2 persons found
          */
-        command = FindInvestTagsCommand.COMMAND_WORD + " teamB new NonMatchingKeyWord";
+        command = FindCaseTagsCommand.COMMAND_WORD + " kidnap murder NonMatchingKeyWord";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -103,7 +100,7 @@ public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
         assertFalse(getModel().getInvestigapptor().getPersonList().contains(BENSON));
         command = FindInvestTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
-        ModelHelper.setFilteredPersonList(expectedModel, DANIEL);
+        ModelHelper.setCrimeCaseFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();*/
 
@@ -112,45 +109,45 @@ public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();*/
 
-        /* Case: find person in investigapptor book, keyword is substring of tag -> 0 persons found */
-        command = FindInvestTagsCommand.COMMAND_WORD + " Mei";
-        ModelHelper.setFilteredPersonList(expectedModel);
+        /* Case: find case in investigapptor book, keyword is substring of tag -> 0 persons found */
+        command = FindCaseTagsCommand.COMMAND_WORD + " mur";
+        ModelHelper.setCrimeCaseFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find person in investigapptor book, tag is substring of keyword -> 0 persons found */
         // keyword -> teamAs, tag -> teamA (substring of keyword)
-        command = FindInvestTagsCommand.COMMAND_WORD + " teamAs";
-        ModelHelper.setFilteredPersonList(expectedModel);
+        command = FindCaseTagsCommand.COMMAND_WORD + " murders";
+        ModelHelper.setCrimeCaseFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find tag that is not found in any investigators -> 0 persons found */
-        command = FindInvestTagsCommand.COMMAND_WORD + " teamie";
+        command = FindCaseTagsCommand.COMMAND_WORD + " murderie";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find name of investigator in investigapptor -> 0 persons found */
-        command = FindInvestTagsCommand.COMMAND_WORD + " " + SIR_LIM.getName().fullName;
+        /* Case: find name of case in investigapptor -> 0 persons found */
+        command = FindCaseTagsCommand.COMMAND_WORD + " " + ONE.getCaseName().crimeCaseName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find address of investigator in investigapptor -> 0 persons found */
-        command = FindInvestTagsCommand.COMMAND_WORD + " " + SIR_LIM.getAddress().value;
+        /* Case: find status of investigator in investigapptor -> 0 persons found */
+        command = FindCaseTagsCommand.COMMAND_WORD + " " + ONE.getStatus().toString();
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find email of investigator in investigapptor book -> 0 persons found */
-        command = FindInvestTagsCommand.COMMAND_WORD + " " + SIR_LIM.getEmail().value;
+        /*command = FindCaseTagsCommand.COMMAND_WORD + " " + SIR_LIM.getEmail().value;
         assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();
+        assertSelectedCardUnchanged();*/
 
         /* Case: find while a person is selected -> selected card deselected */
         /*showAllPersons();
         selectPerson(Index.fromOneBased(1));
         assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
         command = FindInvestTagsCommand.COMMAND_WORD + " new";
-        ModelHelper.setFilteredPersonList(expectedModel, DANIEL);
+        ModelHelper.setCrimeCaseFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();*/
 
@@ -158,18 +155,18 @@ public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
         /*deleteAllPersons();
         command = FindInvestTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
-        ModelHelper.setFilteredPersonList(expectedModel, DANIEL);
+        ModelHelper.setCrimeCaseFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();*/
 
         /* Case: mixed case command word -> rejected */
-        command = "FiNdinVesttAgs teamA";
+        command = "FiNdcAsEtAgs murder";
         assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
      * Executes {@code command} and verifies that the command box displays an empty string, the result display
-     * box displays {@code Messages#MESSAGE_PERSONS_LISTED_OVERVIEW} with the number of people in the filtered list,
+     * box displays {@code Messages#MESSAGE_CASES_LISTED_OVERVIEW} with the number of crime cases in the filtered list,
      * and the model related components equal to {@code expectedModel}.
      * These verifications are done by
      * {@code InvestigapptorSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
@@ -179,7 +176,7 @@ public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel) {
         String expectedResultMessage = String.format(
-                MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredPersonList().size());
+                MESSAGE_CASES_LISTED_OVERVIEW, expectedModel.getFilteredCrimeCaseList().size());
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
-import seedu.investigapptor.commons.events.ui.InvalidFileFormatEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;

@@ -175,7 +175,7 @@ public class CommandTestUtil {
         final String[] splitName = crimeCase.getCaseName().crimeCaseName.split("\\s+");
         model.updateFilteredCrimeCaseList(new CaseNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(7, model.getFilteredCrimeCaseList().size());
+        assertEquals(11, model.getFilteredCrimeCaseList().size());
     }
 
     /**

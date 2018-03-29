@@ -37,13 +37,13 @@ public interface InvestigapptorStorage {
     /**
      * @see #getInvestigapptorFilePath()
      */
-    Optional<ReadOnlyInvestigapptor> readInvestigapptorWithPassword(Password password)
+    void readInvestigapptorWithPassword(Password password)
             throws DataConversionException, IOException, WrongPasswordException;
 
     /**
      * @see #getInvestigapptorFilePath()
      */
-    Optional<ReadOnlyInvestigapptor> checkInvestigapptorPassword(String filePath, Password password)
+    void checkInvestigapptorPassword(String filePath, Password password)
             throws DataConversionException, IOException, WrongPasswordException;
 
     /**

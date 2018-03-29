@@ -14,7 +14,6 @@ import seedu.investigapptor.commons.events.ui.ValidPasswordEvent;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
 import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.logic.commands.CommandResult;
-import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.Password;
 import seedu.investigapptor.storage.Storage;
 

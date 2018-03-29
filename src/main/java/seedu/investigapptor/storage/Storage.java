@@ -8,7 +8,6 @@ import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.commons.events.storage.DataSavingExceptionEvent;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
 import seedu.investigapptor.commons.exceptions.WrongPasswordException;
-import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.UserPrefs;
 

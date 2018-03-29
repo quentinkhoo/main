@@ -65,13 +65,6 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyInvestigapptor> checkInvestigapptorPassword(String filePath, Password password)
-            throws DataConversionException, IOException, WrongPasswordException {
-        logger.fine("Attempting to read data from file: " + filePath);
-        return investigapptorStorage.checkInvestigapptorPassword(filePath, password);
-    }
-
-    @Override
     public Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath)
             throws DataConversionException, IOException, WrongPasswordException {
         logger.fine("Attempting to read data from file: " + filePath);
@@ -79,9 +72,17 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyInvestigapptor> readInvestigapptorWithPassword(Password password)
+    public void readInvestigapptorWithPassword(Password password)
             throws DataConversionException, IOException, WrongPasswordException {
-        return investigapptorStorage.checkInvestigapptorPassword(investigapptorStorage.getInvestigapptorFilePath(), password);
+        investigapptorStorage.checkInvestigapptorPassword(
+                investigapptorStorage.getInvestigapptorFilePath(), password);
+    }
+
+    @Override
+    public void checkInvestigapptorPassword(String filePath, Password password)
+            throws DataConversionException, IOException, WrongPasswordException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        investigapptorStorage.checkInvestigapptorPassword(filePath, password);
     }
 
     @Override

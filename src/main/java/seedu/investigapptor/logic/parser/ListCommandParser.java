@@ -1,6 +1,6 @@
 package seedu.investigapptor.logic.parser;
 
-import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND_ALIAS;
 
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.logic.commands.ListCommand;
@@ -24,7 +24,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListCommand(type);
         } catch (IllegalValueException ive) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_ALIAS, ListCommand.MESSAGE_ALIASES));
         }
     }
 }

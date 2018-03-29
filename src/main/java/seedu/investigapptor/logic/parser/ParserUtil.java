@@ -7,10 +7,13 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.commons.util.StringUtil;
+import seedu.investigapptor.logic.commands.ListCommand;
 import seedu.investigapptor.model.Password;
+
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.StartDate;
@@ -277,8 +280,8 @@ public class ParserUtil {
      */
     public static String parseType(String type) throws IllegalValueException {
         String trimmedType = type.trim();
-        if (!trimmedType.equals("investigators") && !trimmedType.equals("cases")) {
-            throw new IllegalValueException(Tag.MESSAGE_TAG_CONSTRAINTS);
+        if (!ListCommand.isValidInvestigatorAlias(trimmedType) && !ListCommand.isValidCaseAlias((trimmedType))) {
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_COMMAND_ALIAS);
         }
         return trimmedType;
     }

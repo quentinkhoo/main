@@ -13,8 +13,10 @@ import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
 import seedu.investigapptor.logic.commands.ExitCommand;
-import seedu.investigapptor.logic.commands.FindCommand;
+import seedu.investigapptor.logic.commands.FindCaseCommand;
+import seedu.investigapptor.logic.commands.FindCaseTagsCommand;
 import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
+import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.HistoryCommand;
 import seedu.investigapptor.logic.commands.ListCommand;
@@ -52,13 +54,13 @@ public class InvestigapptorParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case RegisterInvestigatorCommand.COMMAND_WORD:
-        case RegisterInvestigatorCommand.COMMAND_ALIAS:
-            return new RegisterInvestigatorCommandParser().parse(arguments);
-
         case AddCaseCommand.COMMAND_WORD:
         case AddCaseCommand.COMMAND_ALIAS:
             return new AddCaseCommandParser().parse(arguments);
+
+        case RegisterInvestigatorCommand.COMMAND_WORD:
+        case RegisterInvestigatorCommand.COMMAND_ALIAS:
+            return new RegisterInvestigatorCommandParser().parse(arguments);
 
         case EditInvestigatorCommand.COMMAND_WORD:
         case EditInvestigatorCommand.COMMAND_ALIAS:
@@ -76,13 +78,21 @@ public class InvestigapptorParser {
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-        case FindCommand.COMMAND_ALIAS:
-            return new FindCommandParser().parse(arguments);
+        case FindCaseCommand.COMMAND_WORD:
+        case FindCaseCommand.COMMAND_ALIAS:
+            return new FindCaseCommandParser().parse(arguments);
+
+        case FindInvestigatorCommand.COMMAND_WORD:
+        case FindInvestigatorCommand.COMMAND_ALIAS:
+            return new FindInvestigatorCommandParser().parse(arguments);
 
         case FindInvestTagsCommand.COMMAND_WORD:
         case FindInvestTagsCommand.COMMAND_ALIAS:
             return new FindInvestTagsCommandParser().parse(arguments);
+
+        case FindCaseTagsCommand.COMMAND_WORD:
+        case FindCaseTagsCommand.COMMAND_ALIAS:
+            return new FindCaseTagsCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:

@@ -121,7 +121,7 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
     @Override
     public void readInvestigapptorWithPassword(Password password)
             throws DataConversionException, IOException, WrongPasswordException {
-       checkInvestigapptorPassword(filePath, password);
+        checkInvestigapptorPassword(filePath, password);
     }
 
 }

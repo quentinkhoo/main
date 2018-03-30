@@ -24,19 +24,19 @@ import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
- * Update the status of a case from open to solved and update the EndDate field
+ * Update the status of a case from open to close and update the EndDate field
  */
-public class SolveCaseCommand extends UndoableCommand {
+public class CloseCaseCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "solve";
+    public static final String COMMAND_WORD = "close";
     public static final String COMMAND_ALIAS = "s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status from open to solve "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status from open to close "
             + "and updates the end date accordingly.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_SOLVE_CASE_SUCCESS = "Case status updated: %1$s";
+    public static final String MESSAGE_CLOSE_CASE_SUCCESS = "Case status updated: %1$s";
     public static final String MESSAGE_DUPLICATE_CASE = "This case already exists in investigapptor.";
     public static final String MESSAGE_CASE_ALREADY_CLOSE = "Case is already closed.";
 
@@ -46,9 +46,9 @@ public class SolveCaseCommand extends UndoableCommand {
     private CrimeCase editedCase;
 
     /**
-     * @param index of the crimecase in the filtered crimecase list to solve
+     * @param index of the crimecase in the filtered crimecase list to close
      */
-    public SolveCaseCommand(Index index) {
+    public CloseCaseCommand(Index index) {
         requireNonNull(index);
         this.index = index;
     }
@@ -63,7 +63,7 @@ public class SolveCaseCommand extends UndoableCommand {
             throw new AssertionError("The target case cannot be missing");
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SOLVE_CASE_SUCCESS, editedCase.getStatus()));
+        return new CommandResult(String.format(MESSAGE_CLOSE_CASE_SUCCESS, editedCase.getStatus()));
     }
 
     @Override

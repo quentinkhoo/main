@@ -48,10 +48,9 @@ public class Status {
     }
 
     /**
-     * Solves the case by updating the case status to close
-     * @throws
+     * Close the case by updating the case status to close
      */
-    public void solveCase() {
+    public void closeCase() {
         this.status = CASE_CLOSE;
     }
 

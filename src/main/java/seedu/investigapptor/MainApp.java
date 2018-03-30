@@ -200,7 +200,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         if (hasPassword) {
             logger.info("Starting Password Prompt " + MainApp.VERSION);
-            PasswordManager passwordManager = new PasswordManager(storage, model, ui);
+            PasswordManager passwordManager = new PasswordManager(storage, ui);
             passwordManager.start(primaryStage);
         } else {
             logger.info("Starting Investigapptor " + MainApp.VERSION);

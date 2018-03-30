@@ -13,7 +13,6 @@ import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.ui.InvalidFileFormatEvent;
 import seedu.investigapptor.commons.events.ui.ValidPasswordEvent;
 import seedu.investigapptor.commons.util.StringUtil;
-import seedu.investigapptor.model.Model;
 import seedu.investigapptor.storage.Storage;
 
 /**
@@ -26,16 +25,14 @@ public class PasswordManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
 
     private Storage storage;
-    private Model model;
     private Ui ui;
 
     private PasswordWindow passwordWindow;
     private Stage primaryStage;
 
-    public PasswordManager(Storage storage, Model model, Ui ui) {
+    public PasswordManager(Storage storage, Ui ui) {
         super();
         this.storage = storage;
-        this.model = model;
         this.ui = ui;
     }
 
@@ -44,7 +41,7 @@ public class PasswordManager extends ComponentManager implements Ui {
         logger.info("Starting Password UI...");
         this.primaryStage = primaryStage;
         try {
-            PasswordWindow pw = new PasswordWindow(primaryStage, model, storage);
+            PasswordWindow pw = new PasswordWindow(primaryStage, storage);
             pw.show();
             pw.fillInnerParts();
         } catch (Throwable e) {

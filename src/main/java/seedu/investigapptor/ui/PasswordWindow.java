@@ -16,7 +16,6 @@ import seedu.investigapptor.commons.core.GuiSettings;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.ui.ExitAppRequestEvent;
 import seedu.investigapptor.commons.events.ui.ShowHelpRequestEvent;
-import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.storage.Storage;
 
@@ -32,7 +31,6 @@ public class PasswordWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     private Stage primaryStage;
-    private Model model;
     private Storage storage;
 
     // Independent Ui parts residing in this Ui container
@@ -42,17 +40,16 @@ public class PasswordWindow extends UiPart<Stage> {
     private StackPane browserPlaceholder;
 
     @FXML
-    private StackPane commandBoxPlaceholder;
+    private StackPane passwordBoxPlacedHolder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
-    public PasswordWindow(Stage primaryStage, Model model, Storage storage) {
+    public PasswordWindow(Stage primaryStage, Storage storage) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
-        this.model = model;
         this.storage = storage;
 
         setTitle(TITLE);
@@ -101,7 +98,7 @@ public class PasswordWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         PasswordBox passwordBox = new PasswordBox(storage);
-        commandBoxPlaceholder.getChildren().add(passwordBox.getRoot());
+        passwordBoxPlacedHolder.getChildren().add(passwordBox.getRoot());
     }
 
     void hide() {

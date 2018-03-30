@@ -12,6 +12,7 @@ import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.commons.util.StringUtil;
 import seedu.investigapptor.logic.commands.ListCommand;
+import seedu.investigapptor.logic.commands.SetCommand;
 import seedu.investigapptor.model.Password;
 
 import seedu.investigapptor.model.crimecase.CaseName;
@@ -278,9 +279,23 @@ public class ParserUtil {
      *
      * @throws IllegalValueException if the given {@code type} is invalid.
      */
-    public static String parseType(String type) throws IllegalValueException {
+    public static String parseListType(String type) throws IllegalValueException {
         String trimmedType = type.trim();
         if (!ListCommand.isValidInvestigatorAlias(trimmedType) && !ListCommand.isValidCaseAlias((trimmedType))) {
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_COMMAND_ALIAS);
+        }
+        return trimmedType;
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code type}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code type} is invalid.
+     */
+    public static String parseSetType(String type) throws IllegalValueException {
+        String trimmedType = type.trim();
+        if (!SetCommand.isValidPasswordAlias(trimmedType)) {
             throw new IllegalValueException(Messages.MESSAGE_INVALID_COMMAND_ALIAS);
         }
         return trimmedType;

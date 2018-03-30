@@ -97,20 +97,18 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-        try {
-            setPassword(newData.getPassword().getPassword());
-        } catch (NullPointerException npe) {
-            ;
-        }
+        String passwordHash = newData.getPassword().getPassword();
+
+        setPassword(passwordHash);
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
-            throw new AssertionError("Investigapptors should not have duplicate persons");
+            throw new AssertionError("Investigapptor should not have duplicate investigators");
         }
         try {
             setCrimeCases(syncedCrimeCaseList);
         } catch (DuplicateCrimeCaseException e) {
-            throw new AssertionError("Investigapptors should not have duplicate cases");
+            throw new AssertionError("Investigapptor should not have duplicate cases");
         }
 
     }

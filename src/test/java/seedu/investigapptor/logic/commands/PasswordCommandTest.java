@@ -61,7 +61,7 @@ public class PasswordCommandTest {
      * Returns a {@code PasswordCommand} with the parameter {@code password}.
      */
     private PasswordCommand prepareCommand(String password) {
-        PasswordCommand passwordCommand = new PasswordCommand(new Password(password));
+        PasswordCommand passwordCommand = new PasswordCommand(new Password(password), model);
         passwordCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return passwordCommand;
     }

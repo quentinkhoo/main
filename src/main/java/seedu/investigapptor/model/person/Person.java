@@ -61,9 +61,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set of type String, which throws
-     * (@code UnsupportedOperationException)
-     * if modification is attempted
+     * Returns an immutable tag set of type String
      */
     public Set<String> getTagsRaw() {
         Set<String> rawTags = new HashSet<>();

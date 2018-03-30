@@ -97,4 +97,65 @@
         <startDate>02/08/2017</startDate>
         <status>open</status>
     </cases>
+    <cases>
+        <name>Project One</name>
+        <description>Scary case</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>10/12/2016</startDate>
+        <status>open</status>
+        <tagged>Murder</tagged>
+        <tagged>Homicide</tagged>
+        <tagged>Missing</tagged>
+    </cases>
+    <cases>
+        <name>Project Two</name>
+        <description>Not so scary case</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>14/12/2016</startDate>
+        <status>open</status>
+        <tagged>Robbery</tagged>
+        <tagged>Prank</tagged>
+        <tagged>Kidnap</tagged>
+    </cases>
+    <cases>
+        <name>Project Three</name>
+        <description>Supernatural Case</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>18/12/2016</startDate>
+        <status>open</status>
+        <tagged>Murder</tagged>
+        <tagged>Supernatural</tagged>
+    </cases>
+    <cases>
+        <name>Project Four</name>
+        <description>Small case</description>
+        <investigator>
+            <name>Detective Holmes</name>
+            <phone>85355255</phone>
+            <email>alice@example.com</email>
+            <address>123, Jurong West Ave 6, #08-111</address>
+            <tagged>friends</tagged>
+        </investigator>
+        <startDate>11/12/2016</startDate>
+        <status>open</status>
+        <tagged>Theft</tagged>
+    </cases>
 </investigapptor>

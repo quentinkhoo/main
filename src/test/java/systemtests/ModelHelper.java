@@ -15,6 +15,9 @@ import seedu.investigapptor.model.person.Person;
 public class ModelHelper {
     private static final Predicate<CrimeCase> PREDICATE_MATCHING_NO_CASES = unused -> false;
     private static final Predicate<Person> PREDICATE_MATCHING_NO_PERSONS = unused -> false;
+    private static final Predicate<CrimeCase> PREDICATE_MATCHING_NO_CRIMECASE = unused -> false;
+
+    /** PERSON PORTION **/
 
     /**
      * Updates {@code model}'s filtered list to display only {@code toDisplay}.
@@ -60,5 +63,30 @@ public class ModelHelper {
      */
     private static Predicate<Person> getPredicateMatching(Person other) {
         return person -> person.equals(other);
+    }
+
+    /*** CRIME CASE PORTION ***/
+
+    /**
+     * Updates {@code model}'s crime case filtered list to display only {@code toDisplay}.
+     */
+    public static void setCrimeCaseFilteredList(Model model, List<CrimeCase> toDisplay) {
+        Optional<Predicate<CrimeCase>> predicate =
+                toDisplay.stream().map(ModelHelper::getPredicateMatchingCrimeCase).reduce(Predicate::or);
+        model.updateFilteredCrimeCaseList(predicate.orElse(PREDICATE_MATCHING_NO_CRIMECASE));
+    }
+
+    /**
+     * @see ModelHelper#setCrimeCaseFilteredList(Model, List)
+     */
+    public static void setCrimeCaseFilteredList(Model model, CrimeCase... toDisplay) {
+        setCrimeCaseFilteredList(model, Arrays.asList(toDisplay));
+    }
+
+    /**
+     * Returns a predicate that evaluates to true if this {@code CrimeCase} equals to {@code other}.
+     */
+    private static Predicate<CrimeCase> getPredicateMatchingCrimeCase(CrimeCase other) {
+        return crimeCase -> crimeCase.equals(other);
     }
 }

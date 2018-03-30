@@ -1,5 +1,7 @@
 package seedu.investigapptor.logic.commands;
 
+import seedu.investigapptor.commons.core.EventsCenter;
+import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.model.person.investigator.TagContainsKeywordsPredicate;
 
 /**
@@ -25,6 +27,7 @@ public class FindInvestTagsCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredPersonList(predicate);
+        EventsCenter.getInstance().post(new SwapTabEvent(0));   // List results toggles to investigators tab
         return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
     }
 

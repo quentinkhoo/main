@@ -1,5 +1,6 @@
 package seedu.investigapptor.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 
 /**
  * Creates a xml copy of the current state of the investigapptor
@@ -19,11 +20,13 @@ public class BackupCommand extends Command {
     private final String fileName;
 
     public BackupCommand(String fileName) {
+        requireNonNull(fileName);
         this.fileName = fileName;
     }
 
     @Override
     public CommandResult execute() {
+        requireNonNull(fileName);
         model.backUpInvestigapptor(fileName);
         return new CommandResult(fileName + MESSAGE_SUCCESS);
     }

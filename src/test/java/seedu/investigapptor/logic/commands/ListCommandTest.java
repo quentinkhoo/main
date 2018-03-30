@@ -68,26 +68,27 @@ public class ListCommandTest {
     @Test
     public void execute_investigatorListIsNotFiltered_showsSameList() {
         assertCommandSuccess(listCommandInvestigators, investigatorModel, String.format(ListCommand.MESSAGE_SUCCESS,
-                "investigators"), expectedInvestigatorModel);
+                "inv"), expectedInvestigatorModel);
     }
 
     @Test
     public void execute_investigatorListIsFiltered_showsEverything() {
         showPersonAtIndex(investigatorModel, INDEX_FIRST_PERSON);
         assertCommandSuccess(listCommandInvestigators, investigatorModel, String.format(ListCommand.MESSAGE_SUCCESS,
-                "investigators"), expectedInvestigatorModel);
+                "i"), expectedInvestigatorModel);
     }
 
     @Test
     public void execute_caseListIsNotFiltered_showsSameList() {
-        assertCommandSuccess(listCommandCases, crimeCaseModel, String.format(ListCommand.MESSAGE_SUCCESS, "cases"),
+        assertCommandSuccess(listCommandCases, crimeCaseModel, String.format(ListCommand.MESSAGE_SUCCESS, "cas"),
                 expectedCrimeCaseModel);
     }
 
     @Test
     public void execute_caseListIsFiltered_showsEverything() {
         showCaseAtIndex(crimeCaseModel, INDEX_FIRST_PERSON);
-        assertCommandSuccess(listCommandCases, crimeCaseModel, String.format(ListCommand.MESSAGE_SUCCESS, "cases"),
+        assertCommandSuccess(listCommandCases, crimeCaseModel, String.format(ListCommand.MESSAGE_SUCCESS, "c"),
                 expectedCrimeCaseModel);
     }
+
 }

@@ -29,7 +29,7 @@ import seedu.investigapptor.model.tag.Tag;
 public class CloseCaseCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "close";
-    public static final String COMMAND_ALIAS = "s";
+    public static final String COMMAND_ALIAS = "c";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status from open to close "
             + "and updates the end date accordingly.\n"

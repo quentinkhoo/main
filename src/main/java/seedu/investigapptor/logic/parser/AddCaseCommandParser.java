@@ -15,8 +15,8 @@ import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.logic.commands.AddCaseCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.crimecase.CaseName;
-import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.Date;
+import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.tag.Tag;
 
 /**

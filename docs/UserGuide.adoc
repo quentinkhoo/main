@@ -251,10 +251,10 @@ Returns case(s) having tags `murder`, `homicide`, OR `robbery`
 * `fct murder supernatural a` +
 Returns case(s) having tags `murder`, `supernatural`, OR `a`
 
-=== Close a case : `close` [Since v1.3]
+=== Close a case : `close` `[Since v1.3]`
 Closes the case identified by the index number used in the last case listing. +
 Format: `close INDEX` +
-Alias: `c`
+Alias: `cl`
 
 ****
 * Closes the case by updating the status of the case from `open` to `close` at the specified `INDEX`.

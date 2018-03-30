@@ -11,6 +11,7 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_BO
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_RANK_CAPTAIN;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.investigapptor.testutil.TypicalCrimeCases.BRAVO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +33,8 @@ public class TypicalInvestigator {
     public static final Investigator BENSON = new InvestigatorBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .addCase(BRAVO).build();
     public static final Investigator CARL = new InvestigatorBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Investigator DANIEL = new InvestigatorBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -43,7 +45,6 @@ public class TypicalInvestigator {
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Investigator GEORGE = new InvestigatorBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
-    public static final Investigator TOM = new InvestigatorBuilder().withName("Tom").build();
 
     // Manually added
     public static final Investigator HOON = new InvestigatorBuilder().withName("Hoon Meier").withPhone("8482424")

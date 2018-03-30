@@ -3,7 +3,7 @@ package seedu.investigapptor.storage;
 import static org.junit.Assert.assertEquals;
 import static seedu.investigapptor.storage.XmlAdaptedCrimeCase.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.ALFA;
-import static seedu.investigapptor.testutil.TypicalPersons.BENSON;
+import static seedu.investigapptor.testutil.TypicalInvestigator.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +23,19 @@ import seedu.investigapptor.testutil.Assert;
 public class XmlAdaptedCrimeCaseTest {
     private static final String INVALID_NAME = "Project H@ppy";
     private static final String INVALID_DESCRIPTION = " ";
-    private static final XmlAdaptedPerson INVALID_INVESTIGATOR =
-            new XmlAdaptedPerson("R@chel", " ", " ", " ",
-                    BENSON.getTags().stream()
-                            .map(XmlAdaptedTag::new)
-                            .collect(Collectors.toList()));
+    private static final XmlAdaptedInvestigator INVALID_INVESTIGATOR =
+            new XmlAdaptedInvestigator("R@chel", " ", " ", " ", " ",
+                    BENSON.getCrimeCases(), BENSON.getTags().stream()
+                    .map(XmlAdaptedTag::new)
+                    .collect(Collectors.toList()));
     private static final String INVALID_STARTDATE = "123/44/17";
     private static final String INVALID_STATUS = " ";
     private static final String INVALID_TAG = "#Corruption";
 
     private static final String VALID_NAME = ALFA.getCaseName().toString();
     private static final String VALID_DESCRIPTION = ALFA.getDescription().toString();
-    private static final XmlAdaptedPerson VALID_INVESTIGATOR =
-            new XmlAdaptedPerson(ALFA.getCurrentInvestigator());
+    private static final XmlAdaptedInvestigator VALID_INVESTIGATOR =
+            new XmlAdaptedInvestigator(ALFA.getCurrentInvestigator());
     private static final String VALID_STARTDATE = ALFA.getStartDate().date;
     private static final String VALID_STATUS = ALFA.getStatus().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = ALFA.getTags().stream()

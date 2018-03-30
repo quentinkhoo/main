@@ -13,6 +13,7 @@ import seedu.investigapptor.commons.core.ComponentManager;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.model.InvestigapptorBackupEvent;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
+import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
@@ -85,6 +86,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         investigapptor.updatePerson(target, editedPerson);
+        indicateInvestigapptorChanged();
+    }
+
+    @Override
+    public void updatePassword(Password password) throws InvalidPasswordException {
+        investigapptor.updatePassword(password);
         indicateInvestigapptorChanged();
     }
 

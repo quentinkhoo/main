@@ -7,7 +7,7 @@ import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.Status;
-import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.util.SampleDataUtil;
 
@@ -23,8 +23,8 @@ public class CrimeCaseBuilder {
 
     private CaseName name;
     private Description description;
-    private Person currentInvestigator;
     private Date startDate;
+    private Investigator currentInvestigator;
     private Status status;
     private Set<Tag> tags;
 
@@ -35,7 +35,7 @@ public class CrimeCaseBuilder {
         status = new Status();
         startDate = new Date(DEFAULT_DATE);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
-        currentInvestigator = new PersonBuilder().withName("Detective Holmes").build();
+        currentInvestigator = new InvestigatorBuilder().withName("Detective Holmes").build();
 
     }
 
@@ -78,7 +78,7 @@ public class CrimeCaseBuilder {
     /**
      * Sets the {@code Person} of the {@code CrimeCase} that we are building.
      */
-    public CrimeCaseBuilder withInvestigator(Person investigator) {
+    public CrimeCaseBuilder withInvestigator(Investigator investigator) {
         this.currentInvestigator = investigator;
         return this;
     }
@@ -110,8 +110,8 @@ public class CrimeCaseBuilder {
     /**
      * Sets the {@code currentInvestigator} of the {@code CrimeCase} that we are building.
      */
-    public CrimeCaseBuilder withCurrentInvestigator(Person investigator) {
-        this.currentInvestigator = new PersonBuilder(investigator).build();
+    public CrimeCaseBuilder withCurrentInvestigator(Investigator investigator) {
+        this.currentInvestigator = new InvestigatorBuilder(investigator).build();
         return this;
     }
 

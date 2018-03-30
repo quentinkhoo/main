@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
+import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
  * An Immutable Investigapptor that is serializable to XML format
@@ -25,6 +26,8 @@ public class XmlSerializableInvestigapptor {
     private List<XmlAdaptedTag> tags;
     @XmlElement
     private List<XmlAdaptedInvestigator> investigators;
+    @XmlElement
+    private XmlAdaptedPassword password;
 
     /**
      * Creates an empty XmlSerializableInvestigapptor.
@@ -35,6 +38,7 @@ public class XmlSerializableInvestigapptor {
         persons = new ArrayList<>();
         investigators = new ArrayList<>();
         tags = new ArrayList<>();
+        password = new XmlAdaptedPassword();
     }
 
     /**
@@ -47,6 +51,7 @@ public class XmlSerializableInvestigapptor {
         investigators.addAll(src.getInvestigatorList().stream()
                 .map(XmlAdaptedInvestigator::new).collect(Collectors.toList()));
         tags.addAll(src.getTagList().stream().map(XmlAdaptedTag::new).collect(Collectors.toList()));
+        password = new XmlAdaptedPassword(src.getPassword());
     }
 
     /**
@@ -67,8 +72,12 @@ public class XmlSerializableInvestigapptor {
             investigapptor.addPerson(p.toModelType());
         }
         for (XmlAdaptedInvestigator i : investigators) {
-            investigapptor.addPerson(i.toModelType());
+            Investigator investigator = i.toModelType();
+            investigapptor.convertHashToCases(investigator);
+            //investigapptor.addPerson(investigator);
+
         }
+        investigapptor.setPassword(password.toModelType());
         return investigapptor;
     }
 
@@ -83,6 +92,7 @@ public class XmlSerializableInvestigapptor {
         }
 
         XmlSerializableInvestigapptor otherAb = (XmlSerializableInvestigapptor) other;
-        return cases.equals(otherAb.cases) && persons.equals(otherAb.persons) && tags.equals(otherAb.tags);
+        return cases.equals(otherAb.cases) && persons.equals(otherAb.persons) && tags.equals(otherAb.tags)
+                && password.equals(otherAb.password);
     }
 }

@@ -15,6 +15,7 @@ import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -29,7 +30,7 @@ public class XmlAdaptedCrimeCase {
     @XmlElement(required = true)
     private String description;
     @XmlElement(required = true)
-    private XmlAdaptedPerson investigator;
+    private XmlAdaptedInvestigator investigator;
     @XmlElement(required = true)
     private String startDate;
     @XmlElement(required = true)
@@ -49,7 +50,7 @@ public class XmlAdaptedCrimeCase {
     /**
      * Constructs an {@code XmlAdaptedCrimeCase} with the given case details.
      */
-    public XmlAdaptedCrimeCase(String name, String description, XmlAdaptedPerson investigator, String startDate,
+    public XmlAdaptedCrimeCase(String name, String description, XmlAdaptedInvestigator investigator, String startDate,
                                String status, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.description = description;
@@ -70,7 +71,7 @@ public class XmlAdaptedCrimeCase {
     public XmlAdaptedCrimeCase(CrimeCase source) {
         name = source.getCaseName().crimeCaseName;
         description = source.getDescription().description;
-        investigator = new XmlAdaptedPerson(source.getCurrentInvestigator());
+        investigator = new XmlAdaptedInvestigator(source.getCurrentInvestigator());
         startDate = source.getStartDate().date;
         endDate = source.getEndDate().date;
         status = source.getStatus().toString();
@@ -112,7 +113,7 @@ public class XmlAdaptedCrimeCase {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Person.class.getSimpleName()));
         }
-        final Person investigator = this.investigator.toModelType();
+        final Investigator investigator = this.investigator.toModelType();
 
         if (this.startDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

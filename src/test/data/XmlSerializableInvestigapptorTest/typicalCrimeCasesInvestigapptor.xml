@@ -10,6 +10,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>10/11/2015</startDate>
@@ -24,6 +25,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>12/03/2016</startDate>
@@ -39,6 +41,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>18/01/2012</startDate>
@@ -53,6 +56,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>27/11/1999</startDate>
@@ -66,6 +70,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>23/11/1965</startDate>
@@ -79,6 +84,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>09/07/2017</startDate>
@@ -92,6 +98,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>02/08/2017</startDate>
@@ -105,6 +112,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>10/12/2016</startDate>
@@ -121,6 +129,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>14/12/2016</startDate>
@@ -137,6 +146,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>18/12/2016</startDate>
@@ -152,6 +162,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
+			<rank>2</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>11/12/2016</startDate>

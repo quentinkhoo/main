@@ -12,6 +12,10 @@ import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.commons.util.StringUtil;
 import seedu.investigapptor.logic.commands.ListCommand;
+import seedu.investigapptor.logic.commands.SetCommand;
+import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
+import seedu.investigapptor.model.Password;
+
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
@@ -271,16 +275,44 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String type} into a {@code Tag}.
+     * Parses a {@code String type} into a {@code type}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws IllegalValueException if the given {@code tag} is invalid.
+     * @throws IllegalValueException if the given {@code type} is invalid.
      */
-    public static String parseType(String type) throws IllegalValueException {
+    public static String parseListType(String type) throws IllegalValueException {
         String trimmedType = type.trim();
         if (!ListCommand.isValidInvestigatorAlias(trimmedType) && !ListCommand.isValidCaseAlias((trimmedType))) {
             throw new IllegalValueException(Messages.MESSAGE_INVALID_COMMAND_ALIAS);
         }
         return trimmedType;
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code type}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code type} is invalid.
+     */
+    public static String parseSetType(String type) throws IllegalValueException {
+        String trimmedType = type.trim();
+        if (!SetCommand.isValidPasswordAlias(trimmedType)) {
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_COMMAND_ALIAS);
+        }
+        return trimmedType;
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code email} is invalid.
+     */
+    public static Password parsePassword(String password) throws InvalidPasswordException {
+        requireNonNull(password);
+        if (!Password.isValidPassword(password)) {
+            throw new InvalidPasswordException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
+        }
+        return new Password(password);
     }
 }

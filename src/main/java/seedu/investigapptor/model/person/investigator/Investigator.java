@@ -1,5 +1,6 @@
 package seedu.investigapptor.model.person.investigator;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ public class Investigator extends Person {
 
     private UniqueCrimeCaseList crimeCases;
     private Rank rank;
+    private ArrayList<Integer> caseListHashed;
     /**
      * Every field must be present and not null.
      */
@@ -36,6 +38,13 @@ public class Investigator extends Person {
         super(name, phone, email, address, tags);
         this.rank = rank;
         crimeCases = new UniqueCrimeCaseList(cases);
+    }
+    public Investigator(Name name, Phone phone, Email email, Address address, Rank rank,
+                        Set<Tag> tags, ArrayList<Integer> caseListHashed) {
+        super(name, phone, email, address, tags);
+        this.rank = rank;
+        crimeCases = new UniqueCrimeCaseList();
+        this.caseListHashed = caseListHashed;
     }
     public void addCrimeCase(CrimeCase caseToAdd) throws DuplicateCrimeCaseException {
         crimeCases.add(caseToAdd);
@@ -71,14 +80,29 @@ public class Investigator extends Person {
         return crimeCases.asObservableList();
     }
 
+    /**
+     * Returns true if empty
+     * else if not empty
+     */
+    public boolean emptyList() {
+        if (getCrimeCases().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void removeCrimeCase(CrimeCase caseToRemove) throws CrimeCaseNotFoundException {
         crimeCases.remove(caseToRemove);
     }
 
+    public ArrayList<Integer> getCaseListHashed() {
+        return caseListHashed;
+    }
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, rank, tags, crimeCases);
+        return Objects.hash(name, phone, email, address, rank, tags);
     }
 
     @Override

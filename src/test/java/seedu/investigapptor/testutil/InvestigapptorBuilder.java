@@ -2,6 +2,7 @@ package seedu.investigapptor.testutil;
 
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.model.Investigapptor;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
@@ -58,6 +59,14 @@ public class InvestigapptorBuilder {
         } catch (IllegalValueException ive) {
             throw new IllegalArgumentException("tagName is expected to be valid.");
         }
+        return this;
+    }
+
+    /**
+     * Parses {@code password} into a {@code Password} and adds it to the {@code Investigapptor} that we are building.
+     */
+    public InvestigapptorBuilder withPassword(String password) {
+        investigapptor.updatePassword(new Password(password));
         return this;
     }
 

@@ -20,6 +20,7 @@ import seedu.investigapptor.logic.UndoRedoStack;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
@@ -171,6 +172,11 @@ public class RegisterInvestigatorCommandTest {
         @Override
         public void backUpInvestigapptor(String fileName) {
             fail("This method should not be called.");
+        }
+
+        @Override
+        public void updatePassword(Password password) {
+            fail("This method should not be called");
         }
     }
 

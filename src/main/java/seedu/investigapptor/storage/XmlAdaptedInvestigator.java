@@ -38,7 +38,7 @@ public class XmlAdaptedInvestigator {
     @XmlElement(required = true)
     private String rank;
     @XmlElement(required = true)
-    private List<XmlAdaptedCrimeCase> caseList = new ArrayList<>();
+    private List<Integer> caseList = new ArrayList<>();
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -53,14 +53,17 @@ public class XmlAdaptedInvestigator {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedInvestigator(String name, String phone, String email, String address, String rank,
-                                  List<XmlAdaptedCrimeCase> caseList, List<XmlAdaptedTag> tagged) {
+                                  List<CrimeCase> caseList, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.rank = rank;
+        this.caseList = new ArrayList<>();
         if (caseList != null) {
-            this.caseList = new ArrayList<>(caseList);
+            for (CrimeCase c : caseList) {
+                this.caseList.add(c.hashCode());
+            }
         }
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -80,7 +83,7 @@ public class XmlAdaptedInvestigator {
         rank = source.getRank().getValue();
         caseList = new ArrayList<>();
         for (CrimeCase crimeCase : source.getCrimeCases()) {
-            caseList.add(new XmlAdaptedCrimeCase(crimeCase));
+            caseList.add(crimeCase.hashCode());
         }
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -99,9 +102,9 @@ public class XmlAdaptedInvestigator {
             personTags.add(tag.toModelType());
         }
 
-        final List<CrimeCase> investigatorCases = new ArrayList<>();
-        for (XmlAdaptedCrimeCase crimeCase: caseList) {
-            investigatorCases.add(crimeCase.toModelType());
+        final ArrayList<Integer> investigatorCases = new ArrayList<>();
+        for (int crimeCase: caseList) {
+            investigatorCases.add(crimeCase);
         }
         if (this.name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -144,8 +147,7 @@ public class XmlAdaptedInvestigator {
         final Rank rank = new Rank(this.rank);
 
         final Set<Tag> tags = new HashSet<>(personTags);
-        final Set<CrimeCase> crimeCases = new HashSet<>(investigatorCases);
-        return new Investigator(name, phone, email, address, rank, tags, crimeCases);
+        return new Investigator(name, phone, email, address, rank, tags, investigatorCases);
     }
 
     /**

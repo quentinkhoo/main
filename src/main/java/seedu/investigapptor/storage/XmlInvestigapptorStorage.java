@@ -1,6 +1,7 @@
 package seedu.investigapptor.storage;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.investigapptor.model.Password.isCorrectPassword;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +12,9 @@ import java.util.logging.Logger;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
+import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.commons.util.FileUtil;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 
 /**
@@ -62,6 +65,35 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
         }
     }
 
+    /**
+     * Similar to {@link InvestigapptorStorage#readInvestigapptor()}
+     *
+     * @param filePath location of the data. Cannot be null
+     * @throws DataConversionException if the file is not in the correct format.
+     */
+    public void checkInvestigapptorPassword(String filePath, Password password)
+            throws DataConversionException, IOException, WrongPasswordException {
+        requireNonNull(filePath);
+        requireNonNull(password);
+
+        File investigapptorFile = new File(filePath);
+
+        if (!investigapptorFile.exists()) {
+            logger.info("Investigapptor file " + investigapptorFile + " not found");
+        }
+        XmlSerializableInvestigapptor xmlInvestigapptor = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        try {
+            String currentPassword = xmlInvestigapptor.toModelType().getPassword().getPassword();
+            String inputPassword = Password.generatePasswordHash(password.getPassword());
+            if (!isCorrectPassword(currentPassword, inputPassword)) {
+                throw new WrongPasswordException("Invalid password entered! Please try again.");
+            }
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in " + investigapptorFile + ": " + ive.getMessage());
+            throw new DataConversionException(ive);
+        }
+    }
+
     @Override
     public void saveInvestigapptor(ReadOnlyInvestigapptor investigapptor) throws IOException {
         saveInvestigapptor(investigapptor, filePath);
@@ -84,6 +116,12 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
     @Override
     public void backupInvestigapptor(ReadOnlyInvestigapptor investigapptor, String fileName) throws IOException {
         saveInvestigapptor(investigapptor, filePath + ".backup");
+    }
+
+    @Override
+    public void readInvestigapptorWithPassword(Password password)
+            throws DataConversionException, IOException, WrongPasswordException {
+        checkInvestigapptorPassword(filePath, password);
     }
 
 }

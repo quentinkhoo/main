@@ -20,7 +20,7 @@ public class ListCommandParser implements Parser<ListCommand> {
 
     public ListCommand parse(String args) throws ParseException {
         try {
-            String type = ParserUtil.parseType(args);
+            String type = ParserUtil.parseListType(args);
             return new ListCommand(type);
         } catch (IllegalValueException ive) {
             throw new ParseException(

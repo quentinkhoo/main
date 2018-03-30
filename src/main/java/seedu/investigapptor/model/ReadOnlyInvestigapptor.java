@@ -41,5 +41,10 @@ public interface ReadOnlyInvestigapptor {
      */
     ObservableList<Person> getPersonOnlyList();
 
+    /**
+     * Returns the hashed password
+     */
+    Password getPassword();
+
 
 }

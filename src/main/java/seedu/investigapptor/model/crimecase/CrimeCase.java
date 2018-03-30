@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
 
@@ -17,8 +17,8 @@ public class CrimeCase {
 
     private final CaseName name;
     private final Description description;
-    private final Person currentInvestigator;
     private final Date startDate;
+    private final Investigator currentInvestigator;
     private final Status status;
     private final Date endDate;
 
@@ -27,7 +27,7 @@ public class CrimeCase {
     /**
      * Every field must be present and not null
      */
-    public CrimeCase(CaseName name, Description description, Person currentInvestigator,
+    public CrimeCase(CaseName name, Description description, Investigator currentInvestigator,
                      Date startDate, Status status, Set<Tag> tags) {
         this.name = name;
         this.description = description;
@@ -46,7 +46,7 @@ public class CrimeCase {
         return description;
     }
 
-    public Person getCurrentInvestigator() {
+    public Investigator getCurrentInvestigator() {
         return currentInvestigator;
     }
 
@@ -109,7 +109,7 @@ public class CrimeCase {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, description, currentInvestigator, startDate, status, tags);
+        return Objects.hash(name, startDate, status, tags);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class CrimeCase {
                 .append(" Description: ")
                 .append(getDescription())
                 .append(" Current Investigator: ")
-                .append(getCurrentInvestigator())
+                .append(getCurrentInvestigator().getName())
                 .append(" Start Date: ")
                 .append(getStartDate())
                 .append(" Status: ")

@@ -2,7 +2,7 @@
 package seedu.investigapptor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_CASES;
 import static seedu.investigapptor.model.crimecase.Status.CASE_CLOSE;
 
 import java.util.List;
@@ -15,12 +15,12 @@ import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.Date;
+import seedu.investigapptor.model.crimecase.Description;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
-import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -62,7 +62,7 @@ public class CloseCaseCommand extends UndoableCommand {
         } catch (CrimeCaseNotFoundException cnfe) {
             throw new AssertionError("The target case cannot be missing");
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
         return new CommandResult(String.format(MESSAGE_CLOSE_CASE_SUCCESS, editedCase.getStatus()));
     }
 
@@ -96,7 +96,7 @@ public class CloseCaseCommand extends UndoableCommand {
         Description desc = caseToEdit.getDescription();
         Date date = caseToEdit.getStartDate();
         Set<Tag> tags = caseToEdit.getTags();
-        Person investigator = caseToEdit.getCurrentInvestigator();
+        Investigator investigator = caseToEdit.getCurrentInvestigator();
         Status status = caseToEdit.getStatus();
         status.closeCase();    // Close case status only
 

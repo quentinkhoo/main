@@ -19,8 +19,8 @@ public class CrimeCase {
     private final Description description;
     private final Person currentInvestigator;
     private final Date startDate;
-    private final Date endDate;
     private final Status status;
+    private final Date endDate;
 
     private final UniqueTagList tags;
 

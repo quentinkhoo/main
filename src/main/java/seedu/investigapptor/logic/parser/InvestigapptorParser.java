@@ -78,6 +78,10 @@ public class InvestigapptorParser {
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
 
+        case CloseCaseCommand.COMMAND_WORD:
+        case CloseCaseCommand.COMMAND_ALIAS:
+            return new CloseCaseCommandParser().parse(arguments);
+
         case FindCaseCommand.COMMAND_WORD:
         case FindCaseCommand.COMMAND_ALIAS:
             return new FindCaseCommandParser().parse(arguments);
@@ -97,10 +101,6 @@ public class InvestigapptorParser {
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:
             return new ListCommandParser().parse(arguments);
-
-        case CloseCaseCommand.COMMAND_WORD:
-        case CloseCaseCommand.COMMAND_ALIAS:
-            return new CloseCaseCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_ALIAS:

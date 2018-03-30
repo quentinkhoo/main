@@ -70,7 +70,7 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
-    public void handleKeyPress_Escape() {
+    public void handleKeyPress_escape() {
         guiRobot.push(KeyCode.ESCAPE);
         assertTrue("".equals(commandBoxHandle.getInput()));
 

@@ -81,6 +81,11 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         List<CrimeCase> syncedCrimeCaseList = newData.getCrimeCaseList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
+        try {
+            setCrimeCases(syncedCrimeCaseList);
+        } catch (DuplicateCrimeCaseException e) {
+            throw new AssertionError("Investigapptors should not have duplicate cases");
+        }
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
@@ -88,11 +93,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("Investigapptors should not have duplicate persons");
-        }
-        try {
-            setCrimeCases(syncedCrimeCaseList);
-        } catch (DuplicateCrimeCaseException e) {
-            throw new AssertionError("Investigapptors should not have duplicate cases");
         }
 
     }
@@ -250,8 +250,9 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() + " tags";
-        // TODO: refine later
+        return cases.asObservableList().size() + " cases, "
+                + persons.asObservableList().size() + " persons, "
+                + tags.asObservableList().size() + " tags";
     }
 
     @Override
@@ -283,6 +284,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Investigapptor // instanceof handles nulls
+                && this.cases.equals(((Investigapptor) other).cases)
                 && this.persons.equals(((Investigapptor) other).persons)
                 && this.tags.equalsOrderInsensitive(((Investigapptor) other).tags));
     }
@@ -290,6 +292,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        return Objects.hash(cases, persons, tags);
     }
 }

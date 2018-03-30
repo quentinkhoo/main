@@ -68,6 +68,12 @@ public class InvestigapptorTest {
     }
 
     @Test
+    public void getCrimeCaseList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        investigapptor.getCrimeCaseList().remove(0);
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         investigapptor.getPersonList().remove(0);

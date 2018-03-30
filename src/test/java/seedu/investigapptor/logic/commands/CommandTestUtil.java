@@ -168,7 +168,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s investigapptor book.
      */
-    public static void showCaseAtIndex(Model model, Index targetIndex) {
+    public static void showCrimeCaseAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredCrimeCaseList().size());
 
         CrimeCase crimeCase = model.getFilteredCrimeCaseList().get(targetIndex.getZeroBased());

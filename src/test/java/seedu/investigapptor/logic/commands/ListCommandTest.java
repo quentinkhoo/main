@@ -1,7 +1,7 @@
 package seedu.investigapptor.logic.commands;
 
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.investigapptor.logic.commands.CommandTestUtil.showCaseAtIndex;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.showCrimeCaseAtIndex;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -86,7 +86,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_caseListIsFiltered_showsEverything() {
-        showCaseAtIndex(crimeCaseModel, INDEX_FIRST_PERSON);
+        showCrimeCaseAtIndex(crimeCaseModel, INDEX_FIRST_PERSON);
         assertCommandSuccess(listCommandCases, crimeCaseModel, String.format(ListCommand.MESSAGE_SUCCESS, "cases"),
                 expectedCrimeCaseModel);
     }

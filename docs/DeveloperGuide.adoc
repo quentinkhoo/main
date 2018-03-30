@@ -640,7 +640,7 @@ The `CrimeCase` package consists of multiple classes used to contain information
 
 ==== `CaseName` class +
 
-Stores a `String` that represents the name of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the `CaseName` object
+Stores a `String` that represents the name of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the `CaseName` object.
 
     /**
      * Constructs a {@code Name}.
@@ -665,7 +665,7 @@ Stores a `String` that represents the description of the case. Provides utility 
 
 ==== `StartDate` class +
 
-Stores a `String` that represents the start date of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the `StartDate` object
+Stores a `String` that represents the start date of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the `StartDate` object.
 
     /**
      * Constructs a {@code date}.

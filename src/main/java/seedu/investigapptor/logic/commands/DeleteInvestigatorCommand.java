@@ -10,6 +10,7 @@ import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
+import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
  * Deletes a person identified using it's last displayed index from the investigapptor book.
@@ -25,7 +26,8 @@ public class DeleteInvestigatorCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Investigator: %1$s";
-
+    public static final String MESSAGE_ACTIVE_INVESTIGATOR = "Investigator is currently in charge of a case.\n"
+            + "Please reassign the cases to another investigator to delete the selected investigator";
     private final Index targetIndex;
 
     private Person personToDelete;
@@ -36,14 +38,19 @@ public class DeleteInvestigatorCommand extends UndoableCommand {
 
 
     @Override
-    public CommandResult executeUndoableCommand() {
+    public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(personToDelete);
-        try {
-            model.deletePerson(personToDelete);
-        } catch (PersonNotFoundException pnfe) {
-            throw new AssertionError("The target investigator cannot be missing");
+        if (personToDelete instanceof Investigator) {
+            if (!((Investigator) personToDelete).emptyList()) {
+                throw new CommandException(MESSAGE_ACTIVE_INVESTIGATOR);
+            }
+        } else {
+            try {
+                model.deletePerson(personToDelete);
+            } catch (PersonNotFoundException pnfe) {
+                throw new AssertionError("The target investigator cannot be missing");
+            }
         }
-
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 

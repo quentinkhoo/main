@@ -52,8 +52,8 @@ public class InvestigapptorParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(person).build();
+        Investigator investigator = new InvestigatorBuilder().build();
+        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(investigator).build();
         AddCaseCommand command = (AddCaseCommand)
                 parser.parseCommand(CrimeCaseUtil.getAddCommand(crimeCase) + "i/" + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new AddCaseCommand(crimeCase.getCaseName(), crimeCase.getDescription(),
@@ -62,8 +62,8 @@ public class InvestigapptorParserTest {
 
     @Test
     public void parseCommand_addAlias() throws Exception {
-        Person person = new PersonBuilder().build();
-        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(person).build();
+        Investigator investigator = new InvestigatorBuilder().build();
+        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(investigator).build();
         AddCaseCommand command = (AddCaseCommand)
                 parser.parseCommand(CrimeCaseUtil.getAliasAddCommand(crimeCase)
                         + "i/" + INDEX_FIRST_PERSON.getOneBased());

@@ -31,6 +31,10 @@ import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
+import seedu.investigapptor.model.Investigapptor;
+import seedu.investigapptor.model.Model;
+import seedu.investigapptor.model.ModelManager;
+import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.model.crimecase.CaseNameContainsKeywordsPredicate;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
@@ -49,11 +53,12 @@ public class InvestigapptorParserTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private final InvestigapptorParser parser = new InvestigapptorParser();
+    private Model model = new ModelManager(new Investigapptor(), new UserPrefs());
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(person).build();
+        Investigator investigator = new InvestigatorBuilder().build();
+        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(investigator).build();
         AddCaseCommand command = (AddCaseCommand)
                 parser.parseCommand(CrimeCaseUtil.getAddCommand(crimeCase) + "i/" + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new AddCaseCommand(crimeCase.getCaseName(), crimeCase.getDescription(),
@@ -62,8 +67,8 @@ public class InvestigapptorParserTest {
 
     @Test
     public void parseCommand_addAlias() throws Exception {
-        Person person = new PersonBuilder().build();
-        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(person).build();
+        Investigator investigator = new InvestigatorBuilder().build();
+        CrimeCase crimeCase = new CrimeCaseBuilder().withInvestigator(investigator).build();
         AddCaseCommand command = (AddCaseCommand)
                 parser.parseCommand(CrimeCaseUtil.getAliasAddCommand(crimeCase)
                         + "i/" + INDEX_FIRST_PERSON.getOneBased());

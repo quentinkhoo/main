@@ -33,6 +33,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     private final UniquePersonList persons;
     private final UniqueCrimeCaseList cases;
     private final UniqueTagList tags;
+    private Password password;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -48,10 +49,15 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
 
     public Investigapptor() {
+        this.password = new Password();
+    }
+
+    public Investigapptor(String password) {
+        this.password = new Password(password);
     }
 
     /**
-     * Creates an Investigapptor using the Persons and Tags in the {@code toBeCopied}
+     * Creates an Investigapptor using the Investigators, CrimeCases, Password and Tags in the {@code toBeCopied}
      */
     public Investigapptor(ReadOnlyInvestigapptor toBeCopied) {
         this();
@@ -72,6 +78,14 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         this.tags.setTags(tags);
     }
 
+    public void setPassword(String password) {
+        this.password = new Password(password);
+    }
+
+    public void setPassword(Password oldPassword) {
+        this.password = oldPassword;
+    }
+
     /**
      * Resets the existing data of this {@code Investigapptor} with {@code newData}.
      */
@@ -81,20 +95,21 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         List<CrimeCase> syncedCrimeCaseList = newData.getCrimeCaseList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
+        List<Person> syncedPersonList = newData.getPersonList().stream()
+                .map(this::syncWithMasterTagList)
+                .collect(Collectors.toList());
         try {
             setCrimeCases(syncedCrimeCaseList);
         } catch (DuplicateCrimeCaseException e) {
             throw new AssertionError("Investigapptors should not have duplicate cases");
         }
-        List<Person> syncedPersonList = newData.getPersonList().stream()
-                .map(this::syncWithMasterTagList)
-                .collect(Collectors.toList());
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
-            throw new AssertionError("Investigapptors should not have duplicate persons");
+            throw new AssertionError("Investigapptor should not have duplicate investigators");
         }
-
+        String passwordHash = newData.getPassword().getPassword();
+        setPassword(passwordHash);
     }
     //// person-level operations
 
@@ -146,6 +161,27 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         }
     }
 
+    /**
+     * Converts {@code key} hashcode list of cases into CrimeCase object
+     *
+     *
+     */
+    public void convertHashToCases(Investigator key) throws DuplicatePersonException {
+        if (key.getCaseListHashed() != null) {
+            for (Integer i : key.getCaseListHashed()) {
+                for (CrimeCase c : cases) {
+                    if (c.hashCode() == i) {
+                        try {
+                            key.addCrimeCase(c);
+                        } catch (DuplicateCrimeCaseException e) {
+                            throw new AssertionError("Not possible, duplicate case while retrieving from xml");
+                        }
+                    }
+                }
+            }
+        }
+        addPerson(key);
+    }
     //// case-level operations
 
     /**
@@ -160,7 +196,14 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any case
         // in the case list.
-        cases.add(crimecase);
+        if (cases.add(crimecase)) {
+            if (crimecase.getCurrentInvestigator() != null) {
+                for (CrimeCase d : crimecase.getCurrentInvestigator().getCrimeCases()) {
+                    System.out.println(d.getCaseName());
+                }
+                crimecase.getCurrentInvestigator().addCrimeCase(crimecase);
+            }
+        }
     }
 
     /**
@@ -246,6 +289,15 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
                 crimecase.getCaseName(), crimecase.getDescription(), crimecase.getCurrentInvestigator(),
                 crimecase.getStartDate(), crimecase.getStatus(), correctTagReferences);
     }
+    ///password level operations
+
+    /**
+     * Updates the password of this {@code Investigapptor}.
+     * @param newPassword  will be the new password.
+     */
+    public void updatePassword(Password newPassword) {
+        password.updatePassword(newPassword);
+    }
     //// util methods
 
     @Override
@@ -273,6 +325,11 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     @Override
     public ObservableList<CrimeCase> getCrimeCaseList() {
         return cases.asObservableList();
+    }
+
+    @Override
+    public Password getPassword() {
+        return password;
     }
 
     @Override

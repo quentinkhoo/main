@@ -7,6 +7,7 @@ import seedu.investigapptor.commons.events.model.InvestigapptorBackupEvent;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.commons.events.storage.DataSavingExceptionEvent;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
+import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.UserPrefs;
 
@@ -25,7 +26,8 @@ public interface Storage extends InvestigapptorStorage, UserPrefsStorage {
     String getInvestigapptorFilePath();
 
     @Override
-    Optional<ReadOnlyInvestigapptor> readInvestigapptor() throws DataConversionException, IOException;
+    Optional<ReadOnlyInvestigapptor> readInvestigapptor()
+            throws DataConversionException, IOException, WrongPasswordException;
 
     @Override
     void saveInvestigapptor(ReadOnlyInvestigapptor investigapptor) throws IOException;

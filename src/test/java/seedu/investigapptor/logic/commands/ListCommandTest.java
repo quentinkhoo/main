@@ -42,27 +42,14 @@ public class ListCommandTest {
         investigatorModel = new ModelManager(TypicalPersons.getTypicalInvestigapptor(), new UserPrefs());
         expectedInvestigatorModel = new ModelManager(investigatorModel.getInvestigapptor(), new UserPrefs());
 
-        listCommandInvestigators = new ListCommand("investigators");
+        listCommandInvestigators = new ListCommand("inv");
         listCommandInvestigators.setData(investigatorModel, new CommandHistory(), new UndoRedoStack());
 
         crimeCaseModel = new ModelManager(TypicalCrimeCases.getTypicalInvestigapptor(), new UserPrefs());
         expectedCrimeCaseModel = new ModelManager(crimeCaseModel.getInvestigapptor(), new UserPrefs());
 
-        listCommandCases = new ListCommand("cases");
+        listCommandCases = new ListCommand("c");
         listCommandCases.setData(investigatorModel, new CommandHistory(), new UndoRedoStack());
-
-        investigatorAliasModel = new ModelManager(TypicalPersons.getTypicalInvestigapptor(), new UserPrefs());
-        expectedInvestigatorAliasModel = new ModelManager(investigatorAliasModel.getInvestigapptor(), new UserPrefs());
-
-        listCommandInvestigatorAlias = new ListCommand(" inv");
-        listCommandInvestigatorAlias.setData(investigatorAliasModel, new CommandHistory(), new UndoRedoStack());
-
-        crimeCaseAliasModel = new ModelManager(TypicalPersons.getTypicalInvestigapptor(), new UserPrefs());
-        expectedCrimeCaseAliasModel = new ModelManager(crimeCaseAliasModel.getInvestigapptor(), new UserPrefs());
-
-        listCommandCrimeCaseAlias = new ListCommand(" c");
-        listCommandCrimeCaseAlias.setData(crimeCaseAliasModel, new CommandHistory(), new UndoRedoStack());
-
     }
 
     @Test
@@ -90,4 +77,5 @@ public class ListCommandTest {
         assertCommandSuccess(listCommandCases, crimeCaseModel, String.format(ListCommand.MESSAGE_SUCCESS, "cases"),
                 expectedCrimeCaseModel);
     }
+
 }

@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.investigapptor.logic.CommandHistory;
@@ -28,7 +29,12 @@ import seedu.investigapptor.model.crimecase.CrimeCase;
  * Contains integration tests (interaction with the Model) for {@code FindCaseCommand}.
  */
 public class FindCaseCommandTest {
-    private Model model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
+    private Model model;
+
+    @Before
+    public void setUp() {
+        model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
+    }
 
     @Test
     public void equals() {

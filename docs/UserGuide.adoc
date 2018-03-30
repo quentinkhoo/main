@@ -186,7 +186,7 @@ Returns `john` and `John Doe`
 * `fI Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
 
-=== Locating cases by name: `findCase [Coming in v1.3]`
+=== Locating cases by name: `findCase [Since v1.3]`
 
 Finds cases whose names contain any of the given keywords. +
 Format: `findCase KEYWORD [MORE_KEYWORDS]` +
@@ -300,7 +300,7 @@ Deletes the 2nd investigator in the address book.
 `dI 1` +
 Deletes the 1st investigator in the results of the `find` command.
 
-=== Deleting a case : `deleteCase [Since v1.2]`
+=== Deleting a case : `deleteCase [Since v1.3]`
 
 Deletes the specified case from the address book. +
 Format: `deleteCase INDEX` +

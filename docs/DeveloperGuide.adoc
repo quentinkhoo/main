@@ -640,10 +640,7 @@ The `CrimeCase` package consists of multiple classes used to contain information
 
 ==== `CaseName` class +
 
-Stores a `String` that represents the name of the case. Provides utility methods to:
-* check the validity of the string to be stored
-* retrieve the string that is stored
-* obtain the hash code of the `CaseName` object
+Stores a `String` that represents the name of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the `CaseName` object
 
     /**
      * Constructs a {@code Name}.
@@ -668,10 +665,7 @@ Stores a `String` that represents the description of the case. Provides utility 
 
 ==== `StartDate` class +
 
-Stores a `String` that represents the start date of the case. Provides utility methods to:
-* check the validity of the string to be stored
-* retrieve the string that is stored
-* obtain the hash code of the `StartDate` object
+Stores a `String` that represents the start date of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the `StartDate` object
 
     /**
      * Constructs a {@code date}.
@@ -682,10 +676,7 @@ Stores a `String` that represents the start date of the case. Provides utility m
 
 ==== `Status` class +
 
-Stores a `String` that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called. Provides utility methods to:
-* toggle the status of the case
-* retrieve the string that is stored
-* obtain the hash code of the `Status` object
+Stores a `String` that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called. Provides utility methods to toggle the status of the case, retrieve the string that is stored, and obtain the hash code of the `Status` object.
 
     /**
      * Constructs a {@code Status}.
@@ -742,19 +733,11 @@ The `AddCaseCommand` that extends the `UndoableCommand` class is implemented wit
      */
     public AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set<Tag> tagList)
 
-+
-
 Since `AddCaseCommand` extends `UndoableCommand`, after the constructor is called, the `preprocessUndoableCommand` and `executeUndoableCommand` methods are executed consecutively right after.
-
-+
 
 If the `AddCaseCommand(CrimeCase crimeCase)` constructor is used, the logic in the `preprocessUndoableCommand` method is not executed.
 
-+
-
 Note that the `AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set<Tag> tagList)` constructor above takes in an `Index` object as a parameter, which refers to the index number of the investigator as displayed in `PersonListPanel`.
-
-+
 
 The `Person` object is retrieved based on the index and the created `CrimeCase` object is stored in `toAdd`:
 
@@ -770,8 +753,6 @@ The `Person` object is retrieved based on the index and the created `CrimeCase` 
         }
     }
 
-+
-
 The `executeUndoableCommand` then adds the `CrimeCase` object to the model and throws a `DuplicateCrimeCaseException` if there exists an identical object:
 
     @Override
@@ -785,85 +766,70 @@ The `executeUndoableCommand` then adds the `CrimeCase` object to the model and t
         }
     }
 
-===== Storage
+=== Deleting cases feature
 
-Newly created cases are stored in the same file as the investigators, in xml format. `XmlAdaptedCrimeCases` is used to convert a `CrimeCase` object, or `String` parameters describing a `CrimeCase` object into an `XmlAdaptedCrimeCase` object for JAXB use (creating the XML).
+==== Current Implementation
 
-    /**
-     * Constructs an {@code XmlAdaptedCrimeCase} with the given case details.
-     */
-    public XmlAdaptedCrimeCase(String name, String description, XmlAdaptedPerson investigator, String startDate,
-                               String status, List<XmlAdaptedTag> tagged)
+===== Logic
 
-+
+* `DeleteCaseCommandParser`
 
-Note that the investigator field uses an `XmlAdaptedPerson` object, which means that the the complete information from the `Person` object is duplicated within the `cases` tags in the XML file.
+`DeleteCaseCommandParser` parses the given `String` of arguments in the context of the `DeleteCaseCommand` and returns an `DeleteCaseCommand` object for execution. A `ParseException` is thrown if the user input does not conform to the expected format.
 
-+
+    public DeleteCaseCommand parse(String args) throws ParseException {
+        try {
+            Index index = ParserUtil.parseIndex(args);
+            return new DeleteCaseCommand(index);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCaseCommand.MESSAGE_USAGE));
+        }
+    }
 
-Below is an example of how the cases and investigators are stored in the file:
+* `DeleteCaseCommand`
 
-    <investigapptor>
-        <cases>
-        <cases>
-            <name>Project Test</name>
-            <description>test description</description>
-            <investigator>
-                <name>Bernice Yu</name>
-                <phone>99272758</phone>
-                <email>berniceyu@example.com</email>
-                <address>Blk 30 Lorong 3 Serangoon Gardens, #07-18</address>
-                <tagged>colleagues</tagged>
-                <tagged>friends</tagged>
-            </investigator>
-            <startDate>14/02/13</startDate>
-            <status>open</status>
-            <tagged>Murder</tagged>
-        </cases>
-        <cases>
-            <name>Project New</name>
-            <description>New project description</description>
-            <investigator>
-                <name>Irfan Ibrahim</name>
-                <phone>92492021</phone>
-                <email>irfan@example.com</email>
-                <address>Blk 47 Tampines Street 20, #17-35</address>
-                <tagged>classmates</tagged>
-            </investigator>
-            <startDate>23/11/2013</startDate>
-            <status>open</status>
-            <tagged>Homicide</tagged>
-            <tagged>Fraud</tagged>
-        </cases>
-        <persons>
-            <name>Alex Yeoh</name>
-            <phone>87438807</phone>
-            <email>alexyeoh@example.com</email>
-            <address>Blk 30 Geylang Street 29, #06-40</address>
-            <tagged>friends</tagged>
-        </persons>
-        <persons>
-            <name>Bernice Yu</name>
-            <phone>99272758</phone>
-            <email>berniceyu@example.com</email>
-            <address>Blk 30 Lorong 3 Serangoon Gardens, #07-18</address>
-            <tagged>colleagues</tagged>
-            <tagged>friends</tagged>
-        </persons>
-        <persons>
-            <name>Irfan Ibrahim</name>
-            <phone>92492021</phone>
-            <email>irfan@example.com</email>
-            <address>Blk 47 Tampines Street 20, #17-35</address>
-            <tagged>classmates</tagged>
-        </persons>
-        <tags>Homicide</tags>
-        <tags>colleagues</tags>
-        <tags>classmates</tags>
-        <tags>Fraud</tags>
-        <tags>Murder</tags>
-        <tags>friends</tags>
-    </investigapptor>
+`preprocessUndoableCommand` first retrieves the `CrimeCase` object based on the `Index` given. The `DeleteCaseCommand` will then be executed to remove the case from the application and update the model. `EventsCenter` reacts to the `SwapTabEvent`, which switches the tab to show the list of cases. The following segment shows the execution code.
+
+    public CommandResult executeUndoableCommand() {
+        requireNonNull(caseToDelete);
+        try {
+            model.deleteCrimeCase(caseToDelete);
+            EventsCenter.getInstance().post(new SwapTabEvent(1));
+        } catch (CrimeCaseNotFoundException pnfe) {
+            throw new AssertionError("The target case cannot be missing");
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_CASE_SUCCESS, caseToDelete));
+    }
+
+=== Finding cases feature
+
+==== Current Implementation
+
+===== Logic
+
+* `FindCaseCommandParser`
+
+`FindCaseCommandParser` parses the given `String` of arguments in the context of the `FindCaseCommand` and returns an `FindCaseCommand` object for execution. A `ParseException` is thrown if the user input does not conform to the expected format.
+
+    public FindCaseCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCaseCommand.MESSAGE_USAGE));
+        }
+        String[] nameKeywords = trimmedArgs.split("\\s+");
+        return new FindCaseCommand(new CaseNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+    }
+
+* `FindCaseCommand`
+
+The `FindCaseCommand` will then be executed and the observable list filteredCrimeCaseList will be updated with the cases whose case name matches the predicate keywords. `EventsCenter` reacts to the `SwapTabEvent`, which switches the tab to show the filtered list of cases. The following segment shows the execution code.
+
+    public CommandResult execute() {
+        model.updateFilteredCrimeCaseList(predicate);
+        EventsCenter.getInstance().post(new SwapTabEvent(1));
+        return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
+    }
 
 === Creating Backup
 

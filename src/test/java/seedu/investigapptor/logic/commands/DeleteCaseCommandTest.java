@@ -1,11 +1,13 @@
 package seedu.investigapptor.logic.commands;
 
 import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.prepareRedoCommand;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.prepareUndoCommand;
+//import static seedu.investigapptor.logic.commands.CommandTestUtil.showCrimeCaseAtIndex;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.getTypicalInvestigapptor;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_CASE;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_SECOND_CASE;
@@ -50,6 +52,7 @@ public class DeleteCaseCommandTest {
         assertCommandFailure(deleteCaseCommand, model, Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
     }
 
+    /* TO REVIEW */
     /*
     @Test
     public void execute_validIndexFilteredList_success() throws Exception {
@@ -68,6 +71,7 @@ public class DeleteCaseCommandTest {
     }
     */
 
+    /* TO REVIEW */
     /*
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
@@ -120,6 +124,7 @@ public class DeleteCaseCommandTest {
         assertCommandFailure(redoCommand, model, RedoCommand.MESSAGE_FAILURE);
     }
 
+    /* TO REVIEW */
     /**
      * 1. Deletes a {@code CrimeCase} from a filtered list.
      * 2. Undo the deletion.

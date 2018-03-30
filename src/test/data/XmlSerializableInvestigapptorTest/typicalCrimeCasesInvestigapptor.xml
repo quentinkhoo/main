@@ -14,6 +14,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>10/11/2015</startDate>
+        <endDate>12/12/3000</endDate>
         <status>close</status>
         <tagged>Murder</tagged>
     </cases>
@@ -29,6 +30,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>12/03/2016</startDate>
+        <endDate>12/12/3000</endDate>
         <status>open</status>
         <tagged>Kidnap</tagged>
         <tagged>Homicide</tagged>
@@ -45,6 +47,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>18/01/2012</startDate>
+        <endDate>12/12/3000</endDate>
         <status>open</status>
         <status>close</status>
     </cases>
@@ -60,6 +63,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>27/11/1999</startDate>
+        <endDate>12/12/3000</endDate>
         <status>open</status>
     </cases>
     <cases>
@@ -74,6 +78,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>23/11/1965</startDate>
+        <endDate>12/12/3000</endDate>
         <status>open</status>
     </cases>
     <cases>
@@ -88,6 +93,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>09/07/2017</startDate>
+        <endDate>12/12/3000</endDate>
         <status>close</status>
     </cases>
     <cases>
@@ -102,6 +108,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>02/08/2017</startDate>
+        <endDate>12/12/3000</endDate>
         <status>open</status>
     </cases>
     <cases>
@@ -116,6 +123,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>10/12/2016</startDate>
+        <endDate>12/12/3000</endDate>
         <status>open</status>
         <tagged>Murder</tagged>
         <tagged>Homicide</tagged>
@@ -133,6 +141,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>14/12/2016</startDate>
+        <endDate>12/12/3000</endDate>
         <status>open</status>
         <tagged>Robbery</tagged>
         <tagged>Prank</tagged>
@@ -150,6 +159,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>18/12/2016</startDate>
+        <endDate>12/12/3000</endDate>
         <status>open</status>
         <tagged>Murder</tagged>
         <tagged>Supernatural</tagged>
@@ -166,6 +176,7 @@
             <tagged>friends</tagged>
         </investigator>
         <startDate>11/12/2016</startDate>
+        <endDate>12/12/3000</endDate>
         <status>open</status>
         <tagged>Theft</tagged>
     </cases>

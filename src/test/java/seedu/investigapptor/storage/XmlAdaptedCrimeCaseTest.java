@@ -37,6 +37,7 @@ public class XmlAdaptedCrimeCaseTest {
     private static final XmlAdaptedInvestigator VALID_INVESTIGATOR =
             new XmlAdaptedInvestigator(ALFA.getCurrentInvestigator());
     private static final String VALID_STARTDATE = ALFA.getStartDate().date;
+    private static final String VALID_ENDDATE = ALFA.getEndDate().date;
     private static final String VALID_STATUS = ALFA.getStatus().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = ALFA.getTags().stream()
             .map(XmlAdaptedTag::new)
@@ -51,8 +52,8 @@ public class XmlAdaptedCrimeCaseTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase =
-                new XmlAdaptedCrimeCase(INVALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR, VALID_STARTDATE,
-                        VALID_STATUS, VALID_TAGS);
+                new XmlAdaptedCrimeCase(INVALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR,
+                        VALID_STARTDATE, VALID_ENDDATE, VALID_STATUS, VALID_TAGS);
         String expectedMessage = CaseName.MESSAGE_CASE_NAME_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
@@ -60,7 +61,7 @@ public class XmlAdaptedCrimeCaseTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase = new XmlAdaptedCrimeCase(null, VALID_DESCRIPTION, VALID_INVESTIGATOR,
-                VALID_STARTDATE, VALID_STATUS, VALID_TAGS);
+                VALID_STARTDATE, VALID_ENDDATE, VALID_STATUS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, CaseName.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
@@ -69,7 +70,7 @@ public class XmlAdaptedCrimeCaseTest {
     public void toModelType_invalidDescription_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase =
                 new XmlAdaptedCrimeCase(VALID_NAME, INVALID_DESCRIPTION, VALID_INVESTIGATOR, VALID_STARTDATE,
-                        VALID_STATUS, VALID_TAGS);
+                        VALID_STATUS, VALID_ENDDATE, VALID_TAGS);
         String expectedMessage = Description.MESSAGE_DESCRIPTION_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
@@ -77,7 +78,7 @@ public class XmlAdaptedCrimeCaseTest {
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase = new XmlAdaptedCrimeCase(VALID_NAME, null, VALID_INVESTIGATOR,
-                VALID_STARTDATE, VALID_STATUS, VALID_TAGS);
+                VALID_STARTDATE, VALID_ENDDATE, VALID_STATUS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
@@ -86,7 +87,7 @@ public class XmlAdaptedCrimeCaseTest {
     public void toModelType_invalidInvestigator_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase =
                 new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, INVALID_INVESTIGATOR, VALID_STARTDATE,
-                        VALID_STATUS, VALID_TAGS);
+                        VALID_ENDDATE, VALID_STATUS, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_NAME_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
@@ -94,7 +95,7 @@ public class XmlAdaptedCrimeCaseTest {
     @Test
     public void toModelType_nullInvestigator_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase = new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, null,
-                VALID_STARTDATE, VALID_STATUS, VALID_TAGS);
+                VALID_STARTDATE, VALID_ENDDATE, VALID_STATUS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
@@ -103,7 +104,7 @@ public class XmlAdaptedCrimeCaseTest {
     public void toModelType_invalidStartDate_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase =
                 new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR, INVALID_STARTDATE,
-                        VALID_STATUS, VALID_TAGS);
+                        VALID_ENDDATE, VALID_STATUS, VALID_TAGS);
         String expectedMessage = Date.MESSAGE_DATE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
@@ -111,7 +112,7 @@ public class XmlAdaptedCrimeCaseTest {
     @Test
     public void toModelType_nullStartDate_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase = new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR,
-                null, VALID_STATUS, VALID_TAGS);
+                null, VALID_ENDDATE, VALID_STATUS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
@@ -120,7 +121,7 @@ public class XmlAdaptedCrimeCaseTest {
     public void toModelType_invalidStatus_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase =
                 new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR, VALID_STARTDATE,
-                        INVALID_STATUS, VALID_TAGS);
+                        VALID_ENDDATE, INVALID_STATUS, VALID_TAGS);
         String expectedMessage = Status.MESSAGE_STATUS_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
@@ -128,7 +129,7 @@ public class XmlAdaptedCrimeCaseTest {
     @Test
     public void toModelType_nullStatus_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase = new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR,
-                VALID_STARTDATE, null, VALID_TAGS);
+                VALID_STARTDATE, VALID_ENDDATE, null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
@@ -139,7 +140,7 @@ public class XmlAdaptedCrimeCaseTest {
         invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
         XmlAdaptedCrimeCase crimeCase =
                 new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR, VALID_STARTDATE,
-                        VALID_STATUS, invalidTags);
+                        VALID_ENDDATE, VALID_STATUS, invalidTags);
         Assert.assertThrows(IllegalValueException.class, crimeCase::toModelType);
     }
 

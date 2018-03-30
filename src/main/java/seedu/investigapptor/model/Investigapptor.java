@@ -297,7 +297,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         crimecaseTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         return new CrimeCase(
                 crimecase.getCaseName(), crimecase.getDescription(), crimecase.getCurrentInvestigator(),
-                crimecase.getStartDate(), crimecase.getStatus(), correctTagReferences);
+                crimecase.getStartDate(), crimecase.getEndDate(), crimecase.getStatus(), correctTagReferences);
     }
     ///password level operations
 

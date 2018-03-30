@@ -94,12 +94,13 @@ public class CloseCaseCommand extends UndoableCommand {
 
         CaseName name = caseToEdit.getCaseName();
         Description desc = caseToEdit.getDescription();
-        Date date = caseToEdit.getStartDate();
+        Date startDate = caseToEdit.getStartDate();
+        Date endDate = new Date(Date.getTodayDate());
         Set<Tag> tags = caseToEdit.getTags();
         Investigator investigator = caseToEdit.getCurrentInvestigator();
         Status status = caseToEdit.getStatus();
         status.closeCase();    // Close case status only
 
-        return new CrimeCase(name, desc, investigator, date, status, tags);
+        return new CrimeCase(name, desc, investigator, startDate, endDate, status, tags);
     }
 }

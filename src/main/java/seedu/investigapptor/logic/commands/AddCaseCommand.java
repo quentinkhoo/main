@@ -6,6 +6,7 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_INVESTIGATOR;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.investigapptor.model.crimecase.Date.LARGEST_DATE;
 
 import java.util.List;
 import java.util.Objects;
@@ -123,7 +124,7 @@ public class AddCaseCommand extends UndoableCommand {
         assert investigatorToAdd != null;
 
         return new CrimeCase(this.name, this.description, investigatorToAdd,
-                this.startDate, new Status(), this.tagList);
+                this.startDate, new Date(LARGEST_DATE), new Status(), this.tagList);
     }
 
     @Override

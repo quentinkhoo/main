@@ -5,6 +5,7 @@ import static seedu.investigapptor.commons.util.AppUtil.checkArgument;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a CrimeCase's Start date in the Investigapptor.
@@ -16,6 +17,7 @@ public class Date {
             "Input date must follow DD/MM/YYYY or D/M/YYYY format, and it should not be blank";
 
     public static final String DATE_VALIDATION_REGEX = "([0-9]*)/([0-9]*)/([0-9]*)";
+    public static final String LARGEST_DATE = "12/12/3000";
 
     private static final int DOB_DAY_INDEX = 0;
     private static final int DOB_MONTH_INDEX = 1;
@@ -37,6 +39,18 @@ public class Date {
         checkArgument(isValidDate(date), MESSAGE_DATE_CONSTRAINTS);
         this.date = date;
         setDateProperties(date);
+    }
+
+    /**
+     * Using LocalDate to retrieve the current date according to the format dd/mm/yyyy
+     * @return String todayDate
+     */
+    public static String getTodayDate() {
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String todayDate = now.format(formatter);
+
+        return todayDate;
     }
 
     /**

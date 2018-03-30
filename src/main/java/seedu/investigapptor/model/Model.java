@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
@@ -44,6 +45,15 @@ public interface Model {
 
     /** Adds the given case */
     void addCrimeCase(CrimeCase crimecase) throws DuplicateCrimeCaseException;
+    /**
+     * Replaces the given case {@code target} with {@code editedCase}.
+     *
+     * @throws DuplicateCrimeCaseException if updating the crimecase's details causes the crimecase to be equivalent to
+     *      another existing crimecase in the list.
+     * @throws CrimeCaseNotFoundException if {@code target} could not be found in the list.
+     */
+    void updateCrimeCase(CrimeCase target, CrimeCase editedCrimeCase)
+            throws DuplicateCrimeCaseException, CrimeCaseNotFoundException;
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

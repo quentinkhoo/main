@@ -14,6 +14,7 @@ import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.model.InvestigapptorBackupEvent;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
@@ -93,6 +94,16 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
         indicateInvestigapptorChanged();
     }
+
+    @Override
+    public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
+            throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
+        requireAllNonNull(target, editedCase);
+
+        investigapptor.updateCrimeCase(target, editedCase);
+        indicateInvestigapptorChanged();
+    }
+
     @Override
     public void deleteTag(Tag toDelete) throws TagNotFoundException {
         investigapptor.deleteTag(toDelete);

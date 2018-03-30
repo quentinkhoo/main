@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
+import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.UniquePersonList;
@@ -160,6 +161,27 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // This can cause the tags master list to have additional tags that are not tagged to any case
         // in the case list.
         cases.add(crimecase);
+    }
+
+    //@@author pkaijun
+    /**
+     * Replaces the given case {@code target} in the list with {@code editedCase}.
+     * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedCase}.
+     *
+     * @throws DuplicateCrimeCaseException if updating the crimecase's details causes the crimecase to be equivalent to
+     *                                  another existing crimecase in the list.
+     * @throws CrimeCaseNotFoundException  if {@code target} could not be found in the list.
+     * @see #syncWithMasterTagList(CrimeCase)
+     */
+    public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
+            throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
+        requireNonNull(editedCase);
+
+        CrimeCase syncedEditedCrimeCase = syncWithMasterTagList(editedCase);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // in the crimecase list.
+        cases.setCrimeCase(target, syncedEditedCrimeCase);
     }
 
     //// tag-level operations

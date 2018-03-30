@@ -72,8 +72,8 @@ public class XmlUtilTest {
     public void getDataFromFile_validFile_validResult() throws Exception {
         Investigapptor dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableInvestigapptor.class)
                                         .toModelType();
-        assertEquals(9, dataFromFile.getPersonList().size());
-        assertEquals(0, dataFromFile.getTagList().size());
+        assertEquals(4, dataFromFile.getPersonList().size());
+        assertEquals(1, dataFromFile.getTagList().size());
     }
 
     @Test

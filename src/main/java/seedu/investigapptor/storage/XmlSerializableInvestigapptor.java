@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
+import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
  * An Immutable Investigapptor that is serializable to XML format
@@ -71,7 +72,10 @@ public class XmlSerializableInvestigapptor {
             investigapptor.addPerson(p.toModelType());
         }
         for (XmlAdaptedInvestigator i : investigators) {
-            investigapptor.addPerson(i.toModelType());
+            Investigator investigator = i.toModelType();
+            investigapptor.convertHashToCases(investigator);
+            //investigapptor.addPerson(investigator);
+
         }
         investigapptor.setPassword(password.toModelType());
         return investigapptor;

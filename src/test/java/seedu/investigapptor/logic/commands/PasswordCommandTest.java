@@ -6,6 +6,7 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandS
 import static seedu.investigapptor.model.Password.generatePasswordHash;
 import static seedu.investigapptor.testutil.TypicalPersons.getTypicalInvestigapptor;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.investigapptor.logic.CommandHistory;
@@ -20,8 +21,14 @@ import seedu.investigapptor.model.UserPrefs;
  * {@code PasswordCommand}.
  */
 public class PasswordCommandTest {
+
     private static final String DEFAULT_PASSWORD = "password";
-    private Model model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
+    private Model model;
+
+    @Before
+    public void setUp() {
+        model = new ModelManager();
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {

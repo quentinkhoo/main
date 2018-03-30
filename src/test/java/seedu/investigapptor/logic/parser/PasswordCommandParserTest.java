@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.investigapptor.logic.commands.Command;
@@ -24,7 +25,7 @@ public class PasswordCommandParserTest {
 
     private PasswordCommandParser parser = new PasswordCommandParser();
 
-    private final Model model = new ModelManager(new Investigapptor(), new UserPrefs());
+    private Model model;
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
@@ -54,6 +55,11 @@ public class PasswordCommandParserTest {
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
         }
+    }
+
+    @Before
+    public void setUp() {
+        this.model  = new ModelManager();
     }
 
     @Test

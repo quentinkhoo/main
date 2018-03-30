@@ -16,7 +16,7 @@ import seedu.investigapptor.logic.commands.AddCaseCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.Description;
-import seedu.investigapptor.model.crimecase.StartDate;
+import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -43,7 +43,7 @@ public class AddCaseCommandParser implements Parser<AddCaseCommand> {
             CaseName name = ParserUtil.parseCaseName(argMultimap.getValue(PREFIX_NAME)).get();
             Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION)).get();
             Index investigatorIndex = ParserUtil.parseIndex(argMultimap.getOnlyValue(PREFIX_INVESTIGATOR));
-            StartDate startDate = ParserUtil.parseStartDate(argMultimap.getValue(PREFIX_STARTDATE)).get();
+            Date startDate = ParserUtil.parseStartDate(argMultimap.getValue(PREFIX_STARTDATE)).get();
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             return new AddCaseCommand(name, description, investigatorIndex, startDate, tagList);

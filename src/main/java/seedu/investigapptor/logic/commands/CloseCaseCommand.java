@@ -16,7 +16,7 @@ import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.Description;
-import seedu.investigapptor.model.crimecase.StartDate;
+import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
@@ -29,7 +29,7 @@ import seedu.investigapptor.model.tag.Tag;
 public class CloseCaseCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "close";
-    public static final String COMMAND_ALIAS = "c";
+    public static final String COMMAND_ALIAS = "cl";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status from open to close "
             + "and updates the end date accordingly.\n"
@@ -94,7 +94,7 @@ public class CloseCaseCommand extends UndoableCommand {
 
         CaseName name = caseToEdit.getCaseName();
         Description desc = caseToEdit.getDescription();
-        StartDate date = caseToEdit.getStartDate();
+        Date date = caseToEdit.getStartDate();
         Set<Tag> tags = caseToEdit.getTags();
         Person investigator = caseToEdit.getCurrentInvestigator();
         Status status = caseToEdit.getStatus();

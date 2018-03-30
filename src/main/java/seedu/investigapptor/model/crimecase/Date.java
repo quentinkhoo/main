@@ -10,7 +10,7 @@ import java.time.LocalDate;
  * Represents a CrimeCase's Start date in the Investigapptor.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class StartDate {
+public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Input date must follow DD/MM/YYYY or D/M/YYYY format, and it should not be blank";
@@ -32,7 +32,7 @@ public class StartDate {
      *
      * @param date A valid date.
      */
-    public StartDate(String date) {
+    public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_DATE_CONSTRAINTS);
         this.date = date;
@@ -99,8 +99,8 @@ public class StartDate {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof StartDate
-                && this.date.equals(((StartDate) other).date));
+                || (other instanceof Date
+                && this.date.equals(((Date) other).date));
     }
 
     @Override

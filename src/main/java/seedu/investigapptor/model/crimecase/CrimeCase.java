@@ -18,7 +18,8 @@ public class CrimeCase {
     private final CaseName name;
     private final Description description;
     private final Person currentInvestigator;
-    private final StartDate startDate;
+    private final Date startDate;
+    private final Date endDate;
     private final Status status;
 
     private final UniqueTagList tags;
@@ -27,11 +28,12 @@ public class CrimeCase {
      * Every field must be present and not null
      */
     public CrimeCase(CaseName name, Description description, Person currentInvestigator,
-                     StartDate startDate, Status status, Set<Tag> tags) {
+                     Date startDate, Status status, Set<Tag> tags) {
         this.name = name;
         this.description = description;
         this.currentInvestigator = currentInvestigator;
         this.startDate = startDate;
+        this.endDate = null;    // Default value is null
         this.status = status;
         this.tags = new UniqueTagList(tags);
     }
@@ -48,8 +50,12 @@ public class CrimeCase {
         return currentInvestigator;
     }
 
-    public StartDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
     }
 
     public Status getStatus() {

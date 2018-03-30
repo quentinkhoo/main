@@ -11,8 +11,8 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
-import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.tag.Tag;
@@ -32,6 +32,8 @@ public class XmlAdaptedCrimeCase {
     private XmlAdaptedPerson investigator;
     @XmlElement(required = true)
     private String startDate;
+    @XmlElement(required = true)
+    private String endDate;
     @XmlElement(required = true)
     private String status;
 
@@ -53,6 +55,7 @@ public class XmlAdaptedCrimeCase {
         this.description = description;
         this.investigator = investigator;
         this.startDate = startDate;
+        this.endDate = null;
         this.status = status;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -69,6 +72,7 @@ public class XmlAdaptedCrimeCase {
         description = source.getDescription().description;
         investigator = new XmlAdaptedPerson(source.getCurrentInvestigator());
         startDate = source.getStartDate().date;
+        endDate = source.getEndDate().date;
         status = source.getStatus().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -112,12 +116,12 @@ public class XmlAdaptedCrimeCase {
 
         if (this.startDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    StartDate.class.getSimpleName()));
+                    Date.class.getSimpleName()));
         }
-        if (!StartDate.isValidDate(this.startDate)) {
-            throw new IllegalValueException(StartDate.MESSAGE_DATE_CONSTRAINTS);
+        if (!Date.isValidDate(this.startDate)) {
+            throw new IllegalValueException(Date.MESSAGE_DATE_CONSTRAINTS);
         }
-        final StartDate startDate = new StartDate(this.startDate);
+        final Date startDate = new Date(this.startDate);
 
         if (this.status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

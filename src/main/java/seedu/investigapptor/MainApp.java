@@ -16,6 +16,7 @@ import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.core.Version;
 import seedu.investigapptor.commons.events.ui.ExitAppRequestEvent;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
+import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.commons.util.ConfigUtil;
 import seedu.investigapptor.commons.util.StringUtil;
 import seedu.investigapptor.logic.Logic;
@@ -32,6 +33,7 @@ import seedu.investigapptor.storage.Storage;
 import seedu.investigapptor.storage.StorageManager;
 import seedu.investigapptor.storage.UserPrefsStorage;
 import seedu.investigapptor.storage.XmlInvestigapptorStorage;
+import seedu.investigapptor.ui.PasswordManager;
 import seedu.investigapptor.ui.Ui;
 import seedu.investigapptor.ui.UiManager;
 
@@ -40,7 +42,7 @@ import seedu.investigapptor.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 2, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -50,6 +52,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    private boolean hasPassword;
 
 
     @Override
@@ -67,6 +70,8 @@ public class MainApp extends Application {
 
         initLogging(config);
 
+        hasPassword = false;
+
         model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model);
@@ -74,6 +79,7 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+
     }
 
     private String getApplicationParameter(String parameterName) {
@@ -95,6 +101,14 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample Investigapptor");
             }
             initialData = investigapptorOptional.orElseGet(SampleDataUtil::getSampleInvestigapptor);
+            String currentPasswordHash = initialData.getPassword().getPassword();
+            if (currentPasswordHash == null) {
+                hasPassword = false;
+            } else {
+                hasPassword = true;
+            }
+        } catch (WrongPasswordException wpe) {
+            initialData = new Investigapptor();
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Investigapptor");
             initialData = new Investigapptor();
@@ -184,12 +198,14 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting Investigapptor " + MainApp.VERSION);
-        ui.start(primaryStage);
-
-
-
-
+        if (hasPassword) {
+            logger.info("Starting Password Prompt " + MainApp.VERSION);
+            PasswordManager passwordManager = new PasswordManager(storage, ui);
+            passwordManager.start(primaryStage);
+        } else {
+            logger.info("Starting Investigapptor " + MainApp.VERSION);
+            ui.start(primaryStage);
+        }
     }
 
 

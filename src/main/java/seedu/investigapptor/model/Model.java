@@ -3,6 +3,7 @@ package seedu.investigapptor.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
@@ -73,4 +74,9 @@ public interface Model {
 
     /** Save Investigapptor information as a new name */
     void backUpInvestigapptor(String fileName);
+
+    /**
+     * Updates the password with the given password.
+     */
+    void updatePassword(Password password) throws InvalidPasswordException;
 }

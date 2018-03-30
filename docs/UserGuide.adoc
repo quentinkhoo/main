@@ -320,15 +320,30 @@ Selects the 1st case in the results of the `findCase` command.
 * `sC 3` +
 Selects the 3rd case in the listed panel list case.
 
-=== Update password : `update password [Coming in v2.0]`
-Updates the current Investigapptor password to a new password
-Format: `update password`
-Alias: `update pw`
+=== Set password : `set password [Since v1.3]`
+Updates the current `Investigapptor` password to a new password
+or creates a new password for the `Investigapptor` if no password has been set +
+
+Format: `set password [p/PASSWORD]` +
+Alias: `set password`, `set pass`, `set pw`, `set p`
+
+[NOTE]
+====
+Password must be of minimal 8 characters and not contain any spaces
+====
+
+Examples:
+
+* `set password p/password` +
+* `set pw p/password`
+
+=== Remove password : `remove password [Coming in v1.4]`
+To be updated
 
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+Format: `history` +
 Alias: `hist`
 
 [NOTE]

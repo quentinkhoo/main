@@ -14,7 +14,7 @@ public class SetCommandParserTest {
 
     @Before
     public void setUp() {
-         parser = new SetCommandParser();
+        parser = new SetCommandParser();
     }
 
     @Test

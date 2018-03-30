@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.investigapptor.model.Password.generatePasswordHash;
-import static seedu.investigapptor.testutil.TypicalPersons.getTypicalInvestigapptor;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -11,11 +11,9 @@ import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.PasswordCommand;
 import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
-import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.ModelManager;
 import seedu.investigapptor.model.Password;
-import seedu.investigapptor.model.UserPrefs;
 
 /**
  * Note that these test cases cover only input in set password <input>

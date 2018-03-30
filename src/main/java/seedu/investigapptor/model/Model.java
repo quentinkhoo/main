@@ -44,6 +44,8 @@ public interface Model {
     void updatePerson(Person target, Person editedPerson)
             throws DuplicatePersonException, PersonNotFoundException;
 
+    /** Deletes the given case. */
+    void deleteCrimeCase(CrimeCase target) throws CrimeCaseNotFoundException;
     /** Adds the given case */
     void addCrimeCase(CrimeCase crimecase) throws DuplicateCrimeCaseException;
     /**

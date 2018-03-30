@@ -90,8 +90,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updatePassword(Password password) throws InvalidPasswordException {
-        investigapptor.updatePassword(password);
+    public synchronized void deleteCrimeCase(CrimeCase target) throws CrimeCaseNotFoundException {
+        investigapptor.removeCrimeCase(target);
         indicateInvestigapptorChanged();
     }
 
@@ -118,6 +118,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void backUpInvestigapptor(String fileName) {
         raise(new InvestigapptorBackupEvent(investigapptor, fileName));
+    }
+    @Override
+    public void updatePassword(Password password) throws InvalidPasswordException {
+        investigapptor.updatePassword(password);
+        indicateInvestigapptorChanged();
     }
     //=========== Filtered Person List Accessors =============================================================
 

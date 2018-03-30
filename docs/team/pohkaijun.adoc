@@ -27,6 +27,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 ** Added new command `FindInvestTagsCommand`
 ** Added new command `FindCaseTagsCommand` [ongoing]
 ** Modified the GUI and layout of the application
+** Added new command `close`
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 

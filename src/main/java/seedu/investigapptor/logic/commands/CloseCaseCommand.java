@@ -98,7 +98,7 @@ public class CloseCaseCommand extends UndoableCommand {
         Set<Tag> tags = caseToEdit.getTags();
         Person investigator = caseToEdit.getCurrentInvestigator();
         Status status = caseToEdit.getStatus();
-        status.toggleCase();    // Update status only
+        status.closeCase();    // Close case status only
 
         return new CrimeCase(name, desc, investigator, date, status, tags);
     }

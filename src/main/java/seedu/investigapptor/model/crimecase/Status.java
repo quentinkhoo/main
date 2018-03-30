@@ -11,6 +11,9 @@ public class Status {
     public static final String MESSAGE_STATUS_CONSTRAINTS =
             "Crime case status should not be blank";
 
+    public static final String CASE_CLOSE = "close";
+    public static final String CASE_OPEN = "open";
+
     private String status;
 
     /**
@@ -37,11 +40,18 @@ public class Status {
      *
      */
     public void toggleCase() {
-        if (this.status.equals("open")) {
-            this.status = "close";
+        if (this.status.equals(CASE_OPEN)) {
+            this.status = CASE_CLOSE;
         } else {
-            this.status = "open";
+            this.status = CASE_OPEN;
         }
+    }
+
+    /**
+     * Close the case by updating the case status to close
+     */
+    public void closeCase() {
+        this.status = CASE_CLOSE;
     }
 
     /**

@@ -1,11 +1,13 @@
 package seedu.investigapptor.testutil;
 
+import static seedu.investigapptor.model.crimecase.Date.LARGEST_DATE;
+
 import java.util.Set;
 
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
-import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
@@ -23,17 +25,18 @@ public class CrimeCaseBuilder {
 
     private CaseName name;
     private Description description;
+    private Date startDate;
+    private Date endDate;
     private Investigator currentInvestigator;
-    private StartDate startDate;
     private Status status;
     private Set<Tag> tags;
-
 
     public CrimeCaseBuilder() {
         name = new CaseName(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
         status = new Status();
-        startDate = new StartDate(DEFAULT_DATE);
+        startDate = new Date(DEFAULT_DATE);
+        endDate = new Date(LARGEST_DATE);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
         currentInvestigator = new InvestigatorBuilder().withName("Detective Holmes").build();
 
@@ -47,6 +50,7 @@ public class CrimeCaseBuilder {
         description = caseToCopy.getDescription();
         status = caseToCopy.getStatus();
         startDate = caseToCopy.getStartDate();
+        endDate = caseToCopy.getEndDate();
         currentInvestigator = caseToCopy.getCurrentInvestigator();
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
     }
@@ -103,7 +107,15 @@ public class CrimeCaseBuilder {
      * Sets the {@code StartDate} of the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder withStartDate(String date) {
-        this.startDate = new StartDate(date);
+        this.startDate = new Date(date);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ENdDate} of the {@code CrimeCase} that we are building.
+     */
+    public CrimeCaseBuilder withEndDate() {
+        this.endDate = new Date(LARGEST_DATE);
         return this;
     }
 
@@ -116,7 +128,7 @@ public class CrimeCaseBuilder {
     }
 
     public CrimeCase build() {
-        return new CrimeCase(name, description, currentInvestigator, startDate, status, tags);
+        return new CrimeCase(name, description, currentInvestigator, startDate, endDate, status, tags);
     }
 
 }

@@ -101,6 +101,16 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
         indicateInvestigapptorChanged();
     }
+
+    @Override
+    public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
+            throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
+        requireAllNonNull(target, editedCase);
+
+        investigapptor.updateCrimeCase(target, editedCase);
+        indicateInvestigapptorChanged();
+    }
+
     @Override
     public void deleteTag(Tag toDelete) throws TagNotFoundException {
         investigapptor.deleteTag(toDelete);

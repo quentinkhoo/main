@@ -208,9 +208,8 @@ Returns `SPF Murder` and `SPF rape`
 Returns any cases having names `murder`, `rape`, or `arson`
 
 === Locating investigators by category/team: `findInvestTags` `[Since v1.2]`
-
 Find investigators whose tags contain any of the given keywords. +
-Format: `findTags KEYWORD [MORE_KEYWORDS]` +
+Format: `findInvestTags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fit`
 
 ****
@@ -230,7 +229,55 @@ Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 
-=== Locating cases by category: `findCaseTags` `[Coming in v1.3]`
+=== Locating cases by category: `findCaseTags` `[Since v1.3]`
+Find investigators whose tags contain any of the given keywords. +
+Format: `findCaseTags KEYWORD [MORE_KEYWORDS]` +
+Alias: `fct`
+
+****
+* The search is case insensitive. e.g `homicide` will match `Homicide`
+* Only the tags are searched.
+* Only full words will be matched e.g. `homicide` will not match `homicidey`
+* Cases matching at least one keyword will be returned (i.e. `OR` search).
+e.g. `murder robbery` will return cases that contains the tag 'murder' or 'robbery'
+****
+
+Examples:
+
+* `findCaseTags murder` +
+Returns case(s) with tag `murder`
+* `findCaseTags murder homicide robbery` +
+Returns case(s) having tags `murder`, `homicide`, OR `robbery`
+* `fct murder supernatural a` +
+Returns case(s) having tags `murder`, `supernatural`, OR `a`
+
+=== Close a case : `close` [Since v1.3]
+Closes the case identified by the index number used in the last case listing. +
+Format: `close INDEX` +
+Alias: `c`
+
+****
+* Closes the case by updating the status of the case from `open` to `close` at the specified `INDEX`.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+[NOTE]
+====
+Close commands: only applied to cases with the status `open`. This command will not be allowed on cases
+with the status `close`.
+====
+
+Examples:
+
+* `list case` +
+`close 2` +
+Closes the 2nd case in the results of the `list case` command.
+* `findCase murder` +
+`close 1` +
+Closes the 1st case in the results of the `findCase` command.
+* `c 3` +
+Closes the 3rd case in the listed panel list case.
 
 === Deleting an investigator : `deleteInv`
 

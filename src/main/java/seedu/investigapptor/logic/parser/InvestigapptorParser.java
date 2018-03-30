@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.investigapptor.logic.commands.AddCaseCommand;
 import seedu.investigapptor.logic.commands.BackupCommand;
 import seedu.investigapptor.logic.commands.ClearCommand;
+import seedu.investigapptor.logic.commands.CloseCaseCommand;
 import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.DeleteCaseCommand;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
@@ -82,6 +83,10 @@ public class InvestigapptorParser {
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
+
+        case CloseCaseCommand.COMMAND_WORD:
+        case CloseCaseCommand.COMMAND_ALIAS:
+            return new CloseCaseCommandParser().parse(arguments);
 
         case FindCaseCommand.COMMAND_WORD:
         case FindCaseCommand.COMMAND_ALIAS:

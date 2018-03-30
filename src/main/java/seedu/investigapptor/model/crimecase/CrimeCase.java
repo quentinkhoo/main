@@ -1,5 +1,7 @@
 package seedu.investigapptor.model.crimecase;
 
+import static seedu.investigapptor.model.crimecase.Status.CASE_CLOSE;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -17,8 +19,9 @@ public class CrimeCase {
 
     private final CaseName name;
     private final Description description;
+    private final Date startDate;
+    private final Date endDate;
     private final Investigator currentInvestigator;
-    private final StartDate startDate;
     private final Status status;
 
     private final UniqueTagList tags;
@@ -27,11 +30,12 @@ public class CrimeCase {
      * Every field must be present and not null
      */
     public CrimeCase(CaseName name, Description description, Investigator currentInvestigator,
-                     StartDate startDate, Status status, Set<Tag> tags) {
+                     Date startDate, Date endDate, Status status, Set<Tag> tags) {
         this.name = name;
         this.description = description;
         this.currentInvestigator = currentInvestigator;
         this.startDate = startDate;
+        this.endDate = endDate;
         this.status = status;
         this.tags = new UniqueTagList(tags);
     }
@@ -48,8 +52,12 @@ public class CrimeCase {
         return currentInvestigator;
     }
 
-    public StartDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
     }
 
     public Status getStatus() {
@@ -114,11 +122,17 @@ public class CrimeCase {
                 .append(getDescription())
                 .append(" Current Investigator: ")
                 .append(getCurrentInvestigator().getName())
-                .append(" Start Date: ")
-                .append(getStartDate())
                 .append(" Status: ")
                 .append(getStatus())
-                .append(" Tags: ");
+                .append(" Start Date: ")
+                .append(getStartDate());
+
+        if (getStatus().toString().equals(CASE_CLOSE)) {
+            builder.append(" End Date: ")
+                    .append(getEndDate());
+        }
+
+        builder.append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }

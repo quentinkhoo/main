@@ -137,7 +137,14 @@ public class AddCaseCommandTest {
         }
 
         @Override
-        public void deleteCrimeCase(CrimeCase target) throws CrimeCaseNotFoundException {
+        public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
+                throws DuplicateCrimeCaseException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void deleteCrimeCase(CrimeCase target)
+            throws CrimeCaseNotFoundException {
             fail("This method should not be called.");
         }
 

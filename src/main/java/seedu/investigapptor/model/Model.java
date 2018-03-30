@@ -48,6 +48,15 @@ public interface Model {
     void deleteCrimeCase(CrimeCase target) throws CrimeCaseNotFoundException;
     /** Adds the given case */
     void addCrimeCase(CrimeCase crimecase) throws DuplicateCrimeCaseException;
+    /**
+     * Replaces the given case {@code target} with {@code editedCase}.
+     *
+     * @throws DuplicateCrimeCaseException if updating the crimecase's details causes the crimecase to be equivalent to
+     *      another existing crimecase in the list.
+     * @throws CrimeCaseNotFoundException if {@code target} could not be found in the list.
+     */
+    void updateCrimeCase(CrimeCase target, CrimeCase editedCrimeCase)
+            throws DuplicateCrimeCaseException, CrimeCaseNotFoundException;
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

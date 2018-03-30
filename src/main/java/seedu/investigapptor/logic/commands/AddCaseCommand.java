@@ -6,6 +6,7 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_INVESTIGATOR;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_STARTDATE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.investigapptor.model.crimecase.Date.LARGEST_DATE;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,8 +17,8 @@ import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
-import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
@@ -53,7 +54,7 @@ public class AddCaseCommand extends UndoableCommand {
     private CaseName name;
     private Description description;
     private Index investigatorIndex;
-    private StartDate startDate;
+    private Date startDate;
     private Set<Tag> tagList;
 
     private CrimeCase toAdd;
@@ -74,7 +75,7 @@ public class AddCaseCommand extends UndoableCommand {
      * @param tagList of the case to be added
      */
     public AddCaseCommand(CaseName name, Description description, Index investigatorIndex,
-                          StartDate startDate, Set<Tag> tagList) {
+                          Date startDate, Set<Tag> tagList) {
         requireNonNull(name);
         requireNonNull(description);
         requireNonNull(investigatorIndex);
@@ -123,7 +124,7 @@ public class AddCaseCommand extends UndoableCommand {
         assert investigatorToAdd != null;
 
         return new CrimeCase(this.name, this.description, investigatorToAdd,
-                this.startDate, new Status(), this.tagList);
+                this.startDate, new Date(LARGEST_DATE), new Status(), this.tagList);
     }
 
     @Override

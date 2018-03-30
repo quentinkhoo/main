@@ -11,8 +11,8 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
-import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.investigator.Investigator;
@@ -34,6 +34,8 @@ public class XmlAdaptedCrimeCase {
     @XmlElement(required = true)
     private String startDate;
     @XmlElement(required = true)
+    private String endDate;
+    @XmlElement(required = true)
     private String status;
 
     @XmlElement
@@ -49,11 +51,12 @@ public class XmlAdaptedCrimeCase {
      * Constructs an {@code XmlAdaptedCrimeCase} with the given case details.
      */
     public XmlAdaptedCrimeCase(String name, String description, XmlAdaptedInvestigator investigator, String startDate,
-                               String status, List<XmlAdaptedTag> tagged) {
+                               String endDate, String status, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.description = description;
         this.investigator = investigator;
         this.startDate = startDate;
+        this.endDate = endDate;
         this.status = status;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -70,6 +73,7 @@ public class XmlAdaptedCrimeCase {
         description = source.getDescription().description;
         investigator = new XmlAdaptedInvestigator(source.getCurrentInvestigator());
         startDate = source.getStartDate().date;
+        endDate = source.getEndDate().date;
         status = source.getStatus().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -113,12 +117,21 @@ public class XmlAdaptedCrimeCase {
 
         if (this.startDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    StartDate.class.getSimpleName()));
+                    Date.class.getSimpleName()));
         }
-        if (!StartDate.isValidDate(this.startDate)) {
-            throw new IllegalValueException(StartDate.MESSAGE_DATE_CONSTRAINTS);
+        if (!Date.isValidDate(this.startDate)) {
+            throw new IllegalValueException(Date.MESSAGE_DATE_CONSTRAINTS);
         }
-        final StartDate startDate = new StartDate(this.startDate);
+        final Date startDate = new Date(this.startDate);
+
+        if (this.endDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Date.class.getSimpleName()));
+        }
+        if (!Date.isValidDate(this.endDate)) {
+            throw new IllegalValueException(Date.MESSAGE_DATE_CONSTRAINTS);
+        }
+        final Date endDate = new Date(this.endDate);
 
         if (this.status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -130,7 +143,7 @@ public class XmlAdaptedCrimeCase {
         final Status status = new Status(this.status);
 
         final Set<Tag> tags = new HashSet<>(crimeCaseTags);
-        return new CrimeCase(name, description, investigator, startDate, status, tags);
+        return new CrimeCase(name, description, investigator, startDate, endDate, status, tags);
     }
 
     @Override
@@ -148,6 +161,7 @@ public class XmlAdaptedCrimeCase {
                 && Objects.equals(description, otherCrimeCase.description)
                 && Objects.equals(investigator, otherCrimeCase.investigator)
                 && Objects.equals(startDate, otherCrimeCase.startDate)
+                && Objects.equals(endDate, otherCrimeCase.endDate)
                 && Objects.equals(status, otherCrimeCase.status)
                 && tagged.equals(otherCrimeCase.tagged);
     }

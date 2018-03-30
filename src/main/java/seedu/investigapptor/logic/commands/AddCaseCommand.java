@@ -21,6 +21,7 @@ import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
+import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
@@ -108,14 +109,19 @@ public class AddCaseCommand extends UndoableCommand {
             }
 
             Person investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
-            toAdd = createCrimeCase(investigatorToAdd);
+            if (investigatorToAdd instanceof Investigator) {
+                toAdd = createCrimeCase((Investigator) investigatorToAdd);
+            } else {
+                throw new CommandException("Selected personal is not an investigator");
+            }
+
         }
     }
 
     /**
      * Creates and returns a {@code CrimeCase} with the details of {@code investigatorToAdd}
      */
-    private CrimeCase createCrimeCase(Person investigatorToAdd) {
+    private CrimeCase createCrimeCase(Investigator investigatorToAdd) {
         assert investigatorToAdd != null;
 
         return new CrimeCase(this.name, this.description, investigatorToAdd,

@@ -137,10 +137,10 @@ public class RegisterInvestigatorCommandTest {
 
         @Override
         public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
-                throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
+                throws DuplicateCrimeCaseException {
             fail("This method should not be called.");
         }
-        
+
         @Override
         public void deleteTag(Tag toDelete)
                 throws TagNotFoundException {

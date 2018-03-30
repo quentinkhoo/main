@@ -145,7 +145,7 @@ public class XmlAdaptedInvestigator {
 
         final Set<Tag> tags = new HashSet<>(personTags);
         final Set<CrimeCase> crimeCases = new HashSet<>(investigatorCases);
-        return new Investigator(name, phone, email, address, rank, tags, crimeCases);
+        return new Investigator(name, phone, email, address, rank, crimeCases, tags);
     }
 
     /**

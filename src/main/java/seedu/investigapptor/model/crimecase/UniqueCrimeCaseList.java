@@ -3,6 +3,7 @@ package seedu.investigapptor.model.crimecase;
 import static java.util.Objects.requireNonNull;
 import static seedu.investigapptor.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -120,7 +121,14 @@ public class UniqueCrimeCaseList implements Iterable<CrimeCase> {
     public ObservableList<CrimeCase> asObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
     }
-
+    /**
+     * Returns all CrimeCase in this list as a Set.
+     * This set is mutable and change-insulated against the internal list.
+     */
+    public Set<CrimeCase> toSet() {
+        assert CollectionUtil.elementsAreUnique(internalList);
+        return new HashSet<>(internalList);
+    }
     @Override
     public Iterator<CrimeCase> iterator() {
         return internalList.iterator();

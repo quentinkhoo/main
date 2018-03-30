@@ -102,9 +102,6 @@ public class InvestigapptorParser {
         case SetCommand.COMMAND_ALIAS:
             return new SetCommandParser().parse(arguments);
 
-
-
-
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_ALIAS:
             return new HistoryCommand();

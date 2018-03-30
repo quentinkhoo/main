@@ -31,6 +31,10 @@ import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
+import seedu.investigapptor.model.Investigapptor;
+import seedu.investigapptor.model.Model;
+import seedu.investigapptor.model.ModelManager;
+import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.model.crimecase.CaseNameContainsKeywordsPredicate;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
@@ -49,6 +53,7 @@ public class InvestigapptorParserTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private final InvestigapptorParser parser = new InvestigapptorParser();
+    private Model model = new ModelManager(new Investigapptor(), new UserPrefs());
 
     @Test
     public void parseCommand_add() throws Exception {

@@ -13,6 +13,7 @@ import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.commons.util.StringUtil;
 import seedu.investigapptor.logic.commands.ListCommand;
 import seedu.investigapptor.logic.commands.SetCommand;
+import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.model.Password;
 
 import seedu.investigapptor.model.crimecase.CaseName;
@@ -307,10 +308,10 @@ public class ParserUtil {
      *
      * @throws IllegalValueException if the given {@code email} is invalid.
      */
-    public static Password parsePassword(String password) throws IllegalValueException {
+    public static Password parsePassword(String password) throws InvalidPasswordException {
         requireNonNull(password);
         if (!Password.isValidPassword(password)) {
-            throw new IllegalValueException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
+            throw new InvalidPasswordException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
         }
         return new Password(password);
     }

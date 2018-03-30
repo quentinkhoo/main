@@ -46,6 +46,10 @@ public class PasswordBox extends UiPart<Region> {
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
+        case ESCAPE:
+            keyEvent.consume();
+            passwordField.setText("");
+            break;
         default:
             // let JavaFx handle the keypress
         }

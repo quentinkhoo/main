@@ -26,6 +26,7 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
+    private boolean isHiddenText = false;
 
     @FXML
     private TextField commandTextField;
@@ -48,12 +49,25 @@ public class CommandBox extends UiPart<Region> {
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
             keyEvent.consume();
             navigateToNextInput();
+            break;
+        case ESCAPE:
+            keyEvent.consume();
+            commandTextField.setText("");
+            break;
+        case ALT:
+            keyEvent.consume();
+            if (isHiddenText) {
+                commandTextField.setOpacity(1.0);
+                isHiddenText = false;
+            } else {
+                commandTextField.setOpacity(0.0);
+                isHiddenText = true;
+            }
             break;
         default:
             // let JavaFx handle the keypress

@@ -23,6 +23,7 @@ import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
@@ -132,6 +133,11 @@ public class RegisterInvestigatorCommandTest {
         @Override
         public void addCrimeCase(CrimeCase crimecase)
                 throws DuplicateCrimeCaseException {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public void deleteCrimeCase(CrimeCase target) throws CrimeCaseNotFoundException {
             fail("This method should not be called.");
         }
 

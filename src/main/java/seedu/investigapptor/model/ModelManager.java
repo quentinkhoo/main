@@ -15,6 +15,7 @@ import seedu.investigapptor.commons.events.model.InvestigapptorBackupEvent;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
@@ -89,8 +90,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updatePassword(Password password) throws InvalidPasswordException {
-        investigapptor.updatePassword(password);
+    public synchronized void deleteCrimeCase(CrimeCase target) throws CrimeCaseNotFoundException {
+        investigapptor.removeCrimeCase(target);
         indicateInvestigapptorChanged();
     }
 
@@ -107,6 +108,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void backUpInvestigapptor(String fileName) {
         raise(new InvestigapptorBackupEvent(investigapptor, fileName));
+    }
+    @Override
+    public void updatePassword(Password password) throws InvalidPasswordException {
+        investigapptor.updatePassword(password);
+        indicateInvestigapptorChanged();
     }
     //=========== Filtered Person List Accessors =============================================================
 

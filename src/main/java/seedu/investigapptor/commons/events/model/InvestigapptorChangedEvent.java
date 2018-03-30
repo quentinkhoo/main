@@ -14,6 +14,8 @@ public class InvestigapptorChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of persons " + data.getPersonList().size() + ", number of tags " + data.getTagList().size();
+        return "number of cases " + data.getCrimeCaseList().size()
+                + ", number of persons " + data.getPersonList().size()
+                + ", number of tags " + data.getTagList().size();
     }
 }

@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
+import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.UniquePersonList;
@@ -97,20 +98,18 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-        String passwordHash = newData.getPassword().getPassword();
-
-        setPassword(passwordHash);
+        try {
+            setCrimeCases(syncedCrimeCaseList);
+        } catch (DuplicateCrimeCaseException e) {
+            throw new AssertionError("Investigapptors should not have duplicate cases");
+        }
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
             throw new AssertionError("Investigapptor should not have duplicate investigators");
         }
-        try {
-            setCrimeCases(syncedCrimeCaseList);
-        } catch (DuplicateCrimeCaseException e) {
-            throw new AssertionError("Investigapptor should not have duplicate cases");
-        }
-
+        String passwordHash = newData.getPassword().getPassword();
+        setPassword(passwordHash);
     }
     //// person-level operations
 
@@ -207,6 +206,19 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         }
     }
 
+    /**
+     * Removes {@code key} from this {@code Investigapptor}.
+     *
+     * @throws CrimeCaseNotFoundException if the {@code key} is not in this {@code Investigapptor}.
+     */
+    public boolean removeCrimeCase(CrimeCase key) throws CrimeCaseNotFoundException {
+        if (cases.remove(key)) {
+            return true;
+        } else {
+            throw new CrimeCaseNotFoundException();
+        }
+    }
+
     //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
@@ -290,8 +302,9 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() + " tags";
-        // TODO: refine later
+        return cases.asObservableList().size() + " cases, "
+                + persons.asObservableList().size() + " persons, "
+                + tags.asObservableList().size() + " tags";
     }
 
     @Override
@@ -328,6 +341,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Investigapptor // instanceof handles nulls
+                && this.cases.equals(((Investigapptor) other).cases)
                 && this.persons.equals(((Investigapptor) other).persons)
                 && this.tags.equalsOrderInsensitive(((Investigapptor) other).tags));
     }
@@ -335,6 +349,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(persons, tags);
+        return Objects.hash(cases, persons, tags);
     }
 }

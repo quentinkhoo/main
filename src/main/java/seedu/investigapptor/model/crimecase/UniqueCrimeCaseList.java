@@ -49,12 +49,13 @@ public class UniqueCrimeCaseList implements Iterable<CrimeCase> {
      *
      * @throws DuplicateCrimeCaseException if the person to add is a duplicate of an existing person in the list.
      */
-    public void add(CrimeCase toAdd) throws DuplicateCrimeCaseException {
+    public boolean add(CrimeCase toAdd) throws DuplicateCrimeCaseException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateCrimeCaseException();
         }
         internalList.add(toAdd);
+        return true;
     }
 
     /**

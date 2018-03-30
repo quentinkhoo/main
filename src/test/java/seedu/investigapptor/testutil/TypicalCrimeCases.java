@@ -96,7 +96,41 @@ public class TypicalCrimeCases {
     }
 
     public static List<CrimeCase> getTypicalCrimeCases() {
-        return new ArrayList<>(Arrays.asList(ALFA, BRAVO, CHARLIE, DELTA, ECHO, FOXTROT, GOLF,
-                ONE, TWO, THREE, FOUR));
+        CrimeCase alfa = new CrimeCaseBuilder().withName("Project Alfa")
+                .withDescription("Murder on the orient express").withStartDate("10/11/2015")
+                .toggleStatus()
+                .withTags("Murder").build();
+        CrimeCase bravo = new CrimeCaseBuilder().withName("Project Bravo Johnny")
+                .withDescription("Crooked house")
+                .withStartDate("12/03/2016")
+                .withTags("Kidnap", "Homicide").build();
+        CrimeCase charlie = new CrimeCaseBuilder().withName("Project Charlie").toggleStatus()
+                .withStartDate("18/01/2012").withDescription("ABC murders").build();
+        CrimeCase delta = new CrimeCaseBuilder().withName("Project Delta Johnny")
+                .withStartDate("27/11/1999").withDescription("Peril at End House").build();
+        CrimeCase echo = new CrimeCaseBuilder().withName("Project Echo")
+                .withStartDate("23/11/1965").withDescription("A study in scarlet").build();
+        CrimeCase foxtrot = new CrimeCaseBuilder().withName("Project Foxtrot").toggleStatus()
+                .withStartDate("09/07/2017").withDescription("The sign of the four").build();
+        CrimeCase golf = new CrimeCaseBuilder().withName("Project Golf")
+                .withStartDate("02/08/2017").withDescription("The hound of the baskervilles").build();
+        CrimeCase one = new CrimeCaseBuilder().withName("Project One")
+                .withDescription("Scary case").withStartDate("10/12/2016")
+                .toggleStatus()
+                .withTags("Murder", "Homicide", "Missing").build();
+        CrimeCase two = new CrimeCaseBuilder().withName("Project Two")
+                .withDescription("Not so scary case").withStartDate("14/12/2016")
+                .toggleStatus()
+                .withTags("Robbery", "Prank", "Kidnap").build();
+        CrimeCase three = new CrimeCaseBuilder().withName("Project Three")
+                .withDescription("Supernatural Case").withStartDate("18/12/2016")
+                .toggleStatus()
+                .withTags("Murder", "Supernatural").build();
+        CrimeCase four = new CrimeCaseBuilder().withName("Project Four")
+                .withDescription("Small case").withStartDate("11/12/2016")
+                .toggleStatus()
+                .withTags("Theft").build();
+        return new ArrayList<>(Arrays.asList(alfa, bravo, charlie, delta, echo, foxtrot, golf,
+                one, two, three, four));
     }
 }

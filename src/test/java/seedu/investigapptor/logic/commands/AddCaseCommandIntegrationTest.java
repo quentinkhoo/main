@@ -4,7 +4,7 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandF
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.getTypicalInvestigapptor;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seedu.investigapptor.logic.CommandHistory;
@@ -20,10 +20,10 @@ import seedu.investigapptor.testutil.CrimeCaseBuilder;
  */
 public class AddCaseCommandIntegrationTest {
 
-    private Model model;
+    private static Model model;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
     }
 
@@ -34,7 +34,7 @@ public class AddCaseCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getInvestigapptor(), new UserPrefs());
         expectedModel.addCrimeCase(validCrimeCase);
 
-        assertCommandSuccess(prepareCommand(validCrimeCase, model), model,
+        assertCommandSuccess(prepareCommand(new CrimeCaseBuilder().build(), model), model,
                 String.format(AddCaseCommand.MESSAGE_SUCCESS, validCrimeCase), expectedModel);
     }
 

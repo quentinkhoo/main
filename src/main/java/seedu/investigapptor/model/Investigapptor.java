@@ -182,6 +182,9 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // in the case list.
         if (cases.add(crimecase)) {
             if (crimecase.getCurrentInvestigator() != null) {
+                for (CrimeCase d : crimecase.getCurrentInvestigator().getCrimeCases()) {
+                    System.out.println(d.getCaseName());
+                }
                 crimecase.getCurrentInvestigator().addCrimeCase(crimecase);
             }
         }

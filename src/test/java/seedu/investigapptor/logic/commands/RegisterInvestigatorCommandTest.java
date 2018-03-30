@@ -22,7 +22,6 @@ import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;

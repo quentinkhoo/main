@@ -1,7 +1,7 @@
 package seedu.investigapptor.model.person.investigator;
 
-import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 

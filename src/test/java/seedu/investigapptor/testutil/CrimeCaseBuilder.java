@@ -1,5 +1,7 @@
 package seedu.investigapptor.testutil;
 
+import static seedu.investigapptor.model.crimecase.Date.LARGEST_DATE;
+
 import java.util.Set;
 
 import seedu.investigapptor.model.crimecase.CaseName;
@@ -24,16 +26,17 @@ public class CrimeCaseBuilder {
     private CaseName name;
     private Description description;
     private Date startDate;
+    private Date endDate;
     private Investigator currentInvestigator;
     private Status status;
     private Set<Tag> tags;
-
 
     public CrimeCaseBuilder() {
         name = new CaseName(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
         status = new Status();
         startDate = new Date(DEFAULT_DATE);
+        endDate = new Date(LARGEST_DATE);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
         currentInvestigator = new InvestigatorBuilder().withName("Detective Holmes").build();
 
@@ -47,6 +50,7 @@ public class CrimeCaseBuilder {
         description = caseToCopy.getDescription();
         status = caseToCopy.getStatus();
         startDate = caseToCopy.getStartDate();
+        endDate = caseToCopy.getEndDate();
         currentInvestigator = caseToCopy.getCurrentInvestigator();
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
     }
@@ -100,10 +104,18 @@ public class CrimeCaseBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code CrimeCase} that we are building.
+     * Sets the {@code StartDate} of the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder withStartDate(String date) {
         this.startDate = new Date(date);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ENdDate} of the {@code CrimeCase} that we are building.
+     */
+    public CrimeCaseBuilder withEndDate() {
+        this.endDate = new Date(LARGEST_DATE);
         return this;
     }
 
@@ -116,7 +128,7 @@ public class CrimeCaseBuilder {
     }
 
     public CrimeCase build() {
-        return new CrimeCase(name, description, currentInvestigator, startDate, status, tags);
+        return new CrimeCase(name, description, currentInvestigator, startDate, endDate, status, tags);
     }
 
 }

@@ -5,7 +5,7 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.showCaseAtInde
 import static seedu.investigapptor.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seedu.investigapptor.logic.CommandHistory;
@@ -21,24 +21,24 @@ import seedu.investigapptor.testutil.TypicalPersons;
  */
 public class ListCommandTest {
 
-    private Model investigatorModel;
-    private Model expectedInvestigatorModel;
-    private ListCommand listCommandInvestigators;
+    private static Model investigatorModel;
+    private static Model expectedInvestigatorModel;
+    private static ListCommand listCommandInvestigators;
 
-    private Model investigatorAliasModel;
-    private Model expectedInvestigatorAliasModel;
-    private ListCommand listCommandInvestigatorAlias;
+    private static Model investigatorAliasModel;
+    private static Model expectedInvestigatorAliasModel;
+    private static ListCommand listCommandInvestigatorAlias;
 
-    private Model crimeCaseModel;
-    private Model expectedCrimeCaseModel;
-    private ListCommand listCommandCases;
+    private static Model crimeCaseModel;
+    private static Model expectedCrimeCaseModel;
+    private static ListCommand listCommandCases;
 
-    private Model crimeCaseAliasModel;
-    private Model expectedCrimeCaseAliasModel;
-    private ListCommand listCommandCrimeCaseAlias;
+    private static Model crimeCaseAliasModel;
+    private static Model expectedCrimeCaseAliasModel;
+    private static ListCommand listCommandCrimeCaseAlias;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         investigatorModel = new ModelManager(TypicalPersons.getTypicalInvestigapptor(), new UserPrefs());
         expectedInvestigatorModel = new ModelManager(investigatorModel.getInvestigapptor(), new UserPrefs());
 

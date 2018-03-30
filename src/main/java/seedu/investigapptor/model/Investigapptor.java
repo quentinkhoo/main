@@ -181,7 +181,9 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // This can cause the tags master list to have additional tags that are not tagged to any case
         // in the case list.
         if (cases.add(crimecase)) {
-            crimecase.getCurrentInvestigator().addCrimeCase(crimecase);
+            if (crimecase.getCurrentInvestigator() != null) {
+                crimecase.getCurrentInvestigator().addCrimeCase(crimecase);
+            }
         }
     }
 

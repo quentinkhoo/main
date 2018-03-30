@@ -28,7 +28,7 @@ import seedu.investigapptor.model.crimecase.CrimeCase;
  * Contains integration tests (interaction with the Model) for {@code FindCaseCommand}.
  */
 public class FindCaseCommandTest {
-    private Model model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
+    private static Model model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
 
     @Test
     public void equals() {

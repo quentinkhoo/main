@@ -107,14 +107,12 @@ public class AddCaseCommand extends UndoableCommand {
             if (investigatorIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
             }
-
             Person investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
             if (investigatorToAdd instanceof Investigator) {
                 toAdd = createCrimeCase((Investigator) investigatorToAdd);
             } else {
                 throw new CommandException("Selected personal is not an investigator");
             }
-
         }
     }
 

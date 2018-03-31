@@ -282,7 +282,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
             Investigator inv = (Investigator) person;
             inv.getCrimeCases().forEach(crimeCase -> cases.add(crimeCase));
             return new Investigator(person.getName(), person.getPhone(), person.getEmail(),
-                    person.getAddress(), ((Investigator) person).getRank(), correctTagReferences, cases);
+                    person.getAddress(), ((Investigator) person).getRank(), cases, correctTagReferences);
         }
         return new Person(
                 person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);

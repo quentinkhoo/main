@@ -1,6 +1,7 @@
 package seedu.investigapptor.model.person.investigator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class Investigator extends Person {
         crimeCases = new UniqueCrimeCaseList();
     }
     public Investigator(Name name, Phone phone, Email email, Address address, Rank rank,
-                        Set<Tag> tags, Set<CrimeCase> cases) {
+                        Set<CrimeCase> cases, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         this.rank = rank;
         crimeCases = new UniqueCrimeCaseList(cases);
@@ -48,6 +49,13 @@ public class Investigator extends Person {
     }
     public void addCrimeCase(CrimeCase caseToAdd) throws DuplicateCrimeCaseException {
         crimeCases.add(caseToAdd);
+    }
+    /**
+     * Returns an immutable CrimeCase set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<CrimeCase> getCaseAsSet() {
+        return Collections.unmodifiableSet(crimeCases.toSet());
     }
     /**
      * Increase the investigator rank by one

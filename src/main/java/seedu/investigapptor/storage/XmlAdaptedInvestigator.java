@@ -147,6 +147,7 @@ public class XmlAdaptedInvestigator {
         final Rank rank = new Rank(this.rank);
 
         final Set<Tag> tags = new HashSet<>(personTags);
+
         return new Investigator(name, phone, email, address, rank, tags, investigatorCases);
     }
 

@@ -64,7 +64,7 @@ public class Password {
     /**
      * Generate password hash given a password string
      * @param password
-     * @return passwordHash in String
+     * @return encodedHash in String
      */
     public static String generatePasswordHash(String password) {
         String encodedHash = null;

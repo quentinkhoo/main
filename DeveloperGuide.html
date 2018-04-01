@@ -56,7 +56,9 @@
 <li><a href="#investigator-class">4.9. Investigator Class</a></li>
 <li><a href="#crimecase-package">4.10. CrimeCase Package</a></li>
 <li><a href="#adding-cases-feature">4.11. Adding cases feature</a></li>
-<li><a href="#creating-backup">4.12. Creating Backup</a></li>
+<li><a href="#deleting-cases-feature">4.12. Deleting cases feature</a></li>
+<li><a href="#finding-cases-feature">4.13. Finding cases feature</a></li>
+<li><a href="#creating-backup">4.14. Creating Backup</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a>
@@ -1301,10 +1303,7 @@ separately</p>
 <div class="sect3">
 <h4 id="code-casename-code-class-br"><a class="link" href="#code-casename-code-class-br">4.10.1. <code>CaseName</code> class<br></a></h4>
 <div class="paragraph">
-<p>Stores a <code>String</code> that represents the name of the case. Provides utility methods to:
-* check the validity of the string to be stored
-* retrieve the string that is stored
-* obtain the hash code of the <code>CaseName</code> object</p>
+<p>Stores a <code>String</code> that represents the name of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the <code>CaseName</code> object.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -1339,10 +1338,7 @@ public Description(String description)</pre>
 <div class="sect3">
 <h4 id="code-startdate-code-class-br"><a class="link" href="#code-startdate-code-class-br">4.10.3. <code>StartDate</code> class<br></a></h4>
 <div class="paragraph">
-<p>Stores a <code>String</code> that represents the start date of the case. Provides utility methods to:
-* check the validity of the string to be stored
-* retrieve the string that is stored
-* obtain the hash code of the <code>StartDate</code> object</p>
+<p>Stores a <code>String</code> that represents the start date of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the <code>StartDate</code> object.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -1358,10 +1354,7 @@ public StartDate(String date)</pre>
 <div class="sect3">
 <h4 id="code-status-code-class-br"><a class="link" href="#code-status-code-class-br">4.10.4. <code>Status</code> class<br></a></h4>
 <div class="paragraph">
-<p>Stores a <code>String</code> that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called. Provides utility methods to:
-* toggle the status of the case
-* retrieve the string that is stored
-* obtain the hash code of the <code>Status</code> object</p>
+<p>Stores a <code>String</code> that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called. Provides utility methods to toggle the status of the case, retrieve the string that is stored, and obtain the hash code of the <code>Status</code> object.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -1450,25 +1443,13 @@ public AddCaseCommand(CaseName name, Description description, Index investigator
 </div>
 </div>
 <div class="paragraph">
-<p>+</p>
-</div>
-<div class="paragraph">
 <p>Since <code>AddCaseCommand</code> extends <code>UndoableCommand</code>, after the constructor is called, the <code>preprocessUndoableCommand</code> and <code>executeUndoableCommand</code> methods are executed consecutively right after.</p>
-</div>
-<div class="paragraph">
-<p>+</p>
 </div>
 <div class="paragraph">
 <p>If the <code>AddCaseCommand(CrimeCase crimeCase)</code> constructor is used, the logic in the <code>preprocessUndoableCommand</code> method is not executed.</p>
 </div>
 <div class="paragraph">
-<p>+</p>
-</div>
-<div class="paragraph">
 <p>Note that the <code>AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set&lt;Tag&gt; tagList)</code> constructor above takes in an <code>Index</code> object as a parameter, which refers to the index number of the investigator as displayed in <code>PersonListPanel</code>.</p>
-</div>
-<div class="paragraph">
-<p>+</p>
 </div>
 <div class="paragraph">
 <p>The <code>Person</code> object is retrieved based on the index and the created <code>CrimeCase</code> object is stored in <code>toAdd</code>:</p>
@@ -1489,9 +1470,6 @@ protected void preprocessUndoableCommand() throws CommandException {
 </div>
 </div>
 <div class="paragraph">
-<p>+</p>
-</div>
-<div class="paragraph">
 <p>The <code>executeUndoableCommand</code> then adds the <code>CrimeCase</code> object to the model and throws a <code>DuplicateCrimeCaseException</code> if there exists an identical object:</p>
 </div>
 <div class="literalblock">
@@ -1509,102 +1487,117 @@ public CommandResult executeUndoableCommand() throws CommandException {
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-cases-feature"><a class="link" href="#deleting-cases-feature">4.12. Deleting cases feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">4.12.1. Current Implementation</a></h4>
 <div class="sect4">
-<h5 id="storage-2"><a class="link" href="#storage-2">Storage</a></h5>
+<h5 id="logic-2"><a class="link" href="#logic-2">Logic</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DeleteCaseCommandParser</code></p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p>Newly created cases are stored in the same file as the investigators, in xml format. <code>XmlAdaptedCrimeCases</code> is used to convert a <code>CrimeCase</code> object, or <code>String</code> parameters describing a <code>CrimeCase</code> object into an <code>XmlAdaptedCrimeCase</code> object for JAXB use (creating the XML).</p>
+<p><code>DeleteCaseCommandParser</code> parses the given <code>String</code> of arguments in the context of the <code>DeleteCaseCommand</code> and returns an <code>DeleteCaseCommand</code> object for execution. A <code>ParseException</code> is thrown if the user input does not conform to the expected format.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>/**
- * Constructs an {@code XmlAdaptedCrimeCase} with the given case details.
- */
-public XmlAdaptedCrimeCase(String name, String description, XmlAdaptedPerson investigator, String startDate,
-                           String status, List&lt;XmlAdaptedTag&gt; tagged)</pre>
+<pre>public DeleteCaseCommand parse(String args) throws ParseException {
+    try {
+        Index index = ParserUtil.parseIndex(args);
+        return new DeleteCaseCommand(index);
+    } catch (IllegalValueException ive) {
+        throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCaseCommand.MESSAGE_USAGE));
+    }
+}</pre>
 </div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DeleteCaseCommand</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>+</p>
-</div>
-<div class="paragraph">
-<p>Note that the investigator field uses an <code>XmlAdaptedPerson</code> object, which means that the the complete information from the <code>Person</code> object is duplicated within the <code>cases</code> tags in the XML file.</p>
-</div>
-<div class="paragraph">
-<p>+</p>
-</div>
-<div class="paragraph">
-<p>Below is an example of how the cases and investigators are stored in the file:</p>
+<p><code>preprocessUndoableCommand</code> first retrieves the <code>CrimeCase</code> object based on the <code>Index</code> given. The <code>DeleteCaseCommand</code> will then be executed to remove the case from the application and update the model. <code>EventsCenter</code> reacts to the <code>SwapTabEvent</code>, which switches the tab to show the list of cases. The following segment shows the execution code.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>&lt;investigapptor&gt;
-    &lt;cases&gt;
-    &lt;cases&gt;
-        &lt;name&gt;Project Test&lt;/name&gt;
-        &lt;description&gt;test description&lt;/description&gt;
-        &lt;investigator&gt;
-            &lt;name&gt;Bernice Yu&lt;/name&gt;
-            &lt;phone&gt;99272758&lt;/phone&gt;
-            &lt;email&gt;berniceyu@example.com&lt;/email&gt;
-            &lt;address&gt;Blk 30 Lorong 3 Serangoon Gardens, #07-18&lt;/address&gt;
-            &lt;tagged&gt;colleagues&lt;/tagged&gt;
-            &lt;tagged&gt;friends&lt;/tagged&gt;
-        &lt;/investigator&gt;
-        &lt;startDate&gt;14/02/13&lt;/startDate&gt;
-        &lt;status&gt;open&lt;/status&gt;
-        &lt;tagged&gt;Murder&lt;/tagged&gt;
-    &lt;/cases&gt;
-    &lt;cases&gt;
-        &lt;name&gt;Project New&lt;/name&gt;
-        &lt;description&gt;New project description&lt;/description&gt;
-        &lt;investigator&gt;
-            &lt;name&gt;Irfan Ibrahim&lt;/name&gt;
-            &lt;phone&gt;92492021&lt;/phone&gt;
-            &lt;email&gt;irfan@example.com&lt;/email&gt;
-            &lt;address&gt;Blk 47 Tampines Street 20, #17-35&lt;/address&gt;
-            &lt;tagged&gt;classmates&lt;/tagged&gt;
-        &lt;/investigator&gt;
-        &lt;startDate&gt;23/11/2013&lt;/startDate&gt;
-        &lt;status&gt;open&lt;/status&gt;
-        &lt;tagged&gt;Homicide&lt;/tagged&gt;
-        &lt;tagged&gt;Fraud&lt;/tagged&gt;
-    &lt;/cases&gt;
-    &lt;persons&gt;
-        &lt;name&gt;Alex Yeoh&lt;/name&gt;
-        &lt;phone&gt;87438807&lt;/phone&gt;
-        &lt;email&gt;alexyeoh@example.com&lt;/email&gt;
-        &lt;address&gt;Blk 30 Geylang Street 29, #06-40&lt;/address&gt;
-        &lt;tagged&gt;friends&lt;/tagged&gt;
-    &lt;/persons&gt;
-    &lt;persons&gt;
-        &lt;name&gt;Bernice Yu&lt;/name&gt;
-        &lt;phone&gt;99272758&lt;/phone&gt;
-        &lt;email&gt;berniceyu@example.com&lt;/email&gt;
-        &lt;address&gt;Blk 30 Lorong 3 Serangoon Gardens, #07-18&lt;/address&gt;
-        &lt;tagged&gt;colleagues&lt;/tagged&gt;
-        &lt;tagged&gt;friends&lt;/tagged&gt;
-    &lt;/persons&gt;
-    &lt;persons&gt;
-        &lt;name&gt;Irfan Ibrahim&lt;/name&gt;
-        &lt;phone&gt;92492021&lt;/phone&gt;
-        &lt;email&gt;irfan@example.com&lt;/email&gt;
-        &lt;address&gt;Blk 47 Tampines Street 20, #17-35&lt;/address&gt;
-        &lt;tagged&gt;classmates&lt;/tagged&gt;
-    &lt;/persons&gt;
-    &lt;tags&gt;Homicide&lt;/tags&gt;
-    &lt;tags&gt;colleagues&lt;/tags&gt;
-    &lt;tags&gt;classmates&lt;/tags&gt;
-    &lt;tags&gt;Fraud&lt;/tags&gt;
-    &lt;tags&gt;Murder&lt;/tags&gt;
-    &lt;tags&gt;friends&lt;/tags&gt;
-&lt;/investigapptor&gt;</pre>
+<pre>public CommandResult executeUndoableCommand() {
+    requireNonNull(caseToDelete);
+    try {
+        model.deleteCrimeCase(caseToDelete);
+        EventsCenter.getInstance().post(new SwapTabEvent(1));
+    } catch (CrimeCaseNotFoundException pnfe) {
+        throw new AssertionError("The target case cannot be missing");
+    }
+    return new CommandResult(String.format(MESSAGE_DELETE_CASE_SUCCESS, caseToDelete));
+}</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="creating-backup"><a class="link" href="#creating-backup">4.12. Creating Backup</a></h3>
+<h3 id="finding-cases-feature"><a class="link" href="#finding-cases-feature">4.13. Finding cases feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">4.13.1. Current Implementation</a></h4>
+<div class="sect4">
+<h5 id="logic-3"><a class="link" href="#logic-3">Logic</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>FindCaseCommandParser</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>FindCaseCommandParser</code> parses the given <code>String</code> of arguments in the context of the <code>FindCaseCommand</code> and returns an <code>FindCaseCommand</code> object for execution. A <code>ParseException</code> is thrown if the user input does not conform to the expected format.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>public FindCaseCommand parse(String args) throws ParseException {
+    String trimmedArgs = args.trim();
+    if (trimmedArgs.isEmpty()) {
+        throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCaseCommand.MESSAGE_USAGE));
+    }
+    String[] nameKeywords = trimmedArgs.split("\\s+");
+    return new FindCaseCommand(new CaseNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+}</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>FindCaseCommand</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>FindCaseCommand</code> will then be executed and the observable list filteredCrimeCaseList will be updated with the cases whose case name matches the predicate keywords. <code>EventsCenter</code> reacts to the <code>SwapTabEvent</code>, which switches the tab to show the filtered list of cases. The following segment shows the execution code.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>public CommandResult execute() {
+    model.updateFilteredCrimeCaseList(predicate);
+    EventsCenter.getInstance().post(new SwapTabEvent(1));
+    return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
+}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating-backup"><a class="link" href="#creating-backup">4.14. Creating Backup</a></h3>
 <div class="paragraph">
 <p>As investigators may want to save the current state of the application before progressing, they can do this
 by using the backup command and typing in a name for the backup.</p>
@@ -1880,7 +1873,7 @@ e.g. <code>seedu.investigapptor.logic.LogicManagerTest</code></p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Update the version number in <a href="https://github.com/CS2103JAN2018-F14-B3/main/src/main/java/seedu/address/MainApp.java"><code>MainApp.java</code></a>.</p>
+<p>Update the version number in <a href="https://github.com/CS2103JAN2018-F14-B3/main/src/main/java/seedu/investigapptor/MainApp.java"><code>MainApp.java</code></a>.</p>
 </li>
 <li>
 <p>Generate a JAR file <a href="UsingGradle.html#creating-the-jar-file">using Gradle</a>.</p>
@@ -3536,7 +3529,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-30 19:27:10 UTC
+Last updated 2018-04-01 18:44:14 UTC
 </div>
 </div>
 </body>

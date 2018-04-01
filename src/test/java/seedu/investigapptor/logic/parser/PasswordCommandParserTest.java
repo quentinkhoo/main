@@ -63,13 +63,13 @@ public class PasswordCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // insufficient characters
-        assertParsePasswordFailure(parser, " p/ ", Password.MESSAGE_PASSWORD_CONSTRAINTS);
+        assertParsePasswordFailure(parser, " pw/ ", Password.MESSAGE_PASSWORD_CONSTRAINTS);
 
         // presence of space in password
-        assertParsePasswordFailure(parser, " p/pass word", Password.MESSAGE_PASSWORD_CONSTRAINTS);
+        assertParsePasswordFailure(parser, " pw/pass word", Password.MESSAGE_PASSWORD_CONSTRAINTS);
 
         // invalid prefix
-        assertParsePasswordFailure(parser, " pw/password", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParsePasswordFailure(parser, " p/password", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 PasswordCommand.MESSAGE_USAGE));
 
         //no prefix
@@ -79,7 +79,7 @@ public class PasswordCommandParserTest {
 
     @Test
     public void parse_validArgs_success() {
-        assertParsePasswordSuccess(parser, " p/password", new PasswordCommand(new Password("password"),
+        assertParsePasswordSuccess(parser, " pw/password", new PasswordCommand(new Password("password"),
                 model));
     }
 }

@@ -5,6 +5,6 @@
 
 <StackPane styleClass="anchor-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <TextField fx:id="commandTextDisplay" promptText="Enter command here..."/>
-    <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" onKeyPressed="#handleKeyPress"/>
+    <TextField fx:id="commandTextField" onAction="#handleCommandInputChanged" onKeyPressed="#handleKeyPress" promptText="Enter command here..."/>
 </StackPane>
 

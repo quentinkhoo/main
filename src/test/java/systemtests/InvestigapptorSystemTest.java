@@ -101,6 +101,9 @@ public abstract class InvestigapptorSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
+    public CommandBoxHandle getCommandBoxDisplay() {
+        return mainWindowHandle.getCommandBoxDisplay(); }
+
     public PersonListPanelHandle getPersonListPanel() {
         return mainWindowHandle.getPersonListPanel();
     }

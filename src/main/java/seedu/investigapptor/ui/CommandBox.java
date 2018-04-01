@@ -75,6 +75,7 @@ public class CommandBox extends UiPart<Region> {
         case ESCAPE:
             keyEvent.consume();
             commandTextField.setText("");
+            commandTextDisplay.setText("");
             break;
         case CONTROL:
             keyEvent.consume();

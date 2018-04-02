@@ -54,6 +54,15 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Optional<String> oneBasedIndex} into an {@code Optional<Index>} if {@code oneBasedIndex}
+     * is present. See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Index> parseIndex(Optional<String> oneBasedIndex) throws IllegalValueException {
+        requireNonNull(oneBasedIndex);
+        return oneBasedIndex.isPresent() ? Optional.of(parseIndex(oneBasedIndex.get())) : Optional.empty();
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *

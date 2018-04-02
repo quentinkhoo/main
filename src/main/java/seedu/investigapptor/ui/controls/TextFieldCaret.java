@@ -4,6 +4,9 @@ import com.sun.javafx.scene.control.skin.TextFieldSkin;
 
 import javafx.scene.control.TextField;
 
+/**
+ * Self defined method for creating text skin
+ */
 public class TextFieldCaret extends TextFieldSkin {
 
     private TextField textField;
@@ -13,6 +16,9 @@ public class TextFieldCaret extends TextFieldSkin {
         setCaretProperties();
     }
 
+    /**
+     * Update caret properties
+     */
     private void setCaretProperties() {
         setCaretAnimating(true);
     }

@@ -23,32 +23,32 @@ public class ListCommandTest {
 
     private Model investigatorModel;
     private Model expectedInvestigatorModel;
-    private ListCommand listCommandInvestigators;
+    private ListInvestigatorCommand listCommandInvestigators;
 
     private Model investigatorAliasModel;
     private Model expectedInvestigatorAliasModel;
-    private ListCommand listCommandInvestigatorAlias;
+    private ListInvestigatorCommand listCommandInvestigatorAlias;
 
     private Model crimeCaseModel;
     private Model expectedCrimeCaseModel;
-    private ListCommand listCommandCases;
+    private ListCaseCommand listCommandCases;
 
     private Model crimeCaseAliasModel;
     private Model expectedCrimeCaseAliasModel;
-    private ListCommand listCommandCrimeCaseAlias;
+    private ListCaseCommand listCommandCrimeCaseAlias;
 
     @Before
     public void setUp() {
         investigatorModel = new ModelManager(TypicalPersons.getTypicalInvestigapptor(), new UserPrefs());
         expectedInvestigatorModel = new ModelManager(investigatorModel.getInvestigapptor(), new UserPrefs());
 
-        listCommandInvestigators = new ListCommand("inv");
+        listCommandInvestigators = new ListInvestigatorCommand();
         listCommandInvestigators.setData(investigatorModel, new CommandHistory(), new UndoRedoStack());
 
         crimeCaseModel = new ModelManager(TypicalCrimeCases.getTypicalInvestigapptor(), new UserPrefs());
         expectedCrimeCaseModel = new ModelManager(crimeCaseModel.getInvestigapptor(), new UserPrefs());
 
-        listCommandCases = new ListCommand("c");
+        listCommandCases = new ListCaseCommand();
         listCommandCases.setData(investigatorModel, new CommandHistory(), new UndoRedoStack());
     }
 

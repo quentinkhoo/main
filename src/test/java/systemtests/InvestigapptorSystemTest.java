@@ -35,6 +35,7 @@ import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
 import seedu.investigapptor.logic.commands.ListCommand;
+import seedu.investigapptor.logic.commands.ListInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
@@ -143,7 +144,7 @@ public abstract class InvestigapptorSystemTest {
      * Displays all persons in the investigapptor book.
      */
     protected void showAllPersons() {
-        executeCommand(ListCommand.COMMAND_WORD + " investigators");
+        executeCommand(ListInvestigatorCommand.COMMAND_WORD);
         assertEquals(getModel().getInvestigapptor().getPersonList().size(), getModel().getFilteredPersonList().size());
     }
 

@@ -50,7 +50,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty()
                 .addListener((observable, oldValue, newValue) -> commandTextDisplay
                         .setText(hidePasswordText(newValue)));
-        commandTextField.setSkin(new TextFieldCaret(commandTextField));
+        //commandTextField.setSkin(new TextFieldCaret(commandTextField));
 
         hideEnabled = true;
         historySnapshot = logic.getHistorySnapshot();
@@ -77,6 +77,7 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
             commandTextDisplay.setText("");
             break;
+
         case CONTROL:
             keyEvent.consume();
             if (hideEnabled) {

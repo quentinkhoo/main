@@ -34,7 +34,6 @@ import seedu.investigapptor.commons.core.EventsCenter;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
-import seedu.investigapptor.logic.commands.ListCommand;
 import seedu.investigapptor.logic.commands.ListInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.model.Investigapptor;

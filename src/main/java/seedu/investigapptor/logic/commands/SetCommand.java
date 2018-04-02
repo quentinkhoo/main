@@ -4,10 +4,8 @@ import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND
 import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
-import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.logic.parser.SetPasswordCommandParser;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
-import seedu.investigapptor.model.Password;
 
 /**
  * Sets a specific settings for the application

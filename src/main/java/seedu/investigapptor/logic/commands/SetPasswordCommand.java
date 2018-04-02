@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
-import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.Password;
 
 /**

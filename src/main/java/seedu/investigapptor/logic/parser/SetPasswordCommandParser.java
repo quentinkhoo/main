@@ -7,9 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.logic.commands.SetPasswordCommand;
-import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
-import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.Password;
 
 /**

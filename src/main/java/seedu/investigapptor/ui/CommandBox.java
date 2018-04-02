@@ -4,8 +4,6 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
 import java.util.logging.Logger;
 
-import com.sun.javafx.scene.control.skin.TextFieldSkin;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -18,7 +16,6 @@ import seedu.investigapptor.logic.Logic;
 import seedu.investigapptor.logic.commands.CommandResult;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
-import seedu.investigapptor.ui.controls.TextFieldCaret;
 
 /**
  * The UI component that is responsible for receiving user command inputs.

@@ -166,7 +166,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      *
      *
      */
-    public void convertHashToCases(Investigator key) throws DuplicatePersonException {
+    public void convertHashToCases(Investigator key) {
         if (key.getCaseListHashed() != null) {
             for (Integer i : key.getCaseListHashed()) {
                 for (CrimeCase c : cases) {
@@ -180,7 +180,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
                 }
             }
         }
-        addPerson(key);
     }
     //// case-level operations
 
@@ -278,11 +277,12 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         if (person instanceof Investigator) {
-            Set<CrimeCase> cases = new HashSet<>();
-            Investigator inv = (Investigator) person;
-            inv.getCrimeCases().forEach(crimeCase -> cases.add(crimeCase));
-            return new Investigator(person.getName(), person.getPhone(), person.getEmail(),
-                    person.getAddress(), ((Investigator) person).getRank(), cases, correctTagReferences);
+
+            Investigator inv = new Investigator(person.getName(), person.getPhone(), person.getEmail(),
+                    person.getAddress(), ((Investigator) person).getRank(),
+                    correctTagReferences, ((Investigator) person).getCaseListHashed());
+            convertHashToCases(inv);
+            return inv;
         }
         return new Person(
                 person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);

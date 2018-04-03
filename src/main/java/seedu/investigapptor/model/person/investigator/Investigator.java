@@ -104,7 +104,7 @@ public class Investigator extends Person {
         crimeCases.remove(caseToRemove);
     }
 
-    public void clear() {
+    public void clearCaseList() {
         crimeCases.removeAll();
     }
 

@@ -311,7 +311,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         final Set<Tag> correctTagReferences = new HashSet<>();
         crimecaseTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         Investigator investigator = (Investigator) syncWithMasterTagList(crimecase.getCurrentInvestigator());
-        investigator.clear(); // Fix for undo/redo: Clears investigator case list
+        investigator.clearCaseList(); // Fix for undo/redo: Clears investigator case list
         return new CrimeCase(
                 crimecase.getCaseName(), crimecase.getDescription(), investigator,
                 crimecase.getStartDate(), crimecase.getEndDate(), crimecase.getStatus(), correctTagReferences);

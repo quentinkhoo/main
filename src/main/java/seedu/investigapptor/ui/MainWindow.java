@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
+    private CalendarPanel calendarPanel;
     private PersonListPanel personListPanel;
     private CrimeCaseListPanel crimeCaseListPanel;
     private Config config;
@@ -66,6 +67,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane calendarPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -128,6 +132,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
+
+        calendarPanel = new CalendarPanel(logic.getFilteredCrimeCaseList());
+        calendarPanelPlaceholder.getChildren().add(calendarPanel.getViewPanel());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());

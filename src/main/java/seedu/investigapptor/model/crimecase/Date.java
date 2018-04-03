@@ -23,9 +23,9 @@ public class Date {
     private static final int DOB_MONTH_INDEX = 1;
     private static final int DOB_YEAR_INDEX = 2;
     private static String[] dateProperties;
-    private static int day;
-    private static int month;
-    private static int year;
+    private int day;
+    private int month;
+    private int year;
 
     public final String date;
 
@@ -103,6 +103,18 @@ public class Date {
         this.day = Integer.parseInt(dateProperties[DOB_DAY_INDEX]);
         this.month = Integer.parseInt(dateProperties[DOB_MONTH_INDEX]);
         this.year = Integer.parseInt(dateProperties[DOB_YEAR_INDEX]);
+    }
+
+    public int getYear() {
+        return this.year;
+    }
+
+    public int getMonth() {
+        return this.month;
+    }
+
+    public int getDay() {
+        return this.day;
     }
 
     @Override

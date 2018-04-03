@@ -104,7 +104,9 @@ public class EditCaseCommand extends UndoableCommand {
             if (investigatorIndex.getZeroBased() >= lastShownPersonList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
             }
-            editCrimeCaseDescriptor.setCurrentInvestigator(lastShownPersonList.get(investigatorIndex.getZeroBased()));
+            editCrimeCaseDescriptor
+                    .setCurrentInvestigator((Investigator) lastShownPersonList
+                            .get(investigatorIndex.getZeroBased()));
         } else {
             editCrimeCaseDescriptor.setCurrentInvestigator(crimeCaseToEdit.getCurrentInvestigator());
         }
@@ -123,7 +125,7 @@ public class EditCaseCommand extends UndoableCommand {
         CaseName updatedCaseName = editCrimeCaseDescriptor.getCaseName().orElse(crimeCaseToEdit.getCaseName());
         Description updatedDescription = editCrimeCaseDescriptor.getDescription()
                 .orElse(crimeCaseToEdit.getDescription());
-        Investigator updatedInvestigator = (Investigator) editCrimeCaseDescriptor.getCurrentInvestigator()
+        Investigator updatedInvestigator = editCrimeCaseDescriptor.getCurrentInvestigator()
                 .orElse(crimeCaseToEdit.getCurrentInvestigator());
         Date updatedStartDate = editCrimeCaseDescriptor.getStartDate().orElse(crimeCaseToEdit.getStartDate());
         Set<Tag> updatedTags = editCrimeCaseDescriptor.getTags().orElse(crimeCaseToEdit.getTags());
@@ -159,7 +161,7 @@ public class EditCaseCommand extends UndoableCommand {
         private CaseName name;
         private Description description;
         private Index currentInvestigatorIndex;
-        private Person currentInvestigator;
+        private Investigator currentInvestigator;
         private Date startDate;
         private Set<Tag> tags;
 
@@ -210,11 +212,11 @@ public class EditCaseCommand extends UndoableCommand {
             return Optional.ofNullable(currentInvestigatorIndex);
         }
 
-        public void setCurrentInvestigator(Person currentInvestigator) {
+        public void setCurrentInvestigator(Investigator currentInvestigator) {
             this.currentInvestigator = currentInvestigator;
         }
 
-        public Optional<Person> getCurrentInvestigator() {
+        public Optional<Investigator> getCurrentInvestigator() {
             return Optional.ofNullable(currentInvestigator);
         }
 

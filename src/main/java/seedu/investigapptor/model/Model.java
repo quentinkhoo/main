@@ -91,4 +91,9 @@ public interface Model {
      * Updates the password with the given password.
      */
     void updatePassword(Password password) throws InvalidPasswordException;
+
+    /**
+     * Removes the existing password
+     */
+    void removePassword();
 }

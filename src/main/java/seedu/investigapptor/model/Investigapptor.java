@@ -319,6 +319,14 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public void updatePassword(Password newPassword) {
         password.updatePassword(newPassword);
     }
+
+    /**
+     * Removes the password of this {@code Investigapptor}
+     */
+    public void removePassword() {
+        this.password = null;
+    }
+
     //// util methods
 
     @Override

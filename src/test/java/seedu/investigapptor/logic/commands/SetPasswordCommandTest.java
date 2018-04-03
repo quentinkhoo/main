@@ -53,7 +53,7 @@ public class SetPasswordCommandTest {
         SetPasswordCommand passwordFirstCommandCopy = prepareCommand(DEFAULT_PASSWORD);
         assertTrue(passwordFirstCommand.equals(passwordFirstCommandCopy));
 
-        // different types -> returns false
+        // empty string -> returnf alse
         assertFalse(passwordFirstCommand.equals(""));
 
         // null -> returns false

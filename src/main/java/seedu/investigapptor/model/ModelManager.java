@@ -124,6 +124,12 @@ public class ModelManager extends ComponentManager implements Model {
         investigapptor.updatePassword(password);
         indicateInvestigapptorChanged();
     }
+
+    @Override
+    public void removePassword() {
+        investigapptor.removePassword();
+        indicateInvestigapptorChanged();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**

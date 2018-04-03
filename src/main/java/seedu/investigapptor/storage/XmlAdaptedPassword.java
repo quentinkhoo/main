@@ -24,7 +24,11 @@ public class XmlAdaptedPassword {
      * Constructs an {@code XmlAdaptedPassword} with the given password.
      */
     public XmlAdaptedPassword(Password password) {
-        this.currentPassword = password.getPassword();
+        try {
+            this.currentPassword = password.getPassword();
+        } catch (NullPointerException npe) {
+            this.currentPassword = null;
+        }
     }
 
     /**

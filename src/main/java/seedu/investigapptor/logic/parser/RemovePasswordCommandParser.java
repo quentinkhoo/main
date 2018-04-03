@@ -27,7 +27,7 @@ public class RemovePasswordCommandParser implements Parser<RemovePasswordCommand
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PASSWORD)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetPasswordCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemovePasswordCommand.MESSAGE_USAGE));
         }
 
         String inputPassword = args.substring(4);

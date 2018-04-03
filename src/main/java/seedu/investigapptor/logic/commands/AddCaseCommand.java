@@ -12,8 +12,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.investigapptor.commons.core.EventsCenter;
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
+import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
@@ -93,11 +95,11 @@ public class AddCaseCommand extends UndoableCommand {
         requireNonNull(model);
         try {
             model.addCrimeCase(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            EventsCenter.getInstance().post(new SwapTabEvent(1));
         } catch (DuplicateCrimeCaseException e) {
             throw new CommandException(MESSAGE_DUPLICATE_CASE);
         }
-
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
@@ -108,12 +110,8 @@ public class AddCaseCommand extends UndoableCommand {
             if (investigatorIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
             }
-            Person investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
-            if (investigatorToAdd instanceof Investigator) {
-                toAdd = createCrimeCase((Investigator) investigatorToAdd);
-            } else {
-                throw new CommandException("Selected personal is not an investigator");
-            }
+            Investigator investigatorToAdd = (Investigator) lastShownList.get(investigatorIndex.getZeroBased());
+            toAdd = createCrimeCase(investigatorToAdd);
         }
     }
 

@@ -94,6 +94,14 @@ public class UniqueCrimeCaseList implements Iterable<CrimeCase> {
         return crimeCaseFoundAndDeleted;
     }
 
+    /**
+     * Removes all cases from the list.
+     *
+     */
+    public void removeAll() {
+        internalList.clear();
+    }
+
     public void setCrimeCases(UniqueCrimeCaseList replacement) {
         this.internalList.setAll(replacement.internalList);
     }

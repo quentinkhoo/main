@@ -104,6 +104,10 @@ public class Investigator extends Person {
         crimeCases.remove(caseToRemove);
     }
 
+    public void clear() {
+        crimeCases.removeAll();
+    }
+
     public ArrayList<Integer> getCaseListHashed() {
         return caseListHashed;
     }

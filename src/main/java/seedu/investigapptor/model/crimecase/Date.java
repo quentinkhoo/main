@@ -23,11 +23,12 @@ public class Date {
     private static final int DOB_MONTH_INDEX = 1;
     private static final int DOB_YEAR_INDEX = 2;
     private static String[] dateProperties;
+
+    public final String date;
+
     private int day;
     private int month;
     private int year;
-
-    public final String date;
 
     /**
      * Constructs a {@code date}.

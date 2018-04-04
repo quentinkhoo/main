@@ -24,10 +24,10 @@ import seedu.investigapptor.model.crimecase.Date;
 /**
  * The CalendarPanel of the Application which displays an overview of the duration of all the cass
  */
-public class CalendarPanel extends UiPart<Region>{
+public class CalendarPanel extends UiPart<Region> {
     private static final String FXML = "CalendarPanel.fxml";
-    private static final Style[] ALL_STYLES = { Style.STYLE1, Style.STYLE2, Style.STYLE3,
-            Style.STYLE4, Style.STYLE5, Style.STYLE6, Style.STYLE7 };
+    private static final Style[] ALL_STYLES = { Style.STYLE1, Style.STYLE2, Style.STYLE3, Style.STYLE4,
+        Style.STYLE5, Style.STYLE6, Style.STYLE7 };
     private static final String CLOSED_CASE_CALENDAR = "Closed Cases";
     private static final String OPENED_CASE_CALENDAR = "Opened Cases";
     private static final String CALENDAR_SOURCE = "All Cases";
@@ -103,7 +103,7 @@ public class CalendarPanel extends UiPart<Region>{
         if (status.equals(CASE_OPEN)) {
             caseEntry.changeEndDate(caseEntry.getStartDate());
             caseOpenCalendar.addEntry(caseEntry);
-        } else if (status.equals(CASE_CLOSE)){
+        } else if (status.equals(CASE_CLOSE)) {
             caseEntry.changeEndDate(LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDay()));
             caseCloseCalendar.addEntry(caseEntry);
         } else {

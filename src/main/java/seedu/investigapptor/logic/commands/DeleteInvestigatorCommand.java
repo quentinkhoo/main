@@ -54,7 +54,7 @@ public class DeleteInvestigatorCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(personToDelete);
         if (personToDelete instanceof Investigator && !((Investigator) personToDelete).emptyList()) {
-                throw new CommandException(MESSAGE_ACTIVE_INVESTIGATOR);
+            throw new CommandException(MESSAGE_ACTIVE_INVESTIGATOR);
         } else {
             deletePerson();
         }

@@ -1,26 +1,26 @@
-//@@author pkaijun
 package seedu.investigapptor.ui;
 
-import com.calendarfx.model.Entry;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
+import static seedu.investigapptor.model.crimecase.Status.CASE_CLOSE;
+import static seedu.investigapptor.model.crimecase.Status.CASE_OPEN;
 
-import javafx.scene.layout.Region;
+import java.time.LocalDate;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Calendar.Style;
 import com.calendarfx.model.CalendarSource;
+import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
+import com.google.common.eventbus.Subscribe;
 
-import seedu.investigapptor.commons.events.ui.CrimeCasePanelSelectionChangedEvent;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.layout.Region;
+import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.Date;
-import seedu.investigapptor.model.crimecase.Status;
 
-import java.time.LocalDate;
-import java.util.Random;
-import java.util.logging.Logger;
-
+//@@author pkaijun
 /**
  * The CalendarPanel of the Application which displays an overview of the duration of all the cass
  */
@@ -28,9 +28,15 @@ public class CalendarPanel extends UiPart<Region>{
     private static final String FXML = "CalendarPanel.fxml";
     private static final Style[] ALL_STYLES = { Style.STYLE1, Style.STYLE2, Style.STYLE3,
             Style.STYLE4, Style.STYLE5, Style.STYLE6, Style.STYLE7 };
+    private static final String CLOSED_CASE_CALENDAR = "Closed Cases";
+    private static final String OPENED_CASE_CALENDAR = "Opened Cases";
+    private static final String CALENDAR_SOURCE = "All Cases";
 
-    private static Calendar caseCalendar;
+    private static Calendar caseCloseCalendar;
+    private static Calendar caseOpenCalendar;
     private static CalendarSource caseCalendarSource;
+
+    private ObservableList<CrimeCase> crimeList;
 
     @FXML
     private CalendarView calendarPanel;
@@ -38,19 +44,26 @@ public class CalendarPanel extends UiPart<Region>{
     public CalendarPanel(ObservableList<CrimeCase> crimeList) {
         super(FXML);
 
+        this.crimeList = crimeList;
+
         /** Constructing the new various calendar objects **/
         calendarPanel = new CalendarView();
-        caseCalendarSource = new CalendarSource();  // Contains calendars
+        caseCalendarSource = new CalendarSource(CALENDAR_SOURCE);  // Contains calendars
+        caseCloseCalendar = new Calendar(CLOSED_CASE_CALENDAR);  // Contains entries of cases that are closed
+        caseOpenCalendar = new Calendar(OPENED_CASE_CALENDAR);  // Contains entries of cases that are opened
 
         /** Setting the defaults **/
         setCalendarView();
+        setCalendar();
 
         /** Creating the calendar entries **/
-        createCalendarEntries(crimeList);
+        createCalendarEntries();
+
+        /** Creating the calendar entries and adding it to the calendar **/
+        addToCalendar();
 
         registerAsAnEventHandler(this);
     }
-
 
     public CalendarView getViewPanel() {
         return this.calendarPanel;
@@ -58,9 +71,8 @@ public class CalendarPanel extends UiPart<Region>{
 
     /**
      * Create canlendar entries for all the cases in the crime list
-     * @param crimeList
      */
-    private void createCalendarEntries(ObservableList<CrimeCase> crimeList) {
+    private void createCalendarEntries() {
         Date endDate;
         Date startDate;
         String caseName;
@@ -69,80 +81,91 @@ public class CalendarPanel extends UiPart<Region>{
         for (CrimeCase crimecase : crimeList) {
             status = crimecase.getStatus().toString();
             startDate = crimecase.getStartDate();
-            switch(status) {
-                case Status.CASE_OPEN:
-            }
             endDate = crimecase.getEndDate();
             caseName = crimecase.getCaseName().toString();
 
-            createCalendar(caseName);
-            setEntry(startDate, endDate, caseName);
-
-            /** Creating the calendar entries and adding it to the calendar **/
-            addToCalendar();
+            setEntry(startDate, endDate, status, caseName);
         }
     }
 
     /**
-     * Create a calendar for each entry
-     */
-    private void createCalendar(String caseName) {
-        caseCalendar = new Calendar(caseName);  // Contains entry
-        setCalendar();
-    }
-
-    /**
-     * Creates an entry and adds it to the calendar
+     * Creates an entry and adds it to the respective calendar according to its status
      * @param startDate
      * @param endDate
+     * @param status
      * @param caseName
      */
-    private void setEntry(Date startDate, Date endDate, String caseName) {
-        Entry<String> caseSpan = new Entry<>(caseName);
-        caseSpan.changeStartDate(LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDay()));
-        caseSpan.changeEndDate(LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDay()));
-        caseSpan.setFullDay(true);
+    private void setEntry(Date startDate, Date endDate, String status, String caseName) {
+        Entry<String> caseEntry = new Entry<>(caseName);
+        caseEntry.changeStartDate(LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDay()));
+        caseEntry.setFullDay(true);
 
-        caseCalendar.addEntry(caseSpan);
+        if (status.equals(CASE_OPEN)) {
+            caseEntry.changeEndDate(caseEntry.getStartDate());
+            caseOpenCalendar.addEntry(caseEntry);
+        } else if (status.equals(CASE_CLOSE)){
+            caseEntry.changeEndDate(LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDay()));
+            caseCloseCalendar.addEntry(caseEntry);
+        } else {
+            assert(false);  // Should not reach here
+        }
     }
-
 
     /**
      * Configure the view of the calendar
      */
     private void setCalendarView() {
-        calendarPanel.setShowToday(true);
+        /*
         calendarPanel.showMonthPage();
         calendarPanel.setShowSearchField(false);
         //calendarPanel.setMouseTransparent(true);    // Prevents user from clicking on the calendar
         calendarPanel.setShowPageSwitcher(false);
         calendarPanel.setShowPrintButton(true);
         calendarPanel.setShowToolBar(false);
-        calendarPanel.setShowAddCalendarButton(false);
         calendarPanel.setShowPageToolBarControls(false);
+        calendarPanel.setShowSearchField(false);*/
+        calendarPanel.setShowAddCalendarButton(false);
         calendarPanel.setShowSearchField(false);
+        calendarPanel.setShowSearchResultsTray(false);
+        calendarPanel.setShowPrintButton(false);
+        calendarPanel.showMonthPage();
+        //calendarPanel.setShowPageSwitcher(false);
+        calendarPanel.setShowAddCalendarButton(false);
+        calendarPanel.setShowToday(true);
     }
 
     /**
-     * Configure the settings of the calendar
+     * Configure the settings of the calendars
      */
     private void setCalendar() {
-        caseCalendar.setReadOnly(true);
-        caseCalendar.setStyle(randomGenerateStyle());
-    }
+        caseCloseCalendar.setReadOnly(true);
+        caseCloseCalendar.setStyle(ALL_STYLES[0]);
 
-    private Style randomGenerateStyle() {
-        Random random = new Random();
-        int num = random.nextInt(6 - 0 + 1) + 0;
-        return ALL_STYLES[num];
+        caseOpenCalendar.setReadOnly(true);
+        caseOpenCalendar.setStyle(ALL_STYLES[4]);
     }
 
     /**
      * Add the entries to the calendar view and source
      */
     private void addToCalendar() {
-        caseCalendarSource.getCalendars().add(caseCalendar);
+        caseCalendarSource.getCalendars().add(caseCloseCalendar);
+        caseCalendarSource.getCalendars().add(caseOpenCalendar);
         calendarPanel.getCalendarSources().addAll(caseCalendarSource);
     }
 
+    @Subscribe
+    private void handleNewCaseAddedEvent(InvestigapptorChangedEvent event) {
+        crimeList = event.data.getCrimeCaseList();
+        Platform.runLater(this::updateCalendar);
+    }
+
+    /**
+     * Updates the calendar whenever there is a change made to the crimecaselist
+     */
+    private void updateCalendar() {
+        caseCloseCalendar.clear();
+        caseOpenCalendar.clear();
+        createCalendarEntries();
+    }
 }

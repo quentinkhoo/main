@@ -4,7 +4,6 @@ import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND
 
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
-import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.ListInvestigatorCaseCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 

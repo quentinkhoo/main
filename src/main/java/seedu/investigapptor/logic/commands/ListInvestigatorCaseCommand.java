@@ -35,7 +35,7 @@ public class ListInvestigatorCaseCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException{
+    public CommandResult execute() throws CommandException {
         if (targetIndex != null) {
             List<Person> lastShownList = model.getFilteredPersonList();
 

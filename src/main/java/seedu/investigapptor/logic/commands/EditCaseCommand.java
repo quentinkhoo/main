@@ -15,8 +15,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.investigapptor.commons.core.EventsCenter;
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
+import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.commons.util.CollectionUtil;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.crimecase.CaseName;
@@ -76,6 +78,7 @@ public class EditCaseCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() throws CommandException {
         try {
             model.updateCrimeCase(crimeCaseToEdit, editedCrimeCase);
+            EventsCenter.getInstance().post(new SwapTabEvent(1));
         } catch (DuplicateCrimeCaseException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_CASE);
         } catch (CrimeCaseNotFoundException pnfe) {

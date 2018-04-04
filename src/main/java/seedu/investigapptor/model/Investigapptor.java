@@ -95,14 +95,14 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         List<CrimeCase> syncedCrimeCaseList = newData.getCrimeCaseList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-        List<Person> syncedPersonList = newData.getPersonList().stream()
-                .map(this::syncWithMasterTagList)
-                .collect(Collectors.toList());
         try {
             setCrimeCases(syncedCrimeCaseList);
         } catch (DuplicateCrimeCaseException e) {
             throw new AssertionError("Investigapptors should not have duplicate cases");
         }
+        List<Person> syncedPersonList = newData.getPersonList().stream()
+                .map(this::syncWithMasterTagList)
+                .collect(Collectors.toList());
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
@@ -167,6 +167,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      *
      */
     public void convertHashToCases(Investigator key) {
+        requireNonNull(key.getCaseListHashed());
         if (key.getCaseListHashed() != null) {
             for (Integer i : key.getCaseListHashed()) {
                 for (CrimeCase c : cases) {
@@ -197,9 +198,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // in the case list.
         if (cases.add(crimecase)) {
             if (crimecase.getCurrentInvestigator() != null) {
-                for (CrimeCase d : crimecase.getCurrentInvestigator().getCrimeCases()) {
-                    System.out.println(d.getCaseName());
-                }
                 crimecase.getCurrentInvestigator().addCrimeCase(crimecase);
             }
         }
@@ -277,7 +275,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         if (person instanceof Investigator) {
-
             Investigator inv = new Investigator(person.getName(), person.getPhone(), person.getEmail(),
                     person.getAddress(), ((Investigator) person).getRank(),
                     correctTagReferences, ((Investigator) person).getCaseListHashed());

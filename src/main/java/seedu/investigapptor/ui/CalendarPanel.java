@@ -32,9 +32,9 @@ public class CalendarPanel extends UiPart<Region> {
     private static final String OPENED_CASE_CALENDAR = "Opened Cases";
     private static final String CALENDAR_SOURCE = "All Cases";
 
-    private static Calendar caseCloseCalendar;
-    private static Calendar caseOpenCalendar;
-    private static CalendarSource caseCalendarSource;
+    private Calendar caseCloseCalendar;
+    private Calendar caseOpenCalendar;
+    private CalendarSource caseCalendarSource;
 
     private ObservableList<CrimeCase> crimeList;
 
@@ -145,7 +145,7 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleNewCaseAddedEvent(InvestigapptorChangedEvent event) {
+    private void handleNewCaseEvent(InvestigapptorChangedEvent event) {
         crimeList = event.data.getCrimeCaseList();
         Platform.runLater(this::updateCalendar);
     }

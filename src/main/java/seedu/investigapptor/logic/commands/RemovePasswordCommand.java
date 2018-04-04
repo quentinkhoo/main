@@ -3,12 +3,14 @@ package seedu.investigapptor.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
-import com.sun.xml.internal.ws.policy.spi.AssertionCreationException;
-
 import seedu.investigapptor.commons.exceptions.WrongPasswordException;
-import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
+import seedu.investigapptor.logic.commands.exceptions.NoPasswordException;
 import seedu.investigapptor.model.Password;
 
+//@@author quentinkhoo
+/**
+ * Removes the password from the investigapptor application
+ */
 public class RemovePasswordCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "removepassword";
@@ -19,19 +21,21 @@ public class RemovePasswordCommand extends UndoableCommand {
             + " Requires input of current password"
             + "Parameters: " + PREFIX_PASSWORD + "currentPassword";
 
-    private String inputPasswordHash;
+    private String inputPassword;
 
 
     public RemovePasswordCommand(String inputPassword) {
         requireNonNull(inputPassword);
-        this.inputPasswordHash = Password.generatePasswordHash(inputPassword);
+        this.inputPassword = inputPassword;
     }
 
     @Override
     public CommandResult executeUndoableCommand() {
         requireNonNull(model);
         try {
-            checkInputPassword(inputPasswordHash);
+            checkInputPassword(inputPassword);
+        } catch (NoPasswordException npe) {
+            return new CommandResult(npe.getMessage());
         } catch (WrongPasswordException wpe) {
             return new CommandResult(wpe.getMessage());
         }
@@ -39,14 +43,20 @@ public class RemovePasswordCommand extends UndoableCommand {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    private void checkInputPassword(String inputPasswordHash) throws WrongPasswordException {
+    /**
+     * Checks whether the input password matches the current investigapptor password
+     * @param inputPassword
+     * @throws WrongPasswordException if password is invalid or there is no password in the application
+     */
+    private void checkInputPassword(String inputPassword) throws WrongPasswordException, NoPasswordException {
+        String inputPasswordHash = Password.generatePasswordHash(inputPassword);
         try {
             String currentPasswordHash = model.getInvestigapptor().getPassword().getPassword();
             if (!currentPasswordHash.equals(inputPasswordHash)) {
                 throw new WrongPasswordException("Password cannot be removed. Invalid password has been entered.");
             }
         } catch (NullPointerException npe) {
-            throw new WrongPasswordException("Investigapptor currently has no password!");
+            throw new NoPasswordException("Investigapptor currently has no password!");
         }
     }
 }

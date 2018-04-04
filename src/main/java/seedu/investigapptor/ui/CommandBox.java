@@ -71,21 +71,11 @@ public class CommandBox extends UiPart<Region> {
             break;
         case ESCAPE:
             keyEvent.consume();
-            commandTextField.setText("");
-            commandTextDisplay.setText("");
+            clearScreenText();
             break;
-
         case CONTROL:
             keyEvent.consume();
-            if (hideEnabled) {
-                commandTextField.setOpacity(1);
-                commandTextDisplay.setOpacity(0);
-                hideEnabled = false;
-            } else {
-                commandTextField.setOpacity(0);
-                commandTextDisplay.setOpacity(1);
-                hideEnabled = true;
-            }
+            togglePasswordHide();
             break;
         default:
                 // let JavaFx handle the keypress
@@ -150,6 +140,30 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author quentinkhoo
+
+    /**
+     * Clears the command box input field
+     */
+    private void clearScreenText() {
+        commandTextField.setText("");
+        commandTextDisplay.setText("");
+    }
+
+    /**
+     *  Toggles between hiding the password and revealing the password field to the user
+     */
+    private void togglePasswordHide() {
+        if (hideEnabled) {
+            commandTextField.setOpacity(1);
+            commandTextDisplay.setOpacity(0);
+            hideEnabled = false;
+        } else {
+            commandTextField.setOpacity(0);
+            commandTextDisplay.setOpacity(1);
+            hideEnabled = true;
+        }
+    }
     /**
      * Hides password string
      * @param inputText
@@ -176,6 +190,7 @@ public class CommandBox extends UiPart<Region> {
         int passwordPrefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
         return passwordPrefixIndex != -1;
     }
+    //@@author
 
     /**
      * Initializes the history snapshot.

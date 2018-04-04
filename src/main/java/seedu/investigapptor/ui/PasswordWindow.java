@@ -19,6 +19,7 @@ import seedu.investigapptor.commons.events.ui.ShowHelpRequestEvent;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.storage.Storage;
 
+//@@author quentinkhoo
 /**
  * The Password Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.

@@ -1,5 +1,6 @@
 package seedu.investigapptor.commons.exceptions;
 
+//@@author quentinkhoo
 /**
  * Represents an error during decryption
  */

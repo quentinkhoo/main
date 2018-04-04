@@ -5,32 +5,38 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
 import java.util.stream.Stream;
 
-import seedu.investigapptor.logic.commands.RemovePasswordCommand;
+import seedu.investigapptor.commons.exceptions.IllegalValueException;
+import seedu.investigapptor.logic.commands.SetPasswordCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
+import seedu.investigapptor.model.Password;
 
 //@@author quentinkhoo
 /**
  * Parses input arguments and creates a new PasswordCommand object
  */
-public class RemovePasswordCommandParser implements Parser<RemovePasswordCommand> {
+public class SetPasswordCommandParser implements Parser<SetPasswordCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the PasswordCommand
      * and returns an PasswordCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public RemovePasswordCommand parse(String args) throws ParseException {
+    public SetPasswordCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PASSWORD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PASSWORD)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RemovePasswordCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetPasswordCommand.MESSAGE_USAGE));
         }
 
-        String inputPassword = args.substring(4);
-        return new RemovePasswordCommand(inputPassword);
+        try {
+            String inputPassword = args.substring(4);
+            Password newPassword = ParserUtil.parsePassword(inputPassword);
+            return new SetPasswordCommand(newPassword);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage());
+        }
     }
 
     /**

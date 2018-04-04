@@ -202,6 +202,7 @@ public class MainWindow extends UiPart<Stage> {
         return this.crimeCaseListPanel;
     }
 
+    //@@author quentinkhoo
     /**
      * Changes to the {@code Tab} at the {@code index} and selects it.
      */
@@ -210,12 +211,12 @@ public class MainWindow extends UiPart<Stage> {
             listPanel.getSelectionModel().select(index);
         });
     }
-
     @Subscribe
     private void handleSwapTabEvent(SwapTabEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         changeTo(event.targetIndex);
     }
+    //@@author
 
     void releaseResources() {
         browserPanel.freeResources();

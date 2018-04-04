@@ -40,7 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         requireAllNonNull(investigapptor, userPrefs);
 
-        logger.fine("Initializing with investigapptor book: " + investigapptor + " and user prefs " + userPrefs);
+        logger.fine("Initializing with investigapptor: " + investigapptor + " and user prefs " + userPrefs);
 
         this.investigapptor = new Investigapptor(investigapptor);
         filteredCrimeCases = new FilteredList<>(this.investigapptor.getCrimeCaseList());
@@ -119,6 +119,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void backUpInvestigapptor(String fileName) {
         raise(new InvestigapptorBackupEvent(investigapptor, fileName));
     }
+
+    //@@author quentinkhoo
     @Override
     public void updatePassword(Password password) throws InvalidPasswordException {
         investigapptor.updatePassword(password);
@@ -130,6 +132,8 @@ public class ModelManager extends ComponentManager implements Model {
         investigapptor.removePassword();
         indicateInvestigapptorChanged();
     }
+    //@@author
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

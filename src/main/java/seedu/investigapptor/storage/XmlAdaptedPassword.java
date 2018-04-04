@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.investigapptor.model.Password;
 
+//@@author quentinkhoo
 /**
  * JAXB-friendly version of the Person.
  */

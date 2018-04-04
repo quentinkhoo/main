@@ -12,6 +12,7 @@ import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.model.Password;
 
+//@@author quentinkhoo
 /**
  * Adds a password to the investigapptor book.
  */

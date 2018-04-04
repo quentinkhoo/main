@@ -7,6 +7,7 @@ import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.parser.SetPasswordCommandParser;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 
+//@@author quentinkhoo
 /**
  * Sets a specific settings for the application
  */

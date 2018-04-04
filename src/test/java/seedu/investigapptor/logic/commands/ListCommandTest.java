@@ -3,6 +3,7 @@ package seedu.investigapptor.logic.commands;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.showCrimeCaseAtIndex;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_CASE;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.Before;
@@ -54,27 +55,27 @@ public class ListCommandTest {
 
     @Test
     public void execute_investigatorListIsNotFiltered_showsSameList() {
-        assertCommandSuccess(listCommandInvestigators, investigatorModel, String.format(ListCommand.MESSAGE_SUCCESS,
-                "investigators"), expectedInvestigatorModel);
+        assertCommandSuccess(listCommandInvestigators, investigatorModel, ListInvestigatorCommand.MESSAGE_SUCCESS,
+                expectedInvestigatorModel);
     }
 
     @Test
     public void execute_investigatorListIsFiltered_showsEverything() {
         showPersonAtIndex(investigatorModel, INDEX_FIRST_PERSON);
-        assertCommandSuccess(listCommandInvestigators, investigatorModel, String.format(ListCommand.MESSAGE_SUCCESS,
-                "investigators"), expectedInvestigatorModel);
+        assertCommandSuccess(listCommandInvestigators, investigatorModel, ListInvestigatorCommand.MESSAGE_SUCCESS,
+                expectedInvestigatorModel);
     }
 
     @Test
     public void execute_caseListIsNotFiltered_showsSameList() {
-        assertCommandSuccess(listCommandCases, crimeCaseModel, String.format(ListCommand.MESSAGE_SUCCESS, "cases"),
+        assertCommandSuccess(listCommandCases, crimeCaseModel, ListCaseCommand.MESSAGE_SUCCESS,
                 expectedCrimeCaseModel);
     }
 
     @Test
     public void execute_caseListIsFiltered_showsEverything() {
-        showCrimeCaseAtIndex(crimeCaseModel, INDEX_FIRST_PERSON);
-        assertCommandSuccess(listCommandCases, crimeCaseModel, String.format(ListCommand.MESSAGE_SUCCESS, "cases"),
+        showCrimeCaseAtIndex(crimeCaseModel, INDEX_FIRST_CASE);
+        assertCommandSuccess(listCommandCases, crimeCaseModel, ListCaseCommand.MESSAGE_SUCCESS,
                 expectedCrimeCaseModel);
     }
 

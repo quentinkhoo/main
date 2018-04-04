@@ -31,6 +31,7 @@ import static seedu.investigapptor.testutil.TypicalInvestigator.ALICE;
 import static seedu.investigapptor.testutil.TypicalInvestigator.AMY;
 import static seedu.investigapptor.testutil.TypicalInvestigator.BOB;
 import static seedu.investigapptor.testutil.TypicalInvestigator.CARL;
+import static seedu.investigapptor.testutil.TypicalInvestigator.DANIEL;
 import static seedu.investigapptor.testutil.TypicalInvestigator.HOON;
 import static seedu.investigapptor.testutil.TypicalInvestigator.IDA;
 import static seedu.investigapptor.testutil.TypicalInvestigator.KEYWORD_MATCHING_MEIER;
@@ -113,7 +114,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
 
         /* Case: add to empty investigapptor book -> added */
         deleteAllPersons();
-        assertCommandSuccess(ALICE);
+        assertCommandSuccess(DANIEL);
 
         /* Case: add a person with tags, command with parameters in random order -> added */
         toAdd = BOB;

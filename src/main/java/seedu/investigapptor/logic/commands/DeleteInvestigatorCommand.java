@@ -38,21 +38,25 @@ public class DeleteInvestigatorCommand extends UndoableCommand {
         this.targetIndex = targetIndex;
     }
 
-
+    /**
+    * Try to call the model to delete Person (@personToDelete)
+    *
+    */
+    private void deletePerson() {
+        try {
+            model.deletePerson(personToDelete);
+            EventsCenter.getInstance().post(new SwapTabEvent(0));
+        } catch (PersonNotFoundException pnfe) {
+            throw new AssertionError("The target investigator cannot be missing");
+        }
+    }
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(personToDelete);
-        if (personToDelete instanceof Investigator) {
-            if (!((Investigator) personToDelete).emptyList()) {
+        if (personToDelete instanceof Investigator && !((Investigator) personToDelete).emptyList()) {
                 throw new CommandException(MESSAGE_ACTIVE_INVESTIGATOR);
-            }
         } else {
-            try {
-                model.deletePerson(personToDelete);
-                EventsCenter.getInstance().post(new SwapTabEvent(0));
-            } catch (PersonNotFoundException pnfe) {
-                throw new AssertionError("The target investigator cannot be missing");
-            }
+            deletePerson();
         }
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }

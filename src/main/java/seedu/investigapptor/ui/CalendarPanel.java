@@ -115,21 +115,11 @@ public class CalendarPanel extends UiPart<Region>{
      * Configure the view of the calendar
      */
     private void setCalendarView() {
-        /*
-        calendarPanel.showMonthPage();
-        calendarPanel.setShowSearchField(false);
-        //calendarPanel.setMouseTransparent(true);    // Prevents user from clicking on the calendar
-        calendarPanel.setShowPageSwitcher(false);
-        calendarPanel.setShowPrintButton(true);
-        calendarPanel.setShowToolBar(false);
-        calendarPanel.setShowPageToolBarControls(false);
-        calendarPanel.setShowSearchField(false);*/
         calendarPanel.setShowAddCalendarButton(false);
         calendarPanel.setShowSearchField(false);
         calendarPanel.setShowSearchResultsTray(false);
         calendarPanel.setShowPrintButton(false);
         calendarPanel.showMonthPage();
-        //calendarPanel.setShowPageSwitcher(false);
         calendarPanel.setShowAddCalendarButton(false);
         calendarPanel.setShowToday(true);
     }

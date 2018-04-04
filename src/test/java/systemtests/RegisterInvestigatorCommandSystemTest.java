@@ -27,7 +27,6 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_AM
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.investigapptor.testutil.TypicalInvestigator.ALICE;
 import static seedu.investigapptor.testutil.TypicalInvestigator.AMY;
 import static seedu.investigapptor.testutil.TypicalInvestigator.BOB;
 import static seedu.investigapptor.testutil.TypicalInvestigator.CARL;

@@ -27,13 +27,13 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_AM
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.investigapptor.testutil.TypicalInvestigators.ALICE;
-import static seedu.investigapptor.testutil.TypicalInvestigators.AMY;
-import static seedu.investigapptor.testutil.TypicalInvestigators.BOB;
-import static seedu.investigapptor.testutil.TypicalInvestigators.CARL;
-import static seedu.investigapptor.testutil.TypicalInvestigators.HOON;
-import static seedu.investigapptor.testutil.TypicalInvestigators.IDA;
-import static seedu.investigapptor.testutil.TypicalInvestigators.KEYWORD_MATCHING_MEIER;
+import static seedu.investigapptor.testutil.TypicalInvestigator.AMY;
+import static seedu.investigapptor.testutil.TypicalInvestigator.BOB;
+import static seedu.investigapptor.testutil.TypicalInvestigator.CARL;
+import static seedu.investigapptor.testutil.TypicalInvestigator.DANIEL;
+import static seedu.investigapptor.testutil.TypicalInvestigator.HOON;
+import static seedu.investigapptor.testutil.TypicalInvestigator.IDA;
+import static seedu.investigapptor.testutil.TypicalInvestigator.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -113,7 +113,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
 
         /* Case: add to empty investigapptor book -> added */
         deleteAllPersons();
-        assertCommandSuccess(ALICE);
+        assertCommandSuccess(DANIEL);
 
         /* Case: add a person with tags, command with parameters in random order -> added */
         toAdd = BOB;
@@ -143,7 +143,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
         assertCommandFailure(command, RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate person except with different tags -> rejected */
-        // "friends" is an existing tag used in the default model, see TypicalInvestigators#ALICE
+        // "friends" is an existing tag used in the default model, see TypicalInvestigator#ALICE
         // This test will fail if a new tag that is not in the model is used, see the bug documented in
         // Investigapptor#addInvestigator(Investigator)
         command = InvestigatorUtil.getRegCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";

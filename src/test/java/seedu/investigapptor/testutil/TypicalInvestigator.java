@@ -18,18 +18,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.investigapptor.model.Investigapptor;
+import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 import seedu.investigapptor.model.person.investigator.Investigator;
 
 /**
  * A utility class containing a list of {@code Investigator} objects to be used in tests.
  */
-public class TypicalInvestigators {
+public class TypicalInvestigator {
 
     public static final Investigator ALICE = new InvestigatorBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("85355255")
-            .withTags("friends").build();
+            .withTags("friends")
+            .addCase(new CrimeCaseBuilder().withName("Omega").build())
+            .addCase(new CrimeCaseBuilder().withName("Stigma").build()).build();
     public static final Investigator BENSON = new InvestigatorBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
@@ -61,13 +65,21 @@ public class TypicalInvestigators {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalInvestigators() {} // prevents instantiation
+    private TypicalInvestigator() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code Investigapptor} with all the typical persons.
      */
     public static Investigapptor getTypicalInvestigapptor() {
         Investigapptor ia = new Investigapptor();
+        for (CrimeCase c : getCrimeCase()) {
+            try {
+                ia.addCrimeCase(c);
+            } catch (DuplicateCrimeCaseException e) {
+                throw new AssertionError("not possible");
+            }
+        }
         for (Investigator investigator : getTypicalInvestigators()) {
             try {
                 ia.addPerson(investigator);
@@ -76,6 +88,13 @@ public class TypicalInvestigators {
             }
         }
         return ia;
+    }
+
+    public static List<CrimeCase> getCrimeCase() {
+        ArrayList<CrimeCase> list = new ArrayList<>();
+        list.add(new CrimeCaseBuilder().withName("Omega").withInvestigator(ALICE).build());
+        list.add(new CrimeCaseBuilder().withName("Stigma").withInvestigator(ALICE).build());
+        return list;
     }
 
     public static List<Investigator> getTypicalInvestigators() {

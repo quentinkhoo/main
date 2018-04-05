@@ -96,6 +96,7 @@ public class InvestigatorBuilder {
         this.email = new Email(email);
         return this;
     }
+
     /**
      * Sets the {@code Name} of the {@code Investigator} that we are building.
      */
@@ -103,17 +104,22 @@ public class InvestigatorBuilder {
         this.rank = new Rank(rank);
         return this;
     }
+
     /**
      * Sets the {@code Name} of the {@code Investigator} that we are building.
      */
     public InvestigatorBuilder addCase(CrimeCase crimeCase) {
         try {
+            CrimeCase c = new CrimeCase(crimeCase.getCaseName(), crimeCase.getDescription(),
+                    new Investigator(name, phone, email, address, rank, tags), crimeCase.getStartDate(),
+                    crimeCase.getEndDate(), crimeCase.getStatus(), crimeCase.getTags());
             caseList.add(crimeCase);
         } catch (DuplicateCrimeCaseException e) {
             throw new AssertionError("not possible");
         }
         return this;
     }
+
     public Investigator build() {
         return new Investigator(name, phone, email, address, rank, caseList.toSet(), tags);
     }

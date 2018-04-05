@@ -73,8 +73,7 @@ public class XmlSerializableInvestigapptor {
         }
         for (XmlAdaptedInvestigator i : investigators) {
             Investigator investigator = i.toModelType();
-            investigapptor.convertHashToCases(investigator);
-            //investigapptor.addPerson(investigator);
+            investigapptor.addPerson(investigator);
 
         }
         investigapptor.setPassword(password.toModelType());

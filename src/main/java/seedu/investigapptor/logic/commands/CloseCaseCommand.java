@@ -82,14 +82,14 @@ public class CloseCaseCommand extends UndoableCommand {
             throw new CommandException(MESSAGE_CASE_ALREADY_CLOSE);
         }
 
-        closedCase = createEditedCase(caseToClose);
+        closedCase = createClosedCase(caseToClose);
     }
 
     /**
      * Creates and returns a {@code CrimeCase} with the details of {@code caseToEdit}
      * Updates status to "close" with the other fields remaining the same
      */
-    private static CrimeCase createEditedCase(CrimeCase caseToClose) {
+    private static CrimeCase createClosedCase(CrimeCase caseToClose) {
         assert caseToClose != null;
 
         CaseName name = caseToClose.getCaseName();

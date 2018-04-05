@@ -10,7 +10,7 @@ import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
  */
 public class FindInvestigatorCommand extends Command {
 
-    public static final String COMMAND_WORD = "findinvestigator";
+    public static final String COMMAND_WORD = "findinvestigators";
     public static final String COMMAND_ALIAS = "fi";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all investigators whose names contain any of "

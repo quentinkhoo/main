@@ -20,7 +20,7 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_CASENAME
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_CASENAME_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_DESCRIPTION_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BANANA;
-import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_INVESTIGATOR_BANANA;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_INVESTIGATOR_INDEX_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_STARTDATE_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_STARTDATE_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_FRAUD;
@@ -116,7 +116,7 @@ public class AddCaseCommandParserTest {
 
         // missing investigator prefix
         assertParseFailure(parser, CASENAME_DESC_BANANA + DESCRIPTION_DESC_BANANA
-                        + VALID_INVESTIGATOR_BANANA + STARTDATE_DESC_BANANA,
+                        + VALID_INVESTIGATOR_INDEX_BANANA + STARTDATE_DESC_BANANA,
                 expectedMessage);
 
         // missing start date prefix

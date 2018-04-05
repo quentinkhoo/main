@@ -10,7 +10,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>10/11/2015</startDate>
@@ -26,7 +26,7 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>12/03/2016</startDate>
@@ -43,13 +43,13 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>18/01/2012</startDate>
         <endDate>12/12/3000</endDate>
-        <status>open</status>
         <status>close</status>
+        <tagged>Homicide</tagged>
     </cases>
     <cases>
         <name>Project Delta Johnny</name>
@@ -59,12 +59,13 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>27/11/1999</startDate>
         <endDate>12/12/3000</endDate>
         <status>open</status>
+        <tagged>Homicide</tagged>
     </cases>
     <cases>
         <name>Project Echo</name>
@@ -74,12 +75,13 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>23/11/1965</startDate>
         <endDate>12/12/3000</endDate>
         <status>open</status>
+        <tagged>Homicide</tagged>
     </cases>
     <cases>
         <name>Project Foxtrot</name>
@@ -89,12 +91,13 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>09/07/2017</startDate>
         <endDate>12/12/3000</endDate>
         <status>close</status>
+        <tagged>Homicide</tagged>
     </cases>
     <cases>
         <name>Project Golf</name>
@@ -104,12 +107,13 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>02/08/2017</startDate>
         <endDate>12/12/3000</endDate>
         <status>open</status>
+        <tagged>Homicide</tagged>
     </cases>
     <cases>
         <name>Project One</name>
@@ -119,12 +123,12 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>10/12/2016</startDate>
         <endDate>12/12/3000</endDate>
-        <status>open</status>
+        <status>close</status>
         <tagged>Murder</tagged>
         <tagged>Homicide</tagged>
         <tagged>Missing</tagged>
@@ -137,12 +141,12 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>14/12/2016</startDate>
         <endDate>12/12/3000</endDate>
-        <status>open</status>
+        <status>close</status>
         <tagged>Robbery</tagged>
         <tagged>Prank</tagged>
         <tagged>Kidnap</tagged>
@@ -155,12 +159,12 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>18/12/2016</startDate>
         <endDate>12/12/3000</endDate>
-        <status>open</status>
+        <status>close</status>
         <tagged>Murder</tagged>
         <tagged>Supernatural</tagged>
     </cases>
@@ -172,12 +176,12 @@
             <phone>85355255</phone>
             <email>alice@example.com</email>
             <address>123, Jurong West Ave 6, #08-111</address>
-			<rank>2</rank>
+            <rank>3</rank>
             <tagged>friends</tagged>
         </investigator>
         <startDate>11/12/2016</startDate>
         <endDate>12/12/3000</endDate>
-        <status>open</status>
+        <status>close</status>
         <tagged>Theft</tagged>
     </cases>
 </investigapptor>

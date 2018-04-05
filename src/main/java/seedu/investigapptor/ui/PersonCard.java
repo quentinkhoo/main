@@ -61,6 +61,7 @@ public class PersonCard extends UiPart<Region> {
         colorTag(person);
     }
 
+    //@@author pkaijun
     /**
      *
      * Creates tag labels for person
@@ -82,6 +83,7 @@ public class PersonCard extends UiPart<Region> {
         // Hash the tag name to get the corresponding colour
         return LABEL_COLOR[Math.abs(tagName.hashCode()) % LABEL_COLOR.length];
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {

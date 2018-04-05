@@ -227,6 +227,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         cases.setCrimeCase(target, syncedEditedCrimeCase);
         addCrimeCaseToInvestigator(syncedEditedCrimeCase);
     }
+    //@@author
 
     /**
      * Removes {@code key} from this {@code Investigapptor}.

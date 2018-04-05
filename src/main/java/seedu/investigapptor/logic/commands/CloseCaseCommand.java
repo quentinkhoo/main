@@ -1,4 +1,3 @@
-//@@author pkaijun
 package seedu.investigapptor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -23,6 +22,7 @@ import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseExcepti
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
+//@@author pkaijun
 /**
  * Update the status of a case from open to close and update the EndDate field
  */
@@ -42,8 +42,8 @@ public class CloseCaseCommand extends UndoableCommand {
 
     private final Index index;
 
-    private CrimeCase caseToEdit;
-    private CrimeCase editedCase;
+    private CrimeCase caseToClose;
+    private CrimeCase closedCase;
 
     /**
      * @param index of the crimecase in the filtered crimecase list to close
@@ -56,14 +56,14 @@ public class CloseCaseCommand extends UndoableCommand {
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         try {
-            model.updateCrimeCase(caseToEdit, editedCase);
+            model.updateCrimeCase(caseToClose, closedCase);
         } catch (DuplicateCrimeCaseException dce) {
             throw new CommandException(MESSAGE_DUPLICATE_CASE);
         } catch (CrimeCaseNotFoundException cnfe) {
             throw new AssertionError("The target case cannot be missing");
         }
         model.updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
-        return new CommandResult(String.format(MESSAGE_CLOSE_CASE_SUCCESS, editedCase.getStatus()));
+        return new CommandResult(String.format(MESSAGE_CLOSE_CASE_SUCCESS, closedCase.getStatus()));
     }
 
     @Override
@@ -76,29 +76,29 @@ public class CloseCaseCommand extends UndoableCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
         }
 
-        caseToEdit = lastShownList.get(index.getZeroBased());
+        caseToClose = lastShownList.get(index.getZeroBased());
 
-        if (caseToEdit.getStatus().toString().equals(CASE_CLOSE)) {
+        if (caseToClose.getStatus().toString().equals(CASE_CLOSE)) {
             throw new CommandException(MESSAGE_CASE_ALREADY_CLOSE);
         }
 
-        editedCase = createEditedCase(caseToEdit);
+        closedCase = createEditedCase(caseToClose);
     }
 
     /**
      * Creates and returns a {@code CrimeCase} with the details of {@code caseToEdit}
      * Updates status to "close" with the other fields remaining the same
      */
-    private static CrimeCase createEditedCase(CrimeCase caseToEdit) {
-        assert caseToEdit != null;
+    private static CrimeCase createEditedCase(CrimeCase caseToClose) {
+        assert caseToClose != null;
 
-        CaseName name = caseToEdit.getCaseName();
-        Description desc = caseToEdit.getDescription();
-        Date startDate = caseToEdit.getStartDate();
+        CaseName name = caseToClose.getCaseName();
+        Description desc = caseToClose.getDescription();
+        Date startDate = caseToClose.getStartDate();
         Date endDate = new Date(Date.getTodayDate());
-        Set<Tag> tags = caseToEdit.getTags();
-        Investigator investigator = caseToEdit.getCurrentInvestigator();
-        Status status = caseToEdit.getStatus();
+        Set<Tag> tags = caseToClose.getTags();
+        Investigator investigator = caseToClose.getCurrentInvestigator();
+        Status status = caseToClose.getStatus();
         status.closeCase();    // Close case status only
 
         return new CrimeCase(name, desc, investigator, startDate, endDate, status, tags);

@@ -4,6 +4,7 @@ import seedu.investigapptor.commons.core.EventsCenter;
 import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.model.person.investigator.TagContainsKeywordsPredicate;
 
+//@@author pkaijun
 /**
  * Finds and lists all investigators in investigapptor whose tags contains any of the argument keywords.
  * Keyword matching is not case-sensitive.

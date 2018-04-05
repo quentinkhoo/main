@@ -62,11 +62,13 @@
             </padding>
           </StackPane>
 
+          <!-- @@author pkaijun -->
           <StackPane fx:id="calendarPanelPlaceholder" prefWidth="340" >
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
           </StackPane>
+          <!-- @@author -->
 
         </SplitPane>
 

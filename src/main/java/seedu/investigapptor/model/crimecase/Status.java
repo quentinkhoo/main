@@ -21,7 +21,7 @@ public class Status {
      *
      */
     public Status() {
-        this.status = "open";
+        this.status = CASE_OPEN;
     }
 
     /**

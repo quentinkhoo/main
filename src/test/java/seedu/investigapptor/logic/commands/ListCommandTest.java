@@ -3,6 +3,7 @@ package seedu.investigapptor.logic.commands;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.showCrimeCaseAtIndex;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_CASE;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.Before;
@@ -23,58 +24,50 @@ public class ListCommandTest {
 
     private Model investigatorModel;
     private Model expectedInvestigatorModel;
-    private ListCommand listCommandInvestigators;
-
-    private Model investigatorAliasModel;
-    private Model expectedInvestigatorAliasModel;
-    private ListCommand listCommandInvestigatorAlias;
+    private ListInvestigatorCommand listCommandInvestigators;
 
     private Model crimeCaseModel;
     private Model expectedCrimeCaseModel;
-    private ListCommand listCommandCases;
-
-    private Model crimeCaseAliasModel;
-    private Model expectedCrimeCaseAliasModel;
-    private ListCommand listCommandCrimeCaseAlias;
+    private ListCaseCommand listCommandCases;
 
     @Before
     public void setUp() {
         investigatorModel = new ModelManager(TypicalPersons.getTypicalInvestigapptor(), new UserPrefs());
         expectedInvestigatorModel = new ModelManager(investigatorModel.getInvestigapptor(), new UserPrefs());
 
-        listCommandInvestigators = new ListCommand("inv");
+        listCommandInvestigators = new ListInvestigatorCommand();
         listCommandInvestigators.setData(investigatorModel, new CommandHistory(), new UndoRedoStack());
 
         crimeCaseModel = new ModelManager(TypicalCrimeCases.getTypicalInvestigapptor(), new UserPrefs());
         expectedCrimeCaseModel = new ModelManager(crimeCaseModel.getInvestigapptor(), new UserPrefs());
 
-        listCommandCases = new ListCommand("c");
+        listCommandCases = new ListCaseCommand();
         listCommandCases.setData(investigatorModel, new CommandHistory(), new UndoRedoStack());
     }
 
     @Test
     public void execute_investigatorListIsNotFiltered_showsSameList() {
-        assertCommandSuccess(listCommandInvestigators, investigatorModel, String.format(ListCommand.MESSAGE_SUCCESS,
-                "investigators"), expectedInvestigatorModel);
+        assertCommandSuccess(listCommandInvestigators, investigatorModel, ListInvestigatorCommand.MESSAGE_SUCCESS,
+                expectedInvestigatorModel);
     }
 
     @Test
     public void execute_investigatorListIsFiltered_showsEverything() {
         showPersonAtIndex(investigatorModel, INDEX_FIRST_PERSON);
-        assertCommandSuccess(listCommandInvestigators, investigatorModel, String.format(ListCommand.MESSAGE_SUCCESS,
-                "investigators"), expectedInvestigatorModel);
+        assertCommandSuccess(listCommandInvestigators, investigatorModel, ListInvestigatorCommand.MESSAGE_SUCCESS,
+                expectedInvestigatorModel);
     }
 
     @Test
     public void execute_caseListIsNotFiltered_showsSameList() {
-        assertCommandSuccess(listCommandCases, crimeCaseModel, String.format(ListCommand.MESSAGE_SUCCESS, "cases"),
+        assertCommandSuccess(listCommandCases, crimeCaseModel, ListCaseCommand.MESSAGE_SUCCESS,
                 expectedCrimeCaseModel);
     }
 
     @Test
     public void execute_caseListIsFiltered_showsEverything() {
-        showCrimeCaseAtIndex(crimeCaseModel, INDEX_FIRST_PERSON);
-        assertCommandSuccess(listCommandCases, crimeCaseModel, String.format(ListCommand.MESSAGE_SUCCESS, "cases"),
+        showCrimeCaseAtIndex(crimeCaseModel, INDEX_FIRST_CASE);
+        assertCommandSuccess(listCommandCases, crimeCaseModel, ListCaseCommand.MESSAGE_SUCCESS,
                 expectedCrimeCaseModel);
     }
 

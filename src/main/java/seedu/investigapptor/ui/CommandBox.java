@@ -1,5 +1,7 @@
 package seedu.investigapptor.ui;
 
+import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PASSWORD;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -26,16 +28,28 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
-    private boolean isHiddenText = false;
+    private boolean hideEnabled;
 
     @FXML
     private TextField commandTextField;
+
+    @FXML
+    private TextField commandTextDisplay;
 
     public CommandBox(Logic logic) {
         super(FXML);
         this.logic = logic;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextDisplay.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.setOpacity(0);
+
+        // checks for password prefix
+        commandTextField.textProperty()
+                .addListener((observable, oldValue, newValue) -> commandTextDisplay
+                        .setText(hidePasswordText(newValue)));
+        //commandTextField.setSkin(new TextFieldCaret(commandTextField));
+
+        hideEnabled = true;
         historySnapshot = logic.getHistorySnapshot();
     }
 
@@ -57,20 +71,14 @@ public class CommandBox extends UiPart<Region> {
             break;
         case ESCAPE:
             keyEvent.consume();
-            commandTextField.setText("");
+            clearScreenText();
             break;
-        case ALT:
+        case CONTROL:
             keyEvent.consume();
-            if (isHiddenText) {
-                commandTextField.setOpacity(1.0);
-                isHiddenText = false;
-            } else {
-                commandTextField.setOpacity(0.0);
-                isHiddenText = true;
-            }
+            togglePasswordHide();
             break;
         default:
-            // let JavaFx handle the keypress
+                // let JavaFx handle the keypress
         }
     }
 
@@ -132,6 +140,58 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    //@@author quentinkhoo
+
+    /**
+     * Clears the command box input field
+     */
+    private void clearScreenText() {
+        commandTextField.setText("");
+        commandTextDisplay.setText("");
+    }
+
+    /**
+     *  Toggles between hiding the password and revealing the password field to the user
+     */
+    private void togglePasswordHide() {
+        if (hideEnabled) {
+            commandTextField.setOpacity(1);
+            commandTextDisplay.setOpacity(0);
+            hideEnabled = false;
+        } else {
+            commandTextField.setOpacity(0);
+            commandTextDisplay.setOpacity(1);
+            hideEnabled = true;
+        }
+    }
+    /**
+     * Hides password string
+     * @param inputText
+     * @return
+     */
+    private String hidePasswordText(String inputText) {
+        StringBuilder sb = new StringBuilder(inputText);
+        int prefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
+
+        if (hasPasswordPrefix(inputText)) {
+            for (int i = prefixIndex + 3; i < inputText.length(); i++) {
+                sb.setCharAt(i, '*');
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Checks for presence of password prefix
+     * @param inputText
+     * @return
+     */
+    private boolean hasPasswordPrefix(String inputText) {
+        int passwordPrefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
+        return passwordPrefixIndex != -1;
+    }
+    //@@author
+
     /**
      * Initializes the history snapshot.
      */
@@ -146,6 +206,7 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
+        commandTextDisplay.getStyleClass().remove(ERROR_STYLE_CLASS);
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
@@ -153,13 +214,20 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
-        ObservableList<String> styleClass = commandTextField.getStyleClass();
+        ObservableList<String> styleClassDisplay = commandTextDisplay.getStyleClass();
+        ObservableList<String> styleClassField = commandTextField.getStyleClass();
 
-        if (styleClass.contains(ERROR_STYLE_CLASS)) {
+        if (styleClassDisplay.contains(ERROR_STYLE_CLASS)) {
             return;
         }
 
-        styleClass.add(ERROR_STYLE_CLASS);
+        styleClassDisplay.add(ERROR_STYLE_CLASS);
+
+        if (styleClassField.contains(ERROR_STYLE_CLASS)) {
+            return;
+        }
+
+        styleClassField.add(ERROR_STYLE_CLASS);
     }
 
 }

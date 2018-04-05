@@ -21,12 +21,14 @@ import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
 import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.HistoryCommand;
-import seedu.investigapptor.logic.commands.ListCommand;
+import seedu.investigapptor.logic.commands.ListCaseCommand;
 import seedu.investigapptor.logic.commands.ListInvestigatorCaseCommand;
+import seedu.investigapptor.logic.commands.ListInvestigatorCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
 import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.RemovePasswordCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
-import seedu.investigapptor.logic.commands.SetCommand;
+import seedu.investigapptor.logic.commands.SetPasswordCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 
@@ -105,17 +107,25 @@ public class InvestigapptorParser {
         case FindCaseTagsCommand.COMMAND_ALIAS:
             return new FindCaseTagsCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-        case ListCommand.COMMAND_ALIAS:
-            return new ListCommandParser().parse(arguments);
+        case ListInvestigatorCommand.COMMAND_WORD:
+        case ListInvestigatorCommand.COMMAND_ALIAS:
+            return new ListInvestigatorCommand();
+
+        case ListCaseCommand.COMMAND_WORD:
+        case ListCaseCommand.COMMAND_ALIAS:
+            return new ListCaseCommand();
+
+        case SetPasswordCommand.COMMAND_WORD:
+        case SetPasswordCommand.COMMAND_ALIAS:
+            return new SetPasswordCommandParser().parse(arguments);
+
+        case RemovePasswordCommand.COMMAND_WORD:
+        case RemovePasswordCommand.COMMAND_ALIAS:
+            return new RemovePasswordCommandParser().parse(arguments);
 
         case ListInvestigatorCaseCommand.COMMAND_WORD:
         case ListInvestigatorCaseCommand.COMMAND_ALIAS:
             return new ListInvestigatorCaseCommandParser().parse(arguments);
-
-        case SetCommand.COMMAND_WORD:
-        case SetCommand.COMMAND_ALIAS:
-            return new SetCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_ALIAS:

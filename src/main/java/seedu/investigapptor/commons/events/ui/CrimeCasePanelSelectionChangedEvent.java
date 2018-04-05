@@ -4,7 +4,7 @@ import seedu.investigapptor.commons.events.BaseEvent;
 import seedu.investigapptor.ui.CrimeCaseCard;
 
 /**
- * Represents a selection change in the Person List Panel
+ * Represents a selection change in the Crime Case List Panel
  */
 public class CrimeCasePanelSelectionChangedEvent extends BaseEvent {
 

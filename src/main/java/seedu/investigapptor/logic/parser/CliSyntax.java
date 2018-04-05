@@ -20,8 +20,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_STATUS = new Prefix("st/");
 
     /* Prefix definitions for password */
-    public static final Prefix PREFIX_OLD_PASSWORD = new Prefix("op/");
-    public static final Prefix PREFIX_NEW_PASSWORD = new Prefix("np/");
-    public static final Prefix PREFIX_PASSWORD = new Prefix("p/");
+    public static final Prefix PREFIX_PASSWORD = new Prefix("pw/");
 
 }

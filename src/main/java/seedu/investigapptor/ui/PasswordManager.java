@@ -15,6 +15,7 @@ import seedu.investigapptor.commons.events.ui.ValidPasswordEvent;
 import seedu.investigapptor.commons.util.StringUtil;
 import seedu.investigapptor.storage.Storage;
 
+//@@author quentinkhoo
 /**
  * The manager of the UI component.
  */

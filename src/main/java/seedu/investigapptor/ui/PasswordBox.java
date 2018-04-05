@@ -18,6 +18,7 @@ import seedu.investigapptor.logic.commands.CommandResult;
 import seedu.investigapptor.model.Password;
 import seedu.investigapptor.storage.Storage;
 
+//@@author quentinkhoo
 /**
  * The UI component that is responsible for receiving user command inputs.
  */

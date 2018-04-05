@@ -14,7 +14,7 @@ public class CrimeCaseCard extends UiPart<Region> {
 
     private static final String FXML = "CrimeCaseListCard.fxml";
     private static final String[] LABEL_COLOR = {"red", "yellow", "blue", "orange", "pink", "olive", "black",
-            "brown", "gray", "green", "beige", "lightblue", "golden", "purple"};
+        "brown", "gray", "green", "beige", "lightblue", "golden", "purple"};
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

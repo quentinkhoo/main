@@ -4,6 +4,8 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_CASENAME
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_CASENAME_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_DESCRIPTION_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BANANA;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_INVESTIGATOR_APPLE;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_INVESTIGATOR_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_STARTDATE_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_STARTDATE_BANANA;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_FRAUD;
@@ -72,11 +74,11 @@ public class TypicalCrimeCases {
 
     // Manually added - CrimeCase's details found in {@code CommandTestUtil}
     public static final CrimeCase APPLE = new CrimeCaseBuilder().withName(VALID_CASENAME_APPLE)
-            .withDescription(VALID_DESCRIPTION_APPLE)
-            .withStartDate(VALID_STARTDATE_APPLE).withEndDate().withTags(VALID_TAG_FRAUD).build();
+            .withDescription(VALID_DESCRIPTION_APPLE).withInvestigator(VALID_INVESTIGATOR_APPLE)
+            .withStartDate(VALID_STARTDATE_APPLE).withTags(VALID_TAG_FRAUD).build();
     public static final CrimeCase BANANA = new CrimeCaseBuilder().withName(VALID_CASENAME_BANANA)
-            .withDescription(VALID_DESCRIPTION_BANANA)
-            .withStartDate(VALID_STARTDATE_BANANA).withEndDate().toggleStatus()
+            .withDescription(VALID_DESCRIPTION_BANANA).withInvestigator(VALID_INVESTIGATOR_BANANA)
+            .withStartDate(VALID_STARTDATE_BANANA).toggleStatus()
             .withTags(VALID_TAG_MURDER, VALID_TAG_FRAUD)
             .build();
 

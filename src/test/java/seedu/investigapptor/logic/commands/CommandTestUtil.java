@@ -28,7 +28,10 @@ import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
+import seedu.investigapptor.model.person.investigator.Investigator;
+import seedu.investigapptor.testutil.EditCrimeCaseDescriptorBuilder;
 import seedu.investigapptor.testutil.EditPersonDescriptorBuilder;
+import seedu.investigapptor.testutil.InvestigatorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -86,8 +89,16 @@ public class CommandTestUtil {
     public static final String VALID_CASENAME_BANANA = "Project Banana";
     public static final String VALID_DESCRIPTION_APPLE = "Description for Project Apple.";
     public static final String VALID_DESCRIPTION_BANANA = "Description for Project Banana.";
-    public static final String VALID_INVESTIGATOR_APPLE = "1";
-    public static final String VALID_INVESTIGATOR_BANANA = "2";
+    public static final String VALID_INVESTIGATOR_INDEX_APPLE = "1";
+    public static final String VALID_INVESTIGATOR_INDEX_BANANA = "2";
+    public static final Investigator VALID_INVESTIGATOR_APPLE;
+    public static final Investigator VALID_INVESTIGATOR_BANANA;
+    static {
+        VALID_INVESTIGATOR_APPLE = new InvestigatorBuilder().withName("Apple Hong").withPhone("98761234")
+                .withEmail("apple@gmail.com").withAddress("The Big Apple").withRank("4").withTags("Red").build();
+        VALID_INVESTIGATOR_BANANA = new InvestigatorBuilder().withName("Banana Huang").withPhone("84267542")
+                .withEmail("banana@gmail.com").withAddress("The Banana Tree").withRank("2").withTags("Yellow").build();
+    }
     public static final String VALID_STARTDATE_APPLE = "31/12/2017";
     public static final String VALID_STARTDATE_BANANA = "4/03/1998";
     public static final String VALID_TAG_FRAUD = "Fraud";
@@ -97,8 +108,8 @@ public class CommandTestUtil {
     public static final String CASENAME_DESC_BANANA = " " + PREFIX_NAME + VALID_CASENAME_BANANA;
     public static final String DESCRIPTION_DESC_APPLE = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_APPLE;
     public static final String DESCRIPTION_DESC_BANANA = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BANANA;
-    public static final String INVESTIGATOR_DESC_APPLE = " " + PREFIX_INVESTIGATOR + VALID_INVESTIGATOR_APPLE;
-    public static final String INVESTIGATOR_DESC_BANANA = " " + PREFIX_INVESTIGATOR + VALID_INVESTIGATOR_BANANA;
+    public static final String INVESTIGATOR_DESC_APPLE = " " + PREFIX_INVESTIGATOR + VALID_INVESTIGATOR_INDEX_APPLE;
+    public static final String INVESTIGATOR_DESC_BANANA = " " + PREFIX_INVESTIGATOR + VALID_INVESTIGATOR_INDEX_BANANA;
     public static final String STARTDATE_DESC_APPLE = " " + PREFIX_STARTDATE + VALID_STARTDATE_APPLE;
     public static final String STARTDATE_DESC_BANANA = " " + PREFIX_STARTDATE + VALID_STARTDATE_BANANA;
     public static final String TAG_DESC_FRAUD = " " + PREFIX_TAG + VALID_TAG_FRAUD;
@@ -107,11 +118,23 @@ public class CommandTestUtil {
     public static final String INVALID_CASENAME_DESC = " " + PREFIX_NAME + "Yellow&"; // '&' not allowed in names
     public static final String INVALID_DESCRIPTION_DESC = " "
             + PREFIX_DESCRIPTION + ""; // empty string not allowed for descriptions
-    public static final String INVALID_INVESTIGATOR_DESC = " "
+    public static final String INVALID_INVESTIGATOR_INDEX_DESC = " "
             + PREFIX_INVESTIGATOR + "-5"; // negative index
     public static final String INVALID_STARTDATE_DESC = " "
             + PREFIX_STARTDATE + "132/11/17"; // is not a valid date
 
+    public static final EditCaseCommand.EditCrimeCaseDescriptor DESC_APPLE;
+    public static final EditCaseCommand.EditCrimeCaseDescriptor DESC_BANANA;
+    static {
+        DESC_APPLE = new EditCrimeCaseDescriptorBuilder().withCaseName(VALID_CASENAME_APPLE)
+                .withDescription(VALID_DESCRIPTION_APPLE).withInvestigator(VALID_INVESTIGATOR_APPLE)
+                .withStartDate(VALID_STARTDATE_APPLE)
+                .withTags(VALID_TAG_FRAUD).build();
+        DESC_BANANA = new EditCrimeCaseDescriptorBuilder().withCaseName(VALID_CASENAME_BANANA)
+                .withDescription(VALID_DESCRIPTION_BANANA).withInvestigator(VALID_INVESTIGATOR_BANANA)
+                .withStartDate(VALID_STARTDATE_BANANA)
+                .withTags(VALID_TAG_MURDER, VALID_TAG_FRAUD).build();
+    }
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the result message matches {@code expectedMessage} <br>

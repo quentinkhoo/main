@@ -143,7 +143,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
         assertCommandFailure(command, RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate person except with different tags -> rejected */
-        // "friends" is an existing tag used in the default model, see TypicalInvestigators#ALICE
+        // "friends" is an existing tag used in the default model, see TypicalInvestigator#ALICE
         // This test will fail if a new tag that is not in the model is used, see the bug documented in
         // Investigapptor#addInvestigator(Investigator)
         command = InvestigatorUtil.getRegCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";

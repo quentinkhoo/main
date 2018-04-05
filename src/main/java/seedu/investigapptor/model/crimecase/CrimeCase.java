@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
-//@@author leowweiching-reuse
+//@@author leowweiching-reused
 /**
  * Represents a Crime Case in the Investigapptor.
  * Guarantees: details are present and not null, field values are validated, immutable.

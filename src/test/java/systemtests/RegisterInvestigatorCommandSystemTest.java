@@ -27,13 +27,13 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_AM
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.investigapptor.testutil.TypicalInvestigator.ALICE;
-import static seedu.investigapptor.testutil.TypicalInvestigator.AMY;
-import static seedu.investigapptor.testutil.TypicalInvestigator.BOB;
-import static seedu.investigapptor.testutil.TypicalInvestigator.CARL;
-import static seedu.investigapptor.testutil.TypicalInvestigator.HOON;
-import static seedu.investigapptor.testutil.TypicalInvestigator.IDA;
-import static seedu.investigapptor.testutil.TypicalInvestigator.KEYWORD_MATCHING_MEIER;
+import static seedu.investigapptor.testutil.TypicalInvestigators.ALICE;
+import static seedu.investigapptor.testutil.TypicalInvestigators.AMY;
+import static seedu.investigapptor.testutil.TypicalInvestigators.BOB;
+import static seedu.investigapptor.testutil.TypicalInvestigators.CARL;
+import static seedu.investigapptor.testutil.TypicalInvestigators.HOON;
+import static seedu.investigapptor.testutil.TypicalInvestigators.IDA;
+import static seedu.investigapptor.testutil.TypicalInvestigators.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 

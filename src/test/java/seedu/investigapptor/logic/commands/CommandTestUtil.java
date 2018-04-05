@@ -118,7 +118,7 @@ public class CommandTestUtil {
     public static final String INVALID_CASENAME_DESC = " " + PREFIX_NAME + "Yellow&"; // '&' not allowed in names
     public static final String INVALID_DESCRIPTION_DESC = " "
             + PREFIX_DESCRIPTION + ""; // empty string not allowed for descriptions
-    public static final String INVALID_INVESTIGATOR_DESC = " "
+    public static final String INVALID_INVESTIGATOR_INDEX_DESC = " "
             + PREFIX_INVESTIGATOR + "-5"; // negative index
     public static final String INVALID_STARTDATE_DESC = " "
             + PREFIX_STARTDATE + "132/11/17"; // is not a valid date

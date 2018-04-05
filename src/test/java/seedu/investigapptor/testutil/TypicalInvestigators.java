@@ -24,7 +24,7 @@ import seedu.investigapptor.model.person.investigator.Investigator;
 /**
  * A utility class containing a list of {@code Investigator} objects to be used in tests.
  */
-public class TypicalInvestigator {
+public class TypicalInvestigators {
 
     public static final Investigator ALICE = new InvestigatorBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -61,7 +61,7 @@ public class TypicalInvestigator {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalInvestigator() {} // prevents instantiation
+    private TypicalInvestigators() {} // prevents instantiation
 
     /**
      * Returns an {@code Investigapptor} with all the typical persons.

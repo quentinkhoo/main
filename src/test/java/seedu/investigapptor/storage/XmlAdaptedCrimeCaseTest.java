@@ -3,7 +3,7 @@ package seedu.investigapptor.storage;
 import static org.junit.Assert.assertEquals;
 import static seedu.investigapptor.storage.XmlAdaptedCrimeCase.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.ALFA;
-import static seedu.investigapptor.testutil.TypicalInvestigator.BENSON;
+import static seedu.investigapptor.testutil.TypicalInvestigators.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,7 @@ package seedu.investigapptor.storage;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.investigapptor.storage.XmlAdaptedInvestigator.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.investigapptor.testutil.TypicalInvestigator.BENSON;
+import static seedu.investigapptor.testutil.TypicalInvestigators.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.testutil.Assert;
-import seedu.investigapptor.testutil.TypicalInvestigator;
+import seedu.investigapptor.testutil.TypicalInvestigators;
 
 public class XmlAdaptedInvestigatorTest {
     private static final String INVALID_NAME = "R@chel";
@@ -33,7 +33,7 @@ public class XmlAdaptedInvestigatorTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_RANK = "6";
-    private static final List<CrimeCase> VALID_CASE = TypicalInvestigator.BENSON.getCrimeCases();
+    private static final List<CrimeCase> VALID_CASE = TypicalInvestigators.BENSON.getCrimeCases();
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());

@@ -27,7 +27,7 @@ delegated to them.
 
 Investigapptor comes with many useful features for investigators and
 their team members such as assigning investigators to a crime case, listing investigators
-based on their expertise so that you can solve crime cases more effienctly ande ffectively.
+based on their expertise so that you can solve crime cases more effienctly and effectively.
 
 Investigapptor v1.5 is available for Windows, Mac OS X, Linux and Unix operating systems.
 

@@ -260,18 +260,18 @@ There is no need to save manually.
 === Investigator Commands
 These are investigator related commands. +
 
-==== Registering an investigator: `regInvest` `registerInvestigator`
+==== Registering an investigator: `regInvest` `registerinvestigator`
 
 You can registers an investigator to the application so that it cases can be assigned to him/her.
 
-Format: `registerInvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RANK [t/TAG]...` +
-Alias: `regInvest`
+Format: `registerinvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RANK [t/TAG]...` +
+Alias: `ri`
 
 Examples:
 
-* `registerInvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/1 t/newcomer`
-* `regInvest n/Tome Lee p/94727341 e/Tom@gmail.com a/323, Baker Street, #01-03 r/1 t/Rookie`
-* `regInvest n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 r/5 p/1234567`
+* `registerinvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/1 t/newcomer`
+* `ri n/Tome Lee p/94727341 e/Tom@gmail.com a/323, Baker Street, #01-03 r/1 t/Rookie`
+* `ri n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 r/5 p/1234567`
 
 Simply key in the information in the above format in the input bar and press enter to register an investigator. Refer to
 <<f1-addInv>> as an example
@@ -300,11 +300,11 @@ Shows a list of all investigators in the Investigapptor. +
 Format: `list investigators` +
 Alias: `l investigators`
 
-==== Editing an investigator : `editInv` `*Bugged` `*Disabled`
+==== Editing an investigator : `editinvestigator` `*Bugged` `*Disabled`
 
 You can edit an existing information of an existing investigator in the Investigapptor. +
-Format: `editInv INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-Alias: `eI`
+Format: `editinvestigator INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+Alias: `ei`
 
 ****
 * Edits the investigator at the specified `INDEX`. The index refers to the index number shown in the last listing of investigators. The index *must be a positive integer* 1, 2, 3, ...
@@ -316,9 +316,9 @@ Alias: `eI`
 
 Examples:
 
-* `editInv 1 p/91234567 e/johndoe@example.com` +
+* `editinvestigator 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st investigator to be `91234567` and `johndoe@example.com` respectively.
-* `eI 2 n/Betsy Crower t/` +
+* `ei 2 n/Betsy Crower t/` +
 Edits the name of the 2nd investigator to be `Betsy Crower` and clears all existing tags.
 
 ==== Locating investigators by name: `find`
@@ -364,11 +364,11 @@ Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 
-==== Deleting an investigator : `deleteInv`
+==== Deleting an investigator : `deleteinvestigator`
 
 Deletes the specified investigator from Investigapptor. +
-Format: `deleteInv INDEX` +
-Alias: `dI`
+Format: `deleteinvestigator INDEX` +
+Alias: `di`
 
 ****
 * Deletes the investigator at the specified `INDEX`.
@@ -379,10 +379,10 @@ Alias: `dI`
 Examples:
 
 * `list investigator` +
-`deleteInv 2` +
+`deleteinvestigator 2` +
 Deletes the 2nd investigator in the address book.
 * `find Betsy` +
-`dI 1` +
+`di 1` +
 Deletes the 1st investigator in the results of the `find` command.
 
 You can identify and delete the investigator by looking at their `INDEX` at the top left of their card as show in the
@@ -390,7 +390,7 @@ arrow in <<f1-deleteInv>>
 
 [[f1-deleteInv]]
 .Using the investigator Index
-image::DeleteInvestigator1.png[width="790"]
+image::DeleteInvestigator1.png[width="390"]
 
 Outcome: You should be able to see a the success message and the investigator will no long be on the list like in
 <<f2-deleteInv>>
@@ -399,11 +399,11 @@ Outcome: You should be able to see a the success message and the investigator wi
 .Outcome
 image::DeleteInvestigator2.png[width="790"]
 
-==== Selecting an investigator : `selectInvestigator`
+==== Selecting an investigator : `selectinvestigator`
 
 Selects the person identified by the index number used in the last person listing. +
-Format: `selectInvestigator INDEX` +
-Alias: `selectInvest`
+Format: `selectinvestigator INDEX` +
+Alias: `selectinvest`
 
 ****
 * Selects the investigator and loads the details of the investigator at the specified `INDEX`.
@@ -414,12 +414,12 @@ Alias: `selectInvest`
 Examples:
 
 * `list` +
-`selectInvestigator 2` +
+`selectinvestigator 2` +
 Selects the 2nd person in the results of the `list` command.
 * `find Betsy` +
-`selectInvest 1` +
+`selectinvest 1` +
 Selects the 1st person in the results of the `find` command.
-* `selectInvestigator 3` +
+* `selectinvestigator 3` +
 Selects the 3rd person in the listed panel list.
 
 === Case Commands
@@ -582,11 +582,11 @@ Selects the 1st case in the results of the `findCase` command.
 * `sC 3` +
 Selects the 3rd case in the listed panel list case.
 
-==== List a specific Investigator's cases
+==== List a specific Investigator's cases `listinvestigatorcase`
 
 Selects an investigator and display all of the case belonging to that investigator +
-Format: `listInvestigatorCase INDEX` +
-Alias: `lIC`
+Format: `listinvestigatorcase INDEX` +
+Alias: `lic`
 
 ****
 * Selects the investigator by index and loads the cases he/she is incharge of in the case list.
@@ -597,12 +597,12 @@ Alias: `lIC`
 Examples:
 
 * `list investigator` +
-`listInvestigatorCase 2` +
+`listinvestigatorcase 2` +
 Display all the cases of the 2nd investigator in the results of the `list case` command.
-* `findInvestigator Amy` +
-`listInvestigatorCase 1` +
+* `findinvestigator Amy` +
+`listinvestigatorCase 1` +
 Display all the cases of the 2nd investigator in the results of the `FindInvestigator` command.
-* `lIC 3` +
+* `lic 3` +
 Display all the cases of the 2nd investigator  in the investigator panel list case.
 
 === Future Enhancement Commands

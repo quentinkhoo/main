@@ -36,8 +36,8 @@ import seedu.investigapptor.model.tag.Tag;
  */
 public class EditCaseCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "editCase";
-    public static final String COMMAND_ALIAS = "eC";
+    public static final String COMMAND_WORD = "editcase";
+    public static final String COMMAND_ALIAS = "ec";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the case identified "
             + "by the index number used in the last listing of crimeCases. "

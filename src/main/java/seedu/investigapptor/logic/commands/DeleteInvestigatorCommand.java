@@ -19,8 +19,8 @@ import seedu.investigapptor.model.person.investigator.Investigator;
  */
 public class DeleteInvestigatorCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "deleteInvestigator";
-    public static final String COMMAND_ALIAS = "dI";
+    public static final String COMMAND_WORD = "deleteinvestigator";
+    public static final String COMMAND_ALIAS = "di";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the investigator identified by the index number used in the last listing of investigators.\n"

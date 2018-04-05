@@ -13,10 +13,13 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+* *Major enhancement*: Added the Investigator package, which is a subclass of the person class
+** What it does: Allows Investigapptor to store a new type of person in the address book that is can handle and more methods and data for Investigator.
+
+** Justification: This enhancement is required as the person package is insufficient to perform the task required. As I wanted to accommodate future enhance of more types of people, the person class was used as a superclass to store the
+basic information rather than just morphing the person class.
+** Highlights: This enhancement has includes much changes to the model component of the Investigapptor allowing it to apply the same general commands to all subclass of the Person class while still being able to use specfic command for specific classes.
+The Investigator also stores a live reference to all his cases that works with undo/redo feature by the usage of hashcode to always ensure it reference the correct case.
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
 * *Minor enhancement*:

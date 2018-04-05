@@ -10,10 +10,10 @@ import seedu.investigapptor.model.person.NameContainsKeywordsPredicate;
  */
 public class FindInvestigatorCommand extends Command {
 
-    public static final String COMMAND_WORD = "findInv";
-    public static final String COMMAND_ALIAS = "fI";
+    public static final String COMMAND_WORD = "findinvestigators";
+    public static final String COMMAND_ALIAS = "fi";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all investigators whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";

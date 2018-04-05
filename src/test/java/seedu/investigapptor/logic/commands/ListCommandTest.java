@@ -26,17 +26,9 @@ public class ListCommandTest {
     private Model expectedInvestigatorModel;
     private ListInvestigatorCommand listCommandInvestigators;
 
-    private Model investigatorAliasModel;
-    private Model expectedInvestigatorAliasModel;
-    private ListInvestigatorCommand listCommandInvestigatorAlias;
-
     private Model crimeCaseModel;
     private Model expectedCrimeCaseModel;
     private ListCaseCommand listCommandCases;
-
-    private Model crimeCaseAliasModel;
-    private Model expectedCrimeCaseAliasModel;
-    private ListCaseCommand listCommandCrimeCaseAlias;
 
     @Before
     public void setUp() {

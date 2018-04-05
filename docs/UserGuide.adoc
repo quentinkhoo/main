@@ -262,7 +262,7 @@ These are investigator related commands. +
 
 ==== Registering an investigator: `regInvest` `registerInvestigator`
 
-Registers an investigator to the application so that it cases can be assigned to him/her.
+You can registers an investigator to the application so that it cases can be assigned to him/her.
 
 Format: `registerInvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RANK [t/TAG]...` +
 Alias: `regInvest`
@@ -273,13 +273,17 @@ Examples:
 * `regInvest n/Tome Lee p/94727341 e/Tom@gmail.com a/323, Baker Street, #01-03 r/1 t/Rookie`
 * `regInvest n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 r/5 p/1234567`
 
-Simply key in the information in the above format in the input bar and press enter. Refer to `Figure 3` as an example
-[.left]
+Simply key in the information in the above format in the input bar and press enter to register an investigator. Refer to
+<<f1-addInv>> as an example
+
+[[f1-addInv]]
 .Keying in the command
 image::AddInvestigator1.png[width="790"]
 
-Outcome: After pressing enter, the new investigator will appear on the investigator list and a success message will be displayed at the bottom
-[.left]
+Outcome: After pressing enter, you should be able to the new investigator appearing on the investigator list and a success message will be displayed at the bottom.
+Refer to <<f2-addInv>>
+
+[[f2-addInv]]
 .Outcome
 image::AddInvestigator2.png[width="790"]
 
@@ -296,9 +300,9 @@ Shows a list of all investigators in the Investigapptor. +
 Format: `list investigators` +
 Alias: `l investigators`
 
-==== Editing an investigator : `editInv` `*Bugged`
+==== Editing an investigator : `editInv` `*Bugged` `*Disabled`
 
-Edits an existing investigator in the Investigapptor. +
+You can edit an existing information of an existing investigator in the Investigapptor. +
 Format: `editInv INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 Alias: `eI`
 
@@ -382,15 +386,16 @@ Deletes the 2nd investigator in the address book.
 Deletes the 1st investigator in the results of the `find` command.
 
 You can identify and delete the investigator by looking at their `INDEX` at the top left of their card as show in the
-arrow in figure.
+arrow in <<f1-deleteInv>>
 
-[.left]
+[[f1-deleteInv]]
 .Using the investigator Index
 image::DeleteInvestigator1.png[width="790"]
 
-Outcome: The success message should appear and the investigator will no long be on the list.
+Outcome: You should be able to see a the success message and the investigator will no long be on the list like in
+<<f2-deleteInv>>
 
-[.left]
+[[f2-deleteInv]]
 .Outcome
 image::DeleteInvestigator2.png[width="790"]
 

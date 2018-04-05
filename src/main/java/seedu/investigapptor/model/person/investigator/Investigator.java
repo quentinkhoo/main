@@ -120,6 +120,10 @@ public class Investigator extends Person {
         caseListHashed.remove(caseToRemove.hashCode());
     }
 
+    public void clearCaseList() {
+        crimeCases.removeAll();
+    }
+
     public ArrayList<Integer> getCaseListHashed() {
         return caseListHashed;
     }

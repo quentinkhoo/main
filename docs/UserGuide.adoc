@@ -454,10 +454,10 @@ Edits the description and investigator of the 1st case to be `some description` 
 * `eC 2 i/Betsy Crower t/` +
 Edits the investigator of the 2nd case to be `Betsy Crower` and clears all existing tags.
 
-==== Locating cases by name: `findcase [Since v1.3]`
+==== Locating cases by name: `findcases [Since v1.3]`
 
 Finds cases whose names contain any of the given keywords. +
-Format: `findcase KEYWORD [MORE_KEYWORDS]` +
+Format: `findcases KEYWORD [MORE_KEYWORDS]` +
 Alias: `fc`
 
 ****
@@ -470,9 +470,9 @@ Alias: `fc`
 
 Examples:
 
-* `findcase SPF` +
+* `findcases SPF` +
 Returns `SPF Murder` and `SPF rape`
-* `findcase murder rape arson` +
+* `findcases murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
 
 ==== Locating cases by tags: `findcasetags` `[Since v1.3]`

@@ -10,7 +10,7 @@ import seedu.investigapptor.model.crimecase.TagContainsKeywordsPredicate;
  */
 public class FindCaseTagsCommand extends Command {
 
-    public static final String COMMAND_WORD = "findCaseTags";
+    public static final String COMMAND_WORD = "findcasetags";
     public static final String COMMAND_ALIAS = "fct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds cases whose tags contain any of "

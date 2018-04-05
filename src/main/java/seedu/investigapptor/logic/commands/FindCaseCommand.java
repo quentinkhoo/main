@@ -10,8 +10,8 @@ import seedu.investigapptor.model.crimecase.CaseNameContainsKeywordsPredicate;
  */
 public class FindCaseCommand extends Command {
 
-    public static final String COMMAND_WORD = "findCase";
-    public static final String COMMAND_ALIAS = "fC";
+    public static final String COMMAND_WORD = "findcases";
+    public static final String COMMAND_ALIAS = "fc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all cases whose names contain any of "
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"

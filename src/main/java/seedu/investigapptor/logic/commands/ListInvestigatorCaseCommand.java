@@ -18,8 +18,8 @@ import seedu.investigapptor.model.person.investigator.Investigator;
  */
 public class ListInvestigatorCaseCommand extends Command {
 
-    public static final String COMMAND_WORD = "listInvestigatorCase";
-    public static final String COMMAND_ALIAS = "fIC";
+    public static final String COMMAND_WORD = "listinvestigatorcases";
+    public static final String COMMAND_ALIAS = "lic";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all cases of the selected investigator "
             + "Example: " + COMMAND_WORD + " 1";

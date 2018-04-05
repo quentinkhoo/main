@@ -10,7 +10,7 @@ import seedu.investigapptor.model.person.investigator.TagContainsKeywordsPredica
  */
 public class FindInvestTagsCommand extends Command {
 
-    public static final String COMMAND_WORD = "findInvestTags";
+    public static final String COMMAND_WORD = "findinvestigatortags";
     public static final String COMMAND_ALIAS = "fit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds investigators whose tags contain any of "

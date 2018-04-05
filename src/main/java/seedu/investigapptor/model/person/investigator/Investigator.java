@@ -50,7 +50,7 @@ public class Investigator extends Person {
         super(name, phone, email, address, tags);
         this.rank = rank;
         crimeCases = new UniqueCrimeCaseList();
-        this.caseListHashed = caseListHashed;
+        this.caseListHashed = new ArrayList<>(caseListHashed);
     }
     /**
      * Add CrimeCase to list
@@ -117,7 +117,7 @@ public class Investigator extends Person {
      */
     public void removeCrimeCase(CrimeCase caseToRemove) throws CrimeCaseNotFoundException {
         crimeCases.remove(caseToRemove);
-        caseListHashed.remove(caseToRemove.hashCode());
+        caseListHashed.remove((Integer) caseToRemove.hashCode());
     }
 
     public void clearCaseList() {

@@ -27,6 +27,7 @@ import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
+//@@author leowweiching
 /**
  * Adds a case to the investigapptor book.
  */

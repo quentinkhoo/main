@@ -327,24 +327,24 @@ Returns `john` and `John Doe`
 * `fI Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
 
-==== Locating investigators by tags: `findinvestigatorstags` `[Since v1.2]`
+==== Locating investigators by tags: `findinvestigatortags` `[Since v1.2]`
 Find investigators whose tags contain any of the given keywords. +
-Format: `findinvestigatorstags KEYWORD [MORE_KEYWORDS]` +
+Format: `findinvestigatortags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fit`
 
 ****
 * The search is case insensitive. e.g `teamA` will match `teama`
 * Only the tags are searched.
 * Only full words will be matched e.g. `teamA` will not match `teamyA`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Investigators matching at least one keyword will be returned (i.e. `OR` search).
 e.g. `teamA teamB` will return investigators that contains the tag 'teamA' or 'teamB'
 ****
 
 Examples:
 
-* `findinvestigatorstags teamA` +
+* `findinvestigatortags teamA` +
 Returns investigator(s) with tag `teamA`
-* `findinvestigatorstags teamA new teamb` +
+* `findinvestigatortags teamA new teamb` +
 Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
@@ -476,7 +476,7 @@ Returns `SPF Murder` and `SPF rape`
 Returns any cases having names `murder`, `rape`, or `arson`
 
 ==== Locating cases by tags: `findcasetags` `[Since v1.3]`
-Find investigators whose tags contain any of the given keywords. +
+Find cases whose tags contain any of the given keywords. +
 Format: `findcasetags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fct`
 

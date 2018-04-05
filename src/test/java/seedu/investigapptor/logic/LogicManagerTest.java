@@ -10,7 +10,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.investigapptor.logic.commands.CommandResult;
 import seedu.investigapptor.logic.commands.HistoryCommand;
-import seedu.investigapptor.logic.commands.ListCommand;
+import seedu.investigapptor.logic.commands.ListInvestigatorCommand;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.Model;
@@ -41,9 +41,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() {
-        String listInvestigatorCommand = ListCommand.COMMAND_WORD + " investigators";
-        assertCommandSuccess(listInvestigatorCommand, String.format(ListCommand.MESSAGE_SUCCESS,
-                "investigators"), model);
+        String listInvestigatorCommand = ListInvestigatorCommand.COMMAND_WORD;
+        assertCommandSuccess(listInvestigatorCommand, ListInvestigatorCommand.MESSAGE_SUCCESS, model);
         assertHistoryCorrect(listInvestigatorCommand);
     }
 

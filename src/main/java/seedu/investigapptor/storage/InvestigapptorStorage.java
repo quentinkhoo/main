@@ -34,6 +34,7 @@ public interface InvestigapptorStorage {
     Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath)
             throws DataConversionException, IOException, WrongPasswordException;
 
+    //@@author quentinkhoo
     /**
      * @see #getInvestigapptorFilePath()
      */
@@ -46,6 +47,7 @@ public interface InvestigapptorStorage {
     void checkInvestigapptorPassword(String filePath, Password password)
             throws DataConversionException, IOException, WrongPasswordException;
 
+    //@@author
     /**
      * Saves the given {@link ReadOnlyInvestigapptor} to the storage.
      * @param investigapptor cannot be null.

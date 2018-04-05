@@ -25,7 +25,8 @@ import seedu.investigapptor.logic.commands.FindCaseCommand;
 import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.HistoryCommand;
-import seedu.investigapptor.logic.commands.ListCommand;
+import seedu.investigapptor.logic.commands.ListCaseCommand;
+import seedu.investigapptor.logic.commands.ListInvestigatorCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
 import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
@@ -222,26 +223,26 @@ public class InvestigapptorParserTest {
 
     @Test
     public void parseCommand_listInvestigators() throws Exception {
-        assertTrue(parser.parseCommand("list investigators") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " investigators") instanceof ListCommand);
+        assertTrue(parser.parseCommand("listinvestigators") instanceof ListInvestigatorCommand);
+        assertTrue(parser.parseCommand(ListInvestigatorCommand.COMMAND_WORD) instanceof ListInvestigatorCommand);
     }
 
     @Test
     public void parseCommand_listInvestigatorsAlias() throws Exception {
-        assertTrue(parser.parseCommand("l investigators") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_ALIAS + " investigators") instanceof ListCommand);
+        assertTrue(parser.parseCommand("li") instanceof ListInvestigatorCommand);
+        assertTrue(parser.parseCommand(ListInvestigatorCommand.COMMAND_ALIAS) instanceof ListInvestigatorCommand);
     }
 
     @Test
     public void parseCommand_listCases() throws Exception {
-        assertTrue(parser.parseCommand("list cases") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " cases") instanceof ListCommand);
+        assertTrue(parser.parseCommand("listcases") instanceof ListCaseCommand);
+        assertTrue(parser.parseCommand(ListCaseCommand.COMMAND_WORD) instanceof ListCaseCommand);
     }
 
     @Test
     public void parseCommand_listCasesAlias() throws Exception {
-        assertTrue(parser.parseCommand("l cases") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_ALIAS + " cases") instanceof ListCommand);
+        assertTrue(parser.parseCommand("lc") instanceof ListCaseCommand);
+        assertTrue(parser.parseCommand(ListCaseCommand.COMMAND_ALIAS) instanceof ListCaseCommand);
     }
 
     @Test

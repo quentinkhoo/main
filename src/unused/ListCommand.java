@@ -34,10 +34,10 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         if (isValidInvestigatorAlias(listType)) {
-            return new ListInvestigatorCommand(model).executeListInvestigators();
+            return new ListInvestigatorCommand().execute();
 
         } else if (isValidCaseAlias(listType)) {
-            return new ListCaseCommand(model).executeListCases();
+            return new ListCaseCommand().execute();
 
         } else {
             throw new CommandException(MESSAGE_INVALID_COMMAND_ALIAS);

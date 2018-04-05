@@ -4,11 +4,10 @@ import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND
 import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
-import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
-import seedu.investigapptor.logic.parser.PasswordCommandParser;
+import seedu.investigapptor.logic.parser.SetPasswordCommandParser;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
-import seedu.investigapptor.model.Password;
 
+//@@author quentinkhoo
 /**
  * Sets a specific settings for the application
  */
@@ -43,16 +42,14 @@ public class SetCommand extends UndoableCommand {
             try {
                 if (args.contains(" ")) {
                     args = args.substring(args.indexOf(" "));
-                    return new PasswordCommandParser().parse(args, model).executeUndoableCommand();
+                    return new SetPasswordCommandParser().parse(args).executeUndoableCommand();
                 } else {
                     return new CommandResult(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            PasswordCommand.MESSAGE_USAGE));
+                            SetPasswordCommand.MESSAGE_USAGE));
                 }
-            } catch (InvalidPasswordException ipe) {
-                return new CommandResult(Password.MESSAGE_PASSWORD_CONSTRAINTS);
             } catch (ParseException pe) {
                 return new CommandResult(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        PasswordCommand.MESSAGE_USAGE));
+                        SetPasswordCommand.MESSAGE_USAGE));
             }
         } else {
             throw new CommandException(MESSAGE_INVALID_COMMAND_ALIAS);

@@ -108,6 +108,7 @@ image::helpUI.png[width="790"]
 ====
 
 // tag::setpassword[]
+[[SetPassword]]
 ==== Setting a password : `setpassword` [Since v1.3]
 You can use this command to set a new password for the Investigapptor
 whether or not a password has been set.
@@ -115,8 +116,8 @@ whether or not a password has been set.
 [IMPORTANT]
 Your password must be of minimal 8 characters and not contain any spaces. +
 [TIP]
-You can press kbd:[CTRL] to reveal the password in plaintext if you find
- yourself having trouble remembering what you typed. Pressing kbd:[CTRL]
+You can press kbd:[Ctrl] to reveal the password in plaintext if you find
+ yourself having trouble remembering what you typed. Pressing kbd:[Ctrl]
 again will hide back the password.
 
 Format: `setpassword [pw/PASSWORD]` +
@@ -137,6 +138,7 @@ image::inputpassword.png[width="790"]
 //end::setpassword[]
 
 //tag::removepassword[]
+[[RemovePassword]]
 ==== Removing the password : `removepassword` [Since v1.4]
 You can use this command to remove a set password from the Investigapptor.
 
@@ -144,8 +146,8 @@ You can use this command to remove a set password from the Investigapptor.
 You must input the currently set password correctly in order to remove the
  password. +
 [TIP]
-You can press kbd:[CTRL] to reveal the password in plaintext if you find
- yourself having trouble remembering what you typed. Pressing kbd:[CTRL]
+You can press kbd:[Ctrl] to reveal the password in plaintext if you find
+ yourself having trouble remembering what you typed. Pressing kbd:[Ctrl]
 again will hide back the password.
 
 Format: `removepassword [pw/PASSWORD]` +
@@ -158,6 +160,7 @@ Alias: `rp pw/PASSWORD` +
 image::removepassword.png[width="790"]
 //end removepassword[]
 
+[[History]]
 ==== Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -170,6 +173,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
+[[Undo]]
 ==== Undoing previous command : `undo`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
@@ -197,6 +201,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
+[[Redo]]
 ==== Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
@@ -258,6 +263,7 @@ Examples:
 * `aI n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
 
 //tag::listinvestigators[]
+[[ListInvestigators]]
 ==== Listing all investigators : `listinvestigators` [Since v1.2]
 
 This command would show you the list of investigators that have been added to
@@ -405,6 +411,7 @@ Examples:
 * `aC n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
 
 //tag::listcases[]
+[[ListCases]]
 ==== Listing all cases : `listcases` [Since v1.2]
 
 This command would show you the list of cases that have been added to
@@ -561,7 +568,7 @@ Selects the 1st case in the results of the `findCase` command.
 * `sC 3` +
 Selects the 3rd case in the listed panel list case.
 
-=== Future Enhancement Commands
+=== Future Enhancements
 These are features that will come in future releases of Investigapptor +
 
 ==== Adding a witness `[Coming in v2.0]`
@@ -589,24 +596,68 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+*A*: You can do so by installing Investigapptor in the other computer and
+overwriting the empty data file it creates with the file that contains
 the data of your previous Investigapptor folder.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+=== General Commands
+[width="100%",cols="50%,<30%,<30%,<30",options="header",]
+|=======================================================================
+|Command Section |Purpose |Format |Example
+
+|_<<Help>>_ |Shows you the user guide |`help` | `help`
+
+|_<<SetPassword>>_ |Sets the password |`setpassword [pw/PASSWORD]` |
+`setpassword pw/password`
+
+|_<<RemovePassword>>_ |Removes the password |`removepassword [pw/PASSWORD]` |
+`removepassword pw/password`
+
+|_<<History>>_ |Shows you a history of all commands used |`history` | `history`
+
+|_<<Undo>>_ |Undo your previous command |`undo` | `undo`
+
+|_<<Redo>>_ |Redo your undo | `redo` | `redo`
+
+|=======================================================================
+
+<<<
+
+=== Investigator Commands
+[width="100%",cols="50%,<30%,<30%,<30",options="header",]
+|=======================================================================
+|Command Section |Purpose |Format |Example
+
+|_<<ListInvestigators>>_ |Shows you the list of added investigators |
+`listinvestigators` | `listinvestigators`
+
+|=======================================================================
+
+<<<
+
+=== Case Commands
+[width="100%",cols="50%,<30%,<30%,<30",options="header",]
+|=======================================================================
+|Command Section |Purpose |Format |Example
+
+|_<<ListCases>>_ |Shows you the list of added cases |
+`listcases` | `listcases`
+
+|=======================================================================
+
+<<<
+
+=== Keyboard Shortcuts
+[width="100%",cols="20%,<30%,<30%,options="header",]
+|=======================================================================
+|Shortcut |Purpose |Remarks
+
+|kbd:[Esc] | Helps you clears the entire command box text field | -
+
+|kbd:[Ctrl] | Toggles between hiding and revealing the password parameter | -
+
+|=======================================================================
+
+<<<

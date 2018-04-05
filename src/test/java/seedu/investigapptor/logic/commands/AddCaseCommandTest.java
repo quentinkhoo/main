@@ -185,6 +185,11 @@ public class AddCaseCommandTest {
         public void updatePassword(Password password) {
             fail("This method should not be called");
         }
+
+        @Override
+        public void removePassword() {
+            fail("This method should not be called");
+        }
     }
 
     /**

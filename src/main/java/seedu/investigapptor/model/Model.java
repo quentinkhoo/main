@@ -87,8 +87,15 @@ public interface Model {
     /** Save Investigapptor information as a new name */
     void backUpInvestigapptor(String fileName);
 
+    //@@author quentinkhoo
     /**
      * Updates the password with the given password.
      */
     void updatePassword(Password password) throws InvalidPasswordException;
+
+    /**
+     * Removes the existing password
+     */
+    void removePassword();
+    //@@author
 }

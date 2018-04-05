@@ -18,7 +18,7 @@ import seedu.investigapptor.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.investigapptor.model.person.Person;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of investigators.
  */
 public class InvestigatorListPanel extends UiPart<Region> {
     private static final String FXML = "InvestigatorListPanel.fxml";

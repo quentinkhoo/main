@@ -19,7 +19,7 @@ import seedu.investigapptor.model.UserPrefs;
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code PasswordCommand}.
  */
-public class PasswordCommandTest {
+public class SetPasswordCommandTest {
 
     private static final String DEFAULT_PASSWORD = "password";
     private Model model;
@@ -31,9 +31,9 @@ public class PasswordCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws Exception {
-        PasswordCommand passwordCommand = prepareCommand(DEFAULT_PASSWORD);
+        SetPasswordCommand passwordCommand = prepareCommand(DEFAULT_PASSWORD);
 
-        String expectedMessage = String.format(PasswordCommand.MESSAGE_SUCCESS);
+        String expectedMessage = String.format(SetPasswordCommand.MESSAGE_SUCCESS);
 
         ModelManager expectedModel = new ModelManager(model.getInvestigapptor(), new UserPrefs());
         expectedModel.updatePassword(new Password(generatePasswordHash(DEFAULT_PASSWORD)));
@@ -43,31 +43,31 @@ public class PasswordCommandTest {
 
     @Test
     public void equals() throws Exception {
-        PasswordCommand passwordFirstCommand = prepareCommand(DEFAULT_PASSWORD);
-        PasswordCommand passwordSecondCommand = prepareCommand(DEFAULT_PASSWORD + "1");
+        SetPasswordCommand passwordFirstCommand = prepareCommand(DEFAULT_PASSWORD);
+        SetPasswordCommand passwordSecondCommand = prepareCommand(DEFAULT_PASSWORD + "1");
 
         // same object -> returns true
         assertTrue(passwordFirstCommand.equals(passwordFirstCommand));
 
         // same values -> returns true
-        PasswordCommand passwordFirstCommandCopy = prepareCommand(DEFAULT_PASSWORD);
+        SetPasswordCommand passwordFirstCommandCopy = prepareCommand(DEFAULT_PASSWORD);
         assertTrue(passwordFirstCommand.equals(passwordFirstCommandCopy));
 
-        // different types -> returns false
-        assertFalse(passwordFirstCommand.equals(1));
+        // empty string -> returnf alse
+        assertFalse(passwordFirstCommand.equals(""));
 
         // null -> returns false
         assertFalse(passwordFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different password -> returns false
         assertFalse(passwordFirstCommand.equals(passwordSecondCommand));
     }
 
     /**
      * Returns a {@code PasswordCommand} with the parameter {@code password}.
      */
-    private PasswordCommand prepareCommand(String password) {
-        PasswordCommand passwordCommand = new PasswordCommand(new Password(password), model);
+    private SetPasswordCommand prepareCommand(String password) {
+        SetPasswordCommand passwordCommand = new SetPasswordCommand(new Password(password));
         passwordCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         return passwordCommand;
     }

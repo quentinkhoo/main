@@ -1,7 +1,6 @@
 package seedu.investigapptor.storage;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.investigapptor.model.Password.isCorrectPassword;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,6 +64,7 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
         }
     }
 
+    //@@author quentinkhoo
     /**
      * Similar to {@link InvestigapptorStorage#readInvestigapptor()}
      *
@@ -93,6 +93,16 @@ public class XmlInvestigapptorStorage implements InvestigapptorStorage {
             throw new DataConversionException(ive);
         }
     }
+
+    /**
+     * Checks if an inputPassword is the currentPassword
+     * @param currentPassword
+     * @param inputPassword
+     */
+    private boolean isCorrectPassword(String currentPassword, String inputPassword) {
+        return currentPassword.equals(inputPassword);
+    }
+    //@@author
 
     @Override
     public void saveInvestigapptor(ReadOnlyInvestigapptor investigapptor) throws IOException {

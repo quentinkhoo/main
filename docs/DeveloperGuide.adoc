@@ -15,7 +15,7 @@ endif::[]
 By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Introduction
-
+Investigapptor is a one-stop solution for investigators to make managing cases as simple, straightforward, and efficient as possible.
 
 == Setting up
 Follow the instructions below to set up and configure `Investigapptor` project files on your computer

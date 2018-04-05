@@ -48,6 +48,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         tags = new UniqueTagList();
     }
 
+    //@@author quentinkhoo
     public Investigapptor() {
         this.password = new Password();
     }
@@ -55,6 +56,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public Investigapptor(String password) {
         this.password = new Password(password);
     }
+    //@@author
 
     /**
      * Creates an Investigapptor using the Investigators, CrimeCases, Password and Tags in the {@code toBeCopied}
@@ -78,6 +80,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         this.tags.setTags(tags);
     }
 
+    //@@author quentinkhoo
     public void setPassword(String password) {
         this.password = new Password(password);
     }
@@ -85,6 +88,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public void setPassword(Password oldPassword) {
         this.password = oldPassword;
     }
+    //@@author
 
     /**
      * Resets the existing data of this {@code Investigapptor} with {@code newData}.
@@ -345,6 +349,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
                 crimeCase.getCaseName(), crimeCase.getDescription(), investigator,
                 crimeCase.getStartDate(), crimeCase.getEndDate(), crimeCase.getStatus(), correctTagReferences);
     }
+
+    //@@author quentinkhoo
     ///password level operations
 
     /**
@@ -354,6 +360,15 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public void updatePassword(Password newPassword) {
         password.updatePassword(newPassword);
     }
+
+    /**
+     * Removes the password of this {@code Investigapptor}
+     */
+    public void removePassword() {
+        this.password = null;
+    }
+    //@@author
+
     //// util methods
 
     @Override
@@ -383,10 +398,12 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         return cases.asObservableList();
     }
 
+    //@@author quentinkhoo
     @Override
     public Password getPassword() {
         return password;
     }
+    //@@author
 
     @Override
     public ObservableList<Tag> getTagList() {

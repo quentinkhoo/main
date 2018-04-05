@@ -62,6 +62,7 @@ public class InvestigapptorBuilder {
         return this;
     }
 
+    //@@author quentinkhoo
     /**
      * Parses {@code password} into a {@code Password} and adds it to the {@code Investigapptor} that we are building.
      */
@@ -69,6 +70,7 @@ public class InvestigapptorBuilder {
         investigapptor.updatePassword(new Password(password));
         return this;
     }
+    //@@author
 
     public Investigapptor build() {
         return investigapptor;

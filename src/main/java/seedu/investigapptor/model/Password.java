@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+//@@author quentinkhoo
 /**
  * Represents a Password in PartTimeManger
  * Store password as hashCode
@@ -15,7 +16,7 @@ import java.util.Base64;
 public class Password {
 
     public static final String MESSAGE_PASSWORD_CONSTRAINTS =
-            "Password should be at least 8 character and no spaces.";
+            "Password must be at least 8 character and must not contain any spaces.";
 
     public static final String INITIAL_VALUE = "IV";
 
@@ -64,7 +65,7 @@ public class Password {
     /**
      * Generate password hash given a password string
      * @param password
-     * @return passwordHash in String
+     * @return encodedHash in String
      */
     public static String generatePasswordHash(String password) {
         String encodedHash = null;
@@ -79,15 +80,6 @@ public class Password {
             System.out.println("Cannot generate hash: MessageDigest.getInstance");
         }
         return encodedHash;
-    }
-
-    /**
-     * Checks if an inputPassword is the currentPassword
-     * @param currentPassword
-     * @param inputPassword
-     */
-    public static boolean isCorrectPassword(String currentPassword, String inputPassword) {
-        return currentPassword.equals(inputPassword);
     }
 
     @Override

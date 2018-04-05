@@ -11,6 +11,7 @@ import org.junit.Test;
 import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
 import seedu.investigapptor.model.person.investigator.TagContainsKeywordsPredicate;
 
+//@@author pkaijun
 public class FindInvestTagsCommandParserTest {
 
     private FindInvestTagsCommandParser parser = new FindInvestTagsCommandParser();

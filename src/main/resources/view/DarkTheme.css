@@ -388,6 +388,7 @@
     -fx-font-size: 11;
 }
 
+/* @@author pkaijun */
 #tags .red {
     -fx-text-fill: black;
     -fx-background-color: #FF0000;

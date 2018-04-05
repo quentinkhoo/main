@@ -2,7 +2,7 @@ package seedu.investigapptor.commons.events.ui;
 
 import seedu.investigapptor.commons.events.BaseEvent;
 
-//@@author quentin khoo
+//@@author quentinkhoo
 /**
  * Represents swapping of tabs
  */

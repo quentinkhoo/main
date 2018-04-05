@@ -14,8 +14,8 @@ import seedu.investigapptor.model.person.Person;
  */
 public class SelectInvestigatorCommand extends Command {
 
-    public static final String COMMAND_WORD = "selectInvestigator";
-    public static final String COMMAND_ALIAS = "selectInvest";
+    public static final String COMMAND_WORD = "selectinvestigator";
+    public static final String COMMAND_ALIAS = "selectinvest";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Selects the investigator identified by the index number used in the last listing of investigators.\n"

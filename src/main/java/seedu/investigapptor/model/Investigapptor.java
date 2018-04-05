@@ -235,6 +235,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      */
     public boolean removeCrimeCase(CrimeCase key) throws CrimeCaseNotFoundException {
         if (cases.remove(key)) {
+            removeCrimeCaseFromInvestigator(key);
             return true;
         } else {
             throw new CrimeCaseNotFoundException();

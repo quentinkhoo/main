@@ -164,7 +164,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
             throw new PersonNotFoundException();
         }
     }
-
+    //@@author Marcus-cxc
     /**
      * Converts {@code key} hashcode list of cases into CrimeCase object
      *
@@ -187,7 +187,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         }
     }
     //// case-level operations
-
+    //@@author
     /**
      * Adds a case to the investigapptor book.
      * Also checks the new case's tags and updates {@link #tags} with any new tags found,
@@ -282,7 +282,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
-
+    //@@author Marcus-cxc
     /**
      * Deletes {@code Investigapptor} from all person and UniqueTagList
      */
@@ -324,7 +324,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         return new Person(
                 person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
     }
-
+    //@@author
     /**
      * Updates the master tag list to include tags in {@code crimeCase} that are not in the list.
      *

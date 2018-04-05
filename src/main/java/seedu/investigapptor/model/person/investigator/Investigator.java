@@ -16,7 +16,7 @@ import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.tag.Tag;
-
+//@@author Marcus-cxc
 /**
  * Represents a Investigator in the investigapptor book.
  * Guarantees: details are present and not null, field values are validated, immutable.

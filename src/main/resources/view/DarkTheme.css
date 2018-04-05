@@ -423,3 +423,39 @@
     -fx-background-color: #000000;
 }
 
+#tags .brown {
+    -fx-text-fill: black;
+    -fx-background-color: #CD853F;
+}
+
+#tags .gray {
+    -fx-text-fill: black;
+    -fx-background-color: #b6b6b6;
+}
+
+#tags .green {
+    -fx-text-fill: black;
+    -fx-background-color: #00ff06;
+}
+
+#tags .beige {
+    -fx-text-fill: black;
+    -fx-background-color: #FFE4C4;
+}
+
+#tags .lightblue {
+    -fx-text-fill: black;
+    -fx-background-color: #27fffa;
+}
+
+#tags .golden {
+    -fx-text-fill: black;
+    -fx-background-color: #DAA520;
+}
+
+#tags .purple {
+    -fx-text-fill: black;
+    -fx-background-color: #bc99da;
+}
+
+

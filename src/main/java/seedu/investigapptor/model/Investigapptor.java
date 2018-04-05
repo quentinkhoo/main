@@ -99,14 +99,14 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         List<CrimeCase> syncedCrimeCaseList = newData.getCrimeCaseList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-        List<Person> syncedPersonList = newData.getPersonList().stream()
-                .map(this::syncWithMasterTagList)
-                .collect(Collectors.toList());
         try {
             setCrimeCases(syncedCrimeCaseList);
         } catch (DuplicateCrimeCaseException e) {
             throw new AssertionError("Investigapptors should not have duplicate cases");
         }
+        List<Person> syncedPersonList = newData.getPersonList().stream()
+                .map(this::syncWithMasterTagList)
+                .collect(Collectors.toList());
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
@@ -170,7 +170,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      *
      *
      */
-    public void convertHashToCases(Investigator key) throws DuplicatePersonException {
+    public void convertHashToCases(Investigator key) {
+        requireNonNull(key.getCaseListHashed());
         if (key.getCaseListHashed() != null) {
             for (Integer i : key.getCaseListHashed()) {
                 for (CrimeCase c : cases) {
@@ -184,7 +185,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
                 }
             }
         }
-        addPerson(key);
     }
     //// case-level operations
 
@@ -196,16 +196,20 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      * @throws DuplicateCrimeCaseException if an equivalent case already exists.
      */
     public void addCrimeCase(CrimeCase c) throws DuplicateCrimeCaseException {
-        CrimeCase crimecase = syncWithMasterTagList(c);
+        CrimeCase crimeCase = syncWithMasterTagList(c);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any case
         // in the case list.
-        if (cases.add(crimecase)) {
-            if (crimecase.getCurrentInvestigator() != null) {
-                for (CrimeCase d : crimecase.getCurrentInvestigator().getCrimeCases()) {
-                    System.out.println(d.getCaseName());
+        if (cases.add(crimeCase)) {
+            if (crimeCase.getCurrentInvestigator() != null) {
+                for (Person person : persons) {
+                    // Finds the independent Investigator object that was assigned under the case
+                    if (crimeCase.getCurrentInvestigator().getName().equals(person.getName())) {
+                        Investigator investigator = (Investigator) person;
+                        investigator.addCrimeCase(crimeCase);
+                        break;
+                    }
                 }
-                crimecase.getCurrentInvestigator().addCrimeCase(crimecase);
             }
         }
     }
@@ -282,11 +286,11 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         final Set<Tag> correctTagReferences = new HashSet<>();
         personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
         if (person instanceof Investigator) {
-            Set<CrimeCase> cases = new HashSet<>();
-            Investigator inv = (Investigator) person;
-            inv.getCrimeCases().forEach(crimeCase -> cases.add(crimeCase));
-            return new Investigator(person.getName(), person.getPhone(), person.getEmail(),
-                    person.getAddress(), ((Investigator) person).getRank(), cases, correctTagReferences);
+            Investigator inv = new Investigator(person.getName(), person.getPhone(), person.getEmail(),
+                    person.getAddress(), ((Investigator) person).getRank(),
+                    correctTagReferences, ((Investigator) person).getCaseListHashed());
+            convertHashToCases(inv);
+            return inv;
         }
         return new Person(
                 person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
@@ -310,8 +314,10 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // Rebuild the list of case tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         crimecaseTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        Investigator investigator = (Investigator) syncWithMasterTagList(crimecase.getCurrentInvestigator());
+        investigator.clearCaseList(); // Fix for undo/redo: Clears investigator case list
         return new CrimeCase(
-                crimecase.getCaseName(), crimecase.getDescription(), crimecase.getCurrentInvestigator(),
+                crimecase.getCaseName(), crimecase.getDescription(), investigator,
                 crimecase.getStartDate(), crimecase.getEndDate(), crimecase.getStatus(), correctTagReferences);
     }
 

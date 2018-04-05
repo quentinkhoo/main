@@ -4,13 +4,14 @@ import seedu.investigapptor.commons.core.EventsCenter;
 import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.model.person.investigator.TagContainsKeywordsPredicate;
 
+//@@author pkaijun
 /**
  * Finds and lists all investigators in investigapptor whose tags contains any of the argument keywords.
  * Keyword matching is not case-sensitive.
  */
 public class FindInvestTagsCommand extends Command {
 
-    public static final String COMMAND_WORD = "findInvestTags";
+    public static final String COMMAND_WORD = "findinvestigatortags";
     public static final String COMMAND_ALIAS = "fit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds investigators whose tags contain any of "

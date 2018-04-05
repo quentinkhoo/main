@@ -1,0 +1,205 @@
+# pkaijun
+###### \java\seedu\investigapptor\logic\commands\FindCaseTagsCommandTest.java
+``` java
+/**
+ * Contains integration tests (interaction with the Model) for {@code FindCaseTagsCommand}.
+ */
+public class FindCaseTagsCommandTest {
+    private Model model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
+
+    @Test
+    public void equals() {
+        TagContainsKeywordsPredicate firstPredicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("first"));
+        TagContainsKeywordsPredicate secondPredicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("second"));
+
+        FindCaseTagsCommand findFirstCommand = new FindCaseTagsCommand(firstPredicate);
+        FindCaseTagsCommand findSecondCommand = new FindCaseTagsCommand(secondPredicate);
+
+        // same object -> returns true
+        assertTrue(findFirstCommand.equals(findFirstCommand));
+
+        // same values -> returns true
+        FindCaseTagsCommand findFirstCommandCopy = new FindCaseTagsCommand(firstPredicate);
+        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(findFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(findFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(findFirstCommand.equals(findSecondCommand));
+    }
+
+    @Test
+    public void execute_zeroKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_CASES_LISTED_OVERVIEW, 0);
+        FindCaseTagsCommand command = prepareCommand(" ");
+        assertCommandSuccess(command, expectedMessage, Collections.emptyList());
+    }
+
+    @Test
+    public void execute_multipleKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_CASES_LISTED_OVERVIEW, 5);
+        String userInput = "Murder Kidnap".toLowerCase();  // Tags are converted to lowercase during comparison
+        FindCaseTagsCommand command = prepareCommand(userInput);
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(ALFA, BRAVO, ONE, TWO, THREE));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code FindCaseTagsCommand}.
+     */
+    private FindCaseTagsCommand prepareCommand(String userInput) {
+        FindCaseTagsCommand command =
+                new FindCaseTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
+        command.setData(model, new CommandHistory(), new UndoRedoStack());
+        return command;
+    }
+
+    /**
+     * Asserts that {@code command} is successfully executed, and<br>
+     *     - the command feedback is equal to {@code expectedMessage}<br>
+     *     - the {@code FilteredList<CrimCase>} is equal to {@code expectedList}<br>
+     *     - the {@code Investigapptor} in model remains the same after executing the {@code command}
+     */
+    private void assertCommandSuccess(FindCaseTagsCommand command, String expectedMessage,
+                                      List<CrimeCase> expectedList) {
+        Investigapptor expectedInvestigapptor = new Investigapptor(model.getInvestigapptor());
+        CommandResult commandResult = command.execute();
+
+        assertEquals(expectedMessage, commandResult.feedbackToUser);
+        assertEquals(expectedList, model.getFilteredCrimeCaseList());
+        assertEquals(expectedInvestigapptor, model.getInvestigapptor());
+    }
+}
+```
+###### \java\seedu\investigapptor\logic\commands\FindInvestTagsCommandTest.java
+``` java
+/**
+ * Contains integration tests (interaction with the Model) for {@code FindInvestTagsCommand}.
+ */
+public class FindInvestTagsCommandTest {
+    private Model model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
+
+    @Test
+    public void equals() {
+        TagContainsKeywordsPredicate firstPredicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("first"));
+        TagContainsKeywordsPredicate secondPredicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("second"));
+
+        FindInvestTagsCommand findFirstCommand = new FindInvestTagsCommand(firstPredicate);
+        FindInvestTagsCommand findSecondCommand = new FindInvestTagsCommand(secondPredicate);
+
+        // same object -> returns true
+        assertTrue(findFirstCommand.equals(findFirstCommand));
+
+        // same values -> returns true
+        FindInvestTagsCommand findFirstCommandCopy = new FindInvestTagsCommand(firstPredicate);
+        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(findFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(findFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(findFirstCommand.equals(findSecondCommand));
+    }
+
+    @Test
+    public void execute_zeroKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        FindInvestTagsCommand command = prepareCommand(" ");
+        assertCommandSuccess(command, expectedMessage, Collections.emptyList());
+    }
+
+    @Test
+    public void execute_multipleKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String userInput = "teamB new".toLowerCase();  // Tags are converted to lowercase during comparison
+        FindInvestTagsCommand command = prepareCommand(userInput);
+        assertCommandSuccess(command, expectedMessage, Arrays.asList(SIR_LIM, MDM_ONG, SIR_CHONG));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code FindInvestTagsCommand}.
+     */
+    private FindInvestTagsCommand prepareCommand(String userInput) {
+        FindInvestTagsCommand command =
+                new FindInvestTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+"))));
+        command.setData(model, new CommandHistory(), new UndoRedoStack());
+        return command;
+    }
+
+    /**
+     * Asserts that {@code command} is successfully executed, and<br>
+     *     - the command feedback is equal to {@code expectedMessage}<br>
+     *     - the {@code FilteredList<Person>} is equal to {@code expectedList}<br>
+     *     - the {@code Investigapptor} in model remains the same after executing the {@code command}
+     */
+    private void assertCommandSuccess(FindInvestTagsCommand command, String expectedMessage,
+                                      List<Person> expectedList) {
+        Investigapptor expectedInvestigapptor = new Investigapptor(model.getInvestigapptor());
+        CommandResult commandResult = command.execute();
+
+        assertEquals(expectedMessage, commandResult.feedbackToUser);
+        assertEquals(expectedList, model.getFilteredPersonList());
+        assertEquals(expectedInvestigapptor, model.getInvestigapptor());
+    }
+}
+```
+###### \java\seedu\investigapptor\logic\parser\FindCaseTagsCommandParserTest.java
+``` java
+public class FindCaseTagsCommandParserTest {
+
+    private FindCaseTagsCommandParser parser = new FindCaseTagsCommandParser();
+
+    @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCaseTagsCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindInvestTagsCommand() {
+        // no leading and trailing whitespaces. arguments are lowercase as comparison is lowercase based
+        FindCaseTagsCommand expectedFindCommand =
+                new FindCaseTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList("murder", "robbery")));
+        assertParseSuccess(parser, "murder robbery", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " \n murder \n \t robbery  \t", expectedFindCommand);
+    }
+
+}
+```
+###### \java\seedu\investigapptor\logic\parser\FindInvestTagsCommandParserTest.java
+``` java
+public class FindInvestTagsCommandParserTest {
+
+    private FindInvestTagsCommandParser parser = new FindInvestTagsCommandParser();
+
+    @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindInvestTagsCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindInvestTagsCommand() {
+        // no leading and trailing whitespaces. arguments are lowercase as comparison is lowercase based
+        FindInvestTagsCommand expectedFindCommand =
+                new FindInvestTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList("teama", "new")));
+        assertParseSuccess(parser, "teama new", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " \n teama \n \t new  \t", expectedFindCommand);
+    }
+
+}
+```

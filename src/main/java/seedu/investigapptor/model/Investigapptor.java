@@ -227,6 +227,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         cases.setCrimeCase(target, syncedEditedCrimeCase);
         addCrimeCaseToInvestigator(syncedEditedCrimeCase);
     }
+    //@@author
 
     /**
      * Removes {@code key} from this {@code Investigapptor}.
@@ -235,6 +236,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      */
     public boolean removeCrimeCase(CrimeCase key) throws CrimeCaseNotFoundException {
         if (cases.remove(key)) {
+            removeCrimeCaseFromInvestigator(key);
             return true;
         } else {
             throw new CrimeCaseNotFoundException();

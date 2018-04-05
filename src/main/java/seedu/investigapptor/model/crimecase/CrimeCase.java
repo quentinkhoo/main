@@ -72,6 +72,7 @@ public class CrimeCase {
         return Collections.unmodifiableSet(tags.toSet());
     }
 
+    //@@author pkaijun
     /**
      * Returns an immutable tag set of type String
      */
@@ -83,6 +84,7 @@ public class CrimeCase {
 
         return rawTags;
     }
+    //@@author
 
     /**
      * Deletes (@code toDelete) tag

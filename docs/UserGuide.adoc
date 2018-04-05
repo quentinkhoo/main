@@ -27,7 +27,7 @@ delegated to them.
 
 Investigapptor comes with many useful features for investigators and
 their team members such as assigning investigators to a crime case, listing investigators
-based on their expertise so that you can solve crime cases more effienctly and effectively.
+based on their expertise so that you can solve crime cases more effienctly ande ffectively.
 
 Investigapptor v1.5 is available for Windows, Mac OS X, Linux and Unix operating systems.
 
@@ -93,7 +93,6 @@ These are general commands not specific to either investigaors or cases.
 
 [[Help]]
 ==== Viewing help: `help`
-
 You can use the `help` command to access the User Guide from Investigapptor +
 
 *Format:* `help`
@@ -109,9 +108,17 @@ image::helpUI.png[width="790"]
 ====
 
 // tag::setpassword[]
+[[SetPassword]]
 ==== Setting a password : `setpassword` [Since v1.3]
-You can use this command to set a new password for the Investigapptor whether or
-not a password has been set
+You can use this command to set a new password for the Investigapptor
+whether or not a password has been set.
+
+[IMPORTANT]
+Your password must be of minimal 8 characters and not contain any spaces. +
+[TIP]
+You can press kbd:[Ctrl] to reveal the password in plaintext if you find
+ yourself having trouble remembering what you typed. Pressing kbd:[Ctrl]
+again will hide back the password.
 
 Format: `setpassword [pw/PASSWORD]` +
 Alias: `sp pw/PASSWORD` +
@@ -122,15 +129,38 @@ Alias: `sp pw/PASSWORD` +
 .Setting a password
 image::setpassword.png[width="790"]
 
-[IMPORTANT]
-Password must be of minimal 8 characters and not contain any spaces. +
-[NOTE]
-You can press kbd:[CTRL] to reveal the password in plaintext.
+The next time you start up Investigapptor, you would be prompted with a password
+input as shown in _<<inputpassword>>_.
+
+[[inputpassword]]
+.Inputting a password
+image::inputpassword.png[width="790"]
 //end::setpassword[]
 
-==== Remove password : `remove password [Coming in v1.4]`
-To be updated
+//tag::removepassword[]
+[[RemovePassword]]
+==== Removing the password : `removepassword` [Since v1.4]
+You can use this command to remove a set password from the Investigapptor.
 
+[NOTE]
+You must input the currently set password correctly in order to remove the
+ password. +
+[TIP]
+You can press kbd:[Ctrl] to reveal the password in plaintext if you find
+ yourself having trouble remembering what you typed. Pressing kbd:[Ctrl]
+again will hide back the password.
+
+Format: `removepassword [pw/PASSWORD]` +
+Alias: `rp pw/PASSWORD` +
+
+*Example:*
+
+[[removepassword]]
+.Removing a password
+image::removepassword.png[width="790"]
+//end removepassword[]
+
+[[History]]
 ==== Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -143,6 +173,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
+[[Undo]]
 ==== Undoing previous command : `undo`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
@@ -151,7 +182,7 @@ Alias: `u`
 
 [NOTE]
 ====
-Undoable commands: those commands that *modify* the address book's content (`addinvestigator`, `deleteinvestigator`, `editinvestigator`,
+Undoable commands: those commands that modify the investigapptor's content (`addinvestigator`, `deleteinvestigator`, `editinvestigator`,
  `addcase`, `deletecase`, `editcase`, `close` and `clear`).
 ====
 
@@ -161,16 +192,17 @@ Examples:
 `listcases` +
 `undo` (reverses the `deletecase 1` command) +
 
-* `selectinvestigator 1` +
-`listinvestigators` +
+* `selectcase 1` +
+`listcases` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `deleteinvestigator 1` +
+* `deletecase 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `deleteinvestigator 1` command) +
+`undo` (reverses the `deletecase 1` command) +
 
+[[Redo]]
 ==== Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
@@ -231,11 +263,27 @@ Examples:
 * `addInv n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
 * `aI n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
 
-==== Listing all investigators : `list investigators [Since v1.2]`
+//tag::listinvestigators[]
+[[ListInvestigators]]
+==== Listing all investigators : `listinvestigators` [Since v1.2]
 
-Shows a list of all investigators in the Investigapptor. +
-Format: `list investigators` +
-Alias: `l investigators`
+This command would show you the list of investigators that have been added to
+ the Investigapptor. +
+
+[NOTE]
+Running this command would automatically help you swap the panel tab
+to the investigator tab. +
+
+Format: `listinvestigators` +
+Alias: `li`
+
+*Example:*
+
+[[listinvestigators]]
+.Listing investigators
+image::listinvestigators.png[width="790"]
+
+//end::listinvestigators[]
 
 ==== Editing an investigator : `editInv`
 
@@ -276,12 +324,12 @@ Examples:
 
 * `findinvestigators John` +
 Returns `john` and `John Doe`
-* `fi Betsy Tim John` +
+* `fI Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
 
-==== Locating investigators by tags: `findinvestigatortags` `[Since v1.2]`
+==== Locating investigators by tags: `findinvestigatorstags` `[Since v1.2]`
 Find investigators whose tags contain any of the given keywords. +
-Format: `findinvestigatortags KEYWORD [MORE_KEYWORDS]` +
+Format: `findinvestigatorstags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fit`
 
 ****
@@ -294,9 +342,9 @@ e.g. `teamA teamB` will return investigators that contains the tag 'teamA' or 't
 
 Examples:
 
-* `findinvestigatortags teamA` +
+* `findinvestigatorstags teamA` +
 Returns investigator(s) with tag `teamA`
-* `findinvestigatortags teamA new teamb` +
+* `findinvestigatorstags teamA new teamb` +
 Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
@@ -336,12 +384,12 @@ Alias: `si`
 
 Examples:
 
-* `listinvestigators` +
+* `listinvestigator` +
 `selectinvestigator 2` +
-Selects the 2nd person in the results of the `listinvestigators` command.
-* `findinvestigators Betsy` +
+Selects the 2nd investigator in the results of the `listinvestigator` command.
+* `findinvestigator Betsy` +
 `selectinvestigator 1` +
-Selects the 1st person in the results of the `findinvestigators` command.
+Selects the 1st investigator in the results of the `findinvestigator` command.
 * `si 3` +
 Selects the 3rd person in the listed panel list.
 
@@ -363,11 +411,27 @@ Examples:
 * `addCase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
 * `aC n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
 
-==== Listing all cases : `listcases [Since v1.2]`
+//tag::listcases[]
+[[ListCases]]
+==== Listing all cases : `listcases` [Since v1.2]
 
-Shows a list of all cases in the Investigapptor. +
-Format: `list cases` +
-Alias: `l cases`
+This command would show you the list of cases that have been added to
+ the Investigapptor. +
+
+[NOTE]
+Running this command would automatically help you swap the panel tab
+to the case tab. +
+
+Format: `listcases` +
+Alias: `lc`
+
+*Example:*
+
+[[listcases]]
+.Listing cases
+image::listcases.png[width="790"]
+
+//end::listcases[]
 
 ==== Editing a case : `editCase [Coming in v1.4]`
 
@@ -390,28 +454,28 @@ Edits the description and investigator of the 1st case to be `some description` 
 * `eC 2 i/Betsy Crower t/` +
 Edits the investigator of the 2nd case to be `Betsy Crower` and clears all existing tags.
 
-==== Locating cases by name: `findcases [Since v1.3]`
+==== Locating cases by name: `findcase [Since v1.3]`
 
 Finds cases whose names contain any of the given keywords. +
-Format: `findcases KEYWORD [MORE_KEYWORDS]` +
+Format: `findcase KEYWORD [MORE_KEYWORDS]` +
 Alias: `fc`
 
 ****
 * The search is case insensitive. e.g `project` will match `Project`
 * The order of the keywords does not matter. e.g. `Project Magic` will match `Magic Project`
 * Only the name is searched.
-* Only full words will be matched e.g. `Project` will not match `Projects`
+* Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `findcases SPF` +
+* `findcase SPF` +
 Returns `SPF Murder` and `SPF rape`
-* `fc murder rape arson` +
+* `findcase murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
 
-==== Locating cases by category: `findcasetags` `[Since v1.3]`
+==== Locating cases by tags: `findcasetags` `[Since v1.3]`
 Find investigators whose tags contain any of the given keywords. +
 Format: `findcasetags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fct`
@@ -455,9 +519,9 @@ Examples:
 * `listcases` +
 `close 2` +
 Closes the 2nd case in the results of the `listcases` command.
-* `findcases murder` +
+* `findcase murder` +
 `close 1` +
-Closes the 1st case in the results of the `findcases` command.
+Closes the 1st case in the results of the `findcase` command.
 * `cl 3` +
 Closes the 3rd case in the listed panel list case.
 
@@ -499,13 +563,13 @@ Examples:
 * `listcases` +
 `selectcase 2` +
 Selects the 2nd case in the results of the `listcases` command.
-* `findcases murder` +
+* `findcase murder` +
 `selectcase 1` +
-Selects the 1st case in the results of the `findcases` command.
+Selects the 1st case in the results of the `findcase` command.
 * `sc 3` +
 Selects the 3rd case in the listed panel list case.
 
-=== Future Enhancement Commands
+=== Future Enhancements
 These are features that will come in future releases of Investigapptor +
 
 ==== Adding a witness `[Coming in v2.0]`
@@ -533,23 +597,68 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: You can do so by installing Investigapptor in the other computer and
+overwriting the empty data file it creates with the file that contains
+the data of your previous Investigapptor folder.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+=== General Commands
+[width="100%",cols="50%,<30%,<30%,<30",options="header",]
+|=======================================================================
+|Command Section |Purpose |Format |Example
+
+|_<<Help>>_ |Shows you the user guide |`help` | `help`
+
+|_<<SetPassword>>_ |Sets the password |`setpassword [pw/PASSWORD]` |
+`setpassword pw/password`
+
+|_<<RemovePassword>>_ |Removes the password |`removepassword [pw/PASSWORD]` |
+`removepassword pw/password`
+
+|_<<History>>_ |Shows you a history of all commands used |`history` | `history`
+
+|_<<Undo>>_ |Undo your previous command |`undo` | `undo`
+
+|_<<Redo>>_ |Redo your undo | `redo` | `redo`
+
+|=======================================================================
+
+<<<
+
+=== Investigator Commands
+[width="100%",cols="50%,<30%,<30%,<30",options="header",]
+|=======================================================================
+|Command Section |Purpose |Format |Example
+
+|_<<ListInvestigators>>_ |Shows you the list of added investigators |
+`listinvestigators` | `listinvestigators`
+
+|=======================================================================
+
+<<<
+
+=== Case Commands
+[width="100%",cols="50%,<30%,<30%,<30",options="header",]
+|=======================================================================
+|Command Section |Purpose |Format |Example
+
+|_<<ListCases>>_ |Shows you the list of added cases |
+`listcases` | `listcases`
+
+|=======================================================================
+
+<<<
+
+=== Keyboard Shortcuts
+[width="100%",cols="20%,<30%,<30%,options="header",]
+|=======================================================================
+|Shortcut |Purpose |Remarks
+
+|kbd:[Esc] | Helps you clears the entire command box text field | -
+
+|kbd:[Ctrl] | Toggles between hiding and revealing the password parameter | -
+
+|=======================================================================
+
+<<<

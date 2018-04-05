@@ -107,25 +107,56 @@ or from the menu bar, as shown in _<<f1-help>>_.
 image::helpUI.png[width="790"]
 ====
 
+// tag::setpassword[]
 ==== Setting a password : `setpassword` [Since v1.3]
-You can use this command to set a new password for the Investigapptor whether or
-not a password has been set
-
-Format: `setpassword [pw/PASSWORD]` +
-Alias: `sp` +
+You can use this command to set a new password for the Investigapptor
+whether or not a password has been set.
 
 [IMPORTANT]
-====
-Password must be of minimal 8 characters and not contain any spaces
-====
+Your password must be of minimal 8 characters and not contain any spaces. +
+[TIP]
+You can press kbd:[CTRL] to reveal the password in plaintext if you find
+ yourself having trouble remembering what you typed. Pressing kbd:[CTRL]
+again will hide back the password.
 
-Examples:
+Format: `setpassword [pw/PASSWORD]` +
+Alias: `sp pw/PASSWORD` +
 
-* `setpassword pw/password` +
-* `sp pw/password`
+*Example:*
 
-==== Remove password : `remove password [Coming in v1.4]`
-To be updated
+[[setpassword]]
+.Setting a password
+image::setpassword.png[width="790"]
+
+The next time you start up Investigapptor, you would be prompted with a password
+input as shown in _<<inputpassword>>_.
+
+[[inputpassword]]
+.Inputting a password
+image::inputpassword.png[width="790"]
+//end::setpassword[]
+
+//tag::removepassword[]
+==== Removing the password : `removepassword` [Since v1.4]
+You can use this command to remove a set password from the Investigapptor.
+
+[NOTE]
+You must input the currently set password correctly in order to remove the
+ password. +
+[TIP]
+You can press kbd:[CTRL] to reveal the password in plaintext if you find
+ yourself having trouble remembering what you typed. Pressing kbd:[CTRL]
+again will hide back the password.
+
+Format: `removepassword [pw/PASSWORD]` +
+Alias: `rp pw/PASSWORD` +
+
+*Example:*
+
+[[removepassword]]
+.Removing a password
+image::removepassword.png[width="790"]
+//end removepassword[]
 
 ==== Listing entered commands : `history`
 
@@ -226,11 +257,26 @@ Examples:
 * `addInv n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
 * `aI n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
 
-==== Listing all investigators : `list investigators [Since v1.2]`
+//tag::listinvestigators[]
+==== Listing all investigators : `listinvestigators` [Since v1.2]
 
-Shows a list of all investigators in the Investigapptor. +
-Format: `list investigators` +
-Alias: `l investigators`
+This command would show you the list of investigators that have been added to
+ the Investigapptor. +
+
+[NOTE]
+Running this command would automatically help you swap the panel tab
+to the investigator tab. +
+
+Format: `listinvestigators` +
+Alias: `li`
+
+*Example:*
+
+[[listinvestigators]]
+.Listing investigators
+image::listinvestigators.png[width="790"]
+
+//end::listinvestigators[]
 
 ==== Editing an investigator : `editInv`
 
@@ -358,11 +404,26 @@ Examples:
 * `addCase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
 * `aC n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
 
-==== Listing all cases : `listcases [Since v1.2]`
+//tag::listcases[]
+==== Listing all cases : `listcases` [Since v1.2]
 
-Shows a list of all cases in the Investigapptor. +
-Format: `list cases` +
-Alias: `l cases`
+This command would show you the list of cases that have been added to
+ the Investigapptor. +
+
+[NOTE]
+Running this command would automatically help you swap the panel tab
+to the case tab. +
+
+Format: `listcases` +
+Alias: `lc`
+
+*Example:*
+
+[[listcases]]
+.Listing cases
+image::listcases.png[width="790"]
+
+//end::listcases[]
 
 ==== Editing a case : `editCase [Coming in v1.4]`
 
@@ -528,7 +589,8 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous Investigapptor folder.
 
 == Command Summary
 

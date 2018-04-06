@@ -246,10 +246,12 @@ Alias: `ex`
 Investigapptor data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+
 === Investigator Commands
 These are investigator related commands. +
 
 ==== Adding an investigator: `addinvestigator`
+
 
 You can registers an investigator to the application so that it cases can be assigned to him/her.
 
@@ -481,6 +483,7 @@ Edits the description and investigator of the 1st case to be `some description` 
 * `ec 2 i/3 t/` +
 Changes the investigator of the 2nd case to the 3rd investigator in the most recent listing of investigators, and clears all existing tags.
 
+=======
 ==== Locating cases by name: `findcases [Since v1.3]`
 
 Finds cases whose names contain any of the given keywords. +

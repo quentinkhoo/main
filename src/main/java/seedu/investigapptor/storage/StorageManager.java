@@ -115,6 +115,7 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+    //@@author Marcus-cxc
     @Override
     @Subscribe
     public void handleInvestigapptorBackupEvent(InvestigapptorBackupEvent event) {

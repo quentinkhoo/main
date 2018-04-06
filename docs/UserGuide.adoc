@@ -93,6 +93,7 @@ These are general commands not specific to either investigaors or cases.
 
 [[Help]]
 ==== Viewing help: `help`
+
 You can use the `help` command to access the User Guide from Investigapptor +
 
 *Format:* `help`
@@ -233,6 +234,7 @@ Clears all entries from the address book. +
 Format: `clear` +
 Alias: `c`
 
+
 ==== Exiting the program : `exit`
 
 Exits the program. +
@@ -244,52 +246,55 @@ Alias: `ex`
 Investigapptor data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+
 === Investigator Commands
 These are investigator related commands. +
 
-==== Registering an investigator: `addInv`
+==== Registering an investigator: `ai` `addinvestigator`
 
-Registers an investigator to the application +
-Format: `addInv n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-Alias: `aI`
+You can registers an investigator to the application so that it cases can be assigned to him/her.
 
-[TIP]
-An investigator can have any number of tags (including 0)
-* Tags are alphanumeric without spaces
+Format: `addinvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RANK [t/TAG]...` +
+Alias: `ai`
 
 Examples:
 
-* `addInv n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/newcomer`
-* `addInv n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
-* `aI n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
+* `addinvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/1 t/newcomer`
+* `ai n/Tome Lee p/94727341 e/Tom@gmail.com a/323, Baker Street, #01-03 r/1 t/Rookie`
+* `ai n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 r/5 p/1234567`
 
-//tag::listinvestigators[]
-[[ListInvestigators]]
-==== Listing all investigators : `listinvestigators` [Since v1.2]
+Simply key in the information in the above format in the input bar and press enter to register an investigator. Refer to
+<<f1-addInv>> as an example
 
-This command would show you the list of investigators that have been added to
- the Investigapptor. +
+[[f1-addInv]]
+.Keying in the command
+image::AddInvestigator1.png[width="790"]
 
-[NOTE]
-Running this command would automatically help you swap the panel tab
-to the investigator tab. +
+Outcome: After pressing enter, you should be able to the new investigator appearing on the investigator list and a success message will be displayed at the bottom.
+Refer to <<f2-addInv>>
 
-Format: `listinvestigators` +
-Alias: `li`
+[[f2-addInv]]
+.Outcome
+image::AddInvestigator2.png[width="790"]
 
-*Example:*
 
-[[listinvestigators]]
-.Listing investigators
-image::listinvestigators.png[width="790"]
 
-//end::listinvestigators[]
+[TIP]
+An investigator can have any number of tags (including 0) +
+Tags are alphanumeric without spaces +
+Ranks ranges from 1 to 5 according (Constable ,Sergeant, Inspector, Detective, Captain)
 
-==== Editing an investigator : `editInv`
+==== Listing all investigators : `list investigators [Since v1.2]`
 
-Edits an existing investigator in the Investigapptor. +
-Format: `editInv INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-Alias: `eI`
+Shows a list of all investigators in the Investigapptor. +
+Format: `list investigators` +
+Alias: `l investigators`
+
+==== Editing an investigator : `editinvestigator` `*Bugged` `*Disabled`
+
+You can edit an existing information of an existing investigator in the Investigapptor. +
+Format: `editinvestigator INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+Alias: `ei`
 
 ****
 * Edits the investigator at the specified `INDEX`. The index refers to the index number shown in the last listing of investigators. The index *must be a positive integer* 1, 2, 3, ...
@@ -301,9 +306,9 @@ Alias: `eI`
 
 Examples:
 
-* `editInv 1 p/91234567 e/johndoe@example.com` +
+* `editinvestigator 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st investigator to be `91234567` and `johndoe@example.com` respectively.
-* `eI 2 n/Betsy Crower t/` +
+* `ei 2 n/Betsy Crower t/` +
 Edits the name of the 2nd investigator to be `Betsy Crower` and clears all existing tags.
 
 ==== Locating investigators by name: `findinvestigators`
@@ -349,11 +354,11 @@ Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 
-==== Deleting an investigator : `deleteInv`
+==== Deleting an investigator : `deleteinvestigator`
 
-Deletes the specified person from the address book. +
-Format: `deleteInv INDEX` +
-Alias: `dI`
+Deletes the specified investigator from Investigapptor. +
+Format: `deleteinvestigator INDEX` +
+Alias: `di`
 
 ****
 * Deletes the investigator at the specified `INDEX`.
@@ -364,17 +369,31 @@ Alias: `dI`
 Examples:
 
 * `list investigator` +
-`deleteInv 2` +
+`deleteinvestigator 2` +
 Deletes the 2nd investigator in the address book.
 * `find Betsy` +
-`dI 1` +
+`di 1` +
 Deletes the 1st investigator in the results of the `find` command.
+
+You can identify and delete the investigator by looking at their `INDEX` at the top left of their card as show in the
+arrow in <<f1-deleteInv>>
+
+[[f1-deleteInv]]
+.Using the investigator Index
+image::DeleteInvestigator1.png[width="390"]
+
+Outcome: You should be able to see a the success message and the investigator will no long be on the list like in
+<<f2-deleteInv>>
+
+[[f2-deleteInv]]
+.Outcome
+image::DeleteInvestigator2.png[width="790"]
 
 ==== Selecting an investigator : `selectinvestigator`
 
 Selects the person identified by the index number used in the last person listing. +
 Format: `selectinvestigator INDEX` +
-Alias: `si`
+Alias: `selectinvest`
 
 ****
 * Selects the investigator and loads the details of the investigator at the specified `INDEX`.
@@ -390,26 +409,27 @@ Selects the 2nd investigator in the results of the `listinvestigator` command.
 * `findinvestigator Betsy` +
 `selectinvestigator 1` +
 Selects the 1st investigator in the results of the `findinvestigator` command.
-* `si 3` +
+* `selectinvestigator 3` +
+
 Selects the 3rd person in the listed panel list.
 
 === Case Commands
 These are case related commands. +
 
-==== Adding a case: `addCase [Since v1.1]`
+==== Adding a case: `addcase` [Since v1.1]
 
-Adds a case to the application +
-Format: `addCase [n/CASE_NAME] [d/DESCRIPTION] [i/INDEX] [s/START_DATE] [t/TAG]...` +
-Alias: `aC`
+The first step to managing your cases is to add them to the application along with their details. +
+*Format:* `addcase [n/CASE_NAME] [d/DESCRIPTION] [i/INVESTIGATOR_INDEX] [s/START_DATE] [t/TAG]...` +
+*Shorthand Format:* `ac`
 
 [TIP]
-A case can have any number of tags (including 0)
+Tags are optional, but you can add as many as you like to a case to help you organize better.
 
-Examples:
+*Examples:*
 
-* `addCase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
-* `addCase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
-* `aC n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
+* `addcase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
+* `addcase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
+* `ac n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
 
 //tag::listcases[]
 [[ListCases]]
@@ -433,27 +453,36 @@ image::listcases.png[width="790"]
 
 //end::listcases[]
 
-==== Editing a case : `editCase [Coming in v1.4]`
+==== Editing a case: `editcase` [Since v1.4]
 
-Edits an existing case in the Investigapptor. +
-Format: `editCase INDEX [n/NAME] [d/DESCRIPTION] [i/INVESTIGATOR] [sd/STARTDATE] [s/STATUS] [t/TAG]...` +
-Alias: `eC`
+You can edit an existing case in the application by specifying the `CASE_INDEX` and entering the attributes that you wish to modify. +
+*Format:* `editcase CASE_INDEX [n/NAME] [d/DESCRIPTION] [i/INVESTIGATOR_INDEX] [s/STARTDATE] [t/TAG]...` +
+*Shorthand Format:* `ec`
 
 ****
-* Edits the case at the specified `INDEX`. The index refers to the index number shown in the last listing of investigators. The index *must be a positive integer* 1, 2, 3, ...
+* The `CASE_INDEX` refers to the index number shown in the last listing of cases. +
+* The `INVESTIGATOR_INDEX` refers to the index number shown in the last listing of investigators. +
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
 ****
 
-Examples:
+[WARNING]
+The index *must be a positive integer* 1, 2, 3, ...
+[WARNING]
+When editing tags, the existing tags of the case will be replaced by the new tags entered i.e adding of tags is not cumulative.
 
-* `editCase 1 d/some description i/John Doe` +
-Edits the description and investigator of the 1st case to be `some description` and `John Doe@` respectively.
-* `eC 2 i/Betsy Crower t/` +
-Edits the investigator of the 2nd case to be `Betsy Crower` and clears all existing tags.
+[TIP]
+To help you find the index of the case that you want to edit, you can use the `findcases` command before using the `editcase` command to narrow the number of cases displayed in the listing.
+[TIP]
+You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
 
+*Examples:*
+
+* `editcase 1 d/some description i/1` +
+Edits the description and investigator of the 1st case to be `some description` and the 1st investigator in the most recent listing of investigators respectively.
+* `ec 2 i/3 t/` +
+Changes the investigator of the 2nd case to the 3rd investigator in the most recent listing of investigators, and clears all existing tags.
+
+=======
 ==== Locating cases by name: `findcases [Since v1.3]`
 
 Finds cases whose names contain any of the given keywords. +
@@ -468,9 +497,18 @@ Alias: `fc`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
-Examples:
+|The search is case insensitive |`scarlet` will match `Scarlet`
+
+|The order of the keywords does not matter |`Stranger Danger` will match `Danger Stranger`
+
+|You can only search for case names |`Stranger Danger` [Name] is valid `fraud` [Tag] is not
+
+|Only full words will be matched | You cannot type `Danger` to search for names with keyword `Dangerous`
+
+|Case matching at least one keyword will be returned |`Stranger Danger` will return `Stranger Things`, `Danger Lightning`
 
 * `findcases SPF` +
+
 Returns `SPF Murder` and `SPF rape`
 * `findcases murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
@@ -525,51 +563,84 @@ Closes the 1st case in the results of the `findcase` command.
 * `cl 3` +
 Closes the 3rd case in the listed panel list case.
 
-==== Deleting a case : `deleteCase [Since v1.3]`
+==== Deleting a case : `deletecase` [Since v1.3]
 
-Deletes the specified case from the address book. +
-Format: `deleteCase INDEX` +
-Alias: `dC`
+You can remove cases by specifying the `CASE_INDEX`. The index refers to the index number shown in the most recent listing of cases. +
+*Format:* `deletecase CASE_INDEX` +
+*Shorthand Format:* `dc`
 
-****
-* Deletes the investigator at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+[WARNING]
+The index *must be a positive integer* 1, 2, 3, ...
 
-Examples:
+[TIP]
+To help you find the index of the case that you want to remove, you can use the `findcases` command before using the `deletecase` command to narrow the number of cases displayed in the listing.
+[TIP]
+If a case is no longer active, consider using the `close` command instead so that you can continue to view details of the case.
 
-* `list case` +
-`deleteCase 2` +
-Deletes the 2nd case in the address book.
-* `findCase Arson` +
-`dC 1` +
-Deletes the 1st case in the results of the `findCase` command.
+*Examples:*
 
-==== Selecting a case : `selectcase`
+* `listcases` +
+`deletecase 2` +
+Deletes the 2nd case in the list of all cases.
+* `findcase Arson` +
+`dc 1` +
+Deletes the 1st case in the results of the `findcase` command.
+
+==== Selecting a case : `selectcase` [Coming in v1.5]
 
 Selects the case identified by the index number used in the last case listing. +
 Format: `selectcase INDEX` +
 Alias: `sc`
 
-****
-* Selects the case and loads the details of the case at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
+To view more details about a case, you can select the case identified by the index number used in the last case listing. +
+*Format:* `selectcase CASE_INDEX` +
+*Shorthand Format:* `sc`
 
-Examples:
+[NOTE]
+The `CASE_INDEX` refers to the index number shown in the last listing of cases.
+
+[WARNING]
+The index *must be a positive integer* 1, 2, 3, ...
+
+*Examples:*
 
 * `listcases` +
 `selectcase 2` +
 Selects the 2nd case in the results of the `listcases` command.
+
 * `findcase murder` +
 `selectcase 1` +
 Selects the 1st case in the results of the `findcase` command.
 * `sc 3` +
-Selects the 3rd case in the listed panel list case.
+Selects the 3rd case in the most recent list of cases.
 
-=== Future Enhancements
+==== List a specific Investigator's cases `listinvestigatorcase`
+
+Selects an investigator and display all of the case belonging to that investigator +
+Format: `listinvestigatorcase INDEX` +
+Alias: `lic`
+
+****
+* Selects the investigator by index and loads the cases he/she is incharge of in the case list.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+*Q*: How do I transfer my data to another Computer? +
+*A*: You can do so by installing Investigapptor in the other computer and
+overwriting the empty data file it creates with the file that contains
+the data of your previous Investigapptor folder.
+
+* `list investigator` +
+`listinvestigatorcase 2` +
+Display all the cases of the 2nd investigator in the results of the `list case` command.
+* `findinvestigator Amy` +
+`listinvestigatorCase 1` +
+Display all the cases of the 2nd investigator in the results of the `FindInvestigator` command.
+* `lic 3` +
+Display all the cases of the 2nd investigator  in the investigator panel list case.
+
+=== Future Enhancement Commands
 These are features that will come in future releases of Investigapptor +
 
 ==== Adding a witness `[Coming in v2.0]`
@@ -660,5 +731,3 @@ the data of your previous Investigapptor folder.
 |kbd:[Ctrl] | Toggles between hiding and revealing the password parameter | -
 
 |=======================================================================
-
-<<<

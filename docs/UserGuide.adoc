@@ -182,24 +182,25 @@ Alias: `u`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the investigapptor's content (`addinvestigator`, `deleteinvestigator`, `editinvestigator`,
+ `addcase`, `deletecase`, `editcase`, `close` and `clear`).
 ====
 
 Examples:
 
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
+* `deletecase 1` +
+`listcases` +
+`undo` (reverses the `deletecase 1` command) +
 
-* `select 1` +
-`list` +
+* `selectcase 1` +
+`listcases` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
+* `deletecase 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+`undo` (reverses the `deletecase 1` command) +
 
 [[Redo]]
 ==== Redoing the previously undone command : `redo`
@@ -210,19 +211,19 @@ Alias: `r`
 
 Examples:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+* `deletecase 1` +
+`undo` (reverses the `deletecase 1` command) +
+`redo` (reapplies the `deletecase 1` command) +
 
-* `delete 1` +
+* `deletecase 1` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
+* `deletecase 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+`undo` (reverses the `deletecase 1` command) +
+`redo` (reapplies the `deletecase 1` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
@@ -305,11 +306,11 @@ Edits the phone number and email address of the 1st investigator to be `91234567
 * `eI 2 n/Betsy Crower t/` +
 Edits the name of the 2nd investigator to be `Betsy Crower` and clears all existing tags.
 
-==== Locating investigators by name: `find`
+==== Locating investigators by name: `findinvestigators`
 
 Finds investigators whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]` +
-Alias: `fI`
+Format: `findinvestigators KEYWORD [MORE_KEYWORDS]` +
+Alias: `fi`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -321,29 +322,29 @@ Alias: `fI`
 
 Examples:
 
-* `find John` +
+* `findinvestigators John` +
 Returns `john` and `John Doe`
 * `fI Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
 
-==== Locating investigators by category/team: `findInvestTags` `[Since v1.2]`
+==== Locating investigators by tags: `findinvestigatortags` `[Since v1.2]`
 Find investigators whose tags contain any of the given keywords. +
-Format: `findInvestTags KEYWORD [MORE_KEYWORDS]` +
+Format: `findinvestigatortags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fit`
 
 ****
 * The search is case insensitive. e.g `teamA` will match `teama`
 * Only the tags are searched.
 * Only full words will be matched e.g. `teamA` will not match `teamyA`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Investigators matching at least one keyword will be returned (i.e. `OR` search).
 e.g. `teamA teamB` will return investigators that contains the tag 'teamA' or 'teamB'
 ****
 
 Examples:
 
-* `findInvestTags teamA` +
+* `findinvestigatortags teamA` +
 Returns investigator(s) with tag `teamA`
-* `findInvestTags teamA new teamb` +
+* `findinvestigatortags teamA new teamb` +
 Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
@@ -369,11 +370,11 @@ Deletes the 2nd investigator in the address book.
 `dI 1` +
 Deletes the 1st investigator in the results of the `find` command.
 
-==== Selecting an investigator : `selectInvestigator`
+==== Selecting an investigator : `selectinvestigator`
 
 Selects the person identified by the index number used in the last person listing. +
-Format: `selectInvestigator INDEX` +
-Alias: `selectInvest`
+Format: `selectinvestigator INDEX` +
+Alias: `si`
 
 ****
 * Selects the investigator and loads the details of the investigator at the specified `INDEX`.
@@ -383,13 +384,13 @@ Alias: `selectInvest`
 
 Examples:
 
-* `list` +
-`selectInvestigator 2` +
-Selects the 2nd person in the results of the `list` command.
-* `find Betsy` +
-`selectInvest 1` +
-Selects the 1st person in the results of the `find` command.
-* `selectInvestigator 3` +
+* `listinvestigator` +
+`selectinvestigator 2` +
+Selects the 2nd investigator in the results of the `listinvestigator` command.
+* `findinvestigator Betsy` +
+`selectinvestigator 1` +
+Selects the 1st investigator in the results of the `findinvestigator` command.
+* `si 3` +
 Selects the 3rd person in the listed panel list.
 
 === Case Commands
@@ -453,15 +454,15 @@ Edits the description and investigator of the 1st case to be `some description` 
 * `eC 2 i/Betsy Crower t/` +
 Edits the investigator of the 2nd case to be `Betsy Crower` and clears all existing tags.
 
-==== Locating cases by name: `findCase [Since v1.3]`
+==== Locating cases by name: `findcases [Since v1.3]`
 
 Finds cases whose names contain any of the given keywords. +
-Format: `findCase KEYWORD [MORE_KEYWORDS]` +
-Alias: `fC`
+Format: `findcases KEYWORD [MORE_KEYWORDS]` +
+Alias: `fc`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case insensitive. e.g `project` will match `Project`
+* The order of the keywords does not matter. e.g. `Project Magic` will match `Magic Project`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -469,14 +470,14 @@ Alias: `fC`
 
 Examples:
 
-* `findCase SPF` +
+* `findcases SPF` +
 Returns `SPF Murder` and `SPF rape`
-* `findCase murder rape arson` +
+* `findcases murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
 
-==== Locating cases by category: `findCaseTags` `[Since v1.3]`
-Find investigators whose tags contain any of the given keywords. +
-Format: `findCaseTags KEYWORD [MORE_KEYWORDS]` +
+==== Locating cases by tags: `findcasetags` `[Since v1.3]`
+Find cases whose tags contain any of the given keywords. +
+Format: `findcasetags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fct`
 
 ****
@@ -489,9 +490,9 @@ e.g. `murder robbery` will return cases that contains the tag 'murder' or 'robbe
 
 Examples:
 
-* `findCaseTags murder` +
+* `findcasetags murder` +
 Returns case(s) with tag `murder`
-* `findCaseTags murder homicide robbery` +
+* `findcasetags murder homicide robbery` +
 Returns case(s) having tags `murder`, `homicide`, OR `robbery`
 * `fct murder supernatural a` +
 Returns case(s) having tags `murder`, `supernatural`, OR `a`
@@ -515,13 +516,13 @@ with the status `close`.
 
 Examples:
 
-* `list case` +
+* `listcases` +
 `close 2` +
-Closes the 2nd case in the results of the `list case` command.
-* `findCase murder` +
+Closes the 2nd case in the results of the `listcases` command.
+* `findcase murder` +
 `close 1` +
-Closes the 1st case in the results of the `findCase` command.
-* `c 3` +
+Closes the 1st case in the results of the `findcase` command.
+* `cl 3` +
 Closes the 3rd case in the listed panel list case.
 
 ==== Deleting a case : `deleteCase [Since v1.3]`
@@ -545,11 +546,11 @@ Deletes the 2nd case in the address book.
 `dC 1` +
 Deletes the 1st case in the results of the `findCase` command.
 
-==== Selecting a case : `selectCase`
+==== Selecting a case : `selectcase`
 
 Selects the case identified by the index number used in the last case listing. +
-Format: `selectCase INDEX` +
-Alias: `sC`
+Format: `selectcase INDEX` +
+Alias: `sc`
 
 ****
 * Selects the case and loads the details of the case at the specified `INDEX`.
@@ -559,13 +560,13 @@ Alias: `sC`
 
 Examples:
 
-* `list case` +
-`selectCase 2` +
-Selects the 2nd case in the results of the `list case` command.
-* `findCase murder` +
-`selectCase 1` +
-Selects the 1st case in the results of the `findCase` command.
-* `sC 3` +
+* `listcases` +
+`selectcase 2` +
+Selects the 2nd case in the results of the `listcases` command.
+* `findcase murder` +
+`selectcase 1` +
+Selects the 1st case in the results of the `findcase` command.
+* `sc 3` +
 Selects the 3rd case in the listed panel list case.
 
 === Future Enhancements

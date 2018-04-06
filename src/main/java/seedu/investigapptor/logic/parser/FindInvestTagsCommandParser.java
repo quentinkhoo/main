@@ -8,6 +8,7 @@ import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.person.investigator.TagContainsKeywordsPredicate;
 
+//@@author pkaijun
 /**
  * Parses input arguments and creates a new FindInvestTagsCommand object
  */

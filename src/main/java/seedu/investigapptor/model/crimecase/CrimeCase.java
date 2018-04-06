@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.UniqueTagList;
-
+//@@author leowweiching-reused
 /**
  * Represents a Crime Case in the Investigapptor.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -72,6 +72,7 @@ public class CrimeCase {
         return Collections.unmodifiableSet(tags.toSet());
     }
 
+    //@@author pkaijun
     /**
      * Returns an immutable tag set of type String
      */
@@ -83,6 +84,7 @@ public class CrimeCase {
 
         return rawTags;
     }
+    //@@author
 
     /**
      * Deletes (@code toDelete) tag

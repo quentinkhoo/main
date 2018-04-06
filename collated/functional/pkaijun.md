@@ -1,30 +1,6 @@
 # pkaijun
 ###### \java\seedu\investigapptor\logic\commands\CloseCaseCommand.java
 ``` java
-package seedu.investigapptor.logic.commands;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_CASES;
-import static seedu.investigapptor.model.crimecase.Status.CASE_CLOSE;
-
-import java.util.List;
-import java.util.Set;
-
-import seedu.investigapptor.commons.core.EventsCenter;
-import seedu.investigapptor.commons.core.Messages;
-import seedu.investigapptor.commons.core.index.Index;
-import seedu.investigapptor.commons.events.ui.SwapTabEvent;
-import seedu.investigapptor.logic.commands.exceptions.CommandException;
-import seedu.investigapptor.model.crimecase.CaseName;
-import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.Date;
-import seedu.investigapptor.model.crimecase.Description;
-import seedu.investigapptor.model.crimecase.Status;
-import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
-import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
-import seedu.investigapptor.model.person.investigator.Investigator;
-import seedu.investigapptor.model.tag.Tag;
-
 /**
  * Update the status of a case from open to close and update the EndDate field
  */
@@ -44,8 +20,8 @@ public class CloseCaseCommand extends UndoableCommand {
 
     private final Index index;
 
-    private CrimeCase caseToEdit;
-    private CrimeCase editedCase;
+    private CrimeCase caseToClose;
+    private CrimeCase closedCase;
 
     /**
      * @param index of the crimecase in the filtered crimecase list to close
@@ -58,14 +34,14 @@ public class CloseCaseCommand extends UndoableCommand {
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         try {
-            model.updateCrimeCase(caseToEdit, editedCase);
+            model.updateCrimeCase(caseToClose, closedCase);
         } catch (DuplicateCrimeCaseException dce) {
             throw new CommandException(MESSAGE_DUPLICATE_CASE);
         } catch (CrimeCaseNotFoundException cnfe) {
             throw new AssertionError("The target case cannot be missing");
         }
         model.updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
-        return new CommandResult(String.format(MESSAGE_CLOSE_CASE_SUCCESS, editedCase.getStatus()));
+        return new CommandResult(String.format(MESSAGE_CLOSE_CASE_SUCCESS, closedCase.getStatus()));
     }
 
     @Override
@@ -78,32 +54,106 @@ public class CloseCaseCommand extends UndoableCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
         }
 
-        caseToEdit = lastShownList.get(index.getZeroBased());
+        caseToClose = lastShownList.get(index.getZeroBased());
 
-        if (caseToEdit.getStatus().toString().equals(CASE_CLOSE)) {
+        if (caseToClose.getStatus().toString().equals(CASE_CLOSE)) {
             throw new CommandException(MESSAGE_CASE_ALREADY_CLOSE);
         }
 
-        editedCase = createEditedCase(caseToEdit);
+        closedCase = createEditedCase(caseToClose);
     }
 
     /**
      * Creates and returns a {@code CrimeCase} with the details of {@code caseToEdit}
      * Updates status to "close" with the other fields remaining the same
      */
-    private static CrimeCase createEditedCase(CrimeCase caseToEdit) {
-        assert caseToEdit != null;
+    private static CrimeCase createEditedCase(CrimeCase caseToClose) {
+        assert caseToClose != null;
 
-        CaseName name = caseToEdit.getCaseName();
-        Description desc = caseToEdit.getDescription();
-        Date startDate = caseToEdit.getStartDate();
+        CaseName name = caseToClose.getCaseName();
+        Description desc = caseToClose.getDescription();
+        Date startDate = caseToClose.getStartDate();
         Date endDate = new Date(Date.getTodayDate());
-        Set<Tag> tags = caseToEdit.getTags();
-        Investigator investigator = caseToEdit.getCurrentInvestigator();
-        Status status = caseToEdit.getStatus();
+        Set<Tag> tags = caseToClose.getTags();
+        Investigator investigator = caseToClose.getCurrentInvestigator();
+        Status status = caseToClose.getStatus();
         status.closeCase();    // Close case status only
 
         return new CrimeCase(name, desc, investigator, startDate, endDate, status, tags);
+    }
+}
+```
+###### \java\seedu\investigapptor\logic\commands\FindCaseTagsCommand.java
+``` java
+/**
+ * Finds and lists all investigators in investigapptor whose tags contains any of the argument keywords.
+ * Keyword matching is not case-sensitive.
+ */
+public class FindCaseTagsCommand extends Command {
+
+    public static final String COMMAND_WORD = "findCaseTags";
+    public static final String COMMAND_ALIAS = "fct";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds cases whose tags contain any of "
+            + "the specified keywords and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " Homicide";
+
+    private final TagContainsKeywordsPredicate predicate;
+
+    public FindCaseTagsCommand(TagContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
+    }
+
+    @Override
+    public CommandResult execute() {
+        model.updateFilteredCrimeCaseList(predicate);
+        EventsCenter.getInstance().post(new SwapTabEvent(1));   // List results toggles to case tab
+        return new CommandResult(getMessageForCrimeListShownSummary(model.getFilteredCrimeCaseList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindCaseTagsCommand // instanceof handles nulls
+                && this.predicate.equals(((FindCaseTagsCommand) other).predicate)); // state check
+    }
+}
+```
+###### \java\seedu\investigapptor\logic\commands\FindInvestTagsCommand.java
+``` java
+/**
+ * Finds and lists all investigators in investigapptor whose tags contains any of the argument keywords.
+ * Keyword matching is not case-sensitive.
+ */
+public class FindInvestTagsCommand extends Command {
+
+    public static final String COMMAND_WORD = "findInvestTags";
+    public static final String COMMAND_ALIAS = "fit";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds investigators whose tags contain any of "
+            + "the specified keywords and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " teamA";
+
+    private final TagContainsKeywordsPredicate predicate;
+
+    public FindInvestTagsCommand(TagContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
+    }
+
+    @Override
+    public CommandResult execute() {
+        model.updateFilteredPersonList(predicate);
+        EventsCenter.getInstance().post(new SwapTabEvent(0));   // List results toggles to investigators tab
+        return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindInvestTagsCommand // instanceof handles nulls
+                && this.predicate.equals(((FindInvestTagsCommand) other).predicate)); // state check
     }
 }
 ```
@@ -139,6 +189,96 @@ public class CloseCaseCommandParser implements Parser<CloseCaseCommand> {
     }
 }
 ```
+###### \java\seedu\investigapptor\logic\parser\FindCaseTagsCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new FindInvestTagsCommand object
+ */
+public class FindCaseTagsCommandParser implements Parser<FindCaseTagsCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the FindInvestTagsCommandParser
+     * and returns an FindInvestTagsCommandParser object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public FindCaseTagsCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCaseTagsCommand.MESSAGE_USAGE));
+        }
+
+        String[] nameKeywords = trimmedArgs.toLowerCase().split("\\s+");
+
+        return new FindCaseTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+    }
+}
+```
+###### \java\seedu\investigapptor\logic\parser\FindInvestTagsCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new FindInvestTagsCommand object
+ */
+public class FindInvestTagsCommandParser implements Parser<FindInvestTagsCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the FindInvestTagsCommandParser
+     * and returns an FindInvestTagsCommandParser object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public FindInvestTagsCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindInvestTagsCommand.MESSAGE_USAGE));
+        }
+
+        String[] nameKeywords = trimmedArgs.toLowerCase().split("\\s+");
+
+        return new FindInvestTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+    }
+}
+```
+###### \java\seedu\investigapptor\model\crimecase\CrimeCase.java
+``` java
+    /**
+     * Returns an immutable tag set of type String
+     */
+    public Set<String> getTagsRaw() {
+        Set<String> rawTags = new HashSet<>();
+        for (Tag s : tags) {
+            rawTags.add(s.getRawString().toLowerCase());
+        }
+
+        return rawTags;
+    }
+```
+###### \java\seedu\investigapptor\model\crimecase\TagContainsKeywordsPredicate.java
+``` java
+/**
+ * Tests that a {@code Person}'s {@code Tags} matches any of the keywords given.
+ */
+public class TagContainsKeywordsPredicate implements Predicate<CrimeCase> {
+    private final List<String> keywords;
+
+    public TagContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    /* Returns true if keywords matches with any element in the set of tags of a person
+     */
+    @Override
+    public boolean test(CrimeCase crimecase) {
+        return keywords.stream()
+                .anyMatch(crimecase.getTagsRaw()::contains);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TagContainsKeywordsPredicate // instanceof handles nulls
+                && this.keywords.equals(((TagContainsKeywordsPredicate) other).keywords)); // state check
+    }
+}
+```
 ###### \java\seedu\investigapptor\model\Investigapptor.java
 ``` java
     /**
@@ -162,129 +302,34 @@ public class CloseCaseCommandParser implements Parser<CloseCaseCommand> {
         cases.setCrimeCase(target, syncedEditedCrimeCase);
         addCrimeCaseToInvestigator(syncedEditedCrimeCase);
     }
+```
+###### \java\seedu\investigapptor\model\person\investigator\TagContainsKeywordsPredicate.java
+``` java
+/**
+ * Tests that a {@code Person}'s {@code Tags} matches any of the keywords given.
+ */
+public class TagContainsKeywordsPredicate implements Predicate<Person> {
+    private final List<String> keywords;
 
-    /**
-     * Removes {@code key} from this {@code Investigapptor}.
-     *
-     * @throws CrimeCaseNotFoundException if the {@code key} is not in this {@code Investigapptor}.
+    public TagContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    /* Returns true if keywords matches with any element in the set of tags of a person
      */
-    public boolean removeCrimeCase(CrimeCase key) throws CrimeCaseNotFoundException {
-        if (cases.remove(key)) {
-            return true;
-        } else {
-            throw new CrimeCaseNotFoundException();
-        }
+    @Override
+    public boolean test(Person person) {
+        return keywords.stream()
+                .anyMatch(person.getTagsRaw()::contains);
     }
 
-    /**
-     * Adds {@code crimeCase} to {@code Investigator}.
-     *
-     * @throws DuplicateCrimeCaseException if the {@code key} is not in this {@code Investigapptor}.
-     */
-    public void addCrimeCaseToInvestigator(CrimeCase key) throws DuplicateCrimeCaseException {
-        if (key.getCurrentInvestigator() != null) {
-            for (Person person : persons) {
-                // Finds the independent Investigator object that was assigned under the case
-                if (key.getCurrentInvestigator().getName().equals(person.getName())) {
-                    Investigator investigator = (Investigator) person;
-                    investigator.addCrimeCase(key);
-                    break;
-                }
-            }
-        }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TagContainsKeywordsPredicate // instanceof handles nulls
+                && this.keywords.equals(((TagContainsKeywordsPredicate) other).keywords)); // state check
     }
-
-    /**
-     * Removes {@code key} from {@code Investigator}.
-     *
-     * @throws CrimeCaseNotFoundException if the {@code key} is not in this {@code Investigapptor}.
-     */
-    public void removeCrimeCaseFromInvestigator(CrimeCase key) throws CrimeCaseNotFoundException {
-        if (key.getCurrentInvestigator() != null) {
-            for (Person person : persons) {
-                // Finds the independent Investigator object that was assigned under the case
-                if (key.getCurrentInvestigator().getName().equals(person.getName())) {
-                    Investigator investigator = (Investigator) person;
-                    investigator.removeCrimeCase(key);
-                    break;
-                }
-            }
-        }
-    }
-
-    //// tag-level operations
-
-    public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
-        tags.add(t);
-    }
-
-    /**
-     * Deletes {@code Investigapptor} from all person and UniqueTagList
-     */
-    public void deleteTag(Tag toDelete) throws TagNotFoundException {
-        if (tags.contains(toDelete)) {
-            tags.delete(toDelete);
-            persons.deleteTagFromPersons(toDelete);
-            cases.deleteTagFromCrimeCases(toDelete);
-        } else {
-            throw new TagNotFoundException();
-        }
-    }
-
-    /**
-     * Updates the master tag list to include tags in {@code person} that are not in the list.
-     *
-     * @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
-     * list.
-     */
-    private Person syncWithMasterTagList(Person person) {
-        final UniqueTagList personTags = new UniqueTagList(person.getTags());
-        tags.mergeFrom(personTags);
-
-        // Create map with values = tag object references in the master list
-        // used for checking person tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
-
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        if (person instanceof Investigator) {
-            Investigator inv = new Investigator(person.getName(), person.getPhone(), person.getEmail(),
-                    person.getAddress(), ((Investigator) person).getRank(),
-                    correctTagReferences, ((Investigator) person).getCaseListHashed());
-            convertHashToCases(inv);
-            return inv;
-        }
-        return new Person(
-                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
-    }
-
-    /**
-     * Updates the master tag list to include tags in {@code crimeCase} that are not in the list.
-     *
-     * @return a copy of this {@code crimeCase} such that every tag in this case points to a Tag object in the master
-     * list.
-     */
-    private CrimeCase syncWithMasterTagList(CrimeCase crimeCase) {
-        final UniqueTagList crimeCaseTags = new UniqueTagList(crimeCase.getTags());
-        tags.mergeFrom(crimeCaseTags);
-
-        // Create map with values = tag object references in the master list
-        // used for checking case tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
-
-        // Rebuild the list of case tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        crimeCaseTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        Investigator investigator = (Investigator) syncWithMasterTagList(crimeCase.getCurrentInvestigator());
-        investigator.clearCaseList(); // Fix for undo/redo: Clears investigator case list
-        return new CrimeCase(
-                crimeCase.getCaseName(), crimeCase.getDescription(), investigator,
-                crimeCase.getStartDate(), crimeCase.getEndDate(), crimeCase.getStatus(), correctTagReferences);
-    }
-
+}
 ```
 ###### \java\seedu\investigapptor\ui\CalendarPanel.java
 ``` java
@@ -426,4 +471,110 @@ public class CalendarPanel extends UiPart<Region> {
         createCalendarEntries();
     }
 }
+```
+###### \java\seedu\investigapptor\ui\PersonCard.java
+``` java
+    /**
+     *
+     * Creates tag labels for person
+     */
+    private void colorTag(Person person) {
+        person.getTags().forEach(tag -> {
+            Label tagLabel = new Label(tag.tagName);
+            tagLabel.getStyleClass().add(getTagColorStyle(tag.tagName));
+            tags.getChildren().add(tagLabel);
+        });
+    }
+
+    /**
+     *
+     * @param tagName
+     * @return Colour in the array
+     */
+    private String getTagColorStyle(String tagName) {
+        // Hash the tag name to get the corresponding colour
+        return LABEL_COLOR[Math.abs(tagName.hashCode()) % LABEL_COLOR.length];
+    }
+```
+###### \resources\view\DarkTheme.css
+``` css
+#tags .red {
+    -fx-text-fill: black;
+    -fx-background-color: #FF0000;
+}
+
+#tags .yellow {
+    -fx-text-fill: black;
+    -fx-background-color: #FFFF00;
+}
+
+#tags .blue {
+    -fx-text-fill: black;
+    -fx-background-color: #76D3E2;
+}
+
+#tags .orange {
+    -fx-text-fill: black;
+    -fx-background-color: #F9C815;
+}
+
+#tags .pink {
+    -fx-text-fill: black;
+    -fx-background-color: #F915EE;
+}
+
+#tags .olive {
+    -fx-text-fill: black;
+    -fx-background-color: #72B07C;
+}
+
+#tags .black {
+    -fx-text-fill: white;
+    -fx-background-color: #000000;
+}
+
+#tags .brown {
+    -fx-text-fill: black;
+    -fx-background-color: #CD853F;
+}
+
+#tags .gray {
+    -fx-text-fill: black;
+    -fx-background-color: #b6b6b6;
+}
+
+#tags .green {
+    -fx-text-fill: black;
+    -fx-background-color: #00ff06;
+}
+
+#tags .beige {
+    -fx-text-fill: black;
+    -fx-background-color: #FFE4C4;
+}
+
+#tags .lightblue {
+    -fx-text-fill: black;
+    -fx-background-color: #27fffa;
+}
+
+#tags .golden {
+    -fx-text-fill: black;
+    -fx-background-color: #DAA520;
+}
+
+#tags .purple {
+    -fx-text-fill: black;
+    -fx-background-color: #bc99da;
+}
+
+
+```
+###### \resources\view\MainWindow.fxml
+``` fxml
+          <StackPane fx:id="calendarPanelPlaceholder" prefWidth="340" >
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+          </StackPane>
 ```

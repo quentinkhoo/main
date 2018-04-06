@@ -20,9 +20,11 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    //@@author leowweiching-reused
     /** {@code Predicate} that always evaluate to true */
     Predicate<CrimeCase> PREDICATE_SHOW_ALL_CASES = unused -> true;
 
+    //@@author
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyInvestigapptor newData);
 
@@ -44,6 +46,7 @@ public interface Model {
     void updatePerson(Person target, Person editedPerson)
             throws DuplicatePersonException, PersonNotFoundException;
 
+    //@@author leowweiching-reused
     /** Deletes the given case. */
     void deleteCrimeCase(CrimeCase target) throws CrimeCaseNotFoundException;
     /** Adds the given case */
@@ -58,27 +61,32 @@ public interface Model {
     void updateCrimeCase(CrimeCase target, CrimeCase editedCrimeCase)
             throws DuplicateCrimeCaseException, CrimeCaseNotFoundException;
 
+    //@@author
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered investigator list */
     //ObservableList<Investigator> getFilteredInvestigatorList();
 
+    //@@author leowweiching-reused
     /** Returns an unmodifiable view of the filtered case list */
     ObservableList<CrimeCase> getFilteredCrimeCaseList();
 
+    //@@author
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    //@@author leowweiching-reused
     /**
      * Updates the filter of the filtered case list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCrimeCaseList(Predicate<CrimeCase> predicate);
 
+    //@@author
     /**
      * Deletes given tag from system
      */

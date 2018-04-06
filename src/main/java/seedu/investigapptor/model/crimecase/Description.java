@@ -2,7 +2,7 @@ package seedu.investigapptor.model.crimecase;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.investigapptor.commons.util.AppUtil.checkArgument;
-
+//@@author leowweiching-reused
 /**
  * Represents a Crime Case's description in the Investigator Application.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}

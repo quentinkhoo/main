@@ -56,6 +56,7 @@ public class InvestigapptorParserTest {
     private final InvestigapptorParser parser = new InvestigapptorParser();
     private Model model = new ModelManager(new Investigapptor(), new UserPrefs());
 
+    //@@author leowweiching
     @Test
     public void parseCommand_add() throws Exception {
         Investigator investigator = new InvestigatorBuilder().build();
@@ -66,6 +67,7 @@ public class InvestigapptorParserTest {
                 INDEX_FIRST_PERSON, crimeCase.getStartDate(), crimeCase.getTags()), command);
     }
 
+    //@@author leowweiching
     @Test
     public void parseCommand_addAlias() throws Exception {
         Investigator investigator = new InvestigatorBuilder().build();
@@ -77,6 +79,7 @@ public class InvestigapptorParserTest {
                 INDEX_FIRST_PERSON, crimeCase.getStartDate(), crimeCase.getTags()), command);
     }
 
+    //@@author
     @Test
     public void parseCommand_reg() throws Exception {
         Investigator investigator = new InvestigatorBuilder().build();
@@ -151,6 +154,7 @@ public class InvestigapptorParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_ALIAS + " 3") instanceof ExitCommand);
     }
 
+    //@@author leowweiching-reused
     @Test
     public void parseCommand_findCase() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
@@ -159,6 +163,7 @@ public class InvestigapptorParserTest {
         assertEquals(new FindCaseCommand(new CaseNameContainsKeywordsPredicate(keywords)), command);
     }
 
+    //@@author leowweiching-reused
     @Test
     public void parseCommand_findCaseAlias() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");

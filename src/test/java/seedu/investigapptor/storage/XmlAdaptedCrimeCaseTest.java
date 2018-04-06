@@ -19,7 +19,7 @@ import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.testutil.Assert;
-
+//@@author leowweiching
 public class XmlAdaptedCrimeCaseTest {
     private static final String INVALID_NAME = "Project H@ppy";
     private static final String INVALID_DESCRIPTION = " ";

@@ -12,11 +12,12 @@ import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.crimecase.CaseContainsInvestigatorPredicate;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.investigator.Investigator;
-
+//@@author Marcus-cxc
 /**
  * Lists all investigators in the investigapptor book to the user.
  */
 public class ListInvestigatorCaseCommand extends Command {
+
 
     public static final String COMMAND_WORD = "listinvestigatorcases";
     public static final String COMMAND_ALIAS = "lic";

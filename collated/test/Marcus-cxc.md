@@ -1,26 +1,6 @@
-package seedu.investigapptor.logic.commands;
-
-import static org.junit.Assert.assertEquals;
-import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.investigapptor.testutil.TypicalInvestigator.ALICE;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
-
-import seedu.investigapptor.commons.core.Messages;
-import seedu.investigapptor.logic.CommandHistory;
-import seedu.investigapptor.logic.UndoRedoStack;
-import seedu.investigapptor.logic.commands.exceptions.CommandException;
-import seedu.investigapptor.model.Investigapptor;
-import seedu.investigapptor.model.Model;
-import seedu.investigapptor.model.ModelManager;
-import seedu.investigapptor.model.UserPrefs;
-import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.testutil.CrimeCaseBuilder;
-import seedu.investigapptor.testutil.TypicalInvestigator;
-//@@author Marcus-cxc
+# Marcus-cxc
+###### \java\seedu\investigapptor\logic\commands\ListInvestigatorCaseCommandTest.java
+``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
@@ -63,3 +43,4 @@ public class ListInvestigatorCaseCommandTest {
         assertEquals(expectedInvestigapptor, model.getInvestigapptor());
     }
 }
+```

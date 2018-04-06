@@ -1,7 +1,7 @@
 package seedu.investigapptor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
+//@@author Marcus-cxc
 /**
  * Creates a xml copy of the current state of the investigapptor
  * The name of the xml is given by the user

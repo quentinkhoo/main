@@ -2,7 +2,7 @@ package seedu.investigapptor.commons.events.model;
 
 import seedu.investigapptor.commons.events.BaseEvent;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
-
+//@@author Marcus-cxc
 /** Indicates the Investigapptor in the model has changed*/
 public class InvestigapptorBackupEvent extends BaseEvent {
 

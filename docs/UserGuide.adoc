@@ -250,7 +250,8 @@ There is no need to save manually.
 === Investigator Commands
 These are investigator related commands. +
 
-==== Registering an investigator: `ai` `addinvestigator`
+==== Adding an investigator: `addinvestigator`
+
 
 You can registers an investigator to the application so that it cases can be assigned to him/her.
 
@@ -267,7 +268,7 @@ Simply key in the information in the above format in the input bar and press ent
 <<f1-addInv>> as an example
 
 [[f1-addInv]]
-.Keying in the command
+.Keying in the command (Note that this should be addinvestigator and not registerInvestigator)
 image::AddInvestigator1.png[width="790"]
 
 Outcome: After pressing enter, you should be able to the new investigator appearing on the investigator list and a success message will be displayed at the bottom.

@@ -18,8 +18,8 @@ public class Rank {
                     + "Constable = 1\n"
                     + "Sergeant = 2\n"
                     + "Inspector = 3\n"
-                    + "Captain = 4\n"
-                    + "Detective = 5\n";
+                    + "Detective = 4\n"
+                    + "Captain = 5\n";
     public static final String RANK_VALIDATION_REGEX = "\\b[1-5]\\b";
     private int value;
 
@@ -76,8 +76,8 @@ public class Rank {
         case 1: return "Constable\n";
         case 2: return "Sergeant\n";
         case 3: return "Inspector\n";
-        case 4: return "Captain\n";
-        case 5: return "Detective\n";
+        case 4: return "Detective\n";
+        case 5: return "Captain\n";
         default: return "Error\n";
         }
     }

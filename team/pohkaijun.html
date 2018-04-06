@@ -180,8 +180,86 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h3>
+<div class="sect3">
+<h4 id="Undo"><a class="link" href="#Undo">Undoing previous command : <code>undo</code></a></h4>
+<div class="paragraph">
+<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
+Format: <code>undo</code><br>
+Alias: <code>u</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Undoable commands: those commands that modify the investigapptor&#8217;s content (<code>addinvestigator</code>, <code>deleteinvestigator</code>, <code>editinvestigator</code>,
+ <code>addcase</code>, <code>deletecase</code>, <code>editcase</code>, <code>close</code> and <code>clear</code>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deletecase 1</code><br>
+<code>listcases</code><br>
+<code>undo</code> (reverses the <code>deletecase 1</code> command)<br></p>
+</li>
+<li>
+<p><code>selectcase 1</code><br>
+<code>listcases</code><br>
+<code>undo</code><br>
+The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+</li>
+<li>
+<p><code>deletecase 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>deletecase 1</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Redo"><a class="link" href="#Redo">Redoing the previously undone command : <code>redo</code></a></h4>
+<div class="paragraph">
+<p>Reverses the most recent <code>undo</code> command.<br>
+Format: <code>redo</code><br>
+Alias: <code>r</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deletecase 1</code><br>
+<code>undo</code> (reverses the <code>deletecase 1</code> command)<br>
+<code>redo</code> (reapplies the <code>deletecase 1</code> command)<br></p>
+</li>
+<li>
+<p><code>deletecase 1</code><br>
+<code>redo</code><br>
+The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+</li>
+<li>
+<p><code>deletecase 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>deletecase 1</code> command)<br>
+<code>redo</code> (reapplies the <code>deletecase 1</code> command)<br>
+<code>redo</code> (reapplies the <code>clear</code> command)<br>
+==== Undoing previous command : <code>undo</code></p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code><br>
@@ -217,21 +295,100 @@ Alias: <code>u</code></p>
 <code>undo</code><br>
 The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
 </li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
+<div class="sect3">
+<h4 id="ListInvestigators"><a class="link" href="#ListInvestigators">Listing all investigators : <code>listinvestigators</code> [Since v1.2]</a></h4>
 <div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code><br>
-Alias: <code>r</code></p>
+<p>This command would show you the list of investigators that have been added to
+ the Investigapptor.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Running this command would automatically help you swap the panel tab
+to the investigator tab.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>listinvestigators</code><br>
+Alias: <code>li</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example:</strong></p>
+</div>
+<div id="listinvestigators" class="imageblock">
+<div class="content">
+<img src="../images/listinvestigators.png" alt="listinvestigators" width="790">
+</div>
+<div class="title">Figure 1. Listing investigators</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-an-investigator-code-editinv-code"><a class="link" href="#editing-an-investigator-code-editinv-code">Editing an investigator : <code>editInv</code></a></h4>
+<div class="paragraph">
+<p>Exits the program.<br>
+Format: <code>exit</code><br>
+Alias: <code>ex</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="backing-up-data-code-backup-code"><a class="link" href="#backing-up-data-code-backup-code">Backing up data : <code>Backup</code></a></h4>
+<div class="paragraph">
+<p>Backup a snapshot of the current data in the Investigapptor with a alphanumeric name.<br>
+Format: <code>Backup "Filename"</code><br>
+Alias: <code>bu</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Backup February</code><br>
+Creates a copy of the data with the name <code>February</code> in <code>root/data</code> folder</p>
+</li>
+<li>
+<p><code>Backup 02012018</code><br>
+Creates a copy of the data with the name <code>02012018</code> in <code>root/data</code> folder</p>
+</li>
+<li>
+<p><code>bu March3rd</code><br>
+Creates a copy of the data with the name <code>March3rd</code> in <code>root/data</code> folder</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Outcome: A success message will be displayed in the textbox with the given file name.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="saving-the-data"><a class="link" href="#saving-the-data">Saving the data</a></h4>
+<div class="paragraph">
+<p>Investigapptor data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="investigator-commands"><a class="link" href="#investigator-commands">Investigator Commands</a></h3>
+<div class="paragraph">
+<p>These are investigator related commands.<br></p>
+</div>
+<div class="sect3">
+<h4 id="registering-an-investigator-code-reginvest-code-code-registerinvestigator-code"><a class="link" href="#registering-an-investigator-code-reginvest-code-code-registerinvestigator-code">Registering an investigator: <code>regInvest</code> <code>registerinvestigator</code></a></h4>
+<div class="paragraph">
+<p>You can registers an investigator to the application so that it cases can be assigned to him/her.</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>registerinvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RANK [t/TAG]&#8230;&#8203;</code><br>
+Alias: <code>ri</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -239,37 +396,1002 @@ Alias: <code>r</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+<p><code>registerinvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/1 t/newcomer</code></p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+<p><code>ri n/Tome Lee p/94727341 e/Tom@gmail.com a/323, Baker Street, #01-03 r/1 t/Rookie</code></p>
 </li>
 <li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+<p><code>ri n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 r/5 p/1234567</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Simply key in the information in the above format in the input bar and press enter to register an investigator. Refer to
+<a href="#f1-addInv">Keying in the command</a> as an example</p>
+</div>
+<div id="f1-addInv" class="imageblock">
+<div class="content">
+<img src="../images/AddInvestigator1.png" alt="AddInvestigator1" width="790">
+</div>
+<div class="title">Figure 2. Keying in the command</div>
+</div>
+<div class="paragraph">
+<p>Outcome: After pressing enter, you should be able to the new investigator appearing on the investigator list and a success message will be displayed at the bottom.
+Refer to <a href="#f2-addInv">Outcome</a></p>
+</div>
+<div id="f2-addInv" class="imageblock">
+<div class="content">
+<img src="../images/AddInvestigator2.png" alt="AddInvestigator2" width="790">
+</div>
+<div class="title">Figure 3. Outcome</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+An investigator can have any number of tags (including 0)<br>
+Tags are alphanumeric without spaces<br>
+Ranks ranges from 1 to 5 according (Constable ,Sergeant, Inspector, Detective, Captain)
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="listing-all-investigators-code-list-investigators-since-v1-2-code"><a class="link" href="#listing-all-investigators-code-list-investigators-since-v1-2-code">Listing all investigators : <code>list investigators [Since v1.2]</code></a></h4>
+<div class="paragraph">
+<p>Shows a list of all investigators in the Investigapptor.<br>
+Format: <code>list investigators</code><br>
+Alias: <code>l investigators</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-an-investigator-code-editinvestigator-code-code-bugged-code-code-disabled-code"><a class="link" href="#editing-an-investigator-code-editinvestigator-code-code-bugged-code-code-disabled-code">Editing an investigator : <code>editinvestigator</code> <code>*Bugged</code> <code>*Disabled</code></a></h4>
+<div class="paragraph">
+<p>You can edit an existing information of an existing investigator in the Investigapptor.<br>
+Format: <code>editinvestigator INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+Alias: <code>ei</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the investigator at the specified <code>INDEX</code>. The index refers to the index number shown in the last listing of investigators. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>You can remove all the investigator&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
 </li>
 </ul>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>editinvestigator 1 p/91234567 e/johndoe@example.com</code><br>
+Edits the phone number and email address of the 1st investigator to be <code>91234567</code> and <code>johndoe@example.com</code> respectively.</p>
+</li>
+<li>
+<p><code>ei 2 n/Betsy Crower t/</code><br>
+Edits the name of the 2nd investigator to be <code>Betsy Crower</code> and clears all existing tags.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="locating-investigators-by-name-code-findinvestigators-code"><a class="link" href="#locating-investigators-by-name-code-findinvestigators-code">Locating investigators by name: <code>findinvestigators</code></a></h4>
+<div class="paragraph">
+<p>Finds investigators whose names contain any of the given keywords.<br>
+Format: <code>findinvestigators KEYWORD [MORE_KEYWORDS]</code><br>
+Alias: <code>fi</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only the name is searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findinvestigators John</code><br>
+Returns <code>john</code> and <code>John Doe</code></p>
+</li>
+<li>
+<p><code>fI Betsy Tim John</code><br>
+Returns any investigators having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="locating-investigators-by-tags-code-findinvestigatortags-code-code-since-v1-2-code"><a class="link" href="#locating-investigators-by-tags-code-findinvestigatortags-code-code-since-v1-2-code">Locating investigators by tags: <code>findinvestigatortags</code> <code>[Since v1.2]</code></a></h4>
+<div class="paragraph">
+<p>Find investigators whose tags contain any of the given keywords.<br>
+Format: <code>findinvestigatortags KEYWORD [MORE_KEYWORDS]</code><br>
+Alias: <code>fit</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>teamA</code> will match <code>teama</code></p>
+</li>
+<li>
+<p>Only the tags are searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>teamA</code> will not match <code>teamyA</code></p>
+</li>
+<li>
+<p>Investigators matching at least one keyword will be returned (i.e. <code>OR</code> search).
+e.g. <code>teamA teamB</code> will return investigators that contains the tag 'teamA' or 'teamB'</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findinvestigatortags teamA</code><br>
+Returns investigator(s) with tag <code>teamA</code></p>
+</li>
+<li>
+<p><code>findinvestigatortags teamA new teamb</code><br>
+Returns investigator(s) having tags <code>teamA</code>, <code>new</code>, OR <code>teamb</code></p>
+</li>
+<li>
+<p><code>fit teamc newbie a</code><br>
+Returns investigator(s) having tags <code>teamc</code>, <code>newbie</code>, OR <code>a</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="deleting-an-investigator-code-deleteinvestigator-code"><a class="link" href="#deleting-an-investigator-code-deleteinvestigator-code">Deleting an investigator : <code>deleteinvestigator</code></a></h4>
+<div class="paragraph">
+<p>Deletes the specified investigator from Investigapptor.<br>
+Format: <code>deleteinvestigator INDEX</code><br>
+Alias: <code>di</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the investigator at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list investigator</code><br>
+<code>deleteinvestigator 2</code><br>
+Deletes the 2nd investigator in the address book.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>di 1</code><br>
+Deletes the 1st investigator in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can identify and delete the investigator by looking at their <code>INDEX</code> at the top left of their card as show in the
+arrow in <a href="#f1-deleteInv">Using the investigator Index</a></p>
+</div>
+<div id="f1-deleteInv" class="imageblock">
+<div class="content">
+<img src="../images/DeleteInvestigator1.png" alt="DeleteInvestigator1" width="390">
+</div>
+<div class="title">Figure 4. Using the investigator Index</div>
+</div>
+<div class="paragraph">
+<p>Outcome: You should be able to see a the success message and the investigator will no long be on the list like in
+<a href="#f2-deleteInv">Outcome</a></p>
+</div>
+<div id="f2-deleteInv" class="imageblock">
+<div class="content">
+<img src="../images/DeleteInvestigator2.png" alt="DeleteInvestigator2" width="790">
+</div>
+<div class="title">Figure 5. Outcome</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="selecting-an-investigator-code-selectinvestigator-code"><a class="link" href="#selecting-an-investigator-code-selectinvestigator-code">Selecting an investigator : <code>selectinvestigator</code></a></h4>
+<div class="paragraph">
+<p>Selects the person identified by the index number used in the last person listing.<br>
+Format: <code>selectinvestigator INDEX</code><br>
+Alias: <code>selectinvest</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects the investigator and loads the details of the investigator at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>listinvestigator</code><br>
+<code>selectinvestigator 2</code><br>
+Selects the 2nd investigator in the results of the <code>listinvestigator</code> command.</p>
+</li>
+<li>
+<p><code>findinvestigator Betsy</code><br>
+<code>selectinvestigator 1</code><br>
+Selects the 1st investigator in the results of the <code>findinvestigator</code> command.</p>
+</li>
+<li>
+<p><code>selectinvestigator 3</code><br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Selects the 3rd person in the listed panel list.</p>
+</div>
+</div>
+</div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">Encrypting data files <code>[Coming in v2.0]</code></a></h3>
+<h3 id="case-commands"><a class="link" href="#case-commands">Case Commands</a></h3>
+<div class="paragraph">
+<p>These are case related commands.<br></p>
+</div>
+<div class="sect3">
+<h4 id="adding-a-case-code-addcase-code-since-v1-1"><a class="link" href="#adding-a-case-code-addcase-code-since-v1-1">Adding a case: <code>addcase</code> [Since v1.1]</a></h4>
+<div class="paragraph">
+<p>The first step to managing your cases is to add them to the application along with their details.<br>
+<strong>Format:</strong> <code>addcase [n/CASE_NAME] [d/DESCRIPTION] [i/INVESTIGATOR_INDEX] [s/START_DATE] [t/TAG]&#8230;&#8203;</code><br>
+<strong>Shorthand Format:</strong> <code>ac</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Tags are optional, but you can add as many as you like to a case to help you organize better.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addcase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution</code></p>
+</li>
+<li>
+<p><code>addcase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution</code></p>
+</li>
+<li>
+<p><code>ac n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ListCases"><a class="link" href="#ListCases">Listing all cases : <code>listcases</code> [Since v1.2]</a></h4>
+<div class="paragraph">
+<p>This command would show you the list of cases that have been added to
+ the Investigapptor.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Running this command would automatically help you swap the panel tab
+to the case tab.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Format: <code>listcases</code><br>
+Alias: <code>lc</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Example:</strong></p>
+</div>
+<div id="listcases" class="imageblock">
+<div class="content">
+<img src="../images/listcases.png" alt="listcases" width="790">
+</div>
+<div class="title">Figure 6. Listing cases</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="editing-a-case-code-editcase-code-since-v1-4"><a class="link" href="#editing-a-case-code-editcase-code-since-v1-4">Editing a case: <code>editcase</code> [Since v1.4]</a></h4>
+<div class="paragraph">
+<p>You can edit an existing case in the application by specifying the <code>CASE_INDEX</code> and entering the attributes that you wish to modify.<br>
+<strong>Format:</strong> <code>editcase CASE_INDEX [n/NAME] [d/DESCRIPTION] [i/INVESTIGATOR_INDEX] [s/STARTDATE] [t/TAG]&#8230;&#8203;</code><br>
+<strong>Shorthand Format:</strong> <code>ec</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>CASE_INDEX</code> refers to the index number shown in the last listing of cases.<br></p>
+</li>
+<li>
+<p>The <code>INVESTIGATOR_INDEX</code> refers to the index number shown in the last listing of investigators.<br></p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+When editing tags, the existing tags of the case will be replaced by the new tags entered i.e adding of tags is not cumulative.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To help you find the index of the case that you want to edit, you can use the <code>findcases</code> command before using the <code>editcase</code> command to narrow the number of cases displayed in the listing.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can remove all the investigator&#8217;s tags by typing <code>t/</code> without specifying any tags after it.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>editcase 1 d/some description i/1</code><br>
+Edits the description and investigator of the 1st case to be <code>some description</code> and the 1st investigator in the most recent listing of investigators respectively.</p>
+</li>
+<li>
+<p><code>ec 2 i/3 t/</code><br>
+Changes the investigator of the 2nd case to the 3rd investigator in the most recent listing of investigators, and clears all existing tags.</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>==== Locating cases by name: <code>findcases [Since v1.3]</code></p>
+</div>
+<div class="paragraph">
+<p>Finds cases whose names contain any of the given keywords.<br>
+Format: <code>findcases KEYWORD [MORE_KEYWORDS]</code><br>
+Alias: <code>fc</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>project</code> will match <code>Project</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Project Magic</code> will match <code>Magic Project</code></p>
+</li>
+<li>
+<p>Only the name is searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Persons matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>|The search is case insensitive |<code>scarlet</code> will match <code>Scarlet</code></p>
+</div>
+<div class="paragraph">
+<p>|The order of the keywords does not matter |<code>Stranger Danger</code> will match <code>Danger Stranger</code></p>
+</div>
+<div class="paragraph">
+<p>|You can only search for case names |<code>Stranger Danger</code> [Name] is valid <code>fraud</code> [Tag] is not</p>
+</div>
+<div class="paragraph">
+<p>|Only full words will be matched | You cannot type <code>Danger</code> to search for names with keyword <code>Dangerous</code></p>
+</div>
+<div class="paragraph">
+<p>|Case matching at least one keyword will be returned |<code>Stranger Danger</code> will return <code>Stranger Things</code>, <code>Danger Lightning</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findcases SPF</code><br></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Returns <code>SPF Murder</code> and <code>SPF rape</code>
+* <code>findcases murder rape arson</code><br>
+Returns any cases having names <code>murder</code>, <code>rape</code>, or <code>arson</code></p>
+</div>
+<div class="paragraph">
+<p>==== Locating cases by tags: <code>findcasetags</code> <code>[Since v1.3]</code>
+Find cases whose tags contain any of the given keywords.<br>
+Format: <code>findcasetags KEYWORD [MORE_KEYWORDS]</code><br>
+Alias: <code>fct</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>homicide</code> will match <code>Homicide</code></p>
+</li>
+<li>
+<p>Only the tags are searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>homicide</code> will not match <code>homicidey</code></p>
+</li>
+<li>
+<p>Cases matching at least one keyword will be returned (i.e. <code>OR</code> search).
+e.g. <code>murder robbery</code> will return cases that contains the tag 'murder' or 'robbery'</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findcasetags murder</code><br>
+Returns case(s) with tag <code>murder</code></p>
+</li>
+<li>
+<p><code>findcasetags murder homicide robbery</code><br>
+Returns case(s) having tags <code>murder</code>, <code>homicide</code>, OR <code>robbery</code></p>
+</li>
+<li>
+<p><code>fct murder supernatural a</code><br>
+Returns case(s) having tags <code>murder</code>, <code>supernatural</code>, OR <code>a</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>==== Close a case : <code>close</code> <code>[Since v1.3]</code>
+Closes the case identified by the index number used in the last case listing.<br>
+Format: <code>close INDEX</code><br>
+Alias: <code>cl</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Closes the case by updating the status of the case from <code>open</code> to <code>close</code> at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Close commands: only applied to cases with the status <code>open</code>. This command will not be allowed on cases
+with the status <code>close</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>listcases</code><br>
+<code>close 2</code><br>
+Closes the 2nd case in the results of the <code>listcases</code> command.</p>
+</li>
+<li>
+<p><code>findcase murder</code><br>
+<code>close 1</code><br>
+Closes the 1st case in the results of the <code>findcase</code> command.</p>
+</li>
+<li>
+<p><code>cl 3</code><br>
+Closes the 3rd case in the listed panel list case.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>==== Deleting a case : <code>deletecase</code> [Since v1.3]</p>
+</div>
+<div class="paragraph">
+<p>You can remove cases by specifying the <code>CASE_INDEX</code>. The index refers to the index number shown in the most recent listing of cases.<br>
+<strong>Format:</strong> <code>deletecase CASE_INDEX</code><br>
+<strong>Shorthand Format:</strong> <code>dc</code></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To help you find the index of the case that you want to remove, you can use the <code>findcases</code> command before using the <code>deletecase</code> command to narrow the number of cases displayed in the listing.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If a case is no longer active, consider using the <code>close</code> command instead so that you can continue to view details of the case.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>listcases</code><br>
+<code>deletecase 2</code><br>
+Deletes the 2nd case in the list of all cases.</p>
+</li>
+<li>
+<p><code>findcase Arson</code><br>
+<code>dc 1</code><br>
+Deletes the 1st case in the results of the <code>findcase</code> command.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>==== Selecting a case : <code>selectcase</code> [Coming in v1.5]</p>
+</div>
+<div class="paragraph">
+<p>Selects the case identified by the index number used in the last case listing.<br>
+Format: <code>selectcase INDEX</code><br>
+Alias: <code>sc</code></p>
+</div>
+<div class="paragraph">
+<p>To view more details about a case, you can select the case identified by the index number used in the last case listing.<br>
+<strong>Format:</strong> <code>selectcase CASE_INDEX</code><br>
+<strong>Shorthand Format:</strong> <code>sc</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>CASE_INDEX</code> refers to the index number shown in the last listing of cases.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Examples:</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>listcases</code><br>
+<code>selectcase 2</code><br>
+Selects the 2nd case in the results of the <code>listcases</code> command.</p>
+</li>
+<li>
+<p><code>findcase murder</code><br>
+<code>selectcase 1</code><br>
+Selects the 1st case in the results of the <code>findcase</code> command.</p>
+</li>
+<li>
+<p><code>sc 3</code><br>
+Selects the 3rd case in the most recent list of cases.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>==== List a specific Investigator&#8217;s cases <code>listinvestigatorcase</code></p>
+</div>
+<div class="paragraph">
+<p>Selects an investigator and display all of the case belonging to that investigator<br>
+Format: <code>listinvestigatorcase INDEX</code><br>
+Alias: <code>lic</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Selects the investigator by index and loads the cases he/she is incharge of in the case list.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the most recent listing.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>: You can do so by installing Investigapptor in the other computer and
+overwriting the empty data file it creates with the file that contains
+the data of your previous Investigapptor folder.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list investigator</code><br>
+<code>listinvestigatorcase 2</code><br>
+Display all the cases of the 2nd investigator in the results of the <code>list case</code> command.</p>
+</li>
+<li>
+<p><code>findinvestigator Amy</code><br>
+<code>listinvestigatorCase 1</code><br>
+Display all the cases of the 2nd investigator in the results of the <code>FindInvestigator</code> command.</p>
+</li>
+<li>
+<p><code>lic 3</code><br>
+Display all the cases of the 2nd investigator  in the investigator panel list case.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>=== Future Enhancement Commands
+These are features that will come in future releases of Investigapptor<br></p>
+</div>
+<div class="paragraph">
+<p>==== Adding a witness <code>[Coming in v2.0]</code></p>
+</div>
+<div class="paragraph">
+<p>==== Adding a suspect <code>[Coming in v2.0]</code></p>
+</div>
+<div class="paragraph">
+<p>==== Adding evidence files <code>[Coming in v2.0]</code></p>
+</div>
+<div class="paragraph">
+<p>==== Setting up chain of custody <code>[Coming in v2.0]</code></p>
+</div>
+<div class="paragraph">
+<p>==== Entering commands in other languages <code>[Coming in v2.0]</code></p>
+</div>
+<div class="paragraph">
+<p>==== Adding any person via scanner <code>[Coming in v2.0]</code></p>
+</div>
+<div class="paragraph">
+<p>==== Exporting case information into a PDF file <code>[Coming in v2.0]</code></p>
+</div>
+<div class="paragraph">
+<p>==== Viewing cases and investigators in a calendar/graph format <code>[Coming in v2.0]</code></p>
+</div>
+<div class="paragraph">
+<p>==== Encrypting data files <code>[Coming in v2.0]</code></p>
+</div>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
+<div class="paragraph">
+<p>== FAQ</p>
 </div>
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>: You can do so by installing Investigapptor in the other computer and
+overwriting the empty data file it creates with the file that contains
+the data of your previous Investigapptor folder.</p>
 </div>
+<div class="paragraph">
+<p>== Command Summary</p>
 </div>
-<div class="sect1">
-<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
-<div class="sectionbody">
+<div class="paragraph">
+<p>=== General Commands</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 35.7142%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4288%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command Section</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+<th class="tableblock halign-left valign-top">Format</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em><a href="#Help">[Help]</a></em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shows you the user guide</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>help</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em><a href="#SetPassword">[SetPassword]</a></em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>setpassword [pw/PASSWORD]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>setpassword pw/password</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em><a href="#RemovePassword">[RemovePassword]</a></em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Removes the password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>removepassword [pw/PASSWORD]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>removepassword pw/password</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em><a href="#History">[History]</a></em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shows you a history of all commands used</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em><a href="#Undo">Undoing previous command : <code>undo</code></a></em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undo your previous command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em><a href="#Redo">Redoing the previously undone command : <code>redo</code></a></em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redo your undo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>=== Investigator Commands</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 35.7142%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4288%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command Section</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+<th class="tableblock halign-left valign-top">Format</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em><a href="#ListInvestigators">Listing all investigators : <code>listinvestigators</code> [Since v1.2]</a></em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shows you the list of added investigators</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listinvestigators</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listinvestigators</code></p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>=== Case Commands</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 35.7142%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4288%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command Section</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+<th class="tableblock halign-left valign-top">Format</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em><a href="#ListCases">Listing all cases : <code>listcases</code> [Since v1.2]</a></em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shows you the list of added cases</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listcases</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listcases</code></p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>=== Keyboard Shortcuts</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 37.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Shortcut</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+<th class="tableblock halign-left valign-top">Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>Esc</kbd></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Helps you clears the entire command box text field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>Ctrl</kbd></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Toggles between hiding and revealing the password parameter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>==== Encrypting data files <code>[Coming in v2.0]</code></p>
+</div>
+<div class="paragraph">
+<p><em>{explain how the user can enable/disable data encryption}</em></p>
+</div>
+<div class="paragraph">
+<p>== Contributions to the Developer Guide</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 100%;">
@@ -280,39 +1402,29 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="password-feature"><a class="link" href="#password-feature">Password feature</a></h3>
-<div class="sect3">
-<h4 id="reason-for-implementation"><a class="link" href="#reason-for-implementation">Reason for implementation</a></h4>
 <div class="paragraph">
-<p>As Investigapptor is a computer software that will likely to be installed on a shared computer,
+<p>=== Password feature
+==== Reason for implementation
+As Investigapptor is a computer software that will likely to be installed on a shared computer,
 a password prompt is necessary in order to deter non-authorized users of the Investigapptor from
 gaining access into the application.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>To be updated</p>
+<p>==== Current Implementation
+To be updated</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="listing-feature"><a class="link" href="#listing-feature">Listing feature</a></h3>
-<div class="sect3">
-<h4 id="reason-for-implementation-2"><a class="link" href="#reason-for-implementation-2">Reason for implementation</a></h4>
 <div class="paragraph">
-<p>Investigapptor allows for separate tab listing of cases and investigators on the user interface as it
+<p>=== Listing feature
+==== Reason for implementation
+Investigapptor allows for separate tab listing of cases and investigators on the user interface as it
 would provide visual aid for them in deciding which investigator to assign to which case. As an investigator who would
 want to list and view all currently registered investigators or assigned cases, the listing
 command would automatically swap between the 2 tabs respectively upon the listing input, bringing
 convenience to the investigator ultimately.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
 <div class="paragraph">
-<p>The investigators/cases tabs are created with a <code>PersonListPanel</code>
+<p>==== Current Implementation
+The investigators/cases tabs are created with a <code>PersonListPanel</code>
 and <code>CrimeCaseListPanel</code> respectively, which are the main classes
 in charge of displaying the details of the investigators or crime cases.
 The list investigators/cases command would then display the respective
@@ -395,27 +1507,16 @@ updated as shown below</p>
             EventsCenter.getInstance().post(<span class="keyword">new</span> SwapTabEvent(<span class="integer">1</span>));</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>==== Alternatives Considered
+===== Aspect: Design of list
+* <strong>Alternative 1 (Current Choice)</strong>: Have the same <code>ListCommand</code> object
+for listing of investigators and cases.
+<strong> Pros: Easier to code and requires less <code>Class</code> files.
+</strong> Cons: Users have to type an extra space whenever they want to list something.</p>
 </div>
-<div class="sect3">
-<h4 id="alternatives-considered"><a class="link" href="#alternatives-considered">Alternatives Considered</a></h4>
-<div class="sect4">
-<h5 id="aspect-design-of-list"><a class="link" href="#aspect-design-of-list">Aspect: Design of list</a></h5>
 <div class="ulist">
 <ul>
-<li>
-<p><strong>Alternative 1 (Current Choice)</strong>: Have the same <code>ListCommand</code> object
-for listing of investigators and cases.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easier to code and requires less <code>Class</code> files.</p>
-</li>
-<li>
-<p>Cons: Users have to type an extra space whenever they want to list something.</p>
-</li>
-</ul>
-</div>
-</li>
 <li>
 <p><strong>Alternative 2 </strong>: Separate into <code>ListInvestigators</code> and <code>ListCases</code>
 for listing of investigators and cases.</p>
@@ -433,13 +1534,10 @@ play in future versions (i.e <code>Witness</code>, <code>Evidence</code>).</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== Undo/Redo feature
+==== Current Implementation</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
-<div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h4>
 <div class="paragraph">
 <p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
 </div>
@@ -590,11 +1688,12 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 <img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
 </div>
 </div>
+<div class="paragraph">
+<p>==== Design Considerations</p>
 </div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-implementation-of-code-undoablecommand-code"><a class="link" href="#aspect-implementation-of-code-undoablecommand-code">Aspect: Implementation of <code>UndoableCommand</code></a></h5>
+<div class="paragraph">
+<p>===== Aspect: Implementation of <code>UndoableCommand</code></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -625,9 +1724,9 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>===== Aspect: How undo &amp; redo executes</p>
 </div>
-<div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -658,9 +1757,9 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>===== Aspect: Type of commands that can be undone/redone</p>
 </div>
-<div class="sect4">
-<h5 id="aspect-type-of-commands-that-can-be-undone-redone"><a class="link" href="#aspect-type-of-commands-that-can-be-undone-redone">Aspect: Type of commands that can be undone/redone</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -692,9 +1791,9 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>===== Aspect: Data structure to support the undo/redo commands</p>
 </div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -725,20 +1824,15 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>=== [Proposed] Data Encryption</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">[Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
+<div class="paragraph">
+<p>== PROJECT: PowerPointLabs</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
 <hr>
 <div class="paragraph">
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
@@ -746,9 +1840,13 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-05 13:27:31 UTC
+Last updated 2018-04-06 05:35:42 UTC
 </div>
 </div>
 </body>

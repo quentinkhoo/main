@@ -93,6 +93,7 @@ These are general commands not specific to either investigaors or cases.
 
 [[Help]]
 ==== Viewing help: `help`
+
 You can use the `help` command to access the User Guide from Investigapptor +
 
 *Format:* `help`
@@ -233,6 +234,7 @@ Clears all entries from the address book. +
 Format: `clear` +
 Alias: `c`
 
+
 ==== Exiting the program : `exit`
 
 Exits the program. +
@@ -249,19 +251,67 @@ These are investigator related commands. +
 
 ==== Registering an investigator: `addInv`
 
-Registers an investigator to the application +
-Format: `addInv n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-Alias: `aI`
+[[inputpassword]]
+.Inputting a password
+image::inputpassword.png[width="790"]
+//end::setpassword[]
 
+//tag::removepassword[]
+==== Removing the password : `removepassword` [Since v1.4]
+You can use this command to remove a set password from the Investigapptor.
+
+[NOTE]
+You must input the currently set password correctly in order to remove the
+ password. +
 [TIP]
-An investigator can have any number of tags (including 0)
-* Tags are alphanumeric without spaces
+You can press kbd:[CTRL] to reveal the password in plaintext if you find
+ yourself having trouble remembering what you typed. Pressing kbd:[CTRL]
+again will hide back the password.
+
+Format: `removepassword [pw/PASSWORD]` +
+Alias: `rp pw/PASSWORD` +
+
+*Example:*
+
+[[removepassword]]
+.Removing a password
+image::removepassword.png[width="790"]
+//end removepassword[]
+
+
+==== Listing entered commands : `history`
+
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history` +
+Alias: `hist`
+
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
+
+// tag::undoredo[]
+==== Undoing previous command : `undo`
+
+Restores the address book to the state before the previous _undoable_ command was executed. +
+Format: `undo` +
+Alias: `u`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+====
 
 Examples:
 
-* `addInv n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/newcomer`
-* `addInv n/Betsy Crowe t/teamA e/betsycrowe@example.com a/Tampines Street, Block 145 p/1234567`
-* `aI n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 p/1234567`
+* `delete 1` +
+`list` +
+`undo` (reverses the `delete 1` command) +
+
+* `select 1` +
+`list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
 
 //tag::listinvestigators[]
 [[ListInvestigators]]
@@ -287,9 +337,80 @@ image::listinvestigators.png[width="790"]
 
 ==== Editing an investigator : `editInv`
 
-Edits an existing investigator in the Investigapptor. +
-Format: `editInv INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-Alias: `eI`
+Exits the program. +
+Format: `exit` +
+Alias: `ex`
+
+==== Backing up data : `Backup`
+
+Backup a snapshot of the current data in the Investigapptor with a alphanumeric name. +
+Format: `Backup "Filename"` +
+Alias: `bu`
+
+Examples: +
+
+* `Backup February` +
+Creates a copy of the data with the name `February` in `root/data` folder
+* `Backup 02012018` +
+Creates a copy of the data with the name `02012018` in `root/data` folder
+* `bu March3rd` +
+Creates a copy of the data with the name `March3rd` in `root/data` folder
+
+Outcome: A success message will be displayed in the textbox with the given file name.
+
+==== Saving the data
+
+Investigapptor data are saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually.
+
+=== Investigator Commands
+These are investigator related commands. +
+
+==== Registering an investigator: `regInvest` `registerinvestigator`
+
+You can registers an investigator to the application so that it cases can be assigned to him/her.
+
+Format: `registerinvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RANK [t/TAG]...` +
+Alias: `ri`
+
+Examples:
+
+* `registerinvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/1 t/newcomer`
+* `ri n/Tome Lee p/94727341 e/Tom@gmail.com a/323, Baker Street, #01-03 r/1 t/Rookie`
+* `ri n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 r/5 p/1234567`
+
+Simply key in the information in the above format in the input bar and press enter to register an investigator. Refer to
+<<f1-addInv>> as an example
+
+[[f1-addInv]]
+.Keying in the command
+image::AddInvestigator1.png[width="790"]
+
+Outcome: After pressing enter, you should be able to the new investigator appearing on the investigator list and a success message will be displayed at the bottom.
+Refer to <<f2-addInv>>
+
+[[f2-addInv]]
+.Outcome
+image::AddInvestigator2.png[width="790"]
+
+
+
+[TIP]
+An investigator can have any number of tags (including 0) +
+Tags are alphanumeric without spaces +
+Ranks ranges from 1 to 5 according (Constable ,Sergeant, Inspector, Detective, Captain)
+
+==== Listing all investigators : `list investigators [Since v1.2]`
+
+Shows a list of all investigators in the Investigapptor. +
+Format: `list investigators` +
+Alias: `l investigators`
+
+==== Editing an investigator : `editinvestigator` `*Bugged` `*Disabled`
+
+You can edit an existing information of an existing investigator in the Investigapptor. +
+Format: `editinvestigator INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+Alias: `ei`
 
 ****
 * Edits the investigator at the specified `INDEX`. The index refers to the index number shown in the last listing of investigators. The index *must be a positive integer* 1, 2, 3, ...
@@ -301,9 +422,9 @@ Alias: `eI`
 
 Examples:
 
-* `editInv 1 p/91234567 e/johndoe@example.com` +
+* `editinvestigator 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st investigator to be `91234567` and `johndoe@example.com` respectively.
-* `eI 2 n/Betsy Crower t/` +
+* `ei 2 n/Betsy Crower t/` +
 Edits the name of the 2nd investigator to be `Betsy Crower` and clears all existing tags.
 
 ==== Locating investigators by name: `findinvestigators`
@@ -349,11 +470,11 @@ Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 
-==== Deleting an investigator : `deleteInv`
+==== Deleting an investigator : `deleteinvestigator`
 
-Deletes the specified person from the address book. +
-Format: `deleteInv INDEX` +
-Alias: `dI`
+Deletes the specified investigator from Investigapptor. +
+Format: `deleteinvestigator INDEX` +
+Alias: `di`
 
 ****
 * Deletes the investigator at the specified `INDEX`.
@@ -364,17 +485,31 @@ Alias: `dI`
 Examples:
 
 * `list investigator` +
-`deleteInv 2` +
+`deleteinvestigator 2` +
 Deletes the 2nd investigator in the address book.
 * `find Betsy` +
-`dI 1` +
+`di 1` +
 Deletes the 1st investigator in the results of the `find` command.
+
+You can identify and delete the investigator by looking at their `INDEX` at the top left of their card as show in the
+arrow in <<f1-deleteInv>>
+
+[[f1-deleteInv]]
+.Using the investigator Index
+image::DeleteInvestigator1.png[width="390"]
+
+Outcome: You should be able to see a the success message and the investigator will no long be on the list like in
+<<f2-deleteInv>>
+
+[[f2-deleteInv]]
+.Outcome
+image::DeleteInvestigator2.png[width="790"]
 
 ==== Selecting an investigator : `selectinvestigator`
 
 Selects the person identified by the index number used in the last person listing. +
 Format: `selectinvestigator INDEX` +
-Alias: `si`
+Alias: `selectinvest`
 
 ****
 * Selects the investigator and loads the details of the investigator at the specified `INDEX`.
@@ -390,7 +525,8 @@ Selects the 2nd investigator in the results of the `listinvestigator` command.
 * `findinvestigator Betsy` +
 `selectinvestigator 1` +
 Selects the 1st investigator in the results of the `findinvestigator` command.
-* `si 3` +
+* `selectinvestigator 3` +
+
 Selects the 3rd person in the listed panel list.
 
 === Case Commands
@@ -569,7 +705,33 @@ Selects the 1st case in the results of the `findcase` command.
 * `sc 3` +
 Selects the 3rd case in the listed panel list case.
 
-=== Future Enhancements
+==== List a specific Investigator's cases `listinvestigatorcase`
+
+Selects an investigator and display all of the case belonging to that investigator +
+Format: `listinvestigatorcase INDEX` +
+Alias: `lic`
+
+****
+* Selects the investigator by index and loads the cases he/she is incharge of in the case list.
+* The index refers to the index number shown in the most recent listing.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+*Q*: How do I transfer my data to another Computer? +
+*A*: You can do so by installing Investigapptor in the other computer and
+overwriting the empty data file it creates with the file that contains
+the data of your previous Investigapptor folder.
+
+* `list investigator` +
+`listinvestigatorcase 2` +
+Display all the cases of the 2nd investigator in the results of the `list case` command.
+* `findinvestigator Amy` +
+`listinvestigatorCase 1` +
+Display all the cases of the 2nd investigator in the results of the `FindInvestigator` command.
+* `lic 3` +
+Display all the cases of the 2nd investigator  in the investigator panel list case.
+
+=== Future Enhancement Commands
 These are features that will come in future releases of Investigapptor +
 
 ==== Adding a witness `[Coming in v2.0]`
@@ -660,5 +822,3 @@ the data of your previous Investigapptor folder.
 |kbd:[Ctrl] | Toggles between hiding and revealing the password parameter | -
 
 |=======================================================================
-
-<<<

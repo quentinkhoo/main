@@ -58,36 +58,8 @@
 <li><a href="#adding-a-case-code-addcase-code-since-v1-1">4.3.1. Adding a case: <code>addcase</code> [Since v1.1]</a></li>
 <li><a href="#ListCases">4.3.2. Listing all cases : <code>listcases</code> [Since v1.2]</a></li>
 <li><a href="#editing-a-case-code-editcase-code-since-v1-4">4.3.3. Editing a case: <code>editcase</code> [Since v1.4]</a></li>
-<li><a href="#locating-cases-by-name-code-findcases-since-v1-3-code">4.3.4. Locating cases by name: <code>findcases [Since v1.3]</code></a></li>
-<li><a href="#locating-cases-by-tags-code-findcasetags-code-code-since-v1-3-code">4.3.5. Locating cases by tags: <code>findcasetags</code> <code>[Since v1.3]</code></a></li>
-<li><a href="#close-a-case-code-close-code-code-since-v1-3-code">4.3.6. Close a case : <code>close</code> <code>[Since v1.3]</code></a></li>
-<li><a href="#deleting-a-case-code-deletecase-code-since-v1-3">4.3.7. Deleting a case : <code>deletecase</code> [Since v1.3]</a></li>
-<li><a href="#selecting-a-case-code-selectcase-code-coming-in-v1-5">4.3.8. Selecting a case : <code>selectcase</code> [Coming in v1.5]</a></li>
-<li><a href="#list-a-specific-investigator-s-cases-code-listinvestigatorcase-code">4.3.9. List a specific Investigator&#8217;s cases <code>listinvestigatorcase</code></a></li>
 </ul>
 </li>
-<li><a href="#future-enhancement-commands">4.4. Future Enhancement Commands</a>
-<ul class="sectlevel3">
-<li><a href="#adding-a-witness-code-coming-in-v2-0-code">4.4.1. Adding a witness <code>[Coming in v2.0]</code></a></li>
-<li><a href="#adding-a-suspect-code-coming-in-v2-0-code">4.4.2. Adding a suspect <code>[Coming in v2.0]</code></a></li>
-<li><a href="#adding-evidence-files-code-coming-in-v2-0-code">4.4.3. Adding evidence files <code>[Coming in v2.0]</code></a></li>
-<li><a href="#setting-up-chain-of-custody-code-coming-in-v2-0-code">4.4.4. Setting up chain of custody <code>[Coming in v2.0]</code></a></li>
-<li><a href="#entering-commands-in-other-languages-code-coming-in-v2-0-code">4.4.5. Entering commands in other languages <code>[Coming in v2.0]</code></a></li>
-<li><a href="#adding-any-person-via-scanner-code-coming-in-v2-0-code">4.4.6. Adding any person via scanner <code>[Coming in v2.0]</code></a></li>
-<li><a href="#exporting-case-information-into-a-pdf-file-code-coming-in-v2-0-code">4.4.7. Exporting case information into a PDF file <code>[Coming in v2.0]</code></a></li>
-<li><a href="#viewing-cases-and-investigators-in-a-calendar-graph-format-code-coming-in-v2-0-code">4.4.8. Viewing cases and investigators in a calendar/graph format <code>[Coming in v2.0]</code></a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">4.4.9. Encrypting data files <code>[Coming in v2.0]</code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#faq">5. FAQ</a></li>
-<li><a href="#command-summary">6. Command Summary</a>
-<ul class="sectlevel2">
-<li><a href="#general-commands-2">6.1. General Commands</a></li>
-<li><a href="#investigator-commands-2">6.2. Investigator Commands</a></li>
-<li><a href="#case-commands-2">6.3. Case Commands</a></li>
-<li><a href="#keyboard-shortcuts">6.4. Keyboard Shortcuts</a></li>
 </ul>
 </li>
 </ul>
@@ -993,9 +965,11 @@ Changes the investigator of the 2nd case to the 3rd investigator in the most rec
 </li>
 </ul>
 </div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>==== Locating cases by name: <code>findcases [Since v1.3]</code></p>
 </div>
-<div class="sect3">
-<h4 id="locating-cases-by-name-code-findcases-since-v1-3-code"><a class="link" href="#locating-cases-by-name-code-findcases-since-v1-3-code">4.3.4. Locating cases by name: <code>findcases [Since v1.3]</code></a></h4>
 <div class="paragraph">
 <p>Finds cases whose names contain any of the given keywords.<br>
 Format: <code>findcases KEYWORD [MORE_KEYWORDS]</code><br>
@@ -1051,11 +1025,9 @@ Alias: <code>fc</code></p>
 * <code>findcases murder rape arson</code><br>
 Returns any cases having names <code>murder</code>, <code>rape</code>, or <code>arson</code></p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="locating-cases-by-tags-code-findcasetags-code-code-since-v1-3-code"><a class="link" href="#locating-cases-by-tags-code-findcasetags-code-code-since-v1-3-code">4.3.5. Locating cases by tags: <code>findcasetags</code> <code>[Since v1.3]</code></a></h4>
 <div class="paragraph">
-<p>Find cases whose tags contain any of the given keywords.<br>
+<p>==== Locating cases by tags: <code>findcasetags</code> <code>[Since v1.3]</code>
+Find cases whose tags contain any of the given keywords.<br>
 Format: <code>findcasetags KEYWORD [MORE_KEYWORDS]</code><br>
 Alias: <code>fct</code></p>
 </div>
@@ -1099,11 +1071,9 @@ Returns case(s) having tags <code>murder</code>, <code>supernatural</code>, OR <
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="close-a-case-code-close-code-code-since-v1-3-code"><a class="link" href="#close-a-case-code-close-code-code-since-v1-3-code">4.3.6. Close a case : <code>close</code> <code>[Since v1.3]</code></a></h4>
 <div class="paragraph">
-<p>Closes the case identified by the index number used in the last case listing.<br>
+<p>==== Close a case : <code>close</code> <code>[Since v1.3]</code>
+Closes the case identified by the index number used in the last case listing.<br>
 Format: <code>close INDEX</code><br>
 Alias: <code>cl</code></p>
 </div>
@@ -1160,9 +1130,9 @@ Closes the 3rd case in the listed panel list case.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>==== Deleting a case : <code>deletecase</code> [Since v1.3]</p>
 </div>
-<div class="sect3">
-<h4 id="deleting-a-case-code-deletecase-code-since-v1-3"><a class="link" href="#deleting-a-case-code-deletecase-code-since-v1-3">4.3.7. Deleting a case : <code>deletecase</code> [Since v1.3]</a></h4>
 <div class="paragraph">
 <p>You can remove cases by specifying the <code>CASE_INDEX</code>. The index refers to the index number shown in the most recent listing of cases.<br>
 <strong>Format:</strong> <code>deletecase CASE_INDEX</code><br>
@@ -1221,9 +1191,9 @@ Deletes the 1st case in the results of the <code>findcase</code> command.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>==== Selecting a case : <code>selectcase</code> [Coming in v1.5]</p>
 </div>
-<div class="sect3">
-<h4 id="selecting-a-case-code-selectcase-code-coming-in-v1-5"><a class="link" href="#selecting-a-case-code-selectcase-code-coming-in-v1-5">4.3.8. Selecting a case : <code>selectcase</code> [Coming in v1.5]</a></h4>
 <div class="paragraph">
 <p>Selects the case identified by the index number used in the last case listing.<br>
 Format: <code>selectcase INDEX</code><br>
@@ -1279,9 +1249,9 @@ Selects the 3rd case in the most recent list of cases.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>==== List a specific Investigator&#8217;s cases <code>listinvestigatorcase</code></p>
 </div>
-<div class="sect3">
-<h4 id="list-a-specific-investigator-s-cases-code-listinvestigatorcase-code"><a class="link" href="#list-a-specific-investigator-s-cases-code-listinvestigatorcase-code">4.3.9. List a specific Investigator&#8217;s cases <code>listinvestigatorcase</code></a></h4>
 <div class="paragraph">
 <p>Selects an investigator and display all of the case belonging to that investigator<br>
 Format: <code>listinvestigatorcase INDEX</code><br>
@@ -1328,70 +1298,55 @@ Display all the cases of the 2nd investigator  in the investigator panel list ca
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="future-enhancement-commands"><a class="link" href="#future-enhancement-commands">4.4. Future Enhancement Commands</a></h3>
 <div class="paragraph">
-<p>These are features that will come in future releases of Investigapptor<br></p>
+<p>=== Future Enhancement Commands
+These are features that will come in future releases of Investigapptor<br></p>
 </div>
-<div class="sect3">
-<h4 id="adding-a-witness-code-coming-in-v2-0-code"><a class="link" href="#adding-a-witness-code-coming-in-v2-0-code">4.4.1. Adding a witness <code>[Coming in v2.0]</code></a></h4>
-
+<div class="paragraph">
+<p>==== Adding a witness <code>[Coming in v2.0]</code></p>
 </div>
-<div class="sect3">
-<h4 id="adding-a-suspect-code-coming-in-v2-0-code"><a class="link" href="#adding-a-suspect-code-coming-in-v2-0-code">4.4.2. Adding a suspect <code>[Coming in v2.0]</code></a></h4>
-
+<div class="paragraph">
+<p>==== Adding a suspect <code>[Coming in v2.0]</code></p>
 </div>
-<div class="sect3">
-<h4 id="adding-evidence-files-code-coming-in-v2-0-code"><a class="link" href="#adding-evidence-files-code-coming-in-v2-0-code">4.4.3. Adding evidence files <code>[Coming in v2.0]</code></a></h4>
-
+<div class="paragraph">
+<p>==== Adding evidence files <code>[Coming in v2.0]</code></p>
 </div>
-<div class="sect3">
-<h4 id="setting-up-chain-of-custody-code-coming-in-v2-0-code"><a class="link" href="#setting-up-chain-of-custody-code-coming-in-v2-0-code">4.4.4. Setting up chain of custody <code>[Coming in v2.0]</code></a></h4>
-
+<div class="paragraph">
+<p>==== Setting up chain of custody <code>[Coming in v2.0]</code></p>
 </div>
-<div class="sect3">
-<h4 id="entering-commands-in-other-languages-code-coming-in-v2-0-code"><a class="link" href="#entering-commands-in-other-languages-code-coming-in-v2-0-code">4.4.5. Entering commands in other languages <code>[Coming in v2.0]</code></a></h4>
-
+<div class="paragraph">
+<p>==== Entering commands in other languages <code>[Coming in v2.0]</code></p>
 </div>
-<div class="sect3">
-<h4 id="adding-any-person-via-scanner-code-coming-in-v2-0-code"><a class="link" href="#adding-any-person-via-scanner-code-coming-in-v2-0-code">4.4.6. Adding any person via scanner <code>[Coming in v2.0]</code></a></h4>
-
+<div class="paragraph">
+<p>==== Adding any person via scanner <code>[Coming in v2.0]</code></p>
 </div>
-<div class="sect3">
-<h4 id="exporting-case-information-into-a-pdf-file-code-coming-in-v2-0-code"><a class="link" href="#exporting-case-information-into-a-pdf-file-code-coming-in-v2-0-code">4.4.7. Exporting case information into a PDF file <code>[Coming in v2.0]</code></a></h4>
-
+<div class="paragraph">
+<p>==== Exporting case information into a PDF file <code>[Coming in v2.0]</code></p>
 </div>
-<div class="sect3">
-<h4 id="viewing-cases-and-investigators-in-a-calendar-graph-format-code-coming-in-v2-0-code"><a class="link" href="#viewing-cases-and-investigators-in-a-calendar-graph-format-code-coming-in-v2-0-code">4.4.8. Viewing cases and investigators in a calendar/graph format <code>[Coming in v2.0]</code></a></h4>
-
+<div class="paragraph">
+<p>==== Viewing cases and investigators in a calendar/graph format <code>[Coming in v2.0]</code></p>
 </div>
-<div class="sect3">
-<h4 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">4.4.9. Encrypting data files <code>[Coming in v2.0]</code></a></h4>
+<div class="paragraph">
+<p>==== Encrypting data files <code>[Coming in v2.0]</code></p>
+</div>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
+<div class="paragraph">
+<p>== FAQ</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">5. FAQ</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
 <strong>A</strong>: You can do so by installing Investigapptor in the other computer and
 overwriting the empty data file it creates with the file that contains
 the data of your previous Investigapptor folder.</p>
 </div>
+<div class="paragraph">
+<p>== Command Summary</p>
 </div>
+<div class="paragraph">
+<p>=== General Commands</p>
 </div>
-<div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">6. Command Summary</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="general-commands-2"><a class="link" href="#general-commands-2">6.1. General Commands</a></h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 35.7142%;">
@@ -1447,9 +1402,9 @@ the data of your previous Investigapptor folder.</p>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>=== Investigator Commands</p>
 </div>
-<div class="sect2">
-<h3 id="investigator-commands-2"><a class="link" href="#investigator-commands-2">6.2. Investigator Commands</a></h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 35.7142%;">
@@ -1475,9 +1430,9 @@ the data of your previous Investigapptor folder.</p>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>=== Case Commands</p>
 </div>
-<div class="sect2">
-<h3 id="case-commands-2"><a class="link" href="#case-commands-2">6.3. Case Commands</a></h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 35.7142%;">
@@ -1503,9 +1458,9 @@ the data of your previous Investigapptor folder.</p>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>=== Keyboard Shortcuts</p>
 </div>
-<div class="sect2">
-<h3 id="keyboard-shortcuts"><a class="link" href="#keyboard-shortcuts">6.4. Keyboard Shortcuts</a></h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 25%;">
@@ -1536,9 +1491,12 @@ the data of your previous Investigapptor folder.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-06 05:52:19 UTC
+Last updated 2018-04-06 07:38:30 UTC
 </div>
 </div>
 </body>

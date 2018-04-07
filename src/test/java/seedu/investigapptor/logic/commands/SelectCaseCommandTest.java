@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static seedu.investigapptor.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.investigapptor.testutil.TypicalPersons.getTypicalInvestigapptor;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.showCrimeCaseAtIndex;
+import static seedu.investigapptor.testutil.TypicalCrimeCases.getTypicalInvestigapptor;
+import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_CASE;
+import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_SECOND_CASE;
+import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_THIRD_CASE;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
-import seedu.investigapptor.commons.events.ui.JumpToPersonListRequestEvent;
+import seedu.investigapptor.commons.events.ui.JumpToCrimeCaseListRequestEvent;
 import seedu.investigapptor.logic.CommandHistory;
 import seedu.investigapptor.logic.UndoRedoStack;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
@@ -25,10 +25,11 @@ import seedu.investigapptor.model.ModelManager;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.ui.testutil.EventsCollectorRule;
 
+//@@author leowweiching
 /**
- * Contains integration tests (interaction with the Model) for {@code SelectInvestigatorCommand}.
+ * Contains integration tests (interaction with the Model) for {@code SelectCaseCommand}.
  */
-public class SelectInvestigatorCommandTest {
+public class SelectCaseCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
@@ -41,48 +42,48 @@ public class SelectInvestigatorCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+        Index lastCrimeCaseIndex = Index.fromOneBased(model.getFilteredCrimeCaseList().size());
 
-        assertExecutionSuccess(INDEX_FIRST_PERSON);
-        assertExecutionSuccess(INDEX_THIRD_PERSON);
-        assertExecutionSuccess(lastPersonIndex);
+        assertExecutionSuccess(INDEX_FIRST_CASE);
+        assertExecutionSuccess(INDEX_THIRD_CASE);
+        assertExecutionSuccess(lastCrimeCaseIndex);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredCrimeCaseList().size() + 1);
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showCrimeCaseAtIndex(model, INDEX_FIRST_CASE);
 
-        assertExecutionSuccess(INDEX_FIRST_PERSON);
+        assertExecutionSuccess(INDEX_FIRST_CASE);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showCrimeCaseAtIndex(model, INDEX_FIRST_CASE);
 
-        Index outOfBoundsIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundsIndex = INDEX_SECOND_CASE;
         // ensures that outOfBoundIndex is still in bounds of investigapptor book list
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getInvestigapptor().getPersonList().size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getInvestigapptor().getCrimeCaseList().size());
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        SelectInvestigatorCommand selectFirstCommand = new SelectInvestigatorCommand(INDEX_FIRST_PERSON);
-        SelectInvestigatorCommand selectSecondCommand = new SelectInvestigatorCommand(INDEX_SECOND_PERSON);
+        SelectCaseCommand selectFirstCommand = new SelectCaseCommand(INDEX_FIRST_CASE);
+        SelectCaseCommand selectSecondCommand = new SelectCaseCommand(INDEX_SECOND_CASE);
 
         // same object -> returns true
         assertTrue(selectFirstCommand.equals(selectFirstCommand));
 
         // same values -> returns true
-        SelectInvestigatorCommand selectFirstCommandCopy = new SelectInvestigatorCommand(INDEX_FIRST_PERSON);
+        SelectCaseCommand selectFirstCommandCopy = new SelectCaseCommand(INDEX_FIRST_CASE);
         assertTrue(selectFirstCommand.equals(selectFirstCommandCopy));
 
         // different types -> returns false
@@ -96,35 +97,36 @@ public class SelectInvestigatorCommandTest {
     }
 
     /**
-     * Executes a {@code SelectInvestigatorCommand} with the given {@code index},
+     * Executes a {@code SelectCaseCommand} with the given {@code index},
      * and checks that {@code JumpToListRequestEvent}
      * is raised with the correct index.
      */
     private void assertExecutionSuccess(Index index) {
-        SelectInvestigatorCommand selectInvestigatorCommand = prepareCommand(index);
+        SelectCaseCommand selectCaseCommand = prepareCommand(index);
 
         try {
-            CommandResult commandResult = selectInvestigatorCommand.execute();
-            assertEquals(String.format(SelectInvestigatorCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased()),
+            CommandResult commandResult = selectCaseCommand.execute();
+            assertEquals(String.format(SelectCaseCommand.MESSAGE_SELECT_CASE_SUCCESS, index.getOneBased()),
                     commandResult.feedbackToUser);
         } catch (CommandException ce) {
             throw new IllegalArgumentException("Execution of command should not fail.", ce);
         }
 
-        JumpToPersonListRequestEvent lastEvent = (JumpToPersonListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+        JumpToCrimeCaseListRequestEvent lastEvent =
+                (JumpToCrimeCaseListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
         assertEquals(index, Index.fromZeroBased(lastEvent.targetIndex));
     }
 
     /**
-     * Executes a {@code SelectInvestigatorCommand} with the given {@code index},
+     * Executes a {@code SelectCaseCommand} with the given {@code index},
      * and checks that a {@code CommandException}
      * is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
-        SelectInvestigatorCommand selectInvestigatorCommand = prepareCommand(index);
+        SelectCaseCommand selectCaseCommand = prepareCommand(index);
 
         try {
-            selectInvestigatorCommand.execute();
+            selectCaseCommand.execute();
             fail("The expected CommandException was not thrown.");
         } catch (CommandException ce) {
             assertEquals(expectedMessage, ce.getMessage());
@@ -133,11 +135,11 @@ public class SelectInvestigatorCommandTest {
     }
 
     /**
-     * Returns a {@code SelectInvestigatorCommand} with parameters {@code index}.
+     * Returns a {@code SelectCaseCommand} with parameters {@code index}.
      */
-    private SelectInvestigatorCommand prepareCommand(Index index) {
-        SelectInvestigatorCommand selectInvestigatorCommand = new SelectInvestigatorCommand(index);
-        selectInvestigatorCommand.setData(model, new CommandHistory(), new UndoRedoStack());
-        return selectInvestigatorCommand;
+    private SelectCaseCommand prepareCommand(Index index) {
+        SelectCaseCommand selectCaseCommand = new SelectCaseCommand(index);
+        selectCaseCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        return selectCaseCommand;
     }
 }

@@ -42,7 +42,7 @@ public class ListCommandTest {
         expectedCrimeCaseModel = new ModelManager(crimeCaseModel.getInvestigapptor(), new UserPrefs());
 
         listCommandCases = new ListCaseCommand();
-        listCommandCases.setData(investigatorModel, new CommandHistory(), new UndoRedoStack());
+        listCommandCases.setData(crimeCaseModel, new CommandHistory(), new UndoRedoStack());
     }
 
     @Test

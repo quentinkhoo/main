@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import seedu.investigapptor.logic.commands.SelectCaseCommand;
 
+//@@author leowweiching
 /**
  * Test scope: similar to {@code DeleteCaseCommandParserTest}.
  * @see DeleteCaseCommandParserTest

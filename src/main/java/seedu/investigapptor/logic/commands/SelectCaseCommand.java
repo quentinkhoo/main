@@ -9,6 +9,7 @@ import seedu.investigapptor.commons.events.ui.JumpToCrimeCaseListRequestEvent;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 
+//@@author leowweiching
 /**
  * Selects a person identified using it's last displayed index from the investigapptor book.
  */

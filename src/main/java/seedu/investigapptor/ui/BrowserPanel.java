@@ -12,7 +12,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.investigapptor.MainApp;
 import seedu.investigapptor.commons.core.LogsCenter;
+import seedu.investigapptor.commons.events.ui.CrimeCasePanelSelectionChangedEvent;
 import seedu.investigapptor.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.person.Person;
 
 /**
@@ -41,6 +43,9 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    private void loadCrimeCasePage(CrimeCase crimeCase) {
+        loadPage(SEARCH_PAGE_URL + crimeCase.getCaseName().crimeCaseName);
+    }
     private void loadPersonPage(Person person) {
         loadPage(SEARCH_PAGE_URL + person.getName().fullName);
     }
@@ -68,5 +73,11 @@ public class BrowserPanel extends UiPart<Region> {
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonPage(event.getNewSelection().person);
+    }
+
+    @Subscribe
+    private void handleCrimeCasePanelSelectionChangedEvent(CrimeCasePanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadCrimeCasePage(event.getNewSelection().crimeCase);
     }
 }

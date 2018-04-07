@@ -28,6 +28,7 @@ import seedu.investigapptor.logic.commands.ListInvestigatorCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
 import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
 import seedu.investigapptor.logic.commands.RemovePasswordCommand;
+import seedu.investigapptor.logic.commands.SelectCaseCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SetPasswordCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
@@ -75,6 +76,10 @@ public class InvestigapptorParser {
         case EditInvestigatorCommand.COMMAND_WORD:
         case EditInvestigatorCommand.COMMAND_ALIAS:
             return new EditInvestigatorCommandParser().parse(arguments);
+
+        case SelectCaseCommand.COMMAND_WORD:
+        case SelectCaseCommand.COMMAND_ALIAS:
+            return new SelectCaseCommandParser().parse(arguments);
 
         case SelectInvestigatorCommand.COMMAND_WORD:
         case SelectInvestigatorCommand.COMMAND_ALIAS:

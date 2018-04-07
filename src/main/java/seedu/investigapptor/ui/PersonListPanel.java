@@ -13,7 +13,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.investigapptor.commons.core.LogsCenter;
-import seedu.investigapptor.commons.events.ui.JumpToListRequestEvent;
+import seedu.investigapptor.commons.events.ui.JumpToPersonListRequestEvent;
 import seedu.investigapptor.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.investigapptor.model.person.Person;
 
@@ -62,7 +62,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+    private void handleJumpToPersonListRequestEvent(JumpToPersonListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         scrollTo(event.targetIndex);
     }

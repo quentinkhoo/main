@@ -257,7 +257,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         if (key.getCurrentInvestigator() != null) {
             for (Person person : persons) {
                 // Finds the independent Investigator object that was assigned under the case
-                if (key.getCurrentInvestigator().getName().equals(person.getName())) {
+                if (key.getCurrentInvestigator().equals(person)) {
                     Investigator investigator = (Investigator) person;
                     investigator.addCrimeCase(key);
                     break;
@@ -276,7 +276,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         if (key.getCurrentInvestigator() != null) {
             for (Person person : persons) {
                 // Finds the independent Investigator object that was assigned under the case
-                if (key.getCurrentInvestigator().getName().equals(person.getName())) {
+                if (key.getCurrentInvestigator().equals(person)) {
                     Investigator investigator = (Investigator) person;
                     investigator.removeCrimeCase(key);
                     break;

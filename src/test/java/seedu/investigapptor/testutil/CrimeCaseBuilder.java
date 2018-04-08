@@ -1,13 +1,14 @@
 package seedu.investigapptor.testutil;
 
-import static seedu.investigapptor.model.crimecase.Date.LARGEST_DATE;
+import static seedu.investigapptor.model.crimecase.EndDate.LARGEST_DATE;
 
 import java.util.Set;
 
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.EndDate;
+import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
@@ -25,8 +26,8 @@ public class CrimeCaseBuilder {
 
     private CaseName name;
     private Description description;
-    private Date startDate;
-    private Date endDate;
+    private StartDate startDate;
+    private EndDate endDate;
     private Investigator currentInvestigator;
     private Status status;
     private Set<Tag> tags;
@@ -35,8 +36,8 @@ public class CrimeCaseBuilder {
         name = new CaseName(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
         status = new Status();
-        startDate = new Date(DEFAULT_DATE);
-        endDate = new Date(LARGEST_DATE);
+        startDate = new StartDate(DEFAULT_DATE);
+        endDate = new EndDate(LARGEST_DATE);
         tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
         currentInvestigator = new InvestigatorBuilder().withName("Detective Holmes").build();
 
@@ -107,7 +108,7 @@ public class CrimeCaseBuilder {
      * Sets the {@code StartDate} of the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder withStartDate(String date) {
-        this.startDate = new Date(date);
+        this.startDate = new StartDate(date);
         return this;
     }
 
@@ -115,7 +116,7 @@ public class CrimeCaseBuilder {
      * Sets the {@code ENdDate} of the {@code CrimeCase} that we are building.
      */
     public CrimeCaseBuilder withEndDate() {
-        this.endDate = new Date(LARGEST_DATE);
+        this.endDate = new EndDate(LARGEST_DATE);
         return this;
     }
 

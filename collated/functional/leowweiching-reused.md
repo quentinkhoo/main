@@ -170,7 +170,7 @@ public class CrimeCase {
      * Every field must be present and not null
      */
     public CrimeCase(CaseName name, Description description, Investigator currentInvestigator,
-                     Date startDate, Date endDate, Status status, Set<Tag> tags) {
+                     StartDate startDate, EndDate endDate, Status status, Set<Tag> tags) {
         this.name = name;
         this.description = description;
         this.currentInvestigator = currentInvestigator;

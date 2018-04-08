@@ -196,9 +196,9 @@ public class CommandTestUtil {
 
         CrimeCase crimeCase = model.getFilteredCrimeCaseList().get(targetIndex.getZeroBased());
         final String[] splitName = crimeCase.getCaseName().crimeCaseName.split("\\s+");
-        model.updateFilteredCrimeCaseList(new CaseNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCrimeCaseList(new CaseNameContainsKeywordsPredicate(Arrays.asList(splitName[1])));
 
-        assertEquals(11, model.getFilteredCrimeCaseList().size());
+        assertEquals(1, model.getFilteredCrimeCaseList().size());
     }
 
     /**

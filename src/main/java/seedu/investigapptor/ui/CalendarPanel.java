@@ -18,7 +18,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.Date;
+import seedu.investigapptor.model.crimecase.EndDate;
+import seedu.investigapptor.model.crimecase.StartDate;
 
 //@@author pkaijun
 /**
@@ -73,8 +74,8 @@ public class CalendarPanel extends UiPart<Region> {
      * Create canlendar entries for all the cases in the crime list
      */
     private void createCalendarEntries() {
-        Date endDate;
-        Date startDate;
+        StartDate startDate;
+        EndDate endDate;
         String caseName;
         String status;
 
@@ -95,7 +96,7 @@ public class CalendarPanel extends UiPart<Region> {
      * @param status
      * @param caseName
      */
-    private void setEntry(Date startDate, Date endDate, String status, String caseName) {
+    private void setEntry(StartDate startDate, EndDate endDate, String status, String caseName) {
         Entry<String> caseEntry = new Entry<>(caseName);
         caseEntry.changeStartDate(LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDay()));
         caseEntry.setFullDay(true);

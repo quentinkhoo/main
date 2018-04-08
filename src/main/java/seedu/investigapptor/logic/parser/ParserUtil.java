@@ -14,8 +14,8 @@ import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.model.Password;
 
 import seedu.investigapptor.model.crimecase.CaseName;
-import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
@@ -206,26 +206,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String investigapptor} into an {@code Date}.
+     * Parses a {@code String investigapptor} into an {@code StartDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws IllegalValueException if the given {@code investigapptor} is invalid.
      */
-    public static Date parseStartDate(String startDate) throws IllegalValueException {
+    public static StartDate parseStartDate(String startDate) throws IllegalValueException {
         requireNonNull(startDate);
         String trimmedStartDate = startDate.trim();
-        if (!Date.isValidDate(trimmedStartDate)) {
-            throw new IllegalValueException(Date.MESSAGE_DATE_CONSTRAINTS);
+        if (!StartDate.isValidDate(trimmedStartDate)) {
+            throw new IllegalValueException(StartDate.MESSAGE_DATE_CONSTRAINTS);
         }
-        return new Date(trimmedStartDate);
+        return new StartDate(trimmedStartDate);
     }
 
     /**
-     * Parses a {@code Optional<String> investigapptor} into an {@code Optional<Date>}
+     * Parses a {@code Optional<String> investigapptor} into an {@code Optional<StartDate>}
      * if {@code investigapptor} is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
      */
-    public static Optional<Date> parseStartDate(Optional<String> startDate) throws IllegalValueException {
+    public static Optional<StartDate> parseStartDate(Optional<String> startDate) throws IllegalValueException {
         requireNonNull(startDate);
         return startDate.isPresent() ? Optional.of(parseStartDate(startDate.get())) : Optional.empty();
     }

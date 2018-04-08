@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
-import seedu.investigapptor.commons.events.ui.JumpToListRequestEvent;
+import seedu.investigapptor.commons.events.ui.JumpToPersonListRequestEvent;
 import seedu.investigapptor.logic.CommandHistory;
 import seedu.investigapptor.logic.UndoRedoStack;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
@@ -111,7 +111,8 @@ public class SelectInvestigatorCommandTest {
             throw new IllegalArgumentException("Execution of command should not fail.", ce);
         }
 
-        JumpToListRequestEvent lastEvent = (JumpToListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+        JumpToPersonListRequestEvent lastEvent =
+                (JumpToPersonListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
         assertEquals(index, Index.fromZeroBased(lastEvent.targetIndex));
     }
 

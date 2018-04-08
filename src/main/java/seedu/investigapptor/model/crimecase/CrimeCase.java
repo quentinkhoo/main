@@ -19,8 +19,8 @@ public class CrimeCase {
 
     private final CaseName name;
     private final Description description;
-    private final Date startDate;
-    private final Date endDate;
+    private final StartDate startDate;
+    private final EndDate endDate;
     private final Investigator currentInvestigator;
     private final Status status;
 
@@ -30,7 +30,7 @@ public class CrimeCase {
      * Every field must be present and not null
      */
     public CrimeCase(CaseName name, Description description, Investigator currentInvestigator,
-                     Date startDate, Date endDate, Status status, Set<Tag> tags) {
+                     StartDate startDate, EndDate endDate, Status status, Set<Tag> tags) {
         this.name = name;
         this.description = description;
         this.currentInvestigator = currentInvestigator;
@@ -52,11 +52,11 @@ public class CrimeCase {
         return currentInvestigator;
     }
 
-    public Date getStartDate() {
+    public StartDate getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public EndDate getEndDate() {
         return endDate;
     }
 

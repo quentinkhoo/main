@@ -23,8 +23,8 @@ import seedu.investigapptor.commons.util.CollectionUtil;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Person;
@@ -130,7 +130,7 @@ public class EditCaseCommand extends UndoableCommand {
                 .orElse(crimeCaseToEdit.getDescription());
         Investigator updatedInvestigator = editCrimeCaseDescriptor.getCurrentInvestigator()
                 .orElse(crimeCaseToEdit.getCurrentInvestigator());
-        Date updatedStartDate = editCrimeCaseDescriptor.getStartDate().orElse(crimeCaseToEdit.getStartDate());
+        StartDate updatedStartDate = editCrimeCaseDescriptor.getStartDate().orElse(crimeCaseToEdit.getStartDate());
         Set<Tag> updatedTags = editCrimeCaseDescriptor.getTags().orElse(crimeCaseToEdit.getTags());
 
         return new CrimeCase(updatedCaseName, updatedDescription, updatedInvestigator,
@@ -165,7 +165,7 @@ public class EditCaseCommand extends UndoableCommand {
         private Description description;
         private Index currentInvestigatorIndex;
         private Investigator currentInvestigator;
-        private Date startDate;
+        private StartDate startDate;
         private Set<Tag> tags;
 
         public EditCrimeCaseDescriptor() {}
@@ -223,11 +223,11 @@ public class EditCaseCommand extends UndoableCommand {
             return Optional.ofNullable(currentInvestigator);
         }
 
-        public void setStartDate(Date startDate) {
+        public void setStartDate(StartDate startDate) {
             this.startDate = startDate;
         }
 
-        public Optional<Date> getStartDate() {
+        public Optional<StartDate> getStartDate() {
             return Optional.ofNullable(startDate);
         }
 

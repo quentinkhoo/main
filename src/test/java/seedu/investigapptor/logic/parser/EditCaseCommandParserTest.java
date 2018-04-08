@@ -37,8 +37,8 @@ import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.EditCaseCommand;
 import seedu.investigapptor.logic.commands.EditCaseCommand.EditCrimeCaseDescriptor;
 import seedu.investigapptor.model.crimecase.CaseName;
-import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.testutil.EditCrimeCaseDescriptorBuilder;
 //@@author leowweiching-reused
@@ -87,7 +87,7 @@ public class EditCaseCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_INVESTIGATOR_INDEX_DESC,
                 MESSAGE_INVALID_INDEX); // invalid investigator index
         assertParseFailure(parser, "1" + INVALID_STARTDATE_DESC,
-                Date.MESSAGE_DATE_CONSTRAINTS); // invalid address
+                StartDate.MESSAGE_DATE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_TAG_DESC,
                 Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 

@@ -120,9 +120,10 @@ public class CalendarPanel extends UiPart<Region> {
         calendarPanel.setShowSearchField(false);
         calendarPanel.setShowSearchResultsTray(false);
         calendarPanel.setShowPrintButton(false);
-        calendarPanel.showMonthPage();
+        calendarPanel.setShowToolBar(false);
         calendarPanel.setShowAddCalendarButton(false);
         calendarPanel.setShowToday(true);
+        calendarPanel.showMonthPage();
     }
 
     /**
@@ -143,6 +144,7 @@ public class CalendarPanel extends UiPart<Region> {
         caseCalendarSource.getCalendars().add(caseCloseCalendar);
         caseCalendarSource.getCalendars().add(caseOpenCalendar);
         calendarPanel.getCalendarSources().addAll(caseCalendarSource);
+        calendarPanel.getCalendarSources().remove(0);   // Remove the default calendar
     }
 
     @Subscribe

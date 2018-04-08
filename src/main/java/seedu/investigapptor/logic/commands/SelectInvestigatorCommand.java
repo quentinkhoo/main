@@ -5,7 +5,7 @@ import java.util.List;
 import seedu.investigapptor.commons.core.EventsCenter;
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
-import seedu.investigapptor.commons.events.ui.JumpToListRequestEvent;
+import seedu.investigapptor.commons.events.ui.JumpToPersonListRequestEvent;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.person.Person;
 
@@ -39,7 +39,7 @@ public class SelectInvestigatorCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
         }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+        EventsCenter.getInstance().post(new JumpToPersonListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
 
     }

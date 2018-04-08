@@ -131,7 +131,7 @@ public class XmlAdaptedCrimeCaseTest {
     public void toModelType_nullEndDate_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase = new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR,
                 VALID_STARTDATE, null, VALID_STATUS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StartDate.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EndDate.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
 

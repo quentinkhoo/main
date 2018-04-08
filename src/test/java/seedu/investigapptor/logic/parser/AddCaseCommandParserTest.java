@@ -36,8 +36,8 @@ import org.junit.Test;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.AddCaseCommand;
 import seedu.investigapptor.model.crimecase.CaseName;
-import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.util.SampleDataUtil;
 //@@author leowweiching
@@ -53,7 +53,7 @@ public class AddCaseCommandParserTest {
 
         AddCaseCommand expectedCommand = new AddCaseCommand(new CaseName(VALID_CASENAME_BANANA),
                 new Description(VALID_DESCRIPTION_BANANA), targetIndex,
-                new Date(VALID_STARTDATE_BANANA), tag);
+                new StartDate(VALID_STARTDATE_BANANA), tag);
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + CASENAME_DESC_BANANA + DESCRIPTION_DESC_BANANA
@@ -78,7 +78,7 @@ public class AddCaseCommandParserTest {
         // multiple tags - all accepted
         AddCaseCommand expectedCommandMultipleTags = new AddCaseCommand(new CaseName(VALID_CASENAME_BANANA),
                 new Description(VALID_DESCRIPTION_BANANA), targetIndex,
-                new Date(VALID_STARTDATE_BANANA), tagList);
+                new StartDate(VALID_STARTDATE_BANANA), tagList);
         assertParseSuccess(parser, CASENAME_DESC_BANANA + DESCRIPTION_DESC_BANANA
                 + " i/" + targetIndex.getOneBased()
                 + STARTDATE_DESC_BANANA + TAG_DESC_MURDER
@@ -93,7 +93,7 @@ public class AddCaseCommandParserTest {
 
         AddCaseCommand expectedCommand = new AddCaseCommand(new CaseName(VALID_CASENAME_APPLE),
                 new Description(VALID_DESCRIPTION_APPLE), targetIndex,
-                new Date(VALID_STARTDATE_APPLE), tag);
+                new StartDate(VALID_STARTDATE_APPLE), tag);
         assertParseSuccess(parser, CASENAME_DESC_APPLE + DESCRIPTION_DESC_APPLE
                         + " i/" + targetIndex.getOneBased() + STARTDATE_DESC_APPLE,
                 expectedCommand);
@@ -146,7 +146,7 @@ public class AddCaseCommandParserTest {
         // invalid start date
         assertParseFailure(parser, CASENAME_DESC_BANANA + DESCRIPTION_DESC_BANANA
                 + INVESTIGATOR_DESC_BANANA + INVALID_STARTDATE_DESC
-                + TAG_DESC_MURDER + TAG_DESC_FRAUD, Date.MESSAGE_DATE_CONSTRAINTS);
+                + TAG_DESC_MURDER + TAG_DESC_FRAUD, StartDate.MESSAGE_DATE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, CASENAME_DESC_BANANA + DESCRIPTION_DESC_BANANA

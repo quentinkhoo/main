@@ -1288,11 +1288,11 @@ required.
 *** This feature helps the investigator to create a separate save file of the current state of the investigapptor and name it.
 
 * *Poh Kai Jun*
-** *Major Enhancement*: Support for calendar and graph
-*** This feature allows an overview of the chronological flow of each case handover and number of cases handled by each investigator
-** *Minor Enhancement*: Implement `findtags` command(s)
-*** This feature helps the users to filter out investigators/cases that are in a certain team/category according
-to their search input.
+** *Major Enhancement*: Support for calendar view
+*** This feature allows an overview of the chronological flow of the cases according to the cases listed on the panel.
+** *Minor Enhancement*: Tag colours
+*** This feature helps to differentiate the various tags present in each of the investigator/cases by using different colours to associate
+different tag content. (Same tag content = same colour)
 
 * *Quentin Khoo*
 ** *Major enhancement*: Support access control by implementing a password prompt upon starting the application

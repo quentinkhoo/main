@@ -40,16 +40,16 @@ public class AddCaseCommand extends UndoableCommand {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + PREFIX_INVESTIGATOR + "INDEX (must be a positive integer) "
+            + PREFIX_INVESTIGATOR + "INVESTIGATOR_INDEX (must be a positive integer) "
             + PREFIX_STARTDATE + "START DATE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Project Magic "
             + PREFIX_DESCRIPTION + "Kidnapping of 6 year-old John Doe "
             + PREFIX_INVESTIGATOR + "1 "
-            + PREFIX_STARTDATE + "25/12/2017 "
+            + PREFIX_STARTDATE + "01/04/2018 "
             + PREFIX_TAG + "Homicide "
-            + PREFIX_TAG + "Missing Persons";
+            + PREFIX_TAG + "Fraud";
 
     public static final String MESSAGE_SUCCESS = "New case added: %1$s";
     public static final String MESSAGE_DUPLICATE_CASE = "This case already exists in the investigapptor book";

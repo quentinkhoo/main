@@ -116,11 +116,10 @@ You can use this command to set a new password for the Investigapptor
 whether or not a password has been set.
 
 [IMPORTANT]
-Your password must be of minimal 8 characters and not contain any spaces. +
-[TIP]
-You can press kbd:[Ctrl] to reveal the password in plaintext if you find
- yourself having trouble remembering what you typed. Pressing kbd:[Ctrl]
-again will hide back the password.
+Your password must be of minimal 8 characters and not contain any spaces.
+
+[NOTE]
+Due to security reasons, this command cannot be undone.
 
 Format: `setpassword [pw/PASSWORD]` +
 Alias: `sp pw/PASSWORD` +
@@ -145,15 +144,11 @@ image::userguide-images/inputpassword.png[width="450"]
 You can use this command to remove a set password from the Investigapptor.
 
 [NOTE]
-You must input the currently set password correctly in order to remove the
-password. +
-[TIP]
-You can press kbd:[Ctrl] to reveal the password in plaintext if you find
- yourself having trouble remembering what you typed. Pressing kbd:[Ctrl]
-again will hide back the password.
+Due to security reasons, this command cannot be undone. +
 
-Format: `removepassword [pw/PASSWORD]` +
-Alias: `rp pw/PASSWORD` +
+
+Format: `removepassword` +
+Alias: `rp` +
 
 *Example:*
 
@@ -701,8 +696,8 @@ the data of your previous Investigapptor folder.
 |_<<SetPassword, Set Password>>_ |Sets the password |`setpassword [pw/PASSWORD]` |
 `setpassword pw/password`
 
-|_<<RemovePassword, Remove Password>>_ |Removes the password |`removepassword [pw/PASSWORD]` |
-`removepassword pw/password`
+|_<<RemovePassword, Remove Password>>_ |Removes the password |`removepassword` |
+`removepassword`
 
 |_<<History, History>>_ |Shows you a history of all commands used |`history` | `history`
 
@@ -744,7 +739,5 @@ the data of your previous Investigapptor folder.
 |Shortcut |Purpose |Remarks
 
 |kbd:[Esc] | Helps you clears the entire command box text field | -
-
-|kbd:[Ctrl] | Toggles between hiding and revealing the password parameter | -
 
 |=======================================================================

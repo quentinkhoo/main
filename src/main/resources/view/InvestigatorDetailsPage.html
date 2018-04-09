@@ -1,0 +1,130 @@
+<!-- @@author Marcus-cxc -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="BrowserPanel.css">
+    <script type="text/javascript">
+        function getJsonFromUrl() {
+            var query = location.search.substr(1);
+            var result = {};
+            query.split("&").forEach(function(part) {
+                var item = part.split("=");
+                result[item[0]] = decodeURIComponent(item[1].replace(/\+/g, '%20'));
+            });
+            return result;
+        }
+
+        // Takes the array of tags and parses it into format suitable to display with HTML
+        function tagsToHTML(tagsArr){
+            if (tagsArr[0] !== '') {
+                var printThis = '<ul class="tags">';
+                for (var i = 0; i < tagsArr.length; i++) {
+                    printThis += '<li>' + tagsArr[i] + '</li>';
+                }
+                printThis += '</ul>';
+                return printThis;
+            } else return '#'; // return dummy value
+        }
+
+        // Takes the array of cases and parses it into format suitable to display with HTML
+        function casesToHTML(casesArr){
+            if (casesArr[0] !== '') {
+                var printThis = '<div class="content">'
+                    + '<div class="box">'
+                    + '<header><h4>Cases</h4></header>'
+                    + '<div class="content">'
+                    + '<table>';
+
+                for (var i = 0; i < casesArr.length - 1; i++) {
+                    var crimeCase = casesArr[i].split("!");
+                    printThis += '<tr>' +
+                    '<td><strong>' + crimeCase[0] + '</strong></td>' +
+                    '<td><strong>' + crimeCase[1] + '</strong></td>' +
+                    '</tr>'
+                }
+                printThis += '</table>\n' +
+                    '</div>\n' +
+                    '</div>\n' +
+                    '</div>';
+                return printThis;
+            } else return '#'; // return dummy value
+        }
+        // Takes in status and endDate and creates HTML tags if status is closed
+        function endDateToHTML(status, endDate){
+            if (status === "close") {
+                return '<td><strong>End Date:</strong></td><td>' + endDate + '</td>';
+            } else return '#'; // return dummy value
+        }
+
+        // Parse url parameters to get JSON
+        var json = getJsonFromUrl();
+
+        // Preprocess tags and endDate
+        var tagsHTML = tagsToHTML(json.tags.split(','));
+        var caseHTML = casesToHTML(json.case.split(','));
+        //var endDateHTML = endDateToHTML(json.status, json.endDate);
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            document.getElementById("bigName").innerHTML=json.invName;
+            if (tagsHTML !== '#')
+                document.getElementById("tag-area").innerHTML=tagsHTML;
+            if (caseHTML !== '#')
+                document.getElementById("case-area").innerHTML=caseHTML;
+            document.getElementById("name").innerHTML=json.invName;
+            document.getElementById("rank").innerHTML=json.rank;
+            document.getElementById("phone").innerHTML=json.phone;
+            document.getElementById("email").innerHTML=json.email;
+            document.getElementById("address").innerHTML=json.address;
+        });
+    </script>
+</head>
+<body>
+    <!-- Main -->
+    <section id="main">
+        <div class="inner">
+            <section id="one" class="wrapper style1">
+                <header class="special">
+                    <h2 id="bigName"></h2>
+                    <div id="tag-area" class="tag-area"></div>
+                </header>
+                <!-- Section: Investigator Assigned -->
+                <div class="content">
+                    <div class="box">
+                        <header><h4>Details</h4></header>
+                        <div class="content">
+                            <table>
+                                <tr>
+                                    <td><strong>Name:</strong></td>
+                                    <td><span id="name"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Rank:</strong></td>
+                                    <td><span id="rank"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Phone:</strong></td>
+                                    <td><span id="phone"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Email:</strong></td>
+                                    <td><span id="email"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Address:</strong></td>
+                                    <td><span id="address"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section: Case Information -->
+                <div id="case-area" class="case-area"></div>
+
+            </section>
+        </div>
+    </section>
+</body>
+
+</html>

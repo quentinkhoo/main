@@ -1,6 +1,7 @@
 package seedu.investigapptor.ui;
 
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -26,9 +27,10 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     public static final String CASE_DETAILS_PAGE = "CaseDetailsPage.html";
+    public static final String INVESTIGATOR_DETAILS_PAGE =
+            "InvestigatorDetailsPage.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
-
     private static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
@@ -59,11 +61,51 @@ public class BrowserPanel extends UiPart<Region> {
                 crimeCase.getStatus().toString(),
                 getTagsSeparatedByComma(crimeCase.getTagsRaw()));
     }
-    //@@author
+    //@@author Marcus-cxc
+    /**
+     * Loads a Investigator HTML file with details from {@code Investigator}.
+     */
     private void loadPersonPage(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+        if (person instanceof Investigator) {
+            loadInvestigatorDetailsPage( (Investigator) person);
+        } else {
+            loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+        }
     }
+    /**
+     * Loads the case details HTML file with a background that matches the general theme.
+     */
+    private void loadInvestigatorDetailsPage(Investigator investigator) {
+        URL investigatorDetailsPage = MainApp.class.getResource(FXML_FILE_FOLDER + INVESTIGATOR_DETAILS_PAGE);
+        StringBuilder  url = new StringBuilder();
+        try {
+            String investigatorDetails = investigatorDetailsPage.toExternalForm()
+                    + "?invName=" + investigator.getName().fullName
+                    + "&rank=" + investigator.getRank().toString()
+                    + "&phone=" + investigator.getPhone().value
+                    + "&email=" + URLEncoder.encode(investigator.getEmail().value, "UTF-8")
+                    + "&address=" + URLEncoder.encode(investigator.getAddress().value, "UTF-8")
+                    + "&tags=" + getTagsSeparatedByComma(investigator.getTagsRaw())
+                    + "&case=";
+            url.append(investigatorDetails);
+            for (CrimeCase c : investigator.getCrimeCases()) {
+                url.append(getBasicCaseDetails(c));
+                url.append(",");
+            }
+            loadPage(url.toString());
+        } catch (Exception e) {
 
+        }
+    }
+    /**
+     * Loads the case details HTML file with a background that matches the general theme.
+     */
+    private String getBasicCaseDetails(CrimeCase crimeCase) {
+        String caseDetail = crimeCase.getCaseName().toString()
+                + "!" + crimeCase.getStatus();
+
+        return caseDetail;
+    }
     public void loadPage(String url) {
         Platform.runLater(() -> browser.getEngine().load(url));
     }

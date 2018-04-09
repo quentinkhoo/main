@@ -67,7 +67,7 @@ public class BrowserPanel extends UiPart<Region> {
      */
     private void loadPersonPage(Person person) {
         if (person instanceof Investigator) {
-            loadInvestigatorDetailsPage( (Investigator) person);
+            loadInvestigatorDetailsPage((Investigator) person);
         } else {
             loadPage(SEARCH_PAGE_URL + person.getName().fullName);
         }
@@ -94,7 +94,7 @@ public class BrowserPanel extends UiPart<Region> {
             }
             loadPage(url.toString());
         } catch (Exception e) {
-
+            throw new AssertionError("Encoder Error");
         }
     }
     /**

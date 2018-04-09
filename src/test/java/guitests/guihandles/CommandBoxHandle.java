@@ -10,8 +10,7 @@ import seedu.investigapptor.ui.CommandBox;
  */
 public class CommandBoxHandle extends NodeHandle<TextField> {
 
-    public static final String COMMAND_INPUT_FIELD_ID = "#commandTextField";
-    public static final String COMMAND_DISPLAY_FIELD_ID = "#commandTextDisplay";
+    public static final String COMMAND_FIELD_ID = "#commandTextField";
 
     public CommandBoxHandle(TextField commandBoxNode) {
         super(commandBoxNode);

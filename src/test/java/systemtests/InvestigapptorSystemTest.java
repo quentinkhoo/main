@@ -50,9 +50,10 @@ public abstract class InvestigapptorSystemTest {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 
-    private static final List<String> COMMAND_BOX_DEFAULT_STYLE = Arrays.asList("text-input", "text-field");
+    private static final List<String> COMMAND_BOX_DEFAULT_STYLE = Arrays.asList("text-input", "text-field",
+            "password-field");
     private static final List<String> COMMAND_BOX_ERROR_STYLE =
-            Arrays.asList("text-input", "text-field", CommandBox.ERROR_STYLE_CLASS);
+            Arrays.asList("text-input", "text-field", "password-field", CommandBox.ERROR_STYLE_CLASS);
 
     private MainWindowHandle mainWindowHandle;
     private TestApp testApp;
@@ -100,9 +101,6 @@ public abstract class InvestigapptorSystemTest {
     public CommandBoxHandle getCommandBox() {
         return mainWindowHandle.getCommandBox();
     }
-
-    public CommandBoxHandle getCommandBoxDisplay() {
-        return mainWindowHandle.getCommandBoxDisplay(); }
 
     public PersonListPanelHandle getPersonListPanel() {
         return mainWindowHandle.getPersonListPanel();

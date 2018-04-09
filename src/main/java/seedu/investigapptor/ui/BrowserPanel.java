@@ -1,6 +1,8 @@
 package seedu.investigapptor.ui;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -83,6 +85,18 @@ public class BrowserPanel extends UiPart<Region> {
     private void loadCaseDetailsPage(String caseName, String description, Investigator currentInvestigator,
                                      String startDate, String endDate, String status, String tagList) {
         URL caseDetailsPage = MainApp.class.getResource(FXML_FILE_FOLDER + CASE_DETAILS_PAGE);
+
+        String encInvEmail = currentInvestigator.getEmail().value;
+        String encInvAddress = currentInvestigator.getAddress().value;
+
+        // Encodes emails and addresses to handle symbols such as '#'
+        try {
+            encInvEmail = URLEncoder.encode(currentInvestigator.getEmail().value, "UTF-8");
+            encInvAddress = URLEncoder.encode(currentInvestigator.getAddress().value, "UTF-8");
+        } catch (UnsupportedEncodingException usee) {
+            usee.printStackTrace();
+        }
+
         loadPage(caseDetailsPage.toExternalForm()
                 + "?caseName=" + caseName
                 + "&description=" + description
@@ -90,8 +104,8 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&invName=" + currentInvestigator.getName().fullName
                 + "&invRank=" + currentInvestigator.getRank().toString()
                 + "&invPhone=" + currentInvestigator.getPhone().value
-                + "&invEmail=" + currentInvestigator.getEmail().value
-                + "&invAddress=" + currentInvestigator.getAddress().value
+                + "&invEmail=" + encInvEmail
+                + "&invAddress=" + encInvAddress
                 + "&startDate=" + startDate
                 + "&endDate=" + endDate
                 + "&status=" + status);

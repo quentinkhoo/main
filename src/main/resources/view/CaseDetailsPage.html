@@ -50,8 +50,10 @@
             document.getElementById("invName").innerHTML=json.invName;
             document.getElementById("invRank").innerHTML=json.invRank;
             document.getElementById("invPhone").innerHTML=json.invPhone;
-            document.getElementById("invEmail").innerHTML=json.invEmail;
-            document.getElementById("invAddress").innerHTML=json.invAddress;
+            document.getElementById("invEmail").innerHTML=
+                decodeURIComponent(json.invEmail.replace(/\+/g, '%20'));
+            document.getElementById("invAddress").innerHTML=
+                decodeURIComponent(json.invAddress.replace(/\+/g, '%20'));
             document.getElementById("startDate").innerHTML=json.startDate;
             if (endDateHTML !== "#")
                 document.getElementById("endDate").innerHTML=endDateHTML;

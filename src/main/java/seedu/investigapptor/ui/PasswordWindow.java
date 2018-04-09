@@ -2,8 +2,6 @@ package seedu.investigapptor.ui;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -14,8 +12,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.investigapptor.commons.core.GuiSettings;
 import seedu.investigapptor.commons.core.LogsCenter;
-import seedu.investigapptor.commons.events.ui.ExitAppRequestEvent;
-import seedu.investigapptor.commons.events.ui.ShowHelpRequestEvent;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.storage.Storage;
 

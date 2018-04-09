@@ -20,7 +20,7 @@ import seedu.investigapptor.storage.XmlInvestigapptorStorage;
 import seedu.investigapptor.ui.testutil.EventsCollectorRule;
 
 
-
+//@@author quentinkhoo
 public class PasswordBoxTest extends GuiUnitTest {
     private static final String CORRECT_PASSWORD = "password";
     private static final String WRONG_PASSWORD = "p@ssword";
@@ -75,8 +75,9 @@ public class PasswordBoxTest extends GuiUnitTest {
     public void passwordBox_handleKeyPress() {
         passwordBoxHandle.run(WRONG_PASSWORD);
         assertEquals(errorStyleOfPasswordBox, passwordBoxHandle.getStyleClass());
+
         guiRobot.push(KeyCode.ESCAPE);
-        assertEquals(errorStyleOfPasswordBox, passwordBoxHandle.getStyleClass());
+        assertEquals("", passwordBoxHandle.getInput());
 
         guiRobot.push(KeyCode.A);
         assertEquals(defaultStyleOfPasswordBox, passwordBoxHandle.getStyleClass());

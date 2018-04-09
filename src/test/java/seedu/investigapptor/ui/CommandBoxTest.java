@@ -69,6 +69,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertEquals(defaultStyleOfCommandBox, commandBoxHandle.getStyleClass());
     }
 
+    //@@author quentinkhoo
     @Test
     public void handleKeyPress_escape() {
         guiRobot.push(KeyCode.ESCAPE);
@@ -81,6 +82,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertFalse("some input".equals(commandBoxHandle.getInput()));
         assertTrue("".equals(commandBoxHandle.getInput()));
     }
+    //@@author
 
     @Test
     public void handleKeyPress_startingWithUp() {

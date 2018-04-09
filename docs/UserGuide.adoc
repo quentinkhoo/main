@@ -61,9 +61,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`listinvestigators`* : lists all investigators
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd investigator shown in the current list
+* *`li`* : lists all investigators
+* **`ai`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`di`**`3` : deletes the 3rd investigator shown in the current list
 * *`exit`* : exits the app
 
 .  You can refer to the <<Features>> section below for details of each command.
@@ -104,8 +104,8 @@ Alternatively, you can find the help option by pressing kbd:[F1]
 or from the menu bar, as shown in _<<f1-help>>_.
 
 [[f1-help]]
-.Accessing Help From Menu Bar
-image::helpUI.png[width="790"]
+.Accessing help from menu bar
+image::userguide-images/help-ui.png[width="300"]
 ====
 
 // tag::setpassword[]
@@ -264,21 +264,10 @@ Examples:
 * `ai n/Tome Lee p/94727341 e/Tom@gmail.com a/323, Baker Street, #01-03 r/1 t/Rookie`
 * `ai n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 r/5 p/1234567`
 
-Simply key in the information in the above format in the input bar and press enter to register an investigator. Refer to
-<<f1-addInv>> as an example
-
-[[f1-addInv]]
-.Keying in the command (Note that this should be addinvestigator and not registerInvestigator)
-image::AddInvestigator1.png[width="790"]
-
-Outcome: After pressing enter, you should be able to the new investigator appearing on the investigator list and a success message will be displayed at the bottom.
-Refer to <<f2-addInv>>
-
-[[f2-addInv]]
-.Outcome
-image::AddInvestigator2.png[width="790"]
-
-
+*Example:*
+[[addinvestigator]]
+.Adding an investigator
+image::userguide-images/ai-command.png[width="790"]
 
 [TIP]
 An investigator can have any number of tags (including 0) +
@@ -288,8 +277,13 @@ Ranks ranges from 1 to 5 according (Constable ,Sergeant, Inspector, Detective, C
 ==== Listing all investigators : `listinvestigators` [Since v1.2]
 
 Shows a list of all investigators in the Investigapptor. +
-Format: `list investigators` +
-Alias: `l investigators`
+Format: `listinvestigators` +
+Alias: `li`
+
+*Example:*
+[[listinvestigators]]
+.Listing of all investigators
+image::userguide-images/li-command.png[width="450"]
 
 ==== Editing an investigator : `editinvestigator` [Since v1.3]
 
@@ -318,6 +312,11 @@ Finds investigators whose names contain any of the given keywords. +
 Format: `findinvestigators KEYWORD [MORE_KEYWORDS]` +
 Alias: `fi`
 
+*Example:*
+[[findinvestigators]]
+.Finding investigators by its name
+image::userguide-images/fi-command.png[width="450"]
+
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -330,13 +329,18 @@ Examples:
 
 * `findinvestigators John` +
 Returns `john` and `John Doe`
-* `fI Betsy Tim John` +
+* `fi Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
 
 ==== Locating investigators by tags: `findinvestigatortags` [Since v1.2]
 Find investigators whose tags contain any of the given keywords. +
 Format: `findinvestigatortags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fit`
+
+*Example:*
+[[findinvestigatortags]]
+.Finding investigators by its tags
+image::userguide-images/fit-command.png[width="450"]
 
 ****
 * The search is case insensitive. e.g `teamA` will match `teama`
@@ -369,26 +373,30 @@ Alias: `di`
 
 Examples:
 
-* `list investigator` +
+* `listinvestigators` +
 `deleteinvestigator 2` +
 Deletes the 2nd investigator in the address book.
-* `find Betsy` +
+* `findinvestigators Betsy` +
 `di 1` +
-Deletes the 1st investigator in the results of the `find` command.
+Deletes the 1st investigator in the results of the `findinvestigators` command.
 
 You can identify and delete the investigator by looking at their `INDEX` at the top left of their card as show in the
-arrow in <<f1-deleteInv>>
+diagram in <<deleteinv-index>>
 
-[[f1-deleteInv]]
-.Using the investigator Index
-image::DeleteInvestigator1.png[width="390"]
+[[deleteinv-index]]
+.Investigator Index
+image::userguide-images/di-command-index.png[width="320"]
 
-Outcome: You should be able to see a the success message and the investigator will no long be on the list like in
-<<f2-deleteInv>>
+*Example:*
+[[deleteinv]]
+.Deleting an investigator
+image::userguide-images/di-command.png[width="500"]
 
-[[f2-deleteInv]]
-.Outcome
-image::DeleteInvestigator2.png[width="790"]
+[NOTE]
+====
+If the investigator you are deleting is currently in charge of a case, it cannot be deleted.
+The case should be reassigned to another investigator before you delete the selected investigator.
+====
 
 ==== Selecting an investigator : `selectinvestigator` [Coming in v1.5]
 
@@ -420,7 +428,7 @@ These are case related commands. +
 ==== Adding a case: `addcase` [Since v1.1]
 
 The first step to managing your cases is to add them to the application along with their details. +
-*Format:* `addcase [n/CASE_NAME] [d/DESCRIPTION] [i/INVESTIGATOR_INDEX] [s/START_DATE] [t/TAG]...` +
+*Format:* `addcase n/CASE_NAME d/DESCRIPTION i/INVESTIGATOR_INDEX s/START_DATE [t/TAG]...` +
 *Shorthand Format:* `ac`
 
 [TIP]
@@ -447,10 +455,9 @@ Format: `listcases` +
 Alias: `lc`
 
 *Example:*
-
 [[listcases]]
 .Listing cases
-image::listcases.png[width="790"]
+image::userguide-images/lc-command.png[width="450"]
 
 //end::listcases[]
 
@@ -489,6 +496,11 @@ Finds cases whose names contain any of the given keywords. +
 Format: `findcases KEYWORD [MORE_KEYWORDS]` +
 Alias: `fc`
 
+*Example:*
+[[findcases]]
+.Finding cases by its name
+image::userguide-images/fc-command.png[width="450"]
+
 ****
 * The search is case insensitive. e.g `project` will match `Project`
 * The order of the keywords does not matter. e.g. `Project Magic` will match `Magic Project`
@@ -517,6 +529,11 @@ Returns any cases having names `murder`, `rape`, or `arson`
 Find cases whose tags contain any of the given keywords. +
 Format: `findcasetags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fct`
+
+*Example:*
+[[findcasetags]]
+.Finding cases by its tags
+image::userguide-images/fct-command.png[width="450"]
 
 ****
 * The search is case insensitive. e.g `homicide` will match `Homicide`

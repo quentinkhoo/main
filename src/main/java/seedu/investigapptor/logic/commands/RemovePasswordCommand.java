@@ -1,11 +1,8 @@
 package seedu.investigapptor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
-import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.logic.commands.exceptions.NoPasswordException;
-import seedu.investigapptor.model.Password;
 
 //@@author quentinkhoo
 /**

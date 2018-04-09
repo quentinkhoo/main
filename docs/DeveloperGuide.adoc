@@ -565,19 +565,40 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
 === Investigator Class
+==== Reason for Implementation
+As the base person class provided by the addressbook only has basic capability to store simple information such name and
+phone number, we had to create a new `Investigator` package which can store and handle a list of `CrimeCases` which is a core
+ requirement for our product to work. We chose not to modify the `Person` package but instead extend from it as it will allow the ease of adding new
+  type of person object in the future such as suspects or witnesses.
 
-The `Investigator` package is a extended from the `Person` package, allowing it to handle the basic functions of a `Person` package while
-having additional properties required for an investigator. The additional properties are:
+==== Current Implementation
+Currently the `Investigator` extends from the `Person` class, and the additional two properties the are:
 
 * `Rank`
 +
 Stores the rank of the investigator
 
+[width="50%",cols="15%,<30%",options="header",]
+|=======================================================================
+|Integer Value |Rank
+|`1` |`Constable`
+
+|`2` |`Sergeant`
+
+|`3` |`Inspector`
+
+|`4` |`Detective`
+
+|`5` |`Captain`
+
+|=======================================================================
+
+
 * `UniqueCrimeCaseList`
 +
 Stores and manages all the CrimeCases which the investigator is in charge of.
 
-==== Model
+===== Model
 
 Currently the `Investigator` is upcasted and stored in the `Investigapptor` 's `UniquePersonList`.
 This is done on purpose to allow future enhancement that allows us to implement types of people such as suspects and witnesses. Storing them together makes it easier to use general
@@ -596,7 +617,7 @@ both Investigator and Person type are both return into the `UniquePersonList`.
         return new Person(
                 person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
 
-==== Storage
+===== Storage
 
 As Investigator has addition properties compared to Person, `XmlAdaptedInvestigator` is created to convert
 the `Investigator` into correct XML format. We had to also change the method of storing the in `Investigapptor`

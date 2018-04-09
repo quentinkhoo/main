@@ -202,6 +202,11 @@ task copyDummySearchPage(type: Copy) {
     into "${buildDir}/docs/html5"
 }
 
+task copyInvestigatorDetailsPage(type: Copy) {
+    from 'src/main/resource/view/InvestigatorDetailsPage.html'
+    into "${buildDir}/doc/html5"
+}
+
 deployOfflineDocs.dependsOn asciidoctor
 processResources.dependsOn deployOfflineDocs
 

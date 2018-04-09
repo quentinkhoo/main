@@ -11,8 +11,9 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.EndDate;
+import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.investigator.Investigator;
@@ -117,21 +118,21 @@ public class XmlAdaptedCrimeCase {
 
         if (this.startDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Date.class.getSimpleName()));
+                    StartDate.class.getSimpleName()));
         }
-        if (!Date.isValidDate(this.startDate)) {
-            throw new IllegalValueException(Date.MESSAGE_DATE_CONSTRAINTS);
+        if (!StartDate.isValidDate(this.startDate)) {
+            throw new IllegalValueException(StartDate.MESSAGE_DATE_CONSTRAINTS);
         }
-        final Date startDate = new Date(this.startDate);
+        final StartDate startDate = new StartDate(this.startDate);
 
         if (this.endDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Date.class.getSimpleName()));
+                    EndDate.class.getSimpleName()));
         }
-        if (!Date.isValidDate(this.endDate)) {
-            throw new IllegalValueException(Date.MESSAGE_DATE_CONSTRAINTS);
+        if (!EndDate.isValidDate(this.endDate)) {
+            throw new IllegalValueException(EndDate.MESSAGE_DATE_CONSTRAINTS);
         }
-        final Date endDate = new Date(this.endDate);
+        final EndDate endDate = new EndDate(this.endDate);
 
         if (this.status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

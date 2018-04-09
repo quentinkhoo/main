@@ -8,15 +8,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 //@@author leowweiching
 /**
- * Represents a CrimeCase's Start date in the Investigapptor.
+ * Represents a CrimeCase's End date in the Investigapptor.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class EndDate {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Input date must follow DD/MM/YYYY or D/M/YYYY format, and it should not be blank";
 
-    public static final String DATE_VALIDATION_REGEX = "([0-9]*)/([0-9]*)/([0-9]*)";
+    public static final String DATE_VALIDATION_REGEX = "[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}";
     public static final String LARGEST_DATE = "12/12/3000";
 
     private static final int DOB_DAY_INDEX = 0;
@@ -35,7 +35,7 @@ public class Date {
      *
      * @param date A valid date.
      */
-    public Date(String date) {
+    public EndDate(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_DATE_CONSTRAINTS);
         this.date = date;
@@ -57,31 +57,28 @@ public class Date {
     /**
      * Returns true if a given string is a valid date.
      */
-    public static boolean isValidDate(String test) {
-        if (isEmptyDate(test)) {
+    public static boolean isValidDate(String date) {
+        if (isEmptyDate(date) || !date.matches(DATE_VALIDATION_REGEX) || !hasDateMonthYear(date)) {
             return false;
         }
 
-        if (!test.matches(DATE_VALIDATION_REGEX)) {
+        try {
+            stringToDate(date);
+            return true;
+        } catch (DateTimeException dte) {
             return false;
         }
+    }
+    /**
+     * Returns {@code LocalDate} from given {@code String} date
+     */
+    private static LocalDate stringToDate(String date) throws DateTimeException {
+        String[] dateProperties = date.split("/");
+        int testDay = Integer.parseInt(dateProperties[DOB_DAY_INDEX]);
+        int testMonth = Integer.parseInt(dateProperties[DOB_MONTH_INDEX]);
+        int testYear = Integer.parseInt(dateProperties[DOB_YEAR_INDEX]);
 
-        String[] dateProperties = test.split("/");
-        if (hasDateMonthYear((test))) {
-            int testDay = Integer.parseInt(dateProperties[DOB_DAY_INDEX]);
-            int testMonth = Integer.parseInt(dateProperties[DOB_MONTH_INDEX]);
-            int testYear = Integer.parseInt(dateProperties[DOB_YEAR_INDEX]);
-
-            try {
-                LocalDate.of(testYear, testMonth, testDay);
-                return true;
-            } catch (DateTimeException dte) {
-                return false;
-            }
-        } else {
-            return false;
-        }
-
+        return LocalDate.of(testYear, testMonth, testDay);
     }
 
     /**
@@ -126,17 +123,17 @@ public class Date {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof Date
-                && this.date.equals(((Date) other).date));
+                || (other instanceof EndDate
+                && this.date.equals(((EndDate) other).date));
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(this.day)
-                .append(" ")
+                .append("/")
                 .append(this.month)
-                .append(" ")
+                .append("/")
                 .append(this.year);
         return builder.toString();
     }

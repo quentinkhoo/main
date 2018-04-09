@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 import seedu.investigapptor.logic.commands.EditCaseCommand.EditCrimeCaseDescriptor;
 import seedu.investigapptor.model.crimecase.CaseName;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.tag.Tag;
 
@@ -67,7 +67,7 @@ public class EditCrimeCaseDescriptorBuilder {
      * Sets the {@code StartDate} of the {@code EditCrimeCaseDescriptor} that we are building.
      */
     public EditCrimeCaseDescriptorBuilder withStartDate(String startDate) {
-        descriptor.setStartDate(new Date(startDate));
+        descriptor.setStartDate(new StartDate(startDate));
         return this;
     }
 

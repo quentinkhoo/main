@@ -407,7 +407,7 @@ public class CalendarPanel extends UiPart<Region> {
      * @param status
      * @param caseName
      */
-    private void setEntry(Date startDate, Date endDate, String status, String caseName) {
+    private void setEntry(StartDate startDate, EndDate endDate, String status, String caseName) {
         Entry<String> caseEntry = new Entry<>(caseName);
         caseEntry.changeStartDate(LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDay()));
         caseEntry.setFullDay(true);

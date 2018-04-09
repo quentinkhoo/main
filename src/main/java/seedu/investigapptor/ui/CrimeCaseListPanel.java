@@ -14,7 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.ui.CrimeCasePanelSelectionChangedEvent;
-import seedu.investigapptor.commons.events.ui.JumpToListRequestEvent;
+import seedu.investigapptor.commons.events.ui.JumpToCrimeCaseListRequestEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 
 /**
@@ -63,7 +63,7 @@ public class CrimeCaseListPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+    private void handleJumpToCrimeCaseListRequestEvent(JumpToCrimeCaseListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         scrollTo(event.targetIndex);
     }

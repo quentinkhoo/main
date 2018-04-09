@@ -13,8 +13,9 @@ import org.junit.Test;
 
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.model.crimecase.CaseName;
-import seedu.investigapptor.model.crimecase.Date;
 import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.EndDate;
+import seedu.investigapptor.model.crimecase.StartDate;
 import seedu.investigapptor.model.crimecase.Status;
 import seedu.investigapptor.model.person.Name;
 import seedu.investigapptor.model.person.Person;
@@ -105,7 +106,7 @@ public class XmlAdaptedCrimeCaseTest {
         XmlAdaptedCrimeCase crimeCase =
                 new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR, INVALID_DATE,
                         VALID_ENDDATE, VALID_STATUS, VALID_TAGS);
-        String expectedMessage = Date.MESSAGE_DATE_CONSTRAINTS;
+        String expectedMessage = StartDate.MESSAGE_DATE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
 
@@ -114,7 +115,7 @@ public class XmlAdaptedCrimeCaseTest {
         XmlAdaptedCrimeCase crimeCase =
                 new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR, VALID_STARTDATE,
                         INVALID_DATE, VALID_STATUS, VALID_TAGS);
-        String expectedMessage = Date.MESSAGE_DATE_CONSTRAINTS;
+        String expectedMessage = EndDate.MESSAGE_DATE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
 
@@ -122,7 +123,7 @@ public class XmlAdaptedCrimeCaseTest {
     public void toModelType_nullStartDate_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase = new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR,
                 null, VALID_ENDDATE, VALID_STATUS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StartDate.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
 
@@ -130,7 +131,7 @@ public class XmlAdaptedCrimeCaseTest {
     public void toModelType_nullEndDate_throwsIllegalValueException() {
         XmlAdaptedCrimeCase crimeCase = new XmlAdaptedCrimeCase(VALID_NAME, VALID_DESCRIPTION, VALID_INVESTIGATOR,
                 VALID_STARTDATE, null, VALID_STATUS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EndDate.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, crimeCase::toModelType);
     }
 

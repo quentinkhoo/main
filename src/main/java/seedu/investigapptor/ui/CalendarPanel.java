@@ -148,7 +148,7 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleNewCaseEvent(InvestigapptorChangedEvent event) {
+    private void handleCaseChangedEvent(InvestigapptorChangedEvent event) {
         crimeList = event.data.getCrimeCaseList();
         Platform.runLater(this::updateCalendar);
     }

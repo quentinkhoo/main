@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
+import seedu.investigapptor.logic.commands.exceptions.NoPasswordException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
@@ -104,6 +105,6 @@ public interface Model {
     /**
      * Removes the existing password
      */
-    void removePassword();
+    void removePassword() throws NoPasswordException;
     //@@author
 }

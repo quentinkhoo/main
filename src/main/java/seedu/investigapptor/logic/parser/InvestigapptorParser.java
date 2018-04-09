@@ -131,7 +131,7 @@ public class InvestigapptorParser {
 
         case RemovePasswordCommand.COMMAND_WORD:
         case RemovePasswordCommand.COMMAND_ALIAS:
-            return new RemovePasswordCommandParser().parse(arguments);
+            return new RemovePasswordCommand();
 
         case ListInvestigatorCaseCommand.COMMAND_WORD:
         case ListInvestigatorCaseCommand.COMMAND_ALIAS:

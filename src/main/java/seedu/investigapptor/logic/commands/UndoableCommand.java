@@ -6,6 +6,7 @@ import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_CASES;
 import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
+import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 

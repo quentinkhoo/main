@@ -16,7 +16,7 @@ import seedu.investigapptor.model.Password;
 /**
  * Adds a password to the investigapptor book.
  */
-public class SetPasswordCommand extends UndoableCommand {
+public class SetPasswordCommand extends Command {
 
     public static final String COMMAND_WORD = "setpassword";
     public static final String COMMAND_ALIAS = "sp";
@@ -39,7 +39,7 @@ public class SetPasswordCommand extends UndoableCommand {
     }
 
     @Override
-    public CommandResult executeUndoableCommand() throws CommandException {
+    public CommandResult execute() throws CommandException {
         requireNonNull(model);
         try {
             model.updatePassword(password);

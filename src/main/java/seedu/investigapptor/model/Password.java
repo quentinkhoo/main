@@ -36,10 +36,10 @@ public class Password {
 
     /**
      * use this if hashcode is known
-     * @param password
+     * @param passwordHash
      */
-    public Password(String password) {
-        this.passwordHash = password;
+    public Password(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     /**

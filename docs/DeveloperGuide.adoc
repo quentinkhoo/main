@@ -649,16 +649,16 @@ The following classes have been introduced in the package as of v1.1:
 [width="100%", cols="1,2,2", options="header"]
 |=======
 |Class |Constructor |Remark
-|CaseName |`new CaseName(“Project Zero”)` |Stores a String that represents the name of the case.
-|Description |`new Description(“Abduction and murder of a Chicago greeting card executive.”)` |Stores a String that represents the description of the case.
-|StartDate |`new StartDate(“01/01/2015”)` |Stores a String that represents the start date of the case.
-|EndDate |`new EndDate(LARGEST_DATE)` |Stores a String that represents the end date of the case.
+|CaseName |`new CaseName(“Project Zero”)` |Stores a `String` that represents the name of the case.
+|Description |`new Description(“Abduction and murder of a Chicago greeting card executive.”)` |Stores a `String` that represents the description of the case.
+|StartDate |`new StartDate(“01/01/2015”)` |Stores a `String` that represents the start date of the case.
+|EndDate |`new EndDate(LARGEST_DATE)` |Stores a `String` that represents the end date of the case.
 
-The class contains a static String `LARGEST_DATE` that is often used as the default argument when instantiating the `EndDate` class to indicate a newly created case whose `Status` is “open”.
-|Status |`new Status()` |Stores a String that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called.
+The class contains a static string `LARGEST_DATE` that is often used as the default argument when instantiating the `EndDate` class to indicate a newly created case whose `Status` is “open”.
+|Status |`new Status()` |Stores a `String` that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called.
 |=======
 
-The `crimecase` package includes the `CrimeCase` class which is used to keep information about a case. The `CrimeCase` class provides utility methods to retrieve the different objects (e.g. CaseName), delete a tag, and obtain the hash code of the `CrimeCase` object.
+The `crimecase` package includes the `CrimeCase` class which is used to keep information about a case. The `CrimeCase` class provides utility methods to retrieve the different objects (e.g. `CaseName`), delete a tag, and obtain the hash code of the `CrimeCase` object.
 
 A `CrimeCase` class is created with one constructor.
 

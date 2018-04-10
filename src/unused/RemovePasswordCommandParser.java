@@ -30,7 +30,7 @@ public class RemovePasswordCommandParser implements Parser<RemovePasswordCommand
         }
 
         String inputPassword = args.substring(4);
-        return new RemovePasswordCommand(inputPassword);
+        return new RemovePasswordCommand();
     }
 
     /**

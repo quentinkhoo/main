@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.investigapptor.logic.commands.exceptions.NoPasswordException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.UniqueCrimeCaseList;
 import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
@@ -84,11 +85,12 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
 
     //@@author quentinkhoo
     public void setPassword(String password) {
-        this.password = new Password(password);
+        String passwordHash = Password.generatePasswordHash(password);
+        this.password = new Password(passwordHash);
     }
 
-    public void setPassword(Password oldPassword) {
-        this.password = oldPassword;
+    public void setPassword(Password password) {
+        this.password = password;
     }
     //@@author
 
@@ -114,8 +116,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         } catch (DuplicatePersonException e) {
             throw new AssertionError("Investigapptor should not have duplicate investigators");
         }
-        String passwordHash = newData.getPassword().getPassword();
-        setPassword(passwordHash);
+
+        setPassword(newData.getPassword());
     }
     //// person-level operations
 
@@ -367,13 +369,20 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
      * @param newPassword  will be the new password.
      */
     public void updatePassword(Password newPassword) {
-        password.updatePassword(newPassword);
+        try {
+            password.updatePassword(newPassword);
+        } catch (NullPointerException npe) {
+            setPassword(newPassword.getPassword());
+        }
     }
 
     /**
      * Removes the password of this {@code Investigapptor}
      */
-    public void removePassword() {
+    public void removePassword () throws NoPasswordException {
+        if (this.password == null || this.password.getPassword() == null) {
+            throw new NoPasswordException("No password in investigapptor");
+        }
         this.password = null;
     }
     //@@author

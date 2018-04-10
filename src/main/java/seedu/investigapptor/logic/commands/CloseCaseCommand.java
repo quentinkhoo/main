@@ -33,7 +33,7 @@ public class CloseCaseCommand extends UndoableCommand {
     public static final String COMMAND_ALIAS = "cl";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status from open to close "
-            + "and updates the end date accordingly.\n"
+            + "and updates the end date to today's date.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
@@ -99,8 +99,7 @@ public class CloseCaseCommand extends UndoableCommand {
         EndDate endDate = new EndDate(EndDate.getTodayDate());
         Set<Tag> tags = caseToClose.getTags();
         Investigator investigator = caseToClose.getCurrentInvestigator();
-        Status status = caseToClose.getStatus();
-        status.closeCase();    // Close case status only
+        Status status = new Status(CASE_CLOSE);
 
         return new CrimeCase(name, desc, investigator, startDate, endDate, status, tags);
     }

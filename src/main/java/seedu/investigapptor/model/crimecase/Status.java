@@ -48,13 +48,6 @@ public class Status {
     }
 
     /**
-     * Close the case by updating the case status to close
-     */
-    public void closeCase() {
-        this.status = CASE_CLOSE;
-    }
-
-    /**
      * Returns true if a given string is a valid case status.
      */
     public static boolean isValidStatus(String test) {

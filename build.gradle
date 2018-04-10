@@ -203,7 +203,7 @@ task copyDummySearchPage(type: Copy) {
 }
 
 task copyCaseDetailsPage(type: Copy) {
-    from 'src/main/resource/view/CaseDetailsPage.html'
+    from 'docs/CaseDetailsPage.html'
     into "${buildDir}/doc/html5"
 }
 

@@ -84,31 +84,39 @@ public class BrowserPanel extends UiPart<Region> {
      */
     private void loadCaseDetailsPage(String caseName, String description, Investigator currentInvestigator,
                                      String startDate, String endDate, String status, String tagList) {
-        URL caseDetailsPage = MainApp.class.getResource(FXML_FILE_FOLDER + CASE_DETAILS_PAGE);
 
+        String encDescription = description;
         String encInvEmail = currentInvestigator.getEmail().value;
         String encInvAddress = currentInvestigator.getAddress().value;
+        String encStartDate = startDate;
+        String encEndDate = endDate;
 
         // Encodes emails and addresses to handle symbols such as '#'
         try {
+            encDescription = URLEncoder.encode(description, "UTF-8");
             encInvEmail = URLEncoder.encode(currentInvestigator.getEmail().value, "UTF-8");
             encInvAddress = URLEncoder.encode(currentInvestigator.getAddress().value, "UTF-8");
+            encStartDate = URLEncoder.encode(startDate, "UTF-8");
+            encEndDate = URLEncoder.encode(endDate, "UTF-8");
         } catch (UnsupportedEncodingException usee) {
             usee.printStackTrace();
         }
 
-        loadPage(caseDetailsPage.toExternalForm()
+        URL caseDetailsPage = MainApp.class.getResource(FXML_FILE_FOLDER + CASE_DETAILS_PAGE);
+        String url = caseDetailsPage.toExternalForm()
                 + "?caseName=" + caseName
-                + "&description=" + description
+                + "&description=" + encDescription
                 + "&tags=" + tagList
                 + "&invName=" + currentInvestigator.getName().fullName
                 + "&invRank=" + currentInvestigator.getRank().toString()
                 + "&invPhone=" + currentInvestigator.getPhone().value
                 + "&invEmail=" + encInvEmail
                 + "&invAddress=" + encInvAddress
-                + "&startDate=" + startDate
-                + "&endDate=" + endDate
-                + "&status=" + status);
+                + "&startDate=" + encStartDate
+                + "&endDate=" + encEndDate
+                + "&status=" + status;
+
+        loadPage(url);
     }
 
     private String getTagsSeparatedByComma(Set<String> tags) {

@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="BrowserPanel.css">
+    <link rel="stylesheet" href="stylesheets/BrowserPanel.css">
     <script type="text/javascript">
         function getJsonFromUrl() {
             var query = location.search.substr(1);
@@ -40,11 +40,13 @@
 
         // Preprocess tags and endDate
         var tagsHTML = tagsToHTML(json.tags.split(','));
-        var endDateHTML = endDateToHTML(json.status, json.endDate);
+        var endDateHTML = endDateToHTML(json.status,
+            decodeURIComponent(json.endDate.replace(/\+/g, '%20')));
 
         document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("caseName").innerHTML=json.caseName;
-            document.getElementById("description").innerHTML=json.description;
+            document.getElementById("description").innerHTML=
+                decodeURIComponent(json.description.replace(/\+/g, '%20'));
             if (tagsHTML !== '#')
                 document.getElementById("tag-area").innerHTML=tagsHTML;
             document.getElementById("invName").innerHTML=json.invName;
@@ -54,7 +56,8 @@
                 decodeURIComponent(json.invEmail.replace(/\+/g, '%20'));
             document.getElementById("invAddress").innerHTML=
                 decodeURIComponent(json.invAddress.replace(/\+/g, '%20'));
-            document.getElementById("startDate").innerHTML=json.startDate;
+            document.getElementById("startDate").innerHTML=
+                decodeURIComponent(json.startDate.replace(/\+/g, '%20'));
             if (endDateHTML !== "#")
                 document.getElementById("endDate").innerHTML=endDateHTML;
             document.getElementById("status").innerHTML=json.status;

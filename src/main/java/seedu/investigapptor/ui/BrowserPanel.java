@@ -27,7 +27,8 @@ import seedu.investigapptor.model.person.investigator.Investigator;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String CASE_DETAILS_PAGE = "CaseDetailsPage.html";
+    public static final String CASE_DETAILS_PAGE =
+            "https://cs2103jan2018-f14-b3.github.io/main/CaseDetailsPage.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
@@ -102,8 +103,7 @@ public class BrowserPanel extends UiPart<Region> {
             usee.printStackTrace();
         }
 
-        URL caseDetailsPage = MainApp.class.getResource(FXML_FILE_FOLDER + CASE_DETAILS_PAGE);
-        String url = caseDetailsPage.toExternalForm()
+        String caseDetailsPage = CASE_DETAILS_PAGE
                 + "?caseName=" + caseName
                 + "&description=" + encDescription
                 + "&tags=" + tagList
@@ -116,7 +116,7 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&endDate=" + encEndDate
                 + "&status=" + status;
 
-        loadPage(url);
+        loadPage(caseDetailsPage);
     }
 
     private String getTagsSeparatedByComma(Set<String> tags) {

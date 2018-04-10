@@ -16,3 +16,4 @@ public class XmlAdaptedPasswordTest {
         assertEquals(password, storedPassword.toModelType());
     }
 }
+//@@author

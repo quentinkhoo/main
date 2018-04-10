@@ -126,6 +126,7 @@ public class InvestigapptorTest {
         assertEquals(new ModelManager(expectedInvestigapptor, userPrefs), modelManager);
     }
 
+    //@@author quentinkhoo
     @Test
     public void setPassword_passwordAdded() throws Exception {
         Investigapptor investigapptorAddedPassword = new Investigapptor("password");
@@ -141,6 +142,8 @@ public class InvestigapptorTest {
         Investigapptor expectedInvestigapptor = new InvestigapptorBuilder().withPassword("newPassword").build();
         assertEquals(investigapptorWithNewPassword, expectedInvestigapptor);
     }
+
+    //@@author
 
     /**
      * A stub ReadOnlyInvestigapptor whose persons and tags lists can violate interface constraints.

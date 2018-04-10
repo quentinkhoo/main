@@ -10,17 +10,23 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.investigapptor.commons.events.model.InvestigapptorBackupEvent;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.commons.events.storage.DataSavingExceptionEvent;
+import seedu.investigapptor.commons.exceptions.WrongPasswordException;
 import seedu.investigapptor.model.Investigapptor;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.ui.testutil.EventsCollectorRule;
 
 public class StorageManagerTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();
@@ -67,6 +73,20 @@ public class StorageManagerTest {
         ReadOnlyInvestigapptor retrieved = storageManager.readInvestigapptor().get();
         assertEquals(original, new Investigapptor(retrieved));
     }
+
+    //@@author quentinkhoo
+    @Test
+    public void investigapptorReadWithWrongPassword() throws Exception {
+        thrown.expect(WrongPasswordException.class);
+        Investigapptor original = getTypicalInvestigapptor();
+        Password password = new Password("password");
+        original.updatePassword(password);
+        storageManager.saveInvestigapptor(original);
+        Password wrongPassword = new Password("p@ssword");
+        storageManager.readInvestigapptorWithPassword(wrongPassword);
+    }
+
+    //@@author
 
     @Test
     public void getInvestigapptorFilePath() {

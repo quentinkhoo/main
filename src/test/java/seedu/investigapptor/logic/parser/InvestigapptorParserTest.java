@@ -29,12 +29,15 @@ import seedu.investigapptor.logic.commands.ListCaseCommand;
 import seedu.investigapptor.logic.commands.ListInvestigatorCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
 import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.RemovePasswordCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
+import seedu.investigapptor.logic.commands.SetPasswordCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.ModelManager;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.model.crimecase.CaseNameContainsKeywordsPredicate;
 import seedu.investigapptor.model.crimecase.CrimeCase;
@@ -301,4 +304,18 @@ public class InvestigapptorParserTest {
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
     }
+
+    //@@author quentinkhoo
+    @Test
+    public void parseCommand_setPassword() throws Exception {
+        SetPasswordCommand command = (SetPasswordCommand) parser
+                .parseCommand(SetPasswordCommand.COMMAND_WORD + " pw/password");
+        assertEquals(new SetPasswordCommand(new Password("password")), command);
+    }
+
+    @Test
+    public void parserCommand_removePassword() throws Exception {
+        assertTrue(parser.parseCommand(RemovePasswordCommand.COMMAND_WORD) instanceof RemovePasswordCommand);
+    }
+    //@@author
 }

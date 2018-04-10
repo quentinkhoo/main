@@ -15,6 +15,7 @@ import seedu.investigapptor.model.ModelManager;
 import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.UserPrefs;
 
+//@@author quentinkhoo
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code PasswordCommand}.

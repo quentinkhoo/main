@@ -1,5 +1,7 @@
 package seedu.investigapptor.logic;
 
+import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PASSWORD;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -42,7 +44,7 @@ public class LogicManager extends ComponentManager implements Logic {
             undoRedoStack.push(command);
             return result;
         } finally {
-            history.add(commandText);
+            history.add(maskPassword(commandText));
         }
     }
 
@@ -60,4 +62,34 @@ public class LogicManager extends ComponentManager implements Logic {
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
     }
+
+    //@@author quentinkhoo
+
+    /**
+     * Masks a password field
+     * @param inputText
+     * @return
+     */
+    private String maskPassword(String inputText) {
+        StringBuilder sb = new StringBuilder(inputText);
+        int prefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
+
+        if (hasPasswordPrefix(inputText)) {
+            for (int i = prefixIndex + 3; i < inputText.length(); i++) {
+                sb.setCharAt(i, '*');
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Checks for presence of password prefix
+     * @param inputText
+     * @return
+     */
+    private boolean hasPasswordPrefix(String inputText) {
+        int passwordPrefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
+        return passwordPrefixIndex != -1;
+    }
+    //@@author
 }

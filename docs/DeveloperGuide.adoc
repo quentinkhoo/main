@@ -1266,7 +1266,7 @@ status.
 track and differentiate between closed and opened cases.
 ** *Minor Enhancement*: Tag colours
 *** This feature helps to differentiate the various tags present in each of the investigator/cases by using different colours to associate
-different tag content. (Same tag content = same colour)
+different tag content. (Same tag content = same colour & vice versa)
 
 * *Quentin Khoo*
 ** *Major enhancement*: Support access control by implementing a password prompt upon starting the application

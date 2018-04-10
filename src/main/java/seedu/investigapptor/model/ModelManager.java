@@ -14,6 +14,7 @@ import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.model.InvestigapptorBackupEvent;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
 import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
+import seedu.investigapptor.logic.commands.exceptions.NoPasswordException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
 import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
@@ -33,6 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final Investigapptor investigapptor;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<CrimeCase> filteredCrimeCases;
+    private Password password;
     /**
      * Initializes a ModelManager with the given investigapptor and userPrefs.
      */
@@ -45,6 +47,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.investigapptor = new Investigapptor(investigapptor);
         filteredCrimeCases = new FilteredList<>(this.investigapptor.getCrimeCaseList());
         filteredPersons = new FilteredList<>(this.investigapptor.getPersonList());
+        password = this.investigapptor.getPassword();
     }
 
     public ModelManager() {
@@ -132,9 +135,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void removePassword() {
-        investigapptor.removePassword();
-        indicateInvestigapptorChanged();
+    public void removePassword() throws NoPasswordException {
+        try {
+            investigapptor.removePassword();
+            indicateInvestigapptorChanged();
+        } catch (NoPasswordException npe) {
+            throw new NoPasswordException(npe.getMessage());
+        }
     }
     //@@author
 

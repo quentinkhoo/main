@@ -17,6 +17,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.investigapptor.commons.exceptions.DataConversionException;
 import seedu.investigapptor.commons.util.FileUtil;
 import seedu.investigapptor.model.Investigapptor;
+import seedu.investigapptor.model.Password;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 
 public class XmlInvestigapptorStorageTest {
@@ -37,6 +38,13 @@ public class XmlInvestigapptorStorageTest {
     private java.util.Optional<ReadOnlyInvestigapptor> readInvestigapptor(String filePath) throws Exception {
         return new XmlInvestigapptorStorage(filePath).readInvestigapptor(addToTestDataPathIfNotNull(filePath));
     }
+
+    //@@author quentinkhoo
+    private void readInvestigapptorWithPassword(String filePath, Password password) throws Exception {
+        new XmlInvestigapptorStorage(filePath)
+                .checkInvestigapptorPassword(addToTestDataPathIfNotNull(filePath), password);
+    }
+    //@@author
 
     private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
         return prefsFileInTestDataFolder != null
@@ -71,6 +79,16 @@ public class XmlInvestigapptorStorageTest {
         thrown.expect(DataConversionException.class);
         readInvestigapptor("invalidAndValidPersonInvestigapptor.xml");
     }
+
+    //@@author quentinkhoo
+    @Test
+    public void readInvestigapptorWithPassword_invalidAndValidPersonInvestigapptor_throwDataConversionException()
+            throws Exception {
+        thrown.expect(DataConversionException.class);
+        readInvestigapptorWithPassword("invalidPasswordInvestigapptor.xml",
+                new Password("password"));
+    }
+    //@@author
 
     @Test
     public void readAndSaveInvestigapptor_allInOrder_success() throws Exception {

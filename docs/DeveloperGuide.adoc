@@ -565,19 +565,40 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
 === Investigator Class
+==== Reason for Implementation
+As the base person class provided by the addressbook only has basic capability to store simple information such name and
+phone number, we had to create a new `Investigator` package which can store and handle a list of `CrimeCases` which is a core
+ requirement for our product to work. We chose not to modify the `Person` package but instead extend from it as it will allow the ease of adding new
+  type of person object in the future such as suspects or witnesses.
 
-The `Investigator` package is a extended from the `Person` package, allowing it to handle the basic functions of a `Person` package while
-having additional properties required for an investigator. The additional properties are:
+==== Current Implementation
+Currently the `Investigator` extends from the `Person` class, and the additional two properties the are:
 
 * `Rank`
 +
 Stores the rank of the investigator
 
+[width="50%",cols="15%,<30%",options="header",]
+|=======================================================================
+|Integer Value |Rank
+|`1` |`Constable`
+
+|`2` |`Sergeant`
+
+|`3` |`Inspector`
+
+|`4` |`Detective`
+
+|`5` |`Captain`
+
+|=======================================================================
+
+
 * `UniqueCrimeCaseList`
 +
 Stores and manages all the CrimeCases which the investigator is in charge of.
 
-==== Model
+===== Model
 
 Currently the `Investigator` is upcasted and stored in the `Investigapptor` 's `UniquePersonList`.
 This is done on purpose to allow future enhancement that allows us to implement types of people such as suspects and witnesses. Storing them together makes it easier to use general
@@ -596,7 +617,7 @@ both Investigator and Person type are both return into the `UniquePersonList`.
         return new Person(
                 person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
 
-==== Storage
+===== Storage
 
 As Investigator has addition properties compared to Person, `XmlAdaptedInvestigator` is created to convert
 the `Investigator` into correct XML format. We had to also change the method of storing the in `Investigapptor`
@@ -634,202 +655,149 @@ This function will only return `Person` in the list
 
 As more type of people are added, more function to differentiate the UniquePersonList.
 
-=== CrimeCase Package
+=== `crimecase` Package
 
-The `CrimeCase` package consists of multiple classes used to contain information about a case.
+==== Reason for implementation
 
-==== `CaseName` class +
+As Investigapptor is a tool for managing investigations, the ability to store information about a case is essential.
 
-Stores a `String` that represents the name of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the `CaseName` object.
+==== How it is implemented
 
-    /**
-     * Constructs a {@code Name}.
-     *
-     * @param name A valid name.
-     */
-    public CaseName(String name)
+Each attribute of a case, such as the case name, description, status, etc. are classes in the `crimecase` package. Each of the classes provide utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the object.
 
-==== `Description` class +
+The following classes have been introduced in the package as of v1.1:
 
-Stores a `String` that represents the description of the case. Provides utility methods to:
-* check the validity of the string to be stored
-* retrieve the string that is stored
-* obtain the hash code of the `Description` object
+[width="100%", cols="1,2,2", options="header"]
+|=======
+|Class |Constructor |Remark
+|CaseName |`new CaseName(“Project Zero”)` |Stores a `String` that represents the name of the case.
+|Description |`new Description(“Abduction and murder of a Chicago greeting card executive.”)` |Stores a `String` that represents the description of the case.
+|StartDate |`new StartDate(“01/01/2015”)` |Stores a `String` that represents the start date of the case.
+|EndDate |`new EndDate(LARGEST_DATE)` |Stores a `String` that represents the end date of the case.
 
-    /**
-     * Constructs a {@code Description}.
-     *
-     * @param description A valid description.
-     */
-    public Description(String description)
+The class contains a static string `LARGEST_DATE` that is often used as the default argument when instantiating the `EndDate` class to indicate a newly created case whose `Status` is “open”.
+|Status |`new Status()` |Stores a `String` that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called.
+|=======
 
-==== `StartDate` class +
+The `crimecase` package includes the `CrimeCase` class which is used to keep information about a case. The `CrimeCase` class provides utility methods to retrieve the different objects (e.g. `CaseName`), delete a tag, and obtain the hash code of the `CrimeCase` object.
 
-Stores a `String` that represents the start date of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the `StartDate` object.
+A `CrimeCase` class is created with one constructor.
 
-    /**
-     * Constructs a {@code date}.
-     *
-     * @param date A valid date.
-     */
-    public StartDate(String date)
+[width="100%", cols="1,2,2", options="header"]
+|=======
+|Class |Constructor |Remark
+|CrimeCase |`new CrimeCase(name, description, investigatorToAdd, startDate, endDate, status, tagList)` |Stores `CaseName`, `Description`, `Investigator`, `StartDate`, `Status`, and `UniqueTagList` objects to represent information of the case.
+|=======
 
-==== `Status` class +
+==== Reasons for how it is implemented
 
-Stores a `String` that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called. Provides utility methods to toggle the status of the case, retrieve the string that is stored, and obtain the hash code of the `Status` object.
+The `crimecase` package follows the model of the `person` package, whereby each attribute is represented by a class. This allows for better organization and a modular design which follows the single responsibility principle.
 
-    /**
-     * Constructs a {@code Status}.
-     *
-     */
-    public Status()
-
-==== `CrimeCase` class +
-
-Stores `CaseName`, `Description`, `Person`, `StartDate`, `Status`, and `UniqueTagList` objects to represent information of the case. Provides utility methods to retrieve the different objects, delete a tag, and obtain the hash code of the `CrimeCase` object.
-
-   /**
-     * Constructs a {@code CrimeCase}.
-     * Every field must be present and not null
-     */
-    public CrimeCase(CaseName name, Description description, Person currentInvestigator, StartDate startDate, Status status, Set<Tag> tags)
 
 === Adding cases feature
 
-==== Current Implementation
+==== Reason for implementation
 
-===== Logic
+To be able to manage cases, investigators should have the ability to add case details into the application.
 
-* `AddCaseCommandParser`
+==== How it is implemented
 
-`AddCaseCommandParser` parses the given `String` of arguments in the context of the `AddCaseCommand` and returns an `AddCaseCommand` object for execution. A `ParseException` is thrown if the user input does not conform to the expected format.
+The `AddCaseCommandParser` parses the string of arguments provided by the user and splits the `String` into its separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) to be used in the context of the `AddCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
-    public AddCaseCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR,
-                        PREFIX_STARTDATE, PREFIX_TAG);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR, PREFIX_STARTDATE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCaseCommand.MESSAGE_USAGE));
-        }
-        ...
+The `AddCaseCommand` that extends the `UndoableCommand` class is implemented with constructor overloading, where either constructor can be used depending on the developer’s needs.
+
+[width="100%", cols="1,2", options="header"]
+|=======
+|Constructor |Remark
+|`new AddCaseCommand(crimeCase)` |Accepts a `CrimeCase` object as parameter.
+
+Useful in testing where `CrimeCaseBuilder` is used to create the `CrimeCase` object first.
+|`new AddCaseCommand(name, description, investigatorIndex, startDate, tagList)` |Accepts `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>` objects as parameters.
+
+Called by `AddCaseCommandParser` when a user inputs the command and details of a case.
+
+When this constructor is used, the `Index` object is processed to retrieve the `Investigator` object at the specified index on the most recent list of investigators displayed by the model. A `CrimeCase` object is created using the parameters and the retrieved `Investigator` object.
+|=======
+
+The `CrimeCase` object is then added to the model and throws a `DuplicateCrimeCaseException` if there exists an identical object already in Investigapptor. The following snippet shows the execution code.
+
+```
+public CommandResult executeUndoableCommand() throws CommandException {
+    requireNonNull(model);
+    try {
+        model.addCrimeCase(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    } catch (DuplicateCrimeCaseException e) {
+        throw new CommandException(MESSAGE_DUPLICATE_CASE);
     }
-
-* `AddCaseCommand`
-
-The `AddCaseCommand` that extends the `UndoableCommand` class is implemented with two overloaded constructors, either of which can be used depending on convenience:
-
-    /**
-     * Creates an AddCaseCommand to add the specified {@code CrimeCase}
-     */
-    public AddCaseCommand(CrimeCase crimeCase)
-
-    /**
-     * @param name of the case to be added
-     * @param description of the case to be added
-     * @param investigatorIndex of the investigator to be added
-     * @param startDate of the case to be added
-     * @param tagList of the case to be added
-     */
-    public AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set<Tag> tagList)
-
-Since `AddCaseCommand` extends `UndoableCommand`, after the constructor is called, the `preprocessUndoableCommand` and `executeUndoableCommand` methods are executed consecutively right after.
-
-If the `AddCaseCommand(CrimeCase crimeCase)` constructor is used, the logic in the `preprocessUndoableCommand` method is not executed.
-
-Note that the `AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set<Tag> tagList)` constructor above takes in an `Index` object as a parameter, which refers to the index number of the investigator as displayed in `PersonListPanel`.
-
-The `Person` object is retrieved based on the index and the created `CrimeCase` object is stored in `toAdd`:
-
-    @Override
-    protected void preprocessUndoableCommand() throws CommandException {
-        if (investigatorIndex != null) {
-            List<Person> lastShownList = model.getFilteredPersonList();
-            if (investigatorIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
-            }
-            Person investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
-            toAdd = createCrimeCase(investigatorToAdd);
-        }
-    }
-
-The `executeUndoableCommand` then adds the `CrimeCase` object to the model and throws a `DuplicateCrimeCaseException` if there exists an identical object:
-
-    @Override
-    public CommandResult executeUndoableCommand() throws CommandException {
-        requireNonNull(model);
-        try {
-            model.addCrimeCase(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (DuplicateCrimeCaseException e) {
-            throw new CommandException(MESSAGE_DUPLICATE_CASE);
-        }
-    }
+}
+```
 
 === Deleting cases feature
 
-==== Current Implementation
+==== Reason for implementation
 
-===== Logic
+Sometimes, cases are added by error or there is no need to continue management of a case. Investigators should have a method to remove a case from the application.
 
-* `DeleteCaseCommandParser`
+==== How it is implemented
 
-`DeleteCaseCommandParser` parses the given `String` of arguments in the context of the `DeleteCaseCommand` and returns an `DeleteCaseCommand` object for execution. A `ParseException` is thrown if the user input does not conform to the expected format.
+The `DeleteCaseCommandParser` parses the string of arguments provided by the user to retrieve the index (i.e. `Index`) to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
-    public DeleteCaseCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCaseCommand(index);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCaseCommand.MESSAGE_USAGE));
-        }
+The `DeleteCaseCommand` extends the `UndoableCommand`.
+
+[width="100%", cols="1,2", options="header"]
+|=======
+|Constructor |Remark
+|`new DeleteCaseCommand(targetIndex)` |Accepts an `Index` object as parameter.
+
+The `targetIndex` is processed to retrieve the `CrimeCase` object at the specified index on the most recent list of cases displayed by the model.
+|=======
+
+The `CrimeCase` object is then removed from the model. `EventsCenter` reacts to the `SwapTabEvent`, which switches the tab to show the list of cases. The following snippet shows the execution code.
+
+```
+public CommandResult executeUndoableCommand() {
+    requireNonNull(caseToDelete);
+    try {
+        model.deleteCrimeCase(caseToDelete);
+        EventsCenter.getInstance().post(new SwapTabEvent(1));
+    } catch (CrimeCaseNotFoundException pnfe) {
+        throw new AssertionError("The target case cannot be missing");
     }
-
-* `DeleteCaseCommand`
-
-`preprocessUndoableCommand` first retrieves the `CrimeCase` object based on the `Index` given. The `DeleteCaseCommand` will then be executed to remove the case from the application and update the model. `EventsCenter` reacts to the `SwapTabEvent`, which switches the tab to show the list of cases. The following segment shows the execution code.
-
-    public CommandResult executeUndoableCommand() {
-        requireNonNull(caseToDelete);
-        try {
-            model.deleteCrimeCase(caseToDelete);
-            EventsCenter.getInstance().post(new SwapTabEvent(1));
-        } catch (CrimeCaseNotFoundException pnfe) {
-            throw new AssertionError("The target case cannot be missing");
-        }
-        return new CommandResult(String.format(MESSAGE_DELETE_CASE_SUCCESS, caseToDelete));
-    }
+    return new CommandResult(String.format(MESSAGE_DELETE_CASE_SUCCESS, caseToDelete));
+}
+```
 
 === Finding cases feature
 
-==== Current Implementation
+==== Reason for implementation
 
-===== Logic
+To manage large numbers of cases, having a feature that would allow investigators to search the list of cases by name would be extremely helpful. If an investigator is looking for a particular case, it would be extremely inefficient and time-consuming to have to manually browse through all the cases. Hence, being able to find cases by name can help to increase productivity workflow and efficiency.
 
-* `FindCaseCommandParser`
+==== How it is implemented
 
-`FindCaseCommandParser` parses the given `String` of arguments in the context of the `FindCaseCommand` and returns an `FindCaseCommand` object for execution. A `ParseException` is thrown if the user input does not conform to the expected format.
+The `FindCaseCommandParser` parses the string of arguments provided by the user to retrieve the list of keywords to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
-    public FindCaseCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCaseCommand.MESSAGE_USAGE));
-        }
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-        return new FindCaseCommand(new CaseNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-    }
+The `FindCaseCommand` has one constructor.
 
-* `FindCaseCommand`
 
-The `FindCaseCommand` will then be executed and the observable list filteredCrimeCaseList will be updated with the cases whose case name matches the predicate keywords. `EventsCenter` reacts to the `SwapTabEvent`, which switches the tab to show the filtered list of cases. The following segment shows the execution code.
+[width="100%", cols="1,2", options="header"]
+|=======
+|Constructor |Remark
+|`new FindCaseCommand(predicate)` |Accepts a `CaseNameContainsKeywordsPredicate` object as parameter.
 
-    public CommandResult execute() {
-        model.updateFilteredCrimeCaseList(predicate);
-        EventsCenter.getInstance().post(new SwapTabEvent(1));
-        return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
-    }
+The `targetIndex` is processed to retrieve the `CrimeCase` object at the specified index on the most recent list of cases displayed by the model.
+|=======
+
+The model is then updated to show the cases whose case name matches the predicate keywords. `EventsCenter` reacts to the `SwapTabEvent`, which switches the tab to show the filtered list of cases. The following snippet shows the execution code.
+
+```
+public CommandResult execute() {
+    model.updateFilteredCrimeCaseList(predicate);
+    EventsCenter.getInstance().post(new SwapTabEvent(1));
+    return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
+}
+```
 
 === Creating Backup
 

@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import seedu.investigapptor.ui.PasswordBox;
 
+//@@author quentinkhoo
 /**
  * A handle to the {@code PasswordBox} in the GUI.
  */
@@ -46,3 +47,4 @@ public class PasswordBoxHandle extends NodeHandle<TextField> {
         return getRootNode().getStyleClass();
     }
 }
+//@@author

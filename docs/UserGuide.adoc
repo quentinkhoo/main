@@ -252,6 +252,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+//tag::clear[]
 [[Clear]]
 ==== Clearing all entries : `clear` [Since v1.0]
 
@@ -264,6 +265,7 @@ Alias: `c`
 If you accidentally keyed in this command, enter the `undo` command to revert back
 the data.
 ====
+// end::clear[]
 
 [[Exit]]
 ==== Exiting the program : `exit` [Since v1.0]
@@ -367,6 +369,7 @@ Returns `john` and `John Doe`
 * `fi Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
 
+//tag::findinvtags[]
 [[FindInvTags]]
 ==== Locating investigators by tags: `findinvestigatortags` [Since v1.2]
 Find investigators whose tags contain any of the given keywords. +
@@ -394,6 +397,7 @@ Returns investigator(s) with tag `teamA`
 Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
+//end::findinvtags[]
 
 [[DelInv]]
 ==== Deleting an investigator : `deleteinvestigator` [Since v1.3]
@@ -462,6 +466,7 @@ Selects the 3rd person in the listed panel list.
 
 === Case Features
 
+//tag::calendarsection[]
 [[CasesCalendar]]
 ==== Cases calendar [Since v1.4]
 By default, when you start up the application, all the cases that are in the application will be
@@ -533,6 +538,7 @@ its start date to end date.
 ====
 Click on the command for further information of how it works. Picture illustrations are provided.
 ====
+//end::calendarsection[]
 
 === Case Commands
 These are case related commands. +
@@ -631,6 +637,7 @@ Returns `SPF Murder` and `SPF rape`
 * `findcases murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
 
+//tag::findcasetags[]
 [[FindCaseTags]]
 ==== Locating cases by tags: `findcasetags` [Since v1.3]
 Find cases whose tags contain any of the given keywords. +
@@ -660,7 +667,9 @@ Returns case(s) having tags `murder`, `homicide`, OR `robbery`
 Returns case(s) having tags `murder`, `supernatural`, OR `a`
 
 You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+//end::findcasetags[]
 
+//tag::findclosecases[]
 [[FindCloseCases]]
 ==== Locating cases by tags: `findclosecases` [Since v1.5rc]
 Find cases whose status is `close`. +
@@ -675,7 +684,9 @@ Returns case(s) with status `close`
 Returns case(s) with status `close`
 
 You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+//end::findclosecases[]
 
+//tag::findopencases[]
 [[FindOpenCases]]
 ==== Locating cases by tags: `findopencases` [Since v1.5rc]
 Find cases whose status is `open`. +
@@ -690,7 +701,9 @@ Returns case(s) with status `open`
 Returns case(s) with status `open`
 
 You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+//end::findopencases[]
 
+//tag::closecase[]
 [[CloseCase]]
 ==== Close a case : `close` [Since v1.3]
 Closes the case identified by the index number used in the last case listing. +
@@ -731,6 +744,7 @@ Closes the 2nd case in the results of the `listcases` command.
 Closes the 1st case in the results of the `findcases` command.
 * `cl 3` +
 Closes the 3rd case in the listed panel list case.
+//end::closecase[]
 
 [[DeleteCase]]
 ==== Deleting a case : `deletecase` [Since v1.3]

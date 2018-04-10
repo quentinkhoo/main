@@ -18,8 +18,10 @@ import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
 import seedu.investigapptor.logic.commands.ExitCommand;
 import seedu.investigapptor.logic.commands.FindCaseCommand;
 import seedu.investigapptor.logic.commands.FindCaseTagsCommand;
+import seedu.investigapptor.logic.commands.FindCloseCaseCommand;
 import seedu.investigapptor.logic.commands.FindInvestTagsCommand;
 import seedu.investigapptor.logic.commands.FindInvestigatorCommand;
+import seedu.investigapptor.logic.commands.FindOpenCaseCommand;
 import seedu.investigapptor.logic.commands.HelpCommand;
 import seedu.investigapptor.logic.commands.HistoryCommand;
 import seedu.investigapptor.logic.commands.ListCaseCommand;
@@ -116,6 +118,14 @@ public class InvestigapptorParser {
         case FindCaseTagsCommand.COMMAND_WORD:
         case FindCaseTagsCommand.COMMAND_ALIAS:
             return new FindCaseTagsCommandParser().parse(arguments);
+
+        case FindCloseCaseCommand.COMMAND_WORD:
+        case FindCloseCaseCommand.COMMAND_ALIAS:
+            return new FindCloseCaseCommand();
+
+        case FindOpenCaseCommand.COMMAND_WORD:
+        case FindOpenCaseCommand.COMMAND_ALIAS:
+            return new FindOpenCaseCommand();
 
         case ListInvestigatorCommand.COMMAND_WORD:
         case ListInvestigatorCommand.COMMAND_ALIAS:

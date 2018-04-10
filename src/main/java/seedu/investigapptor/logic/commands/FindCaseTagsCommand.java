@@ -7,7 +7,7 @@ import seedu.investigapptor.model.crimecase.TagContainsKeywordsPredicate;
 
 //@@author pkaijun
 /**
- * Finds and lists all investigators in investigapptor whose tags contains any of the argument keywords.
+ * Finds and lists all cases in investigapptor whose tags contains any of the argument keywords.
  * Keyword matching is not case-sensitive.
  */
 public class FindCaseTagsCommand extends Command {

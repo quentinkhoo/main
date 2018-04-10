@@ -1,6 +1,7 @@
 package seedu.investigapptor.logic.commands;
 
 import seedu.investigapptor.commons.core.EventsCenter;
+import seedu.investigapptor.commons.events.ui.FilteredCrimeCaseListChangedEvent;
 import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.model.crimecase.TagContainsKeywordsPredicate;
 
@@ -28,7 +29,10 @@ public class FindCaseTagsCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredCrimeCaseList(predicate);
+
         EventsCenter.getInstance().post(new SwapTabEvent(1));   // List results toggles to case tab
+        EventsCenter.getInstance().post(new FilteredCrimeCaseListChangedEvent(model.getFilteredCrimeCaseList()));
+
         return new CommandResult(getMessageForCrimeListShownSummary(model.getFilteredCrimeCaseList().size()));
     }
 

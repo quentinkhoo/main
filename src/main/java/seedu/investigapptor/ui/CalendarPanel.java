@@ -4,6 +4,7 @@ import static seedu.investigapptor.model.crimecase.Status.CASE_CLOSE;
 import static seedu.investigapptor.model.crimecase.Status.CASE_OPEN;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Calendar.Style;
@@ -16,7 +17,9 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
+import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
+import seedu.investigapptor.commons.events.ui.FilteredCrimeCaseListChangedEvent;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.EndDate;
 import seedu.investigapptor.model.crimecase.StartDate;
@@ -32,6 +35,9 @@ public class CalendarPanel extends UiPart<Region> {
     private static final String CLOSED_CASE_CALENDAR = "Closed Cases";
     private static final String OPENED_CASE_CALENDAR = "Opened Cases";
     private static final String CALENDAR_SOURCE = "All Cases";
+
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
+
 
     private Calendar caseCloseCalendar;
     private Calendar caseOpenCalendar;
@@ -150,6 +156,12 @@ public class CalendarPanel extends UiPart<Region> {
     @Subscribe
     private void handleCaseChangedEvent(InvestigapptorChangedEvent event) {
         crimeList = event.data.getCrimeCaseList();
+        Platform.runLater(this::updateCalendar);
+    }
+
+    @Subscribe
+    private void handleCrimeCasePanelChangedEvent(FilteredCrimeCaseListChangedEvent event) {
+        crimeList = event.getFilteredCrimeCaseList();
         Platform.runLater(this::updateCalendar);
     }
 

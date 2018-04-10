@@ -10,7 +10,7 @@ import seedu.investigapptor.model.crimecase.TagContainsKeywordsPredicate;
 
 //@@author pkaijun
 /**
- * Parses input arguments and creates a new FindInvestTagsCommand object
+ * Parses input arguments and creates a new FindCaseTagsCommand object
  */
 public class FindCaseTagsCommandParser implements Parser<FindCaseTagsCommand> {
     /**

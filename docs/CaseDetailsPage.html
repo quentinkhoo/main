@@ -1,0 +1,132 @@
+<!-- @@author leowweiching -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="BrowserPanel.css">
+    <script type="text/javascript">
+        function getJsonFromUrl() {
+            var query = location.search.substr(1);
+            var result = {};
+            query.split("&").forEach(function(part) {
+                var item = part.split("=");
+                result[item[0]] = decodeURIComponent(item[1]);
+            });
+            return result;
+        }
+
+        // Takes the array of tags and parses it into format suitable to display with HTML
+        function tagsToHTML(tagsArr){
+            if (tagsArr[0] !== '') {
+                var printThis = '<ul class="tags">';
+                for (var i = 0; i < tagsArr.length; i++) {
+                    printThis += '<li>' + tagsArr[i] + '</li>';
+                }
+                printThis += '</ul>';
+                return printThis;
+            } else return '#'; // return dummy value
+        }
+
+        // Takes in status and endDate and creates HTML tags if status is closed
+        function endDateToHTML(status, endDate){
+            if (status === "close") {
+                return '<td><strong>End Date:</strong></td><td>' + endDate + '</td>';
+            } else return '#'; // return dummy value
+        }
+
+        // Parse url parameters to get JSON
+        var json = getJsonFromUrl();
+
+        // Preprocess tags and endDate
+        var tagsHTML = tagsToHTML(json.tags.split(','));
+        var endDateHTML = endDateToHTML(json.status,
+            decodeURIComponent(json.endDate.replace(/\+/g, '%20')));
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            document.getElementById("caseName").innerHTML=json.caseName;
+            document.getElementById("description").innerHTML=
+                decodeURIComponent(json.description.replace(/\+/g, '%20'));
+            if (tagsHTML !== '#')
+                document.getElementById("tag-area").innerHTML=tagsHTML;
+            document.getElementById("invName").innerHTML=json.invName;
+            document.getElementById("invRank").innerHTML=json.invRank;
+            document.getElementById("invPhone").innerHTML=json.invPhone;
+            document.getElementById("invEmail").innerHTML=
+                decodeURIComponent(json.invEmail.replace(/\+/g, '%20'));
+            document.getElementById("invAddress").innerHTML=
+                decodeURIComponent(json.invAddress.replace(/\+/g, '%20'));
+            document.getElementById("startDate").innerHTML=
+                decodeURIComponent(json.startDate.replace(/\+/g, '%20'));
+            if (endDateHTML !== "#")
+                document.getElementById("endDate").innerHTML=endDateHTML;
+            document.getElementById("status").innerHTML=json.status;
+        });
+    </script>
+</head>
+
+<body>
+    <!-- Main -->
+    <section id="main">
+        <div class="inner">
+            <section id="one" class="wrapper style1">
+                <header class="special">
+                    <h2 id="caseName"></h2>
+                    <p id="description"></p>
+                    <div id="tag-area" class="tag-area"></div>
+                </header>
+                <!-- Section: Case Information -->
+                <div class="content">
+                    <div class="box">
+                        <header><h4>Case Information</h4></header>
+                        <div class="content">
+                            <table>
+                                <tr>
+                                    <td><strong>Status:</strong></td>
+                                    <td><span id="status"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Start Date:</strong></td>
+                                    <td><span id="startDate"></span></td>
+                                </tr>
+                                <tr id="endDate"></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section: Investigator Assigned -->
+                <div class="content">
+                    <div class="box">
+                        <header><h4>Investigator Assigned</h4></header>
+                        <div class="content">
+                            <table>
+                                <tr>
+                                    <td><strong>Name:</strong></td>
+                                    <td><span id="invName"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Rank:</strong></td>
+                                    <td><span id="invRank"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Phone:</strong></td>
+                                    <td><span id="invPhone"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Email:</strong></td>
+                                    <td><span id="invEmail"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Address:</strong></td>
+                                    <td><span id="invAddress"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</body>
+
+</html>

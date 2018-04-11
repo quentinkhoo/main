@@ -184,7 +184,9 @@ Alias: `u`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the investigapptor's content (`addinvestigator`, `deleteinvestigator`, `editinvestigator`,
+Undoable commands: those commands that modify the investigapptor's content +
+
+(`addinvestigator`, `deleteinvestigator`, `editinvestigator`,
  `addcase`, `deletecase`, `editcase`, `close` and `clear`).
 ====
 
@@ -193,6 +195,27 @@ Examples:
 * `deletecase 1` +
 `listcases` +
 `undo` (reverses the `deletecase 1` command) +
+
+[[undo-1]]
+.Before `deletecase 1` command
+image::userguide-images/undo-command-1.png[width="450"]
+
+[[undo-2]]
+.After `deletecase 1` command
+image::userguide-images/undo-command-2.png[width="450"]
+
+[[undo-3]]
+.`listcases` command
+image::userguide-images/undo-command-3.png[width="450"]
+
+[[undo-4]]
+.`undo` command
+image::userguide-images/undo-command-4.png[width="450"]
+
+[NOTE]
+====
+`listcases` is NOT an undoable command. Hence, `undo` will not be applied on `listcases`.
+====
 
 * `selectcase 1` +
 `listcases` +
@@ -229,12 +252,20 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+//tag::clear[]
 [[Clear]]
 ==== Clearing all entries : `clear` [Since v1.0]
 
 Clears all entries from the address book. +
 Format: `clear` +
 Alias: `c`
+
+[TIP]
+====
+If you accidentally keyed in this command, enter the `undo` command to revert back
+the data.
+====
+// end::clear[]
 
 [[Exit]]
 ==== Exiting the program : `exit` [Since v1.0]
@@ -338,6 +369,7 @@ Returns `john` and `John Doe`
 * `fi Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
 
+//tag::findinvtags[]
 [[FindInvTags]]
 ==== Locating investigators by tags: `findinvestigatortags` [Since v1.2]
 Find investigators whose tags contain any of the given keywords. +
@@ -365,6 +397,7 @@ Returns investigator(s) with tag `teamA`
 Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 * `fit teamc newbie a` +
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
+//end::findinvtags[]
 
 [[DelInv]]
 ==== Deleting an investigator : `deleteinvestigator` [Since v1.3]
@@ -430,6 +463,82 @@ Selects the 1st investigator in the results of the `findinvestigator` command.
 * `selectinvestigator 3` +
 
 Selects the 3rd person in the listed panel list.
+
+=== Case Features
+
+//tag::calendarsection[]
+[[CasesCalendar]]
+==== Cases calendar [Since v1.4]
+By default, when you start up the application, all the cases that are in the application will be
+shown on the calendar as shown in _<<calendar1>>_.
+[[calendar1]]
+.Listing cases
+image::userguide-images/calendar-1.png[width="900"]
+
+===== Calendar Entries
+The entries in the calendar are represented in two different colours as explained
+in _<<colour-table>>_ below.
+
+[[colour-table]]
+.Entry Colours
+[width="50%",cols="5%,<20%",options="header",]
+|=======================================================================
+|Colour |Meaning
+|Red |Case has the status of `open`
+|Green |Case has the status of `close`
+|=======================================================================
+
+[[closecaseentries]]
+====== Close Case Entries (Green)
+When the case status is `close`, the calendar will indicate an entry that spans
+from its start date to its end date. For example, as shown in _<<green-entry>>_
+below, the closed case, Project Magic has a start date of "01/04/2018" and end date of
+"10/04/2018".
+[[green-entry]]
+.Green Entry
+image::userguide-images/green-entry.png[width="500"]
+
+[NOTE]
+====
+Cases with the status `close` will span from its start date to end date
+in the calendar unlike <<opencaseentries, open case entries>>.
+====
+
+[[opencaseentries]]
+====== Open Case Entries (Red)
+When the case status is `open`, the calendar will indicate an entry on its start date.
+For example, as shown in _<<red-entry>>_ below,
+the open case, Project Three has a start date of "01/04/2018". Similarly,
+for Project Two, it has a status of `open` and a start date of "03/04/2018".
+[[red-entry]]
+.Red Entry
+image::userguide-images/red-entry.png[width="500"]
+
+[NOTE]
+====
+Cases with the status `open` will not span and only indicated on its start date, unlike
+<<closecaseentries, close case entries>>.
+====
+
+===== Commands associated to Cases Calendar
+Here are the case commands that will change the cases displayed on the calendar. +
+
+* <<AddCase, `addcase`>>: The new case that you added will be displayed as an entry on the calendar.
+* <<DeleteCase, `deletecase`>> The case that you deleted will be removed from the calendar.
+* <<EditCase, `editcase`>>: The case that you edited (i.e. name of the case) will be reflected on its entry on the calendar.
+* <<FindCases, `findcases`>>: Only the cases whose name matches the keywords you provided will be displayed on the calendar.
+* <<FindCaseTags, `findcasetags`>>: Only the cases whose tags matches the keywords you provided will be displayed on the calendar.
+* <<FindCloseCases, `findclosecases`>>: Only the cases with the status `close` will be displayed on the calendar.
+* <<FindOpenCases, `findopencases`>>: Only the cases with the status `open` will be displayed on the calendar.
+* <<CloseCase, `close`>>: The case that you close will change its entry from red to green, and its entry will span from
+its start date to end date.
+* <<ListCases, `listcases`>>: All the cases in the application will be displayed on the calendar.
+
+[TIP]
+====
+Click on the command for further information of how it works. Picture illustrations are provided.
+====
+//end::calendarsection[]
 
 === Case Commands
 These are case related commands. +
@@ -528,6 +637,7 @@ Returns `SPF Murder` and `SPF rape`
 * `findcases murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
 
+//tag::findcasetags[]
 [[FindCaseTags]]
 ==== Locating cases by tags: `findcasetags` [Since v1.3]
 Find cases whose tags contain any of the given keywords. +
@@ -556,11 +666,61 @@ Returns case(s) having tags `murder`, `homicide`, OR `robbery`
 * `fct murder supernatural a` +
 Returns case(s) having tags `murder`, `supernatural`, OR `a`
 
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+//end::findcasetags[]
+
+//tag::findclosecases[]
+[[FindCloseCases]]
+==== Locating cases by tags: `findclosecases` [Since v1.5rc]
+Find cases whose status is `close`. +
+Format: `findclosecases` +
+Alias: `fcc`
+
+Examples:
+
+* `findclosecases` +
+Returns case(s) with status `close`
+* `fcc` +
+Returns case(s) with status `close`
+
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+//end::findclosecases[]
+
+//tag::findopencases[]
+[[FindOpenCases]]
+==== Locating cases by tags: `findopencases` [Since v1.5rc]
+Find cases whose status is `open`. +
+Format: `findopencases` +
+Alias: `foc`
+
+Examples:
+
+* `findopencases` +
+Returns case(s) with status `open`
+* `foc` +
+Returns case(s) with status `open`
+
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+//end::findopencases[]
+
+//tag::closecase[]
 [[CloseCase]]
 ==== Close a case : `close` [Since v1.3]
 Closes the case identified by the index number used in the last case listing. +
 Format: `close INDEX` +
 Alias: `cl`
+
+*Example:*
+
+[[closecase-1]]
+.Before `close` command
+image::userguide-images/close-command-1.png[width="900"]
+
+[[closecase-2]]
+.After `close` command
+image::userguide-images/close-command-2.png[width="900"]
+
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
 
 ****
 * Closes the case by updating the status of the case from `open` to `close` at the specified `INDEX`.
@@ -584,6 +744,7 @@ Closes the 2nd case in the results of the `listcases` command.
 Closes the 1st case in the results of the `findcases` command.
 * `cl 3` +
 Closes the 3rd case in the listed panel list case.
+//end::closecase[]
 
 [[DeleteCase]]
 ==== Deleting a case : `deletecase` [Since v1.3]

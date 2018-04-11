@@ -13,20 +13,22 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 == Summary of contributions
 
-* *Major enhancement*: Provide support package for an overview of cases
+* *Major enhancement*: Support to view cases efficiently
 ** *Features Implemented*:
 *** Calendar GUI
-*** CloseCaseCommmand
-*** FindCaseTagsCommand
+*** `findcasetags` Command
+*** `findclosecases` & `findopencases` Command
+*** `close` Command
 ** What it does:
 ** Justification:
 ** Highlights:
-** Credits:
+** Credits: https://github.com/dlemmermann/CalendarFX[External API - CalendarFX]
 
 * *Minor enhancement*:
 ** Added functionality to provide different tag colours for different tag contents
 ** Provided support for certain commands
-*** FindInvestTags
+*** `findinvesttags` Command
+*** Added new attribute `endDate` to CrimeCase class
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
@@ -38,15 +40,20 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks by adding screenshots to the User Guide: https://github.com[#14]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** Reported bugs and suggestions for other teams (examples:  https://github.com/CS2103JAN2018-T11-B4/main/issues/137[1],
+https://github.com/CS2103JAN2018-T11-B4/main/issues/134[2],
+https://github.com/CS2103JAN2018-T11-B4/main/issues/128[3],
+https://github.com/CS2103JAN2018-T11-B4/main/issues/121[4],
+https://github.com/CS2103JAN2018-T11-B4/main/issues/118[5],
+https://github.com/CS2103JAN2018-T11-B4/main/issues/113[6],
+https://github.com/CS2103JAN2018-T11-B4/main/issues/104[7],
+https://github.com/CS2103JAN2018-T11-B4/main/issues/102[8])
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+*** Integrated a third party library (CalendarFx) to the project (https://github.com[#42])
 
 _{you can add/remove categories in the list above}_
 
@@ -57,9 +64,19 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=findcasetags]
+
+include::../UserGuide.adoc[tag=findinvtags]
+
+include::../UserGuide.adoc[tag=findclosecases]
+
+include::../UserGuide.adoc[tag=findopencases]
+
+include::../UserGuide.adoc[tag=closecase]
+
 include::../UserGuide.adoc[tag=undoredo]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=calendarsection]
 
 == Contributions to the Developer Guide
 
@@ -67,9 +84,7 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=nn]
 
 
 == PROJECT: PowerPointLabs

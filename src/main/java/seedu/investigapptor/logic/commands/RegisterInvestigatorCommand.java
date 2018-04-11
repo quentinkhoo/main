@@ -8,6 +8,8 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_RANK;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.investigapptor.commons.core.EventsCenter;
+import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
@@ -55,6 +57,7 @@ public class RegisterInvestigatorCommand extends UndoableCommand {
         requireNonNull(model);
         try {
             model.addPerson(toAdd);
+            EventsCenter.getInstance().post(new SwapTabEvent(0));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (DuplicatePersonException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

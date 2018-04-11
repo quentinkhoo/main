@@ -1305,11 +1305,17 @@ required.
 *** This feature helps the investigator to create a separate save file of the current state of the investigapptor and name it.
 
 * *Poh Kai Jun*
-** *Major Enhancement*: Support for calendar view
-*** This feature allows an overview of the chronological flow of the cases according to the cases listed on the panel.
+** *Major Enhancement*: Support to view cases efficiently
+*** *Calendar GUI*: This feature enables the investigator to have an overview of the cases in a calendar interface.
+*** *`findcasetags` Command*: This feature allows the investigator to filter out the cases according to the
+tags that the investigator is searching for.
+*** *`findclosecases` & `findopencases` Command*: This feature allows the investigator to filter out the cases according its
+status.
+*** *`close` Command*: This feature allows the investigator to change the status of the case to close - thus being able to keep
+track and differentiate between closed and opened cases.
 ** *Minor Enhancement*: Tag colours
 *** This feature helps to differentiate the various tags present in each of the investigator/cases by using different colours to associate
-different tag content. (Same tag content = same colour)
+different tag content. (Same tag content = same colour & vice versa)
 
 * *Quentin Khoo*
 ** *Major enhancement*: Support access control by implementing a password prompt upon starting the application

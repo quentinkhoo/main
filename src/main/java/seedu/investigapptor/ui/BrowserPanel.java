@@ -1,6 +1,8 @@
 package seedu.investigapptor.ui;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -25,7 +27,8 @@ import seedu.investigapptor.model.person.investigator.Investigator;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String CASE_DETAILS_PAGE = "CaseDetailsPage.html";
+    public static final String CASE_DETAILS_PAGE =
+            "https://cs2103jan2018-f14-b3.github.io/main/CaseDetailsPage.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
@@ -82,19 +85,38 @@ public class BrowserPanel extends UiPart<Region> {
      */
     private void loadCaseDetailsPage(String caseName, String description, Investigator currentInvestigator,
                                      String startDate, String endDate, String status, String tagList) {
-        URL caseDetailsPage = MainApp.class.getResource(FXML_FILE_FOLDER + CASE_DETAILS_PAGE);
-        loadPage(caseDetailsPage.toExternalForm()
+
+        String encDescription = description;
+        String encInvEmail = currentInvestigator.getEmail().value;
+        String encInvAddress = currentInvestigator.getAddress().value;
+        String encStartDate = startDate;
+        String encEndDate = endDate;
+
+        // Encodes emails and addresses to handle symbols such as '#'
+        try {
+            encDescription = URLEncoder.encode(description, "UTF-8");
+            encInvEmail = URLEncoder.encode(currentInvestigator.getEmail().value, "UTF-8");
+            encInvAddress = URLEncoder.encode(currentInvestigator.getAddress().value, "UTF-8");
+            encStartDate = URLEncoder.encode(startDate, "UTF-8");
+            encEndDate = URLEncoder.encode(endDate, "UTF-8");
+        } catch (UnsupportedEncodingException usee) {
+            usee.printStackTrace();
+        }
+
+        String caseDetailsPage = CASE_DETAILS_PAGE
                 + "?caseName=" + caseName
-                + "&description=" + description
+                + "&description=" + encDescription
                 + "&tags=" + tagList
                 + "&invName=" + currentInvestigator.getName().fullName
                 + "&invRank=" + currentInvestigator.getRank().toString()
                 + "&invPhone=" + currentInvestigator.getPhone().value
-                + "&invEmail=" + currentInvestigator.getEmail().value
-                + "&invAddress=" + currentInvestigator.getAddress().value
-                + "&startDate=" + startDate
-                + "&endDate=" + endDate
-                + "&status=" + status);
+                + "&invEmail=" + encInvEmail
+                + "&invAddress=" + encInvAddress
+                + "&startDate=" + encStartDate
+                + "&endDate=" + encEndDate
+                + "&status=" + status;
+
+        loadPage(caseDetailsPage);
     }
 
     private String getTagsSeparatedByComma(Set<String> tags) {

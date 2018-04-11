@@ -1,13 +1,13 @@
 package seedu.investigapptor.logic.commands;
 
 import static org.junit.Assert.assertFalse;
-//import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.prepareRedoCommand;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.prepareUndoCommand;
-//import static seedu.investigapptor.logic.commands.CommandTestUtil.showCrimeCaseAtIndex;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.showCrimeCaseAtIndex;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.getTypicalInvestigapptor;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_CASE;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_SECOND_CASE;
@@ -52,8 +52,6 @@ public class DeleteCaseCommandTest {
         assertCommandFailure(deleteCaseCommand, model, Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
     }
 
-    /* TO REVIEW */
-    /*
     @Test
     public void execute_validIndexFilteredList_success() throws Exception {
         showCrimeCaseAtIndex(model, INDEX_FIRST_CASE);
@@ -69,10 +67,7 @@ public class DeleteCaseCommandTest {
 
         assertCommandSuccess(deleteCaseCommand, model, expectedMessage, expectedModel);
     }
-    */
 
-    /* TO REVIEW */
-    /*
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showCrimeCaseAtIndex(model, INDEX_FIRST_CASE);
@@ -85,7 +80,6 @@ public class DeleteCaseCommandTest {
 
         assertCommandFailure(deleteCaseCommand, model, Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
     }
-    */
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
@@ -124,7 +118,6 @@ public class DeleteCaseCommandTest {
         assertCommandFailure(redoCommand, model, RedoCommand.MESSAGE_FAILURE);
     }
 
-    /* TO REVIEW */
     /**
      * 1. Deletes a {@code CrimeCase} from a filtered list.
      * 2. Undo the deletion.
@@ -132,7 +125,6 @@ public class DeleteCaseCommandTest {
      * unfiltered list is different from the index at the filtered list.
      * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the crimeCase object regardless of indexing.
      */
-    /*
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameCrimeCaseDeleted() throws Exception {
         UndoRedoStack undoRedoStack = new UndoRedoStack();
@@ -155,7 +147,6 @@ public class DeleteCaseCommandTest {
         // redo -> deletes same second crimeCase in unfiltered crimeCase list
         assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
-    */
 
     @Test
     public void equals() throws Exception {

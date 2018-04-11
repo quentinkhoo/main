@@ -3,8 +3,6 @@ package seedu.investigapptor.model.person.investigator;
 import static java.util.Objects.requireNonNull;
 import static seedu.investigapptor.commons.util.AppUtil.checkArgument;
 
-import seedu.investigapptor.model.person.investigator.exceptions.DemoteExceedException;
-import seedu.investigapptor.model.person.investigator.exceptions.PromoteExceedException;
 //@@author Marcus-cxc
 /**
  * Represents an Investigator's rank in the investigapptor book.
@@ -21,7 +19,7 @@ public class Rank {
                     + "Detective = 4\n"
                     + "Captain = 5\n";
     public static final String RANK_VALIDATION_REGEX = "\\b[1-5]\\b";
-    private int value;
+    private final int value;
 
     /**
      * Constructs a {@code Rank}.
@@ -40,29 +38,6 @@ public class Rank {
     public static boolean isValidRank(String test) {
         return test.matches(RANK_VALIDATION_REGEX);
     }
-    /**
-     * Increase value by one
-     * Throws @PromotionExceedException() if investigator is already at maximum rank
-     */
-    public void promote() throws Exception {
-        if (value >= 5) {
-            throw new PromoteExceedException();
-        } else {
-            value++;
-        }
-    }
-    /**
-     * Increase value by one
-     * Throws @PromotionExceedException() if investigator is already at maximum rank
-     */
-    public void demote() throws Exception {
-        if (value <= 1) {
-            throw new DemoteExceedException();
-        } else {
-            value--;
-        }
-    }
-
     /**
      * Returns rank's value in string
      * @return

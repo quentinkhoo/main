@@ -70,18 +70,6 @@ public class Investigator extends Person {
         return Collections.unmodifiableSet(crimeCases.toSet());
     }
     /**
-     * Increase the investigator rank by one
-     */
-    public void promote() throws Exception {
-        rank.promote();
-    }
-    /**
-     * Decrease the investigator rank by one
-     */
-    public void demote() throws Exception {
-        rank.demote();
-    }
-    /**
      * Returns rank in string
      */
     public Rank getRank() {

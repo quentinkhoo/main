@@ -6,6 +6,7 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_RANK;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -33,7 +34,8 @@ public class EditInvestigatorCommandParser implements Parser<EditInvestigatorCom
     public EditInvestigatorCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RANK,
+                        PREFIX_TAG);
 
         Index index;
 
@@ -50,6 +52,7 @@ public class EditInvestigatorCommandParser implements Parser<EditInvestigatorCom
             ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).ifPresent(editPersonDescriptor::setPhone);
             ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).ifPresent(editPersonDescriptor::setEmail);
             ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).ifPresent(editPersonDescriptor::setAddress);
+            ParserUtil.parseRank(argMultimap.getValue(PREFIX_RANK)).ifPresent(editPersonDescriptor::setRank);
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);

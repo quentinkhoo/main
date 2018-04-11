@@ -2,6 +2,7 @@ package seedu.investigapptor.testutil;
 
 import static seedu.investigapptor.model.crimecase.EndDate.LARGEST_DATE;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.investigapptor.model.crimecase.CaseName;
@@ -53,7 +54,7 @@ public class CrimeCaseBuilder {
         startDate = caseToCopy.getStartDate();
         endDate = caseToCopy.getEndDate();
         currentInvestigator = caseToCopy.getCurrentInvestigator();
-        tags = SampleDataUtil.getTagSet(DEFAULT_TAGS);
+        tags = new HashSet<>(caseToCopy.getTags());
     }
 
     /**

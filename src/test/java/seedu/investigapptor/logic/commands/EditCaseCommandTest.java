@@ -1,7 +1,7 @@
 package seedu.investigapptor.logic.commands;
 
 import static org.junit.Assert.assertFalse;
-//import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.DESC_APPLE;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.DESC_BANANA;
@@ -40,20 +40,19 @@ public class EditCaseCommandTest {
 
     private Model model = new ModelManager(getTypicalInvestigapptor(), new UserPrefs());
 
-    /* TO REVIEW
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() throws Exception {
         CrimeCase editedCrimeCase = new CrimeCaseBuilder().build();
         EditCrimeCaseDescriptor descriptor = new EditCrimeCaseDescriptorBuilder(editedCrimeCase).build();
-        EditCaseCommand editCaseCommand = prepareCommand(INDEX_FIRST_CASE, descriptor);
+        EditCaseCommand editCaseCommand = prepareCommand(INDEX_SECOND_CASE, descriptor);
 
         String expectedMessage = String.format(EditCaseCommand.MESSAGE_EDIT_CASE_SUCCESS, editedCrimeCase);
 
         Model expectedModel = new ModelManager(new Investigapptor(model.getInvestigapptor()), new UserPrefs());
-        expectedModel.updateCrimeCase(model.getFilteredCrimeCaseList().get(0), editedCrimeCase);
+        expectedModel.updateCrimeCase(model.getFilteredCrimeCaseList().get(1), editedCrimeCase);
 
         assertCommandSuccess(editCaseCommand, model, expectedMessage, expectedModel);
-    }*/
+    }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() throws Exception {
@@ -90,7 +89,6 @@ public class EditCaseCommandTest {
         assertCommandSuccess(editCaseCommand, model, expectedMessage, expectedModel);
     }
 
-    /* TO REVIEW
     @Test
     public void execute_filteredList_success() throws Exception {
         showCrimeCaseAtIndex(model, INDEX_FIRST_CASE);
@@ -107,7 +105,7 @@ public class EditCaseCommandTest {
         expectedModel.updateCrimeCase(model.getFilteredCrimeCaseList().get(0), editedCrimeCase);
 
         assertCommandSuccess(editCaseCommand, model, expectedMessage, expectedModel);
-    }*/
+    }
 
     @Test
     public void execute_duplicateCrimeCaseUnfilteredList_failure() {
@@ -144,7 +142,6 @@ public class EditCaseCommandTest {
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of investigapptor book
      */
-    /* TO REVIEW
     @Test
     public void execute_invalidCrimeCaseIndexFilteredList_failure() {
         showCrimeCaseAtIndex(model, INDEX_FIRST_CASE);
@@ -156,7 +153,7 @@ public class EditCaseCommandTest {
                 new EditCrimeCaseDescriptorBuilder().withCaseName(VALID_CASENAME_BANANA).build());
 
         assertCommandFailure(editCaseCommand, model, Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
-    }*/
+    }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
@@ -206,7 +203,6 @@ public class EditCaseCommandTest {
      * unfiltered list is different from the index at the filtered list.
      * 4. Redo the edit. This ensures {@code RedoCommand} edits the crimeCase object regardless of indexing.
      */
-    /* TO REVIEW
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameCrimeCaseEdited() throws Exception {
         UndoRedoStack undoRedoStack = new UndoRedoStack();
@@ -230,7 +226,7 @@ public class EditCaseCommandTest {
         assertNotEquals(model.getFilteredCrimeCaseList().get(INDEX_FIRST_CASE.getZeroBased()), crimeCaseToEdit);
         // redo -> edits same second crimeCase in unfiltered crimeCase list
         assertCommandSuccess(redoCommand, model, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }*/
+    }
 
     @Test
     public void equals() throws Exception {

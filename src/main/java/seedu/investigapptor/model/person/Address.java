@@ -10,13 +10,13 @@ import static seedu.investigapptor.commons.util.AppUtil.checkArgument;
 public class Address {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Person addresses can take any values, and it should not be blank";
+            "Person addresses can take any values except <>/=, and it should more than one character";
 
     /*
      * The first character of the investigapptor must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
+    public static final String ADDRESS_VALIDATION_REGEX = "[^\\s][^<>=/]+?";
 
     public final String value;
 

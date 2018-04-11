@@ -148,20 +148,19 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     public void updatePerson(Person target, Person editedPerson)
             throws DuplicatePersonException, PersonNotFoundException {
         requireNonNull(editedPerson);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the person list.
-        for (CrimeCase c :((Investigator) target).getCrimeCases()) {
-            Investigator inv = new Investigator(editedPerson.getName(), editedPerson.getPhone(),
-                    editedPerson.getEmail(), editedPerson.getAddress(), ((Investigator) editedPerson).getRank(),
-                    editedPerson.getTags());
-            CrimeCase newCase = new CrimeCase(c.getCaseName(), c.getDescription(), inv, c.getStartDate(),
-                    c.getEndDate(), c.getStatus(), c.getTags());
-            try {
-                cases.remove(c);
-                addCrimeCase(newCase);
-            } catch (Exception e) {
-                throw new AssertionError("Case does not exist");
+        if (target instanceof Investigator) {
+            for (CrimeCase c : ((Investigator) target).getCrimeCases()) {
+                Investigator inv = new Investigator(editedPerson.getName(), editedPerson.getPhone(),
+                        editedPerson.getEmail(), editedPerson.getAddress(), ((Investigator) editedPerson).getRank(),
+                        editedPerson.getTags());
+                CrimeCase newCase = new CrimeCase(c.getCaseName(), c.getDescription(), inv, c.getStartDate(),
+                        c.getEndDate(), c.getStatus(), c.getTags());
+                try {
+                    cases.remove(c);
+                    addCrimeCase(newCase);
+                } catch (Exception e) {
+                    throw new AssertionError("Case does not exist");
+                }
             }
         }
         Person syncedEditedPerson = syncWithMasterTagList(editedPerson);

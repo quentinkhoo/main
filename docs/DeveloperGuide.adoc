@@ -568,15 +568,29 @@ Certain properties of the application can be controlled (e.g App name, logging l
 ==== Reason for Implementation
 As the base person class provided by the addressbook only has basic capability to store simple information such name and
 phone number, we had to create a new `Investigator` package which can store and handle a list of `CrimeCases` which is a core
- requirement for our product to work. We chose not to modify the `Person` package but instead extend from it as it will allow the ease of adding new
+ requirement for our product to work. We chose not to modify the `Person` package but instead extend from it as it will be easier for you to implement new
   type of person object in the future such as suspects or witnesses.
 
 ==== Current Implementation
-Currently the `Investigator` extends from the `Person` class, and the additional two properties the are:
+Currently the `Investigator` extends from the `Person`class, which includes two more classes show below.
 
+
+
+[width="100%", cols="11,10,20,20", options="header"]
+|=======
+|Composition Of |Class |Constructor |Remark
+|Person |Name |`new Name(“Jon Doe”)` |Stores a `String` that represents the name of the person.
+|Person |Phone |`new Phone(9123874)` |Stores an `int` that represents the phone number of the person.
+|Person |Email |`new Email(“JohnD@gmail.com”)` |Stores a `String` that represents the email of the person.
+|Person |Address |`new EndDate("Baker Street #01-04")` |Stores a `String` that represents the address of the person.
+|Investigator |Rank |`new Status('1')` |Store a `String` that represent a int value that can be converted to the appropriate <<Rank>>.
+|Investigator |UniqueCrimeCaseList |`new Status()` | Stores a `UniqueCrimeCaseList` that contains all the cases the investigator is in charged of
+|=======
+
+[[Rank]]
 * `Rank`
 +
-Stores the rank of the investigator
+Different integer value represents different rank of the investigator
 
 [width="50%",cols="15%,<30%",options="header",]
 |=======================================================================
@@ -592,11 +606,6 @@ Stores the rank of the investigator
 |`5` |`Captain`
 
 |=======================================================================
-
-
-* `UniqueCrimeCaseList`
-+
-Stores and manages all the CrimeCases which the investigator is in charge of.
 
 ===== Model
 
@@ -732,6 +741,46 @@ public CommandResult executeUndoableCommand() throws CommandException {
     }
 }
 ```
+==== Design Considerations
+
+===== Aspect: Implementation of `UndoableCommand`
+
+* **Alternative 1 (current choice):** Add a new abstract method `executeUndoableCommand()`
+** Pros: We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that deal with `Command` do not have to know that `executeUndoableCommand()` exist.
+** Cons: Hard for new developers to understand the template pattern.
+* **Alternative 2:** Just override `execute()`
+** Pros: Does not involve the template pattern, easier for new developers to understand.
+** Cons: Classes that inherit from `UndoableCommand` must remember to call `super.execute()`, or lose the ability to undo/redo.
+
+===== Aspect: Interaction between Investigator and CrimeCase
+
+* **Alternative 1 (current choice):** Direct reference between Investigator and CrimeCase
+** Pros: Easy to implement.
+** Cons: May have performance issues in terms of memory usage.
+* **Alternative 2:** Individual command knows how to undo/redo by itself.
+** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Cons: We must ensure that the implementation of each individual command are correct.
+
+
+===== Aspect: Type of commands that can be undone/redone
+
+* **Alternative 2 (current choice):** Only include commands that modifies the address book (`add`, `clear`, `edit`).
+** Pros: We only revert changes that are hard to change back (the view can easily be re-modified as no data are * lost).
+** Cons: User might think that undo also applies when the list is modified (undoing filtering for example), * only to realize that it does not do that, after executing `undo`.
+* **Alternative 2:** Include all commands.
+** Pros: Might be more intuitive for the user.
+** Cons: User have no way of skipping such commands if he or she just want to reset the state of the address * book and not the view.
+**Additional Info:** See our discussion  https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672[here].
+
+
+===== Aspect: Data structure to support the undo/redo commands
+
+* **Alternative 1 (current choice):** Use separate stack for undo and redo
+** Pros: Easy to understand for new Computer Science student undergraduates to understand, who are likely to be * the new incoming developers of our project.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update * both `HistoryManager` and `UndoRedoStack`.
+* **Alternative 2:** Use `HistoryManager` for undo/redo
+** Pros: We do not need to maintain a separate stack, and just reuse what is already in the codebase.
+** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two * different things.
 
 === Deleting cases feature
 

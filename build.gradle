@@ -203,8 +203,8 @@ task copyDummySearchPage(type: Copy) {
 }
 
 task copyInvestigatorDetailsPage(type: Copy) {
-    from 'src/main/resource/view/InvestigatorDetailsPage.html'
-    into "${buildDir}src/main/resource/view"
+    from 'docs/InvestigatorDetailsPage.html'
+    into "${buildDir}/docs/html5"
 }
 
 deployOfflineDocs.dependsOn asciidoctor

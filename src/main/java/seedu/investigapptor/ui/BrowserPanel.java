@@ -28,7 +28,7 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String DEFAULT_PAGE = "default.html";
     public static final String CASE_DETAILS_PAGE = "CaseDetailsPage.html";
     public static final String INVESTIGATOR_DETAILS_PAGE =
-            "InvestigatorDetailsPage.html";
+            "https://cs2103jan2018-f14-b3.github.io/main/InvestigatorDetailsPage.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
     private static final String FXML = "BrowserPanel.fxml";
@@ -76,10 +76,9 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads the case details HTML file with a background that matches the general theme.
      */
     private void loadInvestigatorDetailsPage(Investigator investigator) {
-        URL investigatorDetailsPage = MainApp.class.getResource(FXML_FILE_FOLDER + INVESTIGATOR_DETAILS_PAGE);
         StringBuilder  url = new StringBuilder();
         try {
-            String investigatorDetails = investigatorDetailsPage.toExternalForm()
+            String investigatorDetails = INVESTIGATOR_DETAILS_PAGE
                     + "?invName=" + investigator.getName().fullName
                     + "&rank=" + investigator.getRank().toString()
                     + "&phone=" + investigator.getPhone().value

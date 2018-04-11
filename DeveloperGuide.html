@@ -54,7 +54,7 @@
 <li><a href="#logging">4.7. Logging</a></li>
 <li><a href="#Implementation-Configuration">4.8. Configuration</a></li>
 <li><a href="#investigator-class">4.9. Investigator Class</a></li>
-<li><a href="#crimecase-package">4.10. CrimeCase Package</a></li>
+<li><a href="#code-crimecase-code-package">4.10. <code>crimecase</code> Package</a></li>
 <li><a href="#adding-cases-feature">4.11. Adding cases feature</a></li>
 <li><a href="#deleting-cases-feature">4.12. Deleting cases feature</a></li>
 <li><a href="#finding-cases-feature">4.13. Finding cases feature</a></li>
@@ -1202,9 +1202,19 @@ that has handled the case.</p>
 </div>
 <div class="sect2">
 <h3 id="investigator-class"><a class="link" href="#investigator-class">4.9. Investigator Class</a></h3>
+<div class="sect3">
+<h4 id="reason-for-implementation-5"><a class="link" href="#reason-for-implementation-5">4.9.1. Reason for Implementation</a></h4>
 <div class="paragraph">
-<p>The <code>Investigator</code> package is a extended from the <code>Person</code> package, allowing it to handle the basic functions of a <code>Person</code> package while
-having additional properties required for an investigator. The additional properties are:</p>
+<p>As the base person class provided by the addressbook only has basic capability to store simple information such name and
+phone number, we had to create a new <code>Investigator</code> package which can store and handle a list of <code>CrimeCases</code> which is a core
+ requirement for our product to work. We chose not to modify the <code>Person</code> package but instead extend from it as it will allow the ease of adding new
+  type of person object in the future such as suspects or witnesses.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">4.9.2. Current Implementation</a></h4>
+<div class="paragraph">
+<p>Currently the <code>Investigator</code> extends from the <code>Person</code> class, and the additional two properties the are:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1214,6 +1224,44 @@ having additional properties required for an investigator. The additional proper
 <p>Stores the rank of the investigator</p>
 </div>
 </li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Integer Value</th>
+<th class="tableblock halign-left valign-top">Rank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Constable</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Sergeant</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Inspector</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Detective</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Captain</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
 <li>
 <p><code>UniqueCrimeCaseList</code></p>
 <div class="paragraph">
@@ -1222,8 +1270,8 @@ having additional properties required for an investigator. The additional proper
 </li>
 </ul>
 </div>
-<div class="sect3">
-<h4 id="model"><a class="link" href="#model">4.9.1. Model</a></h4>
+<div class="sect4">
+<h5 id="model"><a class="link" href="#model">Model</a></h5>
 <div class="paragraph">
 <p>Currently the <code>Investigator</code> is upcasted and stored in the <code>Investigapptor</code> 's <code>UniquePersonList</code>.
 This is done on purpose to allow future enhancement that allows us to implement types of people such as suspects and witnesses. Storing them together makes it easier to use general
@@ -1247,8 +1295,8 @@ return new Person(
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="storage"><a class="link" href="#storage">4.9.2. Storage</a></h4>
+<div class="sect4">
+<h5 id="storage"><a class="link" href="#storage">Storage</a></h5>
 <div class="paragraph">
 <p>As Investigator has addition properties compared to Person, <code>XmlAdaptedInvestigator</code> is created to convert
 the <code>Investigator</code> into correct XML format. We had to also change the method of storing the in <code>Investigapptor</code>
@@ -1297,187 +1345,147 @@ separately</p>
 </div>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="crimecase-package"><a class="link" href="#crimecase-package">4.10. CrimeCase Package</a></h3>
-<div class="paragraph">
-<p>The <code>CrimeCase</code> package consists of multiple classes used to contain information about a case.</p>
-</div>
+<h3 id="code-crimecase-code-package"><a class="link" href="#code-crimecase-code-package">4.10. <code>crimecase</code> Package</a></h3>
 <div class="sect3">
-<h4 id="code-casename-code-class-br"><a class="link" href="#code-casename-code-class-br">4.10.1. <code>CaseName</code> class<br></a></h4>
+<h4 id="reason-for-implementation-6"><a class="link" href="#reason-for-implementation-6">4.10.1. Reason for implementation</a></h4>
 <div class="paragraph">
-<p>Stores a <code>String</code> that represents the name of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the <code>CaseName</code> object.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/**
- * Constructs a {@code Name}.
- *
- * @param name A valid name.
- */
-public CaseName(String name)</pre>
-</div>
+<p>As Investigapptor is a tool for managing investigations, the ability to store information about a case is essential.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="code-description-code-class-br"><a class="link" href="#code-description-code-class-br">4.10.2. <code>Description</code> class<br></a></h4>
+<h4 id="how-it-is-implemented"><a class="link" href="#how-it-is-implemented">4.10.2. How it is implemented</a></h4>
 <div class="paragraph">
-<p>Stores a <code>String</code> that represents the description of the case. Provides utility methods to:
-* check the validity of the string to be stored
-* retrieve the string that is stored
-* obtain the hash code of the <code>Description</code> object</p>
+<p>Each attribute of a case, such as the case name, description, status, etc. are classes in the <code>crimecase</code> package. Each of the classes provide utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the object.</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>/**
- * Constructs a {@code Description}.
- *
- * @param description A valid description.
- */
-public Description(String description)</pre>
+<div class="paragraph">
+<p>The following classes have been introduced in the package as of v1.1:</p>
 </div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Class</th>
+<th class="tableblock halign-left valign-top">Constructor</th>
+<th class="tableblock halign-left valign-top">Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CaseName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new CaseName(“Project Zero”)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a <code>String</code> that represents the name of the case.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new Description(“Abduction and murder of a Chicago greeting card executive.”)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a <code>String</code> that represents the description of the case.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">StartDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new StartDate(“01/01/2015”)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a <code>String</code> that represents the start date of the case.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EndDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new EndDate(LARGEST_DATE)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a <code>String</code> that represents the end date of the case.</p>
+<p class="tableblock">The class contains a static string <code>LARGEST_DATE</code> that is often used as the default argument when instantiating the <code>EndDate</code> class to indicate a newly created case whose <code>Status</code> is “open”.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new Status()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a <code>String</code> that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>crimecase</code> package includes the <code>CrimeCase</code> class which is used to keep information about a case. The <code>CrimeCase</code> class provides utility methods to retrieve the different objects (e.g. <code>CaseName</code>), delete a tag, and obtain the hash code of the <code>CrimeCase</code> object.</p>
 </div>
+<div class="paragraph">
+<p>A <code>CrimeCase</code> class is created with one constructor.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Class</th>
+<th class="tableblock halign-left valign-top">Constructor</th>
+<th class="tableblock halign-left valign-top">Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CrimeCase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new CrimeCase(name, description, investigatorToAdd, startDate, endDate, status, tagList)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores <code>CaseName</code>, <code>Description</code>, <code>Investigator</code>, <code>StartDate</code>, <code>Status</code>, and <code>UniqueTagList</code> objects to represent information of the case.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
-<h4 id="code-startdate-code-class-br"><a class="link" href="#code-startdate-code-class-br">4.10.3. <code>StartDate</code> class<br></a></h4>
+<h4 id="reasons-for-how-it-is-implemented"><a class="link" href="#reasons-for-how-it-is-implemented">4.10.3. Reasons for how it is implemented</a></h4>
 <div class="paragraph">
-<p>Stores a <code>String</code> that represents the start date of the case. Provides utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the <code>StartDate</code> object.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/**
- * Constructs a {@code date}.
- *
- * @param date A valid date.
- */
-public StartDate(String date)</pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="code-status-code-class-br"><a class="link" href="#code-status-code-class-br">4.10.4. <code>Status</code> class<br></a></h4>
-<div class="paragraph">
-<p>Stores a <code>String</code> that represents the status of the case. The class only stores strings of value "open" or "close", with the default value set to "open" when the constructor is called. Provides utility methods to toggle the status of the case, retrieve the string that is stored, and obtain the hash code of the <code>Status</code> object.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/**
- * Constructs a {@code Status}.
- *
- */
-public Status()</pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="code-crimecase-code-class-br"><a class="link" href="#code-crimecase-code-class-br">4.10.5. <code>CrimeCase</code> class<br></a></h4>
-<div class="paragraph">
-<p>Stores <code>CaseName</code>, <code>Description</code>, <code>Person</code>, <code>StartDate</code>, <code>Status</code>, and <code>UniqueTagList</code> objects to represent information of the case. Provides utility methods to retrieve the different objects, delete a tag, and obtain the hash code of the <code>CrimeCase</code> object.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/**
-  * Constructs a {@code CrimeCase}.
-  * Every field must be present and not null
-  */
- public CrimeCase(CaseName name, Description description, Person currentInvestigator, StartDate startDate, Status status, Set&lt;Tag&gt; tags)</pre>
-</div>
+<p>The <code>crimecase</code> package follows the model of the <code>person</code> package, whereby each attribute is represented by a class. This allows for better organization and a modular design which follows the single responsibility principle.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="adding-cases-feature"><a class="link" href="#adding-cases-feature">4.11. Adding cases feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">4.11.1. Current Implementation</a></h4>
-<div class="sect4">
-<h5 id="logic"><a class="link" href="#logic">Logic</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>AddCaseCommandParser</code></p>
-</li>
-</ul>
+<h4 id="reason-for-implementation-7"><a class="link" href="#reason-for-implementation-7">4.11.1. Reason for implementation</a></h4>
+<div class="paragraph">
+<p>To be able to manage cases, investigators should have the ability to add case details into the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="how-it-is-implemented-2"><a class="link" href="#how-it-is-implemented-2">4.11.2. How it is implemented</a></h4>
+<div class="paragraph">
+<p>The <code>AddCaseCommandParser</code> parses the string of arguments provided by the user and splits the <code>String</code> into its separate components (i.e. <code>CaseName</code>, <code>Description</code>, <code>Index</code>, <code>StartDate</code>, <code>Set&lt;Tag&gt;</code>) to be used in the context of the <code>AddCaseCommand</code>. A <code>ParseException</code> is thrown if the user input does not conform to the expected format.</p>
 </div>
 <div class="paragraph">
-<p><code>AddCaseCommandParser</code> parses the given <code>String</code> of arguments in the context of the <code>AddCaseCommand</code> and returns an <code>AddCaseCommand</code> object for execution. A <code>ParseException</code> is thrown if the user input does not conform to the expected format.</p>
+<p>The <code>AddCaseCommand</code> that extends the <code>UndoableCommand</code> class is implemented with constructor overloading, where either constructor can be used depending on the developer’s needs.</p>
 </div>
-<div class="literalblock">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Constructor</th>
+<th class="tableblock halign-left valign-top">Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new AddCaseCommand(crimeCase)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accepts a <code>CrimeCase</code> object as parameter.</p>
+<p class="tableblock">Useful in testing where <code>CrimeCaseBuilder</code> is used to create the <code>CrimeCase</code> object first.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new AddCaseCommand(name, description, investigatorIndex, startDate, tagList)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accepts <code>CaseName</code>, <code>Description</code>, <code>Index</code>, <code>StartDate</code>, <code>Set&lt;Tag&gt;</code> objects as parameters.</p>
+<p class="tableblock">Called by <code>AddCaseCommandParser</code> when a user inputs the command and details of a case.</p>
+<p class="tableblock">When this constructor is used, the <code>Index</code> object is processed to retrieve the <code>Investigator</code> object at the specified index on the most recent list of investigators displayed by the model. A <code>CrimeCase</code> object is created using the parameters and the retrieved <code>Investigator</code> object.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>CrimeCase</code> object is then added to the model and throws a <code>DuplicateCrimeCaseException</code> if there exists an identical object already in Investigapptor. The following snippet shows the execution code.</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<pre>public AddCaseCommand parse(String args) throws ParseException {
-    ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR,
-                    PREFIX_STARTDATE, PREFIX_TAG);
-    if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_INVESTIGATOR, PREFIX_STARTDATE)
-            || !argMultimap.getPreamble().isEmpty()) {
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCaseCommand.MESSAGE_USAGE));
-    }
-    ...
-}</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>AddCaseCommand</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The <code>AddCaseCommand</code> that extends the <code>UndoableCommand</code> class is implemented with two overloaded constructors, either of which can be used depending on convenience:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/**
- * Creates an AddCaseCommand to add the specified {@code CrimeCase}
- */
-public AddCaseCommand(CrimeCase crimeCase)</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/**
- * @param name of the case to be added
- * @param description of the case to be added
- * @param investigatorIndex of the investigator to be added
- * @param startDate of the case to be added
- * @param tagList of the case to be added
- */
-public AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set&lt;Tag&gt; tagList)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Since <code>AddCaseCommand</code> extends <code>UndoableCommand</code>, after the constructor is called, the <code>preprocessUndoableCommand</code> and <code>executeUndoableCommand</code> methods are executed consecutively right after.</p>
-</div>
-<div class="paragraph">
-<p>If the <code>AddCaseCommand(CrimeCase crimeCase)</code> constructor is used, the logic in the <code>preprocessUndoableCommand</code> method is not executed.</p>
-</div>
-<div class="paragraph">
-<p>Note that the <code>AddCaseCommand(CaseName name, Description description, Index investigatorIndex, StartDate startDate, Set&lt;Tag&gt; tagList)</code> constructor above takes in an <code>Index</code> object as a parameter, which refers to the index number of the investigator as displayed in <code>PersonListPanel</code>.</p>
-</div>
-<div class="paragraph">
-<p>The <code>Person</code> object is retrieved based on the index and the created <code>CrimeCase</code> object is stored in <code>toAdd</code>:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>@Override
-protected void preprocessUndoableCommand() throws CommandException {
-    if (investigatorIndex != null) {
-        List&lt;Person&gt; lastShownList = model.getFilteredPersonList();
-        if (investigatorIndex.getZeroBased() &gt;= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
-        }
-        Person investigatorToAdd = lastShownList.get(investigatorIndex.getZeroBased());
-        toAdd = createCrimeCase(investigatorToAdd);
-    }
-}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>executeUndoableCommand</code> then adds the <code>CrimeCase</code> object to the model and throws a <code>DuplicateCrimeCaseException</code> if there exists an identical object:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>@Override
-public CommandResult executeUndoableCommand() throws CommandException {
+<pre class="CodeRay highlight"><code>public CommandResult executeUndoableCommand() throws CommandException {
     requireNonNull(model);
     try {
         model.addCrimeCase(toAdd);
@@ -1485,8 +1493,7 @@ public CommandResult executeUndoableCommand() throws CommandException {
     } catch (DuplicateCrimeCaseException e) {
         throw new CommandException(MESSAGE_DUPLICATE_CASE);
     }
-}</pre>
-</div>
+}</code></pre>
 </div>
 </div>
 </div>
@@ -1494,45 +1501,44 @@ public CommandResult executeUndoableCommand() throws CommandException {
 <div class="sect2">
 <h3 id="deleting-cases-feature"><a class="link" href="#deleting-cases-feature">4.12. Deleting cases feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">4.12.1. Current Implementation</a></h4>
-<div class="sect4">
-<h5 id="logic-2"><a class="link" href="#logic-2">Logic</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>DeleteCaseCommandParser</code></p>
-</li>
-</ul>
+<h4 id="reason-for-implementation-8"><a class="link" href="#reason-for-implementation-8">4.12.1. Reason for implementation</a></h4>
+<div class="paragraph">
+<p>Sometimes, cases are added by error or there is no need to continue management of a case. Investigators should have a method to remove a case from the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="how-it-is-implemented-3"><a class="link" href="#how-it-is-implemented-3">4.12.2. How it is implemented</a></h4>
+<div class="paragraph">
+<p>The <code>DeleteCaseCommandParser</code> parses the string of arguments provided by the user to retrieve the index (i.e. <code>Index</code>) to be used in the context of the <code>DeleteCaseCommand</code>. A <code>ParseException</code> is thrown if the user input does not conform to the expected format.</p>
 </div>
 <div class="paragraph">
-<p><code>DeleteCaseCommandParser</code> parses the given <code>String</code> of arguments in the context of the <code>DeleteCaseCommand</code> and returns an <code>DeleteCaseCommand</code> object for execution. A <code>ParseException</code> is thrown if the user input does not conform to the expected format.</p>
+<p>The <code>DeleteCaseCommand</code> extends the <code>UndoableCommand</code>.</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>public DeleteCaseCommand parse(String args) throws ParseException {
-    try {
-        Index index = ParserUtil.parseIndex(args);
-        return new DeleteCaseCommand(index);
-    } catch (IllegalValueException ive) {
-        throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCaseCommand.MESSAGE_USAGE));
-    }
-}</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>DeleteCaseCommand</code></p>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Constructor</th>
+<th class="tableblock halign-left valign-top">Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new DeleteCaseCommand(targetIndex)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accepts an <code>Index</code> object as parameter.</p>
+<p class="tableblock">The <code>targetIndex</code> is processed to retrieve the <code>CrimeCase</code> object at the specified index on the most recent list of cases displayed by the model.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p><code>preprocessUndoableCommand</code> first retrieves the <code>CrimeCase</code> object based on the <code>Index</code> given. The <code>DeleteCaseCommand</code> will then be executed to remove the case from the application and update the model. <code>EventsCenter</code> reacts to the <code>SwapTabEvent</code>, which switches the tab to show the list of cases. The following segment shows the execution code.</p>
+<p>The <code>CrimeCase</code> object is then removed from the model. <code>EventsCenter</code> reacts to the <code>SwapTabEvent</code>, which switches the tab to show the list of cases. The following snippet shows the execution code.</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>public CommandResult executeUndoableCommand() {
+<pre class="CodeRay highlight"><code>public CommandResult executeUndoableCommand() {
     requireNonNull(caseToDelete);
     try {
         model.deleteCrimeCase(caseToDelete);
@@ -1541,8 +1547,7 @@ public CommandResult executeUndoableCommand() throws CommandException {
         throw new AssertionError("The target case cannot be missing");
     }
     return new CommandResult(String.format(MESSAGE_DELETE_CASE_SUCCESS, caseToDelete));
-}</pre>
-</div>
+}</code></pre>
 </div>
 </div>
 </div>
@@ -1550,50 +1555,48 @@ public CommandResult executeUndoableCommand() throws CommandException {
 <div class="sect2">
 <h3 id="finding-cases-feature"><a class="link" href="#finding-cases-feature">4.13. Finding cases feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">4.13.1. Current Implementation</a></h4>
-<div class="sect4">
-<h5 id="logic-3"><a class="link" href="#logic-3">Logic</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>FindCaseCommandParser</code></p>
-</li>
-</ul>
+<h4 id="reason-for-implementation-9"><a class="link" href="#reason-for-implementation-9">4.13.1. Reason for implementation</a></h4>
+<div class="paragraph">
+<p>To manage large numbers of cases, having a feature that would allow investigators to search the list of cases by name would be extremely helpful. If an investigator is looking for a particular case, it would be extremely inefficient and time-consuming to have to manually browse through all the cases. Hence, being able to find cases by name can help to increase productivity workflow and efficiency.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="how-it-is-implemented-4"><a class="link" href="#how-it-is-implemented-4">4.13.2. How it is implemented</a></h4>
+<div class="paragraph">
+<p>The <code>FindCaseCommandParser</code> parses the string of arguments provided by the user to retrieve the list of keywords to be used in the context of the <code>DeleteCaseCommand</code>. A <code>ParseException</code> is thrown if the user input does not conform to the expected format.</p>
 </div>
 <div class="paragraph">
-<p><code>FindCaseCommandParser</code> parses the given <code>String</code> of arguments in the context of the <code>FindCaseCommand</code> and returns an <code>FindCaseCommand</code> object for execution. A <code>ParseException</code> is thrown if the user input does not conform to the expected format.</p>
+<p>The <code>FindCaseCommand</code> has one constructor.</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>public FindCaseCommand parse(String args) throws ParseException {
-    String trimmedArgs = args.trim();
-    if (trimmedArgs.isEmpty()) {
-        throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCaseCommand.MESSAGE_USAGE));
-    }
-    String[] nameKeywords = trimmedArgs.split("\\s+");
-    return new FindCaseCommand(new CaseNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-}</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>FindCaseCommand</code></p>
-</li>
-</ul>
-</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Constructor</th>
+<th class="tableblock halign-left valign-top">Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new FindCaseCommand(predicate)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accepts a <code>CaseNameContainsKeywordsPredicate</code> object as parameter.</p>
+<p class="tableblock">The <code>targetIndex</code> is processed to retrieve the <code>CrimeCase</code> object at the specified index on the most recent list of cases displayed by the model.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>The <code>FindCaseCommand</code> will then be executed and the observable list filteredCrimeCaseList will be updated with the cases whose case name matches the predicate keywords. <code>EventsCenter</code> reacts to the <code>SwapTabEvent</code>, which switches the tab to show the filtered list of cases. The following segment shows the execution code.</p>
+<p>The model is then updated to show the cases whose case name matches the predicate keywords. <code>EventsCenter</code> reacts to the <code>SwapTabEvent</code>, which switches the tab to show the filtered list of cases. The following snippet shows the execution code.</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>public CommandResult execute() {
+<pre class="CodeRay highlight"><code>public CommandResult execute() {
     model.updateFilteredCrimeCaseList(predicate);
     EventsCenter.getInstance().post(new SwapTabEvent(1));
     return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
-}</pre>
-</div>
+}</code></pre>
 </div>
 </div>
 </div>
@@ -2718,11 +2721,23 @@ required.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major Enhancement</strong>: Support for calendar view</p>
+<p><strong>Major Enhancement</strong>: Support to view cases efficiently</p>
 <div class="ulist">
 <ul>
 <li>
-<p>This feature allows an overview of the chronological flow of the cases according to the cases listed on the panel.</p>
+<p><strong>Calendar GUI</strong>: This feature enables the investigator to have an overview of the cases in a calendar interface.</p>
+</li>
+<li>
+<p><strong><code>findcasetags</code> Command</strong>: This feature allows the investigator to filter out the cases according to the
+tags that the investigator is searching for.</p>
+</li>
+<li>
+<p><strong><code>findclosecases</code> &amp; <code>findopencases</code> Command</strong>: This feature allows the investigator to filter out the cases according its
+status.</p>
+</li>
+<li>
+<p><strong><code>close</code> Command</strong>: This feature allows the investigator to change the status of the case to close - thus being able to keep
+track and differentiate between closed and opened cases.</p>
 </li>
 </ul>
 </div>
@@ -2733,7 +2748,7 @@ required.</p>
 <ul>
 <li>
 <p>This feature helps to differentiate the various tags present in each of the investigator/cases by using different colours to associate
-different tag content. (Same tag content = same colour)</p>
+different tag content. (Same tag content = same colour &amp; vice versa)</p>
 </li>
 </ul>
 </div>
@@ -3532,7 +3547,7 @@ Expected: Similar to previous.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-09 08:05:15 UTC
+Last updated 2018-04-11 08:55:02 UTC
 </div>
 </div>
 </body>

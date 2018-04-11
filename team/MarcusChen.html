@@ -203,7 +203,10 @@ Alias: <code>u</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the investigapptor&#8217;s content (<code>addinvestigator</code>, <code>deleteinvestigator</code>, <code>editinvestigator</code>,
+<p>Undoable commands: those commands that modify the investigapptor&#8217;s content<br></p>
+</div>
+<div class="paragraph">
+<p>(<code>addinvestigator</code>, <code>deleteinvestigator</code>, <code>editinvestigator</code>,
  <code>addcase</code>, <code>deletecase</code>, <code>editcase</code>, <code>close</code> and <code>clear</code>).</p>
 </div>
 </td>
@@ -220,6 +223,48 @@ Alias: <code>u</code></p>
 <code>listcases</code><br>
 <code>undo</code> (reverses the <code>deletecase 1</code> command)<br></p>
 </li>
+</ul>
+</div>
+<div id="undo-1" class="imageblock">
+<div class="content">
+<img src="../images/userguide-images/undo-command-1.png" alt="undo command 1" width="450">
+</div>
+<div class="title">Figure 1. Before <code>deletecase 1</code> command</div>
+</div>
+<div id="undo-2" class="imageblock">
+<div class="content">
+<img src="../images/userguide-images/undo-command-2.png" alt="undo command 2" width="450">
+</div>
+<div class="title">Figure 2. After <code>deletecase 1</code> command</div>
+</div>
+<div id="undo-3" class="imageblock">
+<div class="content">
+<img src="../images/userguide-images/undo-command-3.png" alt="undo command 3" width="450">
+</div>
+<div class="title">Figure 3. <code>listcases</code> command</div>
+</div>
+<div id="undo-4" class="imageblock">
+<div class="content">
+<img src="../images/userguide-images/undo-command-4.png" alt="undo command 4" width="450">
+</div>
+<div class="title">Figure 4. <code>undo</code> command</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>listcases</code> is NOT an undoable command. Hence, <code>undo</code> will not be applied on <code>listcases</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p><code>selectcase 1</code><br>
 <code>listcases</code><br>
@@ -269,7 +314,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect3">
-<h4 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">Encrypting data files <code>[Coming in v2.0]</code></a></h4>
+<h4 id="encrypting-data-files-code-encryptdata-code-coming-in-v2-0"><a class="link" href="#encrypting-data-files-code-encryptdata-code-coming-in-v2-0">Encrypting data files <code>encryptdata</code> [Coming in v2.0]</a></h4>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -757,7 +802,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-09 08:05:15 UTC
+Last updated 2018-04-11 08:55:02 UTC
 </div>
 </div>
 </body>

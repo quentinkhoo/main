@@ -136,6 +136,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         persons.add(person);
     }
 
+    //@@author Marcus-cxc
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedPerson}.
@@ -165,14 +166,6 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         }
         Person syncedEditedPerson = syncWithMasterTagList(editedPerson);
         persons.setPerson(target, syncedEditedPerson);
-    }
-    /**
-     * Removes {@code key} from this {@code Investigapptor}.
-     *
-     * @throws PersonNotFoundException if the {@code key} is not in this {@code Investigapptor}.
-     */
-    public void updateCasesInvestigator (Investigator updatedInvestigator) {
-
     }
     /**
      * Removes {@code key} from this {@code Investigapptor}.

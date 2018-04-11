@@ -207,6 +207,12 @@ task copyInvestigatorDetailsPage(type: Copy) {
     into "${buildDir}/docs/html5"
 }
 
+task copyCaseDetailsPage(type: Copy) {
+    from 'docs/CaseDetailsPage.html'
+    into "${buildDir}/doc/html5"
+}
+
+
 deployOfflineDocs.dependsOn asciidoctor
 processResources.dependsOn deployOfflineDocs
 

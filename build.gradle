@@ -202,6 +202,11 @@ task copyDummySearchPage(type: Copy) {
     into "${buildDir}/docs/html5"
 }
 
+task copyInvestigatorDetailsPage(type: Copy) {
+    from 'docs/InvestigatorDetailsPage.html'
+    into "${buildDir}/docs/html5"
+}
+
 task copyCaseDetailsPage(type: Copy) {
     from 'docs/CaseDetailsPage.html'
     into "${buildDir}/doc/html5"

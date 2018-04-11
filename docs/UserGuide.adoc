@@ -41,6 +41,7 @@ This user guide shows you how to get started with Investigapptor.
 This user guide will introduce you to the features Investigapptor provides and lead you through with the use of examples.
 
 == Quick Start
+In order to start using Investigapptor, it is best to follow the instructions below to setup your computer to run Investigapptor
 
 .  Ensure that you have Java version `1.8.0_60` or later installed in your Computer.
 +
@@ -56,7 +57,30 @@ This app will not work with earlier versions of Java 8.
 [.left]
 .Successful start up
 image::Ui.png[width="790"]
-+
+
+=== Navigating The Interface
+
+In investigapptor, there are several components as shown below in <<Interface>> which you can view and interact with
+
+
+[[Interface]]
+.Interface
+image::Interface.png[width="790"]
+
+.  *Panel List:* A panel that display the investigators or crime cases. You can toggle between the two by using the
+toggle button at the top.
+
+. *Detail Panel:* The display panel will the full information of selected investigator or crime case.
+
+. *Calendar:* The calendar will show when the cases were open and closed.
+
+. *Command Box:* The command box is where you key in the commands to navigate the investigapptor.
+
+. *Display Box:* The display box will display the result to any command you input.
+
+=== Using commands
+As the using commands is the main method of interacting with investigapptor, learning how to use the command is important.
+
 .  You can type commands in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:

@@ -1,0 +1,63 @@
+= Leow Wei Ching - Project Portfolio
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Investigapptor
+
+---
+
+== Overview
+
+Investigapptor is a desktop application used for investigators to manage cases as simple, straightforward and efficient as possible.
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+* *Major enhancement*: added *support for managing investigation cases*
+** What it does: allows the user to add, delete, edit, find, and view case details in Investigapptor
+** Justification: As Investigapptor is a tool for managing investigations, the ability to store, modify, and view case information is fundamental to the functionality of the application.
+** Highlights: This enhancement touched on the logic, model, storage, and UI components. In the model component, a new package had to be introduced to store case information.
+
+* *Minor enhancement*: updated the GUI with a new colour scheme and style
+** Highlights: Styled with CSS
+
+* *Code contributed*: [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/functional/leowweiching.md[Functional code]] [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/test/leowweiching.md[Test code]]
+
+* *Other contributions*:
+
+** Enhancements to existing features:
+*** Updated the GUI color scheme https://github.com/CS2103JAN2018-F14-B3/main/pull/185[#185]
+** Documentation:
+*** Wrote content for the README.md https://github.com/CS2103JAN2018-F14-B3/main/pull/23[#23]
+*** Did cosmetic tweaks to existing contents of the User Guide
+** Community:
+*** PRs reviewed (with non-trivial review comments)
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103JAN2018-W15-B3/main/issues/127[1], https://github.com/CS2103JAN2018-W15-B3/main/issues/133[2])
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=addcase]
+include::../UserGuide.adoc[tag=editcase]
+include::../UserGuide.adoc[tag=findcases]
+include::../UserGuide.adoc[tag=deletecase]
+include::../UserGuide.adoc[tag=selectcase]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=crimecase]
+
+
+== PROJECT: PowerPointLabs
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_

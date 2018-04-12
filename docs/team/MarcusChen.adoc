@@ -26,19 +26,24 @@ The Investigator also stores a live reference to all his cases that works with u
 ** Implemented Backup command:
 +
 Allows user to create and name a backup of the current state of the investigapptor.
-** Implemented Investigator:
+** Implemented ListInvestigatorCases command:
 +
-Investigator class extends the Person class with an addtional variable that stores the investigators cases
-** Implemented UniqueCrimeCase class
+Allows user to view all cases allocated to the selected investigator.
+** Implemented GUI for Investigator Details:
 +
-UniqueCrimeCase stores and manages multiple cases as well as ensure that they are all unique
+Created a Html file to display the investigator details in a clear and more presentable format.
+** Refactor the following functions
++
+*** AddInvestigatorCommand
+*** EditInvestigatorCommand
+*** DeleteInvestigatorCommand
 ** Implemented CrimeCaseBuilder class
 +
 CrimeCaseBuilder used in JUnit testing to help build CrimeCase
 ** Implemented InvestigatorBuilder class
 +
 InvestigatorBuilder used in JUnit testing to help build CrimeCase
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/functional/Marcus-cxc.md[Functional code]] [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/test/Marcus-cxc.md[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
@@ -67,9 +72,7 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=addInv]
 
 == Contributions to the Developer Guide
 
@@ -77,9 +80,8 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=investigator]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
 
 
 == PROJECT: PowerPointLabs

@@ -16,48 +16,90 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-F14-B3/main
+:javaURL: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
 By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Introduction
 
-Investigapptor is desktop application for a team of professional
+Investigapptor is a desktop application for a team of professional
 investigators to easily manage crime cases that have been
 delegated to them.
 
 Investigapptor comes with many useful features for investigators and
 their team members such as assigning investigators to a crime case, listing investigators
-based on their expertise so that you can solve crime cases more effienctly ande ffectively.
+based on their expertise. This would allow for one to choose the best investigator for a
+particular crime case based on their expertise+
 
 Investigapptor v1.5 is available for Windows, Mac OS X, Linux and Unix operating systems.
 
-To get started, go to <<Quick Start>> for information on how to set
+To get started, go to <<Quick Start, Quick Start>> for information on how to set
 up Investigapptor.
 
-== About
+== About this User Guide
 
 This user guide shows you how to get started with Investigapptor.
 
 This user guide will introduce you to the features Investigapptor provides and lead you through with the use of examples.
 
 == Quick Start
+This section serves as a tutorial for you to familiarise yourself with the use of
+Investigapptor.
 
-.  Ensure that you have Java version `1.8.0_60` or later installed in your Computer.
+=== Installation
+This sub-section provides a step by step guide on teaching you how to install
+Investigapptor.
+
+.  Ensure that you have Java version `1.8.0_60` or later installed in your
+Computer. If you do not already have it installed, you can download it from
+link:{javaURL}[here].
 +
 [NOTE]
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  You can download latest `investigapptor.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Investigapptor.
+.  You can download the latest version `investigapptor.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder
+(e.g `C:\Users\Investigator\InvestigapptorFolder`)
+for your Investigapptor.
 .  Double-click the file to start the app. The Graphical User Interface (GUI) should appear in a few seconds
- as shown in _Figure 1_ below.
+ as shown in _<<StartUp, Figure 1>>_ below.
 +
-[.left]
+[[StartUp]]
 .Successful start up
 image::Ui.png[width="790"]
-+
-.  You can type commands in the command box and press kbd:[Enter] to execute it. +
+
+=== Navigating The Interface
+This sub-section will help you understand the different sections of the application
+interface as shown in _<<Interface, Figure 2>>_ below.
+
+[[Interface]]
+.Interface
+image::Interface.png[width="790"]
+
+[width=100%, cols="1,4,20"]
+|===
+| *Label* | *Name* | *Feature*
+| 1 | Panel List | A panel that displays the list of investigators or crime
+                    cases. You can toggle between the two by clicking on the tab.
+
+| 2 | Detail Panel | The detail panel will display the full information of the
+                        selected investigator or crime case.
+
+| 3 | Calendar | The calendar will show when the cases were opened or closed.
+
+| 4 | Command Box | The command box is where you key in the commands to tell the Investigapptor
+                    to perform actions.
+
+| 5 | Result Box | The result box will display the result to any command you input.
+
+|===
+=== Using commands
+This sub-section will teach you how to key in the commands to interact with
+the Investigapptor.
+
+.  You can type commands (case sensitive) in the command box and
+press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
@@ -65,14 +107,35 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`ai`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
 * **`di`**`3` : deletes the 3rd investigator shown in the current list
 * *`exit`* : exits the app
-.  You can refer to the <<Features>> section below for details of each command.
-
-[TIP]
-If the cursor disappears, you can press kbd:[Ctrl] to reveal the cursor again.
-
+.  You can refer to the <<Commands, Commands>> section for details of each command.
 
 [[Features]]
 == Features
+This section introduces to you the features that are available with Investigapptor.
+//tag::calendarsection[]
+[[CasesCalendar]]
+=== Calendar View for Cases [Since v1.4]
+By default, when you start up the application, all the cases that are in the application will be
+shown on the calendar as shown in _<<calendar1>>_.
+[[calendar1]]
+.Listing cases
+image::userguide-images/calendar-1.png[width="900"]
+
+=== Tags [Since v1.0]
+The tagging feature allows you to add labels to each investigator or crime case.
+This would allow you to easily filter for certain types of investigators or crime cases.
+An example is shown below in _<<TagExample, Figure 4>>_
+
+[[TagExample]]
+.Investigator with a tag
+image::userguide-images/tag-example.png[width="500"]
+
+[TIP]
+You can use the tags to label each investigator with their field of expertise
+
+[[Commands]]
+== Commands
+This section introduces to you the commands that are available with Investigapptor.
 
 [width="80%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
@@ -112,17 +175,14 @@ image::userguide-images/help-ui.png[width="300"]
 // tag::setpassword[]
 [[SetPassword]]
 ==== Setting a password : `setpassword` [Since v1.3]
-You can use this command to set a new password for the Investigapptor
-whether or not a password has been set.
+You can use this command to set a new password for the Investigapptor.
 
 [IMPORTANT]
 Your password must be of minimal 8 characters and not contain any spaces. +
-[TIP]
-You can press kbd:[Ctrl] to reveal the password in plaintext if you find
- yourself having trouble remembering what you typed. Pressing kbd:[Ctrl]
-again will hide back the password.
+[NOTE]
+Due to security reasons, this command is not an undoable command.
 
-Format: `setpassword [pw/PASSWORD]` +
+Format: `setpassword pw/PASSWORD` +
 Alias: `sp pw/PASSWORD` +
 
 *Example:*
@@ -131,8 +191,8 @@ Alias: `sp pw/PASSWORD` +
 .Setting a password
 image::userguide-images/sp-command.png[width="450"]
 
-The next time you start up Investigapptor, you would be prompted with a password
-input as shown in _<<inputpassword>>_.
+The next time you start up Investigapptor, you will be prompted with a password
+input as shown below in _<<inputpassword, Figure 5>>_.
 
 [[inputpassword]]
 .Inputting a password
@@ -145,15 +205,10 @@ image::userguide-images/inputpassword.png[width="450"]
 You can use this command to remove a set password from the Investigapptor.
 
 [NOTE]
-You must input the currently set password correctly in order to remove the
-password. +
-[TIP]
-You can press kbd:[Ctrl] to reveal the password in plaintext if you find
- yourself having trouble remembering what you typed. Pressing kbd:[Ctrl]
-again will hide back the password.
+Due to security reasons, this command is not an undoable command.
 
-Format: `removepassword [pw/PASSWORD]` +
-Alias: `rp pw/PASSWORD` +
+Format: `removepassword` +
+Alias: `rp` +
 
 *Example:*
 
@@ -464,17 +519,6 @@ Selects the 1st investigator in the results of the `findinvestigator` command.
 
 Selects the 3rd person in the listed panel list.
 
-=== Case Features
-
-//tag::calendarsection[]
-[[CasesCalendar]]
-==== Cases calendar [Since v1.4]
-By default, when you start up the application, all the cases that are in the application will be
-shown on the calendar as shown in _<<calendar1>>_.
-[[calendar1]]
-.Listing cases
-image::userguide-images/calendar-1.png[width="900"]
-
 ===== Calendar Entries
 The entries in the calendar are represented in two different colours as explained
 in _<<colour-table>>_ below.
@@ -540,6 +584,7 @@ Click on the command for further information of how it works. Picture illustrati
 ====
 //end::calendarsection[]
 
+//tag::addcase[]
 === Case Commands
 These are case related commands. +
 
@@ -558,6 +603,7 @@ Tags are optional, but you can add as many as you like to a case to help you org
 * `addcase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
 * `addcase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
 * `ac n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
+//end::addcase[]
 
 //tag::listcases[]
 [[ListCases]]
@@ -580,6 +626,7 @@ image::userguide-images/lc-command.png[width="450"]
 
 //end::listcases[]
 
+//tag::editcase[]
 [[EditCase]]
 ==== Editing a case: `editcase` [Since v1.4]
 
@@ -609,7 +656,9 @@ You can remove all the investigator's tags by typing `t/` without specifying any
 Edits the description and investigator of the 1st case to be `some description` and the 1st investigator in the most recent listing of investigators respectively.
 * `ec 2 i/3 t/` +
 Changes the investigator of the 2nd case to the 3rd investigator in the most recent listing of investigators, and clears all existing tags.
+//end::editcase[]
 
+//tag::findcases[]
 [[FindCases]]
 ==== Locating cases by name: `findcases` [Since v1.3]
 
@@ -636,6 +685,7 @@ Examples:
 Returns `SPF Murder` and `SPF rape`
 * `findcases murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
+//end::findcases[]
 
 //tag::findcasetags[]
 [[FindCaseTags]]
@@ -746,6 +796,7 @@ Closes the 1st case in the results of the `findcases` command.
 Closes the 3rd case in the listed panel list case.
 //end::closecase[]
 
+//tag::deletecase[]
 [[DeleteCase]]
 ==== Deleting a case : `deletecase` [Since v1.3]
 
@@ -769,9 +820,11 @@ Deletes the 2nd case in the list of all cases.
 * `findcase Arson` +
 `dc 1` +
 Deletes the 1st case in the results of the `findcase` command.
+//end::deletecase[]
 
+//tag::selectcase[]
 [[SelectCase]]
-==== Selecting a case : `selectcase` [Coming in v1.5]
+==== Selecting a case : `selectcase` [Since v1.5]
 
 Selects the case identified by the index number used in the last case listing. +
 Format: `selectcase INDEX` +
@@ -798,6 +851,7 @@ Selects the 2nd case in the results of the `listcases` command.
 Selects the 1st case in the results of the `findcase` command.
 * `sc 3` +
 Selects the 3rd case in the most recent list of cases.
+//end::selectcase[]
 
 ==== List a specific Investigator's cases `listinvestigatorcases` [Since v1.4]
 
@@ -850,20 +904,24 @@ _{explain how the user can enable/disable data encryption}_
 overwriting the empty data file it creates with the file that contains
 the data of your previous Investigapptor folder.
 
+
+
 == Command Summary
+This section provides a quick reference for
 
 === General Commands
-[width="100%",cols="20%,<30%,<30%,<30",options="header",]
+These are some general commands
+[width="100%",cols="20%,<30%,<20%,<30",options="header",]
 |=======================================================================
-|Command Section |Purpose |Format |Example
+|Command |Purpose |Format |Example
 
 |_<<Help, Help>>_ |Shows you the user guide |`help` | `help`
 
-|_<<SetPassword, Set Password>>_ |Sets the password |`setpassword [pw/PASSWORD]` |
+|_<<SetPassword, Set Password>>_ |Sets the password |`setpassword pw/PASSWORD` |
 `setpassword pw/password`
 
-|_<<RemovePassword, Remove Password>>_ |Removes the password |`removepassword [pw/PASSWORD]` |
-`removepassword pw/password`
+|_<<RemovePassword, Remove Password>>_ |Removes the password |
+`removepassword` | `removepassword`
 
 |_<<History, History>>_ |Shows you a history of all commands used |`history` | `history`
 
@@ -874,9 +932,9 @@ the data of your previous Investigapptor folder.
 |=======================================================================
 
 === Investigator Commands
-[width="100%",cols="20%,<30%,<30%,<30",options="header",]
+[width="100%",cols="20%,<30%,<20%,<30",options="header",]
 |=======================================================================
-|Command Section |Purpose |Format |Example
+|Command |Purpose |Format |Example
 
 |_<<AddInv, Add an Investigator>>_ |Shows you the list of added investigators |
 `listinvestigators` | `listinvestigators`
@@ -890,9 +948,9 @@ the data of your previous Investigapptor folder.
 |=======================================================================
 
 === Case Commands
-[width="100%",cols="20%,<30%,<30%,<30",options="header",]
+[width="100%",cols="20%,<30%,<20%,<30",options="header",]
 |=======================================================================
-|Command Section |Purpose |Format |Example
+|Command |Purpose |Format |Example
 
 |_<<ListCases, List Cases>>_ |Shows you the list of added cases |
 `listcases` | `listcases`
@@ -904,8 +962,6 @@ the data of your previous Investigapptor folder.
 |=======================================================================
 |Shortcut |Purpose |Remarks
 
-|kbd:[Esc] | Helps you clears the entire command box text field | -
-
-|kbd:[Ctrl] | Toggles between hiding and revealing the password parameter | -
+|kbd:[Esc] | Helps you clears the entire command box | -
 
 |=======================================================================

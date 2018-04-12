@@ -192,7 +192,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
                     try {
                         key.addCrimeCase(c);
                     } catch (DuplicateCrimeCaseException e) {
-                            throw new AssertionError("Not possible, duplicate case while retrieving from xml");
+                        throw new AssertionError("Not possible, duplicate case while retrieving from xml");
                     }
                 }
             }

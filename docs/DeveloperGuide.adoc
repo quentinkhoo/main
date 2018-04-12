@@ -12,7 +12,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-F14-B3/main
 
-By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
+By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Introduction
 Investigapptor is a one-stop solution for investigators to make managing cases as simple, straightforward, and efficient as possible.

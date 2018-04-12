@@ -28,10 +28,7 @@ public class FindCaseCommand extends Command {
     @Override
     public CommandResult execute() {
         model.updateFilteredCrimeCaseList(predicate);
-
         EventsCenter.getInstance().post(new SwapTabEvent(1));
-        EventsCenter.getInstance().post(new FilteredCrimeCaseListChangedEvent(model.getFilteredCrimeCaseList()));
-
         return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
     }
 

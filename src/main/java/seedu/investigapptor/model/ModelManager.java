@@ -13,6 +13,7 @@ import seedu.investigapptor.commons.core.ComponentManager;
 import seedu.investigapptor.commons.core.LogsCenter;
 import seedu.investigapptor.commons.events.model.InvestigapptorBackupEvent;
 import seedu.investigapptor.commons.events.model.InvestigapptorChangedEvent;
+import seedu.investigapptor.commons.events.ui.FilteredCrimeCaseListChangedEvent;
 import seedu.investigapptor.logic.commands.exceptions.InvalidPasswordException;
 import seedu.investigapptor.logic.commands.exceptions.NoPasswordException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
@@ -69,6 +70,13 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateInvestigapptorChanged() {
         raise(new InvestigapptorChangedEvent(investigapptor));
     }
+
+    //@@author pkaijun
+    /** Raises an event to indicate the filtered crime cases list has changed */
+    private void indicateFilteredCrimeCaseListChanged() {
+        raise(new FilteredCrimeCaseListChangedEvent(filteredCrimeCases));
+    }
+    //@@author
 
     @Override
     public synchronized void deletePerson(Person target) throws PersonNotFoundException {
@@ -178,6 +186,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredCrimeCaseList(Predicate<CrimeCase> predicate) {
         requireNonNull(predicate);
         filteredCrimeCases.setPredicate(predicate);
+        indicateFilteredCrimeCaseListChanged();
     }
 
     @Override

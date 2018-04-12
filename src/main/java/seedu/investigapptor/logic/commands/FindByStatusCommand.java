@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.investigapptor.commons.core.EventsCenter;
-import seedu.investigapptor.commons.events.ui.FilteredCrimeCaseListChangedEvent;
 import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.model.crimecase.StatusContainsKeywordsPredicate;
 

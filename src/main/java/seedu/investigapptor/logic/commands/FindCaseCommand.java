@@ -1,7 +1,6 @@
 package seedu.investigapptor.logic.commands;
 
 import seedu.investigapptor.commons.core.EventsCenter;
-import seedu.investigapptor.commons.events.ui.FilteredCrimeCaseListChangedEvent;
 import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.model.crimecase.CaseNameContainsKeywordsPredicate;
 //@@author leowweiching-reused

@@ -26,7 +26,12 @@
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#about">2. About</a></li>
-<li><a href="#quick-start">3. Quick Start</a></li>
+<li><a href="#quick-start">3. Quick Start</a>
+<ul class="sectlevel2">
+<li><a href="#navigating-the-interface">3.1. Navigating The Interface</a></li>
+<li><a href="#using-commands">3.2. Using commands</a></li>
+</ul>
+</li>
 <li><a href="#Features">4. Features</a>
 <ul class="sectlevel2">
 <li><a href="#general-commands">4.1. General Commands</a>
@@ -135,6 +140,9 @@ up Investigapptor.</p>
 <div class="sect1">
 <h2 id="quick-start"><a class="link" href="#quick-start">3. Quick Start</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>In order to start using Investigapptor, it is best to follow the instructions below to setup your computer to run Investigapptor</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -169,6 +177,47 @@ as shown in <em>Figure 1</em> below.</p>
 <div class="title">Figure 1. Successful start up</div>
 </div>
 </li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="navigating-the-interface"><a class="link" href="#navigating-the-interface">3.1. Navigating The Interface</a></h3>
+<div class="paragraph">
+<p>In investigapptor, there are several components as shown below in <a href="#Interface">Figure 2, &#8220;Interface&#8221;</a> which you can view and interact with</p>
+</div>
+<div id="Interface" class="imageblock">
+<div class="content">
+<img src="images/Interface.png" alt="Interface" width="790">
+</div>
+<div class="title">Figure 2. Interface</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Panel List:</strong> A panel that display the investigators or crime cases. You can toggle between the two by using the
+toggle button at the top.</p>
+</li>
+<li>
+<p><strong>Detail Panel:</strong> The display panel will the full information of selected investigator or crime case.</p>
+</li>
+<li>
+<p><strong>Calendar:</strong> The calendar will show when the cases were open and closed.</p>
+</li>
+<li>
+<p><strong>Command Box:</strong> The command box is where you key in the commands to navigate the investigapptor.</p>
+</li>
+<li>
+<p><strong>Display Box:</strong> The display box will display the result to any command you input.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-commands"><a class="link" href="#using-commands">3.2. Using commands</a></h3>
+<div class="paragraph">
+<p>As the using commands is the main method of interacting with investigapptor, learning how to use the command is important.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>You can type commands in the command box and press <kbd>Enter</kbd> to execute it.<br>
 e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
@@ -208,6 +257,7 @@ If the cursor disappears, you can press <kbd>Ctrl</kbd> to reveal the cursor aga
 </td>
 </tr>
 </table>
+</div>
 </div>
 </div>
 </div>
@@ -284,13 +334,13 @@ Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHON
 <td class="content">
 <div class="paragraph">
 <p>Alternatively, you can find the help option by pressing <kbd>F1</kbd>
-or from the menu bar, as shown in <em><a href="#f1-help">Figure 2, &#8220;Accessing help from menu bar&#8221;</a></em>.</p>
+or from the menu bar, as shown in <em><a href="#f1-help">Figure 3, &#8220;Accessing help from menu bar&#8221;</a></em>.</p>
 </div>
 <div id="f1-help" class="imageblock">
 <div class="content">
 <img src="images/userguide-images/help-ui.png" alt="help ui" width="300">
 </div>
-<div class="title">Figure 2. Accessing help from menu bar</div>
+<div class="title">Figure 3. Accessing help from menu bar</div>
 </div>
 </td>
 </tr>
@@ -300,8 +350,7 @@ or from the menu bar, as shown in <em><a href="#f1-help">Figure 2, &#8220;Access
 <div class="sect3">
 <h4 id="SetPassword"><a class="link" href="#SetPassword">4.1.2. Setting a password : <code>setpassword</code> [Since v1.3]</a></h4>
 <div class="paragraph">
-<p>You can use this command to set a new password for the Investigapptor
-whether or not a password has been set.</p>
+<p>You can use this command to set a new password for the Investigapptor.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -315,22 +364,8 @@ Your password must be of minimal 8 characters and not contain any spaces.<br>
 </tr>
 </table>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can press <kbd>Ctrl</kbd> to reveal the password in plaintext if you find
- yourself having trouble remembering what you typed. Pressing <kbd>Ctrl</kbd>
-again will hide back the password.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
-<p>Format: <code>setpassword [pw/PASSWORD]</code><br>
+<p>Format: <code>setpassword pw/PASSWORD</code><br>
 Alias: <code>sp pw/PASSWORD</code><br></p>
 </div>
 <div class="paragraph">
@@ -340,17 +375,17 @@ Alias: <code>sp pw/PASSWORD</code><br></p>
 <div class="content">
 <img src="images/userguide-images/sp-command.png" alt="sp command" width="450">
 </div>
-<div class="title">Figure 3. Setting a password</div>
+<div class="title">Figure 4. Setting a password</div>
 </div>
 <div class="paragraph">
 <p>The next time you start up Investigapptor, you would be prompted with a password
-input as shown in <em><a href="#inputpassword">Figure 4, &#8220;Inputting a password&#8221;</a></em>.</p>
+input as shown in <em><a href="#inputpassword">Figure 5, &#8220;Inputting a password&#8221;</a></em>.</p>
 </div>
 <div id="inputpassword" class="imageblock">
 <div class="content">
 <img src="images/userguide-images/inputpassword.png" alt="inputpassword" width="450">
 </div>
-<div class="title">Figure 4. Inputting a password</div>
+<div class="title">Figure 5. Inputting a password</div>
 </div>
 </div>
 <div class="sect3">
@@ -371,23 +406,9 @@ password.<br>
 </tr>
 </table>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can press <kbd>Ctrl</kbd> to reveal the password in plaintext if you find
- yourself having trouble remembering what you typed. Pressing <kbd>Ctrl</kbd>
-again will hide back the password.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
-<p>Format: <code>removepassword [pw/PASSWORD]</code><br>
-Alias: <code>rp pw/PASSWORD</code><br></p>
+<p>Format: <code>removepassword</code><br>
+Alias: <code>rp</code><br></p>
 </div>
 <div class="paragraph">
 <p><strong>Example:</strong></p>
@@ -396,7 +417,7 @@ Alias: <code>rp pw/PASSWORD</code><br></p>
 <div class="content">
 <img src="images/userguide-images/rp-command.png" alt="rp command" width="450">
 </div>
-<div class="title">Figure 5. Removing a password</div>
+<div class="title">Figure 6. Removing a password</div>
 </div>
 </div>
 <div class="sect3">
@@ -462,25 +483,25 @@ Alias: <code>u</code></p>
 <div class="content">
 <img src="images/userguide-images/undo-command-1.png" alt="undo command 1" width="450">
 </div>
-<div class="title">Figure 6. Before <code>deletecase 1</code> command</div>
+<div class="title">Figure 7. Before <code>deletecase 1</code> command</div>
 </div>
 <div id="undo-2" class="imageblock">
 <div class="content">
 <img src="images/userguide-images/undo-command-2.png" alt="undo command 2" width="450">
 </div>
-<div class="title">Figure 7. After <code>deletecase 1</code> command</div>
+<div class="title">Figure 8. After <code>deletecase 1</code> command</div>
 </div>
 <div id="undo-3" class="imageblock">
 <div class="content">
 <img src="images/userguide-images/undo-command-3.png" alt="undo command 3" width="450">
 </div>
-<div class="title">Figure 8. <code>listcases</code> command</div>
+<div class="title">Figure 9. <code>listcases</code> command</div>
 </div>
 <div id="undo-4" class="imageblock">
 <div class="content">
 <img src="images/userguide-images/undo-command-4.png" alt="undo command 4" width="450">
 </div>
-<div class="title">Figure 9. <code>undo</code> command</div>
+<div class="title">Figure 10. <code>undo</code> command</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -622,7 +643,7 @@ Alias: <code>ai</code></p>
 <div class="content">
 <img src="images/userguide-images/ai-command.png" alt="ai command" width="790">
 </div>
-<div class="title">Figure 10. Adding an investigator</div>
+<div class="title">Figure 11. Adding an investigator</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -653,7 +674,7 @@ Alias: <code>li</code></p>
 <div class="content">
 <img src="images/userguide-images/li-command.png" alt="li command" width="450">
 </div>
-<div class="title">Figure 11. Listing of all investigators</div>
+<div class="title">Figure 12. Listing of all investigators</div>
 </div>
 </div>
 <div class="sect3">
@@ -716,7 +737,7 @@ Alias: <code>fi</code></p>
 <div class="content">
 <img src="images/userguide-images/fi-command.png" alt="fi command" width="450">
 </div>
-<div class="title">Figure 12. Finding investigators by its name</div>
+<div class="title">Figure 13. Finding investigators by its name</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -771,7 +792,7 @@ Alias: <code>fit</code></p>
 <div class="content">
 <img src="images/userguide-images/fit-command.png" alt="fit command" width="450">
 </div>
-<div class="title">Figure 13. Finding investigators by its tags</div>
+<div class="title">Figure 14. Finding investigators by its tags</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -857,13 +878,13 @@ Deletes the 1st investigator in the results of the <code>findinvestigators</code
 </div>
 <div class="paragraph">
 <p>You can identify and delete the investigator by looking at their <code>INDEX</code> at the top left of their card as show in the
-diagram in <a href="#deleteinv-index">Figure 14, &#8220;Investigator Index&#8221;</a></p>
+diagram in <a href="#deleteinv-index">Figure 15, &#8220;Investigator Index&#8221;</a></p>
 </div>
 <div id="deleteinv-index" class="imageblock">
 <div class="content">
 <img src="images/userguide-images/di-command-index.png" alt="di command index" width="320">
 </div>
-<div class="title">Figure 14. Investigator Index</div>
+<div class="title">Figure 15. Investigator Index</div>
 </div>
 <div class="paragraph">
 <p><strong>Example:</strong></p>
@@ -872,7 +893,7 @@ diagram in <a href="#deleteinv-index">Figure 14, &#8220;Investigator Index&#8221
 <div class="content">
 <img src="images/userguide-images/di-command.png" alt="di command" width="500">
 </div>
-<div class="title">Figure 15. Deleting an investigator</div>
+<div class="title">Figure 16. Deleting an investigator</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -945,13 +966,13 @@ Selects the 1st investigator in the results of the <code>findinvestigator</code>
 <h4 id="CasesCalendar"><a class="link" href="#CasesCalendar">4.3.1. Cases calendar [Since v1.4]</a></h4>
 <div class="paragraph">
 <p>By default, when you start up the application, all the cases that are in the application will be
-shown on the calendar as shown in <em><a href="#calendar1">Figure 16, &#8220;Listing cases&#8221;</a></em>.</p>
+shown on the calendar as shown in <em><a href="#calendar1">Figure 17, &#8220;Listing cases&#8221;</a></em>.</p>
 </div>
 <div id="calendar1" class="imageblock">
 <div class="content">
 <img src="images/userguide-images/calendar-1.png" alt="calendar 1" width="900">
 </div>
-<div class="title">Figure 16. Listing cases</div>
+<div class="title">Figure 17. Listing cases</div>
 </div>
 <div class="sect4">
 <h5 id="calendar-entries"><a class="link" href="#calendar-entries">Calendar Entries</a></h5>
@@ -986,7 +1007,7 @@ in <em><a href="#colour-table">Table 1, &#8220;Entry Colours&#8221;</a></em> bel
 <h6 id="closecaseentries"><a class="link" href="#closecaseentries">Close Case Entries (Green)</a></h6>
 <div class="paragraph">
 <p>When the case status is <code>close</code>, the calendar will indicate an entry that spans
-from its start date to its end date. For example, as shown in <em><a href="#green-entry">Figure 17, &#8220;Green Entry&#8221;</a></em>
+from its start date to its end date. For example, as shown in <em><a href="#green-entry">Figure 18, &#8220;Green Entry&#8221;</a></em>
 below, the closed case, Project Magic has a start date of "01/04/2018" and end date of
 "10/04/2018".</p>
 </div>
@@ -994,7 +1015,7 @@ below, the closed case, Project Magic has a start date of "01/04/2018" and end d
 <div class="content">
 <img src="images/userguide-images/green-entry.png" alt="green entry" width="500">
 </div>
-<div class="title">Figure 17. Green Entry</div>
+<div class="title">Figure 18. Green Entry</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1016,7 +1037,7 @@ in the calendar unlike <a href="#opencaseentries">open case entries</a>.</p>
 <h6 id="opencaseentries"><a class="link" href="#opencaseentries">Open Case Entries (Red)</a></h6>
 <div class="paragraph">
 <p>When the case status is <code>open</code>, the calendar will indicate an entry on its start date.
-For example, as shown in <em><a href="#red-entry">Figure 18, &#8220;Red Entry&#8221;</a></em> below,
+For example, as shown in <em><a href="#red-entry">Figure 19, &#8220;Red Entry&#8221;</a></em> below,
 the open case, Project Three has a start date of "01/04/2018". Similarly,
 for Project Two, it has a status of <code>open</code> and a start date of "03/04/2018".</p>
 </div>
@@ -1024,7 +1045,7 @@ for Project Two, it has a status of <code>open</code> and a start date of "03/04
 <div class="content">
 <img src="images/userguide-images/red-entry.png" alt="red entry" width="500">
 </div>
-<div class="title">Figure 18. Red Entry</div>
+<div class="title">Figure 19. Red Entry</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1168,7 +1189,7 @@ Alias: <code>lc</code></p>
 <div class="content">
 <img src="images/userguide-images/lc-command.png" alt="lc command" width="450">
 </div>
-<div class="title">Figure 19. Listing cases</div>
+<div class="title">Figure 20. Listing cases</div>
 </div>
 </div>
 <div class="sect3">
@@ -1273,7 +1294,7 @@ Alias: <code>fc</code></p>
 <div class="content">
 <img src="images/userguide-images/fc-command.png" alt="fc command" width="450">
 </div>
-<div class="title">Figure 20. Finding cases by its name</div>
+<div class="title">Figure 21. Finding cases by its name</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1328,7 +1349,7 @@ Alias: <code>fct</code></p>
 <div class="content">
 <img src="images/userguide-images/fct-command.png" alt="fct command" width="450">
 </div>
-<div class="title">Figure 21. Finding cases by its tags</div>
+<div class="title">Figure 22. Finding cases by its tags</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1440,13 +1461,13 @@ Alias: <code>cl</code></p>
 <div class="content">
 <img src="images/userguide-images/close-command-1.png" alt="close command 1" width="900">
 </div>
-<div class="title">Figure 22. Before <code>close</code> command</div>
+<div class="title">Figure 23. Before <code>close</code> command</div>
 </div>
 <div id="closecase-2" class="imageblock">
 <div class="content">
 <img src="images/userguide-images/close-command-2.png" alt="close command 2" width="900">
 </div>
-<div class="title">Figure 23. After <code>close</code> command</div>
+<div class="title">Figure 24. After <code>close</code> command</div>
 </div>
 <div class="paragraph">
 <p>You can refer to <a href="#CasesCalendar">Cases Calendar Section</a> for the guide to the Cases' Calendar.</p>
@@ -1724,8 +1745,14 @@ the data of your previous Investigapptor folder.</p>
 <div class="sect1">
 <h2 id="command-summary"><a class="link" href="#command-summary">6. Command Summary</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This section provides a quick reference for</p>
+</div>
 <div class="sect2">
 <h3 id="general-commands-2"><a class="link" href="#general-commands-2">6.1. General Commands</a></h3>
+<div class="paragraph">
+<p>These are some general commands</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 18.1818%;">
@@ -1837,7 +1864,7 @@ the data of your previous Investigapptor folder.</p>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Command Section</th>
+<th class="tableblock halign-left valign-top">Command</th>
 <th class="tableblock halign-left valign-top">Purpose</th>
 <th class="tableblock halign-left valign-top">Format</th>
 <th class="tableblock halign-left valign-top">Example</th>
@@ -1871,12 +1898,7 @@ the data of your previous Investigapptor folder.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>Esc</kbd></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Helps you clears the entire command box text field</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>Ctrl</kbd></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Toggles between hiding and revealing the password parameter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Helps you clears the entire command box</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
 </tr>
 </tbody>
@@ -1887,7 +1909,7 @@ the data of your previous Investigapptor folder.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-11 08:55:02 UTC
+Last updated 2018-04-12 09:41:02 UTC
 </div>
 </div>
 </body>

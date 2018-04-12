@@ -12,18 +12,31 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-F14-B3/main
 
-By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
+By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Introduction
-Investigapptor is a one-stop solution for investigators to make managing cases as simple, straightforward, and efficient as possible.
+
+Investigapptor is desktop application for a team of professional
+investigators to easily manage crime cases that have been
+delegated to them.
+
+Investigapptor comes with many useful features for investigators and
+their team members such as assigning investigators to a crime case, listing investigators
+based on their expertise so that you can solve crime cases more effienctly ande ffectively.
+
+Investigapptor v1.5 is available for Windows, Mac OS X, Linux and Unix operating systems.
+
+To get started, go to <<Quick Start>> for information on how to set
+up Investigapptor.
 
 == Setting up
 Follow the instructions below to set up and configure `Investigapptor` project files on your computer
 
 === Prerequisites
 
-. *JDK `1.8.0_60`* or later
-+
+. *JDK `1.8.0_60`* or later +
+Download at link:http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html[here]
+
 [NOTE]
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
@@ -37,6 +50,8 @@ Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plu
 
 
 === Setting up the project in your computer
+In order to start coding on Investigapptor, you first need to follow the step belows to set up an
+local Investigapptor project on your computer.
 
 . Fork this repo, and clone the fork to your computer
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
@@ -96,22 +111,26 @@ When you are ready to start coding,
 2. Take a look at <<GetStartedProgramming>>.
 
 == Design
+This section will explain structure of the Investigapptor and what each component of the
+Investigapptor does. WIth a clear understanding of the design, it becomes much easier for you
+to identify where and how your enhancement should be implemented
 
 [[Design-Architecture]]
 === Architecture
 
+The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
+
 .Architecture Diagram
 image::Architecture.png[width="600"]
 
-The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for:
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+* At app launch: Initializing the components in the correct sequence, and connects them up with each other.
+* At shut down: Shutting down the components and invokes cleanup method where necessary.
 
 <<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.
 
@@ -564,15 +583,32 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+//tag::investigator[]
 === Investigator Class
-==== Reason for Implementation
-As the base person class provided by the addressbook only has basic capability to store simple information such name and
-phone number, we had to create a new `Investigator` package which can store and handle a list of `CrimeCases` which is a core
- requirement for our product to work. We chose not to modify the `Person` package but instead extend from it as it will allow the ease of adding new
-  type of person object in the future such as suspects or witnesses.
 
-==== Current Implementation
+==== Investigator Package
+
+===== Reason for Implementation
+As person class provided by the addressbook only has basic capability to store simple information such name and
+phone number, we had to create a new `Investigator` package which can store and handle a list of `CrimeCases` which is a core
+requirement for our product to work. We chose not to modify the `Person` package but instead extend from it as it will be easier
+for you to implement new type of person object in the future such as suspects or witnesses.
+
+===== Current Implementation
 Currently the `Investigator` extends from the `Person` class, and the additional two properties the are:
+
+[width="100%", cols="11,10,20,20", options="header"]
+|=======
+|Composition Of |Class |Constructor |Remark
+|Person |Name |`new Name(“Jon Doe”)` |Stores a `String` that represents the name of the person.
+|Person |Phone |`new Phone(9123874)` |Stores an `int` that represents the phone number of the person.
+|Person |Email |`new Email(“JohnD@gmail.com”)` |Stores a `String` that represents the email of the person.
+|Person |Address |`new EndDate("Baker Street #01-04")` |Stores a `String` that represents the address of the person.
+|Investigator |Rank |`new Status('1')` |Store a `String` that represent a int value that can be converted to the appropriate <<Rank>>.
+|Investigator |UniqueCrimeCaseList |`new Status()` | Stores a `UniqueCrimeCaseList` that contains all the cases the investigator is in charged of
+|=======
+
+[[Rank]]
 
 * `Rank`
 +
@@ -604,18 +640,12 @@ Currently the `Investigator` is upcasted and stored in the `Investigapptor` 's `
 This is done on purpose to allow future enhancement that allows us to implement types of people such as suspects and witnesses. Storing them together makes it easier to use general
 functions.
 
+[invest-com]
+.Investigator in Model Component
+image::investigatorComponent.png[width="790"]
+
 The code below is from the `syncWithMasterTagList` function. It shows that
 both Investigator and Person type are both return into the `UniquePersonList`.
-
-        if (person instanceof Investigator) {
-            Set<CrimeCase> cases = new HashSet<>();
-            Investigator inv = (Investigator) person;
-            inv.getCrimeCases().forEach(crimeCase -> cases.add(crimeCase));
-            return new Investigator(person.getName(), person.getPhone(), person.getEmail(),
-                    person.getAddress(), ((Investigator) person).getRank(), correctTagReferences, cases);
-        }
-        return new Person(
-                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
 
 ===== Storage
 
@@ -653,15 +683,152 @@ This function will only return `Person` in the list
         return persons;
     }
 
-As more type of people are added, more function to differentiate the UniquePersonList.
+As the `Investigator` has to store multiple `CrimeCase` , instead of store the whole `CrimeCase` and all
+its details inside of the `XmlAdaptedInvestigator`, we stored the hashcode instead to
+reduce the amount of space used for storage.
 
+===== Design Consideration
+
+===== Aspect: Interaction between Investigator and CrimeCase
+
+* **Alternative 1 (current choice):** Use mutual reference between Investigator and CrimeCase
+** Pros: Easy and fast to find relation between Investigator and CrimeCase by using the reference
+** Cons: Hard to implement due to the undo/redo feature due to creating multiple `Investigapptor` hence the reference
+has to be correct for each instance.
+* **Alternative 2:** Using Association class
+** Pros: Easier to implement. More compatible with the undo/redo feature
+** Cons: Slower due to having to search through all the association class to find all all the connected
+ `Investigator` and `CrimeCase`. More duplicates in the XML file.
+
+
+==== Add Investigator Command
+
+The `addInvestigatorCommand` will create an instance of the Investigator class and store it in the Investigapptor.
+
+===== Reason for Implementation
+
+The `addInvestigatorCommand` is important as you would want to be able to add your own investigator details into the
+investigapptor before you can start editing and managing with the other commands.
+
+===== Current Implementation
+The `addInvestigatorCommand` is created when the command word `addinvestigator` is detected in the user input. It will then use the `ParserUtil`
+to split the user input into its separate components (i.e. `Name`, `Phone`, `Email`, Address`, `Rank`, Set<Tag>). The
+add investigator command will then create a Investigator instance and pass it from the logic component to the model component.
+The model then recreates the Investigator instance and store it.
+
+[add-invest]
+.Add Investigator Sequence Diagram
+image::AddInvestigatorSequenceDiagram.png[width="790"]
+
+Due to the Redo/Undo feature, multiple instance of the Investigapptor will be created which means the references may point to
+the wrong instance. In order to fix this, hashcode is used to identify the correct the CrimeCase and set the correct reference.
+This is done by the convertHashtoCases method in the Investigapptor as show below.
+
+*convertHashtoCases* +
+
+    for (CrimeCase c : cases) {
+        if (c.hashCode() == i) {
+            try {
+                key.addCrimeCase(c);
+            } catch (DuplicateCrimeCaseException e) {
+                throw new AssertionError("duplicate case");
+            }
+        }
+    }
+
+===== Design Consideration
+
+===== Aspect: Setting up Reference between `Investigator` and `CrimeCase` when loading the XML
+
+* **Alternative 1 (current choice):** Using hashcode to reference `CrimeCase` when adding
+** Pros: The `Investigator` will be able to find correct `CrimeCase` to reference despite having multiple instances.
+Storage takes lesser space as only the hashcode is required.
+** Cons: Have to scan every `CrimeCase` for each `CrimeCase` belonging to the Investigator.
+* **Alternative 2: Saving the whole `CrimeCase` inside the XML
+** Pros: Able to reference the correct `CrimeCase` after loading the XML.
+** Cons: Takes up a lot of storage as two copy `CrimeCase` has to be saved, one in `UniqueCrimeCaseList`
+and one in the `Investigator`.
+
+==== Delete Investigator
+
+The `deleteInvestigatorCommand` will find and delete the specified Investigator in the Investigapptor.
+
+===== Reason for Implementation
+
+The `deleteInvestigatorCommand` is important as you may not longer wish to store certain investigator or have made a mistake when
+add the investigator.
+
+===== Current Implementation
+The `deleteInvestigatorCommand` is created when the command word `deleteinvestigator` is
+detected in the user input. It will then check if the index given is valid. If the index
+ is valid, it will check if the investigator at the index if it's `UniqueCaseList` is empty.
+ If it is empty, it will call the `deletePerson` method from the `ModelManager`. The `ModelManager` will then call
+`Investigapptor` 's `deletePerson` method which will remove the investigator from the
+`persons`.
+
+[delete-invest]
+.Delete Investigator Sequence Diagram
+image::DeleteInvestigatorSequenceDiagram.png[width="790"]
+
+===== Design Consideration
+
+===== Aspect: Method of removing investigator
+
+* **Alternative 1 (current choice):** Fully delete the investigator
+** Pros: Easy to implement, no further issues after deleting the investigator.
+** Cons: No longer able to retrieve it after deleted, other than undo.
+* **Alternative 2:** Archive the investigator
+** Pros: Able bring any investigator out of archive.
+** Cons: Complicated to implement, does not actually delete the investigator and may cause build up of unwanted data.
+
+==== Edit Investigator
+
+The `EditInvestigatorCommand` will recreate an instance of the Investigator class that exist and store it in the Investigapptor.
+
+===== Reason for Implementation
+
+The `EditInvestigatorCommand` is important as you would want to be able to edit an investigator's details in the
+investigapptor rather than having to delete and add a new investigator.
+
+===== Current Implementation
+The `EditInvestigatorCommand` is created when the command word `editinvestigator` is detected in the user input. It will then use the `ParserUtil`
+to identify which detail is to be changed (i.e. `Name`, `Phone`, `Email`, Address`, `Rank`, Set<Tag>). The `EditInvestigatorCommand`
+will then create a Investigator instance using both the old and new information and pass it from the logic component to the model component.
+The model then recreates the Investigator instance and replace the old investigator with the new one.
+
+[edit-invest]
+.Editing Investigator Sequence Diagram
+image::EditInvestigatorSequenceDiagram.png[width="790"]
+
+After editing the investigator, the all the cases referencing the old investigator has to
+ be updated to ensure the that the cases point to the correct investigator. In order to do this, the `Investigapptor`
+ will have to recreate all the `CrimeCases` that belong to the investigator with the new `Investigator`. Once
+ all the `CrimeCases` are recreated, they will be added to new `Investigator` and finally stored
+ in `persons` of the `Investigapptor`.
+
+===== Design Consideration
+
+===== Aspect: Updating the `CrimeCases` referencing the `Investigator`
+
+* **Alternative 1 (current choice):** Recreate every `CrimeCase` with the new value
+** Pros: By recreating the `CrimeCase`, we are able to set the `Investigator` to be final inside the `CrimeCase`.
+This will help avoid bugs when redoing and undoing.
+** Cons: Each edit requires more work as `CrimeCase` has to be remove and recreated.
+* **Alternative 2:** Change `CrimeCase` 's investigator to be not final, so that direct change can be made.
+** Pros: Easier to change the each CrimeCase as it does not need to be recreated.
+** Cons: `Investigator` in `CrimeCase` will no longer be final. This however involve the `Invesetigator` to
+modify `CrimeCase`, which result in bad coupling.
+
+//end::investigator[]
+
+//tag::crimecase[]
 === `crimecase` Package
 
 ==== Reason for implementation
 
 As Investigapptor is a tool for managing investigations, the ability to store information about a case is essential.
 
-==== How it is implemented
+==== Current implementation
 
 Each attribute of a case, such as the case name, description, status, etc. are classes in the `crimecase` package. Each of the classes provide utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the object.
 
@@ -700,7 +867,7 @@ The `crimecase` package follows the model of the `person` package, whereby each 
 
 To be able to manage cases, investigators should have the ability to add case details into the application.
 
-==== How it is implemented
+==== Current implementation
 
 The `AddCaseCommandParser` parses the string of arguments provided by the user and splits the `String` into its separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) to be used in the context of the `AddCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
@@ -739,7 +906,7 @@ public CommandResult executeUndoableCommand() throws CommandException {
 
 Sometimes, cases are added by error or there is no need to continue management of a case. Investigators should have a method to remove a case from the application.
 
-==== How it is implemented
+==== Current implementation
 
 The `DeleteCaseCommandParser` parses the string of arguments provided by the user to retrieve the index (i.e. `Index`) to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
@@ -768,13 +935,21 @@ public CommandResult executeUndoableCommand() {
 }
 ```
 
+Below are sequence diagrams illustrating the `Logic` and `Model` components.
+
+.Interactions Inside the Logic Component for the `deleteCase 1` Command
+image::SD_DeleteCaseCommand_Logic.png[width="800"]
+
+.Interactions Inside the Model Component for the `deleteCase 1` Command
+image::SD_DeleteCaseCommand_Model.png[width="500"]
+
 === Finding cases feature
 
 ==== Reason for implementation
 
-To manage large numbers of cases, having a feature that would allow investigators to search the list of cases by name would be extremely helpful. If an investigator is looking for a particular case, it would be extremely inefficient and time-consuming to have to manually browse through all the cases. Hence, being able to find cases by name can help to increase productivity workflow and efficiency.
+To manage large numbers of cases, having a feature that would allow investigators to search the list of cases by name would be extremely helpful. If an investigator is looking for a particular case, it would be extremely inefficient and time-consuming to have to manually browse through all the cases. Hence, being able to find cases by name can help to increase workflow productivity and efficiency.
 
-==== How it is implemented
+==== Current implementation
 
 The `FindCaseCommandParser` parses the string of arguments provided by the user to retrieve the list of keywords to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
@@ -799,9 +974,168 @@ public CommandResult execute() {
 }
 ```
 
+=== Selecting cases feature
+
+==== Reason for implementation
+
+An investigator should be able to retrieve and view information about a case after adding them into the application.
+
+==== Current implementation
+
+Similar to `DeleteCaseCommandParser`, the `SelectCaseCommandParser` parses the string of arguments provided by the user to retrieve the index (i.e. `Index`) to be used in the context of the `SelectCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
+
+The `SelectCaseCommand` extends `Command` and has one constructor.
+
+[width="100%", cols="1,2", options="header"]
+|=======
+|Constructor |Remark
+|`new SelectCaseCommand(targetIndex)` |Accepts an `Index` object as parameter.
+|=======
+
+The `targetIndex` is processed to retrieve the `CrimeCase` object at the specified index on the most recent list of cases displayed by the model. Subsequently, a `JumpToCrimeCaseListRequestEvent` is posted to `EventsCenter` to signal the `UI` component. The following snippet shows the execution code.
+
+```
+public CommandResult execute() throws CommandException {
+
+    List < CrimeCase > lastShownList = model.getFilteredCrimeCaseList();
+
+    if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        throw new CommandException(Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
+    }
+
+    EventsCenter.getInstance().post(new JumpToCrimeCaseListRequestEvent(targetIndex));
+    return new CommandResult(String.format(MESSAGE_SELECT_CASE_SUCCESS, targetIndex.getOneBased()));
+
+}
+```
+
+Following the raised event, `handleJumpToCrimeCaseListRequestEvent` (in `CrimeCaseListPanel.java`) is signalled to handle the select request, which scrolls the view to the correct cell in the panel.
+
+```
+@Subscribe
+private void handleJumpToCrimeCaseListRequestEvent(JumpToCrimeCaseListRequestEvent event) {
+    logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    scrollTo(event.targetIndex);
+}
+```
+
+Next, a `CrimeCasePanelSelectionChangedEvent` that contains the `CrimeCase` object that was selected, is raised. This event is handled by `handleCrimeCasePanelSelectionChangedEvent` (in `BrowserPanel.java`), as shown in the snippet below.
+
+```
+@Subscribe
+private void handleCrimeCasePanelSelectionChangedEvent(CrimeCasePanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadCrimeCasePage(event.getNewSelection().crimeCase);
+}
+```
+
+`loadCrimeCasePage` method takes the `CrimeCase` object contained within the event and splits it up into its various components (i.e. case name, description, investigator, start date, end date, status, and tags) as `String`, which are then used to create a URL query string. Components with strings that may contain symbols such as “#” are encoded first before appending to the query string.
+
+```
+encDescription = URLEncoder.encode(description, "UTF-8");
+encInvEmail = URLEncoder.encode(currentInvestigator.getEmail().value, "UTF-8");
+encInvAddress = URLEncoder.encode(currentInvestigator.getAddress().value, "UTF-8");
+encStartDate = URLEncoder.encode(startDate, "UTF-8");
+encEndDate = URLEncoder.encode(endDate, "UTF-8");
+```
+
+To create the view where the information is displayed on the GUI (`BrowserPanel`), an HTML file (`/docs/CaseDetailsPage.html`) was created as a template for displaying the details of a single case. In order to load the HTML file, utility methods provided by JavaFX’s `WebView` (an embedded browser) is used.
+
+A `String` containing the URL or file path is passed to the `load` method with a request string appended to the back (e.g. “https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=John+Doe”). This method can be used to load pages from third-party services (e.g. Google Search).
+
+```
+public void loadPage(String url) {
+    Platform.runLater(() - > browser.getEngine().load(url));
+}
+```
+
+```
+String caseDetailsPage = CASE_DETAILS_PAGE +
+    "?caseName=" + caseName +
+    "&description=" + encDescription +
+    "&tags=" + tagList +
+    "&invName=" + currentInvestigator.getName().fullName +
+    "&invRank=" + currentInvestigator.getRank().toString() +
+    "&invPhone=" + currentInvestigator.getPhone().value +
+    "&invEmail=" + encInvEmail +
+    "&invAddress=" + encInvAddress +
+    "&startDate=" + encStartDate +
+    "&endDate=" + encEndDate +
+    "&status=" + status;
+
+loadPage(caseDetailsPage);
+```
+Javascript code is included in the HTML file to parse the URL request string and populate the HTML file with the corresponding case details.
+
+==== Design Considerations
+
+===== Aspect: Implementation to view case details
+
+* **Alternative 1 (current choice):** Use HTML and Javascript with JavaFX `WebView` (embedded browser)
+** Pros: Easy to implement and design with basic HTML knowledge.
+** Cons: Passing of data to the HTML file has to be done with a request string, which can get a messy if the data is complex in structure. Loading data is not as efficient.
+* **Alternative 2:** Use only JavaFX
+** Pros: The view integrates more seamlessly with the application.
+** Cons: More troublesome to implement and requires JavaFX knowledge.
+
+**Reason for current choice:** As the data we have is simple, implementing and styling with HTML is easier.
+
+=== Editing cases feature
+
+==== Reason for implementation
+
+Typos can be made when in a haste. The ability to edit cases would give investigators a chance to rectify these mistakes easily. This feature will also enable re-assignment of cases to other investigators, which is useful when an investigator can no longer work on a case.
+
+==== Current implementation
+
+The EditCaseCommandParser parses the String of arguments provided by the user and splits the `String` into the case index (`Index`) and the separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) and directs it into a  ` EditCrimeCaseDescriptor` object  to be used in the context of the `EditCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
+
+The `EditCrimeCaseDescriptor` is a class containing information that describes the case (i.e. case name, description, investigator, start date, tags). The descriptor is used because the user is not required to input all the fields except the case index. When the user specifies the field they wish to edit, it sets the field in the `EditCrimeCaseDescriptor` to that value. If any field is not specified, the field is set to `null`.
+
+The `EditCaseCommand` that extends the `UndoableCommand` has one constructor.
+
+[width="100%", cols="1,2", options="header"]
+|=======
+|Constructor |Remark
+|`new EditCaseCommand(caseIndex, editCrimeCaseDescriptor)` |Accepts an `Index` object and `EditCrimeCaseDescriptor` as parameters.
+
+The `caseIndex` is processed to retrieve the `CrimeCase` object at the specified index on the most recent list of cases displayed by the model.
+
+A new `CrimeCase` object is created using the retrieved case-to-be-edited and the descriptor.
+|=======
+
+When the `EditCaseCommand` is executed, the original `CrimeCase` object is not modified, but rather, replaced by a new `CrimeCase` object. Note that a new `Investigator` object is also created to be stored in the new `CrimeCase`. The cases in that particular `Investigator`’s `UniqueCrimeCaseList` is cleared so that only personal details of the investigator is stored within the `CrimeCase` object. This is to simplify the data to be recorded in storage. The list of cases within the original `Investigator` object remains untouched. The snippet of code below shows the implementation.
+
+```
+private CrimeCase syncWithMasterTagList(CrimeCase crimeCase) {
+    // … logic for handling and rebuilding tags …
+
+    Investigator investigator = (Investigator) syncWithMasterTagList(crimeCase.getCurrentInvestigator());
+    investigator.clearCaseList();
+    return new CrimeCase(
+        crimeCase.getCaseName(), crimeCase.getDescription(), investigator,
+        crimeCase.getStartDate(), crimeCase.getEndDate(), crimeCase.getStatus(), correctTagReferences);
+}
+```
+
+Since the `CrimeCase` object is replaced rather than modified, we need to remove the old `CrimeCase` object stored in the `UniqueCrimeCaseList` of the `Investigator` and reference the new, modified `CrimeCase` object instead. This is done by traversing the entire list of investigators and finding the correct `Investigator` object to remove the case from. The code below shows its implementation.
+
+```
+public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
+throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
+    requireNonNull(editedCase);
+
+    CrimeCase syncedEditedCrimeCase = syncWithMasterTagList(editedCase);
+    removeCrimeCaseFromInvestigator(target);
+    cases.setCrimeCase(target, syncedEditedCrimeCase);
+    addCrimeCaseToInvestigator(syncedEditedCrimeCase);
+}
+```
+//end::crimecase[]
+
 === Creating Backup
 
-As investigators may want to save the current state of the application before progressing, they can do this
+As investigators may want to save the current state of the Investigapptor before progressing, they can do this
 by using the backup command and typing in a name for the backup.
 
 eg: backup 3rdMarch
@@ -1245,8 +1579,8 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * *Leow Wei Ching*
 ** *Major enhancement*: Support for adding, editing, and deleting cases
 *** This enhancement allows users to manage cases.
-** *Minor enhancement*: Support data encryption
-*** This would allow for an added layer of security and prevent viewing of data outside the application.
+** *Minor enhancement*: Update the GUI with a new colour scheme and style
+*** This would make the interface more aesthetically pleasing.
 
 * *Marcus Chen*
 ** *Major enhancement*: Implement the Investigator package and refactoring the model and logic for the Investigator

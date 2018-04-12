@@ -16,72 +16,90 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-F14-B3/main
+:javaURL: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
 By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Introduction
 
-Investigapptor is desktop application for a team of professional
+Investigapptor is a desktop application for a team of professional
 investigators to easily manage crime cases that have been
 delegated to them.
 
 Investigapptor comes with many useful features for investigators and
 their team members such as assigning investigators to a crime case, listing investigators
-based on their expertise so that you can solve crime cases more effienctly ande ffectively.
+based on their expertise. This would allow for one to choose the best investigator for a
+particular crime case based on their expertise+
 
 Investigapptor v1.5 is available for Windows, Mac OS X, Linux and Unix operating systems.
 
-To get started, go to <<Quick Start>> for information on how to set
+To get started, go to <<Quick Start, Quick Start>> for information on how to set
 up Investigapptor.
 
-== About
+== About this User Guide
 
 This user guide shows you how to get started with Investigapptor.
 
 This user guide will introduce you to the features Investigapptor provides and lead you through with the use of examples.
 
 == Quick Start
-In order to start using Investigapptor, it is best to follow the instructions below to setup your computer to run Investigapptor
+This section serves as a tutorial for you to familiarise yourself with the use of
+Investigapptor.
 
-.  Ensure that you have Java version `1.8.0_60` or later installed in your Computer.
+=== Installation
+This sub-section provides a step by step guide on teaching you how to install
+Investigapptor.
+
+.  Ensure that you have Java version `1.8.0_60` or later installed in your
+Computer. If you do not already have it installed, you can download it from
+link:{javaURL}[here].
 +
 [NOTE]
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  You can download latest `investigapptor.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Investigapptor.
+.  You can download the latest version `investigapptor.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder
+(e.g `C:\Users\Investigator\InvestigapptorFolder`)
+for your Investigapptor.
 .  Double-click the file to start the app. The Graphical User Interface (GUI) should appear in a few seconds
- as shown in _Figure 1_ below.
+ as shown in _<<StartUp, Figure 1>>_ below.
 +
-[.left]
+[[StartUp]]
 .Successful start up
 image::Ui.png[width="790"]
 
 === Navigating The Interface
-
-In investigapptor, there are several components as shown below in <<Interface>> which you can view and interact with
-
+This sub-section will help you understand the different sections of the application
+interface as shown in _<<Interface, Figure 2>>_ below.
 
 [[Interface]]
 .Interface
 image::Interface.png[width="790"]
 
-.  *Panel List:* A panel that display the investigators or crime cases. You can toggle between the two by using the
-toggle button at the top.
+[width=100%, cols="1,4,20"]
+|===
+| *Label* | *Name* | *Feature*
+| 1 | Panel List | A panel that displays the list of investigators or crime
+                    cases. You can toggle between the two by clicking on the tab.
 
-. *Detail Panel:* The display panel will the full information of selected investigator or crime case.
+| 2 | Detail Panel | The detail panel will display the full information of the
+                        selected investigator or crime case.
 
-. *Calendar:* The calendar will show when the cases were open and closed.
+| 3 | Calendar | The calendar will show when the cases were opened or closed.
 
-. *Command Box:* The command box is where you key in the commands to navigate the investigapptor.
+| 4 | Command Box | The command box is where you key in the commands to tell the Investigapptor
+                    to perform actions.
 
-. *Display Box:* The display box will display the result to any command you input.
+| 5 | Result Box | The result box will display the result to any command you input.
 
+|===
 === Using commands
-As the using commands is the main method of interacting with investigapptor, learning how to use the command is important.
+This sub-section will teach you how to key in the commands to interact with
+the Investigapptor.
 
-.  You can type commands in the command box and press kbd:[Enter] to execute it. +
+.  You can type commands (case sensitive) in the command box and
+press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
@@ -89,14 +107,35 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`ai`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
 * **`di`**`3` : deletes the 3rd investigator shown in the current list
 * *`exit`* : exits the app
-.  You can refer to the <<Features>> section below for details of each command.
-
-[TIP]
-If the cursor disappears, you can press kbd:[Ctrl] to reveal the cursor again.
-
+.  You can refer to the <<Commands, Commands>> section for details of each command.
 
 [[Features]]
 == Features
+This section introduces to you the features that are available with Investigapptor.
+//tag::calendarsection[]
+[[CasesCalendar]]
+=== Calendar View for Cases [Since v1.4]
+By default, when you start up the application, all the cases that are in the application will be
+shown on the calendar as shown in _<<calendar1>>_.
+[[calendar1]]
+.Listing cases
+image::userguide-images/calendar-1.png[width="900"]
+
+=== Tags [Since v1.0]
+The tagging feature allows you to add labels to each investigator or crime case.
+This would allow you to easily filter for certain types of investigators or crime cases.
+An example is shown below in _<<TagExample, Figure 4>>_
+
+[[TagExample]]
+.Investigator with a tag
+image::userguide-images/tag-example.png[width="500"]
+
+[TIP]
+You can use the tags to label each investigator with their field of expertise
+
+[[Commands]]
+== Commands
+This section introduces to you the commands that are available with Investigapptor.
 
 [width="80%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
@@ -140,6 +179,8 @@ You can use this command to set a new password for the Investigapptor.
 
 [IMPORTANT]
 Your password must be of minimal 8 characters and not contain any spaces. +
+[NOTE]
+Due to security reasons, this command is not an undoable command.
 
 Format: `setpassword pw/PASSWORD` +
 Alias: `sp pw/PASSWORD` +
@@ -150,8 +191,8 @@ Alias: `sp pw/PASSWORD` +
 .Setting a password
 image::userguide-images/sp-command.png[width="450"]
 
-The next time you start up Investigapptor, you would be prompted with a password
-input as shown in _<<inputpassword>>_.
+The next time you start up Investigapptor, you will be prompted with a password
+input as shown below in _<<inputpassword, Figure 5>>_.
 
 [[inputpassword]]
 .Inputting a password
@@ -164,8 +205,7 @@ image::userguide-images/inputpassword.png[width="450"]
 You can use this command to remove a set password from the Investigapptor.
 
 [NOTE]
-You must input the currently set password correctly in order to remove the
-password. +
+Due to security reasons, this command is not an undoable command.
 
 Format: `removepassword` +
 Alias: `rp` +
@@ -478,17 +518,6 @@ Selects the 1st investigator in the results of the `findinvestigator` command.
 * `selectinvestigator 3` +
 
 Selects the 3rd person in the listed panel list.
-
-=== Case Features
-
-//tag::calendarsection[]
-[[CasesCalendar]]
-==== Cases calendar [Since v1.4]
-By default, when you start up the application, all the cases that are in the application will be
-shown on the calendar as shown in _<<calendar1>>_.
-[[calendar1]]
-.Listing cases
-image::userguide-images/calendar-1.png[width="900"]
 
 ===== Calendar Entries
 The entries in the calendar are represented in two different colours as explained
@@ -872,17 +901,17 @@ This section provides a quick reference for
 
 === General Commands
 These are some general commands
-[width="100%",cols="20%,<30%,<30%,<30",options="header",]
+[width="100%",cols="20%,<30%,<20%,<30",options="header",]
 |=======================================================================
-|Command Section |Purpose |Format |Example
+|Command |Purpose |Format |Example
 
 |_<<Help, Help>>_ |Shows you the user guide |`help` | `help`
 
-|_<<SetPassword, Set Password>>_ |Sets the password |`setpassword [pw/PASSWORD]` |
+|_<<SetPassword, Set Password>>_ |Sets the password |`setpassword pw/PASSWORD` |
 `setpassword pw/password`
 
-|_<<RemovePassword, Remove Password>>_ |Removes the password |`removepassword [pw/PASSWORD]` |
-`removepassword pw/password`
+|_<<RemovePassword, Remove Password>>_ |Removes the password |
+`removepassword` | `removepassword`
 
 |_<<History, History>>_ |Shows you a history of all commands used |`history` | `history`
 
@@ -893,9 +922,9 @@ These are some general commands
 |=======================================================================
 
 === Investigator Commands
-[width="100%",cols="20%,<30%,<30%,<30",options="header",]
+[width="100%",cols="20%,<30%,<20%,<30",options="header",]
 |=======================================================================
-|Command Section |Purpose |Format |Example
+|Command |Purpose |Format |Example
 
 |_<<AddInv, Add an Investigator>>_ |Shows you the list of added investigators |
 `listinvestigators` | `listinvestigators`
@@ -909,7 +938,7 @@ These are some general commands
 |=======================================================================
 
 === Case Commands
-[width="100%",cols="20%,<30%,<30%,<30",options="header",]
+[width="100%",cols="20%,<30%,<20%,<30",options="header",]
 |=======================================================================
 |Command |Purpose |Format |Example
 

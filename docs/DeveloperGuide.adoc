@@ -821,13 +821,14 @@ modify `CrimeCase`, which result in bad coupling.
 
 //end::investigator[]
 
+//tag::crimecase[]
 === `crimecase` Package
 
 ==== Reason for implementation
 
 As Investigapptor is a tool for managing investigations, the ability to store information about a case is essential.
 
-==== How it is implemented
+==== Current implementation
 
 Each attribute of a case, such as the case name, description, status, etc. are classes in the `crimecase` package. Each of the classes provide utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the object.
 
@@ -866,7 +867,7 @@ The `crimecase` package follows the model of the `person` package, whereby each 
 
 To be able to manage cases, investigators should have the ability to add case details into the application.
 
-==== How it is implemented
+==== Current implementation
 
 The `AddCaseCommandParser` parses the string of arguments provided by the user and splits the `String` into its separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) to be used in the context of the `AddCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
@@ -905,7 +906,7 @@ public CommandResult executeUndoableCommand() throws CommandException {
 
 Sometimes, cases are added by error or there is no need to continue management of a case. Investigators should have a method to remove a case from the application.
 
-==== How it is implemented
+==== Current implementation
 
 The `DeleteCaseCommandParser` parses the string of arguments provided by the user to retrieve the index (i.e. `Index`) to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
@@ -934,13 +935,21 @@ public CommandResult executeUndoableCommand() {
 }
 ```
 
+Below are sequence diagrams illustrating the `Logic` and `Model` components.
+
+.Interactions Inside the Logic Component for the `deleteCase 1` Command
+image::SD_DeleteCaseCommand_Logic.png[width="800"]
+
+.Interactions Inside the Model Component for the `deleteCase 1` Command
+image::SD_DeleteCaseCommand_Model.png[width="500"]
+
 === Finding cases feature
 
 ==== Reason for implementation
 
-To manage large numbers of cases, having a feature that would allow investigators to search the list of cases by name would be extremely helpful. If an investigator is looking for a particular case, it would be extremely inefficient and time-consuming to have to manually browse through all the cases. Hence, being able to find cases by name can help to increase productivity workflow and efficiency.
+To manage large numbers of cases, having a feature that would allow investigators to search the list of cases by name would be extremely helpful. If an investigator is looking for a particular case, it would be extremely inefficient and time-consuming to have to manually browse through all the cases. Hence, being able to find cases by name can help to increase workflow productivity and efficiency.
 
-==== How it is implemented
+==== Current implementation
 
 The `FindCaseCommandParser` parses the string of arguments provided by the user to retrieve the list of keywords to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
@@ -964,6 +973,165 @@ public CommandResult execute() {
     return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
 }
 ```
+
+=== Selecting cases feature
+
+==== Reason for implementation
+
+An investigator should be able to retrieve and view information about a case after adding them into the application.
+
+==== Current implementation
+
+Similar to `DeleteCaseCommandParser`, the `SelectCaseCommandParser` parses the string of arguments provided by the user to retrieve the index (i.e. `Index`) to be used in the context of the `SelectCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
+
+The `SelectCaseCommand` extends `Command` and has one constructor.
+
+[width="100%", cols="1,2", options="header"]
+|=======
+|Constructor |Remark
+|`new SelectCaseCommand(targetIndex)` |Accepts an `Index` object as parameter.
+|=======
+
+The `targetIndex` is processed to retrieve the `CrimeCase` object at the specified index on the most recent list of cases displayed by the model. Subsequently, a `JumpToCrimeCaseListRequestEvent` is posted to `EventsCenter` to signal the `UI` component. The following snippet shows the execution code.
+
+```
+public CommandResult execute() throws CommandException {
+
+    List < CrimeCase > lastShownList = model.getFilteredCrimeCaseList();
+
+    if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        throw new CommandException(Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
+    }
+
+    EventsCenter.getInstance().post(new JumpToCrimeCaseListRequestEvent(targetIndex));
+    return new CommandResult(String.format(MESSAGE_SELECT_CASE_SUCCESS, targetIndex.getOneBased()));
+
+}
+```
+
+Following the raised event, `handleJumpToCrimeCaseListRequestEvent` (in `CrimeCaseListPanel.java`) is signalled to handle the select request, which scrolls the view to the correct cell in the panel.
+
+```
+@Subscribe
+private void handleJumpToCrimeCaseListRequestEvent(JumpToCrimeCaseListRequestEvent event) {
+    logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    scrollTo(event.targetIndex);
+}
+```
+
+Next, a `CrimeCasePanelSelectionChangedEvent` that contains the `CrimeCase` object that was selected, is raised. This event is handled by `handleCrimeCasePanelSelectionChangedEvent` (in `BrowserPanel.java`), as shown in the snippet below.
+
+```
+@Subscribe
+private void handleCrimeCasePanelSelectionChangedEvent(CrimeCasePanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadCrimeCasePage(event.getNewSelection().crimeCase);
+}
+```
+
+`loadCrimeCasePage` method takes the `CrimeCase` object contained within the event and splits it up into its various components (i.e. case name, description, investigator, start date, end date, status, and tags) as `String`, which are then used to create a URL query string. Components with strings that may contain symbols such as “#” are encoded first before appending to the query string.
+
+```
+encDescription = URLEncoder.encode(description, "UTF-8");
+encInvEmail = URLEncoder.encode(currentInvestigator.getEmail().value, "UTF-8");
+encInvAddress = URLEncoder.encode(currentInvestigator.getAddress().value, "UTF-8");
+encStartDate = URLEncoder.encode(startDate, "UTF-8");
+encEndDate = URLEncoder.encode(endDate, "UTF-8");
+```
+
+To create the view where the information is displayed on the GUI (`BrowserPanel`), an HTML file (`/docs/CaseDetailsPage.html`) was created as a template for displaying the details of a single case. In order to load the HTML file, utility methods provided by JavaFX’s `WebView` (an embedded browser) is used.
+
+A `String` containing the URL or file path is passed to the `load` method with a request string appended to the back (e.g. “https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=John+Doe”). This method can be used to load pages from third-party services (e.g. Google Search).
+
+```
+public void loadPage(String url) {
+    Platform.runLater(() - > browser.getEngine().load(url));
+}
+```
+
+```
+String caseDetailsPage = CASE_DETAILS_PAGE +
+    "?caseName=" + caseName +
+    "&description=" + encDescription +
+    "&tags=" + tagList +
+    "&invName=" + currentInvestigator.getName().fullName +
+    "&invRank=" + currentInvestigator.getRank().toString() +
+    "&invPhone=" + currentInvestigator.getPhone().value +
+    "&invEmail=" + encInvEmail +
+    "&invAddress=" + encInvAddress +
+    "&startDate=" + encStartDate +
+    "&endDate=" + encEndDate +
+    "&status=" + status;
+
+loadPage(caseDetailsPage);
+```
+Javascript code is included in the HTML file to parse the URL request string and populate the HTML file with the corresponding case details.
+
+==== Design Considerations
+
+===== Aspect: Implementation to view case details
+
+* **Alternative 1 (current choice):** Use HTML and Javascript with JavaFX `WebView` (embedded browser)
+** Pros: Easy to implement and design with basic HTML knowledge.
+** Cons: Passing of data to the HTML file has to be done with a request string, which can get a messy if the data is complex in structure. Loading data is not as efficient.
+* **Alternative 2:** Use only JavaFX
+** Pros: The view integrates more seamlessly with the application.
+** Cons: More troublesome to implement and requires JavaFX knowledge.
+
+**Reason for current choice:** As the data we have is simple, implementing and styling with HTML is easier.
+
+=== Editing cases feature
+
+==== Reason for implementation
+
+Typos can be made when in a haste. The ability to edit cases would give investigators a chance to rectify these mistakes easily. This feature will also enable re-assignment of cases to other investigators, which is useful when an investigator can no longer work on a case.
+
+==== Current implementation
+
+The EditCaseCommandParser parses the String of arguments provided by the user and splits the `String` into the case index (`Index`) and the separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) and directs it into a  ` EditCrimeCaseDescriptor` object  to be used in the context of the `EditCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
+
+The `EditCrimeCaseDescriptor` is a class containing information that describes the case (i.e. case name, description, investigator, start date, tags). The descriptor is used because the user is not required to input all the fields except the case index. When the user specifies the field they wish to edit, it sets the field in the `EditCrimeCaseDescriptor` to that value. If any field is not specified, the field is set to `null`.
+
+The `EditCaseCommand` that extends the `UndoableCommand` has one constructor.
+
+[width="100%", cols="1,2", options="header"]
+|=======
+|Constructor |Remark
+|`new EditCaseCommand(caseIndex, editCrimeCaseDescriptor)` |Accepts an `Index` object and `EditCrimeCaseDescriptor` as parameters.
+
+The `caseIndex` is processed to retrieve the `CrimeCase` object at the specified index on the most recent list of cases displayed by the model.
+
+A new `CrimeCase` object is created using the retrieved case-to-be-edited and the descriptor.
+|=======
+
+When the `EditCaseCommand` is executed, the original `CrimeCase` object is not modified, but rather, replaced by a new `CrimeCase` object. Note that a new `Investigator` object is also created to be stored in the new `CrimeCase`. The cases in that particular `Investigator`’s `UniqueCrimeCaseList` is cleared so that only personal details of the investigator is stored within the `CrimeCase` object. This is to simplify the data to be recorded in storage. The list of cases within the original `Investigator` object remains untouched. The snippet of code below shows the implementation.
+
+```
+private CrimeCase syncWithMasterTagList(CrimeCase crimeCase) {
+    // … logic for handling and rebuilding tags …
+
+    Investigator investigator = (Investigator) syncWithMasterTagList(crimeCase.getCurrentInvestigator());
+    investigator.clearCaseList();
+    return new CrimeCase(
+        crimeCase.getCaseName(), crimeCase.getDescription(), investigator,
+        crimeCase.getStartDate(), crimeCase.getEndDate(), crimeCase.getStatus(), correctTagReferences);
+}
+```
+
+Since the `CrimeCase` object is replaced rather than modified, we need to remove the old `CrimeCase` object stored in the `UniqueCrimeCaseList` of the `Investigator` and reference the new, modified `CrimeCase` object instead. This is done by traversing the entire list of investigators and finding the correct `Investigator` object to remove the case from. The code below shows its implementation.
+
+```
+public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
+throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
+    requireNonNull(editedCase);
+
+    CrimeCase syncedEditedCrimeCase = syncWithMasterTagList(editedCase);
+    removeCrimeCaseFromInvestigator(target);
+    cases.setCrimeCase(target, syncedEditedCrimeCase);
+    addCrimeCaseToInvestigator(syncedEditedCrimeCase);
+}
+```
+//end::crimecase[]
 
 === Creating Backup
 
@@ -1411,8 +1579,8 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * *Leow Wei Ching*
 ** *Major enhancement*: Support for adding, editing, and deleting cases
 *** This enhancement allows users to manage cases.
-** *Minor enhancement*: Support data encryption
-*** This would allow for an added layer of security and prevent viewing of data outside the application.
+** *Minor enhancement*: Update the GUI with a new colour scheme and style
+*** This would make the interface more aesthetically pleasing.
 
 * *Marcus Chen*
 ** *Major enhancement*: Implement the Investigator package and refactoring the model and logic for the Investigator

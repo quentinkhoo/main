@@ -584,6 +584,7 @@ Click on the command for further information of how it works. Picture illustrati
 ====
 //end::calendarsection[]
 
+//tag::addcase[]
 === Case Commands
 These are case related commands. +
 
@@ -602,6 +603,7 @@ Tags are optional, but you can add as many as you like to a case to help you org
 * `addcase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
 * `addcase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
 * `ac n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
+//end::addcase[]
 
 //tag::listcases[]
 [[ListCases]]
@@ -624,6 +626,7 @@ image::userguide-images/lc-command.png[width="450"]
 
 //end::listcases[]
 
+//tag::editcase[]
 [[EditCase]]
 ==== Editing a case: `editcase` [Since v1.4]
 
@@ -653,7 +656,9 @@ You can remove all the investigator's tags by typing `t/` without specifying any
 Edits the description and investigator of the 1st case to be `some description` and the 1st investigator in the most recent listing of investigators respectively.
 * `ec 2 i/3 t/` +
 Changes the investigator of the 2nd case to the 3rd investigator in the most recent listing of investigators, and clears all existing tags.
+//end::editcase[]
 
+//tag::findcases[]
 [[FindCases]]
 ==== Locating cases by name: `findcases` [Since v1.3]
 
@@ -680,6 +685,7 @@ Examples:
 Returns `SPF Murder` and `SPF rape`
 * `findcases murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
+//end::findcases[]
 
 //tag::findcasetags[]
 [[FindCaseTags]]
@@ -790,6 +796,7 @@ Closes the 1st case in the results of the `findcases` command.
 Closes the 3rd case in the listed panel list case.
 //end::closecase[]
 
+//tag::deletecase[]
 [[DeleteCase]]
 ==== Deleting a case : `deletecase` [Since v1.3]
 
@@ -813,9 +820,11 @@ Deletes the 2nd case in the list of all cases.
 * `findcase Arson` +
 `dc 1` +
 Deletes the 1st case in the results of the `findcase` command.
+//end::deletecase[]
 
+//tag::selectcase[]
 [[SelectCase]]
-==== Selecting a case : `selectcase` [Coming in v1.5]
+==== Selecting a case : `selectcase` [Since v1.5]
 
 Selects the case identified by the index number used in the last case listing. +
 Format: `selectcase INDEX` +
@@ -842,6 +851,7 @@ Selects the 2nd case in the results of the `listcases` command.
 Selects the 1st case in the results of the `findcase` command.
 * `sc 3` +
 Selects the 3rd case in the most recent list of cases.
+//end::selectcase[]
 
 ==== List a specific Investigator's cases `listinvestigatorcases` [Since v1.4]
 

@@ -15,15 +15,28 @@ endif::[]
 By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Introduction
-Investigapptor is a one-stop solution for investigators to make managing cases as simple, straightforward, and efficient as possible.
+
+Investigapptor is desktop application for a team of professional
+investigators to easily manage crime cases that have been
+delegated to them.
+
+Investigapptor comes with many useful features for investigators and
+their team members such as assigning investigators to a crime case, listing investigators
+based on their expertise so that you can solve crime cases more effienctly ande ffectively.
+
+Investigapptor v1.5 is available for Windows, Mac OS X, Linux and Unix operating systems.
+
+To get started, go to <<Quick Start>> for information on how to set
+up Investigapptor.
 
 == Setting up
 Follow the instructions below to set up and configure `Investigapptor` project files on your computer
 
 === Prerequisites
 
-. *JDK `1.8.0_60`* or later
-+
+. *JDK `1.8.0_60`* or later +
+Download at link:http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html[here]
+
 [NOTE]
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
@@ -37,6 +50,8 @@ Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plu
 
 
 === Setting up the project in your computer
+In order to start coding on Investigapptor, you first need to follow the step belows to set up an
+local Investigapptor project on your computer.
 
 . Fork this repo, and clone the fork to your computer
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
@@ -96,22 +111,26 @@ When you are ready to start coding,
 2. Take a look at <<GetStartedProgramming>>.
 
 == Design
+This section will explain structure of the Investigapptor and what each component of the
+Investigapptor does. WIth a clear understanding of the design, it becomes much easier for you
+to identify where and how your enhancement should be implemented
 
 [[Design-Architecture]]
 === Architecture
 
+The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
+
 .Architecture Diagram
 image::Architecture.png[width="600"]
 
-The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for:
 
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup method where necessary.
+* At app launch: Initializing the components in the correct sequence, and connects them up with each other.
+* At shut down: Shutting down the components and invokes cleanup method where necessary.
 
 <<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.
 
@@ -564,6 +583,7 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+//tag::investigator[]
 === Investigator Class
 
 ==== Investigator Package
@@ -620,18 +640,12 @@ Currently the `Investigator` is upcasted and stored in the `Investigapptor` 's `
 This is done on purpose to allow future enhancement that allows us to implement types of people such as suspects and witnesses. Storing them together makes it easier to use general
 functions.
 
+[invest-com]
+.Investigator in Model Component
+image::investigatorComponent.png[width="790"]
+
 The code below is from the `syncWithMasterTagList` function. It shows that
 both Investigator and Person type are both return into the `UniquePersonList`.
-
-        if (person instanceof Investigator) {
-            Set<CrimeCase> cases = new HashSet<>();
-            Investigator inv = (Investigator) person;
-            inv.getCrimeCases().forEach(crimeCase -> cases.add(crimeCase));
-            return new Investigator(person.getName(), person.getPhone(), person.getEmail(),
-                    person.getAddress(), ((Investigator) person).getRank(), correctTagReferences, cases);
-        }
-        return new Person(
-                person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), correctTagReferences);
 
 ===== Storage
 
@@ -668,6 +682,10 @@ This function will only return `Person` in the list
         }
         return persons;
     }
+
+As the `Investigator` has to store multiple `CrimeCase` , instead of store the whole `CrimeCase` and all
+its details inside of the `XmlAdaptedInvestigator`, we stored the hashcode instead to
+reduce the amount of space used for storage.
 
 ===== Design Consideration
 
@@ -800,6 +818,8 @@ This will help avoid bugs when redoing and undoing.
 ** Pros: Easier to change the each CrimeCase as it does not need to be recreated.
 ** Cons: `Investigator` in `CrimeCase` will no longer be final. This however involve the `Invesetigator` to
 modify `CrimeCase`, which result in bad coupling.
+
+//end::investigator[]
 
 === `crimecase` Package
 
@@ -947,7 +967,7 @@ public CommandResult execute() {
 
 === Creating Backup
 
-As investigators may want to save the current state of the application before progressing, they can do this
+As investigators may want to save the current state of the Investigapptor before progressing, they can do this
 by using the backup command and typing in a name for the backup.
 
 eg: backup 3rdMarch

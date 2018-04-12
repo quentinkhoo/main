@@ -183,19 +183,16 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     /**
      * Converts {@code key} hashcode list of cases into CrimeCase object
      *
-     *
      */
-    public void convertHashToCases(Investigator key) {
+    private void convertHashToCases(Investigator key) {
         requireNonNull(key.getCaseListHashed());
-        if (key.getCaseListHashed() != null) {
-            for (Integer i : key.getCaseListHashed()) {
-                for (CrimeCase c : cases) {
-                    if (c.hashCode() == i) {
-                        try {
-                            key.addCrimeCase(c);
-                        } catch (DuplicateCrimeCaseException e) {
+        for (Integer i : key.getCaseListHashed()) {
+            for (CrimeCase c : cases) {
+                if (c.hashCode() == i) {
+                    try {
+                        key.addCrimeCase(c);
+                    } catch (DuplicateCrimeCaseException e) {
                             throw new AssertionError("Not possible, duplicate case while retrieving from xml");
-                        }
                     }
                 }
             }

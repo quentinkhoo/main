@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
+import seedu.investigapptor.commons.events.ui.FilteredCrimeCaseListChangedEvent;
 import seedu.investigapptor.commons.events.ui.JumpToCrimeCaseListRequestEvent;
 import seedu.investigapptor.logic.CommandHistory;
 import seedu.investigapptor.logic.UndoRedoStack;
@@ -71,7 +72,7 @@ public class SelectCaseCommandTest {
         // ensures that outOfBoundIndex is still in bounds of investigapptor book list
         assertTrue(outOfBoundsIndex.getZeroBased() < model.getInvestigapptor().getCrimeCaseList().size());
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
+        assertExecutionFailureWithEvent(outOfBoundsIndex, Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
     }
 
     @Test
@@ -121,6 +122,8 @@ public class SelectCaseCommandTest {
      * Executes a {@code SelectCaseCommand} with the given {@code index},
      * and checks that a {@code CommandException}
      * is thrown with the {@code expectedMessage}.
+     *
+     * This function checks that no events were raised
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
         SelectCaseCommand selectCaseCommand = prepareCommand(index);
@@ -131,6 +134,26 @@ public class SelectCaseCommandTest {
         } catch (CommandException ce) {
             assertEquals(expectedMessage, ce.getMessage());
             assertTrue(eventsCollectorRule.eventsCollector.isEmpty());
+        }
+    }
+
+    /**
+     * Executes a {@code SelectCaseCommand} with the given {@code index},
+     * and checks that a {@code CommandException}
+     * is thrown with the {@code expectedMessage}.
+     *
+     * This function also checks that the event raised is FilteredCrimeCaseListChangedEvent
+     */
+    private void assertExecutionFailureWithEvent(Index index, String expectedMessage) {
+        SelectCaseCommand selectCaseCommand = prepareCommand(index);
+
+        try {
+            selectCaseCommand.execute();
+            fail("The expected CommandException was not thrown.");
+        } catch (CommandException ce) {
+            assertEquals(expectedMessage, ce.getMessage());
+            assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1
+                    && eventsCollectorRule.eventsCollector.getMostRecent() instanceof FilteredCrimeCaseListChangedEvent);
         }
     }
 

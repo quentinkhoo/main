@@ -153,7 +153,8 @@ public class SelectCaseCommandTest {
         } catch (CommandException ce) {
             assertEquals(expectedMessage, ce.getMessage());
             assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1
-                    && eventsCollectorRule.eventsCollector.getMostRecent() instanceof FilteredCrimeCaseListChangedEvent);
+                    && eventsCollectorRule.eventsCollector.getMostRecent()
+                    instanceof FilteredCrimeCaseListChangedEvent);
         }
     }
 

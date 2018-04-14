@@ -526,6 +526,9 @@ Selects the 3rd case in the most recent list of cases.</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><code>CrimeCase</code> objects are considered "duplicates" when they share at least the same <code>CaseName</code>, <code>Description</code>, and <code>StartDate</code>.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="reasons-for-how-it-is-implemented"><a class="link" href="#reasons-for-how-it-is-implemented">Reasons for how it is implemented</a></h4>
@@ -576,7 +579,7 @@ Selects the 3rd case in the most recent list of cases.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The <code>CrimeCase</code> object is then added to the model and throws a <code>DuplicateCrimeCaseException</code> if there exists an identical object already in Investigapptor. The following snippet shows the execution code.</p>
+<p>The <code>CrimeCase</code> object is then added to the model and throws a <code>DuplicateCrimeCaseException</code> if there exists a similar object already in Investigapptor. The following snippet shows the execution code.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -589,6 +592,64 @@ Selects the 3rd case in the most recent list of cases.</p>
         throw new CommandException(MESSAGE_DUPLICATE_CASE);
     }
 }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the <code>Model</code> component, the new <code>CrimeCase</code> object gets added to the case list of the assigned investigator as well (i.e. <code>UniqueCrimeCaseList</code> within the <code>Investigator</code> object) via the <code>addCrimeCaseToInvestigator</code> method. This method traverses through the entire list of investigators to find the correct <code>Investigator</code> object to add the new <code>CrimeCase</code> object to. The code is shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>public void addCrimeCase(CrimeCase c) throws DuplicateCrimeCaseException {
+    CrimeCase crimeCase = syncWithMasterTagList(c);
+    if (cases.add(crimeCase)) {
+        addCrimeCaseToInvestigator(crimeCase);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram illustrates what happens in the <code>Model</code> component when a case is added.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SD_AddCaseCommand_Model.png" alt="SD AddCaseCommand Model" width="800">
+</div>
+<div class="title">Figure 2. Interactions Inside the Model Component for the <code>addcase</code> Command</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-parsing-the-investigator-to-be-assigned"><a class="link" href="#aspect-parsing-the-investigator-to-be-assigned">Aspect: Parsing the investigator-to-be-assigned</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> User inputs an investigator&#8217;s name after the <code>i/</code> prefix to indicate who to assign the case to</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: More intuitive for the user.</p>
+</li>
+<li>
+<p>Cons: More difficult to implement - need a way to decide which investigator to assign if they share identical names.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (current choice):</strong> User inputs the index of the investigator based on the case list after the <code>i/</code> prefix to indicate who to assign the case to</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement and more straightforward. Index provided is the investigator to be assigned - don&#8217;t have to worry about identical names.</p>
+</li>
+<li>
+<p>Cons: User would have to switch between lists to refer to the investigator index. For example, the user types the command to add the case but then realises that they needed the investigator index. They would have to either use the interface to switch the tabs or type the <code>listinvestigators</code> command. This disrupts the flow and hinders efficiency.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -652,13 +713,16 @@ Selects the 3rd case in the most recent list of cases.</p>
 <div class="content">
 <img src="../images/SD_DeleteCaseCommand_Logic.png" alt="SD DeleteCaseCommand Logic" width="800">
 </div>
-<div class="title">Figure 2. Interactions Inside the Logic Component for the <code>deleteCase 1</code> Command</div>
+<div class="title">Figure 3. Interactions Inside the Logic Component for the <code>deletecase 1</code> Command</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../images/SD_DeleteCaseCommand_Model.png" alt="SD DeleteCaseCommand Model" width="500">
 </div>
-<div class="title">Figure 3. Interactions Inside the Model Component for the <code>deleteCase 1</code> Command</div>
+<div class="title">Figure 4. Interactions Inside the Model Component for the <code>deletecase 1</code> Command</div>
 </div>
 </div>
 </div>
@@ -708,6 +772,15 @@ Selects the 3rd case in the most recent list of cases.</p>
     return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
 }</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram illustrates how the <code>Logic</code> component operates when a keyword is given with the command.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SD_FindCaseCommand_Logic.png" alt="SD FindCaseCommand Logic" width="800">
+</div>
+<div class="title">Figure 5. Interactions Inside the Logic Component for the <code>findcase magic</code> Command</div>
 </div>
 </div>
 </div>
@@ -765,6 +838,18 @@ Selects the 3rd case in the most recent list of cases.</p>
 </div>
 </div>
 <div class="paragraph">
+<p>The following sequence diagram illustrates what happens in the <code>Logic</code> component when a case is selected.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SD_SelectCaseCommand_Logic.png" alt="SD SelectCaseCommand Logic" width="800">
+</div>
+<div class="title">Figure 6. Interactions Inside the Logic Component for the <code>selectcase 1</code> Command</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
 <p>Following the raised event, <code>handleJumpToCrimeCaseListRequestEvent</code> (in <code>CrimeCaseListPanel.java</code>) is signalled to handle the select request, which scrolls the view to the correct cell in the panel.</p>
 </div>
 <div class="listingblock">
@@ -789,6 +874,18 @@ private void handleCrimeCasePanelSelectionChangedEvent(CrimeCasePanelSelectionCh
 </div>
 </div>
 <div class="paragraph">
+<p>The following sequence diagram below shows how the EventsCenter interacts with the UI component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SD_SelectCaseCommand_EventsCenter.png" alt="SD SelectCaseCommand EventsCenter" width="800">
+</div>
+<div class="title">Figure 7. Interactions Inside the EventsCenter and UI Component for the <code>selectcase 1</code> Command</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
 <p><code>loadCrimeCasePage</code> method takes the <code>CrimeCase</code> object contained within the event and splits it up into its various components (i.e. case name, description, investigator, start date, end date, status, and tags) as <code>String</code>, which are then used to create a URL query string. Components with strings that may contain symbols such as “#” are encoded first before appending to the query string.</p>
 </div>
 <div class="listingblock">
@@ -801,10 +898,10 @@ encEndDate = URLEncoder.encode(endDate, "UTF-8");</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>To create the view where the information is displayed on the GUI (<code>BrowserPanel</code>), an HTML file (<code>/docs/CaseDetailsPage.html</code>) was created as a template for displaying the details of a single case. In order to load the HTML file, utility methods provided by JavaFX’s <code>WebView</code> (an embedded browser) is used.</p>
+<p>To create the view where the information is displayed on the GUI (<code>BrowserPanel</code>), an HTML file (<code>/docs/CaseDetailsPage.html</code>) was created as a template for displaying the details of a single case. In order to load the HTML file, utility methods provided by JavaFX’s <code>WebView</code> (an embedded browser) are used.</p>
 </div>
 <div class="paragraph">
-<p>A <code>String</code> containing the URL or file path is passed to the <code>load</code> method with a request string appended to the back (e.g. “https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=John+Doe”). This method can be used to load pages from third-party services (e.g. Google Search).</p>
+<p>A <code>String</code> containing the URL or file path is passed to the <code>load</code> method with a request string appended to the back (e.g. “https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=John%20Doe”). This method can be used to load pages from third-party services (e.g. Google Search).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -836,7 +933,7 @@ loadPage(caseDetailsPage);</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-implementation-to-view-case-details"><a class="link" href="#aspect-implementation-to-view-case-details">Aspect: Implementation to view case details</a></h5>
 <div class="ulist">
@@ -915,23 +1012,24 @@ loadPage(caseDetailsPage);</code></pre>
 </tbody>
 </table>
 <div class="paragraph">
-<p>When the <code>EditCaseCommand</code> is executed, the original <code>CrimeCase</code> object is not modified, but rather, replaced by a new <code>CrimeCase</code> object. Note that a new <code>Investigator</code> object is also created to be stored in the new <code>CrimeCase</code>. The cases in that particular <code>Investigator</code>’s <code>UniqueCrimeCaseList</code> is cleared so that only personal details of the investigator is stored within the <code>CrimeCase</code> object. This is to simplify the data to be recorded in storage. The list of cases within the original <code>Investigator</code> object remains untouched. The snippet of code below shows the implementation.</p>
+<p>When the <code>EditCaseCommand</code> is executed, note that the original <code>CrimeCase</code> object is not modified, but rather, replaced by a new <code>CrimeCase</code> object. When the <code>CrimeCase</code> constructor is called, a new <code>Investigator</code> object without its <code>UniqueCrimeCaseList</code> is created within the <code>CrimeCase</code> (i.e. only the personal details are stored). This is to simplify the data to be recorded in storage. The list of cases within the original <code>Investigator</code> object remains untouched. The snippet of code below shows the implementation.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code>private CrimeCase syncWithMasterTagList(CrimeCase crimeCase) {
     // … logic for handling and rebuilding tags …
 
-    Investigator investigator = (Investigator) syncWithMasterTagList(crimeCase.getCurrentInvestigator());
-    investigator.clearCaseList();
     return new CrimeCase(
-        crimeCase.getCaseName(), crimeCase.getDescription(), investigator,
+        crimeCase.getCaseName(), crimeCase.getDescription(), crimeCase.getCurrentInvestigator(),,
         crimeCase.getStartDate(), crimeCase.getEndDate(), crimeCase.getStatus(), correctTagReferences);
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Since the <code>CrimeCase</code> object is replaced rather than modified, we need to remove the old <code>CrimeCase</code> object stored in the <code>UniqueCrimeCaseList</code> of the <code>Investigator</code> and reference the new, modified <code>CrimeCase</code> object instead. This is done by traversing the entire list of investigators and finding the correct <code>Investigator</code> object to remove the case from. The code below shows its implementation.</p>
+<p>Remember that each <code>Investigator</code> object has their own <code>UniqueCrimeCaseList</code> that holds <code>CrimeCase</code> objects that they&#8217;ve been assigned.</p>
+</div>
+<div class="paragraph">
+<p>Since the <code>CrimeCase</code> object is replaced rather than modified, we need to remove the old <code>CrimeCase</code> object stored in the <code>UniqueCrimeCaseList</code> of the <code>Investigator</code> and reference the new, modified <code>CrimeCase</code> object instead. This is done by traversing the entire list of investigators and finding the correct <code>Investigator</code> object to remove the <code>CrimeCase</code> object from using the <code>removeCrimeCaseFromInvestigator</code> method. Next, after replacing the old <code>CrimeCase</code> object with the edited one in master list of all cases, it traverses the entire list of investigators again to add the case back to the correct <code>Investigator</code> object using the <code>addCrimeCaseFromInvestigator</code> method. The code below shows its implementation.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -945,6 +1043,18 @@ throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
     addCrimeCaseToInvestigator(syncedEditedCrimeCase);
 }</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram below illustrates how the Model component works when a case is edited.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SD_EditCaseCommand_Model.png" alt="SD EditCaseCommand Model" width="800">
+</div>
+<div class="title">Figure 8. Interactions Inside the Model Component for the <code>editcase</code> Command</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
 </div>
 </div>
 </div>
@@ -962,7 +1072,7 @@ throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 21:09:25 UTC
+Last updated 2018-04-14 21:15:27 UTC
 </div>
 </div>
 </body>

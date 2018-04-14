@@ -329,23 +329,13 @@ Examples:
 `undo` (reverses the `deletecase 1` command) +
 
 [[undo-1]]
-.Before `deletecase 1` command
-image::userguide-images/undo-command-1.png[width="320"]
+.`deletecase 1` command
+image::userguide-images/undo-command-1-2.png[width="500"]
 {nbsp} +
 
 [[undo-2]]
-.After `deletecase 1` command
-image::userguide-images/undo-command-2.png[width="320"]
-{nbsp} +
-
-[[undo-3]]
-.`listcases` command
-image::userguide-images/undo-command-3.png[width="320"]
-{nbsp} +
-
-[[undo-4]]
-.`undo` command
-image::userguide-images/undo-command-4.png[width="320"]
+.`listcases` and `undo` command
+image::userguide-images/undo-command-3-4.png[width="500"]
 {nbsp} +
 
 [NOTE]
@@ -658,7 +648,7 @@ Alias: `selectinvest`
 Examples:
 
 [[selectinv]]
-.Deleting an investigator
+.Selecting an investigator
 image::userguide-images/si-command.png[width="500"]
 
 * `listinvestigator` +

@@ -96,7 +96,32 @@ image::Interface.png[width="790"]
 |===
 
 === Adjusting the panel width
+This sub-section will teach you how to adjust the width of the panels according to your preferences.
+For example, in the interface shown in <<width-issue>> below, the Calendar view is not able to be
+seen properly.
 
+[[width-issue]]
+.Before adjusting panel width
+image::userguide-images/width-issue.png[width="790"]
+
+As shown in the <<adjust-width ,figure>> below, you can move your cursor to the panel separator
+and an adjust-width cursor will appear. You can use this cursor to adjust the width of the panel
+according to your preferences.
+
+[[adjust-width]]
+.Before adjusting panel width
+image::userguide-images/adjust-width.png[width="400"]
+
+After you've adjusted the width of the panel for visibility purposes, you should be able to see
+the interface properly as shown in the <<adjust-width-after,figure>> below.
+
+[[adjust-width-after]]
+.After adjusting panel width
+image::userguide-images/after-adjust-width.png[width="600"]
+
+[TIP]
+When the cursor appears, hold on to your left mouse key and drag to the left/right of the screen
+according to your prefrences.
 
 === Using commands
 This sub-section will teach you how to key in the commands to interact with
@@ -437,10 +462,7 @@ Alias: `bu`
 
 [NOTE]
 ====
-The data folder is located in the same directory as your Investigapptor.jar
-====
-[NOTE]
-====
+The data folder is located in the same directory as your Investigapptor.jar +
 Saving the xml using the name "Investigator" will only overwrite the currenty save file and not create a new file.
 ====
 
@@ -488,7 +510,7 @@ The following provides an explanation of some command examples: +
 [TIP]
 An investigator can have any number of tags (including 0) +
 Tags are alphanumeric without spaces +
-Ranks ranges from 1 to 5 according (Constable ,Sergeant, Inspector, Detective, Captain)
+Ranks ranges from 1 to 5 (Constable ,Sergeant, Inspector, Detective, Captain)
 
 [[ListInv]]
 ==== Listing all investigators : `listinvestigators` [Since v1.2]
@@ -517,7 +539,7 @@ Existing values will be updated to the input values.
 [WARNING]
 The index *must be a positive integer* 1, 2, 3, ... +
 At least one of the optional fields must be provided. +
-When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+When editing tags, the existing tags of the person will be removed (i.e adding of tags is not cumulative).
 
 [TIP]
 You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
@@ -557,13 +579,13 @@ Format: `findinvestigators KEYWORD [MORE_KEYWORDS]` +
 Alias: `fi`
 
 [NOTE]
-The search is case insensitive. e.g `hans` will match `Hans` +
-The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` +
+The search is case insensitive. e.g `hans` will match `Hans`. +
+The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`. +
 Only the name is searched. +
-Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 [WARNING]
-Only full words will be matched e.g. `Han` will not match `Hans`
+Only full words will be matched e.g. `Han` will not match `Hans`.
 
 You can refer to the screenshot below for an example.
 [[findinvestigators]]
@@ -586,13 +608,13 @@ Format: `findinvestigatortags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fit`
 
 [NOTE]
-The search is case insensitive. e.g `teamA` will match `teama` +
+The search is case insensitive. e.g `teamA` will match `teama`. +
 Only the tags are searched. +
-Investigators matching at least one keyword will be returned (i.e. `OR` search).
-e.g. `teamA teamB` will return investigators that contains the tag 'teamA' or 'teamB'
+Investigators matching at least one keyword will be returned (i.e. `OR` search)
+(e.g. `teamA teamB` will return investigators that contains the tag 'teamA' or 'teamB').
 
 [WARNING]
-Only full words will be matched e.g. `teamA` will not match `teamyA`
+Only full words will be matched e.g. `teamA` will not match `teamyA`.
 
 You can refer to the screenshot below for an example.
 [[findinvestigatortags]]
@@ -653,8 +675,8 @@ The case should be reassigned to another investigator before you delete the sele
 [[SelInv]]
 ==== Selecting an investigator : `selectinvestigator` [Coming in v1.5]
 
-Selects the person identified by the index number used in the last person listing. +
-Format: `selectinvestigator INDEX` +
+Selects the person identified by the index number used in the last investigator listing. +
+Format: `selectinvestigator INVESTIGATOR_INDEX` +
 Alias: `selectinvest`
 
 [NOTE]

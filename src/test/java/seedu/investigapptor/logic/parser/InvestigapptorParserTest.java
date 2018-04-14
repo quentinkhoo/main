@@ -28,7 +28,7 @@ import seedu.investigapptor.logic.commands.HistoryCommand;
 import seedu.investigapptor.logic.commands.ListCaseCommand;
 import seedu.investigapptor.logic.commands.ListInvestigatorCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
-import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.AddInvestigatorCommand;
 import seedu.investigapptor.logic.commands.RemovePasswordCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SetPasswordCommand;
@@ -86,17 +86,17 @@ public class InvestigapptorParserTest {
     @Test
     public void parseCommand_reg() throws Exception {
         Investigator investigator = new InvestigatorBuilder().build();
-        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
+        AddInvestigatorCommand command = (AddInvestigatorCommand)
                 parser.parseCommand(InvestigatorUtil.getRegCommand(investigator));
-        assertEquals(new RegisterInvestigatorCommand(investigator), command);
+        assertEquals(new AddInvestigatorCommand(investigator), command);
     }
 
     @Test
     public void parseCommand_regAlias() throws Exception {
         Investigator investigator = new InvestigatorBuilder().build();
-        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
+        AddInvestigatorCommand command = (AddInvestigatorCommand)
                 parser.parseCommand(InvestigatorUtil.getAliasRegCommand(investigator));
-        assertEquals(new RegisterInvestigatorCommand(investigator), command);
+        assertEquals(new AddInvestigatorCommand(investigator), command);
     }
 
     @Test

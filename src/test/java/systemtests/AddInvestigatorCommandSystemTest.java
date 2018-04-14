@@ -40,7 +40,7 @@ import org.junit.Test;
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.logic.commands.RedoCommand;
-import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.AddInvestigatorCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.person.Address;
@@ -53,7 +53,7 @@ import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.testutil.InvestigatorBuilder;
 import seedu.investigapptor.testutil.InvestigatorUtil;
 
-public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemTest {
+public class AddInvestigatorCommandSystemTest extends InvestigapptorSystemTest {
 
     @Test
     public void add() throws Exception {
@@ -65,7 +65,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
          * -> added
          */
         Investigator toAdd = AMY;
-        String command = "   " + RegisterInvestigatorCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  "
+        String command = "   " + AddInvestigatorCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  "
                 + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   "
                 + RANK_DESC_CAP + " " + TAG_DESC_FRIEND + " ";
         assertCommandSuccess(command, toAdd);
@@ -84,21 +84,21 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
         /* Case: add a person with all fields same as another person in the investigapptor book except name -> added */
         toAdd = new InvestigatorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + RANK_DESC_CAP + " " + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the investigapptor except phone -> added */
         toAdd = new InvestigatorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_AMY
                 + RANK_DESC_CAP + " " + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the investigapptor except email -> added */
         toAdd = new InvestigatorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_BOB
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_BOB
                 + RANK_DESC_CAP + " " + ADDRESS_DESC_AMY + RANK_DESC_CAP + " " + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
@@ -107,7 +107,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
         */
         toAdd = new InvestigatorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_FRIEND).build();
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + RANK_DESC_CAP + " " + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
@@ -117,7 +117,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
 
         /* Case: add a person with tags, command with parameters in random order -> added */
         toAdd = BOB;
-        command = RegisterInvestigatorCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB
+        command = AddInvestigatorCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB
                 + RANK_DESC_CAP + " " + NAME_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
@@ -140,74 +140,74 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
 
         /* Case: add a duplicate person -> rejected */
         command = InvestigatorUtil.getRegCommand(HOON);
-        assertCommandFailure(command, RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: add a duplicate person except with different tags -> rejected */
         // "friends" is an existing tag used in the default model, see TypicalInvestigator#ALICE
         // This test will fail if a new tag that is not in the model is used, see the bug documented in
         // Investigapptor#addInvestigator(Investigator)
         command = InvestigatorUtil.getRegCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
-        assertCommandFailure(command, RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: missing name -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + RANK_DESC_CAP + " ";
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RegisterInvestigatorCommand.MESSAGE_USAGE));
+                AddInvestigatorCommand.MESSAGE_USAGE));
 
         /* Case: missing phone -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + RANK_DESC_CAP + " ";
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RegisterInvestigatorCommand.MESSAGE_USAGE));
+                AddInvestigatorCommand.MESSAGE_USAGE));
 
         /* Case: missing email -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY
                 + RANK_DESC_CAP + " ";
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RegisterInvestigatorCommand.MESSAGE_USAGE));
+                AddInvestigatorCommand.MESSAGE_USAGE));
 
         /* Case: missing investigapptor -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + RANK_DESC_CAP + " ";
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RegisterInvestigatorCommand.MESSAGE_USAGE));
+                AddInvestigatorCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
         command = "adds " + InvestigatorUtil.getInvestigatorDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + RANK_DESC_CAP + " ";
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + RANK_DESC_CAP + " ";
         assertCommandFailure(command, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC
                 + ADDRESS_DESC_AMY + RANK_DESC_CAP + " ";
         assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid investigapptor -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + INVALID_ADDRESS_DESC + RANK_DESC_CAP + " ";
         assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        command = RegisterInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        command = AddInvestigatorCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + RANK_DESC_CAP + " " + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     /**
-     * Executes the {@code RegisterInvestigatorCommand} that adds {@code toAdd} to the model and asserts that the,<br>
+     * Executes the {@code AddInvestigatorCommand} that adds {@code toAdd} to the model and asserts that the,<br>
      * 1. Command box displays an empty string.<br>
      * 2. Command box has the default style class.<br>
-     * 3. Result display box displays the success message of executing {@code RegisterInvestigatorCommand}
+     * 3. Result display box displays the success message of executing {@code AddInvestigatorCommand}
      * with the details of
      * {@code toAdd}.<br>
      * 4. {@code Model}, {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
@@ -225,7 +225,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
     /**
      * Performs the same verification as {@code assertCommandSuccess(Investigator)}. Executes {@code command}
      * instead.
-     * @see RegisterInvestigatorCommandSystemTest#assertCommandSuccess(Investigator)
+     * @see AddInvestigatorCommandSystemTest#assertCommandSuccess(Investigator)
      */
     private void assertCommandSuccess(String command, Investigator toAdd) {
         Model expectedModel = getModel();
@@ -234,7 +234,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
         } catch (DuplicatePersonException dpe) {
             throw new IllegalArgumentException("toAdd already exists in the model.");
         }
-        String expectedResultMessage = String.format(RegisterInvestigatorCommand.MESSAGE_SUCCESS, toAdd);
+        String expectedResultMessage = String.format(AddInvestigatorCommand.MESSAGE_SUCCESS, toAdd);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
@@ -245,7 +245,7 @@ public class RegisterInvestigatorCommandSystemTest extends InvestigapptorSystemT
      * 1. Result display box displays {@code expectedResultMessage}.<br>
      * 2. {@code Model}, {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
-     * @see RegisterInvestigatorCommandSystemTest#assertCommandSuccess(String, Investigator)
+     * @see AddInvestigatorCommandSystemTest#assertCommandSuccess(String, Investigator)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);

@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
-import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.AddInvestigatorCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
@@ -23,16 +23,16 @@ import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new RegisterInvestigatorCommand object
+ * Parses input arguments and creates a new AddInvestigatorCommand object
  */
-public class RegisterInvestigatorCommandParser implements Parser<RegisterInvestigatorCommand> {
+public class AddInvestigatorCommandParser implements Parser<AddInvestigatorCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the RegisterInvestigatorCommand
-     * and returns an RegisterInvestigatorCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddInvestigatorCommand
+     * and returns an AddInvestigatorCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public RegisterInvestigatorCommand parse(String args) throws ParseException {
+    public AddInvestigatorCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_RANK, PREFIX_TAG);
@@ -40,7 +40,7 @@ public class RegisterInvestigatorCommandParser implements Parser<RegisterInvesti
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_RANK) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RegisterInvestigatorCommand.MESSAGE_USAGE));
+                    AddInvestigatorCommand.MESSAGE_USAGE));
         }
 
         try {
@@ -52,7 +52,7 @@ public class RegisterInvestigatorCommandParser implements Parser<RegisterInvesti
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             Investigator investigator = new Investigator(name, phone, email, address, rank, tagList);
-            return new RegisterInvestigatorCommand(investigator);
+            return new AddInvestigatorCommand(investigator);
         } catch (IllegalValueException ive) {
             throw new ParseException(ive.getMessage(), ive);
         }

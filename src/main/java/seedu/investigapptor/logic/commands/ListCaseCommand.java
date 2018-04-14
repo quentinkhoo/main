@@ -3,7 +3,6 @@ package seedu.investigapptor.logic.commands;
 import static seedu.investigapptor.model.Model.PREDICATE_SHOW_ALL_CASES;
 
 import seedu.investigapptor.commons.core.EventsCenter;
-import seedu.investigapptor.commons.events.ui.FilteredCrimeCaseListChangedEvent;
 import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 
 /**
@@ -20,10 +19,7 @@ public class ListCaseCommand extends Command {
      */
     public CommandResult execute() {
         model.updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
-
         EventsCenter.getInstance().post(new SwapTabEvent(1));
-        EventsCenter.getInstance().post(new FilteredCrimeCaseListChangedEvent(model.getFilteredCrimeCaseList()));
-
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

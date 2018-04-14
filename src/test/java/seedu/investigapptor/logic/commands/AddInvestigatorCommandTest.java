@@ -32,7 +32,7 @@ import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
 import seedu.investigapptor.testutil.PersonBuilder;
 
-public class RegisterInvestigatorCommandTest {
+public class AddInvestigatorCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -40,7 +40,7 @@ public class RegisterInvestigatorCommandTest {
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new RegisterInvestigatorCommand(null);
+        new AddInvestigatorCommand(null);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class RegisterInvestigatorCommandTest {
 
         CommandResult commandResult = getAddCommandForPerson(validPerson, modelStub).execute();
 
-        assertEquals(String.format(RegisterInvestigatorCommand.MESSAGE_SUCCESS, validPerson),
+        assertEquals(String.format(AddInvestigatorCommand.MESSAGE_SUCCESS, validPerson),
                 commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -61,7 +61,7 @@ public class RegisterInvestigatorCommandTest {
         Person validPerson = new PersonBuilder().build();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(RegisterInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddInvestigatorCommand.MESSAGE_DUPLICATE_PERSON);
 
         getAddCommandForPerson(validPerson, modelStub).execute();
     }
@@ -70,14 +70,14 @@ public class RegisterInvestigatorCommandTest {
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
-        RegisterInvestigatorCommand addAliceCommand = new RegisterInvestigatorCommand(alice);
-        RegisterInvestigatorCommand addBobCommand = new RegisterInvestigatorCommand(bob);
+        AddInvestigatorCommand addAliceCommand = new AddInvestigatorCommand(alice);
+        AddInvestigatorCommand addBobCommand = new AddInvestigatorCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        RegisterInvestigatorCommand addAliceCommandCopy = new RegisterInvestigatorCommand(alice);
+        AddInvestigatorCommand addAliceCommandCopy = new AddInvestigatorCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -91,10 +91,10 @@ public class RegisterInvestigatorCommandTest {
     }
 
     /**
-     * Generates a new RegisterInvestigatorCommand with the details of the given person.
+     * Generates a new AddInvestigatorCommand with the details of the given person.
      */
-    private RegisterInvestigatorCommand getAddCommandForPerson(Person person, Model model) {
-        RegisterInvestigatorCommand command = new RegisterInvestigatorCommand(person);
+    private AddInvestigatorCommand getAddCommandForPerson(Person person, Model model) {
+        AddInvestigatorCommand command = new AddInvestigatorCommand(person);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
     }

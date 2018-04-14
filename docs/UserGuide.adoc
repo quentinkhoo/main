@@ -700,6 +700,15 @@ To help you find the index of the case that you want to edit, you can use the `f
 [TIP]
 You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
 
+*Example:*
+[[editcase1]]
+.Editing Case
+image::userguide-images/ec-command1.png[width="450"]
+
+
+[[editcase2]]
+.Result
+image::userguide-images/ec-command2.png[width="450"]
 *Examples:*
 
 * `editcase 1 d/some description i/1` +
@@ -905,7 +914,9 @@ Selects the 3rd case in the most recent list of cases.
 
 ==== List a specific Investigator's cases `listinvestigatorcases` [Since v1.4]
 
-Selects an investigator and display all of the case belonging to that investigator +
+To find all the case belonging to a certain investigator, you can use the `listinvestigatorcases` command to retrieve all
+the cases which the investigator is currently in charge of and display them on the list panel. +
+
 Format: `listinvestigatorcases INDEX` +
 Alias: `lic`
 
@@ -914,6 +925,19 @@ Alias: `lic`
 * The index refers to the index number shown in the most recent listing.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
+
+To use the `listinvestigatorcases` command, you just need to indicate which investigator's cases you
+want to view by using the index as shown in <<investigatorcase-1>> bellow
+
+[[investigatorcase-1]]
+.Using listinvestigatorcases command
+image::userguide-images/lic-command1.png[width="900"]
+
+[[investigatorcase-1]]
+.Result
+image::userguide-images/lic-command2.png[width="900"]
+
+*Examples:*
 
 * `listinvestigator` +
 `listinvestigatorcases 2` +
@@ -928,23 +952,38 @@ Display all the cases of the 2nd investigator  in the investigator panel list ca
 These are features that will come in future releases of Investigapptor +
 
 ==== Adding a witness `addwitness` [Coming in v2.0]
+We have plan to implement the feature to allow investigator to create and add witnesses to the cases in the investigapptor,
+ allowing investigators to track witnesses using the Investigapptor.
 
 ==== Adding a suspect `addsuspect` [Coming in v2.0]
+We plan to allow investigator to create and add suspects to the cases in the investigapptor, allowing investigators
+to track and view suspects involvement in any past or current cases using the Investigapptor.
 
 ==== Adding evidence files `addevidence` [Coming in v2.0]
+We plan to allow investigator to create and add evidence to cases in the investigapptor, allowing investigators
+to view more information the evidence related in the case.
 
 ==== Setting up chain of custody `buildcoc` [Coming in v2.0]
+We plan to store the history of the investigator in charge of each case, allowing the Investigapptor to display
+when the case was transferred and whom the cases was transfer to.
 
 ==== Entering commands in other languages `language` [Coming in v2.0]
+We plan to add more languages support such as Mandarin and Malay to the Investigapptor in the future to allow non-english
+user to be able to use Investigapptor
 
 ==== Adding any person via scanner `scanperson` [Coming in v2.0]
+We plan to add a scanner feature where Investigapptor is able to read the image of the case file and automatically
+process the information and add it into the Investigapptor.
 
 ==== Exporting case information into a PDF file `exportfile` [Coming in v2.0]
+We plan to add the feature which allows Investigapptor to create a PDF file which contains the information
+of a case or investigator.
 
 // tag::dataencryption[]
 ==== Encrypting data files `encryptdata` [Coming in v2.0]
 
-_{explain how the user can enable/disable data encryption}_
+We plan to add data encryption to Investigapptor in the future, which will encrypt and protect the data stored
+in investigapptor.
 // end::dataencryption[]
 
 == FAQ

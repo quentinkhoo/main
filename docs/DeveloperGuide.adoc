@@ -674,7 +674,7 @@ image::SDforFindOpenCase.png[width="800"]
 
 [[SDforFindCloseCase]]
 .Sequence Diagram for interactions within Logic component
-image::SDforFindCloseCase.png[width="800"]
+image::SDForFindCloseCase.png[width="800"]
 
 The `Logic` component will set the `StatusContainsKeywordsPredicate` with
 a `List<String>` containing the keyword of either `open` or `close`.
@@ -717,7 +717,7 @@ by its status.
 
 [[ADForFindCase]]
 .Activity Diagram when user enters `findclosecase` command
-image::ADForFindCase.png[width="800"]
+image::ADforFindCase.png[width="800"]
 
 ==== Current Implementation to find cases by tags
 The command class, `FindCaseTagsCommand` was created to find the cases according to its tags. Cases whose tags

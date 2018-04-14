@@ -38,9 +38,8 @@ up Investigapptor.
 
 == About this User Guide
 
-This user guide shows you how to get started with Investigapptor.
-
-This user guide will introduce you to the features Investigapptor provides and lead you through with the use of examples.
+This user guide shows you how to get started with Investigapptor. It will introduce
+you to the features that Investigapptor provides and lead you through with the use of examples.
 
 == Quick Start
 This section serves as a tutorial for you to familiarise yourself with the use of
@@ -69,13 +68,14 @@ for your Investigapptor.
 .Successful start up
 image::Ui.png[width="790"]
 
-=== Navigating The Interface
+=== Navigating the interface
 This sub-section will help you understand the different sections of the application
 interface as shown in _<<Interface, Figure 2>>_ below.
 
 [[Interface]]
 .Interface
 image::Interface.png[width="790"]
+{nbsp} +
 
 [width=100%, cols="1,4,20"]
 |===
@@ -94,6 +94,10 @@ image::Interface.png[width="790"]
 | 5 | Result Box | The result box will display the result to any command you input.
 
 |===
+
+=== Adjusting the panel width
+
+
 === Using commands
 This sub-section will teach you how to key in the commands to interact with
 the Investigapptor.
@@ -144,6 +148,7 @@ below, the closed case, Project Magic has a start date of "01/04/2018" and end d
 [[green-entry]]
 .Green Entry
 image::userguide-images/green-entry.png[width="500"]
+{nbsp} +
 
 [NOTE]
 ====
@@ -160,6 +165,7 @@ for Project Two, it has a status of `open` and a start date of "03/04/2018".
 [[red-entry]]
 .Red Entry
 image::userguide-images/red-entry.png[width="500"]
+{nbsp} +
 
 [NOTE]
 ====
@@ -194,7 +200,8 @@ An example is shown below in _<<TagExample, Figure 4>>_.
 
 [[TagExample]]
 .Investigator with a tag
-image::userguide-images/tag-example.png[width="500"]
+image::userguide-images/tag-example.PNG[width="450"]
+{nbsp} +
 
 [TIP]
 You can use the tags to label each investigator with their field of expertise
@@ -256,6 +263,7 @@ Alias: `sp pw/PASSWORD` +
 [[setpassword]]
 .Setting a password
 image::userguide-images/sp-command.png[width="450"]
+{nbsp} +
 
 The next time you start up Investigapptor, you will be prompted with a password
 input as shown below in _<<inputpassword, Figure 5>>_.
@@ -291,6 +299,7 @@ Alias: `hist`
 [[historycommand]]
 .Using the `history` command
 image::userguide-images/history-command.png[width="790"]
+{nbsp} +
 
 [NOTE]
 ====
@@ -322,18 +331,22 @@ Examples:
 [[undo-1]]
 .Before `deletecase 1` command
 image::userguide-images/undo-command-1.png[width="320"]
+{nbsp} +
 
 [[undo-2]]
 .After `deletecase 1` command
 image::userguide-images/undo-command-2.png[width="320"]
+{nbsp} +
 
 [[undo-3]]
 .`listcases` command
 image::userguide-images/undo-command-3.png[width="320"]
+{nbsp} +
 
 [[undo-4]]
 .`undo` command
 image::userguide-images/undo-command-4.png[width="320"]
+{nbsp} +
 
 [NOTE]
 ====
@@ -348,14 +361,17 @@ The `undo` command fails as there are no undoable commands executed previously.
 [[undo-5]]
 .`selectcase 1` command
 image::userguide-images/undo-command-5.png[width="320"]
+{nbsp} +
 
 [[undo-6]]
 .`listcases` command
 image::userguide-images/undo-command-3.png[width="320"]
+{nbsp} +
 
 [[undo-7]]
 .`undo` command
 image::userguide-images/undo-command-7.png[width="320"]
+{nbsp} +
 
 * `deletecase 1` +
 `clear` +
@@ -430,7 +446,7 @@ Saving the xml using the name "Investigator" will only overwrite the currenty sa
 [[backup-img]]
 .`backup` command
 image::userguide-images/backup.png[width="450"]
-
+{nbsp} +
 
 Examples: +
 
@@ -470,6 +486,7 @@ Examples:
 [[addinvestigator]]
 .Adding an investigator
 image::userguide-images/ai-command.png[width="790"]
+{nbsp} +
 
 [TIP]
 An investigator can have any number of tags (including 0) +
@@ -503,7 +520,6 @@ Alias: `ei`
 * You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
 ****
 
-
 To change a investigator's detail, follow the steps below
 
  . Select the investigator you want to edit by using the index as show below in <<editinvestigator>>.
@@ -513,12 +529,14 @@ To change a investigator's detail, follow the steps below
 [[editinvestigator]]
 .Using the Edit Investigator Command
 image::userguide-images/ei-command1.png[width="450"]
+{nbsp} +
 
 You can observe that the details of the investigator has be change in both the panel list and details panel.
 The result box will also print the new investigator details as show in <<editinvestigator2>>.
 [[editinvestigator2]]
 .Outcome
 image::userguide-images/ei-command2.png[width="450"]
+{nbsp} +
 
 Examples:
 
@@ -538,6 +556,7 @@ Alias: `fi`
 [[findinvestigators]]
 .Finding investigators by its name
 image::userguide-images/fi-command.png[width="450"]
+{nbsp} +
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`

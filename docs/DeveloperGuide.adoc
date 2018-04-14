@@ -3,6 +3,7 @@
 :toc-title:
 :toc-placement: preamble
 :sectnums:
+:sectnumlevels: 5
 :imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
@@ -11,38 +12,44 @@ ifdef::env-github[]
 :note-caption: :information_source:
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-F14-B3/main
+:teamURL: https://github.com/CS2103JAN2018-F14-B3
 
 By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Introduction
 
+=== What is Investigapptor
 Investigapptor is desktop application for a team of professional
 investigators to easily manage crime cases that have been
 delegated to them.
 
-Investigapptor comes with many useful features for investigators and
-their team members such as assigning investigators to a crime case, listing investigators
-based on their expertise so that you can solve crime cases more effienctly ande ffectively.
+=== Core Team
+Investigapptor was deveoped and is continually being maintained and
+improved upon by link:teamURL[Team F14-B3].
 
-Investigapptor v1.5 is available for Windows, Mac OS X, Linux and Unix operating systems.
+== About this Developer Guide
+This developer guide serves to assist you in making contributions to
+Investigapptor. To get started, jump to <<Setting Up>>.
 
-To get started, go to <<Quick Start>> for information on how to set
-up Investigapptor.
-
-== Setting up
-Follow the instructions below to set up and configure `Investigapptor` project files on your computer
+== Setting Up
+Follow the instructions below to set up and configure `Investigapptor`
+project files on your computer.
 
 === Prerequisites
+Investigapptor requires you to have the following programs installed
+in order for you to work on it further.
 
-. *JDK `1.8.0_60`* or later +
-Download at link:http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html[here]
+- *JDK `1.8.0_60`* or later.
 
+[TIP]
+If you do not
+already have it installed, you can download it from
+link:{javaURL}[here].
 [NOTE]
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
-+
 
-. *IntelliJ* IDE
+- *IntelliJ* IDE
 +
 [NOTE]
 IntelliJ by default has Gradle and JavaFx plugins installed. +
@@ -50,8 +57,7 @@ Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plu
 
 
 === Setting up the project in your computer
-In order to start coding on Investigapptor, you first need to follow the step belows to set up an
-local Investigapptor project on your computer.
+To setup Investigapptor on IntelliJ, follow the steps below.
 
 . Fork this repo, and clone the fork to your computer
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
@@ -66,11 +72,15 @@ local Investigapptor project on your computer.
 This will generate all resources required by the application and tests.
 
 === Verifying the setup
+To verify that the setup is completed, you should
 
 . Run the `seedu.investigapptor.MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
 
 === Configurations to do before writing code
+This subsection would guide you through in setting up certain configurations
+that you may find useful as you work on this project. It is highly recommended
+that you make these configurations before you write any code.
 
 ==== Configuring the coding style
 
@@ -112,36 +122,42 @@ When you are ready to start coding,
 
 == Design
 This section will explain structure of the Investigapptor and what each component of the
-Investigapptor does. WIth a clear understanding of the design, it becomes much easier for you
-to identify where and how your enhancement should be implemented
+Investigapptor does. With a clear understanding of the design, it becomes much easier for you
+to identify where and how your enhancement should be implemented.
 
 [[Design-Architecture]]
 === Architecture
 
-The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
+The *_Architecture Diagram_* as shown in <<ArcDiagram, Architecture Diagram>>
+ below explains the high-level design of the Application.
+ Given below is a quick overview of each component.
 
+[[ArcDiagram]]
 .Architecture Diagram
 image::Architecture.png[width="600"]
 
 
 [TIP]
-The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
+The `.pptx` files used to create diagrams in this document can be found in the
+link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for:
+`Main` has only one class called
+link:{repoURL}/src/main/java/seedu/investigapptor/MainApp.java[`MainApp`].
+It is responsible for:
 
-* At app launch: Initializing the components in the correct sequence, and connects them up with each other.
+* At Investigapptor launch: Initializing the components in the correct sequence, and connects them up with each other.
 * At shut down: Shutting down the components and invokes cleanup method where necessary.
 
 <<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.
 
 * `EventsCenter` : This class (written using https://github.com/google/guava/wiki/EventBusExplained[Google's Event Bus library]) is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+* `LogsCenter` : Used by many classes to write log messages to the Investigapptor's log file.
 
-The rest of the App consists of four components.
+The rest of the Application consists of four components.
 
-* <<Design-Ui,*`UI`*>>: The UI of the App.
+* <<Design-Ui,*`UI`*>>: The UI of the Application.
 * <<Design-Logic,*`Logic`*>>: The command executor.
-* <<Design-Model,*`Model`*>>: Holds the data of the App in-memory.
+* <<Design-Model,*`Model`*>>: Holds the data of Investigapptor in-memory.
 * <<Design-Storage,*`Storage`*>>: Reads data from, and writes data to, the hard disk.
 
 Each of the four components
@@ -177,6 +193,7 @@ The sections below give more details of each component.
 
 [[Design-Ui]]
 === UI component
+
 
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
@@ -253,107 +270,100 @@ Classes used by multiple components are in the `seedu.investigapptorbook.commons
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
+// tag::password[]
 === Password feature
-==== Reason for implementation
-As Investigapptor is a computer software that will likely to be installed on a shared computer,
-a password prompt is necessary in order to deter non-authorized users of the Investigapptor from
-gaining access into the application.
+The password feature allows for investigators to set a password
+for the application. This password can then be disclosed only to
+authorised investigators so as disallow unauthorised users from accessing
+ or modifying the application data.
 
 ==== Current Implementation
-To be updated
+This subsection will describe the current implementation of the password
+feature. An overview of how the password feature is implemented can be
+seen in the sequence diagram below:
 
-=== Listing feature
-==== Reason for implementation
-Investigapptor allows for separate tab listing of cases and investigators on the user interface as it
-would provide visual aid for them in deciding which investigator to assign to which case. As an investigator who would
-want to list and view all currently registered investigators or assigned cases, the listing
-command would automatically swap between the 2 tabs respectively upon the listing input, bringing
-convenience to the investigator ultimately.
+[[HighLevelDiagram]]
+.High Level Sequence Diagram of Password Feature
+image::PasswordHighLevelSequenceDiagram.png[width="790"]
 
-==== Current Implementation
-The investigators/cases tabs are created with a `PersonListPanel`
-and `CrimeCaseListPanel` respectively, which are the main classes
-in charge of displaying the details of the investigators or crime cases.
-The list investigators/cases command would then display the respective
-tabs depending on the list argument.
+===== Logic Component
 
-A `PersonListPanel` constructor is created with a constructor:
-[source,java]
-----
-public class PersonListPanel extends UiPart<Region> {
-    @Override
-    public PersonListPanel(ObservableList<Person> personList) {
-    /// PersonListPanel code
-    }
-}
-----
-The `PersonListPanel` is then initialised in the MainWindow class
-by taking in an unmodifiable list of Person as follows:
-[source,java]
-----
-    personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-----
-A `CrimeCaseListPanel` constructor is created with a constructor:
-[source,java]
-----
-public class CrimeCaseListPanel extends UiPart<Region> {
-    @Override
-    public CrimeCaseListPanel(ObservableList<CrimeCase> crimeCaseList) {
-    /// CrimeCaseListPanel code
-    }
-}
-----
-The `CrimeCaseListPanel` is then initialised in the MainWindow class by taking in
-an unmodifiable list of CrimeCase as follows:
-[source,java]
-----
-    crimeCaseListPanel = new CrimeCaseListPanel(logic.getFilteredCrimeCaseList());
+When a `setpassword` command is executed, a `SetPasswordCommand`
+object gets created if the parsing of the command was successful. This
+will in turn make a call to the `updatePassword` function in the `Model`
+component, as shown in the sequence diagram below:
 
-----
+[[LogicDiagram]]
+.Password Feature's Logic Component Sequence Diagram
+image::PasswordLogicSequenceDiagram.png[width="790"]
 
-The list investigators/cases command is handled in the logic component
-by a `ListCommand` object which takes in a list type as follows:
-[source,java]
-----
-ListCommand(String listType);
-----
-Depending on the `listType` input, a different list would be returned
-to the `model` component and trigger for a `SwapTabEvent`
+===== Model Component +
+Upon being called, the `updatePassword` function in the `ModelManager`
+would raise a new `InvestigapptorChangedEvent` to indicate that the
+password has been updated. The entire sequence diagram for the `Model`
+component as shown below describes this in greater detail.
 
-In the case of an 'investigators' `listType` input, the `model` gets
-updated as shown below
+[[ModelDiagram]]
+.Password Feature's Model Component Sequence Diagram
+image::PasswordModelSequenceDiagram.png[width="790"]
+
+Whenever then `Password` Object's `updatePassword` function is called,
+the hash of the password is first generated with the `generatePasswordHash`
+function. This function makes use of the `SHA-256` hashing algorithm
+to generate the hash of the password as shown below:
+
 [source, java]
 ----
-model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            EventsCenter.getInstance().post(new SwapTabEvent(0));
+public static String generatePasswordHash(String password) {
+        String encodedHash = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.update(INITIAL_VALUE.getBytes());
+            if (!isNull(password)) {
+                byte[] byteHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+                encodedHash = Base64.getEncoder().encodeToString(byteHash);
+            }
+        } catch (NoSuchAlgorithmException noSuchAlgoException) {
+            System.out.println("Cannot generate hash: MessageDigest.getInstance");
+        }
+        return encodedHash;
+    }
+
 ----
 
-In the case of an 'cases' `listType` input, the `model` gets
-updated as shown below
-[source, java]
-----
-model.updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
-            EventsCenter.getInstance().post(new SwapTabEvent(1));
-----
+===== Storage Component
+With regards to the password feature, the `Storage` component is responsible
+not only for storing the currently set password, but also for checking whether
+an input password is correct. If the input password is correct, a
+`ValidPasswordEvent` is raised, as shown in the sequence diagram below:
+
+[[StorageDiagram]]
+.Password Feature's Storage Component Sequence Diagram
+image::PasswordInputSequenceDiagram.png[width="790"]
 
 ==== Alternatives Considered
-===== Aspect: Design of list
-* **Alternative 1 (Current Choice)**: Have the same `ListCommand` object
-for listing of investigators and cases.
-** Pros: Easier to code and requires less `Class` files.
-** Cons: Users have to type an extra space whenever they want to list something.
+This subsection would describe other designs and implementations
+that were taken into consideration.
 
-* **Alternative 2 **: Separate into `ListInvestigators` and `ListCases`
-for listing of investigators and cases.
-** Pros: More object oriented style and can be treated as separate entities.
-** Cons: Requires much more modifications when other types of listing come into
-play in future versions (i.e `Witness`, `Evidence`).
+===== Aspect: Usage of password feature
+* **Alternative 1 (Current Choice)**: Have one password for the entire
+application
+** Pros: Investigators within a team can simply share the password.
+** Cons: There is no access control between investigators of different
+ranks.
+
+* **Alternative 2 **: Have a separate password for each investigator.
+** Pros: Each investigator can have their own password, allowing for
+access control between investigators of different ranks.
+** Cons: Requires an additional password attribute for each investigator.
+// end::password[]
 
 === Undo/Redo feature
 ==== Current Implementation
 
-The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides inside `LogicManager`. It supports undoing and redoing of commands that modifies the state of the address book (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
+The undo/redo mechanism is facilitated by an `UndoRedoStack`, which
+resides inside `LogicManager`. It supports undoing and redoing of
+ commands that modifies the state of the Investigapptor (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
 
 `UndoRedoStack` only deals with `UndoableCommands`. Commands that cannot be undone will inherit from `Command` instead. The following diagram shows the inheritance diagram for commands:
 

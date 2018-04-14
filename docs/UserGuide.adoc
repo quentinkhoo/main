@@ -696,7 +696,7 @@ You can refer to the screenshot below for an example.
 
 [[addcase]]
 .Adding a case
-image::userguide-images/ac-command.png[width="450"]
+image::userguide-images/ac-command.png[width="800"]
 
 The following provides an explanation of some command examples:
 

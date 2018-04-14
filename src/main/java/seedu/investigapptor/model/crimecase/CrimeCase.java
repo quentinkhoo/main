@@ -33,7 +33,9 @@ public class CrimeCase {
                      StartDate startDate, EndDate endDate, Status status, Set<Tag> tags) {
         this.name = name;
         this.description = description;
-        this.currentInvestigator = currentInvestigator;
+        this.currentInvestigator = new Investigator(currentInvestigator.getName(), currentInvestigator.getPhone(),
+        currentInvestigator.getEmail(), currentInvestigator.getAddress(), currentInvestigator.getRank(),
+                currentInvestigator.getTags());
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;

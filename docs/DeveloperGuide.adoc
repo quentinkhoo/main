@@ -1110,6 +1110,8 @@ A `CrimeCase` class is created with one constructor.
 |CrimeCase |`new CrimeCase(name, description, investigatorToAdd, startDate, endDate, status, tagList)` |Stores `CaseName`, `Description`, `Investigator`, `StartDate`, `Status`, and `UniqueTagList` objects to represent information of the case.
 |=======
 
+`CrimeCase` objects are considered "duplicates" when they share at least the same `CaseName`, `Description`, and `StartDate`.
+
 ==== Reasons for how it is implemented
 
 The `crimecase` package follows the model of the `person` package, whereby each attribute is represented by a class. This allows for better organization and a modular design which follows the single responsibility principle.
@@ -1140,7 +1142,7 @@ Called by `AddCaseCommandParser` when a user inputs the command and details of a
 When this constructor is used, the `Index` object is processed to retrieve the `Investigator` object at the specified index on the most recent list of investigators displayed by the model. A `CrimeCase` object is created using the parameters and the retrieved `Investigator` object.
 |=======
 
-The `CrimeCase` object is then added to the model and throws a `DuplicateCrimeCaseException` if there exists an identical object already in Investigapptor. The following snippet shows the execution code.
+The `CrimeCase` object is then added to the model and throws a `DuplicateCrimeCaseException` if there exists a similar object already in Investigapptor. The following snippet shows the execution code.
 
 ```
 public CommandResult executeUndoableCommand() throws CommandException {
@@ -1153,6 +1155,33 @@ public CommandResult executeUndoableCommand() throws CommandException {
     }
 }
 ```
+
+In the `Model` component, the new `CrimeCase` object gets added to the case list of the assigned investigator as well (i.e. `UniqueCrimeCaseList` within the `Investigator` object) via the `addCrimeCaseToInvestigator` method. This method traverses through the entire list of investigators to find the correct `Investigator` object to add the new `CrimeCase` object to. The code is shown below.
+
+```
+public void addCrimeCase(CrimeCase c) throws DuplicateCrimeCaseException {
+    CrimeCase crimeCase = syncWithMasterTagList(c);
+    if (cases.add(crimeCase)) {
+        addCrimeCaseToInvestigator(crimeCase);
+    }
+}
+```
+
+The following sequence diagram illustrates what happens in the `Model` component when a case is added.
+
+.Interactions Inside the Model Component for the `addcase` Command
+image::SD_AddCaseCommand_Model.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: Parsing the investigator-to-be-assigned
+
+* **Alternative 1:** User inputs an investigator's name after the `i/` prefix to indicate who to assign the case to
+** Pros: More intuitive for the user.
+** Cons: More difficult to implement - need a way to decide which investigator to assign if they share identical names.
+* **Alternative 2 (current choice):** User inputs the index of the investigator based on the case list after the `i/` prefix to indicate who to assign the case to
+** Pros: Easier to implement and more straightforward. Index provided is the investigator to be assigned - don't have to worry about identical names.
+** Cons: User would have to switch between lists to refer to the investigator index. For example, the user types the command to add the case but then realises that they needed the investigator index. They would have to either use the interface to switch the tabs or type the `listinvestigators` command. This disrupts the flow and hinders efficiency.
 
 === Deleting cases feature
 
@@ -1191,10 +1220,12 @@ public CommandResult executeUndoableCommand() {
 
 Below are sequence diagrams illustrating the `Logic` and `Model` components.
 
-.Interactions Inside the Logic Component for the `deleteCase 1` Command
+.Interactions Inside the Logic Component for the `deletecase 1` Command
 image::SD_DeleteCaseCommand_Logic.png[width="800"]
 
-.Interactions Inside the Model Component for the `deleteCase 1` Command
+{nbsp} +
+
+.Interactions Inside the Model Component for the `deletecase 1` Command
 image::SD_DeleteCaseCommand_Model.png[width="500"]
 
 === Finding cases feature
@@ -1227,6 +1258,11 @@ public CommandResult execute() {
     return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
 }
 ```
+
+The following sequence diagram illustrates how the `Logic` component operates when a keyword is given with the command.
+
+.Interactions Inside the Logic Component for the `findcase magic` Command
+image::SD_FindCaseCommand_Logic.png[width="800"]
 
 === Selecting cases feature
 
@@ -1263,6 +1299,13 @@ public CommandResult execute() throws CommandException {
 }
 ```
 
+The following sequence diagram illustrates what happens in the `Logic` component when a case is selected.
+
+.Interactions Inside the Logic Component for the `selectcase 1` Command
+image::SD_SelectCaseCommand_Logic.png[width="800"]
+
+{nbsp} +
+
 Following the raised event, `handleJumpToCrimeCaseListRequestEvent` (in `CrimeCaseListPanel.java`) is signalled to handle the select request, which scrolls the view to the correct cell in the panel.
 
 ```
@@ -1283,6 +1326,13 @@ private void handleCrimeCasePanelSelectionChangedEvent(CrimeCasePanelSelectionCh
 }
 ```
 
+The following sequence diagram below shows how the EventsCenter interacts with the UI component.
+
+.Interactions Inside the EventsCenter and UI Component for the `selectcase 1` Command
+image::SD_SelectCaseCommand_EventsCenter.png[width="800"]
+
+{nbsp} +
+
 `loadCrimeCasePage` method takes the `CrimeCase` object contained within the event and splits it up into its various components (i.e. case name, description, investigator, start date, end date, status, and tags) as `String`, which are then used to create a URL query string. Components with strings that may contain symbols such as “#” are encoded first before appending to the query string.
 
 ```
@@ -1293,9 +1343,9 @@ encStartDate = URLEncoder.encode(startDate, "UTF-8");
 encEndDate = URLEncoder.encode(endDate, "UTF-8");
 ```
 
-To create the view where the information is displayed on the GUI (`BrowserPanel`), an HTML file (`/docs/CaseDetailsPage.html`) was created as a template for displaying the details of a single case. In order to load the HTML file, utility methods provided by JavaFX’s `WebView` (an embedded browser) is used.
+To create the view where the information is displayed on the GUI (`BrowserPanel`), an HTML file (`/docs/CaseDetailsPage.html`) was created as a template for displaying the details of a single case. In order to load the HTML file, utility methods provided by JavaFX’s `WebView` (an embedded browser) are used.
 
-A `String` containing the URL or file path is passed to the `load` method with a request string appended to the back (e.g. “https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=John+Doe”). This method can be used to load pages from third-party services (e.g. Google Search).
+A `String` containing the URL or file path is passed to the `load` method with a request string appended to the back (e.g. “https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=John%20Doe”). This method can be used to load pages from third-party services (e.g. Google Search).
 
 ```
 public void loadPage(String url) {
@@ -1358,21 +1408,21 @@ The `caseIndex` is processed to retrieve the `CrimeCase` object at the specified
 A new `CrimeCase` object is created using the retrieved case-to-be-edited and the descriptor.
 |=======
 
-When the `EditCaseCommand` is executed, the original `CrimeCase` object is not modified, but rather, replaced by a new `CrimeCase` object. Note that a new `Investigator` object is also created to be stored in the new `CrimeCase`. The cases in that particular `Investigator`’s `UniqueCrimeCaseList` is cleared so that only personal details of the investigator is stored within the `CrimeCase` object. This is to simplify the data to be recorded in storage. The list of cases within the original `Investigator` object remains untouched. The snippet of code below shows the implementation.
+When the `EditCaseCommand` is executed, note that the original `CrimeCase` object is not modified, but rather, replaced by a new `CrimeCase` object. When the `CrimeCase` constructor is called, a new `Investigator` object without its `UniqueCrimeCaseList` is created within the `CrimeCase` (i.e. only the personal details are stored). This is to simplify the data to be recorded in storage. The list of cases within the original `Investigator` object remains untouched. The snippet of code below shows the implementation.
 
 ```
 private CrimeCase syncWithMasterTagList(CrimeCase crimeCase) {
     // … logic for handling and rebuilding tags …
 
-    Investigator investigator = (Investigator) syncWithMasterTagList(crimeCase.getCurrentInvestigator());
-    investigator.clearCaseList();
     return new CrimeCase(
-        crimeCase.getCaseName(), crimeCase.getDescription(), investigator,
+        crimeCase.getCaseName(), crimeCase.getDescription(), crimeCase.getCurrentInvestigator(),,
         crimeCase.getStartDate(), crimeCase.getEndDate(), crimeCase.getStatus(), correctTagReferences);
 }
 ```
 
-Since the `CrimeCase` object is replaced rather than modified, we need to remove the old `CrimeCase` object stored in the `UniqueCrimeCaseList` of the `Investigator` and reference the new, modified `CrimeCase` object instead. This is done by traversing the entire list of investigators and finding the correct `Investigator` object to remove the case from. The code below shows its implementation.
+Remember that each `Investigator` object has their own `UniqueCrimeCaseList` that holds `CrimeCase` objects that they've been assigned.
+
+Since the `CrimeCase` object is replaced rather than modified, we need to remove the old `CrimeCase` object stored in the `UniqueCrimeCaseList` of the `Investigator` and reference the new, modified `CrimeCase` object instead. This is done by traversing the entire list of investigators and finding the correct `Investigator` object to remove the `CrimeCase` object from using the `removeCrimeCaseFromInvestigator` method. Next, after replacing the old `CrimeCase` object with the edited one in master list of all cases, it traverses the entire list of investigators again to add the case back to the correct `Investigator` object using the `addCrimeCaseFromInvestigator` method. The code below shows its implementation.
 
 ```
 public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
@@ -1385,6 +1435,13 @@ throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
     addCrimeCaseToInvestigator(syncedEditedCrimeCase);
 }
 ```
+
+The following sequence diagram below illustrates how the Model component works when a case is edited.
+
+.Interactions Inside the Model Component for the `editcase` Command
+image::SD_EditCaseCommand_Model.png[width="800"]
+
+{nbsp} +
 //end::crimecase[]
 
 === Creating Backup

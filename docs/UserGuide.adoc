@@ -653,7 +653,7 @@ The case should be reassigned to another investigator before you delete the sele
 
 Selects the person identified by the index number used in the last investigator listing. +
 Format: `selectinvestigator INVESTIGATOR_INDEX` +
-Alias: `selectinvest`
+Alias: `si`
 
 [NOTE]
 Selects the investigator and loads the details of the investigator at the specified `INDEX`. +

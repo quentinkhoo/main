@@ -17,7 +17,7 @@ import seedu.investigapptor.model.person.exceptions.DuplicatePersonException;
 /**
  * Adds a person to the investigapptor book.
  */
-public class RegisterInvestigatorCommand extends UndoableCommand {
+public class AddInvestigatorCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "addinvestigator";
     public static final String COMMAND_ALIAS = "ai";
@@ -45,9 +45,9 @@ public class RegisterInvestigatorCommand extends UndoableCommand {
     private final Person toAdd;
 
     /**
-     * Creates an RegisterInvestigatorCommand to add the specified {@code Person}
+     * Creates an AddInvestigatorCommand to add the specified {@code Person}
      */
-    public RegisterInvestigatorCommand(Person person) {
+    public AddInvestigatorCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -68,7 +68,7 @@ public class RegisterInvestigatorCommand extends UndoableCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof RegisterInvestigatorCommand // instanceof handles nulls
-                && toAdd.equals(((RegisterInvestigatorCommand) other).toAdd));
+                || (other instanceof AddInvestigatorCommand // instanceof handles nulls
+                && toAdd.equals(((AddInvestigatorCommand) other).toAdd));
     }
 }

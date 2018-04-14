@@ -36,7 +36,7 @@ import static seedu.investigapptor.logic.parser.CommandParserTestUtil.assertPars
 
 import org.junit.Test;
 
-import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.AddInvestigatorCommand;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
@@ -46,8 +46,8 @@ import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.testutil.InvestigatorBuilder;
 
-public class RegisterInvestigatorCommandParserTest {
-    private RegisterInvestigatorCommandParser parser = new RegisterInvestigatorCommandParser();
+public class AddInvestigatorCommandParserTest {
+    private AddInvestigatorCommandParser parser = new AddInvestigatorCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -58,27 +58,27 @@ public class RegisterInvestigatorCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + RANK_DESC_CAP + TAG_DESC_FRIEND,
-                new RegisterInvestigatorCommand(expectedInvestigator));
+                new AddInvestigatorCommand(expectedInvestigator));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + RANK_DESC_CAP + TAG_DESC_FRIEND,
-                new RegisterInvestigatorCommand(expectedInvestigator));
+                new AddInvestigatorCommand(expectedInvestigator));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + RANK_DESC_CAP + TAG_DESC_FRIEND,
-                new RegisterInvestigatorCommand(expectedInvestigator));
+                new AddInvestigatorCommand(expectedInvestigator));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + RANK_DESC_CAP + TAG_DESC_FRIEND,
-                new RegisterInvestigatorCommand(expectedInvestigator));
+                new AddInvestigatorCommand(expectedInvestigator));
 
         // multiple addresses - last investigapptor accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + RANK_DESC_CAP + TAG_DESC_FRIEND,
-                new RegisterInvestigatorCommand(expectedInvestigator));
+                new AddInvestigatorCommand(expectedInvestigator));
 
         // multiple tags - all accepted
         Investigator expectedInvestigatorMultipleTags = new InvestigatorBuilder().withName(VALID_NAME_BOB)
@@ -86,7 +86,7 @@ public class RegisterInvestigatorCommandParserTest {
                 .withRank(VALID_RANK_CAPTAIN).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + RANK_DESC_CAP + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new RegisterInvestigatorCommand(expectedInvestigatorMultipleTags));
+                new AddInvestigatorCommand(expectedInvestigatorMultipleTags));
     }
 
     @Test
@@ -96,13 +96,13 @@ public class RegisterInvestigatorCommandParserTest {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withRank(VALID_RANK_CAPTAIN).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + RANK_DESC_CAP, new RegisterInvestigatorCommand(expectedInvestigator));
+                + RANK_DESC_CAP, new AddInvestigatorCommand(expectedInvestigator));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RegisterInvestigatorCommand.MESSAGE_USAGE);
+                AddInvestigatorCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -154,7 +154,7 @@ public class RegisterInvestigatorCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + RANK_DESC_CAP + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterInvestigatorCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddInvestigatorCommand.MESSAGE_USAGE));
 
         //invalid rank
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

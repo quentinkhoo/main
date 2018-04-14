@@ -508,7 +508,7 @@ interacts with each other.
 
 [[SDforCalendar]]
 .Component interactions within `CalendarPanel`
-image::SDforCalendar.png[width="800"]
+image::SDForCalendar.png[width="800"]
 
 The `CalendarPanel` comprises of the following attributes and objects:
 
@@ -550,7 +550,7 @@ will raise the `InvestigapptorChangedEvent` which will remove the case from the 
 ====== Sequence Diagram for commands that updates the case's details
 [[SDForUpdateCase]]
 .Component interactions for commands that update the details of a case
-image::SDForUpdateCase.png[width="800"]
+image::SDforUpdateCase.png[width="800"]
 As for `editcase` and `close` command, it will make changes to the details of the cases. When the
 case is updated, the investigapptor will raise the `InvestigapptorChangedEvent` which will
 update the calendar by displaying the updated entry.
@@ -592,7 +592,7 @@ When the `FilteredCrimeCaseList` has been updated, it  will contain the cases th
 
 [[SDForFindCase]]
 .Component interactions for commands that update the `FilteredCrimeCaseList`
-image::SDForFindCase.png[width="800"]
+image::SDforFindCase.png[width="800"]
 
 When these commands are executed, it will raise a `FilteredCrimeCaseListChangedEvent` which will
 update the calendar with the cases that are currently in the `FilteredCrimeCaseList`.

@@ -424,8 +424,21 @@ Alias: `ei`
 ****
 
 
+To change a investigator's detail, follow the steps below
 
+ . Select the investigator you want to edit by using the index as show below in <<editinvestigator>>.
 
+ . Use the prefix to indicate which details you want to edit, e.g `n/John` to change the name to John.
+
+[[editinvestigator]]
+.Using the Edit Investigator Command
+image::userguide-images/ei-command1.png[width="450"]
+
+You can observe that the details of the investigator has be change in both the panel list and details panel.
+The result box will also print the new investigator details as show in <<editinvestigator2>>.
+[[editinvestigator2]]
+.Outcome
+image::userguide-images/ei-command2.png[width="450"]
 
 Examples:
 

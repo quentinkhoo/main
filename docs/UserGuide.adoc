@@ -22,32 +22,35 @@ By: `Team F14-B3`      Since: `Mar 2018`      Licence: `MIT`
 
 == Introduction
 
-Investigapptor is a desktop application for a team of professional
-investigators to easily manage crime cases that have been
-delegated to them.
+Investigapptor is a desktop Graphical User Interface (GUI) application that is based on
+Command Line Interface (CLI) for a team of professional investigators to easily
+manage crime cases that have been assigned to them.
 
-Investigapptor comes with many useful features for investigators and
-their team members such as assigning investigators to a crime case, listing investigators
-based on their expertise. This would allow for one to choose the best investigator for a
-particular crime case based on their expertise+
-
-Investigapptor v1.5 is available for Windows, Mac OS X, Linux and Unix operating systems.
-
-To get started, go to <<Quick Start, Quick Start>> for information on how to set
-up Investigapptor.
+To get started, go to <<Quick Start, Quick Start>> to start setting up Investigapptor.
 
 == About this User Guide
 
-This user guide shows you how to get started with Investigapptor. It will introduce
-you to the features that Investigapptor provides and lead you through with the use of examples.
+This user guide shows you how to get started with Investigapptor.
+
+It will introduce you to the features Investigapptor provides and lead you through with the use of examples.
+
+Throughout this user guide, there would be various icons used as described below.
+
+TIP: This is a tip. Follow these suggested tips to make your life much
+    simpler when using Investigapptor!
+
+NOTE: This is a note. These are things for you to take note of when using
+    Investigapptor.
+
+WARNING: This is a rule. Ensure that you follow these rule to make your
+    life using Investigapptor a pleasant one.
 
 == Quick Start
 This section serves as a tutorial for you to familiarise yourself with the use of
 Investigapptor.
 
 === Installation
-This sub-section provides a step by step guide on teaching you how to install
-Investigapptor.
+Follow these steps to ensure that you have properly set up Investigapptor.
 
 .  Ensure that you have Java version `1.8.0_60` or later installed in your
 Computer. If you do not already have it installed, you can download it from
@@ -57,10 +60,14 @@ link:{javaURL}[here].
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
 +
-.  You can download the latest version `investigapptor.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder
-(e.g `C:\Users\Investigator\InvestigapptorFolder`)
-for your Investigapptor.
+.  You can download the latest `investigapptor.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Investigapptor.
++
+[TIP]
+An example of a home folder would be `C:\Users\Investigator\InvestigapptorFolder`. +
+It is highly recommended that your home folder be a folder of its own and not contain any
+other files not related to Investigapptor.
++
 .  Double-click the file to start the app. The Graphical User Interface (GUI) should appear in a few seconds
  as shown in _<<StartUp, Figure 1>>_ below.
 +
@@ -69,14 +76,15 @@ for your Investigapptor.
 image::Ui.png[width="790"]
 
 === Navigating the interface
-This sub-section will help you understand the different sections of the application
-interface as shown in _<<Interface, Figure 2>>_ below.
+You can study the Investigapptor's interface as shown below in <<Interface, Figure 2>> to understand
+the various components of the application. You can also refer to the <<Reference, table>> below to understand
+their respective usage and features.
 
 [[Interface]]
 .Interface
 image::Interface.png[width="790"]
-{nbsp} +
 
+[[Reference]]
 [width=100%, cols="1,4,20"]
 |===
 | *Label* | *Name* | *Feature*
@@ -341,27 +349,16 @@ Alias: `u`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the investigapptor's content +
-
-(`addinvestigator`, `deleteinvestigator`, `editinvestigator`,
- `addcase`, `deletecase`, `editcase`, `close` and `clear`).
+Undoable commands are those commands that modify the Investigapptor's content +
+`addinvestigator`, `deleteinvestigator`, `editinvestigator` +
+`addcase`, `deletecase`, `editcase`, `close` and `clear`
 ====
 
-Examples:
+The following provides an explanation of some command examples:
 
 * `deletecase 1` +
 `listcases` +
 `undo` (reverses the `deletecase 1` command) +
-
-[[undo-1]]
-.`deletecase 1` command
-image::userguide-images/undo-command-1-2.png[width="500"]
-{nbsp} +
-
-[[undo-2]]
-.`listcases` and `undo` command
-image::userguide-images/undo-command-3-4.png[width="500"]
-{nbsp} +
 
 [NOTE]
 ====
@@ -372,21 +369,6 @@ image::userguide-images/undo-command-3-4.png[width="500"]
 `listcases` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
-
-[[undo-5]]
-.`selectcase 1` command
-image::userguide-images/undo-command-5.png[width="320"]
-{nbsp} +
-
-[[undo-6]]
-.`listcases` command
-image::userguide-images/undo-command-3.png[width="320"]
-{nbsp} +
-
-[[undo-7]]
-.`undo` command
-image::userguide-images/undo-command-7.png[width="320"]
-{nbsp} +
 
 * `deletecase 1` +
 `clear` +
@@ -426,7 +408,7 @@ Clears all entries from the address book. +
 Format: `clear` +
 Alias: `c`
 
-You can refer to the screenshots below for an example of how the investigapptor
+You can refer to the screenshots below for an example of how the Investigapptor
 would look like after you've executed the `clear` command.
 
 [[before-clear-command]]
@@ -462,7 +444,7 @@ Alias: `bu`
 
 [NOTE]
 ====
-The data folder is located in the same directory as your Investigapptor.jar +
+The data folder is located in the same directory as your investigapptor.jar +
 Saving the xml using the name "Investigator" will only overwrite the currenty save file and not create a new file.
 ====
 
@@ -479,12 +461,6 @@ Creates a copy of the data with the name `February` in `root/data` folder
 Creates a copy of the data with the name `02012018` in `root/data` folder
 * `bu 03Mar2018` +
 Creates a copy of the data with the name `March3rd` in `root/data` folder
-
-[[Save]]
-==== Saving the data
-
-Investigapptor data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
 
 === Investigator Commands
 These are investigator related commands. +
@@ -792,10 +768,14 @@ Case matching at least one keyword will be returned  (i.e. `OR` search). e.g. `S
 [WARNING]
 Only full words will be matched e.g. You cannot type `Danger` to search for names with the word `Dangerous` +
 
-You can refer to the screenshot below for an example.
+You can refer to the screenshots below for an example.
 [[findcases]]
-.Finding cases by its name
+.Finding cases by its name (Panel List)
 image::userguide-images/fc-command.png[width="450"]
+
+[[findcases-calendar]]
+.Finding cases by its name (Calendar View)
+image::userguide-images/fc-command-calendar.png[width="450"]
 
 The following provides an explanation of some command examples:
 
@@ -804,7 +784,8 @@ Returns `SPF Murder` and `SPF rape`
 * `findcases murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
 
-You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar
+should you require more information about it.
 //end::findcases[]
 
 //tag::findcasetags[]
@@ -823,10 +804,14 @@ e.g. `murder robbery` will return cases that contains the tag 'murder' or 'robbe
 [WARNING]
 Only full words will be matched e.g. `homicide` will not match `homicidey`
 
-You can refer to the screenshot below for an example.
+You can refer to the screenshots below for an example.
 [[findcasetags]]
 .Finding cases by its tags
 image::userguide-images/fct-command.png[width="450"]
+
+[[findcasetags-calendar]]
+.Finding cases by its tags (Calendar View)
+image::userguide-images/fct-command-calendar.png[width="450"]
 
 The following provides an explanation of some command examples:
 
@@ -837,7 +822,8 @@ Returns case(s) having tags `murder`, `homicide`, OR `robbery`
 * `fct murder supernatural a` +
 Returns case(s) having tags `murder`, `supernatural`, OR `a`
 
-You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar
+should you require more information about it.
 //end::findcasetags[]
 
 //tag::findclosecases[]
@@ -847,6 +833,17 @@ You can find cases whose status is `close`. +
 Format: `findclosecases` +
 Alias: `fcc`
 
+You can refer to the screenshots below for an example of how the Investigapptor
+would look like after you've executed the `findclosecases` command.
+
+[[all-cases-displayed]]
+.Default interface displays all cases
+image::userguide-images/all-cases-displayed.png[width="800"]
+
+[[findclosecases]]
+.After `findclosecases` command
+image::userguide-images/fcc-command.png[width="800"]
+
 The following provides an explanation of some command examples:
 
 * `findclosecases` +
@@ -854,7 +851,8 @@ Returns case(s) with status `close`
 * `fcc` +
 Returns case(s) with status `close`
 
-You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar
+should you require more information about it.
 //end::findclosecases[]
 
 //tag::findopencases[]
@@ -864,6 +862,17 @@ You can find cases whose status is `open`. +
 Format: `findopencases` +
 Alias: `foc`
 
+You can refer to the screenshots below for an example of how the Investigapptor
+would look like after you've executed the `findopencases` command.
+
+[[all-cases-displayed]]
+.Default interface displays all cases
+image::userguide-images/all-cases-displayed.png[width="800"]
+
+[[findopencases]]
+.After `findopencases` command
+image::userguide-images/foc-command.png[width="800"]
+
 The following provides an explanation of some command examples:
 
 * `findopencases` +
@@ -871,7 +880,8 @@ Returns case(s) with status `open`
 * `foc` +
 Returns case(s) with status `open`
 
-You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar
+should you require more information about it.
 //end::findopencases[]
 
 //tag::closecase[]
@@ -912,7 +922,7 @@ Closes the 1st case in the results of the `findcases` command.
 * `cl 3` +
 Closes the 3rd case in the listed panel list case.
 
-You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar should you require more information about it.
 //end::closecase[]
 
 //tag::deletecase[]
@@ -930,14 +940,32 @@ The index *must be a positive integer* 1, 2, 3, ...
 To help you find the index of the case that you want to remove, you can use the `findcases` command before using the `deletecase` command to narrow the number of cases displayed in the listing. +
 If a case is no longer active, consider using the `close` command instead so that you can continue to view details of the case.
 
+You can identify and delete the case by looking at their
+INDEX at the top left of their card as show in the diagram <<deletecase-index, below>>.
+
+[[deletecase-index]]
+.Case Index
+image::userguide-images/dc-index.png[width="320"]
+
+You can refer to the screenshots below for an example of how the Investigapptor
+would look like after you've executed the `deletecase` command.
+
+[[deletecase-before]]
+.Before executing `deletecase 1` command
+image::userguide-images/before-dc-command.png[width="800"]
+
+[[deletecase-command]]
+.After executing `deletecase 1` command
+image::userguide-images/dc-command.png[width="800"]
+
 The following provides an explanation of some command examples:
 
 * `listcases` +
 `deletecase 2` +
 Deletes the 2nd case in the list of all cases.
-* `findcase Arson` +
+* `findcases Arson` +
 `dc 1` +
-Deletes the 1st case in the results of the `findcase` command.
+Deletes the 1st case in the results of the `findcases` command.
 //end::deletecase[]
 
 //tag::selectcase[]
@@ -962,7 +990,7 @@ Selects the 2nd case in the results of the `listcases` command.
 
 * `findcases murder` +
 `selectcase 1` +
-Selects the 1st case in the results of the `findcase` command.
+Selects the 1st case in the results of the `findcases` command.
 * `sc 3` +
 Selects the 3rd case in the most recent list of cases.
 //end::selectcase[]
@@ -1020,10 +1048,12 @@ _{explain how the user can enable/disable data encryption}_
 overwriting the empty data file it creates with the file that contains
 the data of your previous Investigapptor folder.
 
-
+*Q*: How do I save my data? +
+*A*: Investigapptor data are saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 == Command Summary
-This section provides a quick reference for
+This section provides a quick reference for all the commands available in the Investigapptor.
 
 === General Commands
 These are some general commands

@@ -1007,6 +1007,17 @@ The `INVESTIGATOR_INDEX` refers to the index number shown in the most recent lis
 [WARNING]
 The index *must be a positive integer* `1, 2, 3, ...`
 
+You can refer to the screenshots below for an example of how the Investigapptor
+would look like after you've executed the `listinvestigatorcases` command.
+
+[[lic-before]]
+.Before executing `listinvestigatorcases 1` command
+image::userguide-images/lic-before.png[width="800"]
+
+[[lic-after]]
+.After executing `listinvestigatorcases 1` command
+image::userguide-images/lic-command.png[width="800"]
+
 The following provides an explanation of some command examples:
 
 * `listinvestigator` +

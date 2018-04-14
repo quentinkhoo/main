@@ -296,15 +296,15 @@ Lists all the commands that you have entered in reverse chronological order. +
 Format: `history` +
 Alias: `hist`
 
-[[historycommand]]
-.Using the `history` command
-image::userguide-images/history-command.png[width="790"]
-{nbsp} +
-
 [NOTE]
 ====
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
+
+[[historycommand]]
+.Using the `history` command
+image::userguide-images/history-command.png[width="790"]
+{nbsp} +
 
 // tag::undoredo[]
 [[Undo]]
@@ -401,11 +401,16 @@ Clears all entries from the address book. +
 Format: `clear` +
 Alias: `c`
 
-====
-[[backup-img]]
-.`backup` command
-image::userguide-images/backup.png[width="450"]
-====
+You can refer to the screenshots below for an example of how the investigapptor
+would look like after you've executed the `clear` command.
+
+[[before-clear-command]]
+.Before `clear` command
+image::userguide-images/before-clear-command.png[width="790"]
+
+[[after-clear-command]]
+.After `clear` command
+image::userguide-images/after-clear-command.png[width="790"]
 
 [TIP]
 ====
@@ -439,11 +444,12 @@ The data folder is located in the same directory as your Investigapptor.jar
 Saving the xml using the name "Investigator" will only overwrite the currenty save file and not create a new file.
 ====
 
+You can refer to the screenshot below for an example.
 [[backup-img]]
 .`backup` command
 image::userguide-images/backup.png[width="450"]
 
-Examples: +
+The following provides an explanation of some command examples: +
 
 * `backup February` +
 Creates a copy of the data with the name `February` in `root/data` folder
@@ -452,36 +458,32 @@ Creates a copy of the data with the name `02012018` in `root/data` folder
 * `bu 03Mar2018` +
 Creates a copy of the data with the name `March3rd` in `root/data` folder
 
-
 [[Save]]
 ==== Saving the data
 
 Investigapptor data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-
 === Investigator Commands
 These are investigator related commands. +
 
 [[AddInv]]
 ==== Adding an investigator: `addinvestigator` [Since v1.3]
-
 You can add an investigator to the application so that the cases can be assigned to him/her.
 
 Format: `addinvestigator n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/RANK [t/TAG]...` +
 Alias: `ai`
 
-Examples:
+You can refer to the screenshot below for an example.
+[[addinvestigator]]
+.Adding an investigator
+image::userguide-images/ai-command.png[width="790"]
+
+The following provides an explanation of some command examples: +
 
 * `addinvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/1 t/newcomer`
 * `ai n/Tome Lee p/94727341 e/Tom@gmail.com a/323, Baker Street, #01-03 r/1 t/Rookie`
 * `ai n/Lim Choo t/teamC e/choochoo@example.com a/Bedok Street, Block 789 r/5 p/1234567`
-
-*Example:*
-[[addinvestigator]]
-.Adding an investigator
-image::userguide-images/ai-command.png[width="790"]
-{nbsp} +
 
 [TIP]
 An investigator can have any number of tags (including 0) +
@@ -491,11 +493,11 @@ Ranks ranges from 1 to 5 according (Constable ,Sergeant, Inspector, Detective, C
 [[ListInv]]
 ==== Listing all investigators : `listinvestigators` [Since v1.2]
 
-Shows a list of all investigators in the Investigapptor. +
+You can view all the investigators in the Investigapptor. +
 Format: `listinvestigators` +
 Alias: `li`
 
-*Example:*
+You can refer to the screenshot below for an example.
 [[listinvestigators]]
 .Listing of all investigators
 image::userguide-images/li-command.png[width="450"]
@@ -504,22 +506,32 @@ image::userguide-images/li-command.png[width="450"]
 ==== Editing an investigator : `editinvestigator` [Since v1.3]
 
 You can edit an existing information of an existing investigator in the Investigapptor. +
-Format: `editinvestigator INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RANK] [t/TAG]...` +
+Format: `editinvestigator INVESTIGATOR_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RANK] [t/TAG]...` +
 Alias: `ei`
 
-****
-* Edits the investigator at the specified `INDEX`. The index refers to the index number shown in the last listing of investigators. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
-****
+[NOTE]
+Edits the investigator at the specified `INVESTIGATOR_INDEX`.
+The index refers to the index number shown in the last listing of investigators.
+[NOTE]
+Existing values will be updated to the input values.
+
+[WARNING]
+The index *must be a positive integer* 1, 2, 3, ...
+[WARNING]
+At least one of the optional fields must be provided.
+[WARNING]
+When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+
+[TIP]
+You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
 
 To change a investigator's detail, follow the steps below
 
  . Select the investigator you want to edit by using the index as show below in <<editinvestigator>>.
 
  . Use the prefix to indicate which details you want to edit, e.g `n/John` to change the name to John.
+
+You can refer to the screenshot below for an example.
 
 [[editinvestigator]]
 .Using the Edit Investigator Command
@@ -533,7 +545,7 @@ The result box will also print the new investigator details as show in <<editinv
 image::userguide-images/ei-command2.png[width="450"]
 {nbsp} +
 
-Examples:
+The following provides an explanation of some command examples:
 
 * `editinvestigator 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st investigator to be `91234567` and `johndoe@example.com` respectively.
@@ -543,15 +555,9 @@ Edits the name of the 2nd investigator to be `Betsy Crower` and clears all exist
 [[FindInv]]
 ==== Locating investigators by name: `findinvestigators` [Since v1.3]
 
-Finds investigators whose names contain any of the given keywords. +
+You can find investigators whose names contain any of your given keywords. +
 Format: `findinvestigators KEYWORD [MORE_KEYWORDS]` +
 Alias: `fi`
-
-*Example:*
-[[findinvestigators]]
-.Finding investigators by its name
-image::userguide-images/fi-command.png[width="450"]
-{nbsp} +
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -561,7 +567,13 @@ image::userguide-images/fi-command.png[width="450"]
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
-Examples:
+You can refer to the screenshot below for an example.
+[[findinvestigators]]
+.Finding investigators by its name
+image::userguide-images/fi-command.png[width="450"]
+{nbsp} +
+
+The following provides an explanation of some command examples:
 
 * `findinvestigators John` +
 Returns `john` and `John Doe`
@@ -571,14 +583,9 @@ Returns any investigators having names `Betsy`, `Tim`, or `John`
 //tag::findinvtags[]
 [[FindInvTags]]
 ==== Locating investigators by tags: `findinvestigatortags` [Since v1.2]
-Find investigators whose tags contain any of the given keywords. +
+You can find investigators whose tags contain any of your given keywords. +
 Format: `findinvestigatortags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fit`
-
-*Example:*
-[[findinvestigatortags]]
-.Finding investigators by its tags
-image::userguide-images/fit-command.png[width="450"]
 
 ****
 * The search is case insensitive. e.g `teamA` will match `teama`
@@ -588,7 +595,12 @@ image::userguide-images/fit-command.png[width="450"]
 e.g. `teamA teamB` will return investigators that contains the tag 'teamA' or 'teamB'
 ****
 
-Examples:
+You can refer to the screenshot below for an example.
+[[findinvestigatortags]]
+.Finding investigators by its tags
+image::userguide-images/fit-command.png[width="450"]
+
+The following provides an explanation of some command examples:
 
 * `findinvestigatortags teamA` +
 Returns investigator(s) with tag `teamA`
@@ -601,7 +613,7 @@ Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 [[DelInv]]
 ==== Deleting an investigator : `deleteinvestigator` [Since v1.3]
 
-Deletes the specified investigator from Investigapptor. +
+You can delete a specified investigator from Investigapptor. +
 Format: `deleteinvestigator INDEX` +
 Alias: `di`
 
@@ -618,11 +630,12 @@ diagram <<deleteinv-index, below>>.
 .Investigator Index
 image::userguide-images/di-command-index.png[width="320"]
 
-Examples:
-
+You can refer to the screenshot below for an example.
 [[deleteinv]]
 .Deleting an investigator
 image::userguide-images/di-command.png[width="500"]
+
+The following provides an explanation of some command examples:
 
 * `listinvestigators` +
 `deleteinvestigator 2` +
@@ -650,11 +663,12 @@ Alias: `selectinvest`
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
-Examples:
-
+You can refer to the screenshot below for an example.
 [[selectinv]]
 .Selecting an investigator
 image::userguide-images/si-command.png[width="500"]
+
+The following provides an explanation of some command examples:
 
 * `listinvestigator` +
 `selectinvestigator 2` +
@@ -663,7 +677,6 @@ Selects the 2nd investigator in the results of the `listinvestigator` command.
 `selectinvestigator 1` +
 Selects the 1st investigator in the results of the `findinvestigator` command.
 * `selectinvestigator 3` +
-
 Selects the 3rd person in the listed panel list.
 
 === Case Commands
@@ -675,12 +688,18 @@ These are case related commands. +
 
 The first step to managing your cases is to add them to the application along with their details. +
 *Format:* `addcase n/CASE_NAME d/DESCRIPTION i/INVESTIGATOR_INDEX s/START_DATE [t/TAG]...` +
-*Shorthand Format:* `ac`
+*Alias:* `ac`
 
 [TIP]
 Tags are optional, but you can add as many as you like to a case to help you organize better.
 
-*Examples:*
+You can refer to the screenshot below for an example.
+
+[[addcase]]
+.Adding a case
+image::userguide-images/ac-command.png[width="450"]
+
+The following provides an explanation of some command examples:
 
 * `addcase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
 * `addcase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
@@ -690,22 +709,18 @@ Tags are optional, but you can add as many as you like to a case to help you org
 //tag::listcases[]
 [[ListCases]]
 ==== Listing all cases : `listcases` [Since v1.2]
-
-This command would show you the list of cases that have been added to
- the Investigapptor. +
+This command would show you the list of all cases that have been added to the Investigapptor. +
+Format: `listcases` +
+Alias: `lc`
 
 [NOTE]
 Running this command would automatically help you swap the panel tab
 to the case tab. +
 
-Format: `listcases` +
-Alias: `lc`
-
-*Example:*
+You can refer to the screenshot below for an example.
 [[listcases]]
 .Listing cases
 image::userguide-images/lc-command.png[width="450"]
-
 //end::listcases[]
 
 //tag::editcase[]
@@ -714,7 +729,7 @@ image::userguide-images/lc-command.png[width="450"]
 
 You can edit an existing case in the application by specifying the `CASE_INDEX` and entering the attributes that you wish to modify. +
 *Format:* `editcase CASE_INDEX [n/NAME] [d/DESCRIPTION] [i/INVESTIGATOR_INDEX] [s/STARTDATE] [t/TAG]...` +
-*Shorthand Format:* `ec`
+*Alias:* `ec`
 
 ****
 * The `CASE_INDEX` refers to the index number shown in the last listing of cases. +
@@ -732,7 +747,7 @@ To help you find the index of the case that you want to edit, you can use the `f
 [TIP]
 You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
 
-*Examples:*
+The following provides an explanation of some command examples:
 
 * `editcase 1 d/some description i/1` +
 Edits the description and investigator of the 1st case to be `some description` and the 1st investigator in the most recent listing of investigators respectively.
@@ -744,14 +759,9 @@ Changes the investigator of the 2nd case to the 3rd investigator in the most rec
 [[FindCases]]
 ==== Locating cases by name: `findcases` [Since v1.3]
 
-Finds cases whose names contain any of the given keywords. +
+You can find cases whose names contain any of your given keywords. +
 Format: `findcases KEYWORD [MORE_KEYWORDS]` +
 Alias: `fc`
-
-*Example:*
-[[findcases]]
-.Finding cases by its name
-image::userguide-images/fc-command.png[width="450"]
 
 ****
 * The search is case insensitive. e.g `project` will match `Project`
@@ -761,25 +771,27 @@ image::userguide-images/fc-command.png[width="450"]
 * Case matching at least one keyword will be returned  (i.e. `OR` search). e.g. `Stranger Danger` will return `Stranger Things`, `Danger Lightning`
 ****
 
-Examples:
+You can refer to the screenshot below for an example.
+[[findcases]]
+.Finding cases by its name
+image::userguide-images/fc-command.png[width="450"]
+
+The following provides an explanation of some command examples:
 
 * `findcases SPF` +
 Returns `SPF Murder` and `SPF rape`
 * `findcases murder rape arson` +
 Returns any cases having names `murder`, `rape`, or `arson`
+
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
 //end::findcases[]
 
 //tag::findcasetags[]
 [[FindCaseTags]]
 ==== Locating cases by tags: `findcasetags` [Since v1.3]
-Find cases whose tags contain any of the given keywords. +
+You can find cases whose tags contain any of your given keywords. +
 Format: `findcasetags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fct`
-
-*Example:*
-[[findcasetags]]
-.Finding cases by its tags
-image::userguide-images/fct-command.png[width="450"]
 
 ****
 * The search is case insensitive. e.g `homicide` will match `Homicide`
@@ -789,7 +801,12 @@ image::userguide-images/fct-command.png[width="450"]
 e.g. `murder robbery` will return cases that contains the tag 'murder' or 'robbery'
 ****
 
-Examples:
+You can refer to the screenshot below for an example.
+[[findcasetags]]
+.Finding cases by its tags
+image::userguide-images/fct-command.png[width="450"]
+
+The following provides an explanation of some command examples:
 
 * `findcasetags murder` +
 Returns case(s) with tag `murder`
@@ -804,11 +821,11 @@ You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the 
 //tag::findclosecases[]
 [[FindCloseCases]]
 ==== Locating cases by tags: `findclosecases` [Since v1.5rc]
-Find cases whose status is `close`. +
+You can find cases whose status is `close`. +
 Format: `findclosecases` +
 Alias: `fcc`
 
-Examples:
+The following provides an explanation of some command examples:
 
 * `findclosecases` +
 Returns case(s) with status `close`
@@ -821,11 +838,11 @@ You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the 
 //tag::findopencases[]
 [[FindOpenCases]]
 ==== Locating cases by tags: `findopencases` [Since v1.5rc]
-Find cases whose status is `open`. +
+You can find cases whose status is `open`. +
 Format: `findopencases` +
 Alias: `foc`
 
-Examples:
+The following provides an explanation of some command examples:
 
 * `findopencases` +
 Returns case(s) with status `open`
@@ -838,21 +855,9 @@ You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the 
 //tag::closecase[]
 [[CloseCase]]
 ==== Close a case : `close` [Since v1.3]
-Closes the case identified by the index number used in the last case listing. +
+You can close the case that is identified by the index number used in the last case listing. +
 Format: `close INDEX` +
 Alias: `cl`
-
-*Example:*
-
-[[closecase-1]]
-.Before `close` command
-image::userguide-images/close-command-1.png[width="800"]
-
-[[closecase-2]]
-.After `close` command
-image::userguide-images/close-command-2.png[width="800"]
-
-You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
 
 ****
 * Closes the case by updating the status of the case from `open` to `close` at the specified `INDEX`.
@@ -866,7 +871,18 @@ Close commands: only applied to cases with the status `open`. This command will 
 with the status `close`.
 ====
 
-Examples:
+You can refer to the screenshots below for an example of how the Investigapptor
+would look like after you've executed the `close` command.
+
+[[closecase-1]]
+.Before `close` command
+image::userguide-images/close-command-1.png[width="800"]
+
+[[closecase-2]]
+.After `close` command
+image::userguide-images/close-command-2.png[width="800"]
+
+The following provides an explanation of some command examples:
 
 * `listcases` +
 `close 2` +
@@ -876,6 +892,8 @@ Closes the 2nd case in the results of the `listcases` command.
 Closes the 1st case in the results of the `findcases` command.
 * `cl 3` +
 Closes the 3rd case in the listed panel list case.
+
+You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
 //end::closecase[]
 
 //tag::deletecase[]
@@ -884,7 +902,7 @@ Closes the 3rd case in the listed panel list case.
 
 You can remove cases by specifying the `CASE_INDEX`. The index refers to the index number shown in the most recent listing of cases. +
 *Format:* `deletecase CASE_INDEX` +
-*Shorthand Format:* `dc`
+*Alias:* `dc`
 
 [WARNING]
 The index *must be a positive integer* 1, 2, 3, ...
@@ -894,7 +912,7 @@ To help you find the index of the case that you want to remove, you can use the 
 [TIP]
 If a case is no longer active, consider using the `close` command instead so that you can continue to view details of the case.
 
-*Examples:*
+The following provides an explanation of some command examples:
 
 * `listcases` +
 `deletecase 2` +
@@ -908,13 +926,9 @@ Deletes the 1st case in the results of the `findcase` command.
 [[SelectCase]]
 ==== Selecting a case : `selectcase` [Since v1.5]
 
-Selects the case identified by the index number used in the last case listing. +
-Format: `selectcase INDEX` +
-Alias: `sc`
-
 To view more details about a case, you can select the case identified by the index number used in the last case listing. +
 *Format:* `selectcase CASE_INDEX` +
-*Shorthand Format:* `sc`
+*Alias:* `sc`
 
 [NOTE]
 The `CASE_INDEX` refers to the index number shown in the last listing of cases.
@@ -922,7 +936,7 @@ The `CASE_INDEX` refers to the index number shown in the last listing of cases.
 [WARNING]
 The index *must be a positive integer* 1, 2, 3, ...
 
-*Examples:*
+The following provides an explanation of some command examples:
 
 * `listcases` +
 `selectcase 2` +
@@ -936,9 +950,8 @@ Selects the 3rd case in the most recent list of cases.
 //end::selectcase[]
 
 ==== List a specific Investigator's cases `listinvestigatorcases` [Since v1.4]
-
-Selects an investigator and display all of the case belonging to that investigator +
-Format: `listinvestigatorcases INDEX` +
+You can display all of the cases that is currently assigned to the investigator by specifying the investigator's index number +
+Format: `listinvestigatorcases INVESTIGATOR_INDEX` +
 Alias: `lic`
 
 ****
@@ -947,11 +960,13 @@ Alias: `lic`
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
+The following provides an explanation of some command examples:
+
 * `listinvestigator` +
 `listinvestigatorcases 2` +
 Display all the cases of the 2nd investigator in the results of the `list case` command.
 * `findinvestigators Amy` +
-`listinvestigatorCase 1` +
+`listinvestigatorcases 1` +
 Display all the cases of the 2nd investigator in the results of the `FindInvestigator` command.
 * `lic 3` +
 Display all the cases of the 2nd investigator  in the investigator panel list case.

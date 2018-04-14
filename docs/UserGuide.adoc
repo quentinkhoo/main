@@ -329,6 +329,39 @@ Exits the program. +
 Format: `exit` +
 Alias: `ex`
 
+[[Backup]]
+==== Backing up data : `Backup`
+
+To save a snapshot of the current data in the Investigapptor before you make major changes, you use a the backup command to create
+a new xml file of the current state. The new save file will be placed in the data folder. +
+
+Format: `Backup "Filename"` +
+Alias: `bu`
+
+[NOTE]
+====
+The data folder is located in the same directory as your Investigapptor.jar
+====
+[NOTE]
+====
+Saving the xml using the name "Investigator" will only overwrite the currenty save file and not create a new file.
+====
+
+[[backup-img]]
+.`backup` command
+image::userguide-images/backup.png[width="450"]
+
+
+Examples: +
+
+* `Backup February` +
+Creates a copy of the data with the name `February` in `root/data` folder
+* `Backup 02012018` +
+Creates a copy of the data with the name `02012018` in `root/data` folder
+* `bu 03Mar2018` +
+Creates a copy of the data with the name `March3rd` in `root/data` folder
+
+
 [[Save]]
 ==== Saving the data
 
@@ -379,7 +412,7 @@ image::userguide-images/li-command.png[width="450"]
 ==== Editing an investigator : `editinvestigator` [Since v1.3]
 
 You can edit an existing information of an existing investigator in the Investigapptor. +
-Format: `editinvestigator INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+Format: `editinvestigator INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RANK] [t/TAG]...` +
 Alias: `ei`
 
 ****
@@ -389,6 +422,23 @@ Alias: `ei`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
 ****
+
+
+To change a investigator's detail, follow the steps below
+
+ . Select the investigator you want to edit by using the index as show below in <<editinvestigator>>.
+
+ . Use the prefix to indicate which details you want to edit, e.g `n/John` to change the name to John.
+
+[[editinvestigator]]
+.Using the Edit Investigator Command
+image::userguide-images/ei-command1.png[width="450"]
+
+You can observe that the details of the investigator has be change in both the panel list and details panel.
+The result box will also print the new investigator details as show in <<editinvestigator2>>.
+[[editinvestigator2]]
+.Outcome
+image::userguide-images/ei-command2.png[width="450"]
 
 Examples:
 

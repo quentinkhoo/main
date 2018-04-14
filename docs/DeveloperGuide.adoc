@@ -485,84 +485,330 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two * different things.
 // end::undoredo[]
 
-//tag::findinvesttags[]
-=== Find investigators according to its tags feature
-==== Reason for Implementation
-The purpose of having tags associated to an investigator is to store certain information such as the team he is in
-and the level of his experience. One of the aims of Investigapptor is to provide ease in managing and retrieving information that is required.
-Hence, this implementation is in line with the aim where investigators that belongs to a certain team/category can be
-filtered out efficiently.
+//tag:calendar[]
+[[Calendar-Feature]]
+=== Calendar feature
+The calendar feature serves as an interface to provide an overview of all the cases
+present in the `CrimeCaseListPanel`. The entries are colour-coded according to its case's
+status. Red represents the status `open`; whereas green represents the status `close`.
 
-Without this implementation, it is inefficient as the user may have to browse through *all* the listed investigators to find an investigator that belongs
-to a certain team/category.
+[[CalendarFeature]]
+.Calendar Interface
+image::CalendarFeature.PNG[width="800"]
+
+==== Reason for implementation
+The calendar serves as an organization tool to arrange the cases according to its start and end date,
+and it also categorizes the cases by its current status. This feature is useful for the investigators as it provides them an overview of all the cases that they are looking for.
+Having such an overview, the investigators can instantly identify all the required cases at a quick glance.
+
+This feature not only brings in convenience for the investigators, it also eliminates the need of manual work in
+scheduling existing cases. This thus improves the efficiency of the investigators as time will be spent on
+significant events such as investigative work instead of bookkeeping tasks.
 
 ==== Current Implementation
-A command called `findInvestTags` was created under the logic component with the java class `FindInvestTagsCommand.java`. Additionally,
-a parser, `FindInvestTagsCommandParser.java` was being used to parse the arguments required for the command to work. This command
-will display the investigator(s) whose tags that matches with *ANY* of the arguments stated in the command.
+The calendar graphical interface was implemented with an external library, https://github.com/dlemmermann/CalendarFX[CalendarFX].
+The calendar interface, `CalendarPanel` is part of the UI component which supports the view of the cases that are currently present
+in the panel list.
 
-Under the main commands parser, `InvestigapptorParser.java`, a case scenario for `findInvestTags` alongside with its alias was being implemented.
+The following sequence diagram illustrates how the components within the `CalendarPanel`
+interacts with each other.
+
+[[SDforCalendar]]
+.Component interactions within `CalendarPanel`
+image::SDForCalendar.png[width="800"]
+
+The `CalendarPanel` comprises of the following attributes and objects:
+
+* A `Calendar` object called `caseCloseCalendar` which stores the entries consisting of cases whose status is `close`
+* A `Calendar` object called `caseOpenCalendar` which stores the entries consisting of cases whose status is `open`
+* A `CalendarSource` object called `caseCalendarSource` which stores the calendars, `caseCloseCalendar` and `caseOpenCalendar`
+* A `CalendarView` FXML object called `calendarPanel` which provides the graphical view (interface) of the calendar
+* An `ObservableList<CrimeCase>` called `crimeList` that stores the current list of the crime cases
+
+The `CalendarPanel` does event handling in order to keep its view updated with the list of
+cases that is currently displayed on the `CrimeCaseListPanel`. Hence, when either one of the two events, `InvestigapptorChangedEvent` or `FilteredCrimeCaseListChangedEvent`
+has been raised from the `EventsCenter`, the `CalendarPanel` will handle the event by updating the
+`FilteredCrimeCaseList`. The following section below will illustrate in details
+on how the event handling was carried out by `CalendarPanel`.
+
+==== Events-Driven Entries
+The entries displayed on the calendar will be changed according to the commands that were executed.
+
+===== Event raised from data change in application
+As mentioned in the <<Events, event-driven design section>>, the model will raise
+an `InvestigapptorChangedEvent` to indicate that the data in the application has changed.
+In the following sequence diagrams, it indicates how the components interacts when the user
+enters the commands that changes the data in the investigapptor. (Commands are as shown in the diagrams).
+
+====== Sequence Diagram for `addcase`
+[[SDforAddCase]]
+.Component interactions for `addcase 1` command
+image::SDforAddCase.png[width="800"]
+For the `addcase` command, when a new case has been added to the investigapptor, it will raise
+an `InvestigapptorChangedEvent` which will update the calendar to reflect the newly added case.
+
+====== Sequence Diagram for `deletecase`
+[[SDforDeleteCase]]
+.Component interactions for `deletecase 1` command
+image::SDforDeleteCase.png[width="800"]
+Similarly, for the `deletecase` command, when a case has been deleted from the investigapptor, it
+will raise the `InvestigapptorChangedEvent` which will remove the case from the calendar.
+
+====== Sequence Diagram for commands that updates the case's details
+[[SDForUpdateCase]]
+.Component interactions for commands that update the details of a case
+image::SDforUpdateCase.png[width="800"]
+As for `editcase` and `close` command, it will make changes to the details of the cases. When the
+case is updated, the investigapptor will raise the `InvestigapptorChangedEvent` which will
+update the calendar by displaying the updated entry.
+
+====== Sequence Diagram for handling `InvestigapptorChangedEvent`
+[[SDForInvestigapptorChangedEventHandling]]
+.Handling `InvestigapptorChangedEvent`
+image::SDForInvestigapptorChangedEventHandling.png[width="800"]
+
+The <<SDForInvestigapptorChangedEventHandling, diagram above>> represents how the `EventsCenter`
+reacts to the `InvestigapptorChangedEvent`.
+
+When the commands mentioned in these diagrams - <<SDforAddCase, #1>>, <<SDforDeleteCase, #2>>, <<SDForUpdateCase, #3>>
+is executed, the `InvestigapptorChangedEvent` will be raised and the function
+`handleInvestigapptorChangedEvent` in `CalendarPanel` will be invoked. The function
+would then re-initialize `crimeList` to the updated `crimeCaseList` and proceed to
+update the calendar accordingly.
+
 [source,java]
 ----
-case FindInvestTagsCommand.COMMAND_WORD:
-case FindInvestTagsCommand.COMMAND_ALIAS:
-    return new FindInvestTagsCommandParser().parse(arguments);
-----
-
-The parser, `FindInvestTagsCommandParser()` will be invoked to parse the arguments specified by the user input with the following implementation.
-The comparison is done in lowercase to prevent any comparison errors due to case sensitivity.
-[source,java]
-----
-public FindInvestTagsCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindInvestTagsCommand.MESSAGE_USAGE));
-        }
-
-        String[] nameKeywords = trimmedArgs.toLowerCase().split("\\s+");
-
-        return new FindInvestTagsCommand(new TagContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-    }
-----
-
-While parsing the arguments, a `TagContainsKeywordsPredicate` object was created to test whether any keywords
-matches with any tags of the investigator(s). The comparison was implemented in the following code segment.
-[source,java]
-----
-public boolean test(Person person) {
-    return keywords.stream().anyMatch(person.getTagsRaw()::contains);
+@Subscribe
+private void handleInvestigapptorChangedEvent(InvestigapptorChangedEvent event) {
+    logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    crimeList = event.data.getCrimeCaseList();
+    Platform.runLater(this::updateCalendar);
 }
 ----
 
-After the parsing the arguments, a `FindInvestTagsCommand` object will be constructed with the `TagContainsKeywordPredicate`
-object as the attribute and returned to `InvestigapptorParser`.
+[[Calendar-Events-Filter]]
+===== Event raised from filtering the `CrimeCase` list
+In the following sequence diagram, it shows how the components interacts when the user issues
+the commands that filters  the cases that the user is looking for. (Commands are shown in the diagram).
 
-The `findInvestTags` command will then be executed and the observable list `filteredPersonList` will be updated with the investigators
-whose tags matches the predicate keywords. The following segment shows the execution code.
+These commands does not change the data in the investigapptor, but it filters the cases that matches the keywords
+predicate which is passed in as an parameter in `updateFilteredCrimeCaseList(keywords)`.
+When the `FilteredCrimeCaseList` has been updated, it  will contain the cases that the user is looking for.
+
+====== Sequence Diagram for commands that update `FilteredCrimeCaseList`
+
+[[SDForFindCase]]
+.Component interactions for commands that update the `FilteredCrimeCaseList`
+image::SDforFindCase.png[width="800"]
+
+When these commands are executed, it will raise a `FilteredCrimeCaseListChangedEvent` which will
+update the calendar with the cases that are currently in the `FilteredCrimeCaseList`.
+
+====== Sequence Diagram for handling `FilteredCrimeCaseListChangedEvent`
+[[SDforFilteredCrimeCaseListChangedEventHandling]]
+.Handling `FilteredCrimeCaseListChangedEvent`
+image::SDforFilteredCrimeCaseListChangedEventHandling.png[width="800"]
+
+The <<SDforFilteredCrimeCaseListChangedEventHandling, diagram above>> represents how the `EventsCenter`
+reacts to the `FilteredCrimeCaseListChangedEvent`.
+
+When the commands in the <<SDForFindCase>> is executed, it will update the `FilteredCrimeCaseList` in the
+model component and the `FilteredCrimeCaseListChangedEvent` will be raised.
+`handleFilteredCrimeCaseListChangedEvent` from `CalendarPanel` will be invoked which
+updates the `crimeList` to the updated `FilteredCrimeCaseList`. It will then
+update the calendar accordingly with the updated `crimeList`.
+
 [source,java]
 ----
- public CommandResult execute() {
-    model.updateFilteredPersonList(predicate);
-    return new CommandResult(getMessageForPersonListShownSummary(model.getFilteredPersonList().size()));
+@Subscribe
+private void handleFilteredCrimeCaseListChangedEvent(FilteredCrimeCaseListChangedEvent event) {
+    logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    crimeList = event.getFilteredCrimeCaseList();
+    Platform.runLater(this::updateCalendar);
 }
 ----
+//end:calendar[]
 
-The result of the number of people listed will be shown under the `ResultDisplay` UI, and the investigators found
-in the `filteredPersonList` will be displayed under the `InvestigatorListPanel`.
+[[Find-Feature]]
+//tag:findcases[]
+=== Find cases by status/tags feature
+The following sections provides an explanation on how the investigapptor finds
+certain cases according to its status or tags.
 
-//end::findinvesttags[]
-
-//tag::calendargraph[]
-=== Calendar/graph feature
 ==== Reason for implementation
-Hand-over of cases is critical in investigation processes and such information has to be documented down.
-By having a calendar/graph for each case and investigator, it can provide a chronological flow of the investigators
-that has handled the case.
+This implementation improves efficiency as the investigators do not need to manually browse through
+all the listed cases just to find certain cases.
 
-==== Current implementation
-Usage of CalendarFX (To be updated - coming in v2.0)
+By having a find command, the investigator can easily search for cases that they
+are looking for. They can simply just run the find-related commands with their desired
+keywords and the cases they require will be displayed instantly.
 
-//end::calendargraph[]
+==== Current Implementation to find cases by status
+Commands were created to find the cases according to the status specified. As there
+are only two possible status - `open` or `close`, two separate command classes `FindCloseCaseCommand`
+and `FindOpenCaseCommand` were created. These two commands inherits from its parent class - `FindByStatusCommand`.
+
+===== Class Inheritance
+[[CDFindByStatus]]
+.Class Diagram to illustrate inheritance
+image::CDFindByStatus.png[width="800"]
+
+In both `FindCloseCaseCommand` and `FindOpenCaseCommand`, its respective constructor will
+invoke its parent class' (`FindByStatusCommand`) constructor as passes in its corresponding status as the parameter.
+
+`FindCloseCaseCommand` will pass in the status `close` as shown in the code segment below.
+[source,java]
+----
+public FindCloseCaseCommand() {
+    super(CASE_CLOSE);
+}
+----
+
+`FindOpenCaseCommand` will pass in the status `open` as shown in the code segment below.
+[source,java]
+----
+public FindOpenCaseCommand() {
+    super(CASE_OPEN);
+}
+----
+===== Sequence Diagrams for Logic Component
+The following sequence diagrams represents the interactions within the `Logic`
+component when the user inputs the `findopencases` or `findclosecases` command.
+
+[[SDforFindOpenCase]]
+.Sequence Diagram for interactions within Logic component for `FindOpenCaseCommand`
+image::SDforFindOpenCase.png[width="800"]
+
+[[SDforFindCloseCase]]
+.Sequence Diagram for interactions within Logic component for `FindCloseCaseCommand`
+image::SDForFindCloseCase.png[width="800"]
+
+The `Logic` component will set the `StatusContainsKeywordsPredicate` with
+a `List<String>` containing the keyword of either `open` or `close`.
+
+For `FindCloseCaseCommand`, the `List<String>` will contain the keyword `close`;
+whereas for `FindOpenCaseCommand`, the `List<String>` will contain the keyword `open`.
+
+The command will be executed by the `LogicManager` by updating the
+`FilteredCrimeCaseList` in the `Model` component with the given `StatusContainsKeywordsPredicate`.
+
+===== Sequence Diagrams for Model Component
+Below are the sequence diagrams that represents the interactions within the
+`Model` component after the `findopencases` or `findclosecases` command
+has been executed by the `LogicManager`.
+
+[[SDForFindByStatusModel]]
+.Sequence Diagram for interactions within Model component
+image::SDForFindByStatusModel.png[width="800"]
+
+The `Model` component is responsible for updating the filtered crime case list with
+the given `StatusContainsKeywordsPredicate`. The predicate will test if any keywords matches
+with any status of the case(s).
+
+Specifically, for `findopencases`, the predicate will test
+if the keyword 'open' matches any cases with the status of 'open'. Similarly,
+for `findclosecases`,  the predicate will test if the keyword 'close' matches
+any cases with the status of 'close'.
+
+The `FilteredCrimeCaseList` will then be updated with the cases that matches the
+given `StatusContainsKeywordsPredicate`.
+
+The `Model` will then raise a `FilteredCrimeCaseListChangedEvent` which is
+captured by the `EventsCenter`. This event is used as an indication to update the calendar entries
+whenever the `FilteredCrimeCaseList` has changed. This implementation can be found in
+the <<Calendar-Events-Filter, above section>>.
+
+===== Activity Diagram
+The following activity diagram illustrates an example when a user executes a command that finds the cases
+by its status.
+
+[[ADForFindCase]]
+.Activity Diagram when user enters `findclosecase` command
+image::ADforFindCase.png[width="800"]
+
+==== Current Implementation to find cases by tags
+The command class, `FindCaseTagsCommand` was created to find the cases according to its tags. Cases whose tags
+matches the keywords that the user has input will be displayed.
+
+===== Sequence Diagrams for Logic Component
+The following sequence diagrams represents the interactions within the `Logic`
+component when the user inputs the `findcasetags`.
+
+[[SDforFindCaseTags]]
+.Sequence Diagram for interactions within Logic component
+image::SDforFindCaseTags.png[width="800"]
+
+The `Logic` component will set the `TagContainsKeywordsPredicate` with
+a `List<String>` containing the keywords that were parsed by `FindCaseTagsCommandParser`.
+
+For the command `findcasetags fraud homicide` in the
+<<SDforFindCaseTags, sequence diagram above>>, the `List<String>` will
+contain the keywords `fraud` and `homicide`.
+
+The command will be executed by the `LogicManager` by updating the
+`FilteredCrimeCaseList` in the `Model` component with the given `TagContainsKeywordsPredicate`.
+
+===== Sequence Diagrams for Model Component
+The following sequence diagram shows the interactions within the `Model` component.
+
+[[SDforFindCaseTagsModel]]
+.Sequence Diagram for interactions within Model component
+image::SDForFindByStatusModel.png[width="800"]
+
+The `Model` component is responsible for updating the filtered crime case list with
+the given `TagContainsKeywordsPredicate`. The predicate will test if any keywords matches
+with any tags of the case(s).
+
+For the example in the <<SDforFindCaseTags, above logic sequence diagram>>,
+the predicate will test if the keywords "fraud" or "homicide" matches any cases'
+tags.
+
+The `FilteredCrimeCaseList` will then be updated with the cases whose
+tags matches the keyword of either "fraud" or "homicide".
+
+The `Model` will then raise a `FilteredCrimeCaseListChangedEvent` which is
+captured by the `EventsCenter`. This event is used as an indication to update the calendar entries
+whenever the `FilteredCrimeCaseList` has changed. This implementation can be found in
+the <<Calendar-Events-Filter, above section>>.
+
+===== Activity Diagram
+The following activity diagram illustrates an example when a user executes a command that finds the cases
+by its tags.
+
+[[ADForFindCaseTags]]
+.Activity Diagram when user enters `findcasetags murder` command
+image::ADForFindCaseTags.png[width="800"]
+
+==== Alternatives Considered
+This section compares between the current choice of implementation and the
+alternative choice that was considered. It lists the pros and cons to each of the
+choices that were considered.
+
+===== Aspect: Design Implementation
+* **Alternative 1 (Current Choice)**: Separate the find-related commands classes into its
+individual category its searching for. In this case we have `FindCaseTagsCommand`,
+`FindCloseCaseCommand` & `FindOpenCaseCommand`
+** Pros: Easy for the user as they just need to know the command name/alias
+(i.e. `findopencases` or `foc` will just instantly display the cases that are closed)
+** Cons: Additional `.java` class files
+
+* **Alternative 2 **: Have just one `FindCommand` class and use prefixes to differentiate
+the type of keywords (i.e. findcase t/Tags s/Status)
+** Pros: Only one `.java` file required for different types of find. Easier to
+extend the command to find other details by adding more prefixes.
+** Cons: Not as user-friendly. Users has to recognize the prefixes, could be
+too technical for non-technical users.
+
+===== Aspect: Class Implementation [for finding cases by status]
+* **Alternative 1 (Current Choice)**: Have two classes `FindCloseCaseCommand` and `FindOpenCaseCommand`
+that are extended from parent class `FindByStatusCommand`
+** Pros: No code duplication as duplicated set of codes will be in the parent class `FindByStatusCommand`
+** Cons: Additional `.java` class file
+
+* **Alternative 2 **: Separate commands into two classes without inheritance
+** Pros: One less `.java` class file (no parent class)
+** Cons: Duplicated set of codes
+//end::findcases[]
 
 //tag::dataencryption[]
 === [Proposed] Data Encryption

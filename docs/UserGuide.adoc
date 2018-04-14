@@ -961,10 +961,10 @@ to track and view suspects involvement in any past or current cases using the In
 
 ==== Adding evidence files `addevidence` [Coming in v2.0]
 We plan to allow investigator to create and add evidence to cases in the investigapptor, allowing investigators
-to view more information the evidence related in the case.
+to view more information about the evidence related in the case.
 
 ==== Setting up chain of custody `buildcoc` [Coming in v2.0]
-We plan to store the history of the investigator in charge of each case, allowing the Investigapptor to display
+We plan to store the history of investigators in charge of each case, allowing the Investigapptor to display
 when the case was transferred and whom the cases was transfer to.
 
 ==== Entering commands in other languages `language` [Coming in v2.0]

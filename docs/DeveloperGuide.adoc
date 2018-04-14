@@ -356,6 +356,7 @@ ranks.
 ** Pros: Each investigator can have their own password, allowing for
 access control between investigators of different ranks.
 ** Cons: Requires an additional password attribute for each investigator.
+// end::password[]
 
 === Undo/Redo feature
 ==== Current Implementation

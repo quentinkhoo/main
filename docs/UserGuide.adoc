@@ -623,11 +623,11 @@ diagram <<deleteinv-index, below>>.
 .Investigator Index
 image::userguide-images/di-command-index.png[width="320"]
 
+Examples:
+
 [[deleteinv]]
 .Deleting an investigator
 image::userguide-images/di-command.png[width="500"]
-
-Examples:
 
 * `listinvestigators` +
 `deleteinvestigator 2` +
@@ -657,6 +657,10 @@ Alias: `selectinvest`
 
 Examples:
 
+[[selectinv]]
+.Deleting an investigator
+image::userguide-images/si-command.png[width="500"]
+
 * `listinvestigator` +
 `selectinvestigator 2` +
 Selects the 2nd investigator in the results of the `listinvestigator` command.
@@ -667,12 +671,10 @@ Selects the 1st investigator in the results of the `findinvestigator` command.
 
 Selects the 3rd person in the listed panel list.
 
-
-
-//tag::addcase[]
 === Case Commands
 These are case related commands. +
 
+//tag::addcase[]
 [[AddCase]]
 ==== Adding a case: `addcase` [Since v1.1]
 
@@ -849,11 +851,11 @@ Alias: `cl`
 
 [[closecase-1]]
 .Before `close` command
-image::userguide-images/close-command-1.png[width="900"]
+image::userguide-images/close-command-1.png[width="800"]
 
 [[closecase-2]]
 .After `close` command
-image::userguide-images/close-command-2.png[width="900"]
+image::userguide-images/close-command-2.png[width="800"]
 
 You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the Cases' Calendar.
 

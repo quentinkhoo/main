@@ -151,21 +151,26 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         requireNonNull(editedPerson);
         if (target instanceof Investigator) {
             for (CrimeCase c : ((Investigator) target).getCrimeCases()) {
-                Investigator inv = new Investigator(editedPerson.getName(), editedPerson.getPhone(),
-                        editedPerson.getEmail(), editedPerson.getAddress(), ((Investigator) editedPerson).getRank(),
-                        editedPerson.getTags());
-                CrimeCase newCase = new CrimeCase(c.getCaseName(), c.getDescription(), inv, c.getStartDate(),
-                        c.getEndDate(), c.getStatus(), c.getTags());
-                try {
-                    cases.remove(c);
-                    addCrimeCase(newCase);
-                } catch (Exception e) {
-                    throw new AssertionError("Case does not exist");
-                }
+                recreateCasesForInvestigator((Investigator) editedPerson, c);
             }
         }
         Person syncedEditedPerson = syncWithMasterTagList(editedPerson);
         persons.setPerson(target, syncedEditedPerson);
+    }
+    /**
+     * Converts {@code key} hashcode list of cases into CrimeCase object
+     * Throws AssertionError when duplicate case occur
+     */
+    private void recreateCasesForInvestigator(Investigator inv, CrimeCase c) {
+        CrimeCase newCase = syncWithMasterTagList(new CrimeCase(c.getCaseName(), c.getDescription(), inv,
+                c.getStartDate(), c.getEndDate(), c.getStatus(), c.getTags()));
+        try {
+            cases.setCrimeCase(c, newCase);
+        } catch (DuplicateCrimeCaseException e) {
+            throw new AssertionError("Duplicate Case when editing investigator");
+        } catch (CrimeCaseNotFoundException e) {
+            throw new AssertionError("Case not found when editing investigator");
+        }
     }
     /**
      * Removes {@code key} from this {@code Investigapptor}.
@@ -182,19 +187,26 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     //@@author Marcus-cxc
     /**
      * Converts {@code key} hashcode list of cases into CrimeCase object
-     *
+     * Throws AssertionError when duplicate case occur
      */
     private void convertHashToCases(Investigator key) {
         requireNonNull(key.getCaseListHashed());
         for (Integer i : key.getCaseListHashed()) {
-            for (CrimeCase c : cases) {
-                if (c.hashCode() == i) {
-                    try {
-                        key.addCrimeCase(c);
-                    } catch (DuplicateCrimeCaseException e) {
-                        throw new AssertionError("Not possible, duplicate case while retrieving from xml");
-                    }
-                }
+            try {
+                addCaseFromHash(key, i);
+            } catch (DuplicateCrimeCaseException e) {
+                throw new AssertionError("Not possible, duplicate case while retrieving from xml");
+            }
+        }
+    }
+    /**
+     * Check {@code hash} if it matches to any CrimeCase in the cases list
+     * if match, add the CrimeCase to the investigator {@code key}
+     */
+    private void addCaseFromHash (Investigator key, int hash) throws DuplicateCrimeCaseException {
+        for (CrimeCase c : cases) {
+            if (c.hashCode() == hash) {
+                key.addCrimeCase(c);
             }
         }
     }
@@ -362,10 +374,8 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         // Rebuild the list of case tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
         crimeCaseTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        Investigator investigator = (Investigator) syncWithMasterTagList(crimeCase.getCurrentInvestigator());
-        investigator.clearCaseList(); // Fix for undo/redo: Clears investigator case list
         return new CrimeCase(
-                crimeCase.getCaseName(), crimeCase.getDescription(), investigator,
+                crimeCase.getCaseName(), crimeCase.getDescription(), crimeCase.getCurrentInvestigator(),
                 crimeCase.getStartDate(), crimeCase.getEndDate(), crimeCase.getStatus(), correctTagReferences);
     }
 

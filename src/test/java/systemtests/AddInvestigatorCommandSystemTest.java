@@ -39,8 +39,8 @@ import org.junit.Test;
 
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
-import seedu.investigapptor.logic.commands.RedoCommand;
 import seedu.investigapptor.logic.commands.AddInvestigatorCommand;
+import seedu.investigapptor.logic.commands.RedoCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.person.Address;

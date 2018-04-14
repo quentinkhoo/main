@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.investigapptor.logic.commands.AddCaseCommand;
+import seedu.investigapptor.logic.commands.AddInvestigatorCommand;
 import seedu.investigapptor.logic.commands.ClearCommand;
 import seedu.investigapptor.logic.commands.DeleteInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
@@ -28,7 +29,6 @@ import seedu.investigapptor.logic.commands.HistoryCommand;
 import seedu.investigapptor.logic.commands.ListCaseCommand;
 import seedu.investigapptor.logic.commands.ListInvestigatorCommand;
 import seedu.investigapptor.logic.commands.RedoCommand;
-import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
 import seedu.investigapptor.logic.commands.RemovePasswordCommand;
 import seedu.investigapptor.logic.commands.SelectInvestigatorCommand;
 import seedu.investigapptor.logic.commands.SetPasswordCommand;
@@ -86,17 +86,17 @@ public class InvestigapptorParserTest {
     @Test
     public void parseCommand_reg() throws Exception {
         Investigator investigator = new InvestigatorBuilder().build();
-        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
+        AddInvestigatorCommand command = (AddInvestigatorCommand)
                 parser.parseCommand(InvestigatorUtil.getRegCommand(investigator));
-        assertEquals(new RegisterInvestigatorCommand(investigator), command);
+        assertEquals(new AddInvestigatorCommand(investigator), command);
     }
 
     @Test
     public void parseCommand_regAlias() throws Exception {
         Investigator investigator = new InvestigatorBuilder().build();
-        RegisterInvestigatorCommand command = (RegisterInvestigatorCommand)
+        AddInvestigatorCommand command = (AddInvestigatorCommand)
                 parser.parseCommand(InvestigatorUtil.getAliasRegCommand(investigator));
-        assertEquals(new RegisterInvestigatorCommand(investigator), command);
+        assertEquals(new AddInvestigatorCommand(investigator), command);
     }
 
     @Test

@@ -135,8 +135,6 @@ public class Investigator extends Person {
                 .append(getRank())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" CrimeCases: ");
-        getCrimeCases().forEach(builder::append);
         return builder.toString();
     }
 }

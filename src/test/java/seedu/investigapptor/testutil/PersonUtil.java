@@ -6,7 +6,7 @@ import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.investigapptor.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.investigapptor.logic.commands.RegisterInvestigatorCommand;
+import seedu.investigapptor.logic.commands.AddInvestigatorCommand;
 import seedu.investigapptor.model.person.Person;
 
 /**
@@ -18,14 +18,14 @@ public class PersonUtil {
      * Returns an reg command string for adding the {@code person}.
      */
     public static String getRegCommand(Person person) {
-        return RegisterInvestigatorCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return AddInvestigatorCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**
      * Returns an reg command string for adding the {@code person}.
      */
     public static String getAliasRegCommand(Person person) {
-        return RegisterInvestigatorCommand.COMMAND_ALIAS + " " + getPersonDetails(person);
+        return AddInvestigatorCommand.COMMAND_ALIAS + " " + getPersonDetails(person);
     }
 
     /**

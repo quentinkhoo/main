@@ -44,7 +44,7 @@ public class SetPasswordCommand extends Command {
         try {
             model.updatePassword(password);
             logger.info("Password has been updated!");
-            return new CommandResult(String.format(MESSAGE_SUCCESS));
+            return new CommandResult(MESSAGE_SUCCESS);
         } catch (InvalidPasswordException ipe) {
             throw new CommandException(MESSAGE_PASSWORD_CONSTRAINTS);
         }

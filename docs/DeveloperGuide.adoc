@@ -543,7 +543,7 @@ an `InvestigapptorChangedEvent` which will update the calendar to reflect the ne
 ====== Sequence Diagram for `deletecase`
 [[SDforDeleteCase]]
 .Component interactions for `deletecase 1` command
-image::SDforDeletePerson.png[width="800"]
+image::SDforDeleteCase.png[width="800"]
 Similarly, for the `deletecase` command, when a case has been deleted from the investigapptor, it
 will raise the `InvestigapptorChangedEvent` which will remove the case from the calendar.
 

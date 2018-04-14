@@ -507,9 +507,8 @@ The following sequence diagram illustrates how the components within the `Calend
 interacts with each other.
 
 [[SDforCalendar]]
-.Component interactions within `CalendarPanel` +
+.Component interactions within `CalendarPanel`
 image::SDForCalendar.png[width="800"]
-
 
 The `CalendarPanel` comprises of the following attributes and objects:
 

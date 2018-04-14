@@ -669,11 +669,11 @@ The following sequence diagrams represents the interactions within the `Logic`
 component when the user inputs the `findopencases` or `findclosecases` command.
 
 [[SDforFindOpenCase]]
-.Sequence Diagram for interactions within Logic component
+.Sequence Diagram for interactions within Logic component for `FindOpenCaseCommand`
 image::SDforFindOpenCase.png[width="800"]
 
 [[SDforFindCloseCase]]
-.Sequence Diagram for interactions within Logic component
+.Sequence Diagram for interactions within Logic component for `FindCloseCaseCommand`
 image::SDForFindCloseCase.png[width="800"]
 
 The `Logic` component will set the `StatusContainsKeywordsPredicate` with

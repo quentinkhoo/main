@@ -67,15 +67,31 @@ The Investigator also stores a live reference to all his cases that works with u
 </div>
 </li>
 <li>
-<p>Implemented Investigator:</p>
+<p>Implemented ListInvestigatorCases command:</p>
 <div class="paragraph">
-<p>Investigator class extends the Person class with an addtional variable that stores the investigators cases</p>
+<p>Allows user to view all cases allocated to the selected investigator.</p>
 </div>
 </li>
 <li>
-<p>Implemented UniqueCrimeCase class</p>
+<p>Implemented GUI for Investigator Details:</p>
 <div class="paragraph">
-<p>UniqueCrimeCase stores and manages multiple cases as well as ensure that they are all unique</p>
+<p>Created a Html file to display the investigator details in a clear and more presentable format.</p>
+</div>
+</li>
+<li>
+<p>Refactor the following functions</p>
+<div class="ulist">
+<ul>
+<li>
+<p>AddInvestigatorCommand</p>
+</li>
+<li>
+<p>EditInvestigatorCommand</p>
+</li>
+<li>
+<p>DeleteInvestigatorCommand</p>
+</li>
+</ul>
 </div>
 </li>
 <li>
@@ -94,7 +110,7 @@ The Investigator also stores a live reference to all his cases that works with u
 </div>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: [<a href="https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/functional/Marcus-cxc.md">Functional code</a>] [<a href="https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/test/Marcus-cxc.md">Test code</a>] <em>{give links to collated code files}</em></p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -188,137 +204,6 @@ The Investigator also stores a live reference to all his cases that works with u
 </tr>
 </tbody>
 </table>
-<div class="sect3">
-<h4 id="Undo"><a class="link" href="#Undo">Undoing previous command : <code>undo</code> [Since v1.0]</a></h4>
-<div class="paragraph">
-<p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code><br>
-Alias: <code>u</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify the investigapptor&#8217;s content<br></p>
-</div>
-<div class="paragraph">
-<p>(<code>addinvestigator</code>, <code>deleteinvestigator</code>, <code>editinvestigator</code>,
- <code>addcase</code>, <code>deletecase</code>, <code>editcase</code>, <code>close</code> and <code>clear</code>).</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deletecase 1</code><br>
-<code>listcases</code><br>
-<code>undo</code> (reverses the <code>deletecase 1</code> command)<br></p>
-</li>
-</ul>
-</div>
-<div id="undo-1" class="imageblock">
-<div class="content">
-<img src="../images/userguide-images/undo-command-1.png" alt="undo command 1" width="450">
-</div>
-<div class="title">Figure 1. Before <code>deletecase 1</code> command</div>
-</div>
-<div id="undo-2" class="imageblock">
-<div class="content">
-<img src="../images/userguide-images/undo-command-2.png" alt="undo command 2" width="450">
-</div>
-<div class="title">Figure 2. After <code>deletecase 1</code> command</div>
-</div>
-<div id="undo-3" class="imageblock">
-<div class="content">
-<img src="../images/userguide-images/undo-command-3.png" alt="undo command 3" width="450">
-</div>
-<div class="title">Figure 3. <code>listcases</code> command</div>
-</div>
-<div id="undo-4" class="imageblock">
-<div class="content">
-<img src="../images/userguide-images/undo-command-4.png" alt="undo command 4" width="450">
-</div>
-<div class="title">Figure 4. <code>undo</code> command</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p><code>listcases</code> is NOT an undoable command. Hence, <code>undo</code> will not be applied on <code>listcases</code>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>selectcase 1</code><br>
-<code>listcases</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
-</li>
-<li>
-<p><code>deletecase 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>deletecase 1</code> command)<br></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="Redo"><a class="link" href="#Redo">Redoing the previously undone command : <code>redo</code> [Since v1.0]</a></h4>
-<div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code><br>
-Alias: <code>r</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>deletecase 1</code><br>
-<code>undo</code> (reverses the <code>deletecase 1</code> command)<br>
-<code>redo</code> (reapplies the <code>deletecase 1</code> command)<br></p>
-</li>
-<li>
-<p><code>deletecase 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>deletecase 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>deletecase 1</code> command)<br>
-<code>redo</code> (reapplies the <code>deletecase 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="encrypting-data-files-code-encryptdata-code-coming-in-v2-0"><a class="link" href="#encrypting-data-files-code-encryptdata-code-coming-in-v2-0">Encrypting data files <code>encryptdata</code> [Coming in v2.0]</a></h4>
-<div class="paragraph">
-<p><em>{explain how the user can enable/disable data encryption}</em></p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -335,457 +220,469 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="password-feature"><a class="link" href="#password-feature">Password feature</a></h3>
+<h3 id="investigator-class"><a class="link" href="#investigator-class">Investigator Class</a></h3>
 <div class="sect3">
-<h4 id="reason-for-implementation"><a class="link" href="#reason-for-implementation">Reason for implementation</a></h4>
-<div class="paragraph">
-<p>As Investigapptor is a computer software that will likely to be installed on a shared computer,
-a password prompt is necessary in order to deter non-authorized users of the Investigapptor from
-gaining access into the application.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
-<div class="paragraph">
-<p>To be updated</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="listing-feature"><a class="link" href="#listing-feature">Listing feature</a></h3>
-<div class="sect3">
-<h4 id="reason-for-implementation-2"><a class="link" href="#reason-for-implementation-2">Reason for implementation</a></h4>
-<div class="paragraph">
-<p>Investigapptor allows for separate tab listing of cases and investigators on the user interface as it
-would provide visual aid for them in deciding which investigator to assign to which case. As an investigator who would
-want to list and view all currently registered investigators or assigned cases, the listing
-command would automatically swap between the 2 tabs respectively upon the listing input, bringing
-convenience to the investigator ultimately.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
-<div class="paragraph">
-<p>The investigators/cases tabs are created with a <code>PersonListPanel</code>
-and <code>CrimeCaseListPanel</code> respectively, which are the main classes
-in charge of displaying the details of the investigators or crime cases.
-The list investigators/cases command would then display the respective
-tabs depending on the list argument.</p>
-</div>
-<div class="paragraph">
-<p>A <code>PersonListPanel</code> constructor is created with a constructor:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">PersonListPanel</span> <span class="directive">extends</span> UiPart&lt;<span class="predefined-type">Region</span>&gt; {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> PersonListPanel(ObservableList&lt;Person&gt; personList) {
-    <span class="comment">/// PersonListPanel code</span>
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>PersonListPanel</code> is then initialised in the MainWindow class
-by taking in an unmodifiable list of Person as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    personListPanel = <span class="keyword">new</span> PersonListPanel(logic.getFilteredPersonList());</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>A <code>CrimeCaseListPanel</code> constructor is created with a constructor:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">CrimeCaseListPanel</span> <span class="directive">extends</span> UiPart&lt;<span class="predefined-type">Region</span>&gt; {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> CrimeCaseListPanel(ObservableList&lt;CrimeCase&gt; crimeCaseList) {
-    <span class="comment">/// CrimeCaseListPanel code</span>
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>CrimeCaseListPanel</code> is then initialised in the MainWindow class by taking in
-an unmodifiable list of CrimeCase as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">    crimeCaseListPanel = <span class="keyword">new</span> CrimeCaseListPanel(logic.getFilteredCrimeCaseList());</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The list investigators/cases command is handled in the logic component
-by a <code>ListCommand</code> object which takes in a list type as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">ListCommand(<span class="predefined-type">String</span> listType);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Depending on the <code>listType</code> input, a different list would be returned
-to the <code>model</code> component and trigger for a <code>SwapTabEvent</code></p>
-</div>
-<div class="paragraph">
-<p>In the case of an 'investigators' <code>listType</code> input, the <code>model</code> gets
-updated as shown below</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            EventsCenter.getInstance().post(<span class="keyword">new</span> SwapTabEvent(<span class="integer">0</span>));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In the case of an 'cases' <code>listType</code> input, the <code>model</code> gets
-updated as shown below</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">model.updateFilteredCrimeCaseList(PREDICATE_SHOW_ALL_CASES);
-            EventsCenter.getInstance().post(<span class="keyword">new</span> SwapTabEvent(<span class="integer">1</span>));</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="alternatives-considered"><a class="link" href="#alternatives-considered">Alternatives Considered</a></h4>
+<h4 id="investigator-package"><a class="link" href="#investigator-package">Investigator Package</a></h4>
 <div class="sect4">
-<h5 id="aspect-design-of-list"><a class="link" href="#aspect-design-of-list">Aspect: Design of list</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (Current Choice)</strong>: Have the same <code>ListCommand</code> object
-for listing of investigators and cases.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easier to code and requires less <code>Class</code> files.</p>
-</li>
-<li>
-<p>Cons: Users have to type an extra space whenever they want to list something.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2 </strong>: Separate into <code>ListInvestigators</code> and <code>ListCases</code>
-for listing of investigators and cases.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: More object oriented style and can be treated as separate entities.</p>
-</li>
-<li>
-<p>Cons: Requires much more modifications when other types of listing come into
-play in future versions (i.e <code>Witness</code>, <code>Evidence</code>).</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
-<div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h4>
+<h5 id="reason-for-implementation"><a class="link" href="#reason-for-implementation">Reason for Implementation</a></h5>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by an <code>UndoRedoStack</code>, which resides inside <code>LogicManager</code>. It supports undoing and redoing of commands that modifies the state of the address book (e.g. <code>add</code>, <code>edit</code>). Such commands will inherit from <code>UndoableCommand</code>.</p>
+<p>As person class provided by the addressbook only has basic capability to store simple information such name and
+phone number, we had to create a new <code>Investigator</code> package which can store and handle a list of <code>CrimeCases</code> which is a core
+requirement for our product to work. We chose not to modify the <code>Person</code> package but instead extend from it as it will be easier
+for you to implement new type of person object in the future such as suspects or witnesses.</p>
 </div>
+</div>
+<div class="sect4">
+<h5 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h5>
 <div class="paragraph">
-<p><code>UndoRedoStack</code> only deals with <code>UndoableCommands</code>. Commands that cannot be undone will inherit from <code>Command</code> instead. The following diagram shows the inheritance diagram for commands:</p>
+<p>Currently the <code>Investigator</code> extends from the <code>Person</code> class, and the additional two properties the are:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 18.0327%;">
+<col style="width: 16.3934%;">
+<col style="width: 32.7868%;">
+<col style="width: 32.7871%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Composition Of</th>
+<th class="tableblock halign-left valign-top">Class</th>
+<th class="tableblock halign-left valign-top">Constructor</th>
+<th class="tableblock halign-left valign-top">Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new Name(“Jon Doe”)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a <code>String</code> that represents the name of the person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Phone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new Phone(9123874)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores an <code>int</code> that represents the phone number of the person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new Email(“<a href="mailto:JohnD@gmail.com">JohnD@gmail.com</a>”)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a <code>String</code> that represents the email of the person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Person</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new EndDate("Baker Street #01-04")</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a <code>String</code> that represents the address of the person.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Investigator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rank</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new Status('1')</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store a <code>String</code> that represent a int value that can be converted to the appropriate <a href="#Rank">[Rank]</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Investigator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UniqueCrimeCaseList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>new Status()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stores a <code>UniqueCrimeCaseList</code> that contains all the cases the investigator is in charged of</p></td>
+</tr>
+</tbody>
+</table>
+<div id="Rank" class="ulist">
+<ul>
+<li>
+<p><code>Rank</code></p>
+<div class="paragraph">
+<p>Stores the rank of the investigator</p>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Integer Value</th>
+<th class="tableblock halign-left valign-top">Rank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Constable</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Sergeant</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Inspector</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Detective</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Captain</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>UniqueCrimeCaseList</code></p>
+<div class="paragraph">
+<p>Stores and manages all the CrimeCases which the investigator is in charge of.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="model"><a class="link" href="#model">Model</a></h5>
+<div class="paragraph">
+<p>Currently the <code>Investigator</code> is upcasted and stored in the <code>Investigapptor</code> 's <code>UniquePersonList</code>.
+This is done on purpose to allow future enhancement that allows us to implement types of people such as suspects and witnesses. Storing them together makes it easier to use general
+functions.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/LogicCommandClassDiagram.png" alt="LogicCommandClassDiagram" width="800">
+<img src="../images/investigatorComponent.png" alt="invest-com" width="790">
 </div>
-</div>
-<div class="paragraph">
-<p>As you can see from the diagram, <code>UndoableCommand</code> adds an extra layer between the abstract <code>Command</code> class and concrete commands that can be undone, such as the <code>DeleteCommand</code>. Note that extra tasks need to be done when executing a command in an <em>undoable</em> way, such as saving the state of the address book before execution. <code>UndoableCommand</code> contains the high-level algorithm for those extra tasks while the child classes implements the details of how to execute the specific command. Note that this technique of putting the high-level algorithm in the parent class and lower-level steps of the algorithm in child classes is also known as the <a href="https://www.tutorialspoint.com/design_pattern/template_pattern.htm">template pattern</a>.</p>
+<div class="title">Figure 1. Investigator in Model Component</div>
 </div>
 <div class="paragraph">
-<p>Commands that are not undoable are implemented this way:</p>
+<p>The code below is from the <code>syncWithMasterTagList</code> function. It shows that
+both Investigator and Person type are both return into the <code>UniquePersonList</code>.</p>
 </div>
-<div class="listingblock">
+</div>
+<div class="sect4">
+<h5 id="storage"><a class="link" href="#storage">Storage</a></h5>
+<div class="paragraph">
+<p>As Investigator has addition properties compared to Person, <code>XmlAdaptedInvestigator</code> is created to convert
+the <code>Investigator</code> into correct XML format. We had to also change the method of storing the in <code>Investigapptor</code>
+the different classes have to be converted and stored in the correct format. To accomplish this,
+two new methods were added which each return a person only list and a investigator only list to store them
+separately</p>
+</div>
+<div class="paragraph">
+<p>This function will return only <code>Investigator</code> in the list</p>
+</div>
+<div class="literalblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="type">class</span> <span class="class">ListCommand</span> <span class="directive">extends</span> Command {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> CommandResult execute() {
-        <span class="comment">// ... list logic ...</span>
+<pre>public ObservableList&lt;Investigator&gt; investigatorList() {
+    Iterator irt = iterator();
+    ObservableList&lt;Investigator&gt; investigators = FXCollections.observableArrayList();
+    while (irt.hasNext()) {
+        Object element = irt.next();
+        if (element instanceof Investigator) {
+            investigators.add((Investigator) element);
+        }
     }
-}</code></pre>
+    return investigators;
+}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>With the extra layer, the commands that are undoable are implemented this way:</p>
+<p>This function will only return <code>Person</code> in the list</p>
 </div>
-<div class="listingblock">
+<div class="literalblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="directive">public</span> <span class="directive">abstract</span> <span class="type">class</span> <span class="class">UndoableCommand</span> <span class="directive">extends</span> Command {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> CommandResult execute() {
-        <span class="comment">// ... undo logic ...</span>
+<pre>public ObservableList&lt;Person&gt; personOnlyList() {
+    Iterator irt = iterator();
+    ObservableList&lt;Person&gt; persons = FXCollections.observableArrayList();
+    while (irt.hasNext()) {
+        Object element = irt.next();
+        if (!(element instanceof Investigator)) {
+            persons.add((Person) element);
+        }
+    }
+    return persons;
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As the <code>Investigator</code> has to store multiple <code>CrimeCase</code> , instead of store the whole <code>CrimeCase</code> and all
+its details inside of the <code>XmlAdaptedInvestigator</code>, we stored the hashcode instead to
+reduce the amount of space used for storage.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-consideration"><a class="link" href="#design-consideration">Design Consideration</a></h5>
 
-        executeUndoableCommand();
-    }
-}
-
-<span class="directive">public</span> <span class="type">class</span> <span class="class">DeleteCommand</span> <span class="directive">extends</span> UndoableCommand {
-    <span class="annotation">@Override</span>
-    <span class="directive">public</span> CommandResult executeUndoableCommand() {
-        <span class="comment">// ... delete logic ...</span>
-    }
-}</code></pre>
 </div>
+<div class="sect4">
+<h5 id="aspect-interaction-between-investigator-and-crimecase"><a class="link" href="#aspect-interaction-between-investigator-and-crimecase">Aspect: Interaction between Investigator and CrimeCase</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use mutual reference between Investigator and CrimeCase</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy and fast to find relation between Investigator and CrimeCase by using the reference</p>
+</li>
+<li>
+<p>Cons: Hard to implement due to the undo/redo feature due to creating multiple <code>Investigapptor</code> hence the reference
+has to be correct for each instance.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>Suppose that the user has just launched the application. The <code>UndoRedoStack</code> will be empty at the beginning.</p>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Using Association class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement. More compatible with the undo/redo feature</p>
+</li>
+<li>
+<p>Cons: Slower due to having to search through all the association class to find all all the connected
+<code>Investigator</code> and <code>CrimeCase</code>. More duplicates in the XML file.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>The user executes a new <code>UndoableCommand</code>, <code>delete 5</code>, to delete the 5th person in the address book. The current state of the address book is saved before the <code>delete 5</code> command executes. The <code>delete 5</code> command will then be pushed onto the <code>undoStack</code> (the current state is saved together with the command).</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoStartingStackDiagram.png" alt="UndoRedoStartingStackDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>As the user continues to use the program, more commands are added into the <code>undoStack</code>. For example, the user may execute <code>add n/David &#8230;&#8203;</code> to add a new person.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand1StackDiagram.png" alt="UndoRedoNewCommand1StackDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not be pushed to the <code>UndoRedoStack</code> at all.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The user now decides that adding the person was a mistake, and decides to undo that action using <code>undo</code>.</p>
-</div>
-<div class="paragraph">
-<p>We will pop the most recent command out of the <code>undoStack</code> and push it back to the <code>redoStack</code>. We will restore the address book to the state before the <code>add</code> command executed.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoExecuteUndoStackDiagram.png" alt="UndoRedoExecuteUndoStackDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>undoStack</code> is empty, then there are no other commands left to be undone, and an <code>Exception</code> will be thrown when popping the <code>undoStack</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The redo does the exact opposite (pops from <code>redoStack</code>, push to <code>undoStack</code>, and restores the address book to the state after the command is executed).</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>redoStack</code> is empty, then there are no other commands left to be redone, and an <code>Exception</code> will be thrown when popping the <code>redoStack</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The user now decides to execute a new command, <code>clear</code>. As before, <code>clear</code> will be pushed into the <code>undoStack</code>. This time the <code>redoStack</code> is no longer empty. It will be purged as it no longer make sense to redo the <code>add n/David</code> command (this is the behavior that most modern desktop applications follow).</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand2StackDiagram.png" alt="UndoRedoNewCommand2StackDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Commands that are not undoable are not added into the <code>undoStack</code>. For example, <code>list</code>, which inherits from <code>Command</code> rather than <code>UndoableCommand</code>, will not be added after execution:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand3StackDiagram.png" alt="UndoRedoNewCommand3StackDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarize what happens inside the <code>UndoRedoStack</code> when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-implementation-of-code-undoablecommand-code"><a class="link" href="#aspect-implementation-of-code-undoablecommand-code">Aspect: Implementation of <code>UndoableCommand</code></a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Add a new abstract method <code>executeUndoableCommand()</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that deal with <code>Command</code> do not have to know that <code>executeUndoableCommand()</code> exist.</p>
-</li>
-<li>
-<p>Cons: Hard for new developers to understand the template pattern.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Just override <code>execute()</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Does not involve the template pattern, easier for new developers to understand.</p>
-</li>
-<li>
-<p>Cons: Classes that inherit from <code>UndoableCommand</code> must remember to call <code>super.execute()</code>, or lose the ability to undo/redo.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
-</li>
-<li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-type-of-commands-that-can-be-undone-redone"><a class="link" href="#aspect-type-of-commands-that-can-be-undone-redone">Aspect: Type of commands that can be undone/redone</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Only include commands that modifies the address book (<code>add</code>, <code>clear</code>, <code>edit</code>).</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We only revert changes that are hard to change back (the view can easily be re-modified as no data are * lost).</p>
-</li>
-<li>
-<p>Cons: User might think that undo also applies when the list is modified (undoing filtering for example), * only to realize that it does not do that, after executing <code>undo</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Include all commands.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Might be more intuitive for the user.</p>
-</li>
-<li>
-<p>Cons: User have no way of skipping such commands if he or she just want to reset the state of the address * book and not the view.
-<strong>Additional Info:</strong> See our discussion  <a href="https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672">here</a>.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use separate stack for undo and redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to understand for new Computer Science student undergraduates to understand, who are likely to be * the new incoming developers of our project.</p>
-</li>
-<li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update * both <code>HistoryManager</code> and <code>UndoRedoStack</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate stack, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two * different things.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">[Proposed] Data Encryption</a></h3>
+<h4 id="add-investigator-command"><a class="link" href="#add-investigator-command">Add Investigator Command</a></h4>
 <div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+<p>The <code>addInvestigatorCommand</code> will create an instance of the Investigator class and store it in the Investigapptor.</p>
+</div>
+<div class="sect4">
+<h5 id="reason-for-implementation-2"><a class="link" href="#reason-for-implementation-2">Reason for Implementation</a></h5>
+<div class="paragraph">
+<p>The <code>addInvestigatorCommand</code> is important as you would want to be able to add your own investigator details into the
+investigapptor before you can start editing and managing with the other commands.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h5>
+<div class="paragraph">
+<p>The <code>addInvestigatorCommand</code> is created when the command word <code>addinvestigator</code> is detected in the user input. It will then use the <code>ParserUtil</code>
+to split the user input into its separate components (i.e. <code>Name</code>, <code>Phone</code>, <code>Email</code>, Address`, <code>Rank</code>, Set&lt;Tag&gt;). The
+add investigator command will then create a Investigator instance and pass it from the logic component to the model component.
+The model then recreates the Investigator instance and store it.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AddInvestigatorSequenceDiagram.png" alt="add-invest" width="790">
+</div>
+<div class="title">Figure 2. Add Investigator Sequence Diagram</div>
+</div>
+<div class="paragraph">
+<p>Due to the Redo/Undo feature, multiple instance of the Investigapptor will be created which means the references may point to
+the wrong instance. In order to fix this, hashcode is used to identify the correct the CrimeCase and set the correct reference.
+This is done by the convertHashtoCases method in the Investigapptor as show below.</p>
+</div>
+<div class="paragraph">
+<p><strong>convertHashtoCases</strong><br></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>for (CrimeCase c : cases) {
+    if (c.hashCode() == i) {
+        try {
+            key.addCrimeCase(c);
+        } catch (DuplicateCrimeCaseException e) {
+            throw new AssertionError("duplicate case");
+        }
+    }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-consideration-2"><a class="link" href="#design-consideration-2">Design Consideration</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="aspect-setting-up-reference-between-code-investigator-code-and-code-crimecase-code-when-loading-the-xml"><a class="link" href="#aspect-setting-up-reference-between-code-investigator-code-and-code-crimecase-code-when-loading-the-xml">Aspect: Setting up Reference between <code>Investigator</code> and <code>CrimeCase</code> when loading the XML</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Using hashcode to reference <code>CrimeCase</code> when adding</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The <code>Investigator</code> will be able to find correct <code>CrimeCase</code> to reference despite having multiple instances.
+Storage takes lesser space as only the hashcode is required.</p>
+</li>
+<li>
+<p>Cons: Have to scan every <code>CrimeCase</code> for each <code>CrimeCase</code> belonging to the Investigator.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>**Alternative 2: Saving the whole <code>CrimeCase</code> inside the XML</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able to reference the correct <code>CrimeCase</code> after loading the XML.</p>
+</li>
+<li>
+<p>Cons: Takes up a lot of storage as two copy <code>CrimeCase</code> has to be saved, one in <code>UniqueCrimeCaseList</code>
+and one in the <code>Investigator</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-investigator"><a class="link" href="#delete-investigator">Delete Investigator</a></h4>
+<div class="paragraph">
+<p>The <code>deleteInvestigatorCommand</code> will find and delete the specified Investigator in the Investigapptor.</p>
+</div>
+<div class="sect4">
+<h5 id="reason-for-implementation-3"><a class="link" href="#reason-for-implementation-3">Reason for Implementation</a></h5>
+<div class="paragraph">
+<p>The <code>deleteInvestigatorCommand</code> is important as you may not longer wish to store certain investigator or have made a mistake when
+add the investigator.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="current-implementation-3"><a class="link" href="#current-implementation-3">Current Implementation</a></h5>
+<div class="paragraph">
+<p>The <code>deleteInvestigatorCommand</code> is created when the command word <code>deleteinvestigator</code> is
+detected in the user input. It will then check if the index given is valid. If the index
+ is valid, it will check if the investigator at the index if it&#8217;s <code>UniqueCaseList</code> is empty.
+ If it is empty, it will call the <code>deletePerson</code> method from the <code>ModelManager</code>. The <code>ModelManager</code> will then call
+<code>Investigapptor</code> 's <code>deletePerson</code> method which will remove the investigator from the
+<code>persons</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/DeleteInvestigatorSequenceDiagram.png" alt="delete-invest" width="790">
+</div>
+<div class="title">Figure 3. Delete Investigator Sequence Diagram</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-consideration-3"><a class="link" href="#design-consideration-3">Design Consideration</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="aspect-method-of-removing-investigator"><a class="link" href="#aspect-method-of-removing-investigator">Aspect: Method of removing investigator</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Fully delete the investigator</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, no further issues after deleting the investigator.</p>
+</li>
+<li>
+<p>Cons: No longer able to retrieve it after deleted, other than undo.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Archive the investigator</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able bring any investigator out of archive.</p>
+</li>
+<li>
+<p>Cons: Complicated to implement, does not actually delete the investigator and may cause build up of unwanted data.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="edit-investigator"><a class="link" href="#edit-investigator">Edit Investigator</a></h4>
+<div class="paragraph">
+<p>The <code>EditInvestigatorCommand</code> will recreate an instance of the Investigator class that exist and store it in the Investigapptor.</p>
+</div>
+<div class="sect4">
+<h5 id="reason-for-implementation-4"><a class="link" href="#reason-for-implementation-4">Reason for Implementation</a></h5>
+<div class="paragraph">
+<p>The <code>EditInvestigatorCommand</code> is important as you would want to be able to edit an investigator&#8217;s details in the
+investigapptor rather than having to delete and add a new investigator.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="current-implementation-4"><a class="link" href="#current-implementation-4">Current Implementation</a></h5>
+<div class="paragraph">
+<p>The <code>EditInvestigatorCommand</code> is created when the command word <code>editinvestigator</code> is detected in the user input. It will then use the <code>ParserUtil</code>
+to identify which detail is to be changed (i.e. <code>Name</code>, <code>Phone</code>, <code>Email</code>, Address`, <code>Rank</code>, Set&lt;Tag&gt;). The <code>EditInvestigatorCommand</code>
+will then create a Investigator instance using both the old and new information and pass it from the logic component to the model component.
+The model then recreates the Investigator instance and replace the old investigator with the new one.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/EditInvestigatorSequenceDiagram.png" alt="edit-invest" width="790">
+</div>
+<div class="title">Figure 4. Editing Investigator Sequence Diagram</div>
+</div>
+<div class="paragraph">
+<p>After editing the investigator, the all the cases referencing the old investigator has to
+ be updated to ensure the that the cases point to the correct investigator. In order to do this, the <code>Investigapptor</code>
+ will have to recreate all the <code>CrimeCases</code> that belong to the investigator with the new <code>Investigator</code>. Once
+ all the <code>CrimeCases</code> are recreated, they will be added to new <code>Investigator</code> and finally stored
+ in <code>persons</code> of the <code>Investigapptor</code>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="design-consideration-4"><a class="link" href="#design-consideration-4">Design Consideration</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="aspect-updating-the-code-crimecases-code-referencing-the-code-investigator-code"><a class="link" href="#aspect-updating-the-code-crimecases-code-referencing-the-code-investigator-code">Aspect: Updating the <code>CrimeCases</code> referencing the <code>Investigator</code></a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Recreate every <code>CrimeCase</code> with the new value</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: By recreating the <code>CrimeCase</code>, we are able to set the <code>Investigator</code> to be final inside the <code>CrimeCase</code>.
+This will help avoid bugs when redoing and undoing.</p>
+</li>
+<li>
+<p>Cons: Each edit requires more work as <code>CrimeCase</code> has to be remove and recreated.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Change <code>CrimeCase</code> 's investigator to be not final, so that direct change can be made.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to change the each CrimeCase as it does not need to be recreated.</p>
+</li>
+<li>
+<p>Cons: <code>Investigator</code> in <code>CrimeCase</code> will no longer be final. This however involve the <code>Invesetigator</code> to
+modify <code>CrimeCase</code>, which result in bad coupling.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -802,7 +699,7 @@ If the <code>redoStack</code> is empty, then there are no other commands left to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-12 09:41:02 UTC
+Last updated 2018-04-14 21:09:25 UTC
 </div>
 </div>
 </body>

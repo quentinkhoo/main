@@ -401,6 +401,12 @@ Clears all entries from the address book. +
 Format: `clear` +
 Alias: `c`
 
+====
+[[backup-img]]
+.`backup` command
+image::userguide-images/backup.png[width="450"]
+====
+
 [TIP]
 ====
 If you accidentally keyed in this command, enter the `undo` command to revert back
@@ -436,7 +442,6 @@ Saving the xml using the name "Investigator" will only overwrite the currenty sa
 [[backup-img]]
 .`backup` command
 image::userguide-images/backup.png[width="450"]
-{nbsp} +
 
 Examples: +
 

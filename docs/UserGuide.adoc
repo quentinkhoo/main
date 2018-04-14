@@ -510,16 +510,13 @@ Format: `editinvestigator INVESTIGATOR_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADD
 Alias: `ei`
 
 [NOTE]
-Edits the investigator at the specified `INVESTIGATOR_INDEX`.
-The index refers to the index number shown in the last listing of investigators.
-[NOTE]
+Edits the investigator at the specified `INVESTIGATOR_INDEX`. +
+The index refers to the index number shown in the last listing of investigators. +
 Existing values will be updated to the input values.
 
 [WARNING]
-The index *must be a positive integer* 1, 2, 3, ...
-[WARNING]
-At least one of the optional fields must be provided.
-[WARNING]
+The index *must be a positive integer* 1, 2, 3, ... +
+At least one of the optional fields must be provided. +
 When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 
 [TIP]
@@ -559,13 +556,14 @@ You can find investigators whose names contain any of your given keywords. +
 Format: `findinvestigators KEYWORD [MORE_KEYWORDS]` +
 Alias: `fi`
 
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
+[NOTE]
+The search is case insensitive. e.g `hans` will match `Hans` +
+The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` +
+Only the name is searched. +
+Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+[WARNING]
+Only full words will be matched e.g. `Han` will not match `Hans`
 
 You can refer to the screenshot below for an example.
 [[findinvestigators]]
@@ -587,13 +585,14 @@ You can find investigators whose tags contain any of your given keywords. +
 Format: `findinvestigatortags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fit`
 
-****
-* The search is case insensitive. e.g `teamA` will match `teama`
-* Only the tags are searched.
-* Only full words will be matched e.g. `teamA` will not match `teamyA`
-* Investigators matching at least one keyword will be returned (i.e. `OR` search).
+[NOTE]
+The search is case insensitive. e.g `teamA` will match `teama` +
+Only the tags are searched. +
+Investigators matching at least one keyword will be returned (i.e. `OR` search).
 e.g. `teamA teamB` will return investigators that contains the tag 'teamA' or 'teamB'
-****
+
+[WARNING]
+Only full words will be matched e.g. `teamA` will not match `teamyA`
 
 You can refer to the screenshot below for an example.
 [[findinvestigatortags]]
@@ -614,14 +613,15 @@ Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 ==== Deleting an investigator : `deleteinvestigator` [Since v1.3]
 
 You can delete a specified investigator from Investigapptor. +
-Format: `deleteinvestigator INDEX` +
+Format: `deleteinvestigator INVESTIGATOR_INDEX` +
 Alias: `di`
 
-****
-* Deletes the investigator at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+[NOTE]
+Deletes the investigator at the specified `INVESTIGATOR_INDEX`. +
+The index refers to the index number shown in the most recent listing.
+
+[WARNING]
+The index *must be a positive integer* 1, 2, 3, ...
 
 You can identify and delete the investigator by looking at their `INDEX` at the top left of their card as show in the
 diagram <<deleteinv-index, below>>.
@@ -657,11 +657,12 @@ Selects the person identified by the index number used in the last person listin
 Format: `selectinvestigator INDEX` +
 Alias: `selectinvest`
 
-****
-* Selects the investigator and loads the details of the investigator at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
+[NOTE]
+Selects the investigator and loads the details of the investigator at the specified `INDEX`. +
+The index refers to the index number shown in the most recent listing.
+
+[WARNING]
+The index *must be a positive integer* `1, 2, 3, ...`
 
 You can refer to the screenshot below for an example.
 [[selectinv]]
@@ -731,20 +732,17 @@ You can edit an existing case in the application by specifying the `CASE_INDEX` 
 *Format:* `editcase CASE_INDEX [n/NAME] [d/DESCRIPTION] [i/INVESTIGATOR_INDEX] [s/STARTDATE] [t/TAG]...` +
 *Alias:* `ec`
 
-****
-* The `CASE_INDEX` refers to the index number shown in the last listing of cases. +
-* The `INVESTIGATOR_INDEX` refers to the index number shown in the last listing of investigators. +
-* At least one of the optional fields must be provided.
-****
+[NOTE]
+The `CASE_INDEX` refers to the index number shown in the last listing of cases. +
+The `INVESTIGATOR_INDEX` refers to the index number shown in the last listing of investigators. +
 
 [WARNING]
-The index *must be a positive integer* 1, 2, 3, ...
-[WARNING]
+At least one of the optional fields must be provided. +
+The index *must be a positive integer* 1, 2, 3, ... +
 When editing tags, the existing tags of the case will be replaced by the new tags entered i.e adding of tags is not cumulative.
 
 [TIP]
-To help you find the index of the case that you want to edit, you can use the `findcases` command before using the `editcase` command to narrow the number of cases displayed in the listing.
-[TIP]
+To help you find the index of the case that you want to edit, you can use the `findcases` command before using the `editcase` command to narrow the number of cases displayed in the listing. +
 You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
 
 The following provides an explanation of some command examples:

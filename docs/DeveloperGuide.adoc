@@ -272,9 +272,9 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::password[]
 === Password feature
-The password feature allows for the user to set a password
+The password feature allows for investigators to set a password
 for the application. This password can then be disclosed only to
-authorised users so as disallow unauthorised users from accessing
+authorised investigators so as disallow unauthorised users from accessing
  or modifying the application data.
 
 ==== Current Implementation
@@ -361,7 +361,9 @@ access control between investigators of different ranks.
 === Undo/Redo feature
 ==== Current Implementation
 
-The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides inside `LogicManager`. It supports undoing and redoing of commands that modifies the state of the address book (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
+The undo/redo mechanism is facilitated by an `UndoRedoStack`, which
+resides inside `LogicManager`. It supports undoing and redoing of
+ commands that modifies the state of the Investigapptor (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
 
 `UndoRedoStack` only deals with `UndoableCommands`. Commands that cannot be undone will inherit from `Command` instead. The following diagram shows the inheritance diagram for commands:
 

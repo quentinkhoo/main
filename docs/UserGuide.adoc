@@ -761,13 +761,14 @@ You can find cases whose names contain any of your given keywords. +
 Format: `findcases KEYWORD [MORE_KEYWORDS]` +
 Alias: `fc`
 
-****
-* The search is case insensitive. e.g `project` will match `Project`
-* The order of the keywords does not matter. e.g. `Project Magic` will match `Magic Project`
-* You can only search for case names. e.g. `Stranger Danger` [Name] is valid `fraud` [Tag] is not valid
-* Only full words will be matched e.g. You cannot type `Danger` to search for names with the word `Dangerous`
-* Case matching at least one keyword will be returned  (i.e. `OR` search). e.g. `Stranger Danger` will return `Stranger Things`, `Danger Lightning`
-****
+[NOTE]
+The search is case insensitive. e.g `project` will match `Project` +
+The order of the keywords does not matter. e.g. `Project Magic` will match `Magic Project` +
+You can only search for case names. e.g. `Stranger Danger` [Name] is valid `fraud` [Tag] is not valid +
+Case matching at least one keyword will be returned  (i.e. `OR` search). e.g. `Stranger Danger` will return `Stranger Things`, `Danger Lightning`
+
+[WARNING]
+Only full words will be matched e.g. You cannot type `Danger` to search for names with the word `Dangerous` +
 
 You can refer to the screenshot below for an example.
 [[findcases]]
@@ -791,13 +792,14 @@ You can find cases whose tags contain any of your given keywords. +
 Format: `findcasetags KEYWORD [MORE_KEYWORDS]` +
 Alias: `fct`
 
-****
-* The search is case insensitive. e.g `homicide` will match `Homicide`
-* Only the tags are searched.
-* Only full words will be matched e.g. `homicide` will not match `homicidey`
-* Cases matching at least one keyword will be returned (i.e. `OR` search).
+[NOTE]
+The search is case insensitive. e.g `homicide` will match `Homicide` +
+Only the tags are searched. +
+Cases matching at least one keyword will be returned (i.e. `OR` search).
 e.g. `murder robbery` will return cases that contains the tag 'murder' or 'robbery'
-****
+
+[WARNING]
+Only full words will be matched e.g. `homicide` will not match `homicidey`
 
 You can refer to the screenshot below for an example.
 [[findcasetags]]
@@ -854,20 +856,17 @@ You can refer to <<CasesCalendar, Cases Calendar Section>> for the guide to the 
 [[CloseCase]]
 ==== Close a case : `close` [Since v1.3]
 You can close the case that is identified by the index number used in the last case listing. +
-Format: `close INDEX` +
+Format: `close CASE_INDEX` +
 Alias: `cl`
 
-****
-* Closes the case by updating the status of the case from `open` to `close` at the specified `INDEX`.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
 [NOTE]
-====
-Close commands: only applied to cases with the status `open`. This command will not be allowed on cases
+Closes the case by updating the status of the case from `open` to `close` at the specified `CASE_INDEX`.
+The index refers to the index number shown in the most recent listing. +
+
+[WARNING]
+The index *must be a positive integer* `1, 2, 3, ...` +
+This command is only applied to cases with the status `open`. It will not be allowed on cases
 with the status `close`.
-====
 
 You can refer to the screenshots below for an example of how the Investigapptor
 would look like after you've executed the `close` command.
@@ -906,8 +905,7 @@ You can remove cases by specifying the `CASE_INDEX`. The index refers to the ind
 The index *must be a positive integer* 1, 2, 3, ...
 
 [TIP]
-To help you find the index of the case that you want to remove, you can use the `findcases` command before using the `deletecase` command to narrow the number of cases displayed in the listing.
-[TIP]
+To help you find the index of the case that you want to remove, you can use the `findcases` command before using the `deletecase` command to narrow the number of cases displayed in the listing. +
 If a case is no longer active, consider using the `close` command instead so that you can continue to view details of the case.
 
 The following provides an explanation of some command examples:
@@ -952,11 +950,12 @@ You can display all of the cases that is currently assigned to the investigator 
 Format: `listinvestigatorcases INVESTIGATOR_INDEX` +
 Alias: `lic`
 
-****
-* Selects the investigator by index and loads the cases he/she is incharge of in the case list.
-* The index refers to the index number shown in the most recent listing.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
+[NOTE]
+Selects the investigator by the `INVESTIGATOR_INDEX` and loads the cases he/she is in-charge of in the case list. +
+The `INVESTIGATOR_INDEX` refers to the index number shown in the most recent listing of the investigators.
+
+[WARNING]
+The index *must be a positive integer* `1, 2, 3, ...`
 
 The following provides an explanation of some command examples:
 

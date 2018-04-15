@@ -24,8 +24,9 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
                 target audience. This implementation was challenging as it requires the
                 input password to always be hidden from plain sight.
 
-* *Minor enhancement*:
-** implemented automated swapping of tabs upon list command
+* *Minor enhancement*: implemented Ui support for automated swapping of tabs
+** What it does: Allows the panel to automatically switch to the appropriate
+    display list depending on the command input.
  [https://github.com/CS2103JAN2018-F14-B3/main/pull/68/files[PR#68]]
 
 * *Code contributed*: [https://github.com/CS2103JAN2018-F14-B3/main/tree/master/collated/functional/[Functional code]]

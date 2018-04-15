@@ -435,6 +435,7 @@ Exits the program. +
 Format: `exit` +
 Alias: `ex`
 
+//tag::backup[]
 [[Backup]]
 ==== Backing up data : `backup`
 
@@ -464,9 +465,12 @@ Creates a copy of the data with the name `02012018` in `root/data` folder
 * `bu 03Mar2018` +
 Creates a copy of the data with the name `March3rd` in `root/data` folder
 
+//end::backup[]
+
 === Investigator Commands
 These are investigator related commands. +
 
+//tag::addinv[]
 [[AddInv]]
 ==== Adding an investigator: `addinvestigator` [Since v1.3]
 You can add an investigator to the application so that the cases can be assigned to him/her.
@@ -490,6 +494,9 @@ An investigator can have any number of tags (including 0) +
 Tags are alphanumeric without spaces +
 Ranks ranges from 1 to 5 (Constable ,Sergeant, Inspector, Detective, Captain)
 
+//end::addinv[]
+
+//tag::listinv[]
 [[ListInv]]
 ==== Listing all investigators : `listinvestigators` [Since v1.2]
 
@@ -501,7 +508,9 @@ You can refer to the screenshot below for an example.
 [[listinvestigators]]
 .Listing of all investigators
 image::userguide-images/li-command.png[width="450"]
+//end::listinv[]
 
+//tag::editinv[]
 [[EditInv]]
 ==== Editing an investigator : `editinvestigator` [Since v1.3]
 
@@ -549,6 +558,9 @@ Edits the phone number and email address of the 1st investigator to be `91234567
 * `ei 2 n/Betsy Crower t/` +
 Edits the name of the 2nd investigator to be `Betsy Crower` and clears all existing tags.
 
+//end::editinv[]
+
+//tag::findinv[]
 [[FindInv]]
 ==== Locating investigators by name: `findinvestigators` [Since v1.3]
 
@@ -577,6 +589,7 @@ The following provides an explanation of some command examples:
 Returns `john` and `John Doe`
 * `fi Betsy Tim John` +
 Returns any investigators having names `Betsy`, `Tim`, or `John`
+//end::findinv[]
 
 //tag::findinvtags[]
 [[FindInvTags]]
@@ -609,6 +622,7 @@ Returns investigator(s) having tags `teamA`, `new`, OR `teamb`
 Returns investigator(s) having tags `teamc`, `newbie`, OR `a`
 //end::findinvtags[]
 
+//tag::deleteinv[]
 [[DelInv]]
 ==== Deleting an investigator : `deleteinvestigator` [Since v1.3]
 
@@ -650,6 +664,9 @@ If the investigator you are deleting is currently in charge of a case, it cannot
 The case should be reassigned to another investigator before you delete the selected investigator.
 ====
 
+//end::deleteinv[]
+
+//tag::selectinv[]
 [[SelInv]]
 ==== Selecting an investigator : `selectinvestigator` [Coming in v1.5]
 
@@ -679,6 +696,8 @@ Selects the 2nd investigator in the results of the `listinvestigator` command.
 Selects the 1st investigator in the results of the `findinvestigator` command.
 * `selectinvestigator 3` +
 Selects the 3rd person in the listed panel list.
+
+//end::selectinv[]
 
 === Case Commands
 These are case related commands. +
@@ -748,12 +767,12 @@ You can remove all the investigator's tags by typing `t/` without specifying any
 *Example:*
 [[editcase1]]
 .Editing Case
-image::userguide-images/ec-command1.png[width="450"]
+image::userguide-images/ec-command1.png[width="790"]
 
 
 [[editcase2]]
 .Result
-image::userguide-images/ec-command2.png[width="450"]
+image::userguide-images/ec-command2.png[width="790"]
 
 The following provides an explanation of some command examples:
 
@@ -1007,6 +1026,7 @@ Selects the 1st case in the results of the `findcases` command.
 Selects the 3rd case in the most recent list of cases.
 //end::selectcase[]
 
+//tag::listinvcase[]
 [[ListInvCases]]
 ==== List a specific Investigator's cases `listinvestigatorcases` [Since v1.4]
 To find all the case belonging to a certain investigator, you can use the `listinvestigatorcases` command to retrieve all
@@ -1056,6 +1076,8 @@ Display all the cases of the 2nd investigator in the results of the `list case` 
 Display all the cases of the 2nd investigator in the results of the `FindInvestigator` command.
 * `lic 3` +
 Display all the cases of the 2nd investigator  in the investigator panel list case.
+
+//end::listinvcase[]
 
 === Future Enhancement Commands
 These are features that will come in future releases of Investigapptor +

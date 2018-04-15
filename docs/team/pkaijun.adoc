@@ -43,9 +43,9 @@ cases or display only a certain set of cases when commands related to the cases 
 * *Minor enhancement*:
 ** Added functionality to provide different tag colours for different tag contents (PR https://github.com/CS2103JAN2018-F14-B3/main/pull/137[#137])
 ** Added new command to display investigators whose tags matches the keyword(s) provided by the user (PR https://github.com/CS2103JAN2018-F14-B3/main/pull/59[#59])
-** Added new attribute `endDate` to CrimeCase class (PR https://github.com/CS2103JAN2018-F14-B3/main/pull/104/commits/89f36467df0ae93ba1b5459685dc7db7d72918d7[#104])
+** Added new attribute `endDate` to CrimeCase class (PR https://github.com/CS2103JAN2018-F14-B3/main/pull/104[#104])
 
-* *Code contributed*: [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/functional/pkaijun.md[Functional code]] [https://github.com/CS2103JAN2018-F14-B3/main/tree/master/collated/test[Test code]]
+* *Code contributed*: [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/functional/pkaijun.md[Functional code]] [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/test/pkaijun.md[Test code]]
 
 * *Other contributions*:
 
@@ -56,15 +56,14 @@ the major enhancement into smaller tasks (Epic Issue https://github.com/CS2103JA
 
 ** Enhancements:
 *** Implemented auto-update functionality for the Calendar to automatically reflect the current list of
-cases shown on the panel
-(Commit https://github.com/CS2103JAN2018-F14-B3/main/pull/237/commits/b4453b5a872a426632720086f2eea8904109a9ce[#237],
-https://github.com/CS2103JAN2018-F14-B3/main/pull/223/commits/b3e3235967302ff3b47f20f732e055aef6062a4c[#223])
+cases shown on the panel (PR https://github.com/CS2103JAN2018-F14-B3/main/pull/237[#237], https://github.com/CS2103JAN2018-F14-B3/main/pull/223[#223])
 
 ** Documentation:
 *** Added screenshots to the User Guide to illustrate examples:
 (PR https://github.com/CS2103JAN2018-F14-B3/main/pull/246[#246],
 https://github.com/CS2103JAN2018-F14-B3/main/pull/225/[#225])
-
+*** Updated User Guide to ensure consistency throughout the sections
+(PR https://github.com/CS2103JAN2018-F14-B3/main/pull/246[#246])
 *** Updated Developer Guide's diagrams according to the components of the Investigapptor:
 (PR https://github.com/CS2103JAN2018-F14-B3/main/pull/132/files[#132],
 https://github.com/CS2103JAN2018-F14-B3/main/pull/232[#232],
@@ -88,38 +87,30 @@ https://github.com/CS2103JAN2018-F14-B3/main/pull/224[#224])
 
 ** Troubleshooting:
 *** Fixed bugs from user testing (PR https://github.com/CS2103JAN2018-F14-B3/main/pull/204[#204])
-*** Fixed bug from test case caused by the auto-update functionality (Commit https://github.com/CS2103JAN2018-F14-B3/main/pull/237/commits/4fd7aada969f97774a3a86afbad4267a2eca38ab[#237])
+*** Fixed bug from test case caused by the auto-update functionality (PR https://github.com/CS2103JAN2018-F14-B3/main/pull/237[#237])
 
 == Contributions to the User Guide
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are some sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users. +
+Here are all the sections that I have contributed: https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindInvTags[1],
+https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindCloseCases[2],
+https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindOpenCases[3],
+https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#CloseCase[4],
+https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindCaseTags[5]
+https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#CasesCalendar[6]_
 |===
 
-include::../UserGuide.adoc[tag=findcasetags]
-
-include::../UserGuide.adoc[tag=findinvtags]
-
-include::../UserGuide.adoc[tag=findclosecases]
+include::../UserGuide.adoc[tag=calendarsection]
 
 include::../UserGuide.adoc[tag=findopencases]
-
-include::../UserGuide.adoc[tag=closecase]
-
-include::../UserGuide.adoc[tag=calendarsection]
 
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Given below are some sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project. +
+Here are all the sections that I have contributed: https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/DeveloperGuide.adoc#Find-Feature[1],
+https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/DeveloperGuide.adoc#Calendar-Feature[2]_
 |===
 
-include::../DeveloperGuide.adoc[tag=calendar]
-
-include::../DeveloperGuide.adoc[tag=findcasestag]
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=calendar2]

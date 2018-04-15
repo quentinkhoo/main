@@ -1083,6 +1083,30 @@ public class Status {
 ###### \java\seedu\investigapptor\model\Investigapptor.java
 ``` java
     /**
+     * Replaces the given case {@code target} in the list with {@code editedCase}.
+     * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedCase}.
+     *
+     * @throws DuplicateCrimeCaseException if updating the crimeCase's details causes the crimeCase to be equivalent to
+     *                                  another existing crimeCase in the list.
+     * @throws CrimeCaseNotFoundException  if {@code target} could not be found in the list.
+     * @see #syncWithMasterTagList(CrimeCase)
+     */
+    public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
+            throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
+        requireNonNull(editedCase);
+
+        CrimeCase syncedEditedCrimeCase = syncWithMasterTagList(editedCase);
+        // TODO: the tags master list will be updated even though the below line fails.
+        // This can cause the tags master list to have additional tags that are not tagged to any person
+        // in the crimeCase list.
+        removeCrimeCaseFromInvestigator(target);
+        cases.setCrimeCase(target, syncedEditedCrimeCase);
+        addCrimeCaseToInvestigator(syncedEditedCrimeCase);
+    }
+```
+###### \java\seedu\investigapptor\model\Investigapptor.java
+``` java
+    /**
      * Removes {@code key} from this {@code Investigapptor}.
      *
      * @throws CrimeCaseNotFoundException if the {@code key} is not in this {@code Investigapptor}.

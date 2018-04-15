@@ -393,30 +393,6 @@ public class TagContainsKeywordsPredicate implements Predicate<CrimeCase> {
     }
 }
 ```
-###### \java\seedu\investigapptor\model\Investigapptor.java
-``` java
-    /**
-     * Replaces the given case {@code target} in the list with {@code editedCase}.
-     * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedCase}.
-     *
-     * @throws DuplicateCrimeCaseException if updating the crimeCase's details causes the crimeCase to be equivalent to
-     *                                  another existing crimeCase in the list.
-     * @throws CrimeCaseNotFoundException  if {@code target} could not be found in the list.
-     * @see #syncWithMasterTagList(CrimeCase)
-     */
-    public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
-            throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
-        requireNonNull(editedCase);
-
-        CrimeCase syncedEditedCrimeCase = syncWithMasterTagList(editedCase);
-        // TODO: the tags master list will be updated even though the below line fails.
-        // This can cause the tags master list to have additional tags that are not tagged to any person
-        // in the crimeCase list.
-        removeCrimeCaseFromInvestigator(target);
-        cases.setCrimeCase(target, syncedEditedCrimeCase);
-        addCrimeCaseToInvestigator(syncedEditedCrimeCase);
-    }
-```
 ###### \java\seedu\investigapptor\model\ModelManager.java
 ``` java
     /** Raises an event to indicate the filtered crime cases list has changed */
@@ -702,79 +678,6 @@ public class CalendarPanel extends UiPart<Region> {
     -fx-background-color: #bc99da;
 }
 
-
-```
-###### \resources\view\LightTheme.css
-``` css
-#tags .red {
-    -fx-text-fill: black;
-    -fx-background-color: #FF0000;
-}
-
-#tags .yellow {
-    -fx-text-fill: black;
-    -fx-background-color: #FFFF00;
-}
-
-#tags .blue {
-    -fx-text-fill: black;
-    -fx-background-color: #76D3E2;
-}
-
-#tags .orange {
-    -fx-text-fill: black;
-    -fx-background-color: #F9C815;
-}
-
-#tags .pink {
-    -fx-text-fill: black;
-    -fx-background-color: #F915EE;
-}
-
-#tags .olive {
-    -fx-text-fill: black;
-    -fx-background-color: #72B07C;
-}
-
-#tags .black {
-    -fx-text-fill: white;
-    -fx-background-color: #000000;
-}
-
-#tags .brown {
-    -fx-text-fill: black;
-    -fx-background-color: #CD853F;
-}
-
-#tags .gray {
-    -fx-text-fill: black;
-    -fx-background-color: #b6b6b6;
-}
-
-#tags .green {
-    -fx-text-fill: black;
-    -fx-background-color: #00ff06;
-}
-
-#tags .beige {
-    -fx-text-fill: black;
-    -fx-background-color: #FFE4C4;
-}
-
-#tags .lightblue {
-    -fx-text-fill: black;
-    -fx-background-color: #27fffa;
-}
-
-#tags .golden {
-    -fx-text-fill: black;
-    -fx-background-color: #DAA520;
-}
-
-#tags .purple {
-    -fx-text-fill: black;
-    -fx-background-color: #bc99da;
-}
 
 ```
 ###### \resources\view\MainWindow.fxml

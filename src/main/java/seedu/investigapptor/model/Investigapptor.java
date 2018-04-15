@@ -230,7 +230,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         }
     }
 
-    //@@author pkaijun
+    //@@author leowweiching
     /**
      * Replaces the given case {@code target} in the list with {@code editedCase}.
      * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedCase}.

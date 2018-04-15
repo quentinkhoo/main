@@ -70,54 +70,26 @@ public class NoPasswordException extends Exception {
 /**
  * Removes the password from the investigapptor application
  */
-public class RemovePasswordCommand extends UndoableCommand {
+public class RemovePasswordCommand extends Command {
 
     public static final String COMMAND_WORD = "removepassword";
     public static final String COMMAND_ALIAS = "rp";
     public static final String MESSAGE_SUCCESS =  "Password successfully removed!";
+    public static final String MESSAGE_NO_PASSWORD = "No password to remove!";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the password from the Investigapptor."
-            + " Requires input of current password"
-            + "Parameters: " + PREFIX_PASSWORD + "currentPassword";
-
-    private String inputPassword;
-
-
-    public RemovePasswordCommand(String inputPassword) {
-        requireNonNull(inputPassword);
-        this.inputPassword = inputPassword;
-    }
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the password from the Investigapptor.";
 
     @Override
-    public CommandResult executeUndoableCommand() {
+    public CommandResult execute() {
         requireNonNull(model);
         try {
-            checkInputPassword(inputPassword);
+            model.removePassword();
+            return new CommandResult(MESSAGE_SUCCESS);
         } catch (NoPasswordException npe) {
-            return new CommandResult(npe.getMessage());
-        } catch (WrongPasswordException wpe) {
-            return new CommandResult(wpe.getMessage());
+            return new CommandResult(MESSAGE_NO_PASSWORD);
         }
-        model.removePassword();
-        return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    /**
-     * Checks whether the input password matches the current investigapptor password
-     * @param inputPassword
-     * @throws WrongPasswordException if password is invalid or there is no password in the application
-     */
-    private void checkInputPassword(String inputPassword) throws WrongPasswordException, NoPasswordException {
-        String inputPasswordHash = Password.generatePasswordHash(inputPassword);
-        try {
-            String currentPasswordHash = model.getInvestigapptor().getPassword().getPassword();
-            if (!currentPasswordHash.equals(inputPasswordHash)) {
-                throw new WrongPasswordException("Password cannot be removed. Invalid password has been entered.");
-            }
-        } catch (NullPointerException npe) {
-            throw new NoPasswordException("Investigapptor currently has no password!");
-        }
-    }
 }
 ```
 ###### \java\seedu\investigapptor\logic\commands\SetPasswordCommand.java
@@ -125,7 +97,7 @@ public class RemovePasswordCommand extends UndoableCommand {
 /**
  * Adds a password to the investigapptor book.
  */
-public class SetPasswordCommand extends UndoableCommand {
+public class SetPasswordCommand extends Command {
 
     public static final String COMMAND_WORD = "setpassword";
     public static final String COMMAND_ALIAS = "sp";
@@ -148,12 +120,12 @@ public class SetPasswordCommand extends UndoableCommand {
     }
 
     @Override
-    public CommandResult executeUndoableCommand() throws CommandException {
+    public CommandResult execute() throws CommandException {
         requireNonNull(model);
         try {
             model.updatePassword(password);
             logger.info("Password has been updated!");
-            return new CommandResult(String.format(MESSAGE_SUCCESS));
+            return new CommandResult(MESSAGE_SUCCESS);
         } catch (InvalidPasswordException ipe) {
             throw new CommandException(MESSAGE_PASSWORD_CONSTRAINTS);
         }
@@ -178,6 +150,36 @@ public class SetPasswordCommand extends UndoableCommand {
     }
 }
 ```
+###### \java\seedu\investigapptor\logic\LogicManager.java
+``` java
+
+    /**
+     * Masks a password field
+     * @param inputText
+     * @return
+     */
+    private String maskPassword(String inputText) {
+        StringBuilder sb = new StringBuilder(inputText);
+        int prefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
+
+        if (hasPasswordPrefix(inputText)) {
+            for (int i = prefixIndex + 3; i < inputText.length(); i++) {
+                sb.setCharAt(i, '*');
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Checks for presence of password prefix
+     * @param inputText
+     * @return
+     */
+    private boolean hasPasswordPrefix(String inputText) {
+        int passwordPrefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
+        return passwordPrefixIndex != -1;
+    }
+```
 ###### \java\seedu\investigapptor\logic\parser\ParserUtil.java
 ``` java
     /**
@@ -193,41 +195,6 @@ public class SetPasswordCommand extends UndoableCommand {
         }
         return new Password(password);
     }
-```
-###### \java\seedu\investigapptor\logic\parser\RemovePasswordCommandParser.java
-``` java
-/**
- * Parses input arguments and creates a new PasswordCommand object
- */
-public class RemovePasswordCommandParser implements Parser<RemovePasswordCommand> {
-
-    /**
-     * Parses the given {@code String} of arguments in the context of the PasswordCommand
-     * and returns an PasswordCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public RemovePasswordCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PASSWORD);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_PASSWORD)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RemovePasswordCommand.MESSAGE_USAGE));
-        }
-
-        String inputPassword = args.substring(4);
-        return new RemovePasswordCommand(inputPassword);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-}
 ```
 ###### \java\seedu\investigapptor\logic\parser\SetPasswordCommandParser.java
 ``` java
@@ -281,11 +248,12 @@ public class SetPasswordCommandParser implements Parser<SetPasswordCommand> {
 ###### \java\seedu\investigapptor\model\Investigapptor.java
 ``` java
     public void setPassword(String password) {
-        this.password = new Password(password);
+        String passwordHash = Password.generatePasswordHash(password);
+        this.password = new Password(passwordHash);
     }
 
-    public void setPassword(Password oldPassword) {
-        this.password = oldPassword;
+    public void setPassword(Password password) {
+        this.password = password;
     }
 ```
 ###### \java\seedu\investigapptor\model\Investigapptor.java
@@ -297,13 +265,20 @@ public class SetPasswordCommandParser implements Parser<SetPasswordCommand> {
      * @param newPassword  will be the new password.
      */
     public void updatePassword(Password newPassword) {
-        password.updatePassword(newPassword);
+        try {
+            password.updatePassword(newPassword);
+        } catch (NullPointerException npe) {
+            setPassword(newPassword.getPassword());
+        }
     }
 
     /**
      * Removes the password of this {@code Investigapptor}
      */
-    public void removePassword() {
+    public void removePassword () throws NoPasswordException {
+        if (this.password == null || this.password.getPassword() == null) {
+            throw new NoPasswordException("No password in investigapptor");
+        }
         this.password = null;
     }
 ```
@@ -324,7 +299,7 @@ public class SetPasswordCommandParser implements Parser<SetPasswordCommand> {
     /**
      * Removes the existing password
      */
-    void removePassword();
+    void removePassword() throws NoPasswordException;
 ```
 ###### \java\seedu\investigapptor\model\ModelManager.java
 ``` java
@@ -335,9 +310,13 @@ public class SetPasswordCommandParser implements Parser<SetPasswordCommand> {
     }
 
     @Override
-    public void removePassword() {
-        investigapptor.removePassword();
-        indicateInvestigapptorChanged();
+    public void removePassword() throws NoPasswordException {
+        try {
+            investigapptor.removePassword();
+            indicateInvestigapptorChanged();
+        } catch (NoPasswordException npe) {
+            throw new NoPasswordException(npe.getMessage());
+        }
     }
 ```
 ###### \java\seedu\investigapptor\model\Password.java
@@ -369,10 +348,10 @@ public class Password {
 
     /**
      * use this if hashcode is known
-     * @param password
+     * @param passwordHash
      */
-    public Password(String password) {
-        this.passwordHash = password;
+    public Password(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     /**
@@ -564,49 +543,10 @@ public class XmlAdaptedPassword {
      */
     private void clearScreenText() {
         commandTextField.setText("");
-        commandTextDisplay.setText("");
     }
 
-    /**
-     *  Toggles between hiding the password and revealing the password field to the user
-     */
-    private void togglePasswordHide() {
-        if (hideEnabled) {
-            commandTextField.setOpacity(1);
-            commandTextDisplay.setOpacity(0);
-            hideEnabled = false;
-        } else {
-            commandTextField.setOpacity(0);
-            commandTextDisplay.setOpacity(1);
-            hideEnabled = true;
-        }
-    }
-    /**
-     * Hides password string
-     * @param inputText
-     * @return
-     */
-    private String hidePasswordText(String inputText) {
-        StringBuilder sb = new StringBuilder(inputText);
-        int prefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
 
-        if (hasPasswordPrefix(inputText)) {
-            for (int i = prefixIndex + 3; i < inputText.length(); i++) {
-                sb.setCharAt(i, '*');
-            }
-        }
-        return sb.toString();
-    }
 
-    /**
-     * Checks for presence of password prefix
-     * @param inputText
-     * @return
-     */
-    private boolean hasPasswordPrefix(String inputText) {
-        int passwordPrefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
-        return passwordPrefixIndex != -1;
-    }
 ```
 ###### \java\seedu\investigapptor\ui\MainWindow.java
 ``` java
@@ -908,35 +848,48 @@ public class PasswordWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
     }
 
-    /**
-     * Opens the help window.
-     */
-    @FXML
-    public void handleHelp() {
-        HelpWindow helpWindow = new HelpWindow();
-        helpWindow.show();
-    }
 
     void show() {
         primaryStage.show();
     }
 
-    /**
-     * Closes the application.
-     */
-    @FXML
-    private void handleExit() {
-        raise(new ExitAppRequestEvent());
-    }
-
     void releaseResources() {
         browserPanel.freeResources();
     }
+}
+```
+###### \java\seedu\investigapptor\ui\skin\PasswordFieldSkin.java
+``` java
+/**
+ * The PassworldFieldSkin class is responsible for masking the password input yet displaying the other commands
+ */
+public class PasswordFieldSkin extends TextFieldSkin {
 
-    @Subscribe
-    private void handleShowHelpEvent(ShowHelpRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        handleHelp();
+    public PasswordFieldSkin(PasswordField passwordField) {
+        super(passwordField, new PasswordFieldBehavior(passwordField));
+    }
+
+    @Override
+    protected String maskText(String inputText) {
+        StringBuilder sb = new StringBuilder(inputText);
+        int prefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
+
+        if (hasPasswordPrefix(inputText)) {
+            for (int i = prefixIndex + 3; i < inputText.length(); i++) {
+                sb.setCharAt(i, '*');
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Checks for presence of password prefix
+     * @param inputText
+     * @return
+     */
+    private boolean hasPasswordPrefix(String inputText) {
+        int passwordPrefixIndex = inputText.indexOf(PREFIX_PASSWORD.getPrefix());
+        return passwordPrefixIndex != -1;
     }
 }
 ```

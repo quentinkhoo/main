@@ -6,7 +6,7 @@ import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.logic.commands.ListCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 
-
+//@@author quentinkhoo
 /**
  + * Parses input arguments and creates a new ListCommand object
  + */
@@ -28,3 +28,4 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
     }
 }
+//@@author

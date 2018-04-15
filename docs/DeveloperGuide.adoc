@@ -2154,6 +2154,17 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+=== Setting a Password
+. Setting a password for the application
+
+.. Test case: `setpassword pw/pass word` +
+    Expected: Password is not accepted. Error details shown in status message.
+    Status bar remains the same.
+.. Test case: `set password pw/password` +
+    Expected: Password is set. Upon re-opening of application, a password
+    is prompted for, an inputting 'password' would allow you access to the
+    application.
+
 === Deleting an investigator
 
 . Deleting an investigator while all investigators are listed

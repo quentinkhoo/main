@@ -1,5 +1,5 @@
 # leowweiching
-###### /java/seedu/investigapptor/logic/commands/AddCaseCommandIntegrationTest.java
+###### \java\seedu\investigapptor\logic\commands\AddCaseCommandIntegrationTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCaseCommand}.
@@ -42,7 +42,7 @@ public class AddCaseCommandIntegrationTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/AddCaseCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\AddCaseCommandTest.java
 ``` java
 public class AddCaseCommandTest {
 
@@ -239,7 +239,7 @@ public class AddCaseCommandTest {
 
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/DeleteCaseCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\DeleteCaseCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -411,7 +411,7 @@ public class DeleteCaseCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/EditCaseCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\EditCaseCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
@@ -648,7 +648,7 @@ public class EditCaseCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/EditCrimeCaseDescriptorTest.java
+###### \java\seedu\investigapptor\logic\commands\EditCrimeCaseDescriptorTest.java
 ``` java
 public class EditCrimeCaseDescriptorTest {
 
@@ -696,7 +696,7 @@ public class EditCrimeCaseDescriptorTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/FindCaseCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\FindCaseCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCaseCommand}.
@@ -776,7 +776,7 @@ public class FindCaseCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/SelectCaseCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\SelectCaseCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCaseCommand}.
@@ -919,7 +919,7 @@ public class SelectCaseCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/parser/AddCaseCommandParserTest.java
+###### \java\seedu\investigapptor\logic\parser\AddCaseCommandParserTest.java
 ``` java
 public class AddCaseCommandParserTest {
     private AddCaseCommandParser parser = new AddCaseCommandParser();
@@ -1045,7 +1045,7 @@ public class AddCaseCommandParserTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/parser/DeleteCaseCommandParserTest.java
+###### \java\seedu\investigapptor\logic\parser\DeleteCaseCommandParserTest.java
 ``` java
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -1070,7 +1070,7 @@ public class DeleteCaseCommandParserTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/parser/EditCaseCommandParserTest.java
+###### \java\seedu\investigapptor\logic\parser\EditCaseCommandParserTest.java
 ``` java
 public class EditCaseCommandParserTest {
 
@@ -1253,7 +1253,7 @@ public class EditCaseCommandParserTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/parser/InvestigapptorParserTest.java
+###### \java\seedu\investigapptor\logic\parser\InvestigapptorParserTest.java
 ``` java
     @Test
     public void parseCommand_add() throws Exception {
@@ -1266,7 +1266,7 @@ public class EditCaseCommandParserTest {
     }
 
 ```
-###### /java/seedu/investigapptor/logic/parser/InvestigapptorParserTest.java
+###### \java\seedu\investigapptor\logic\parser\InvestigapptorParserTest.java
 ``` java
     @Test
     public void parseCommand_addAlias() throws Exception {
@@ -1280,7 +1280,7 @@ public class EditCaseCommandParserTest {
     }
 
 ```
-###### /java/seedu/investigapptor/logic/parser/InvestigapptorParserTest.java
+###### \java\seedu\investigapptor\logic\parser\InvestigapptorParserTest.java
 ``` java
     @Test
     public void parseCommand_findCase() throws Exception {
@@ -1291,7 +1291,7 @@ public class EditCaseCommandParserTest {
     }
 
 ```
-###### /java/seedu/investigapptor/logic/parser/InvestigapptorParserTest.java
+###### \java\seedu\investigapptor\logic\parser\InvestigapptorParserTest.java
 ``` java
     @Test
     public void parseCommand_findCaseAlias() throws Exception {
@@ -1432,7 +1432,7 @@ public class EditCaseCommandParserTest {
     }
 
 ```
-###### /java/seedu/investigapptor/logic/parser/SelectCaseCommandParserTest.java
+###### \java\seedu\investigapptor\logic\parser\SelectCaseCommandParserTest.java
 ``` java
 /**
  * Test scope: similar to {@code DeleteCaseCommandParserTest}.
@@ -1454,7 +1454,7 @@ public class SelectCaseCommandParserTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/storage/XmlAdaptedCrimeCaseTest.java
+###### \java\seedu\investigapptor\storage\XmlAdaptedCrimeCaseTest.java
 ``` java
 public class XmlAdaptedCrimeCaseTest {
     private static final String INVALID_NAME = "Project H@ppy";
@@ -1599,7 +1599,7 @@ public class XmlAdaptedCrimeCaseTest {
 
 }
 ```
-###### /java/seedu/investigapptor/storage/XmlSerializableInvestigapptorTest.java
+###### \java\seedu\investigapptor\storage\XmlSerializableInvestigapptorTest.java
 ``` java
     @Test
     public void toModelType_invalidCrimeCaseFile_throwsIllegalValueException() throws Exception {

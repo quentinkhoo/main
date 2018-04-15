@@ -1,5 +1,5 @@
 # quentinkhoo
-###### /java/guitests/guihandles/PasswordBoxHandle.java
+###### \java\guitests\guihandles\PasswordBoxHandle.java
 ``` java
 /**
  * A handle to the {@code PasswordBox} in the GUI.
@@ -43,7 +43,7 @@ public class PasswordBoxHandle extends NodeHandle<TextField> {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/RemovePasswordCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\RemovePasswordCommandTest.java
 ``` java
 public class RemovePasswordCommandTest {
     private static final Password TEST_PASSWORD = new Password("password");
@@ -85,7 +85,7 @@ public class RemovePasswordCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/SetPasswordCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\SetPasswordCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -145,7 +145,7 @@ public class SetPasswordCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/parser/InvestigapptorParserTest.java
+###### \java\seedu\investigapptor\logic\parser\InvestigapptorParserTest.java
 ``` java
     @Test
     public void parseCommand_setPassword() throws Exception {
@@ -159,7 +159,7 @@ public class SetPasswordCommandTest {
         assertTrue(parser.parseCommand(RemovePasswordCommand.COMMAND_WORD) instanceof RemovePasswordCommand);
     }
 ```
-###### /java/seedu/investigapptor/model/InvestigapptorTest.java
+###### \java\seedu\investigapptor\model\InvestigapptorTest.java
 ``` java
     @Test
     public void setPassword_passwordAdded() throws Exception {
@@ -178,7 +178,7 @@ public class SetPasswordCommandTest {
     }
 
 ```
-###### /java/seedu/investigapptor/storage/StorageManagerTest.java
+###### \java\seedu\investigapptor\storage\StorageManagerTest.java
 ``` java
     @Test
     public void investigapptorReadWithWrongPassword() throws Exception {
@@ -192,7 +192,7 @@ public class SetPasswordCommandTest {
     }
 
 ```
-###### /java/seedu/investigapptor/storage/XmlAdaptedPasswordTest.java
+###### \java\seedu\investigapptor\storage\XmlAdaptedPasswordTest.java
 ``` java
 public class XmlAdaptedPasswordTest {
 
@@ -204,14 +204,14 @@ public class XmlAdaptedPasswordTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/storage/XmlInvestigapptorStorageTest.java
+###### \java\seedu\investigapptor\storage\XmlInvestigapptorStorageTest.java
 ``` java
     private void readInvestigapptorWithPassword(String filePath, Password password) throws Exception {
         new XmlInvestigapptorStorage(filePath)
                 .checkInvestigapptorPassword(addToTestDataPathIfNotNull(filePath), password);
     }
 ```
-###### /java/seedu/investigapptor/storage/XmlInvestigapptorStorageTest.java
+###### \java\seedu\investigapptor\storage\XmlInvestigapptorStorageTest.java
 ``` java
     @Test
     public void readInvestigapptorWithPassword_invalidAndValidPersonInvestigapptor_throwDataConversionException()
@@ -221,7 +221,7 @@ public class XmlAdaptedPasswordTest {
                 new Password("password"));
     }
 ```
-###### /java/seedu/investigapptor/testutil/InvestigapptorBuilder.java
+###### \java\seedu\investigapptor\testutil\InvestigapptorBuilder.java
 ``` java
     /**
      * Parses {@code password} into a {@code Password} and adds it to the {@code Investigapptor} that we are building.
@@ -231,7 +231,7 @@ public class XmlAdaptedPasswordTest {
         return this;
     }
 ```
-###### /java/seedu/investigapptor/ui/CommandBoxTest.java
+###### \java\seedu\investigapptor\ui\CommandBoxTest.java
 ``` java
     @Test
     public void handleKeyPress_escape() {
@@ -246,7 +246,7 @@ public class XmlAdaptedPasswordTest {
         assertTrue("".equals(commandBoxHandle.getInput()));
     }
 ```
-###### /java/seedu/investigapptor/ui/PasswordBoxTest.java
+###### \java\seedu\investigapptor\ui\PasswordBoxTest.java
 ``` java
 public class PasswordBoxTest extends GuiUnitTest {
     private static final String CORRECT_PASSWORD = "password";

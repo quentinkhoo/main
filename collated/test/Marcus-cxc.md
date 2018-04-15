@@ -1,5 +1,5 @@
 # Marcus-cxc
-###### \java\seedu\investigapptor\logic\commands\ListInvestigatorCaseCommandTest.java
+###### /java/seedu/investigapptor/logic/commands/ListInvestigatorCaseCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.

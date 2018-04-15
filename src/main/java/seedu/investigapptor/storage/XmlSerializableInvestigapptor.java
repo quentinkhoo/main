@@ -11,7 +11,7 @@ import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
 import seedu.investigapptor.model.person.investigator.Investigator;
-//@@author leowweiching-reused
+//@@author leowweiching
 /**
  * An Immutable Investigapptor that is serializable to XML format
  */

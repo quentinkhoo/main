@@ -21,7 +21,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     /** {@code Predicate} that always evaluate to true */
     Predicate<CrimeCase> PREDICATE_SHOW_ALL_CASES = unused -> true;
 
@@ -47,7 +47,7 @@ public interface Model {
     void updatePerson(Person target, Person editedPerson)
             throws DuplicatePersonException, PersonNotFoundException;
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     /** Deletes the given case. */
     void deleteCrimeCase(CrimeCase target) throws CrimeCaseNotFoundException;
     /** Adds the given case */
@@ -69,7 +69,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered investigator list */
     //ObservableList<Investigator> getFilteredInvestigatorList();
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     /** Returns an unmodifiable view of the filtered case list */
     ObservableList<CrimeCase> getFilteredCrimeCaseList();
 
@@ -80,7 +80,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     /**
      * Updates the filter of the filtered case list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

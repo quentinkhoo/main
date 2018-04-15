@@ -22,7 +22,7 @@ import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.ModelManager;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-//@@author leowweiching-reused
+//@@author leowweiching
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
  * {@code DeleteCaseCommand}.

@@ -92,13 +92,13 @@ https://github.com/CS2103JAN2018-F14-B3/main/pull/224[#224])
 == Contributions to the User Guide
 
 |===
-|_Given below are some sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users. +
-Here are all the sections that I have contributed: https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindInvTags[1],
-https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindCloseCases[2],
-https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindOpenCases[3],
-https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#CloseCase[4],
-https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindCaseTags[5]
-https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#CasesCalendar[6]_
+|_Here are all the sections that I have contributed: https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindInvTags[1],
+  https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindCloseCases[2],
+  https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindOpenCases[3],
+  https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#CloseCase[4],
+  https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#FindCaseTags[5]
+  https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/UserGuide.adoc#CasesCalendar[6] +
+  Given below are some sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
 include::../UserGuide.adoc[tag=calendarsection]
@@ -108,9 +108,9 @@ include::../UserGuide.adoc[tag=findopencases]
 == Contributions to the Developer Guide
 
 |===
-|_Given below are some sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project. +
-Here are all the sections that I have contributed: https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/DeveloperGuide.adoc#Find-Feature[1],
-https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/DeveloperGuide.adoc#Calendar-Feature[2]_
+|_Here are all the sections that I have contributed: https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/DeveloperGuide.adoc#Find-Feature[1],
+  https://github.com/CS2103JAN2018-F14-B3/main/blob/master/docs/DeveloperGuide.adoc#Calendar-Feature[2] +
+  Given below are some sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
 include::../DeveloperGuide.adoc[tag=calendar2]

@@ -621,7 +621,7 @@ private void handleInvestigapptorChangedEvent(InvestigapptorChangedEvent event) 
 ----
 
 [[Calendar-Events-Filter]]
-===== Event raised from fi=ltering the `CrimeCase` list
+===== Event raised from filtering the `CrimeCase` list
 In the following sequence diagram, it shows how the components interacts when the user issues
 the commands that filters  the cases that the user is looking for. (Commands are shown in the diagram).
 

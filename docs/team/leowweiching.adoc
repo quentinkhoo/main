@@ -26,8 +26,8 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 * *Other contributions*:
 
-** Enhancements to existing features:
-*** Updated the GUI color scheme https://github.com/CS2103JAN2018-F14-B3/main/pull/185[#185]
+** Project management:
+*** Managed release `v1.5rc` on GitHub
 ** Documentation:
 *** Wrote content for the README.md https://github.com/CS2103JAN2018-F14-B3/main/pull/23[#23]
 *** Restructured the Developer Guide and changed language style of existing content to make it more reader-focused https://github.com/CS2103JAN2018-F14-B3/main/pull/252[#252]

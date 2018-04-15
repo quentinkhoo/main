@@ -55,11 +55,17 @@ include::../UserGuide.adoc[tag=selectcase]
 |===
 
 include::../DeveloperGuide.adoc[tag=crimecase]
+
 include::../DeveloperGuide.adoc[tag=addcase]
-include::../DeveloperGuide.adoc[tag=editcase]
-include::../DeveloperGuide.adoc[tag=findcases]
+
 include::../DeveloperGuide.adoc[tag=deletecase]
+
+include::../DeveloperGuide.adoc[tag=editcase]
+
+include::../DeveloperGuide.adoc[tag=findcases]
+
 include::../DeveloperGuide.adoc[tag=selectcase]
+
 include::../DeveloperGuide.adoc[tag=ui-enhancements]
 
 

@@ -837,7 +837,9 @@ has to be correct for each instance.
 ** Cons: Slower due to having to search through all the association class to find all all the connected
  `Investigator` and `CrimeCase`. More duplicates in the XML file.
 
+//end::investigator[]
 
+//tag::addinvestigator[]
 ==== Add investigator
 
 The `addInvestigatorCommand` will create an instance of the Investigator class and store it in the Investigapptor.
@@ -905,6 +907,10 @@ Storage takes lesser space as only the hashcode is required.
 ** Cons: Takes up a lot of storage as two copy `CrimeCase` has to be saved, one in `UniqueCrimeCaseList`
 and one in the `Investigator`.
 
+//end::addinvestigator[]
+
+//tag::deleteinvestigator[]
+
 ==== Delete investigator
 
 The `deleteInvestigatorCommand` will find and delete the specified Investigator in the Investigapptor.
@@ -942,6 +948,10 @@ image::DeleteInvestigatorSequenceDiagram.png[width="790"]
 * **Alternative 2:** Archive the investigator
 ** Pros: Able bring any investigator out of archive.
 ** Cons: Complicated to implement, does not actually delete the investigator and may cause build up of unwanted data.
+
+//end::deleteinvestigator[]
+
+//tag::editinvestigator[]
 
 ==== Edit investigator
 
@@ -995,6 +1005,10 @@ This will help avoid bugs when redoing and undoing.
 ** Cons: `Investigator` in `CrimeCase` will no longer be final. This however involve the `Invesetigator` to
 modify `CrimeCase`, which result in bad coupling.
 
+//end::editinvestigator[]
+
+//tag::listinvestigatorcase[]
+
 ==== List investigator's cases
 
 The `ListInvestigatorCaseCommand` will search and display all the cases belonging to the investigator in the panel list.
@@ -1047,7 +1061,7 @@ type of searches.
 ** Pros: Does not need to search every `CrimeCase` , meaning command will be processed faster
 ** Cons: Have to implement a method to convert the `investigator` 's list of `CrimeCase` to a filtered list.
 
-//end::investigator[]
+//end::listinvestigatorcase[]
 
 === Case Features
 

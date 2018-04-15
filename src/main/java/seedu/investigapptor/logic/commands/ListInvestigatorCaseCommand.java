@@ -52,6 +52,11 @@ public class ListInvestigatorCaseCommand extends Command {
         return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
     }
 
-
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListInvestigatorCaseCommand // instanceof handles nulls
+                && this.predicate.equals(((ListInvestigatorCaseCommand) other).predicate)); // state check
+    }
 
 }

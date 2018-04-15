@@ -29,14 +29,13 @@ Our primary goals are:
 
 == What can Investigapptor do?
 
-Investigapptor is currently in its early stages of development. Below are some are the features that you can expect:
-
 * Overview of investigators and cases
-* Assign cases to investigators
+* Assign investigators to cases
 * Assess key information of a case
-* Categorise cases with labels
+* Categorise cases and investigators with labels
 
-Note that Investigapptor is a desktop application with a GUI, but most of the user interactions happen using a CLI (Command Line Interface).
+Note that Investigapptor is a desktop application with a GUI,
+but most of the user interactions happen using a CLI (Command Line Interface).
 
 == Site Map
 

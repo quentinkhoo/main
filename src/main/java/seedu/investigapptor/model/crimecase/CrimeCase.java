@@ -108,7 +108,6 @@ public class CrimeCase {
         CrimeCase otherCrimeCase = (CrimeCase) other;
         return otherCrimeCase.getCaseName().equals(this.getCaseName())
                 && otherCrimeCase.getDescription().equals(this.getDescription())
-                && otherCrimeCase.getCurrentInvestigator().equals(this.getCurrentInvestigator())
                 && otherCrimeCase.getStartDate().equals(this.getStartDate());
     }
 

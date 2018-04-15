@@ -116,10 +116,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 
 ==== Getting started with coding
 
-When you are ready to start coding,
-
-1. Get some sense of the overall design by reading <<Design-Architecture>>.
-2. Take a look at <<GetStartedProgramming>>.
+When you are ready to start coding, get some sense of the overall design by reading <<Design-Architecture>>.
 
 == Design
 This section will explain structure of the Investigapptor and what each component of the
@@ -247,6 +244,7 @@ The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Investigapptor data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<CrimeCase>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [[Design-Storage]]
@@ -265,7 +263,7 @@ The `Storage` component,
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.investigapptorbook.commons` package.
+Classes used by multiple components are in the `seedu.investigapptor.commons` package.
 
 == Implementation
 
@@ -447,7 +445,8 @@ image::PasswordHighLevelSequenceDiagram.png[width="790"]
 
 ====== Logic Component
 
-When a `setpassword` command is executed, a `SetPasswordCommand`
+When a `setpassword` command is executed, a
+link:{repoUrl}/src/main/java/seedu/investigapptor/logic/commands/SetPasswordCommand.java[SetPasswordCommand]
 object gets created if the parsing of the command was successful. This
 will in turn make a call to the `updatePassword` function in the `Model`
 component, as shown in the sequence diagram below:
@@ -458,7 +457,8 @@ image::PasswordLogicSequenceDiagram.png[width="790"]
 
 ====== Model Component
 
-Upon being called, the `updatePassword` function in the `ModelManager`
+Upon being called, the `updatePassword` function in the
+link:{repoUrl}/src/main/java/seedu/investigapptor/model/ModelManager.java[ModelManager]
 would raise a new `InvestigapptorChangedEvent` to indicate that the
 password has been updated. The entire sequence diagram for the `Model`
 component as shown below describes this in greater detail.
@@ -467,11 +467,11 @@ component as shown below describes this in greater detail.
 .Password Feature's Model Component Sequence Diagram
 image::PasswordModelSequenceDiagram.png[width="790"]
 
-Whenever then `Password` Object's `updatePassword` function is called,
+Whenever then link:{repoUrl}/src/main/java/seedu/investigapptor/model/Password.java[Password]
+ Object's `updatePassword` function is called,
 the <<hash, hash>> of the password is first generated with the `generatePasswordHash`
 function. This function makes use of the link:https://en.wikipedia.org/wiki/SHA-2[SHA-256]
-hashing algorithm
-to generate the <<hash, hash>> of the password as shown below:
+hashing algorithm as shown below:
 
 [source, java]
 ----
@@ -517,9 +517,21 @@ ranks.
 ** Pros: Each investigator can have their own password, allowing for
 access control between investigators of different ranks.
 ** Cons: Requires an additional password attribute for each investigator.
+
+====== Aspect: Password related commands being undoable
+* **Alternative 1 (Current Choice)**: Password related commands should not be
+undoable
+** Pros: Security becomes tighter.
+** Cons: More effort is required in configuring passwords.
+
+* **Alternative 2 **: Password related commands should be undoable.
+** Pros: Less effort is required in configuring passwords.
+** Cons: Security becomes less tight due to the additional method of
+configuring passwords
+
 // end::password[]
 
-//tag::calendar[]
+//tag::calendar2[]
 [[Calendar-Feature]]
 ==== Calendar feature
 The calendar feature serves as an interface to provide an overview of all the cases
@@ -528,7 +540,7 @@ status. Red represents the status `open`; whereas green represents the status `c
 
 [[CalendarFeature]]
 .Calendar Interface
-image::CalendarFeature.PNG[width="800"]
+image::CalendarFeature.PNG[width="700"]
 
 ===== Reason for implementation
 The calendar serves as an organization tool to arrange the cases according to its start and end date,
@@ -619,6 +631,7 @@ private void handleInvestigapptorChangedEvent(InvestigapptorChangedEvent event) 
     Platform.runLater(this::updateCalendar);
 }
 ----
+//end::calendar2[]
 
 [[Calendar-Events-Filter]]
 ===== Event raised from filtering the `CrimeCase` list
@@ -1643,7 +1656,7 @@ The current version of Investigapptor does not provide users with the ability to
 
 == Documentation
 
-We use asciidoc for writing documentation.
+We use link:http://www.methods.co.nz/asciidoc/[asciidoc] for writing documentation.
 
 [NOTE]
 We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
@@ -1903,7 +1916,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |=======================================================================
 
-_{More to be added}_
 
 [appendix]
 == Use Cases
@@ -2162,8 +2174,26 @@ These instructions only provide a starting point for testers to work on; testers
     Status bar remains the same.
 .. Test case: `set password pw/password` +
     Expected: Password is set. Upon re-opening of application, a password
-    is prompted for, an inputting 'password' would allow you access to the
+    is prompted for, and inputting 'password' would allow you access to the
     application.
+
+=== Adding an investigator
+
+. Adding an investigator into the Investigapptor
+
+.. Prerequisites: None
+.. Test case: `addinvestigator n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/1 t/newcomer` +
+   Expected: A new investigator to be added
+   Details of the new investigator shown in the status message.
+   Timestamp in the status bar is updated.
+.. Test case: `n/John Doe e/johnd@example.com a/John street, block 123, #01-01 r/1 t/newcomer` +
+   Expected: Missing input phone number. Error details shown in the status message.
+   Status bar remains the same.
+.. Other incorrect add commands to try: `add .....`, +
+ `n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/newcomer` +
+  ` p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/1 t/newcomer`
+     +
+   Expected: Similar to previous due to missing input arguments.
 
 === Deleting an investigator
 
@@ -2182,10 +2212,224 @@ Multiple investigators in the list.
 (where x is larger than the list size) +
    Expected: Similar to previous.
 
-=== Saving data
+=== Unable to delete an investigator with a case
 
-. Dealing with missing/corrupted data files
+. Deleting an investigator while all investigators are listed
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Prerequisites: Investigator at index one has a CrimeCase under him/her
+Multiple investigators in the list.
+.. Test case: `deleteinvestigator 1` +
+   Expected: Investigator cannot be deleted
+   Details of why investigator cannot be deleted to be shown in the status message.
+   Timestamp in the status bar is updated.
+.. Test case: `deleteinvestigator 0` +
+   Expected: No investigator is deleted. Error details shown in the status message.
+   Status bar remains the same.
+.. Other incorrect delete commands to try: `delete`, `delete x`
+(where x is larger than the list size) +
+   Expected: Similar to previous.
 
-_{ more test cases ... }_
+=== Edit an investigator
+
+. Editing an investigator that exist in the Investigapptor
+
+.. Prerequisites: List all investigators using the `listinvestigators` command.
+.. Test case: `editinvestigator 1 n/Detective Conan` +
+   Expected: First investigator name is changed to Detective Conan
+   Details of the edited investigator shown in the status message. Cases under the
+   investigator should reflect the change as well.
+   Timestamp in the status bar is updated.
+.. Test case: `deleteinvestigator 1 n/(&$(@#^$(@` +
+   Expected: Unable to edit the investigator, name can only be alphanumeric.
+   Error details shown in the status message.
+   Status bar remains the same.
+.. Test case: `deleteinvestigator 0` +
+   Expected: No investigator is deleted. Error details shown in the status message.
+   Status bar remains the same.
+.. Other incorrect delete commands to try: `delete`, `delete x`
+(where x is larger than the list size) +
+   Expected: Similar to previous.
+
+=== Backup Investigapptor
+
+. Creating a backup of the investigapptor state.
+
+.. Prerequisites: Have a investigator in the investigapptor
+.. Test case: `backup savefile` +
+   Expected: A savefile.xml to be created in the root/data folder. The newly created backup should be
+   exactly the same as the default Investigapptor.xml file.
+   Success message of the backup being created,
+   timestamp in the status bar is updated.
+.. Test case: `backup *&@#^$*` +
+   Expected: Unable to backup as filename can only be alphanumeric.
+   Error details shown in the status message.
+   Status bar remains the same.
+
+=== List Investigator Cases
+
+. Viewing all the `CrimeCase` under the selected investigator.
+
+.. Prerequisites: List all investigators using the `listinvestigators` command.
+Investigator at index 1 has at least one `CrimeCase`.
+.. Test case: `listinvestigatorcase 1` +
+   Expected: Change to `CrimeCase` List Panel and only display cases under the investigator and
+   index 1.
+   Details of how many cases shown in the status message.
+   Timestamp in the status bar is updated.
+.. Test case: `listinvestigatorcase 0` +
+   Expected: No investigator is deleted. Error details shown in the status message.
+   Status bar remains the same.
+.. Other incorrect delete commands to try: `listinvestigatorcase`, `listinvestigatorcase x`
+(where x is larger than the list size) +
+   Expected: Similar to previous.
+
+=== Adding a case
+
+. Adding a case while all cases are listed
+
+.. Prerequisites: At least one investigator has been added. List all cases using the `listcases` command. Multiple cases in the list.
+.. Test case: `addcase n/Project Magic d/Kidnapping of 6 year-old John Doe i/1 s/01/04/2018 t/Homicide t/Fraud` +
+   Expected: Case is added to the bottom of the list. Details of the added case shown in the status message. Timestamp in the status bar is updated. Added case is reflected in the case list of the corresponding investigator.
+.. Test case: `addcase n/Project Magic i/1 s/01/04/2018 t/Homicide t/Fraud` +
+   Expected: No case is added. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect `addcase` commands to try: `addcase`, `addcase n/Project Test i/1 d/Kidnapping of 6 year-old John Doe s/x` (where x is an invalid date e.g. greater than today's date) +
+   Expected: Similar to previous.
+
+. Adding a case while list is filtered
+
+.. Prerequisites: At least one investigator has been added. List one or more cases using the `findcases` command.
+.. Test case: `addcase n/Project Magic d/Kidnapping of 6 year-old John Doe i/1 s/01/04/2018 t/Homicide t/Fraud` +
+   Expected: Unfiltered list is displayed. Case is added to the bottom of the list. Details of the added case shown in the status message. Timestamp in the status bar is updated. Added case is reflected in the case list of the corresponding investigator.
+.. Test case: `addcase n/Project Magic i/1 s/01/04/2018 t/Homicide t/Fraud` +
+   Expected: No case is added. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect `addcase` commands to try: `addcase`, `addcase n/Project Test i/1 d/Kidnapping of 6 year-old John Doe s/x` (where x is an invalid date e.g. greater than today's date) +
+   Expected: Similar to previous.
+
+=== Deleting a case
+
+. Deleting a case while all cases are listed
+
+.. Prerequisites: List all cases using the `listcases` command. Multiple cases in the list.
+.. Test case: `deletecase 1` +
+   Expected: First case is deleted from the list. Details of the deleted case shown in the status message. Timestamp in the status bar is updated. Case is removed from the case list of the corresponding investigator.
+.. Test case: `delete 0` +
+   Expected: No case is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `deletecase`, `delete x` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
+. Deleting a case while list is filtered
+
+.. Prerequisites: List some cases using the `findcases` command. One or more cases in the list.
+.. Test case: `deletecase 1` +
+   Expected: View remains on the filtered list. First case is deleted from the filtered list. Details of the deleted case shown in the status message. Case is removed from the case list of the corresponding investigator. Timestamp in the status bar is updated.
+
+=== Editing a case
+
+. Editing a case while all cases are listed
+
+.. Prerequisites: At least one case has been added. List all cases using the `listcases` command. Multiple cases in the list.
+.. Test case: `editcase 1 d/Another description. s/3/4/2017` +
+   Expected: First case is updated accordingly from the list. Details of the edited case shown in the status message. Timestamp in the status bar is updated.
+.. Test case: `editcase 0` +
+   Expected: No case is edited. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `editcase`, `editcase x`, `editcase 1 i/y` (where x is larger than the case list size and y is larger than the investigator list size) +
+   Expected: Similar to previous.
+
+. Editing a case while list is filtered
+
+.. Prerequisites: At least one case has been added. List some cases using the `findcases` command. One or more cases in the list.
+.. Test case: `editcase 1` +
+   Expected: First case from the filtered list is edited. The unfiltered list is displayed. Details of the edited case shown in the status message. Timestamp in the status bar is updated.
+
+=== Finding a case by name
+
+. Finding a case while all cases are listed
+
+.. Prerequisites: List all cases using the `listcases` command. Multiple cases in the list.
+.. Test case: `findcases happy` +
+   Expected: List will display all the cases whose name contains the keyword "happy". Number of cases found shown in the status message.
+.. Test case: `findcases happy sad` +
+   Expected: List will display all the cases whose name contains the keyword "happy" OR "sad". Number of cases found shown in the status message.
+.. Test case: `findcases` +
+   Expected: View is not changed. Error details shown in the status message. Status bar remains the same.
+
+. Finding a case while list is filtered
+
+.. Prerequisites: List some cases using the `findcases` command. One or more cases in the list.
+.. Test case: `findcases test` +
+   Expected: The already filtered list is further filtered. List will display all the cases whose name contains the keyword "test". Number of cases found shown in the status message.
+
+=== Selecting a case
+
+. Selecting a case
+
+.. Prerequisites: At least one case has been added.
+.. Test case: `selectcase 1` +
+   Expected: The first case is highlighted in the list. Details of the case is displayed on the panel on the right of the list. Status message displays index of case that has been selected.
+.. Test case: `selectcase 0` +
+   Expected: No case is selected. Error details shown in the status message.
+.. Other incorrect delete commands to try: `selectcase`, `selectcase x` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
+
+=== Closing a case
+
+Prerequisites: The target case to be closed has a status of `open` +
+
+.. Test case: `close 1`
+.. Expected: First case's status will change from `open` to `close`.
+Success message stating that the case status has been updated is shown in the result box.
+Its corresponding entry on the calendar will change its colour from red to green, and span from its start date to today's date.
+
+Prerequisites: The target case to be closed has a status of `close` +
+
+.. Test case: `close 1`
+.. Expected: No case's status will be changed.
+Error details (case is already closed) shown in the result box.
+Its corresponding entry on the calendar remains the same.
+
+Incorrect `close` commands to try: +
+
+.. Test case: `close 0`, `close x` (where x is larger than the list size), `close`
+.. Expected: No case's status will be changed. Error details shown in the result box. Its corresponding entry on the calendar remains the same.
+
+=== Finding cases according to its tags
+
+.. Test case: `findcasetags homicide fraud`
+.. Expected: Panel list will display all the cases whose tags matches the keyword "homicide" or "fraud".
+Number of cases listed is shown in the result box.
+The calendar view changes by reflecting the cases that is currently listed on the panel list.
+
+Incorrect `findcasetags` commands to try:
+
+.. Test case: `findcasetags`
+.. Expected: No changes will be seen.
+Error details shown in the result box.
+
+=== Finding cases with status `open`
+
+.. Test case: `findopencases`
+.. Expected: Panel list will display all the cases whose status is `open`.
+Number of cases listed is shown in the result box.
+The calendar view changes by reflecting the cases that is currently listed on the panel list.
+All entries displayed on the calendar is red.
+
+=== Finding cases with status `close`
+
+.. Test case: `findclosecases`
+.. Expected: Panel list will display all the cases whose status is `close`.
+Number of cases listed is shown in the result box.
+The calendar view changes by reflecting the cases that is currently listed on the panel list.
+All entries displayed on the calendar is green.
+
+=== Finding investigators according to its tags
+
+.. Test case: `findinvestigatortags teamA expert`
+.. Expected: Panel list will display all the investigators whose tags matches the keyword "teamA" or "expert".
+Number of investigators listed is shown in the result box.
+
+Incorrect `findinvestigatortags` commands to try:
+
+.. Test case: `findinvestigatortags`
+.. Expected: No changes will be seen.
+Error details shown in the result box.

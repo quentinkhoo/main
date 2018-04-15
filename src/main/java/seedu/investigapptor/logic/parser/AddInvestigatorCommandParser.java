@@ -21,7 +21,7 @@ import seedu.investigapptor.model.person.Phone;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.model.tag.Tag;
-
+//@@author Marcus-cxc
 /**
  * Parses input arguments and creates a new AddInvestigatorCommand object
  */

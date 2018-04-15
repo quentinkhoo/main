@@ -97,13 +97,13 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         investigapptorStorage.saveInvestigapptor(investigapptor, filePath);
     }
-
+    //@@author Marcus-cxc
     @Override
     public void backupInvestigapptor(ReadOnlyInvestigapptor investigapptor, String fileName) throws IOException {
         logger.fine("Attempting to write to data file: " + "data/" + fileName + ".xml");
         investigapptorStorage.saveInvestigapptor(investigapptor, "data/" + fileName + ".xml");
     }
-
+    //@@author
 
     @Override
     @Subscribe

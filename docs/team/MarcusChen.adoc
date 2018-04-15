@@ -9,6 +9,7 @@
 == Overview
 
 Investigapptor is a desktop application used for investigators to manage cases as simple, straightforward and efficient as possible.
+
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 == Summary of contributions
@@ -31,8 +32,8 @@ Allows user to create and name a backup of the current state of the investigappt
 Allows user to view all cases allocated to the selected investigator.
 ** Implemented GUI for Investigator Details:
 +
-Created a Html file to display the investigator details in a clear and more presentable format.
-** Refactor the following functions
+Created a html file to display the investigator details in a clear and more presentable format.
+** Refactor the following command in order for investigator to integrate properly into Invesstigapptor.
 +
 *** AddInvestigatorCommand
 *** EditInvestigatorCommand
@@ -43,27 +44,17 @@ CrimeCaseBuilder used in JUnit testing to help build CrimeCase
 ** Implemented InvestigatorBuilder class
 +
 InvestigatorBuilder used in JUnit testing to help build CrimeCase
-* *Code contributed*: [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/functional/Marcus-cxc.md[Functional code]] [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/test/Marcus-cxc.md[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/functional/Marcus-cxc.md[Functional code]] [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/test/Marcus-cxc.md[Test code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Managed releases `v1.2` (1 releases) on GitHub
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Did screenshots for several commands in the User Guide: https://github.com/CS2103JAN2018-F14-B3/main/pull/255[#255] https://github.com/CS2103JAN2018-F14-B3/main/pull/260[#260]
+*** Did the navigating the interface section for the User Guide: https://github.com/CS2103JAN2018-F14-B3/main/pull/231[#231]
+*** Filled in the future enhancement in the user doc: https://github.com/CS2103JAN2018-F14-B3/main/pull/244[#244]
+*** Update the Design component for the Developer Guide https://github.com/CS2103JAN2018-F14-B3/main/pull/255[#255]
 
 == Contributions to the User Guide
 
@@ -72,7 +63,12 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=addInv]
+include::../UserGuide.adoc[tag=addinv]
+include::../UserGuide.adoc[tag=editinv]
+include::../UserGuide.adoc[tag=deleteinv]
+include::../UserGuide.adoc[tag=listinvcase]
+include::../UserGuide.adoc[tag=Backup]
+
 
 == Contributions to the Developer Guide
 
@@ -81,6 +77,9 @@ include::../UserGuide.adoc[tag=addInv]
 |===
 
 include::../DeveloperGuide.adoc[tag=investigator]
+
+
+include::../DeveloperGuide.adoc[tag=backup]
 
 
 

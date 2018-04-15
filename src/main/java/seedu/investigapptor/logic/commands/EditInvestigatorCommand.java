@@ -32,7 +32,7 @@ import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
 import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.model.tag.Tag;
-
+//@@author Marcus-cxc
 /**
  * Edits the details of an existing person in the investigapptor book.
  */

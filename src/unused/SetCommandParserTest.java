@@ -8,6 +8,7 @@ import org.junit.Test;
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.logic.commands.SetCommand;
 
+//@@author quentinkhoo
 public class SetCommandParserTest {
 
     private SetCommandParser parser;
@@ -23,3 +24,4 @@ public class SetCommandParserTest {
                 SetCommand.MESSAGE_ALIASES));
     }
 }
+//@@author

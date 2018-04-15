@@ -54,6 +54,7 @@ public class XmlSerializableInvestigapptor {
         password = new XmlAdaptedPassword(src.getPassword());
     }
 
+
     /**
      * Converts this investigapptor into the model's {@code Investigapptor} object.
      *

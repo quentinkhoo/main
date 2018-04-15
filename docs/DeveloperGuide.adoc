@@ -1090,6 +1090,8 @@ To be able to manage cases, investigators should have the ability to add case de
 
 ===== Current implementation
 
+====== Logic component
+
 The `AddCaseCommandParser` parses the string of arguments provided by the user and splits the `String` into its separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) to be used in the context of the `AddCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
 The `AddCaseCommand` that extends the `UndoableCommand` class is implemented with constructor overloading, where either constructor can be used depending on the developer’s needs.
@@ -1121,6 +1123,8 @@ public CommandResult executeUndoableCommand() throws CommandException {
     }
 }
 ----
+
+====== Model component
 
 In the `Model` component, the new `CrimeCase` object gets added to the case list of the assigned investigator as well (i.e. `UniqueCrimeCaseList` within the `Investigator` object) via the `addCrimeCaseToInvestigator` method. This method traverses through the entire list of investigators to find the correct `Investigator` object to add the new `CrimeCase` object to. The code is shown below.
 
@@ -1160,6 +1164,8 @@ Sometimes, cases are added by error or there is no need to continue management o
 
 ===== Current implementation
 
+====== Logic component
+
 The `DeleteCaseCommandParser` parses the string of arguments provided by the user to retrieve the index (i.e. `Index`) to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
 The `DeleteCaseCommand` extends the `UndoableCommand`.
@@ -1188,12 +1194,28 @@ public CommandResult executeUndoableCommand() {
 }
 ----
 
-Below are sequence diagrams illustrating the `Logic` and `Model` components.
+Below is a sequence diagram illustrating the `Logic` component.
 
 .Interactions Inside the Logic Component for the `deletecase 1` Command
 image::SD_DeleteCaseCommand_Logic.png[width="800"]
 
-{nbsp} +
+====== Model component
+
+The new `CrimeCase` object gets removed from the case list of the assigned investigator as well (i.e. `UniqueCrimeCaseList` within the `Investigator` object) via the `removeCrimeCaseFromInvestigator` method. This method traverses through the entire list of investigators to find the correct `Investigator` object to remove the `CrimeCase` object from. The code is shown below.
+
+[source, java]
+----
+public boolean removeCrimeCase(CrimeCase key) throws CrimeCaseNotFoundException {
+    if (cases.remove(key)) {
+        removeCrimeCaseFromInvestigator(key);
+        return true;
+    } else {
+        throw new CrimeCaseNotFoundException();
+    }
+}
+----
+
+The sequence diagram for the `Model` component is provided below.
 
 .Interactions Inside the Model Component for the `deletecase 1` Command
 image::SD_DeleteCaseCommand_Model.png[width="500"]
@@ -1207,6 +1229,8 @@ image::SD_DeleteCaseCommand_Model.png[width="500"]
 Typos can be made when in a haste. The ability to edit cases would give investigators a chance to rectify these mistakes easily. This feature will also enable re-assignment of cases to other investigators, which is useful when an investigator can no longer work on a case.
 
 ===== Current implementation
+
+====== Logic component
 
 The EditCaseCommandParser parses the String of arguments provided by the user and splits the `String` into the case index (`Index`) and the separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) and directs it into a `EditCrimeCaseDescriptor` object  to be used in the context of the `EditCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
@@ -1223,6 +1247,8 @@ The `caseIndex` is processed to retrieve the `CrimeCase` object at the specified
 
 A new `CrimeCase` object is created using the retrieved case-to-be-edited and the descriptor.
 |=======
+
+====== Model component
 
 When the `EditCaseCommand` is executed, note that the original `CrimeCase` object is not modified, but rather, replaced by a new `CrimeCase` object. When the `CrimeCase` constructor is called, a new `Investigator` object without its `UniqueCrimeCaseList` is created within the `CrimeCase` (i.e. only the personal details are stored). This is to simplify the data to be recorded in storage. The list of cases within the original `Investigator` object remains untouched. The snippet of code below shows the implementation.
 
@@ -1269,6 +1295,8 @@ image::SD_EditCaseCommand_Model.png[width="800"]
 To manage large numbers of cases, having a feature that would allow investigators to search the list of cases by name would be extremely helpful. If an investigator is looking for a particular case, it would be extremely inefficient and time-consuming to have to manually browse through all the cases. Hence, being able to find cases by name can help to increase workflow productivity and efficiency.
 
 ===== Current implementation
+
+====== Logic component
 
 The `FindCaseCommandParser` parses the string of arguments provided by the user to retrieve the list of keywords to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
@@ -1491,6 +1519,8 @@ An investigator should be able to retrieve and view information about a case aft
 
 ===== Current implementation
 
+====== Logic component
+
 Similar to `DeleteCaseCommandParser`, the `SelectCaseCommandParser` parses the string of arguments provided by the user to retrieve the index (i.e. `Index`) to be used in the context of the `SelectCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
 The `SelectCaseCommand` extends `Command` and has one constructor.
@@ -1524,7 +1554,7 @@ The following sequence diagram illustrates what happens in the `Logic` component
 .Interactions Inside the Logic Component for the `selectcase 1` Command
 image::SD_SelectCaseCommand_Logic.png[width="800"]
 
-{nbsp} +
+====== EventsCenter and UI component
 
 Following the raised event, `handleJumpToCrimeCaseListRequestEvent` (in `CrimeCaseListPanel.java`) is signalled to handle the select request, which scrolls the view to the correct cell in the panel.
 
@@ -1559,6 +1589,7 @@ To learn more about how the data is reflected onto the UI, you can take a look a
 
 //end::selectcase[]
 
+//tag::ui-enhancements
 === UI Enhancements
 
 [[UI-DetailsPane]]
@@ -1641,6 +1672,7 @@ You can take a look at link:{repoURL}/src/main/resources/view/DarkTheme.css[Dark
 [NOTE]
 The current version of Investigapptor does not provide users with the ability to set the theme from within the application. This is a feature that we wish to implement in future versions.
 
+//end::ui-enhancements
 
 == Documentation
 

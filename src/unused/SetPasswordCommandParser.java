@@ -10,6 +10,7 @@ import seedu.investigapptor.logic.commands.SetPasswordCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.Password;
 
+//@@author quentinkhoo
 /**
  * Parses input arguments and creates a new PasswordCommand object
  */
@@ -46,3 +47,4 @@ public class SetPasswordCommandParser implements Parser<SetPasswordCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
+//@@author

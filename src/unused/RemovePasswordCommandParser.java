@@ -41,3 +41,4 @@ public class RemovePasswordCommandParser implements Parser<RemovePasswordCommand
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
+//@@author

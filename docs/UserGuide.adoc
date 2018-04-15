@@ -239,6 +239,7 @@ image::userguide-images/tag-example.PNG[width="450"]
 [TIP]
 You can use the tags to label each investigator with their field of expertise
 
+// tag::commandintro[]
 [[Commands]]
 == Commands
 This section introduces to you the commands that are available with Investigapptor.
@@ -257,6 +258,7 @@ This section introduces to you the commands that are available with Investigappt
 
 [NOTE]
 Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+//end::commandintro[]
 
 === General Commands
 These are general commands not specific to either investigaors or cases.
@@ -299,7 +301,7 @@ image::userguide-images/sp-command.png[width="450"]
 {nbsp} +
 
 The next time you start up Investigapptor, you will be prompted with a password
-input as shown below in _<<inputpassword, Figure 5>>_.
+input as shown below in _<<inputpassword>>_.
 
 [[inputpassword]]
 .Inputting a password

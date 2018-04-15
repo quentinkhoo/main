@@ -6,6 +6,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 
+//@@author quentinkhoo
 public class SetCommandTest {
 
     @Rule
@@ -20,3 +21,4 @@ public class SetCommandTest {
         setCommand.executeUndoableCommand();
     }
 }
+//@@author

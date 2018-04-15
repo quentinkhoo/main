@@ -1059,36 +1059,39 @@ Display all the cases of the 2nd investigator  in the investigator panel list ca
 These are features that will come in future releases of Investigapptor +
 
 ==== Adding a witness `addwitness` [Coming in v2.0]
-We have plan to implement the feature to allow investigator to create and add witnesses to the cases in the investigapptor,
- allowing investigators to track witnesses using the Investigapptor.
+We plan to implement this feature to allow for investigators to
+create and add witnesses to the cases in the Investigapptor. This would allow for
+them to associate relevant witnesses to the various cases.
 
 ==== Adding a suspect `addsuspect` [Coming in v2.0]
-We plan to allow investigator to create and add suspects to the cases in the investigapptor, allowing investigators
-to track and view suspects involvement in any past or current cases using the Investigapptor.
+We plan to implement this feature to allow for investigators to
+create and add suspects to the cases in the Investigapptor. This would allow for
+them to associate relevant suspects to the various cases.
 
 ==== Adding evidence files `addevidence` [Coming in v2.0]
-We plan to allow investigator to create and add evidence to cases in the investigapptor, allowing investigators
-to view more information about the evidence related in the case.
+We plan to implement this feature to allow for investigators to
+create and add evidence files to the cases in the Investigapptor. This would allow for
+them to associate relevant evidences to the various cases.
 
 ==== Setting up chain of custody `buildcoc` [Coming in v2.0]
-We plan to store the history of investigators in charge of each case, allowing the Investigapptor to display
-when the case was transferred and whom the cases was transfer to.
+We plan to implement this feature to document the tracing of the handing over
+of files and documents.
 
 ==== Entering commands in other languages `language` [Coming in v2.0]
-We plan to add more languages support such as Mandarin and Malay to the Investigapptor in the future to allow non-english
-user to be able to use Investigapptor
+We plan to add more languages support such as Mandarin and Malay to the
+Investigapptor in the future to allow non-english
+users to be able to use Investigapptor
 
 ==== Adding any person via scanner `scanperson` [Coming in v2.0]
 We plan to add a scanner feature where Investigapptor is able to read the image of the case file and automatically
 process the information and add it into the Investigapptor.
 
 ==== Exporting case information into a PDF file `exportfile` [Coming in v2.0]
-We plan to add the feature which allows Investigapptor to create a PDF file which contains the information
-of a case or investigator.
+We plan to add this feature which would allow Investigapptor to create a
+PDF file which contains the information of a case or investigator.
 
 // tag::dataencryption[]
 ==== Encrypting data files `encryptdata` [Coming in v2.0]
-
 We plan to add data encryption to Investigapptor in the future, which will encrypt and protect the data stored
 in investigapptor.
 // end::dataencryption[]
@@ -1103,6 +1106,10 @@ the data of your previous Investigapptor folder.
 *Q*: How do I save my data? +
 *A*: Investigapptor data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
+
+*Q*: How do I report a bug that I have noticed? +
+*A*: If you have found a bug with our application, you may post it in our issue tracker over
+https://github.com/CS2103JAN2018-F14-B3/main/issues[here].
 
 == Command Summary
 This section provides a quick reference for all the commands available in the Investigapptor.

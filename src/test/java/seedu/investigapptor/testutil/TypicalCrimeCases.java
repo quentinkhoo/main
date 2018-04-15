@@ -65,6 +65,10 @@ public class TypicalCrimeCases {
             .withDescription("Small case").withStartDate("11/12/2016")
             .toggleStatus().withEndDate()
             .withTags("Theft").build();
+    public static final CrimeCase FIVE = new CrimeCaseBuilder().withName("Project Five")
+            .withDescription("Opened case").withStartDate("11/12/2016")
+            .withEndDate()
+            .withTags("Theft").build();
 
     // Manually added
     public static final CrimeCase BLUE = new CrimeCaseBuilder().withName("Project Blue").toggleStatus()
@@ -143,7 +147,11 @@ public class TypicalCrimeCases {
                 .withDescription("Small case").withStartDate("11/12/2016")
                 .withEndDate().toggleStatus()
                 .withTags("Theft").build();
+        CrimeCase five = new CrimeCaseBuilder().withName("Project Five")
+                .withDescription("Opened case").withStartDate("11/12/2016")
+                .withEndDate()
+                .withTags("Theft").build();
         return new ArrayList<>(Arrays.asList(alfa, bravo, charlie, delta, echo, foxtrot, golf,
-                one, two, three, four));
+                one, two, three, four, five));
     }
 }

@@ -58,12 +58,6 @@ public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find person where person list is not displaying the person we are finding -> 1 person found */
-        /*command = FindInvestTagsCommand.COMMAND_WORD + " Carl";
-        ModelHelper.setFilteredPersonList(expectedModel, CARL);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();*/
-
         /* Case 3: find multiple investigators in investigapptor book, 2 keywords -> 3 persons found */
         command = FindInvestTagsCommand.COMMAND_WORD + " new teamB";
         ModelHelper.setFilteredPersonList(expectedModel, SIR_LIM, MDM_ONG, SIR_CHONG);
@@ -98,20 +92,6 @@ public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-        /* Case: find same persons in investigapptor book after deleting 1 of them -> 1 person found */
-        /*executeCommand(DeleteInvestigatorCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getInvestigapptor().getPersonList().contains(BENSON));
-        command = FindInvestTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
-        expectedModel = getModel();
-        ModelHelper.setFilteredPersonList(expectedModel, DANIEL);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();*/
-
-        /* Case: find person in investigapptor book, keyword is same as name but of different case -> 1 person found */
-        /*command = FindInvestTagsCommand.COMMAND_WORD + " MeIeR";
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();*/
-
         /* Case: find person in investigapptor book, keyword is substring of tag -> 0 persons found */
         command = FindInvestTagsCommand.COMMAND_WORD + " Mei";
         ModelHelper.setFilteredPersonList(expectedModel);
@@ -144,23 +124,6 @@ public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
         command = FindInvestTagsCommand.COMMAND_WORD + " " + SIR_LIM.getEmail().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
-
-        /* Case: find while a person is selected -> selected card deselected */
-        /*showAllPersons();
-        selectPerson(Index.fromOneBased(1));
-        assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
-        command = FindInvestTagsCommand.COMMAND_WORD + " new";
-        ModelHelper.setFilteredPersonList(expectedModel, DANIEL);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardDeselected();*/
-
-        /* Case: find person in empty investigapptor book -> 0 persons found */
-        /*deleteAllPersons();
-        command = FindInvestTagsCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
-        expectedModel = getModel();
-        ModelHelper.setFilteredPersonList(expectedModel, DANIEL);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardUnchanged();*/
 
         /* Case: mixed case command word -> rejected */
         command = "FiNdinVesttAgs teamA";

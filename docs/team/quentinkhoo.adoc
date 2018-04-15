@@ -43,8 +43,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide
     [https://github.com/CS2103JAN2018-F14-B3/main/pull/203[PR#203]]
-*** Designed formatting for User Guide Command Summary to ensure readability
-and ease of usage
+*** Designed formatting for User Guide Command Summary to ensure ease of usage
 *** Did cosmetic tweaks to existing contents of the Developer Guide
 *** Managed formatting for Developer Guide to ensure consistency in format
 and language.
@@ -72,6 +71,8 @@ and language.
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
+
+include::../UserGuide.adoc[tag=commandintro]
 
 include::../UserGuide.adoc[tag=setpassword]
 

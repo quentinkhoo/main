@@ -28,7 +28,7 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_NAME_AMY
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_RANK_CAPTAIN;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_RANK_INSPECTOR;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.investigapptor.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -46,6 +46,7 @@ import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.testutil.InvestigatorBuilder;
 
+//@@author Marcus-cxc
 public class AddInvestigatorCommandParserTest {
     private AddInvestigatorCommandParser parser = new AddInvestigatorCommandParser();
 
@@ -53,7 +54,7 @@ public class AddInvestigatorCommandParserTest {
     public void parse_allFieldsPresent_success() {
         Investigator expectedInvestigator = new InvestigatorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withRank(VALID_RANK_CAPTAIN).withTags(VALID_TAG_FRIEND).build();
+                .withRank(VALID_RANK_INSPECTOR).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -83,7 +84,7 @@ public class AddInvestigatorCommandParserTest {
         // multiple tags - all accepted
         Investigator expectedInvestigatorMultipleTags = new InvestigatorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withRank(VALID_RANK_CAPTAIN).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+                .withRank(VALID_RANK_INSPECTOR).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + RANK_DESC_CAP + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddInvestigatorCommand(expectedInvestigatorMultipleTags));
@@ -94,7 +95,7 @@ public class AddInvestigatorCommandParserTest {
         // zero tags
         Investigator expectedInvestigator = new InvestigatorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withRank(VALID_RANK_CAPTAIN).withTags().build();
+                .withRank(VALID_RANK_INSPECTOR).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + RANK_DESC_CAP, new AddInvestigatorCommand(expectedInvestigator));
     }

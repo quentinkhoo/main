@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.testutil.Assert;
-
+//@@author Marcus-cxc
 public class RankTest {
 
     @Test

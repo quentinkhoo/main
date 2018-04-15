@@ -8,7 +8,7 @@ import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_NAME_AMY
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_RANK_CAPTAIN;
+import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_RANK_INSPECTOR;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.investigapptor.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.investigapptor.testutil.TypicalCrimeCases.BRAVO;
@@ -60,11 +60,12 @@ public class TypicalInvestigator {
     public static final Investigator AMY = new InvestigatorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Investigator BOB = new InvestigatorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRank(VALID_RANK_CAPTAIN)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRank(VALID_RANK_INSPECTOR)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
+    //@@author Marcus-cxc
     private TypicalInvestigator() {
     } // prevents instantiation
 

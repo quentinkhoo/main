@@ -320,7 +320,7 @@ Alias: `rp` +
 [[removepassword]]
 .Removing a password
 image::userguide-images/rp-command.png[width="450"]
-//end removepassword[]
+//end::removepassword[]
 
 [[History]]
 ==== Listing entered commands : `history` [Since v1.0]
@@ -1005,8 +1005,8 @@ Selects the 1st case in the results of the `findcases` command.
 Selects the 3rd case in the most recent list of cases.
 //end::selectcase[]
 
+[[ListInvCases]]
 ==== List a specific Investigator's cases `listinvestigatorcases` [Since v1.4]
-
 To find all the case belonging to a certain investigator, you can use the `listinvestigatorcases` command to retrieve all
 the cases which the investigator is currently in charge of and display them on the list panel. +
 
@@ -1134,14 +1134,22 @@ These are some general commands
 |=======================================================================
 |Command |Purpose |Format |Example
 
-|_<<AddInv, Add an Investigator>>_ |Shows you the list of added investigators |
+|_<<AddInv, Add an Investigator>>_ |Add a new investigator |
 `listinvestigators` | `listinvestigators`
-|_<<SelInv, Select an Investigator>>_ |Select the investigator based on its index to view its details |
+|_<<SelInv, Select an Investigator>>_ |Select the investigator to view its details based on the investigator index given |
 `selectinvestigator` | `selectinvestigator 1`
-|_<<EditInv, Edit an Investigator>>_ |Edits the investigator's details based on the parameters given |
+|_<<EditInv, Edit an Investigator>>_ |Edit the investigator's details based on the parameters given |
 `editinvestigator` | `editinvestigator 1 n/Project NewName`
-|_<<ListInv, List all Investigators>>_ |Shows you the list of added investigators |
+|_<<DelInv, Delete an Investigator>>_ |Delete an investigator based on the investigator index given |
+`deleteinvestigator` | `deleteinvestigator 2`
+|_<<ListInv, List all Investigators>>_ |Shows you the list of all investigators |
 `listinvestigators` | `listinvestigators`
+|_<<FindInv, Find Investigators by their name>>_ |Shows you the list of all investigators whose name matches the keyword(s) given|
+`findinvestigators` | `findinvestigators Robert`
+|_<<FindInvTags, Find Investigators by their tags>>_ |Shows you the list of all investigators whose tag matches the keyword(s) given |
+`findinvestigatortags` | `findinvestigatortags Expert TeamA`
+
+
 
 |=======================================================================
 
@@ -1150,8 +1158,29 @@ These are some general commands
 |=======================================================================
 |Command |Purpose |Format |Example
 
-|_<<ListCases, List Cases>>_ |Shows you the list of added cases |
+|_<<AddCase, Add a Case>>_ |Adds a new case |
+`addcase` | `addcase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`
+|_<<SelectCase, Select a Case>>_ |Select the case based on its index to view its details |
+`selectcase` | `selectcase 1`
+|_<<EditCase, Edit a Case>>_ |Edit the case's details based on the parameters given |
+`editcase` | `editcase 1 d/new description i/1`
+|_<<DeleteCase, Delete a Case>>_ |Delete a case based on the case index given |
+`deletecase` | `deletecase 1`
+|_<<CloseCase, Closing a case>>_ |Changes the status of the case from `open` to `close` based on the case index given|
+`close` | `close 1`
+|_<<ListCases, List all Cases>>_ |Shows you the list of all cases |
 `listcases` | `listcases`
+|_<<ListInvCases, List the Cases assigned to an Investigator>>_ |Shows you the list of all cases that has been assigned to the investigator based on the investigator index given |
+`listinvestigatorcases` | `listinvestigatorcases  2`
+|_<<FindCases, Find Cases by their name>>_ |Shows you the list of all cases whose name matches the keyword(s) given|
+`findcases` | `findcases Project Murder`
+|_<<FindCaseTags, Find Cases by their tags>>_ |Shows you the list of all cases whose tag matches the keyword(s) given |
+`findcasetags` | `findcasetags Homicide Fraud`
+|_<<FindCloseCases, Find Cases with the status 'close'>>_ |Shows you the list of all cases whose status is `close`|
+`findclosecases` | `findclosecases`
+|_<<FindOpenCases, Find Cases with the status 'open'>>_ |Shows you the list of all cases whose status is `open` |
+`findopencases` | `findopencases`
+
 
 |=======================================================================
 

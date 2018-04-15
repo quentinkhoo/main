@@ -16,11 +16,11 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 == Summary of contributions
 
 * *Major enhancement*: added *support for managing investigation cases*
-** What it does: allows the user to add, delete, edit, find, and view case details in Investigapptor
-** Justification: As Investigapptor is a tool for managing investigations, the ability to store, modify, and view case information is fundamental to the functionality of the application.
+** What it does: allows the user to add, delete, edit, find, and view case details in Investigapptor using the Command Line Interface (CLI)
+** Justification: As Investigapptor is a tool for managing investigations, the ability to store, modify, and view case information is integral to the functionality of the application. This feature aims to eliminate the need for paper-based processing during investigations, and give investigators a platform to access the data that they need more easily and efficiently.
 ** Highlights: This enhancement touched on the logic, model, storage, and UI components. In the model component, a new package had to be introduced to store case information.
 
-* *Minor enhancement*: updated the GUI with a new colour scheme and style
+* *Minor enhancement*: updated the GUI with a new colour scheme and style https://github.com/CS2103JAN2018-F14-B3/main/pull/185[#185]
 
 * *Code contributed*: [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/functional/leowweiching.md[Functional code]] [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/test/leowweiching.md[Test code]]
 

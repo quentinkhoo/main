@@ -19,9 +19,9 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 ** Justification: This enhancement is required as the person package is insufficient to perform the task required. As I wanted to accommodate future enhance of more types of people, the person class was used as a superclass to store the
 basic information rather than just morphing the person class.
-** Highlights: This enhancement has includes much changes to the model component of the Investigapptor allowing it to apply the same general commands to all subclass of the Person class while still being able to use specfic command for specific classes.
-The Investigator also stores a live reference to all his cases that works with undo/redo feature by the usage of hashcode to always ensure it reference the correct case.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+** Highlights: This enhancement has includes much changes to all major changes to all components of the Invesitgapptor,
+especially the model component to allow the Investigator to stores a live reference to all his cases that works with undo/redo feature by the usage of hashcode.
+
 
 * *Minor enhancement*:
 ** Implemented Backup command:
@@ -55,20 +55,24 @@ InvestigatorBuilder used in JUnit testing to help build CrimeCase
 *** Did the navigating the interface section for the User Guide: https://github.com/CS2103JAN2018-F14-B3/main/pull/231[#231]
 *** Filled in the future enhancement in the user doc: https://github.com/CS2103JAN2018-F14-B3/main/pull/244[#244]
 *** Update the Design component for the Developer Guide https://github.com/CS2103JAN2018-F14-B3/main/pull/255[#255]
+** Enhancements to existing features:
+*** Update the sample data to reflect the new data type, investigator and cases: https://github.com/CS2103JAN2018-F14-B3/main/pull/264[#264]
+* Community:
+*** Reported bugs and suggestions for other teams (examples:
+https://github.com/CS2103JAN2018-F11-B4/main/issues/120[1],
+https://github.com/CS2103JAN2018-F11-B4/main/issues/132[2],
+https://github.com/CS2103JAN2018-F11-B4/main/issues/128[3],
+https://github.com/CS2103JAN2018-F11-B4/main/issues/104[4],
+https://github.com/CS2103JAN2018-F11-B4/main/issues/110[5])
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
 include::../UserGuide.adoc[tag=addinv]
-include::../UserGuide.adoc[tag=editinv]
-include::../UserGuide.adoc[tag=deleteinv]
-include::../UserGuide.adoc[tag=listinvcase]
-include::../UserGuide.adoc[tag=Backup]
-
+include::../UserGuide.adoc[tag=backup]
 
 == Contributions to the Developer Guide
 
@@ -76,15 +80,7 @@ include::../UserGuide.adoc[tag=Backup]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=investigator]
-
-
+include::../DeveloperGuide.adoc[tag=addinvestigator]
+include::../DeveloperGuide.adoc[tag=editinvestigator]
+include::../DeveloperGuide.adoc[tag=listinvestigatorcase]
 include::../DeveloperGuide.adoc[tag=backup]
-
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

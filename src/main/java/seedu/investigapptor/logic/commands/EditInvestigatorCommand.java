@@ -16,8 +16,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.investigapptor.commons.core.EventsCenter;
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.commons.core.index.Index;
+import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.commons.util.CollectionUtil;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.person.Address;
@@ -74,9 +76,9 @@ public class EditInvestigatorCommand extends UndoableCommand {
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
-
+    //@@author Marcus-cxc
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates investigator and returns as {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
@@ -96,7 +98,7 @@ public class EditInvestigatorCommand extends UndoableCommand {
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
-
+    //@@author
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         try {
@@ -107,6 +109,7 @@ public class EditInvestigatorCommand extends UndoableCommand {
             throw new AssertionError("The target person cannot be missing");
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        EventsCenter.getInstance().post(new SwapTabEvent(1));
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 

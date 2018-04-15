@@ -283,7 +283,7 @@ image::userguide-images/help-ui.png[width="300"]
 ==== Setting a password : `setpassword` [Since v1.3]
 You can use this command to set a new password for the Investigapptor.
 
-[IMPORTANT]
+[WARNING]
 Your password must be of minimal 8 characters and not contain any spaces. +
 [NOTE]
 Due to security reasons, this command is not an undoable command.

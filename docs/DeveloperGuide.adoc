@@ -271,10 +271,9 @@ Classes used by multiple components are in the `seedu.investigapptorbook.commons
 
 This section describes some noteworthy details on how certain features are implemented.
 
-[[Implementation-Configuration]]
-
 === Laying the Groundwork
 
+[[Implementation-Configuration]]
 ==== Configuration
 
 For starters, you can control certain properties of the application, such as:
@@ -302,7 +301,9 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 ==== Undo/Redo feature
 ===== Current Implementation
 
-The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides inside `LogicManager`. It supports undoing and redoing of commands that modifies the state of the address book (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
+The undo/redo mechanism is facilitated by an `UndoRedoStack`, which
+resides inside `LogicManager`. It supports undoing and redoing of
+ commands that modifies the state of the Investigapptor (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
 
 `UndoRedoStack` only deals with `UndoableCommands`. Commands that cannot be undone will inherit from `Command` instead. The following diagram shows the inheritance diagram for commands:
 

@@ -6,6 +6,8 @@ import static seedu.investigapptor.commons.util.AppUtil.checkArgument;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 //@@author leowweiching
 /**
  * Represents a CrimeCase's Start date in the Investigapptor.
@@ -55,7 +57,8 @@ public class StartDate {
             // Check if input date exceeds today's date
             LocalDate inputDate = stringToDate(date);
             LocalDate now = LocalDate.now();
-            return inputDate.isBefore(now);
+            LocalDate tomorrow = now.plus(1, ChronoUnit.DAYS);
+            return inputDate.isBefore(tomorrow);
         } catch (DateTimeException dte) {
             return false;
         }

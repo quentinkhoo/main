@@ -61,14 +61,14 @@ public class FindCaseTagsCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noCrimeCaseFound() {
         String expectedMessage = String.format(MESSAGE_CASES_LISTED_OVERVIEW, 0);
         FindCaseTagsCommand command = prepareCommand(" ");
         assertCommandSuccess(command, expectedMessage, Collections.emptyList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multipleCrimeCaseFound() {
         String expectedMessage = String.format(MESSAGE_CASES_LISTED_OVERVIEW, 5);
         String userInput = "Murder Kidnap".toLowerCase();  // Tags are converted to lowercase during comparison
         FindCaseTagsCommand command = prepareCommand(userInput);
@@ -88,7 +88,7 @@ public class FindCaseTagsCommandTest {
     /**
      * Asserts that {@code command} is successfully executed, and<br>
      *     - the command feedback is equal to {@code expectedMessage}<br>
-     *     - the {@code FilteredList<CrimCase>} is equal to {@code expectedList}<br>
+     *     - the {@code FilteredList<CrimeCase>} is equal to {@code expectedList}<br>
      *     - the {@code Investigapptor} in model remains the same after executing the {@code command}
      */
     private void assertCommandSuccess(FindCaseTagsCommand command, String expectedMessage,

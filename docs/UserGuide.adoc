@@ -286,6 +286,9 @@ You can use this command to set a new password for the Investigapptor.
 Your password must be of minimal 8 characters and not contain any spaces. +
 [NOTE]
 Due to security reasons, this command is not an undoable command.
+[TIP]
+If you have accidentally added a kbd:[Space] to the back of the
+ password, Investigapptor automatically removes it for you.
 
 Format: `setpassword pw/PASSWORD` +
 Alias: `sp pw/PASSWORD` +

@@ -1560,9 +1560,9 @@ To learn more about how the data is reflected onto the UI, you can take a look a
 === UI Enhancements
 
 [[UI-DetailsPane]]
-==== Details pane
+==== Details panel
 
-This component is used by the `selectinvestigator` and `selectcase`(<<case-select>>) commands. The details pane makes use of JavaFx's `WebView` (an embedded browser) to render the data onto the display. The implementation for this can be found in link:{repoURL}/java/seedu/investigapptor/ui/BrowserPanel.java[BrowserPanel].
+This component is used by the `selectinvestigator` and `selectcase`(<<case-select>>) commands. The details pane makes use of JavaFx's `WebView` (an embedded browser) to render the data onto the display. The implementation for this can be found in link:{repoURL}/src/main/java/seedu/investigapptor/ui/BrowserPanel.java[BrowserPanel].
 
 Two HTML files, `/docs/InvestigatorDetailsPage.html` and `/docs/CaseDetailsPage.html` are created as templates for displaying the details of a single investigator and case respectively. `WebView` provides utility methods that can be used to load and display the HTML files.
 

@@ -20,7 +20,7 @@ import seedu.investigapptor.logic.commands.EditInvestigatorCommand;
 import seedu.investigapptor.logic.commands.EditInvestigatorCommand.EditPersonDescriptor;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 import seedu.investigapptor.model.tag.Tag;
-
+//@@author Marcus-cxc
 /**
  * Parses input arguments and creates a new EditInvestigatorCommand object
  */

@@ -1587,6 +1587,7 @@ To learn more about how the data is reflected onto the UI, you can take a look a
 
 //end::selectcase[]
 
+//tag::ui-enhancements
 === UI Enhancements
 
 [[UI-DetailsPane]]
@@ -1669,6 +1670,7 @@ You can take a look at link:{repoURL}/blob/master/src/main/resources/view/DarkTh
 [NOTE]
 The current version of Investigapptor does not provide users with the ability to set the theme from within the application. This is a feature that we wish to implement in future versions.
 
+//end::ui-enhancements
 
 == Documentation
 

@@ -9,6 +9,8 @@
 == Overview
 
 Investigapptor is a desktop application used for investigators to manage cases as simple, straightforward and efficient as possible.
+
+
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 == Summary of contributions
@@ -19,7 +21,6 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 ** Highlights: This enhancement touched on the logic, model, storage, and UI components. In the model component, a new package had to be introduced to store case information.
 
 * *Minor enhancement*: updated the GUI with a new colour scheme and style
-** Highlights: Styled with CSS
 
 * *Code contributed*: [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/functional/leowweiching.md[Functional code]] [https://github.com/CS2103JAN2018-F14-B3/main/blob/master/collated/test/leowweiching.md[Test code]]
 
@@ -29,9 +30,9 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 *** Updated the GUI color scheme https://github.com/CS2103JAN2018-F14-B3/main/pull/185[#185]
 ** Documentation:
 *** Wrote content for the README.md https://github.com/CS2103JAN2018-F14-B3/main/pull/23[#23]
+*** Restructured the Developer Guide and changed language style of existing content to make it more reader-focused https://github.com/CS2103JAN2018-F14-B3/main/pull/252[#252]
 *** Did cosmetic tweaks to existing contents of the User Guide
 ** Community:
-*** PRs reviewed (with non-trivial review comments)
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103JAN2018-W15-B3/main/issues/127[1], https://github.com/CS2103JAN2018-W15-B3/main/issues/133[2])
 
 == Contributions to the User Guide
@@ -54,6 +55,12 @@ include::../UserGuide.adoc[tag=selectcase]
 |===
 
 include::../DeveloperGuide.adoc[tag=crimecase]
+include::../DeveloperGuide.adoc[tag=addcase]
+include::../DeveloperGuide.adoc[tag=editcase]
+include::../DeveloperGuide.adoc[tag=findcases]
+include::../DeveloperGuide.adoc[tag=deletecase]
+include::../DeveloperGuide.adoc[tag=selectcase]
+include::../DeveloperGuide.adoc[tag=ui-enhancements]
 
 
 == PROJECT: PowerPointLabs

@@ -1,4 +1,4 @@
-= INVESTIGAPPTOR - User Guide
+= Investigapptor - User Guide
 :toc:
 :toc-title: Table of Contents
 :toclevels: 3
@@ -34,7 +34,7 @@ This user guide shows you how to get started with Investigapptor.
 
 It will introduce you to the features Investigapptor provides and lead you through with the use of examples.
 
-Throughout this user guide, there would be various icons used as described below.
+Throughout this user guide, there will be various icons used as described below.
 
 TIP: This is a tip. Follow these suggested tips to make your life much
     simpler when using Investigapptor!
@@ -64,7 +64,7 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for your Investigapptor.
 +
 [TIP]
-An example of a home folder would be `C:\Users\Investigator\InvestigapptorFolder`. +
+An example of a home folder will be `C:\Users\Investigator\InvestigapptorFolder`. +
 It is highly recommended that your home folder be a folder of its own and not contain any
 other files not related to Investigapptor.
 +
@@ -226,7 +226,7 @@ Click on the command for further information of how it works. Picture illustrati
 
 === Tags [Since v1.0]
 The tagging feature allows you to add labels to each investigator or crime case.
-This would allow you to easily filter for certain types of investigators or crime cases.
+This will allow you to easily filter for certain types of investigators or crime cases.
 An example is shown below in _<<TagExample, Figure 4>>_.
 
 [[TagExample]]
@@ -258,7 +258,7 @@ Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUM
 //end::commandintro[]
 
 === General Commands
-These are general commands not specific to either investigaors or cases.
+To get started, here are some commands you can use to help you get the most out of Investigapptor.
 
 [[Help]]
 ==== Viewing help: `help` [Since v1.0]
@@ -353,24 +353,32 @@ Undoable commands are those commands that modify the Investigapptor's content +
 
 The following provides an explanation of some command examples:
 
-* `deletecase 1` +
-`listcases` +
-`undo` (reverses the `deletecase 1` command) +
+* *Scenario 1:*
+. Delete case at index 1: `deletecase 1` +
+. List all cases: `listcases` +
+. Undo: `undo` +
+*Outcome:* `undo` reverses the `deletecase 1` command +
 
 [NOTE]
 ====
 `listcases` is NOT an undoable command. Hence, `undo` will not be applied on `listcases`.
 ====
 
-* `selectcase 1` +
-`listcases` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
+* *Scenario 2:*
 
-* `deletecase 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `deletecase 1` command) +
+. Select case at index 1: `selectcase 1` +
+. List all cases: `listcases` +
+. Undo: `undo` +
+*Outcome:* `undo` command fails as no undoable commands were executed
+
+* *Scenario 3:*
+
+. Delete case at index 1: `deletecase 1` +
+. Remove all investigators and cases: `clear` +
+. Undo: `undo` +
+*Outcome:* reverses the `clear` command +
+. Undo: `undo` +
+*Outcome:* reverses the `deletecase 1` command +
 
 [[Redo]]
 ==== Redoing the previously undone command : `redo` [Since v1.0]
@@ -381,20 +389,30 @@ Alias: `r`
 
 Examples:
 
-* `deletecase 1` +
-`undo` (reverses the `deletecase 1` command) +
-`redo` (reapplies the `deletecase 1` command) +
+* *Scenario 1:*
+. Delete case at index 1: `deletecase 1` +
+. Undo: `undo` +
+*Outcome:* `undo` reverses the `deletecase 1` command
+. Redo: `redo` +
+*Outcome:* `redo` reapplies the `deletecase 1` command +
 
-* `deletecase 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
+* *Scenario 2:*
+. Delete case at index 1: `deletecase 1` +
+. Redo: `redo` +
+*Outcome:* `redo` command fails as no `undo` commands were executed previously +
 
-* `deletecase 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `deletecase 1` command) +
-`redo` (reapplies the `deletecase 1` command) +
-`redo` (reapplies the `clear` command) +
+* *Scenario 3:*
+. Delete case at index 1: `deletecase 1` +
+. Remove all investigators and cases: `clear` +
+. Undo: `undo` +
+*Outcome:* `undo` reverses the `clear` command
+. Undo: `undo` +
+*Outcome:* `undo` reverses the `deletecase 1` command
+. Redo: `redo` +
+*Outcome:* `redo` reapplies the `deletecase 1` command +
+. Redo: `redo` +
+*Outcome:* `redo` reapplies the `clear` command +
+
 // end::undoredo[]
 
 //tag::clear[]
@@ -406,7 +424,7 @@ Format: `clear` +
 Alias: `c`
 
 You can refer to the screenshots below for an example of how the Investigapptor
-would look like after you've executed the `clear` command.
+will look like after you've executed the `clear` command.
 
 [[before-clear-command]]
 .Before `clear` command
@@ -463,7 +481,7 @@ Creates a copy of the data with the name `March3rd` in `root/data` folder
 //end::backup[]
 
 === Investigator Commands
-These are investigator related commands. +
+These commands will help you to manage contact details of investigators easily and to view cases they have been assigned. +
 
 //tag::addinv[]
 [[AddInv]]
@@ -680,10 +698,10 @@ image::userguide-images/si-command.png[width="500"]
 
 The following provides an explanation of some command examples:
 
-* `listinvestigator` +
+* `listinvestigators` +
 `selectinvestigator 2` +
-Selects the 2nd investigator in the results of the `listinvestigator` command.
-* `findinvestigator Betsy` +
+Selects the 2nd investigator in the results of the `listinvestigators` command.
+* `findinvestigators Betsy` +
 `selectinvestigator 1` +
 Selects the 1st investigator in the results of the `findinvestigator` command.
 * `selectinvestigator 3` +
@@ -692,7 +710,7 @@ Selects the 3rd person in the listed panel list.
 //end::selectinv[]
 
 === Case Commands
-These are case related commands. +
+Managing lots of cases can be daunting but we've got you covered! Here are some commands you can use to make the process a simple and pleasant one. +
 
 //tag::addcase[]
 [[AddCase]]
@@ -711,7 +729,7 @@ You can refer to the screenshot below for an example.
 .Adding a case
 image::userguide-images/ac-command.png[width="800"]
 
-The following provides an explanation of some command examples:
+The following are some command examples that you can try out:
 
 * `addcase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994 t/Rape t/prostitution`
 * `addcase n/Bedok Riot i/3 s/12/05/2017 d/Riot at bedok 85 t/Rape t/prostitution`
@@ -721,12 +739,12 @@ The following provides an explanation of some command examples:
 //tag::listcases[]
 [[ListCases]]
 ==== Listing all cases : `listcases` [Since v1.2]
-This command would show you the list of all cases that have been added to the Investigapptor. +
+This command will show you the list of all cases that have been added to the Investigapptor. +
 Format: `listcases` +
 Alias: `lc`
 
 [NOTE]
-Running this command would automatically help you swap the panel tab
+Running this command will automatically help you toggle the panel tab
 to the case tab. +
 
 You can refer to the screenshot below for an example.
@@ -739,7 +757,7 @@ image::userguide-images/lc-command.png[width="450"]
 [[EditCase]]
 ==== Editing a case: `editcase` [Since v1.4]
 
-You can edit an existing case in the application by specifying the `CASE_INDEX` and entering the attributes that you wish to modify. +
+You can use this command to update case details or to re-assign a case to another investigator. Edit an existing case in the application by specifying the `CASE_INDEX` and entering the attributes that you wish to modify. +
 *Format:* `editcase CASE_INDEX [n/NAME] [d/DESCRIPTION] [i/INVESTIGATOR_INDEX] [s/STARTDATE] [t/TAG]...` +
 *Alias:* `ec`
 
@@ -778,7 +796,7 @@ Changes the investigator of the 2nd case to the 3rd investigator in the most rec
 [[FindCases]]
 ==== Locating cases by name: `findcases` [Since v1.3]
 
-You can find cases whose names contain any of your given keywords. +
+To help you get the details you need faster, you can use this command. You can find cases whose names contain any of your given keywords. +
 Format: `findcases KEYWORD [MORE_KEYWORDS]` +
 Alias: `fc`
 
@@ -857,7 +875,7 @@ Format: `findclosecases` +
 Alias: `fcc`
 
 You can refer to the screenshots below for an example of how the Investigapptor
-would look like after you've executed the `findclosecases` command.
+will look like after you've executed the `findclosecases` command.
 
 [[all-cases-displayed]]
 .Default interface displays all cases
@@ -886,7 +904,7 @@ Format: `findopencases` +
 Alias: `foc`
 
 You can refer to the screenshots below for an example of how the Investigapptor
-would look like after you've executed the `findopencases` command.
+will look like after you've executed the `findopencases` command.
 
 [[all-cases-displayed]]
 .Default interface displays all cases
@@ -924,7 +942,7 @@ This command is only applied to cases with the status `open`. It will not be all
 with the status `close`.
 
 You can refer to the screenshots below for an example of how the Investigapptor
-would look like after you've executed the `close` command.
+will look like after you've executed the `close` command.
 
 [[closecase-1]]
 .Before `close` command
@@ -939,7 +957,7 @@ The following provides an explanation of some command examples:
 * `listcases` +
 `close 2` +
 Closes the 2nd case in the results of the `listcases` command.
-* `findcase murder` +
+* `findcases murder` +
 `close 1` +
 Closes the 1st case in the results of the `findcases` command.
 * `cl 3` +
@@ -971,7 +989,7 @@ INDEX at the top left of their card as show in the diagram <<deletecase-index, b
 image::userguide-images/dc-index.png[width="320"]
 
 You can refer to the screenshots below for an example of how the Investigapptor
-would look like after you've executed the `deletecase` command.
+will look like after you've executed the `deletecase` command.
 
 [[deletecase-before]]
 .Before executing `deletecase 1` command
@@ -1004,6 +1022,11 @@ The `CASE_INDEX` refers to the index number shown in the last listing of cases.
 
 [WARNING]
 The index *must be a positive integer* 1, 2, 3, ...
+
+You can refer to the screenshot below for an example on how to use the command.
+[[selectcase-img]]
+.`selectcase 1` command
+image::userguide-images/sc-command.png[width="450"]
 
 The following provides an explanation of some command examples:
 
@@ -1047,7 +1070,7 @@ image::userguide-images/lic-command.png[width="800"]
 
 The following provides an explanation of some command examples:
 
-* `listinvestigator` +
+* `listinvestigators` +
 `listinvestigatorcases 2` +
 Display all the cases of the 2nd investigator in the results of the `list case` command.
 * `findinvestigators Amy` +
@@ -1063,17 +1086,17 @@ These are features that will come in future releases of Investigapptor +
 
 ==== Adding a witness `addwitness` [Coming in v2.0]
 We plan to implement this feature to allow for investigators to
-create and add witnesses to the cases in the Investigapptor. This would allow for
+create and add witnesses to the cases in the Investigapptor. This will allow for
 them to associate relevant witnesses to the various cases.
 
 ==== Adding a suspect `addsuspect` [Coming in v2.0]
 We plan to implement this feature to allow for investigators to
-create and add suspects to the cases in the Investigapptor. This would allow for
+create and add suspects to the cases in the Investigapptor. This will allow for
 them to associate relevant suspects to the various cases.
 
 ==== Adding evidence files `addevidence` [Coming in v2.0]
 We plan to implement this feature to allow for investigators to
-create and add evidence files to the cases in the Investigapptor. This would allow for
+create and add evidence files to the cases in the Investigapptor. This will allow for
 them to associate relevant evidences to the various cases.
 
 ==== Setting up chain of custody `buildcoc` [Coming in v2.0]
@@ -1090,7 +1113,7 @@ We plan to add a scanner feature where Investigapptor is able to read the image 
 process the information and add it into the Investigapptor.
 
 ==== Exporting case information into a PDF file `exportfile` [Coming in v2.0]
-We plan to add this feature which would allow Investigapptor to create a
+We plan to add this feature which will allow Investigapptor to create a
 PDF file which contains the information of a case or investigator.
 
 // tag::dataencryption[]
@@ -1118,14 +1141,14 @@ https://github.com/CS2103JAN2018-F14-B3/main/issues[here].
 This section provides a quick reference for all the commands available in the Investigapptor.
 
 === General Commands
-These are some general commands
+General commands that you might find useful in helping you to navigate and configure Investigapptor:
 [width="100%",cols="20%,<30%,<20%,<30",options="header",]
 |=======================================================================
-|Command |Purpose |Format |Example
+|Task |Purpose |Command |Example
 
 |_<<Help, Help>>_ |Shows you the user guide |`help` | `help`
 
-|_<<SetPassword, Set Password>>_ |Sets the password |`setpassword pw/PASSWORD` |
+|_<<SetPassword, Set Password>>_ |Sets the password |`setpassword` |
 `setpassword pw/password`
 
 |_<<RemovePassword, Remove Password>>_ |Removes the password |
@@ -1140,9 +1163,10 @@ These are some general commands
 |=======================================================================
 
 === Investigator Commands
+Commands to help you manage investigator details:
 [width="100%",cols="20%,<30%,<20%,<30",options="header",]
 |=======================================================================
-|Command |Purpose |Format |Example
+|Task |Purpose |Command |Example
 
 |_<<AddInv, Add an Investigator>>_ |Add a new investigator |
 `listinvestigators` | `listinvestigators`
@@ -1164,9 +1188,10 @@ These are some general commands
 |=======================================================================
 
 === Case Commands
+Commands to help you manage case details:
 [width="100%",cols="20%,<30%,<20%,<30",options="header",]
 |=======================================================================
-|Command |Purpose |Format |Example
+|Task |Purpose |Command |Example
 
 |_<<AddCase, Add a Case>>_ |Adds a new case |
 `addcase` | `addcase n/Geylang Rape d/Rape at geylang i/1 s/12/05/1994`

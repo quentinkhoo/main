@@ -111,8 +111,7 @@ input password to always be hidden from plain sight.</p>
 [<a href="https://github.com/CS2103JAN2018-F14-B3/main/pull/203">PR#203</a>]</p>
 </li>
 <li>
-<p>Designed formatting for User Guide Command Summary to ensure readability
-and ease of usage</p>
+<p>Designed formatting for User Guide Command Summary to ensure ease of usage</p>
 </li>
 <li>
 <p>Did cosmetic tweaks to existing contents of the Developer Guide</p>
@@ -1852,7 +1851,7 @@ the data of your previous Investigapptor folder.</p>
 <div class="sect2">
 <h3 id="password-feature"><a class="link" href="#password-feature">Password feature</a></h3>
 <div class="paragraph">
-<p>The password feature allows for investigators to set a password
+<p>The password feature allows for <a href="#investigator">investigators</a> to set a password
 for the application. This password can then be disclosed only to
 authorised investigators so as disallow unauthorised users from accessing
  or modifying the application data.</p>
@@ -1901,9 +1900,10 @@ component as shown below describes this in greater detail.</p>
 </div>
 <div class="paragraph">
 <p>Whenever then <code>Password</code> Object&#8217;s <code>updatePassword</code> function is called,
-the hash of the password is first generated with the <code>generatePasswordHash</code>
-function. This function makes use of the <code>SHA-256</code> hashing algorithm
-to generate the hash of the password as shown below:</p>
+the <a href="#hash">hash</a> of the password is first generated with the <code>generatePasswordHash</code>
+function. This function makes use of the <a href="https://en.wikipedia.org/wiki/SHA-2">SHA-256</a>,
+ hashing algorithm
+to generate the <a href="#hash">hash</a> of the password as shown below:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1951,7 +1951,7 @@ that were taken into consideration.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (Current Choice)</strong>: Have one password for the entire
+<p><strong>Alternative 1 (Current Choice)</strong>: Have a single password for the entire
 application</p>
 <div class="ulist">
 <ul>
@@ -1959,7 +1959,7 @@ application</p>
 <p>Pros: Investigators within a team can simply share the password.</p>
 </li>
 <li>
-<p>Cons: There is no access control between investigators of different
+<p>Cons: There is no <a href="#access-control">access control</a> between investigators of different
 ranks.</p>
 </li>
 </ul>
@@ -1971,7 +1971,7 @@ ranks.</p>
 <ul>
 <li>
 <p>Pros: Each investigator can have their own password, allowing for
-access control between investigators of different ranks.</p>
+<a href="#access-control">access control</a> between investigators of different ranks.</p>
 </li>
 <li>
 <p>Cons: Requires an additional password attribute for each investigator.</p>
@@ -1989,7 +1989,7 @@ access control between investigators of different ranks.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-14 21:15:27 UTC
+Last updated 2018-04-15 08:30:50 UTC
 </div>
 </div>
 </body>

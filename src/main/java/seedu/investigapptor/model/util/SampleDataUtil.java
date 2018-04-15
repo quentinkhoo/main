@@ -34,22 +34,22 @@ public class SampleDataUtil {
         return new Person[]{
             new Investigator(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new Rank("4"),
-                    getTagSet("friends")),
+                    getTagSet("teamA")),
             new Investigator(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Rank("2"),
-                    getTagSet("colleagues", "friends")),
+                    getTagSet("teamB")),
             new Investigator(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Rank("1"),
-                    getTagSet("neighbours")),
+                    getTagSet("new", "teamC")),
             new Investigator(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Rank("3"),
-                    getTagSet("family")),
+                    getTagSet( "teamA")),
             new Investigator(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"), new Rank("5"),
-                    getTagSet("classmates")),
+                    getTagSet("new", "teamB")),
             new Investigator(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"), new Rank("3"),
-                    getTagSet("colleagues"))
+                    getTagSet("teamC"))
         };
     }
 
@@ -61,7 +61,7 @@ public class SampleDataUtil {
                     new Status("open"), getTagSet("Murder")),
             new CrimeCase(new CaseName("BnE at Seragoon"), new Description("Unit #03-132 was broken in"),
                     (Investigator) getSamplePersons()[1], new StartDate("01/03/2018"), new EndDate(LARGEST_DATE),
-                    new Status("open"), getTagSet("BnE")),
+                    new Status("open"), getTagSet("Robbery")),
             new CrimeCase(new CaseName("Assault At Woodlands"), new Description("Man Assaulted at Woodland Blk "
                     + "312 void deck"), (Investigator) getSamplePersons()[3], new StartDate("07/08/2017"),
                     new EndDate(LARGEST_DATE), new Status("open"), getTagSet("Assault")),

@@ -521,6 +521,7 @@ access control between investigators of different ranks.
 
 //tag::calendar[]
 [[Calendar-Feature]]
+//tag::calendar2[]
 ==== Calendar feature
 The calendar feature serves as an interface to provide an overview of all the cases
 present in the `CrimeCaseListPanel`. The entries are colour-coded according to its case's
@@ -528,7 +529,7 @@ status. Red represents the status `open`; whereas green represents the status `c
 
 [[CalendarFeature]]
 .Calendar Interface
-image::CalendarFeature.PNG[width="800"]
+image::CalendarFeature.PNG[width="700"]
 
 ===== Reason for implementation
 The calendar serves as an organization tool to arrange the cases according to its start and end date,
@@ -619,7 +620,7 @@ private void handleInvestigapptorChangedEvent(InvestigapptorChangedEvent event) 
     Platform.runLater(this::updateCalendar);
 }
 ----
-
+//end::calendar2[]
 [[Calendar-Events-Filter]]
 ===== Event raised from filtering the `CrimeCase` list
 In the following sequence diagram, it shows how the components interacts when the user issues

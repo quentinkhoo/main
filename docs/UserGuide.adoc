@@ -181,7 +181,6 @@ below, the closed case, Project Magic has a start date of "01/04/2018" and end d
 [[green-entry]]
 .Green Entry
 image::userguide-images/green-entry.png[width="500"]
-{nbsp} +
 
 [NOTE]
 ====
@@ -198,7 +197,6 @@ for Project Two, it has a status of `open` and a start date of "03/04/2018".
 [[red-entry]]
 .Red Entry
 image::userguide-images/red-entry.png[width="500"]
-{nbsp} +
 
 [NOTE]
 ====
@@ -234,7 +232,6 @@ An example is shown below in _<<TagExample, Figure 4>>_.
 [[TagExample]]
 .Investigator with a tag
 image::userguide-images/tag-example.PNG[width="450"]
-{nbsp} +
 
 [TIP]
 You can use the tags to label each investigator with their field of expertise
@@ -285,7 +282,7 @@ image::userguide-images/help-ui.png[width="300"]
 ==== Setting a password : `setpassword` [Since v1.3]
 You can use this command to set a new password for the Investigapptor.
 
-[IMPORTANT]
+[WARNING]
 Your password must be of minimal 8 characters and not contain any spaces. +
 [NOTE]
 Due to security reasons, this command is not an undoable command.
@@ -298,7 +295,6 @@ Alias: `sp pw/PASSWORD` +
 [[setpassword]]
 .Setting a password
 image::userguide-images/sp-command.png[width="450"]
-{nbsp} +
 
 The next time you start up Investigapptor, you will be prompted with a password
 input as shown below in _<<inputpassword>>_.
@@ -339,7 +335,6 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 [[historycommand]]
 .Using the `history` command
 image::userguide-images/history-command.png[width="790"]
-{nbsp} +
 
 // tag::undoredo[]
 [[Undo]]
@@ -542,14 +537,12 @@ You can refer to the screenshot below for an example.
 [[editinvestigator]]
 .Using the Edit Investigator Command
 image::userguide-images/ei-command1.png[width="450"]
-{nbsp} +
 
 You can observe that the details of the investigator has be change in both the panel list and details panel.
 The result box will also print the new investigator details as show in <<editinvestigator2>>.
 [[editinvestigator2]]
 .Outcome
 image::userguide-images/ei-command2.png[width="450"]
-{nbsp} +
 
 The following provides an explanation of some command examples:
 
@@ -581,7 +574,6 @@ You can refer to the screenshot below for an example.
 [[findinvestigators]]
 .Finding investigators by its name
 image::userguide-images/fi-command.png[width="450"]
-{nbsp} +
 
 The following provides an explanation of some command examples:
 

@@ -533,6 +533,7 @@ configuring passwords
 
 //tag::calendar2[]
 [[Calendar-Feature]]
+//tag::calendar2[]
 ==== Calendar feature
 The calendar feature serves as an interface to provide an overview of all the cases
 present in the `CrimeCaseListPanel`. The entries are colour-coded according to its case's

@@ -92,7 +92,7 @@ public class Investigator extends Person {
      * Returns true if empty
      * else if not empty
      */
-    public boolean emptyList() {
+    public boolean isCaseListEmpty() {
         if (getCrimeCases().isEmpty()) {
             return true;
         } else {

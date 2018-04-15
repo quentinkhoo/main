@@ -53,7 +53,7 @@ public class DeleteInvestigatorCommand extends UndoableCommand {
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(personToDelete);
-        if (personToDelete instanceof Investigator && !((Investigator) personToDelete).emptyList()) {
+        if (personToDelete instanceof Investigator && !((Investigator) personToDelete).isCaseListEmpty()) {
             throw new CommandException(MESSAGE_ACTIVE_INVESTIGATOR);
         } else {
             deletePerson();

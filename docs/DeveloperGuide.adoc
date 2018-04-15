@@ -1206,7 +1206,7 @@ Typos can be made when in a haste. The ability to edit cases would give investig
 
 ===== Current implementation
 
-The EditCaseCommandParser parses the String of arguments provided by the user and splits the `String` into the case index (`Index`) and the separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) and directs it into a  ` EditCrimeCaseDescriptor` object  to be used in the context of the `EditCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
+The EditCaseCommandParser parses the String of arguments provided by the user and splits the `String` into the case index (`Index`) and the separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) and directs it into a `EditCrimeCaseDescriptor` object  to be used in the context of the `EditCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
 The `EditCrimeCaseDescriptor` is a class containing information that describes the case (i.e. case name, description, investigator, start date, tags). The descriptor is used because the user is not required to input all the fields except the case index. When the user specifies the field they wish to edit, it sets the field in the `EditCrimeCaseDescriptor` to that value. If any field is not specified, the field is set to `null`.
 
@@ -1479,6 +1479,7 @@ that are extended from parent class `FindByStatusCommand`
 ** Cons: Duplicated set of codes
 //end::findcasestag[]
 
+[[case-select]]
 //tag::selectcase[]
 ==== Select case
 
@@ -1561,9 +1562,9 @@ To learn more about how the data is reflected onto the UI, you can take a look a
 [[UI-DetailsPane]]
 ==== Details pane
 
-The details pane makes use of JavaFx's `WebView` (an embedded browser) to render the data onto the display. The implementation for this can be found in link:{repoURL}/java/seedu/investigapptor/ui/BrowserPanel.java[BrowserPanel].
+This component is used by the `selectinvestigator` and `selectcase`(<<case-select>>) commands. The details pane makes use of JavaFx's `WebView` (an embedded browser) to render the data onto the display. The implementation for this can be found in link:{repoURL}/java/seedu/investigapptor/ui/BrowserPanel.java[BrowserPanel].
 
-Two HTML files, `/docs/InvestigatorDetailsPage.html` and `/docs/CaseDetailsPage.html` were created as templates for displaying the details of a single investigator and case respectively. `WebView` provides utility methods that can be used to load and display the HTML files.
+Two HTML files, `/docs/InvestigatorDetailsPage.html` and `/docs/CaseDetailsPage.html` are created as templates for displaying the details of a single investigator and case respectively. `WebView` provides utility methods that can be used to load and display the HTML files.
 
 A `String` containing the URL or file path is passed to the `load` method with a query string appended to the back (e.g. “https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=John%20Doe”). This method can be used to load pages from third-party services (e.g. Google Search).
 

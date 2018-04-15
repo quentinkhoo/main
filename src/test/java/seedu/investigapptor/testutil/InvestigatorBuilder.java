@@ -14,7 +14,7 @@ import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.util.SampleDataUtil;
-
+//@@author Marcus-cxc
 /**
  * A utility class to help with building Investigator objects.
  */

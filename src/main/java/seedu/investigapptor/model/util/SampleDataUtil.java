@@ -1,10 +1,19 @@
 package seedu.investigapptor.model.util;
 
+import static seedu.investigapptor.model.crimecase.EndDate.LARGEST_DATE;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.ReadOnlyInvestigapptor;
+import seedu.investigapptor.model.crimecase.CaseName;
+import seedu.investigapptor.model.crimecase.CrimeCase;
+import seedu.investigapptor.model.crimecase.Description;
+import seedu.investigapptor.model.crimecase.EndDate;
+import seedu.investigapptor.model.crimecase.StartDate;
+import seedu.investigapptor.model.crimecase.Status;
+import seedu.investigapptor.model.crimecase.exceptions.DuplicateCrimeCaseException;
 import seedu.investigapptor.model.person.Address;
 import seedu.investigapptor.model.person.Email;
 import seedu.investigapptor.model.person.Name;
@@ -15,6 +24,7 @@ import seedu.investigapptor.model.person.investigator.Investigator;
 import seedu.investigapptor.model.person.investigator.Rank;
 import seedu.investigapptor.model.tag.Tag;
 
+//@@author Marcus-cxc
 /**
  * Contains utility methods for populating {@code Investigapptor} with sample data.
  */
@@ -41,7 +51,33 @@ public class SampleDataUtil {
                 getTagSet("colleagues"))
         };
     }
+    public static CrimeCase[] getSampleCases() {
 
+        return new CrimeCase[] {
+                new CrimeCase(new CaseName("Murder at Bishan"), new Description("Man stab to death"),
+                        (Investigator) getSamplePersons()[1], new StartDate("07/08/2017"), new EndDate(LARGEST_DATE),
+                        new Status("open"), getTagSet("Murder")),
+                new CrimeCase(new CaseName("BnE at Seragoon"), new Description("Unit #03-132 was broken in"),
+                        (Investigator) getSamplePersons()[1], new StartDate("01/03/2018"), new EndDate(LARGEST_DATE),
+                        new Status("open"), getTagSet("BnE")),
+                new CrimeCase(new CaseName("Assault At Woodlands"), new Description("Man Assaulted at Woodland Blk " +
+                        "312 void deck"), (Investigator) getSamplePersons()[3], new StartDate("07/08/2017"),
+                        new EndDate(LARGEST_DATE), new Status("open"), getTagSet("Assault")),
+                new CrimeCase(new CaseName("Illegal Firearm"), new Description("Man possessing a SAR-21 at home"),
+                        (Investigator) getSamplePersons()[5], new StartDate("02/02/2018"), new EndDate(LARGEST_DATE),
+                        new Status("open"), getTagSet("Firearm")),
+                new CrimeCase(new CaseName("Robbery at AMK Macdonald"), new Description("Man demanded 50 big mac" +
+                        "with a knife"),
+                        (Investigator) getSamplePersons()[2], new StartDate("07/03/2016"), new EndDate(LARGEST_DATE),
+                        new Status("open"), getTagSet("Robbery")),
+                new CrimeCase(new CaseName("The Oolong Slayer"), new Description("A serial murderer who always" +
+                        "leave behind oolong tea"), (Investigator) getSamplePersons()[0], new StartDate("07/02/2011"),
+                        new EndDate(LARGEST_DATE), new Status("open"), getTagSet("Murder", "Serial")),
+                new CrimeCase(new CaseName("Punggol Arson"), new Description("Fire started by unknown perp at 7pm"),
+                        (Investigator) getSamplePersons()[4], new StartDate("02/01/2018"),
+                        new EndDate(LARGEST_DATE), new Status("open"), getTagSet("Arson", "Fire"))
+        };
+    }
     public static ReadOnlyInvestigapptor getSampleInvestigapptor() {
         try {
             Investigapptor sampleAb = new Investigapptor();
@@ -49,10 +85,19 @@ public class SampleDataUtil {
             for (Person samplePerson : getSamplePersons()) {
                 sampleAb.addPerson(samplePerson);
             }
+
+            for (CrimeCase crimeCase: getSampleCases()) {
+                sampleAb.addCrimeCase(crimeCase);
+            }
+
+
             return sampleAb;
         } catch (DuplicatePersonException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
+        } catch (DuplicateCrimeCaseException e) {
+            throw new AssertionError("sample data cannot contain duplicate Case");
         }
+
     }
 
     /**

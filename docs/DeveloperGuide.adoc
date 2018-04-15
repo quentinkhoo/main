@@ -518,7 +518,7 @@ access control between investigators of different ranks.
 ** Cons: Requires an additional password attribute for each investigator.
 // end::password[]
 
-//tag:calendar[]
+//tag::calendar[]
 [[Calendar-Feature]]
 ==== Calendar feature
 The calendar feature serves as an interface to provide an overview of all the cases
@@ -660,7 +660,7 @@ private void handleFilteredCrimeCaseListChangedEvent(FilteredCrimeCaseListChange
     Platform.runLater(this::updateCalendar);
 }
 ----
-//end:calendar[]
+//end::calendar[]
 
 //tag::backup[]
 ==== Create backup
@@ -1623,7 +1623,7 @@ Javascript code is included in the HTML file to parse the URL request string and
 
 **Reason for current choice:** As the data we have is simple, implementing and styling with HTML is easier.
 
-==== Modify the style/colour scheme of the interface
+==== Modify interface theme/colour scheme
 
 It's easy to customize the look and feel of Investigapptor just by using CSS!
 

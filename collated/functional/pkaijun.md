@@ -1,4 +1,27 @@
 # pkaijun
+###### \java\seedu\investigapptor\commons\events\ui\FilteredCrimeCaseListChangedEvent.java
+``` java
+/**
+ * Indicates a request to change the cases displayed on the calendar panel
+ */
+public class FilteredCrimeCaseListChangedEvent extends BaseEvent {
+
+    public final ObservableList<CrimeCase> crimecases;
+
+    public FilteredCrimeCaseListChangedEvent(ObservableList<CrimeCase> crimecases) {
+        this.crimecases = crimecases;
+    }
+
+    public ObservableList<CrimeCase> getFilteredCrimeCaseList() {
+        return crimecases;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
+}
+```
 ###### \java\seedu\investigapptor\logic\commands\CloseCaseCommand.java
 ``` java
 /**
@@ -10,7 +33,7 @@ public class CloseCaseCommand extends UndoableCommand {
     public static final String COMMAND_ALIAS = "cl";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status from open to close "
-            + "and updates the end date accordingly.\n"
+            + "and updates the end date to today's date.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
@@ -60,38 +83,65 @@ public class CloseCaseCommand extends UndoableCommand {
             throw new CommandException(MESSAGE_CASE_ALREADY_CLOSE);
         }
 
-        closedCase = createEditedCase(caseToClose);
+        closedCase = createClosedCase(caseToClose);
     }
 
     /**
      * Creates and returns a {@code CrimeCase} with the details of {@code caseToEdit}
      * Updates status to "close" with the other fields remaining the same
      */
-    private static CrimeCase createEditedCase(CrimeCase caseToClose) {
+    private static CrimeCase createClosedCase(CrimeCase caseToClose) {
         assert caseToClose != null;
 
         CaseName name = caseToClose.getCaseName();
         Description desc = caseToClose.getDescription();
-        Date startDate = caseToClose.getStartDate();
-        Date endDate = new Date(Date.getTodayDate());
+        StartDate startDate = caseToClose.getStartDate();
+        EndDate endDate = new EndDate(EndDate.getTodayDate());
         Set<Tag> tags = caseToClose.getTags();
         Investigator investigator = caseToClose.getCurrentInvestigator();
-        Status status = caseToClose.getStatus();
-        status.closeCase();    // Close case status only
+        Status status = new Status(CASE_CLOSE);
 
         return new CrimeCase(name, desc, investigator, startDate, endDate, status, tags);
+    }
+}
+```
+###### \java\seedu\investigapptor\logic\commands\FindByStatusCommand.java
+``` java
+/**
+ * Finds and lists all cases in investigapptor according to the status predicate specified
+ */
+public class FindByStatusCommand extends Command {
+    private final StatusContainsKeywordsPredicate predicate;
+
+    public FindByStatusCommand(String caseStatus) {
+        List<String> keywords = Arrays.asList(caseStatus);
+        this.predicate = new StatusContainsKeywordsPredicate(keywords);
+    }
+
+    @Override
+    public CommandResult execute() {
+        model.updateFilteredCrimeCaseList(predicate);
+        EventsCenter.getInstance().post(new SwapTabEvent(1));   // List results toggles to case tab
+        return new CommandResult(getMessageForCrimeListShownSummary(model.getFilteredCrimeCaseList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindByStatusCommand // instanceof handles nulls
+                && this.predicate.equals(((FindByStatusCommand) other).predicate)); // state check
     }
 }
 ```
 ###### \java\seedu\investigapptor\logic\commands\FindCaseTagsCommand.java
 ``` java
 /**
- * Finds and lists all investigators in investigapptor whose tags contains any of the argument keywords.
+ * Finds and lists all cases in investigapptor whose tags contains any of the argument keywords.
  * Keyword matching is not case-sensitive.
  */
 public class FindCaseTagsCommand extends Command {
 
-    public static final String COMMAND_WORD = "findCaseTags";
+    public static final String COMMAND_WORD = "findcasetags";
     public static final String COMMAND_ALIAS = "fct";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds cases whose tags contain any of "
@@ -120,6 +170,24 @@ public class FindCaseTagsCommand extends Command {
     }
 }
 ```
+###### \java\seedu\investigapptor\logic\commands\FindCloseCaseCommand.java
+``` java
+/**
+ * Finds and lists all cases in investigapptor whose status are closed
+ */
+public class FindCloseCaseCommand extends FindByStatusCommand {
+    public static final String COMMAND_WORD = "findclosecases";
+    public static final String COMMAND_ALIAS = "fcc";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds cases whose status is "
+            + CASE_CLOSE + ".\n"
+            + "Example: " + COMMAND_WORD;
+
+    public FindCloseCaseCommand() {
+        super(CASE_CLOSE);
+    }
+}
+```
 ###### \java\seedu\investigapptor\logic\commands\FindInvestTagsCommand.java
 ``` java
 /**
@@ -128,7 +196,7 @@ public class FindCaseTagsCommand extends Command {
  */
 public class FindInvestTagsCommand extends Command {
 
-    public static final String COMMAND_WORD = "findInvestTags";
+    public static final String COMMAND_WORD = "findinvestigatortags";
     public static final String COMMAND_ALIAS = "fit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds investigators whose tags contain any of "
@@ -154,6 +222,24 @@ public class FindInvestTagsCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof FindInvestTagsCommand // instanceof handles nulls
                 && this.predicate.equals(((FindInvestTagsCommand) other).predicate)); // state check
+    }
+}
+```
+###### \java\seedu\investigapptor\logic\commands\FindOpenCaseCommand.java
+``` java
+/**
+ * Finds and lists all cases in investigapptor whose status are opened
+ */
+public class FindOpenCaseCommand extends FindByStatusCommand {
+    public static final String COMMAND_WORD = "findopencases";
+    public static final String COMMAND_ALIAS = "foc";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds cases whose status is "
+            + CASE_OPEN + ".\n"
+            + "Example: " + COMMAND_WORD;
+
+    public FindOpenCaseCommand() {
+        super(CASE_OPEN);
     }
 }
 ```
@@ -192,7 +278,7 @@ public class CloseCaseCommandParser implements Parser<CloseCaseCommand> {
 ###### \java\seedu\investigapptor\logic\parser\FindCaseTagsCommandParser.java
 ``` java
 /**
- * Parses input arguments and creates a new FindInvestTagsCommand object
+ * Parses input arguments and creates a new FindCaseTagsCommand object
  */
 public class FindCaseTagsCommandParser implements Parser<FindCaseTagsCommand> {
     /**
@@ -251,6 +337,34 @@ public class FindInvestTagsCommandParser implements Parser<FindInvestTagsCommand
         return rawTags;
     }
 ```
+###### \java\seedu\investigapptor\model\crimecase\StatusContainsKeywordsPredicate.java
+``` java
+/**
+ * Tests that a {@code CrimeCase}'s {@code Status} matches any of the keywords given.
+ */
+public class StatusContainsKeywordsPredicate implements Predicate<CrimeCase> {
+    private final List<String> keywords;
+
+    public StatusContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    /* Returns true if keywords matches with any element in the set of status of a crimecase
+     */
+    @Override
+    public boolean test(CrimeCase crimecase) {
+        return keywords.stream()
+                .anyMatch(crimecase.getStatus().toString()::contains);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof StatusContainsKeywordsPredicate // instanceof handles nulls
+                && this.keywords.equals(((StatusContainsKeywordsPredicate) other).keywords)); // state check
+    }
+}
+```
 ###### \java\seedu\investigapptor\model\crimecase\TagContainsKeywordsPredicate.java
 ``` java
 /**
@@ -303,6 +417,13 @@ public class TagContainsKeywordsPredicate implements Predicate<CrimeCase> {
         addCrimeCaseToInvestigator(syncedEditedCrimeCase);
     }
 ```
+###### \java\seedu\investigapptor\model\ModelManager.java
+``` java
+    /** Raises an event to indicate the filtered crime cases list has changed */
+    private void indicateFilteredCrimeCaseListChanged() {
+        raise(new FilteredCrimeCaseListChangedEvent(filteredCrimeCases));
+    }
+```
 ###### \java\seedu\investigapptor\model\person\investigator\TagContainsKeywordsPredicate.java
 ``` java
 /**
@@ -343,6 +464,9 @@ public class CalendarPanel extends UiPart<Region> {
     private static final String CLOSED_CASE_CALENDAR = "Closed Cases";
     private static final String OPENED_CASE_CALENDAR = "Opened Cases";
     private static final String CALENDAR_SOURCE = "All Cases";
+
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
+
 
     private Calendar caseCloseCalendar;
     private Calendar caseOpenCalendar;
@@ -385,8 +509,8 @@ public class CalendarPanel extends UiPart<Region> {
      * Create canlendar entries for all the cases in the crime list
      */
     private void createCalendarEntries() {
-        Date endDate;
-        Date startDate;
+        StartDate startDate;
+        EndDate endDate;
         String caseName;
         String status;
 
@@ -431,9 +555,10 @@ public class CalendarPanel extends UiPart<Region> {
         calendarPanel.setShowSearchField(false);
         calendarPanel.setShowSearchResultsTray(false);
         calendarPanel.setShowPrintButton(false);
-        calendarPanel.showMonthPage();
+        calendarPanel.setShowToolBar(true);
         calendarPanel.setShowAddCalendarButton(false);
         calendarPanel.setShowToday(true);
+        calendarPanel.showMonthPage();
     }
 
     /**
@@ -454,11 +579,20 @@ public class CalendarPanel extends UiPart<Region> {
         caseCalendarSource.getCalendars().add(caseCloseCalendar);
         caseCalendarSource.getCalendars().add(caseOpenCalendar);
         calendarPanel.getCalendarSources().addAll(caseCalendarSource);
+        calendarPanel.getCalendarSources().remove(0);   // Remove the default calendar
     }
 
     @Subscribe
-    private void handleNewCaseEvent(InvestigapptorChangedEvent event) {
+    private void handleInvestigapptorChangedEvent(InvestigapptorChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
         crimeList = event.data.getCrimeCaseList();
+        Platform.runLater(this::updateCalendar);
+    }
+
+    @Subscribe
+    private void handleFilteredCrimeCaseListChangedEvent(FilteredCrimeCaseListChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        crimeList = event.getFilteredCrimeCaseList();
         Platform.runLater(this::updateCalendar);
     }
 
@@ -568,6 +702,79 @@ public class CalendarPanel extends UiPart<Region> {
     -fx-background-color: #bc99da;
 }
 
+
+```
+###### \resources\view\LightTheme.css
+``` css
+#tags .red {
+    -fx-text-fill: black;
+    -fx-background-color: #FF0000;
+}
+
+#tags .yellow {
+    -fx-text-fill: black;
+    -fx-background-color: #FFFF00;
+}
+
+#tags .blue {
+    -fx-text-fill: black;
+    -fx-background-color: #76D3E2;
+}
+
+#tags .orange {
+    -fx-text-fill: black;
+    -fx-background-color: #F9C815;
+}
+
+#tags .pink {
+    -fx-text-fill: black;
+    -fx-background-color: #F915EE;
+}
+
+#tags .olive {
+    -fx-text-fill: black;
+    -fx-background-color: #72B07C;
+}
+
+#tags .black {
+    -fx-text-fill: white;
+    -fx-background-color: #000000;
+}
+
+#tags .brown {
+    -fx-text-fill: black;
+    -fx-background-color: #CD853F;
+}
+
+#tags .gray {
+    -fx-text-fill: black;
+    -fx-background-color: #b6b6b6;
+}
+
+#tags .green {
+    -fx-text-fill: black;
+    -fx-background-color: #00ff06;
+}
+
+#tags .beige {
+    -fx-text-fill: black;
+    -fx-background-color: #FFE4C4;
+}
+
+#tags .lightblue {
+    -fx-text-fill: black;
+    -fx-background-color: #27fffa;
+}
+
+#tags .golden {
+    -fx-text-fill: black;
+    -fx-background-color: #DAA520;
+}
+
+#tags .purple {
+    -fx-text-fill: black;
+    -fx-background-color: #bc99da;
+}
 
 ```
 ###### \resources\view\MainWindow.fxml

@@ -531,7 +531,7 @@ configuring passwords
 
 // end::password[]
 
-//tag::calendar2[]
+//tag::calendar[]
 [[Calendar-Feature]]
 //tag::calendar2[]
 ==== Calendar feature

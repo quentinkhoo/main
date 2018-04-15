@@ -1,5 +1,5 @@
 # Marcus-cxc
-###### /java/seedu/investigapptor/logic/commands/ListInvestigatorCaseCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\ListInvestigatorCaseCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -97,7 +97,7 @@ public class ListInvestigatorCaseCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/parser/AddInvestigatorCommandParserTest.java
+###### \java\seedu\investigapptor\logic\parser\AddInvestigatorCommandParserTest.java
 ``` java
 public class AddInvestigatorCommandParserTest {
     private AddInvestigatorCommandParser parser = new AddInvestigatorCommandParser();
@@ -215,7 +215,7 @@ public class AddInvestigatorCommandParserTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/model/person/RankTest.java
+###### \java\seedu\investigapptor\model\person\RankTest.java
 ``` java
 public class RankTest {
 
@@ -253,7 +253,7 @@ public class RankTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/storage/XmlAdaptedInvestigatorTest.java
+###### \java\seedu\investigapptor\storage\XmlAdaptedInvestigatorTest.java
 ``` java
     @Test
     public void toModelType_validInvestigatorDetails_returnsInvestigator() throws Exception {
@@ -357,7 +357,7 @@ public class RankTest {
 
 }
 ```
-###### /java/seedu/investigapptor/testutil/InvestigatorBuilder.java
+###### \java\seedu\investigapptor\testutil\InvestigatorBuilder.java
 ``` java
 /**
  * A utility class to help with building Investigator objects.
@@ -470,7 +470,7 @@ public class InvestigatorBuilder {
 
 }
 ```
-###### /java/seedu/investigapptor/testutil/TypicalInvestigator.java
+###### \java\seedu\investigapptor\testutil\TypicalInvestigator.java
 ``` java
     private TypicalInvestigator() {
     } // prevents instantiation

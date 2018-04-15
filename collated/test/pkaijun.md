@@ -1,5 +1,5 @@
 # pkaijun
-###### /java/seedu/investigapptor/logic/commands/CloseCaseCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\CloseCaseCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model, UndoCommand)
@@ -137,7 +137,7 @@ public class CloseCaseCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/FindCaseTagsCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\FindCaseTagsCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCaseTagsCommand}.
@@ -214,7 +214,7 @@ public class FindCaseTagsCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/FindCloseCaseCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\FindCloseCaseCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCloseCaseCommand}.
@@ -277,7 +277,7 @@ public class FindCloseCaseCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/FindInvestTagsCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\FindInvestTagsCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code FindInvestTagsCommand}.
@@ -354,7 +354,7 @@ public class FindInvestTagsCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/commands/FindOpenCaseCommandTest.java
+###### \java\seedu\investigapptor\logic\commands\FindOpenCaseCommandTest.java
 ``` java
 /**
  * Contains integration tests (interaction with the Model) for {@code FindOpenCaseCommand}.
@@ -417,7 +417,7 @@ public class FindOpenCaseCommandTest {
     }
 }
 ```
-###### /java/seedu/investigapptor/logic/parser/FindCaseTagsCommandParserTest.java
+###### \java\seedu\investigapptor\logic\parser\FindCaseTagsCommandParserTest.java
 ``` java
 public class FindCaseTagsCommandParserTest {
 
@@ -442,7 +442,7 @@ public class FindCaseTagsCommandParserTest {
 
 }
 ```
-###### /java/seedu/investigapptor/logic/parser/FindInvestTagsCommandParserTest.java
+###### \java\seedu\investigapptor\logic\parser\FindInvestTagsCommandParserTest.java
 ``` java
 public class FindInvestTagsCommandParserTest {
 

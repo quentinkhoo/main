@@ -100,14 +100,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateInvestigapptorChanged();
     }
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     @Override
     public synchronized void deleteCrimeCase(CrimeCase target) throws CrimeCaseNotFoundException {
         investigapptor.removeCrimeCase(target);
         indicateInvestigapptorChanged();
     }
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     @Override
     public synchronized void addCrimeCase(CrimeCase crimecase) throws DuplicateCrimeCaseException {
         investigapptor.addCrimeCase(crimecase);
@@ -115,7 +115,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateInvestigapptorChanged();
     }
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     @Override
     public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
             throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
@@ -172,7 +172,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Filtered Cases List Accessors =============================================================
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     /**
      * Returns an unmodifiable view of the list of {@code CrimeCase} backed by the internal list of
      * {@code investigapptor}

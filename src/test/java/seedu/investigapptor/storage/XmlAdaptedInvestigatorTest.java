@@ -37,7 +37,6 @@ public class XmlAdaptedInvestigatorTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
-    
     //@@author Marcus-cxc
     @Test
     public void toModelType_validInvestigatorDetails_returnsInvestigator() throws Exception {

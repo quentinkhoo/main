@@ -5,19 +5,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_THIRD_CASE;
 import static seedu.investigapptor.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.investigapptor.testutil.TypicalInvestigator.ALICE;
-import static seedu.investigapptor.testutil.TypicalInvestigator.BENSON;
-import static seedu.investigapptor.testutil.TypicalInvestigator.getTypicalInvestigapptor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
-
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import seedu.investigapptor.commons.core.Messages;
 import seedu.investigapptor.logic.CommandHistory;
@@ -27,7 +21,6 @@ import seedu.investigapptor.model.Investigapptor;
 import seedu.investigapptor.model.Model;
 import seedu.investigapptor.model.ModelManager;
 import seedu.investigapptor.model.UserPrefs;
-import seedu.investigapptor.model.crimecase.CaseContainsInvestigatorPredicate;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.testutil.CrimeCaseBuilder;
 import seedu.investigapptor.testutil.TypicalInvestigator;
@@ -46,12 +39,12 @@ public class ListInvestigatorCaseCommandTest {
         ListInvestigatorCaseCommand findSecondCommand = new ListInvestigatorCaseCommand(INDEX_SECOND_PERSON);
         findFirstCommand.setData(model, new CommandHistory(), new UndoRedoStack());
         findSecondCommand.setData(model, new CommandHistory(), new UndoRedoStack());
-        try{
+        try {
             findFirstCommand.execute();
         } catch (CommandException e) {
             throw new AssertionError("First command execute fail");
         }
-        try{
+        try {
             findSecondCommand.execute();
         } catch (CommandException e) {
             throw new AssertionError("Second command execute fail");
@@ -63,7 +56,7 @@ public class ListInvestigatorCaseCommandTest {
         // same values -> returns true
         ListInvestigatorCaseCommand findFirstCommandCopy = new ListInvestigatorCaseCommand(INDEX_FIRST_PERSON);
         findFirstCommandCopy.setData(model, new CommandHistory(), new UndoRedoStack());
-        try{
+        try {
             findFirstCommandCopy.execute();
         } catch (CommandException e) {
             throw new AssertionError("findFirstCommandCopy execute fail");

@@ -57,6 +57,145 @@ public class BackupCommand extends Command {
     }
 }
 ```
+###### \java\seedu\investigapptor\logic\commands\DeleteInvestigatorCommand.java
+``` java
+/**
+ * Deletes a person identified using it's last displayed index from the investigapptor book.
+ */
+public class DeleteInvestigatorCommand extends UndoableCommand {
+
+    public static final String COMMAND_WORD = "deleteinvestigator";
+    public static final String COMMAND_ALIAS = "di";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the investigator identified by the index number used in the last listing of investigators.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
+
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Investigator: %1$s";
+    public static final String MESSAGE_ACTIVE_INVESTIGATOR = "Investigator is currently in charge of a case.\n"
+            + "Please reassign the cases to another investigator to delete the selected investigator";
+    private final Index targetIndex;
+
+    private Person personToDelete;
+
+    public DeleteInvestigatorCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
+    }
+
+    /**
+    * Try to call the model to delete Person (@personToDelete)
+    *
+    */
+    private void deletePerson() {
+        try {
+            model.deletePerson(personToDelete);
+            EventsCenter.getInstance().post(new SwapTabEvent(0));
+        } catch (PersonNotFoundException pnfe) {
+            throw new AssertionError("The target investigator cannot be missing");
+        }
+    }
+    @Override
+    public CommandResult executeUndoableCommand() throws CommandException {
+        requireNonNull(personToDelete);
+        if (personToDelete instanceof Investigator && !((Investigator) personToDelete).isCaseListEmpty()) {
+            throw new CommandException(MESSAGE_ACTIVE_INVESTIGATOR);
+        } else {
+            deletePerson();
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+    }
+
+    @Override
+    protected void preprocessUndoableCommand() throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_INVESTIGATOR_DISPLAYED_INDEX);
+        }
+
+        personToDelete = lastShownList.get(targetIndex.getZeroBased());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteInvestigatorCommand // instanceof handles nulls
+                && this.targetIndex.equals(((DeleteInvestigatorCommand) other).targetIndex) // state check
+                && Objects.equals(this.personToDelete, ((DeleteInvestigatorCommand) other).personToDelete));
+    }
+}
+```
+###### \java\seedu\investigapptor\logic\commands\EditInvestigatorCommand.java
+``` java
+/**
+ * Edits the details of an existing person in the investigapptor book.
+ */
+public class EditInvestigatorCommand extends UndoableCommand {
+
+    public static final String COMMAND_WORD = "editinvestigator";
+    public static final String COMMAND_ALIAS = "ei";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the investigator identified "
+            + "by the index number used in the last listing of investigators. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_RANK + "RANK] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
+
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Investigator: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This investigator already exists in investigapptor.";
+
+    private final Index index;
+    private final EditPersonDescriptor editPersonDescriptor;
+
+    private Person personToEdit;
+    private Person editedPerson;
+
+    /**
+     * @param index                of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
+     */
+    public EditInvestigatorCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editPersonDescriptor);
+
+        this.index = index;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
+```
+###### \java\seedu\investigapptor\logic\commands\EditInvestigatorCommand.java
+``` java
+    /**
+     * Creates investigator and returns as {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
+
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
+        if (personToEdit instanceof Investigator) {
+            Rank updatedRank = editPersonDescriptor.getRank().orElse((((Investigator) personToEdit).getRank()));
+            return new Investigator(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRank, updatedTags, (
+                    (Investigator) personToEdit).getCaseListHashed());
+        }
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+    }
+```
 ###### \java\seedu\investigapptor\logic\commands\ListInvestigatorCaseCommand.java
 ``` java
 /**
@@ -98,34 +237,231 @@ public class ListInvestigatorCaseCommand extends Command {
         return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListInvestigatorCaseCommand // instanceof handles nulls
+                && this.predicate.equals(((ListInvestigatorCaseCommand) other).predicate)); // state check
+    }
 
+}
+```
+###### \java\seedu\investigapptor\logic\parser\AddInvestigatorCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new AddInvestigatorCommand object
+ */
+public class AddInvestigatorCommandParser implements Parser<AddInvestigatorCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddInvestigatorCommand
+     * and returns an AddInvestigatorCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public AddInvestigatorCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_ADDRESS, PREFIX_RANK, PREFIX_TAG);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_RANK) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddInvestigatorCommand.MESSAGE_USAGE));
+        }
+
+        try {
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)).get();
+            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).get();
+            Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).get();
+            Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).get();
+            Rank rank = ParserUtil.parseRank(argMultimap.getValue(PREFIX_RANK)).get();
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+            Investigator investigator = new Investigator(name, phone, email, address, rank, tagList);
+            return new AddInvestigatorCommand(investigator);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+}
+```
+###### \java\seedu\investigapptor\logic\parser\EditInvestigatorCommandParser.java
+``` java
+/**
+ * Parses input arguments and creates a new EditInvestigatorCommand object
+ */
+public class EditInvestigatorCommandParser implements Parser<EditInvestigatorCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the EditInvestigatorCommand
+     * and returns an EditInvestigatorCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public EditInvestigatorCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RANK,
+                        PREFIX_TAG);
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditInvestigatorCommand.MESSAGE_USAGE));
+        }
+
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        try {
+            ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME)).ifPresent(editPersonDescriptor::setName);
+            ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)).ifPresent(editPersonDescriptor::setPhone);
+            ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)).ifPresent(editPersonDescriptor::setEmail);
+            ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)).ifPresent(editPersonDescriptor::setAddress);
+            ParserUtil.parseRank(argMultimap.getValue(PREFIX_RANK)).ifPresent(editPersonDescriptor::setRank);
+            parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(ive.getMessage(), ive);
+        }
+
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditInvestigatorCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditInvestigatorCommand(index, editPersonDescriptor);
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
+     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Tag>} containing zero tags.
+     */
+    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
+        assert tags != null;
+
+        if (tags.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+}
+```
+###### \java\seedu\investigapptor\model\crimecase\CaseContainsInvestigatorPredicate.java
+``` java
+/**
+ * Tests that a {@code CrimeCase}'s {@code CaseName} matches any of the keywords given.
+ */
+public class CaseContainsInvestigatorPredicate implements Predicate<CrimeCase> {
+    private final Integer hashcode;
+
+    public CaseContainsInvestigatorPredicate(Integer hashcode) {
+        this.hashcode = hashcode;
+    }
+
+    @Override
+    public boolean test(CrimeCase crimeCase) {
+        return hashcode == crimeCase.getCurrentInvestigator().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CaseContainsInvestigatorPredicate // instanceof handles nulls
+                && this.hashcode.equals(((CaseContainsInvestigatorPredicate) other).hashcode)); // state check
+    }
 
 }
 ```
 ###### \java\seedu\investigapptor\model\Investigapptor.java
 ``` java
     /**
-     * Converts {@code key} hashcode list of cases into CrimeCase object
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedPerson}.
      *
-     *
+     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     *                                  another existing person in the list.
+     * @throws PersonNotFoundException  if {@code target} could not be found in the list.
+     * @see #syncWithMasterTagList(Person)
      */
-    public void convertHashToCases(Investigator key) {
+    public void updatePerson(Person target, Person editedPerson)
+            throws DuplicatePersonException, PersonNotFoundException {
+        requireNonNull(editedPerson);
+        if (target instanceof Investigator) {
+            for (CrimeCase c : ((Investigator) target).getCrimeCases()) {
+                recreateCasesForInvestigator((Investigator) editedPerson, c);
+            }
+        }
+        Person syncedEditedPerson = syncWithMasterTagList(editedPerson);
+        persons.setPerson(target, syncedEditedPerson);
+    }
+    /**
+     * Converts {@code key} hashcode list of cases into CrimeCase object
+     * Throws AssertionError when duplicate case occur
+     */
+    private void recreateCasesForInvestigator(Investigator inv, CrimeCase c) {
+        CrimeCase newCase = syncWithMasterTagList(new CrimeCase(c.getCaseName(), c.getDescription(), inv,
+                c.getStartDate(), c.getEndDate(), c.getStatus(), c.getTags()));
+        try {
+            cases.setCrimeCase(c, newCase);
+        } catch (DuplicateCrimeCaseException e) {
+            throw new AssertionError("Duplicate Case when editing investigator");
+        } catch (CrimeCaseNotFoundException e) {
+            throw new AssertionError("Case not found when editing investigator");
+        }
+    }
+    /**
+     * Removes {@code key} from this {@code Investigapptor}.
+     *
+     * @throws PersonNotFoundException if the {@code key} is not in this {@code Investigapptor}.
+     */
+    public boolean removePerson(Person key) throws PersonNotFoundException {
+        if (persons.remove(key)) {
+            return true;
+        } else {
+            throw new PersonNotFoundException();
+        }
+    }
+```
+###### \java\seedu\investigapptor\model\Investigapptor.java
+``` java
+    /**
+     * Converts {@code key} hashcode list of cases into CrimeCase object
+     * Throws AssertionError when duplicate case occur
+     */
+    private void convertHashToCases(Investigator key) {
         requireNonNull(key.getCaseListHashed());
-        if (key.getCaseListHashed() != null) {
-            for (Integer i : key.getCaseListHashed()) {
-                for (CrimeCase c : cases) {
-                    if (c.hashCode() == i) {
-                        try {
-                            key.addCrimeCase(c);
-                        } catch (DuplicateCrimeCaseException e) {
-                            throw new AssertionError("Not possible, duplicate case while retrieving from xml");
-                        }
-                    }
-                }
+        for (Integer i : key.getCaseListHashed()) {
+            try {
+                addCaseFromHash(key, i);
+            } catch (DuplicateCrimeCaseException e) {
+                throw new AssertionError("Not possible, duplicate case while retrieving from xml");
+            }
+        }
+    }
+    /**
+     * Check {@code hash} if it matches to any CrimeCase in the cases list
+     * if match, add the CrimeCase to the investigator {@code key}
+     */
+    private void addCaseFromHash (Investigator key, int hash) throws DuplicateCrimeCaseException {
+        for (CrimeCase c : cases) {
+            if (c.hashCode() == hash) {
+                key.addCrimeCase(c);
             }
         }
     }
     //// case-level operations
+
 ```
 ###### \java\seedu\investigapptor\model\Investigapptor.java
 ``` java
@@ -226,18 +562,6 @@ public class Investigator extends Person {
         return Collections.unmodifiableSet(crimeCases.toSet());
     }
     /**
-     * Increase the investigator rank by one
-     */
-    public void promote() throws Exception {
-        rank.promote();
-    }
-    /**
-     * Decrease the investigator rank by one
-     */
-    public void demote() throws Exception {
-        rank.demote();
-    }
-    /**
      * Returns rank in string
      */
     public Rank getRank() {
@@ -260,7 +584,7 @@ public class Investigator extends Person {
      * Returns true if empty
      * else if not empty
      */
-    public boolean emptyList() {
+    public boolean isCaseListEmpty() {
         if (getCrimeCases().isEmpty()) {
             return true;
         } else {
@@ -303,8 +627,6 @@ public class Investigator extends Person {
                 .append(getRank())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" CrimeCases: ");
-        getCrimeCases().forEach(builder::append);
         return builder.toString();
     }
 }
@@ -326,7 +648,7 @@ public class Rank {
                     + "Detective = 4\n"
                     + "Captain = 5\n";
     public static final String RANK_VALIDATION_REGEX = "\\b[1-5]\\b";
-    private int value;
+    private final int value;
 
     /**
      * Constructs a {@code Rank}.
@@ -345,29 +667,6 @@ public class Rank {
     public static boolean isValidRank(String test) {
         return test.matches(RANK_VALIDATION_REGEX);
     }
-    /**
-     * Increase value by one
-     * Throws @PromotionExceedException() if investigator is already at maximum rank
-     */
-    public void promote() throws Exception {
-        if (value >= 5) {
-            throw new PromoteExceedException();
-        } else {
-            value++;
-        }
-    }
-    /**
-     * Increase value by one
-     * Throws @PromotionExceedException() if investigator is already at maximum rank
-     */
-    public void demote() throws Exception {
-        if (value <= 1) {
-            throw new DemoteExceedException();
-        } else {
-            value--;
-        }
-    }
-
     /**
      * Returns rank's value in string
      * @return
@@ -404,6 +703,14 @@ public class Rank {
 ###### \java\seedu\investigapptor\storage\StorageManager.java
 ``` java
     @Override
+    public void backupInvestigapptor(ReadOnlyInvestigapptor investigapptor, String fileName) throws IOException {
+        logger.fine("Attempting to write to data file: " + "data/" + fileName + ".xml");
+        investigapptorStorage.saveInvestigapptor(investigapptor, "data/" + fileName + ".xml");
+    }
+```
+###### \java\seedu\investigapptor\storage\StorageManager.java
+``` java
+    @Override
     @Subscribe
     public void handleInvestigapptorBackupEvent(InvestigapptorBackupEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
@@ -415,4 +722,227 @@ public class Rank {
     }
 
 }
+```
+###### \java\seedu\investigapptor\storage\XmlAdaptedInvestigator.java
+``` java
+/**
+ * JAXB-friendly version of the Person.
+ */
+public class XmlAdaptedInvestigator {
+
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Investigator's %s field is missing!";
+
+    @XmlElement(required = true)
+    private String name;
+    @XmlElement(required = true)
+    private String phone;
+    @XmlElement(required = true)
+    private String email;
+    @XmlElement(required = true)
+    private String address;
+    @XmlElement(required = true)
+    private String rank;
+    @XmlElement(required = true)
+    private List<Integer> caseList = new ArrayList<>();
+
+    @XmlElement
+    private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
+    /**
+     * Constructs an XmlAdaptedPerson.
+     * This is the no-arg constructor that is required by JAXB.
+     */
+    public XmlAdaptedInvestigator() {}
+
+    /**
+     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     */
+    public XmlAdaptedInvestigator(String name, String phone, String email, String address, String rank,
+                                  List<CrimeCase> caseList, List<XmlAdaptedTag> tagged) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.rank = rank;
+        this.caseList = new ArrayList<>();
+        if (caseList != null) {
+            for (CrimeCase c : caseList) {
+                this.caseList.add(c.hashCode());
+            }
+        }
+        if (tagged != null) {
+            this.tagged = new ArrayList<>(tagged);
+        }
+    }
+
+    /**
+     * Converts a given Person into this class for JAXB use.
+     *
+     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     */
+    public XmlAdaptedInvestigator(Investigator source) {
+        name = source.getName().fullName;
+        phone = source.getPhone().value;
+        email = source.getEmail().value;
+        address = source.getAddress().value;
+        rank = source.getRank().getValue();
+        caseList = new ArrayList<>();
+        for (CrimeCase crimeCase : source.getCrimeCases()) {
+            caseList.add(crimeCase.hashCode());
+        }
+        tagged = new ArrayList<>();
+        for (Tag tag : source.getTags()) {
+            tagged.add(new XmlAdaptedTag(tag));
+        }
+    }
+
+    /**
+     * Converts this jaxb-friendly adapted person object into the model's Investigator object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     */
+    public Investigator toModelType() throws IllegalValueException {
+        final List<Tag> personTags = new ArrayList<>();
+        for (XmlAdaptedTag tag : tagged) {
+            personTags.add(tag.toModelType());
+        }
+
+        final ArrayList<Integer> investigatorCases = new ArrayList<>();
+        for (int crimeCase: caseList) {
+            investigatorCases.add(crimeCase);
+        }
+        if (this.name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(this.name)) {
+            throw new IllegalValueException(Name.MESSAGE_NAME_CONSTRAINTS);
+        }
+        final Name name = new Name(this.name);
+
+        if (this.phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        }
+        if (!Phone.isValidPhone(this.phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        }
+        final Phone phone = new Phone(this.phone);
+
+        if (this.email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+        if (!Email.isValidEmail(this.email)) {
+            throw new IllegalValueException(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        }
+        final Email email = new Email(this.email);
+
+        if (this.address == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        }
+        if (!Address.isValidAddress(this.address)) {
+            throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        }
+        final Address address = new Address(this.address);
+
+        if (this.rank == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rank.class.getSimpleName()));
+        }
+        if (!Rank.isValidRank(this.rank)) {
+            throw new IllegalValueException(Rank.MESSAGE_RANK_CONSTRAINTS);
+        }
+        final Rank rank = new Rank(this.rank);
+
+        final Set<Tag> tags = new HashSet<>(personTags);
+
+        return new Investigator(name, phone, email, address, rank, tags, investigatorCases);
+    }
+
+    /**
+     * Compares if it is equal to another object
+     * @param other
+     * @return
+     */
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof XmlAdaptedInvestigator)) {
+            return false;
+        }
+
+        XmlAdaptedInvestigator otherPerson = (XmlAdaptedInvestigator) other;
+        return Objects.equals(name, otherPerson.name)
+                && Objects.equals(phone, otherPerson.phone)
+                && Objects.equals(email, otherPerson.email)
+                && Objects.equals(address, otherPerson.address)
+                && Objects.equals(rank, otherPerson.rank)
+                && tagged.equals(otherPerson.tagged)
+                && caseList.equals(otherPerson.caseList);
+    }
+}
+```
+###### \java\seedu\investigapptor\storage\XmlInvestigapptorStorage.java
+``` java
+    @Override
+    public void backupInvestigapptor(ReadOnlyInvestigapptor investigapptor, String fileName) throws IOException {
+        saveInvestigapptor(investigapptor, filePath + ".backup");
+    }
+```
+###### \java\seedu\investigapptor\ui\BrowserPanel.java
+``` java
+    /**
+     * Loads a Investigator HTML file with details from {@code Investigator}.
+     */
+    private void loadPersonPage(Person person) {
+        if (person instanceof Investigator) {
+            loadInvestigatorDetailsPage((Investigator) person);
+        } else {
+            loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+        }
+    }
+    /**
+     * Loads the case details HTML file with a background that matches the general theme.
+     */
+    private void loadInvestigatorDetailsPage(Investigator investigator) {
+        StringBuilder  url = new StringBuilder();
+        try {
+            String investigatorDetails = INVESTIGATOR_DETAILS_PAGE
+                    + "?invName=" + investigator.getName().fullName
+                    + "&rank=" + investigator.getRank().toString()
+                    + "&phone=" + investigator.getPhone().value
+                    + "&email=" + URLEncoder.encode(investigator.getEmail().value, "UTF-8")
+                    + "&address=" + URLEncoder.encode(investigator.getAddress().value, "UTF-8")
+                    + "&tags=" + getTagsSeparatedByComma(investigator.getTagsRaw())
+                    + "&case=";
+            url.append(investigatorDetails);
+            for (CrimeCase c : investigator.getCrimeCases()) {
+                url.append(getBasicCaseDetails(c));
+                url.append(",");
+            }
+            loadPage(url.toString());
+        } catch (Exception e) {
+            throw new AssertionError("Encoder Error");
+        }
+    }
+    /**
+     * Loads the case details HTML file with a background that matches the general theme.
+     */
+    private String getBasicCaseDetails(CrimeCase crimeCase) {
+        String caseDetail = crimeCase.getCaseName().toString()
+                + "!" + crimeCase.getStatus();
+
+        return caseDetail;
+    }
+    public void loadPage(String url) {
+        Platform.runLater(() -> browser.getEngine().load(url));
+    }
+
+    /**
+     * Loads a default HTML file with a background that matches the general theme.
+     */
+    private void loadDefaultPage() {
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
+        loadPage(defaultPage.toExternalForm());
+    }
+
 ```

@@ -756,15 +756,15 @@ When editing tags, the existing tags of the case will be replaced by the new tag
 To help you find the index of the case that you want to edit, you can use the `findcases` command before using the `editcase` command to narrow the number of cases displayed in the listing. +
 You can remove all the investigator's tags by typing `t/` without specifying any tags after it.
 
-*Example:*
+You can refer to the screenshots below for an example.
+
 [[editcase1]]
 .Editing Case
-image::userguide-images/ec-command1.png[width="790"]
-
+image::userguide-images/ec-command1.png[width="450"]
 
 [[editcase2]]
 .Result
-image::userguide-images/ec-command2.png[width="790"]
+image::userguide-images/ec-command2.png[width="450"]
 
 The following provides an explanation of some command examples:
 
@@ -1034,31 +1034,18 @@ The `INVESTIGATOR_INDEX` refers to the index number shown in the most recent lis
 [WARNING]
 The index *must be a positive integer* `1, 2, 3, ...`
 
-You can refer to the screenshots below for an example of how the Investigapptor
-would look like after you've executed the `listinvestigatorcases` command.
+To use the `listinvestigatorcases` command, you just need to indicate which investigator's cases you
+want to view by using the index as shown in <<investigatorcase-1>> below
 
-[[lic-before]]
-.Before executing `listinvestigatorcases 1` command
-image::userguide-images/lic-before.png[width="800"]
+[[investigatorcase-1]]
+.Locating investigator's index
+image::userguide-images/lic-command1.png[width="450"]
 
 [[lic-after]]
 .After executing `listinvestigatorcases 1` command
 image::userguide-images/lic-command.png[width="800"]
 
 The following provides an explanation of some command examples:
-
-To use the `listinvestigatorcases` command, you just need to indicate which investigator's cases you
-want to view by using the index as shown in <<investigatorcase-1>> bellow
-
-[[investigatorcase-1]]
-.Using listinvestigatorcases command
-image::userguide-images/lic-command1.png[width="900"]
-
-[[investigatorcase-1]]
-.Result
-image::userguide-images/lic-command2.png[width="900"]
-
-*Examples:*
 
 * `listinvestigator` +
 `listinvestigatorcases 2` +

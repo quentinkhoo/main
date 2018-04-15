@@ -13,7 +13,7 @@ import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.person.Person;
 import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
 import seedu.investigapptor.model.person.investigator.Investigator;
-
+//@@author Marcus-cxc
 /**
  * Deletes a person identified using it's last displayed index from the investigapptor book.
  */

@@ -6,7 +6,6 @@ import seedu.investigapptor.commons.core.index.Index;
 import seedu.investigapptor.commons.exceptions.IllegalValueException;
 import seedu.investigapptor.logic.commands.ListInvestigatorCaseCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
-
 /**
  * Parses input arguments and creates a new DeleteInvestigatorCommand object
  */

@@ -4,6 +4,7 @@ import static seedu.investigapptor.commons.core.Messages.MESSAGE_INVALID_COMMAND
 
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 
+//@@author quentinkhoo
 /**
  * Lists all persons in the investigapptor book to the user.
  */
@@ -71,3 +72,4 @@ public class ListCommand extends Command {
         return false;
     }
 }
+//@@author

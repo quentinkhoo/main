@@ -7,7 +7,7 @@ import seedu.investigapptor.logic.commands.Command;
 import seedu.investigapptor.logic.commands.SetCommand;
 import seedu.investigapptor.logic.parser.exceptions.ParseException;
 
-
+//@@author quentinkhoo
 /**
  + * Parses input arguments and creates a new ListCommand object
  + */
@@ -34,3 +34,4 @@ public class SetCommandParser implements Parser<Command> {
         }
     }
 }
+//@@author

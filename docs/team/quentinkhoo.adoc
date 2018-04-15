@@ -43,7 +43,11 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide
     [https://github.com/CS2103JAN2018-F14-B3/main/pull/203[PR#203]]
-*** Managed formatting for User Guide to ensure consistency in format and language
+*** Designed formatting for User Guide Command Summary to ensure readability
+and ease of usage
+*** Did cosmetic tweaks to existing contents of the Developer Guide
+*** Managed formatting for Developer Guide to ensure consistency in format
+and language.
 
 ** Community:
 *** Reported and documented bugs for other teams in procedural manner: +
@@ -79,6 +83,4 @@ include::../UserGuide.adoc[tag=removepassword]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=password]

@@ -1,9 +1,10 @@
 = Investigapptor - Developer Guide
 :toc:
 :toc-title:
+:toclevels: 3
 :toc-placement: preamble
 :sectnums:
-:sectnumlevels: 5
+:sectnumlevels: 6
 :imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
@@ -40,11 +41,11 @@ Investigapptor requires you to have the following programs installed
 in order for you to work on it further.
 
 - *JDK `1.8.0_60`* or later.
-
++
 [TIP]
 If you do not
 already have it installed, you can download it from
-link:{javaURL}[here].
+link:http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html[here].
 [NOTE]
 Having any Java 8 version is not enough. +
 This app will not work with earlier versions of Java 8.
@@ -270,96 +271,35 @@ Classes used by multiple components are in the `seedu.investigapptorbook.commons
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::password[]
-=== Password feature
-The password feature allows for investigators to set a password
-for the application. This password can then be disclosed only to
-authorised investigators so as disallow unauthorised users from accessing
- or modifying the application data.
+=== Laying the Groundwork
 
-==== Current Implementation
-This subsection will describe the current implementation of the password
-feature. An overview of how the password feature is implemented can be
-seen in the sequence diagram below:
+[[Implementation-Configuration]]
+==== Configuration
 
-[[HighLevelDiagram]]
-.High Level Sequence Diagram of Password Feature
-image::PasswordHighLevelSequenceDiagram.png[width="790"]
+For starters, you can control certain properties of the application, such as:
 
-===== Logic Component
+* application name
+* logging level
 
-When a `setpassword` command is executed, a `SetPasswordCommand`
-object gets created if the parsing of the command was successful. This
-will in turn make a call to the `updatePassword` function in the `Model`
-component, as shown in the sequence diagram below:
+through the configuration file (default: `config.json`).
 
-[[LogicDiagram]]
-.Password Feature's Logic Component Sequence Diagram
-image::PasswordLogicSequenceDiagram.png[width="790"]
+==== Logging
 
-===== Model Component +
-Upon being called, the `updatePassword` function in the `ModelManager`
-would raise a new `InvestigapptorChangedEvent` to indicate that the
-password has been updated. The entire sequence diagram for the `Model`
-component as shown below describes this in greater detail.
+We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
 
-[[ModelDiagram]]
-.Password Feature's Model Component Sequence Diagram
-image::PasswordModelSequenceDiagram.png[width="790"]
+* The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
+* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level
+* Currently log messages are output through: `Console` and to a `.log` file.
 
-Whenever then `Password` Object's `updatePassword` function is called,
-the hash of the password is first generated with the `generatePasswordHash`
-function. This function makes use of the `SHA-256` hashing algorithm
-to generate the hash of the password as shown below:
+*Logging Levels*
 
-[source, java]
-----
-public static String generatePasswordHash(String password) {
-        String encodedHash = null;
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            digest.update(INITIAL_VALUE.getBytes());
-            if (!isNull(password)) {
-                byte[] byteHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-                encodedHash = Base64.getEncoder().encodeToString(byteHash);
-            }
-        } catch (NoSuchAlgorithmException noSuchAlgoException) {
-            System.out.println("Cannot generate hash: MessageDigest.getInstance");
-        }
-        return encodedHash;
-    }
+* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
+* `WARNING` : Can continue, but with caution
+* `INFO` : Information showing the noteworthy actions by the App
+* `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
 
-----
-
-===== Storage Component
-With regards to the password feature, the `Storage` component is responsible
-not only for storing the currently set password, but also for checking whether
-an input password is correct. If the input password is correct, a
-`ValidPasswordEvent` is raised, as shown in the sequence diagram below:
-
-[[StorageDiagram]]
-.Password Feature's Storage Component Sequence Diagram
-image::PasswordInputSequenceDiagram.png[width="790"]
-
-==== Alternatives Considered
-This subsection would describe other designs and implementations
-that were taken into consideration.
-
-===== Aspect: Usage of password feature
-* **Alternative 1 (Current Choice)**: Have one password for the entire
-application
-** Pros: Investigators within a team can simply share the password.
-** Cons: There is no access control between investigators of different
-ranks.
-
-* **Alternative 2 **: Have a separate password for each investigator.
-** Pros: Each investigator can have their own password, allowing for
-access control between investigators of different ranks.
-** Cons: Requires an additional password attribute for each investigator.
-// end::password[]
-
-=== Undo/Redo feature
-==== Current Implementation
+==== Undo/Redo feature
+===== Current Implementation
 
 The undo/redo mechanism is facilitated by an `UndoRedoStack`, which
 resides inside `LogicManager`. It supports undoing and redoing of
@@ -445,9 +385,9 @@ The following activity diagram summarize what happens inside the `UndoRedoStack`
 
 image::UndoRedoActivityDiagram.png[width="650"]
 
-==== Design Considerations
+===== Design Considerations
 
-===== Aspect: Implementation of `UndoableCommand`
+====== Aspect: Implementation of `UndoableCommand`
 
 * **Alternative 1 (current choice):** Add a new abstract method `executeUndoableCommand()`
 ** Pros: We will not lose any undone/redone functionality as it is now part of the default behaviour. Classes that deal with `Command` do not have to know that `executeUndoableCommand()` exist.
@@ -456,7 +396,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: Does not involve the template pattern, easier for new developers to understand.
 ** Cons: Classes that inherit from `UndoableCommand` must remember to call `super.execute()`, or lose the ability to undo/redo.
 
-===== Aspect: How undo & redo executes
+====== Aspect: How undo & redo executes
 
 * **Alternative 1 (current choice):** Saves the entire address book.
 ** Pros: Easy to implement.
@@ -466,7 +406,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 
-===== Aspect: Type of commands that can be undone/redone
+====== Aspect: Type of commands that can be undone/redone
 
 * **Alternative 1 (current choice):** Only include commands that modifies the address book (`add`, `clear`, `edit`).
 ** Pros: We only revert changes that are hard to change back (the view can easily be re-modified as no data are * lost).
@@ -477,7 +417,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 **Additional Info:** See our discussion  https://github.com/se-edu/addressbook-level4/issues/390#issuecomment-298936672[here].
 
 
-===== Aspect: Data structure to support the undo/redo commands
+====== Aspect: Data structure to support the undo/redo commands
 
 * **Alternative 1 (current choice):** Use separate stack for undo and redo
 ** Pros: Easy to understand for new Computer Science student undergraduates to understand, who are likely to be * the new incoming developers of our project.
@@ -487,9 +427,100 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two * different things.
 // end::undoredo[]
 
-//tag:calendar[]
+=== Functional Enhancements
+
+// tag::password[]
+==== Password feature
+The password feature allows for the user to set a password
+for the application. This password can then be disclosed only to
+authorised users so as disallow unauthorised users from accessing
+ or modifying the application data.
+
+===== Current Implementation
+This subsection will describe the current implementation of the password
+feature. An overview of how the password feature is implemented can be
+seen in the sequence diagram below:
+
+[[HighLevelDiagram]]
+.High Level Sequence Diagram of Password Feature
+image::PasswordHighLevelSequenceDiagram.png[width="790"]
+
+====== Logic Component
+
+When a `setpassword` command is executed, a `SetPasswordCommand`
+object gets created if the parsing of the command was successful. This
+will in turn make a call to the `updatePassword` function in the `Model`
+component, as shown in the sequence diagram below:
+
+[[LogicDiagram]]
+.Password Feature's Logic Component Sequence Diagram
+image::PasswordLogicSequenceDiagram.png[width="790"]
+
+====== Model Component
+
+Upon being called, the `updatePassword` function in the `ModelManager`
+would raise a new `InvestigapptorChangedEvent` to indicate that the
+password has been updated. The entire sequence diagram for the `Model`
+component as shown below describes this in greater detail.
+
+[[ModelDiagram]]
+.Password Feature's Model Component Sequence Diagram
+image::PasswordModelSequenceDiagram.png[width="790"]
+
+Whenever then `Password` Object's `updatePassword` function is called,
+the hash of the password is first generated with the `generatePasswordHash`
+function. This function makes use of the `SHA-256` hashing algorithm
+to generate the hash of the password as shown below:
+
+[source, java]
+----
+public static String generatePasswordHash(String password) {
+        String encodedHash = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.update(INITIAL_VALUE.getBytes());
+            if (!isNull(password)) {
+                byte[] byteHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+                encodedHash = Base64.getEncoder().encodeToString(byteHash);
+            }
+        } catch (NoSuchAlgorithmException noSuchAlgoException) {
+            System.out.println("Cannot generate hash: MessageDigest.getInstance");
+        }
+        return encodedHash;
+    }
+
+----
+
+====== Storage Component
+With regards to the password feature, the `Storage` component is responsible
+not only for storing the currently set password, but also for checking whether
+an input password is correct. If the input password is correct, a
+`ValidPasswordEvent` is raised, as shown in the sequence diagram below:
+
+[[StorageDiagram]]
+.Password Feature's Storage Component Sequence Diagram
+image::PasswordInputSequenceDiagram.png[width="790"]
+
+===== Alternatives Considered
+This subsection would describe other designs and implementations
+that were taken into consideration.
+
+====== Aspect: Usage of password feature
+* **Alternative 1 (Current Choice)**: Have one password for the entire
+application
+** Pros: Investigators within a team can simply share the password.
+** Cons: There is no access control between investigators of different
+ranks.
+
+* **Alternative 2 **: Have a separate password for each investigator.
+** Pros: Each investigator can have their own password, allowing for
+access control between investigators of different ranks.
+** Cons: Requires an additional password attribute for each investigator.
+// end::password[]
+
+//tag::calendar[]
 [[Calendar-Feature]]
-=== Calendar feature
+==== Calendar feature
 The calendar feature serves as an interface to provide an overview of all the cases
 present in the `CrimeCaseListPanel`. The entries are colour-coded according to its case's
 status. Red represents the status `open`; whereas green represents the status `close`.
@@ -498,7 +529,7 @@ status. Red represents the status `open`; whereas green represents the status `c
 .Calendar Interface
 image::CalendarFeature.PNG[width="800"]
 
-==== Reason for implementation
+===== Reason for implementation
 The calendar serves as an organization tool to arrange the cases according to its start and end date,
 and it also categorizes the cases by its current status. This feature is useful for the investigators as it provides them an overview of all the cases that they are looking for.
 Having such an overview, the investigators can instantly identify all the required cases at a quick glance.
@@ -507,7 +538,7 @@ This feature not only brings in convenience for the investigators, it also elimi
 scheduling existing cases. This thus improves the efficiency of the investigators as time will be spent on
 significant events such as investigative work instead of bookkeeping tasks.
 
-==== Current Implementation
+===== Current Implementation
 The calendar graphical interface was implemented with an external library, https://github.com/dlemmermann/CalendarFX[CalendarFX].
 The calendar interface, `CalendarPanel` is part of the UI component which supports the view of the cases that are currently present
 in the panel list.
@@ -533,10 +564,10 @@ has been raised from the `EventsCenter`, the `CalendarPanel` will handle the eve
 `FilteredCrimeCaseList`. The following section below will illustrate in details
 on how the event handling was carried out by `CalendarPanel`.
 
-==== Events-Driven Entries
+===== Events-Driven Entries
 The entries displayed on the calendar will be changed according to the commands that were executed.
 
-===== Event raised from data change in application
+====== Event raised from data change in application
 As mentioned in the <<Events, event-driven design section>>, the model will raise
 an `InvestigapptorChangedEvent` to indicate that the data in the application has changed.
 In the following sequence diagrams, it indicates how the components interacts when the user
@@ -573,7 +604,7 @@ The <<SDForInvestigapptorChangedEventHandling, diagram above>> represents how th
 reacts to the `InvestigapptorChangedEvent`.
 
 When the commands mentioned in these diagrams - <<SDforAddCase, #1>>, <<SDforDeleteCase, #2>>, <<SDForUpdateCase, #3>>
-is executed, the `InvestigapptorChangedEvent` will be raised and the function
+are executed, the `InvestigapptorChangedEvent` will be raised and the function
 `handleInvestigapptorChangedEvent` in `CalendarPanel` will be invoked. The function
 would then re-initialize `crimeList` to the updated `crimeCaseList` and proceed to
 update the calendar accordingly.
@@ -589,7 +620,7 @@ private void handleInvestigapptorChangedEvent(InvestigapptorChangedEvent event) 
 ----
 
 [[Calendar-Events-Filter]]
-===== Event raised from filtering the `CrimeCase` list
+===== Event raised from fi=ltering the `CrimeCase` list
 In the following sequence diagram, it shows how the components interacts when the user issues
 the commands that filters  the cases that the user is looking for. (Commands are shown in the diagram).
 
@@ -629,220 +660,55 @@ private void handleFilteredCrimeCaseListChangedEvent(FilteredCrimeCaseListChange
     Platform.runLater(this::updateCalendar);
 }
 ----
-//end:calendar[]
+//end::calendar[]
 
-[[Find-Feature]]
-//tag:findcases[]
-=== Find cases by status/tags feature
-The following sections provides an explanation on how the investigapptor finds
-certain cases according to its status or tags.
+//tag::backup[]
+==== Create backup
 
-==== Reason for implementation
-This implementation improves efficiency as the investigators do not need to manually browse through
-all the listed cases just to find certain cases.
+This feature allows users to create a new xml file of the current state of the Investigapptor
+with a new name.
 
-By having a find command, the investigator can easily search for cases that they
-are looking for. They can simply just run the find-related commands with their desired
-keywords and the cases they require will be displayed instantly.
+===== Reason for implementation
 
-==== Current Implementation to find cases by status
-Commands were created to find the cases according to the status specified. As there
-are only two possible status - `open` or `close`, two separate command classes `FindCloseCaseCommand`
-and `FindOpenCaseCommand` were created. These two commands inherits from its parent class - `FindByStatusCommand`.
+As investigators may want to save the current state of the Investigapptor before progressing
+or having to create a periodic backup to fall back on.
 
-===== Class Inheritance
-[[CDFindByStatus]]
-.Class Diagram to illustrate inheritance
-image::CDFindByStatus.png[width="800"]
+===== Current implementation
 
-In both `FindCloseCaseCommand` and `FindOpenCaseCommand`, its respective constructor will
-invoke its parent class' (`FindByStatusCommand`) constructor as passes in its corresponding status as the parameter.
+The `BackupCommand` is created when the command word `backup` is detected in the user input. It will then use the `BackupCommandParser`
+ensure that the filename is alphanumeric. The `BackupCommand` will then call the `backupInvestigapptor` method from the model
+and pass in the filename as a string.
 
-`FindCloseCaseCommand` will pass in the status `close` as shown in the code segment below.
-[source,java]
-----
-public FindCloseCaseCommand() {
-    super(CASE_CLOSE);
-}
-----
+[[backup-diagram]]
+.Backup Sequence Diagram
+image::backupDiagram.png[width="790"]
 
-`FindOpenCaseCommand` will pass in the status `open` as shown in the code segment below.
-[source,java]
-----
-public FindOpenCaseCommand() {
-    super(CASE_OPEN);
-}
-----
-===== Sequence Diagrams for Logic Component
-The following sequence diagrams represents the interactions within the `Logic`
-component when the user inputs the `findopencases` or `findclosecases` command.
 
-[[SDforFindOpenCase]]
-.Sequence Diagram for interactions within Logic component for `FindOpenCaseCommand`
-image::SDforFindOpenCase.png[width="800"]
 
-[[SDforFindCloseCase]]
-.Sequence Diagram for interactions within Logic component for `FindCloseCaseCommand`
-image::SDForFindCloseCase.png[width="800"]
+In the `Model`, the `backUpInvestigapptor` will raise the event `InvestigapptorBackupEvent` .The event contains filename which will be passed to
+Storage component to start the saving sequence.
 
-The `Logic` component will set the `StatusContainsKeywordsPredicate` with
-a `List<String>` containing the keyword of either `open` or `close`.
+    public void backUpInvestigapptor(String fileName) {
+        raise(new InvestigapptorBackupEvent(investigapptor, fileName));
+    }
 
-For `FindCloseCaseCommand`, the `List<String>` will contain the keyword `close`;
-whereas for `FindOpenCaseCommand`, the `List<String>` will contain the keyword `open`.
+At the Storage component, the `handleInvestigapptorBackupEvent` will extract the filename and create a new
+xml by using the `backupInvestigapptor` method.
 
-The command will be executed by the `LogicManager` by updating the
-`FilteredCrimeCaseList` in the `Model` component with the given `StatusContainsKeywordsPredicate`.
-
-===== Sequence Diagrams for Model Component
-Below are the sequence diagrams that represents the interactions within the
-`Model` component after the `findopencases` or `findclosecases` command
-has been executed by the `LogicManager`.
-
-[[SDForFindByStatusModel]]
-.Sequence Diagram for interactions within Model component
-image::SDForFindByStatusModel.png[width="800"]
-
-The `Model` component is responsible for updating the filtered crime case list with
-the given `StatusContainsKeywordsPredicate`. The predicate will test if any keywords matches
-with any status of the case(s).
-
-Specifically, for `findopencases`, the predicate will test
-if the keyword 'open' matches any cases with the status of 'open'. Similarly,
-for `findclosecases`,  the predicate will test if the keyword 'close' matches
-any cases with the status of 'close'.
-
-The `FilteredCrimeCaseList` will then be updated with the cases that matches the
-given `StatusContainsKeywordsPredicate`.
-
-The `Model` will then raise a `FilteredCrimeCaseListChangedEvent` which is
-captured by the `EventsCenter`. This event is used as an indication to update the calendar entries
-whenever the `FilteredCrimeCaseList` has changed. This implementation can be found in
-the <<Calendar-Events-Filter, above section>>.
-
-===== Activity Diagram
-The following activity diagram illustrates an example when a user executes a command that finds the cases
-by its status.
-
-[[ADForFindCase]]
-.Activity Diagram when user enters `findclosecase` command
-image::ADforFindCase.png[width="800"]
-
-==== Current Implementation to find cases by tags
-The command class, `FindCaseTagsCommand` was created to find the cases according to its tags. Cases whose tags
-matches the keywords that the user has input will be displayed.
-
-===== Sequence Diagrams for Logic Component
-The following sequence diagrams represents the interactions within the `Logic`
-component when the user inputs the `findcasetags`.
-
-[[SDforFindCaseTags]]
-.Sequence Diagram for interactions within Logic component
-image::SDforFindCaseTags.png[width="800"]
-
-The `Logic` component will set the `TagContainsKeywordsPredicate` with
-a `List<String>` containing the keywords that were parsed by `FindCaseTagsCommandParser`.
-
-For the command `findcasetags fraud homicide` in the
-<<SDforFindCaseTags, sequence diagram above>>, the `List<String>` will
-contain the keywords `fraud` and `homicide`.
-
-The command will be executed by the `LogicManager` by updating the
-`FilteredCrimeCaseList` in the `Model` component with the given `TagContainsKeywordsPredicate`.
-
-===== Sequence Diagrams for Model Component
-The following sequence diagram shows the interactions within the `Model` component.
-
-[[SDforFindCaseTagsModel]]
-.Sequence Diagram for interactions within Model component
-image::SDForFindByStatusModel.png[width="800"]
-
-The `Model` component is responsible for updating the filtered crime case list with
-the given `TagContainsKeywordsPredicate`. The predicate will test if any keywords matches
-with any tags of the case(s).
-
-For the example in the <<SDforFindCaseTags, above logic sequence diagram>>,
-the predicate will test if the keywords "fraud" or "homicide" matches any cases'
-tags.
-
-The `FilteredCrimeCaseList` will then be updated with the cases whose
-tags matches the keyword of either "fraud" or "homicide".
-
-The `Model` will then raise a `FilteredCrimeCaseListChangedEvent` which is
-captured by the `EventsCenter`. This event is used as an indication to update the calendar entries
-whenever the `FilteredCrimeCaseList` has changed. This implementation can be found in
-the <<Calendar-Events-Filter, above section>>.
-
-===== Activity Diagram
-The following activity diagram illustrates an example when a user executes a command that finds the cases
-by its tags.
-
-[[ADForFindCaseTags]]
-.Activity Diagram when user enters `findcasetags murder` command
-image::ADForFindCaseTags.png[width="800"]
-
-==== Alternatives Considered
-This section compares between the current choice of implementation and the
-alternative choice that was considered. It lists the pros and cons to each of the
-choices that were considered.
-
-===== Aspect: Design Implementation
-* **Alternative 1 (Current Choice)**: Separate the find-related commands classes into its
-individual category its searching for. In this case we have `FindCaseTagsCommand`,
-`FindCloseCaseCommand` & `FindOpenCaseCommand`
-** Pros: Easy for the user as they just need to know the command name/alias
-(i.e. `findopencases` or `foc` will just instantly display the cases that are closed)
-** Cons: Additional `.java` class files
-
-* **Alternative 2 **: Have just one `FindCommand` class and use prefixes to differentiate
-the type of keywords (i.e. findcase t/Tags s/Status)
-** Pros: Only one `.java` file required for different types of find. Easier to
-extend the command to find other details by adding more prefixes.
-** Cons: Not as user-friendly. Users has to recognize the prefixes, could be
-too technical for non-technical users.
-
-===== Aspect: Class Implementation [for finding cases by status]
-* **Alternative 1 (Current Choice)**: Have two classes `FindCloseCaseCommand` and `FindOpenCaseCommand`
-that are extended from parent class `FindByStatusCommand`
-** Pros: No code duplication as duplicated set of codes will be in the parent class `FindByStatusCommand`
-** Cons: Additional `.java` class file
-
-* **Alternative 2 **: Separate commands into two classes without inheritance
-** Pros: One less `.java` class file (no parent class)
-** Cons: Duplicated set of codes
-//end::findcases[]
-
-//tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-//end::dataencryption[]
-
-=== Logging
-
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
-
-* The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
-* The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level
-* Currently log messages are output through: `Console` and to a `.log` file.
-
-*Logging Levels*
-
-* `SEVERE` : Critical problem detected which may possibly cause the termination of the application
-* `WARNING` : Can continue, but with caution
-* `INFO` : Information showing the noteworthy actions by the App
-* `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
-
-[[Implementation-Configuration]]
-=== Configuration
-
-Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
+    public void handleInvestigapptorBackupEvent(InvestigapptorBackupEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Backup command, saving to file"));
+        try {
+            backupInvestigapptor(event.data, event.fileName);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+//end::backup[]
 
 //tag::investigator[]
-=== Investigator Class
+=== Investigator Features
 
-==== Investigator Package
+==== `investigator` Package
 
 ===== Reason for Implementation
 As person class provided by the addressbook only has basic capability to store simple information such name and
@@ -957,7 +823,7 @@ has to be correct for each instance.
  `Investigator` and `CrimeCase`. More duplicates in the XML file.
 
 
-==== Add Investigator Command
+==== Add investigator
 
 The `addInvestigatorCommand` will create an instance of the Investigator class and store it in the Investigapptor.
 
@@ -1024,7 +890,7 @@ Storage takes lesser space as only the hashcode is required.
 ** Cons: Takes up a lot of storage as two copy `CrimeCase` has to be saved, one in `UniqueCrimeCaseList`
 and one in the `Investigator`.
 
-==== Delete Investigator
+==== Delete investigator
 
 The `deleteInvestigatorCommand` will find and delete the specified Investigator in the Investigapptor.
 
@@ -1062,7 +928,7 @@ image::DeleteInvestigatorSequenceDiagram.png[width="790"]
 ** Pros: Able bring any investigator out of archive.
 ** Cons: Complicated to implement, does not actually delete the investigator and may cause build up of unwanted data.
 
-==== Edit Investigator
+==== Edit investigator
 
 The `EditInvestigatorCommand` will recreate an instance of the Investigator class that exist and store it in the Investigapptor.
 
@@ -1114,7 +980,7 @@ This will help avoid bugs when redoing and undoing.
 ** Cons: `Investigator` in `CrimeCase` will no longer be final. This however involve the `Invesetigator` to
 modify `CrimeCase`, which result in bad coupling.
 
-==== List Investigator Cases
+==== List investigator's cases
 
 The `ListInvestigatorCaseCommand` will search and display all the cases belonging to the investigator in the panel list.
 
@@ -1168,14 +1034,16 @@ type of searches.
 
 //end::investigator[]
 
-//tag::crimecase[]
-=== `crimecase` Package
+=== Case Features
 
-==== Reason for implementation
+//tag::crimecase[]
+==== `crimecase` Package
+
+===== Reason for implementation
 
 As Investigapptor is a tool for managing investigations, the ability to store information about a case is essential.
 
-==== Current implementation
+===== Current implementation
 
 Each attribute of a case, such as the case name, description, status, etc. are classes in the `crimecase` package. Each of the classes provide utility methods to check the validity of the string to be stored, retrieve the string that is stored, and obtain the hash code of the object.
 
@@ -1205,18 +1073,20 @@ A `CrimeCase` class is created with one constructor.
 
 `CrimeCase` objects are considered "duplicates" when they share at least the same `CaseName`, `Description`, and `StartDate`.
 
-==== Reasons for how it is implemented
+===== Reasons for how it is implemented
 
 The `crimecase` package follows the model of the `person` package, whereby each attribute is represented by a class. This allows for better organization and a modular design which follows the single responsibility principle.
 
+//end::crimecase[]
 
-=== Adding cases feature
+//tag::addcase[]
+==== Add case
 
-==== Reason for implementation
+===== Reason for implementation
 
 To be able to manage cases, investigators should have the ability to add case details into the application.
 
-==== Current implementation
+===== Current implementation
 
 The `AddCaseCommandParser` parses the string of arguments provided by the user and splits the `String` into its separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) to be used in the context of the `AddCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
@@ -1237,7 +1107,8 @@ When this constructor is used, the `Index` object is processed to retrieve the `
 
 The `CrimeCase` object is then added to the model and throws a `DuplicateCrimeCaseException` if there exists a similar object already in Investigapptor. The following snippet shows the execution code.
 
-```
+[source, java]
+----
 public CommandResult executeUndoableCommand() throws CommandException {
     requireNonNull(model);
     try {
@@ -1247,27 +1118,28 @@ public CommandResult executeUndoableCommand() throws CommandException {
         throw new CommandException(MESSAGE_DUPLICATE_CASE);
     }
 }
-```
+----
 
 In the `Model` component, the new `CrimeCase` object gets added to the case list of the assigned investigator as well (i.e. `UniqueCrimeCaseList` within the `Investigator` object) via the `addCrimeCaseToInvestigator` method. This method traverses through the entire list of investigators to find the correct `Investigator` object to add the new `CrimeCase` object to. The code is shown below.
 
-```
+[source, java]
+----
 public void addCrimeCase(CrimeCase c) throws DuplicateCrimeCaseException {
     CrimeCase crimeCase = syncWithMasterTagList(c);
     if (cases.add(crimeCase)) {
         addCrimeCaseToInvestigator(crimeCase);
     }
 }
-```
+----
 
 The following sequence diagram illustrates what happens in the `Model` component when a case is added.
 
 .Interactions Inside the Model Component for the `addcase` Command
 image::SD_AddCaseCommand_Model.png[width="800"]
 
-==== Design Considerations
+===== Design Considerations
 
-===== Aspect: Parsing the investigator-to-be-assigned
+====== Aspect: Parsing the investigator-to-be-assigned
 
 * **Alternative 1:** User inputs an investigator's name after the `i/` prefix to indicate who to assign the case to
 ** Pros: More intuitive for the user.
@@ -1275,14 +1147,16 @@ image::SD_AddCaseCommand_Model.png[width="800"]
 * **Alternative 2 (current choice):** User inputs the index of the investigator based on the case list after the `i/` prefix to indicate who to assign the case to
 ** Pros: Easier to implement and more straightforward. Index provided is the investigator to be assigned - don't have to worry about identical names.
 ** Cons: User would have to switch between lists to refer to the investigator index. For example, the user types the command to add the case but then realises that they needed the investigator index. They would have to either use the interface to switch the tabs or type the `listinvestigators` command. This disrupts the flow and hinders efficiency.
+//end::addcase[]
 
-=== Deleting cases feature
+//tag::deletecase[]
+==== Delete case
 
-==== Reason for implementation
+===== Reason for implementation
 
 Sometimes, cases are added by error or there is no need to continue management of a case. Investigators should have a method to remove a case from the application.
 
-==== Current implementation
+===== Current implementation
 
 The `DeleteCaseCommandParser` parses the string of arguments provided by the user to retrieve the index (i.e. `Index`) to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
@@ -1298,7 +1172,8 @@ The `targetIndex` is processed to retrieve the `CrimeCase` object at the specifi
 
 The `CrimeCase` object is then removed from the model. `EventsCenter` reacts to the `SwapTabEvent`, which switches the tab to show the list of cases. The following snippet shows the execution code.
 
-```
+[source, java]
+----
 public CommandResult executeUndoableCommand() {
     requireNonNull(caseToDelete);
     try {
@@ -1309,7 +1184,7 @@ public CommandResult executeUndoableCommand() {
     }
     return new CommandResult(String.format(MESSAGE_DELETE_CASE_SUCCESS, caseToDelete));
 }
-```
+----
 
 Below are sequence diagrams illustrating the `Logic` and `Model` components.
 
@@ -1320,172 +1195,18 @@ image::SD_DeleteCaseCommand_Logic.png[width="800"]
 
 .Interactions Inside the Model Component for the `deletecase 1` Command
 image::SD_DeleteCaseCommand_Model.png[width="500"]
+//end::deletecase[]
 
-=== Finding cases feature
+//tag::editcase[]
+==== Edit case
 
-==== Reason for implementation
-
-To manage large numbers of cases, having a feature that would allow investigators to search the list of cases by name would be extremely helpful. If an investigator is looking for a particular case, it would be extremely inefficient and time-consuming to have to manually browse through all the cases. Hence, being able to find cases by name can help to increase workflow productivity and efficiency.
-
-==== Current implementation
-
-The `FindCaseCommandParser` parses the string of arguments provided by the user to retrieve the list of keywords to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
-
-The `FindCaseCommand` has one constructor.
-
-
-[width="100%", cols="1,2", options="header"]
-|=======
-|Constructor |Remark
-|`new FindCaseCommand(predicate)` |Accepts a `CaseNameContainsKeywordsPredicate` object as parameter.
-
-The `targetIndex` is processed to retrieve the `CrimeCase` object at the specified index on the most recent list of cases displayed by the model.
-|=======
-
-The model is then updated to show the cases whose case name matches the predicate keywords. `EventsCenter` reacts to the `SwapTabEvent`, which switches the tab to show the filtered list of cases. The following snippet shows the execution code.
-
-```
-public CommandResult execute() {
-    model.updateFilteredCrimeCaseList(predicate);
-    EventsCenter.getInstance().post(new SwapTabEvent(1));
-    return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
-}
-```
-
-The following sequence diagram illustrates how the `Logic` component operates when a keyword is given with the command.
-
-.Interactions Inside the Logic Component for the `findcase magic` Command
-image::SD_FindCaseCommand_Logic.png[width="800"]
-
-=== Selecting cases feature
-
-==== Reason for implementation
-
-An investigator should be able to retrieve and view information about a case after adding them into the application.
-
-==== Current implementation
-
-Similar to `DeleteCaseCommandParser`, the `SelectCaseCommandParser` parses the string of arguments provided by the user to retrieve the index (i.e. `Index`) to be used in the context of the `SelectCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
-
-The `SelectCaseCommand` extends `Command` and has one constructor.
-
-[width="100%", cols="1,2", options="header"]
-|=======
-|Constructor |Remark
-|`new SelectCaseCommand(targetIndex)` |Accepts an `Index` object as parameter.
-|=======
-
-The `targetIndex` is processed to retrieve the `CrimeCase` object at the specified index on the most recent list of cases displayed by the model. Subsequently, a `JumpToCrimeCaseListRequestEvent` is posted to `EventsCenter` to signal the `UI` component. The following snippet shows the execution code.
-
-```
-public CommandResult execute() throws CommandException {
-
-    List < CrimeCase > lastShownList = model.getFilteredCrimeCaseList();
-
-    if (targetIndex.getZeroBased() >= lastShownList.size()) {
-        throw new CommandException(Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
-    }
-
-    EventsCenter.getInstance().post(new JumpToCrimeCaseListRequestEvent(targetIndex));
-    return new CommandResult(String.format(MESSAGE_SELECT_CASE_SUCCESS, targetIndex.getOneBased()));
-
-}
-```
-
-The following sequence diagram illustrates what happens in the `Logic` component when a case is selected.
-
-.Interactions Inside the Logic Component for the `selectcase 1` Command
-image::SD_SelectCaseCommand_Logic.png[width="800"]
-
-{nbsp} +
-
-Following the raised event, `handleJumpToCrimeCaseListRequestEvent` (in `CrimeCaseListPanel.java`) is signalled to handle the select request, which scrolls the view to the correct cell in the panel.
-
-```
-@Subscribe
-private void handleJumpToCrimeCaseListRequestEvent(JumpToCrimeCaseListRequestEvent event) {
-    logger.info(LogsCenter.getEventHandlingLogMessage(event));
-    scrollTo(event.targetIndex);
-}
-```
-
-Next, a `CrimeCasePanelSelectionChangedEvent` that contains the `CrimeCase` object that was selected, is raised. This event is handled by `handleCrimeCasePanelSelectionChangedEvent` (in `BrowserPanel.java`), as shown in the snippet below.
-
-```
-@Subscribe
-private void handleCrimeCasePanelSelectionChangedEvent(CrimeCasePanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadCrimeCasePage(event.getNewSelection().crimeCase);
-}
-```
-
-The following sequence diagram below shows how the EventsCenter interacts with the UI component.
-
-.Interactions Inside the EventsCenter and UI Component for the `selectcase 1` Command
-image::SD_SelectCaseCommand_EventsCenter.png[width="800"]
-
-{nbsp} +
-
-`loadCrimeCasePage` method takes the `CrimeCase` object contained within the event and splits it up into its various components (i.e. case name, description, investigator, start date, end date, status, and tags) as `String`, which are then used to create a URL query string. Components with strings that may contain symbols such as “#” are encoded first before appending to the query string.
-
-```
-encDescription = URLEncoder.encode(description, "UTF-8");
-encInvEmail = URLEncoder.encode(currentInvestigator.getEmail().value, "UTF-8");
-encInvAddress = URLEncoder.encode(currentInvestigator.getAddress().value, "UTF-8");
-encStartDate = URLEncoder.encode(startDate, "UTF-8");
-encEndDate = URLEncoder.encode(endDate, "UTF-8");
-```
-
-To create the view where the information is displayed on the GUI (`BrowserPanel`), an HTML file (`/docs/CaseDetailsPage.html`) was created as a template for displaying the details of a single case. In order to load the HTML file, utility methods provided by JavaFX’s `WebView` (an embedded browser) are used.
-
-A `String` containing the URL or file path is passed to the `load` method with a request string appended to the back (e.g. “https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=John%20Doe”). This method can be used to load pages from third-party services (e.g. Google Search).
-
-```
-public void loadPage(String url) {
-    Platform.runLater(() - > browser.getEngine().load(url));
-}
-```
-
-```
-String caseDetailsPage = CASE_DETAILS_PAGE +
-    "?caseName=" + caseName +
-    "&description=" + encDescription +
-    "&tags=" + tagList +
-    "&invName=" + currentInvestigator.getName().fullName +
-    "&invRank=" + currentInvestigator.getRank().toString() +
-    "&invPhone=" + currentInvestigator.getPhone().value +
-    "&invEmail=" + encInvEmail +
-    "&invAddress=" + encInvAddress +
-    "&startDate=" + encStartDate +
-    "&endDate=" + encEndDate +
-    "&status=" + status;
-
-loadPage(caseDetailsPage);
-```
-Javascript code is included in the HTML file to parse the URL request string and populate the HTML file with the corresponding case details.
-
-==== Design Considerations
-
-===== Aspect: Implementation to view case details
-
-* **Alternative 1 (current choice):** Use HTML and Javascript with JavaFX `WebView` (embedded browser)
-** Pros: Easy to implement and design with basic HTML knowledge.
-** Cons: Passing of data to the HTML file has to be done with a request string, which can get a messy if the data is complex in structure. Loading data is not as efficient.
-* **Alternative 2:** Use only JavaFX
-** Pros: The view integrates more seamlessly with the application.
-** Cons: More troublesome to implement and requires JavaFX knowledge.
-
-**Reason for current choice:** As the data we have is simple, implementing and styling with HTML is easier.
-
-=== Editing cases feature
-
-==== Reason for implementation
+===== Reason for implementation
 
 Typos can be made when in a haste. The ability to edit cases would give investigators a chance to rectify these mistakes easily. This feature will also enable re-assignment of cases to other investigators, which is useful when an investigator can no longer work on a case.
 
-==== Current implementation
+===== Current implementation
 
-The EditCaseCommandParser parses the String of arguments provided by the user and splits the `String` into the case index (`Index`) and the separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) and directs it into a  ` EditCrimeCaseDescriptor` object  to be used in the context of the `EditCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
+The EditCaseCommandParser parses the String of arguments provided by the user and splits the `String` into the case index (`Index`) and the separate components (i.e. `CaseName`, `Description`, `Index`, `StartDate`, `Set<Tag>`) and directs it into a `EditCrimeCaseDescriptor` object  to be used in the context of the `EditCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
 
 The `EditCrimeCaseDescriptor` is a class containing information that describes the case (i.e. case name, description, investigator, start date, tags). The descriptor is used because the user is not required to input all the fields except the case index. When the user specifies the field they wish to edit, it sets the field in the `EditCrimeCaseDescriptor` to that value. If any field is not specified, the field is set to `null`.
 
@@ -1503,7 +1224,8 @@ A new `CrimeCase` object is created using the retrieved case-to-be-edited and th
 
 When the `EditCaseCommand` is executed, note that the original `CrimeCase` object is not modified, but rather, replaced by a new `CrimeCase` object. When the `CrimeCase` constructor is called, a new `Investigator` object without its `UniqueCrimeCaseList` is created within the `CrimeCase` (i.e. only the personal details are stored). This is to simplify the data to be recorded in storage. The list of cases within the original `Investigator` object remains untouched. The snippet of code below shows the implementation.
 
-```
+[source, java]
+----
 private CrimeCase syncWithMasterTagList(CrimeCase crimeCase) {
     // … logic for handling and rebuilding tags …
 
@@ -1511,13 +1233,14 @@ private CrimeCase syncWithMasterTagList(CrimeCase crimeCase) {
         crimeCase.getCaseName(), crimeCase.getDescription(), crimeCase.getCurrentInvestigator(),,
         crimeCase.getStartDate(), crimeCase.getEndDate(), crimeCase.getStatus(), correctTagReferences);
 }
-```
+----
 
 Remember that each `Investigator` object has their own `UniqueCrimeCaseList` that holds `CrimeCase` objects that they've been assigned.
 
 Since the `CrimeCase` object is replaced rather than modified, we need to remove the old `CrimeCase` object stored in the `UniqueCrimeCaseList` of the `Investigator` and reference the new, modified `CrimeCase` object instead. This is done by traversing the entire list of investigators and finding the correct `Investigator` object to remove the `CrimeCase` object from using the `removeCrimeCaseFromInvestigator` method. Next, after replacing the old `CrimeCase` object with the edited one in master list of all cases, it traverses the entire list of investigators again to add the case back to the correct `Investigator` object using the `addCrimeCaseFromInvestigator` method. The code below shows its implementation.
 
-```
+[source, java]
+----
 public void updateCrimeCase(CrimeCase target, CrimeCase editedCase)
 throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
     requireNonNull(editedCase);
@@ -1527,58 +1250,395 @@ throws DuplicateCrimeCaseException, CrimeCaseNotFoundException {
     cases.setCrimeCase(target, syncedEditedCrimeCase);
     addCrimeCaseToInvestigator(syncedEditedCrimeCase);
 }
-```
+----
 
 The following sequence diagram below illustrates how the Model component works when a case is edited.
 
 .Interactions Inside the Model Component for the `editcase` Command
 image::SD_EditCaseCommand_Model.png[width="800"]
 
+//end::editcase[]
+
+//tag::findcasesname[]
+==== Find cases by name
+
+===== Reason for implementation
+
+To manage large numbers of cases, having a feature that would allow investigators to search the list of cases by name would be extremely helpful. If an investigator is looking for a particular case, it would be extremely inefficient and time-consuming to have to manually browse through all the cases. Hence, being able to find cases by name can help to increase workflow productivity and efficiency.
+
+===== Current implementation
+
+The `FindCaseCommandParser` parses the string of arguments provided by the user to retrieve the list of keywords to be used in the context of the `DeleteCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
+
+The `FindCaseCommand` has one constructor.
+
+
+[width="100%", cols="1,2", options="header"]
+|=======
+|Constructor |Remark
+|`new FindCaseCommand(predicate)` |Accepts a `CaseNameContainsKeywordsPredicate` object as parameter.
+
+The `targetIndex` is processed to retrieve the `CrimeCase` object at the specified index on the most recent list of cases displayed by the model.
+|=======
+
+The model is then updated to show the cases whose case name matches the predicate keywords. `EventsCenter` reacts to the `SwapTabEvent`, which switches the tab to show the filtered list of cases. The following snippet shows the execution code.
+
+[source, java]
+----
+public CommandResult execute() {
+    model.updateFilteredCrimeCaseList(predicate);
+    EventsCenter.getInstance().post(new SwapTabEvent(1));
+    return new CommandResult(getMessageForCrimeCaseListShownSummary(model.getFilteredCrimeCaseList().size()));
+}
+----
+
+The following sequence diagram illustrates how the `Logic` component operates when a keyword is given with the command.
+
+.Interactions Inside the Logic Component for the `findcase magic` Command
+image::SD_FindCaseCommand_Logic.png[width="800"]
+//end::findcasesname[]
+
+[[Find-Feature]]
+//tag::findcasestag[]
+==== Find cases by status/tags
+The following sections provides an explanation on how the investigapptor finds
+certain cases according to its status or tags.
+
+===== Reason for implementation
+This implementation improves efficiency as the investigators do not need to manually browse through
+all the listed cases just to find certain cases.
+
+By having a find command, the investigator can easily search for cases that they
+are looking for. They can simply just run the find-related commands with their desired
+keywords and the cases they require will be displayed instantly.
+
+===== Current Implementation to find cases by status
+Commands were created to find the cases according to the status specified. As there
+are only two possible status - `open` or `close`, two separate command classes `FindCloseCaseCommand`
+and `FindOpenCaseCommand` were created. These two commands inherits from its parent class - `FindByStatusCommand`.
+
+====== Class Inheritance
+[[CDFindByStatus]]
+.Class Diagram to illustrate inheritance
+image::CDFindByStatus.png[width="800"]
+
+In both `FindCloseCaseCommand` and `FindOpenCaseCommand`, its respective constructor will
+invoke its parent class' (`FindByStatusCommand`) constructor as passes in its corresponding status as the parameter.
+
+`FindCloseCaseCommand` will pass in the status `close` as shown in the code segment below.
+[source,java]
+----
+public FindCloseCaseCommand() {
+    super(CASE_CLOSE);
+}
+----
+
+`FindOpenCaseCommand` will pass in the status `open` as shown in the code segment below.
+[source,java]
+----
+public FindOpenCaseCommand() {
+    super(CASE_OPEN);
+}
+----
+====== Sequence Diagrams for Logic Component
+The following sequence diagrams represents the interactions within the `Logic`
+component when the user inputs the `findopencases` or `findclosecases` command.
+
+[[SDforFindOpenCase]]
+.Sequence Diagram for interactions within Logic component for `FindOpenCaseCommand`
+image::SDforFindOpenCase.png[width="800"]
+
+[[SDforFindCloseCase]]
+.Sequence Diagram for interactions within Logic component for `FindCloseCaseCommand`
+image::SDForFindCloseCase.png[width="800"]
+
+The `Logic` component will set the `StatusContainsKeywordsPredicate` with
+a `List<String>` containing the keyword of either `open` or `close`.
+
+For `FindCloseCaseCommand`, the `List<String>` will contain the keyword `close`;
+whereas for `FindOpenCaseCommand`, the `List<String>` will contain the keyword `open`.
+
+The command will be executed by the `LogicManager` by updating the
+`FilteredCrimeCaseList` in the `Model` component with the given `StatusContainsKeywordsPredicate`.
+
+====== Sequence Diagrams for Model Component
+Below are the sequence diagrams that represents the interactions within the
+`Model` component after the `findopencases` or `findclosecases` command
+has been executed by the `LogicManager`.
+
+[[SDForFindByStatusModel]]
+.Sequence Diagram for interactions within Model component
+image::SDForFindByStatusModel.png[width="800"]
+
+The `Model` component is responsible for updating the filtered crime case list with
+the given `StatusContainsKeywordsPredicate`. The predicate will test if any keywords matches
+with any status of the case(s).
+
+Specifically, for `findopencases`, the predicate will test
+if the keyword 'open' matches any cases with the status of 'open'. Similarly,
+for `findclosecases`,  the predicate will test if the keyword 'close' matches
+any cases with the status of 'close'.
+
+The `FilteredCrimeCaseList` will then be updated with the cases that matches the
+given `StatusContainsKeywordsPredicate`.
+
+The `Model` will then raise a `FilteredCrimeCaseListChangedEvent` which is
+captured by the `EventsCenter`. This event is used as an indication to update the calendar entries
+whenever the `FilteredCrimeCaseList` has changed. This implementation can be found in
+the <<Calendar-Events-Filter, above section>>.
+
+====== Activity Diagram
+The following activity diagram illustrates an example when a user executes a command that finds the cases
+by its status.
+
+[[ADForFindCase]]
+.Activity Diagram when user enters `findclosecase` command
+image::ADforFindCase.png[width="800"]
+
+===== Current Implementation to find cases by tags
+The command class, `FindCaseTagsCommand` was created to find the cases according to its tags. Cases whose tags
+matches the keywords that the user has input will be displayed.
+
+====== Sequence Diagrams for Logic Component
+The following sequence diagrams represents the interactions within the `Logic`
+component when the user inputs the `findcasetags`.
+
+[[SDforFindCaseTags]]
+.Sequence Diagram for interactions within Logic component
+image::SDforFindCaseTags.png[width="800"]
+
+The `Logic` component will set the `TagContainsKeywordsPredicate` with
+a `List<String>` containing the keywords that were parsed by `FindCaseTagsCommandParser`.
+
+For the command `findcasetags fraud homicide` in the
+<<SDforFindCaseTags, sequence diagram above>>, the `List<String>` will
+contain the keywords `fraud` and `homicide`.
+
+The command will be executed by the `LogicManager` by updating the
+`FilteredCrimeCaseList` in the `Model` component with the given `TagContainsKeywordsPredicate`.
+
+====== Sequence Diagrams for Model Component
+The following sequence diagram shows the interactions within the `Model` component.
+
+[[SDforFindCaseTagsModel]]
+.Sequence Diagram for interactions within Model component
+image::SDForFindByStatusModel.png[width="800"]
+
+The `Model` component is responsible for updating the filtered crime case list with
+the given `TagContainsKeywordsPredicate`. The predicate will test if any keywords matches
+with any tags of the case(s).
+
+For the example in the <<SDforFindCaseTags, above logic sequence diagram>>,
+the predicate will test if the keywords "fraud" or "homicide" matches any cases'
+tags.
+
+The `FilteredCrimeCaseList` will then be updated with the cases whose
+tags matches the keyword of either "fraud" or "homicide".
+
+The `Model` will then raise a `FilteredCrimeCaseListChangedEvent` which is
+captured by the `EventsCenter`. This event is used as an indication to update the calendar entries
+whenever the `FilteredCrimeCaseList` has changed. This implementation can be found in
+the <<Calendar-Events-Filter, above section>>.
+
+====== Activity Diagram
+The following activity diagram illustrates an example when a user executes a command that finds the cases
+by its tags.
+
+[[ADForFindCaseTags]]
+.Activity Diagram when user enters `findcasetags murder` command
+image::ADForFindCaseTags.png[width="800"]
+
+===== Alternatives Considered
+This section compares between the current choice of implementation and the
+alternative choice that was considered. It lists the pros and cons to each of the
+choices that were considered.
+
+====== Aspect: Design Implementation
+* **Alternative 1 (Current Choice)**: Separate the find-related commands classes into its
+individual category its searching for. In this case we have `FindCaseTagsCommand`,
+`FindCloseCaseCommand` & `FindOpenCaseCommand`
+** Pros: Easy for the user as they just need to know the command name/alias
+(i.e. `findopencases` or `foc` will just instantly display the cases that are closed)
+** Cons: Additional `.java` class files
+
+* **Alternative 2 **: Have just one `FindCommand` class and use prefixes to differentiate
+the type of keywords (i.e. findcase t/Tags s/Status)
+** Pros: Only one `.java` file required for different types of find. Easier to
+extend the command to find other details by adding more prefixes.
+** Cons: Not as user-friendly. Users has to recognize the prefixes, could be
+too technical for non-technical users.
+
+====== Aspect: Class Implementation [for finding cases by status]
+* **Alternative 1 (Current Choice)**: Have two classes `FindCloseCaseCommand` and `FindOpenCaseCommand`
+that are extended from parent class `FindByStatusCommand`
+** Pros: No code duplication as duplicated set of codes will be in the parent class `FindByStatusCommand`
+** Cons: Additional `.java` class file
+
+* **Alternative 2 **: Separate commands into two classes without inheritance
+** Pros: One less `.java` class file (no parent class)
+** Cons: Duplicated set of codes
+//end::findcasestag[]
+
+[[case-select]]
+//tag::selectcase[]
+==== Select case
+
+===== Reason for implementation
+
+An investigator should be able to retrieve and view information about a case after adding them into the application.
+
+===== Current implementation
+
+Similar to `DeleteCaseCommandParser`, the `SelectCaseCommandParser` parses the string of arguments provided by the user to retrieve the index (i.e. `Index`) to be used in the context of the `SelectCaseCommand`. A `ParseException` is thrown if the user input does not conform to the expected format.
+
+The `SelectCaseCommand` extends `Command` and has one constructor.
+
+[width="100%", cols="1,2", options="header"]
+|=======
+|Constructor |Remark
+|`new SelectCaseCommand(targetIndex)` |Accepts an `Index` object as parameter.
+|=======
+
+The `targetIndex` is processed to retrieve the `CrimeCase` object at the specified index on the most recent list of cases displayed by the model. Subsequently, a `JumpToCrimeCaseListRequestEvent` is posted to `EventsCenter` to signal the `UI` component. The following snippet shows the execution code.
+
+[source, java]
+----
+public CommandResult execute() throws CommandException {
+
+    List < CrimeCase > lastShownList = model.getFilteredCrimeCaseList();
+
+    if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        throw new CommandException(Messages.MESSAGE_INVALID_CASE_DISPLAYED_INDEX);
+    }
+
+    EventsCenter.getInstance().post(new JumpToCrimeCaseListRequestEvent(targetIndex));
+    return new CommandResult(String.format(MESSAGE_SELECT_CASE_SUCCESS, targetIndex.getOneBased()));
+
+}
+----
+
+The following sequence diagram illustrates what happens in the `Logic` component when a case is selected.
+
+.Interactions Inside the Logic Component for the `selectcase 1` Command
+image::SD_SelectCaseCommand_Logic.png[width="800"]
+
 {nbsp} +
-//end::crimecase[]
 
-//tag::backup[]
-=== Creating Backup
+Following the raised event, `handleJumpToCrimeCaseListRequestEvent` (in `CrimeCaseListPanel.java`) is signalled to handle the select request, which scrolls the view to the correct cell in the panel.
 
-This feature allows users to create a new xml file of the current state of the Investigapptor
-with a new name.
+[source, java]
+----
+@Subscribe
+private void handleJumpToCrimeCaseListRequestEvent(JumpToCrimeCaseListRequestEvent event) {
+    logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    scrollTo(event.targetIndex);
+}
+----
 
-==== Reason for implementation
+Next, a `CrimeCasePanelSelectionChangedEvent` that contains the `CrimeCase` object that was selected, is raised. This event is handled by `handleCrimeCasePanelSelectionChangedEvent` (in `BrowserPanel.java`), as shown in the snippet below.
 
-As investigators may want to save the current state of the Investigapptor before progressing
-or having to create a periodic backup to fall back on.
+[source, java]
+----
+@Subscribe
+private void handleCrimeCasePanelSelectionChangedEvent(CrimeCasePanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadCrimeCasePage(event.getNewSelection().crimeCase);
+}
+----
 
-==== Current implementation
+The following sequence diagram below shows how the EventsCenter interacts with the UI component.
 
-The `BackupCommand` is created when the command word `backup` is detected in the user input. It will then use the `BackupCommandParser`
-ensure that the filename is alphanumeric. The `BackupCommand` will then call the `backupInvestigapptor` method from the model
-and pass in the filename as a string.
+.Interactions Inside the EventsCenter and UI Component for the `selectcase 1` Command
+image::SD_SelectCaseCommand_EventsCenter.png[width="800"]
 
-[[backup-diagram]]
-.Backup Sequence Diagram
-image::backupDiagram.png[width="790"]
+`loadCrimeCasePage` method then takes the `CrimeCase` object contained within the event and splits it up into its various components (i.e. case name, description, investigator, start date, end date, status, and tags), to be processed for viewing on the UI.
 
+To learn more about how the data is reflected onto the UI, you can take a look at <<UI-DetailsPane>>.
 
+//end::selectcase[]
 
-In the `Model`, the `backUpInvestigapptor` will raise the event `InvestigapptorBackupEvent` .The event contains filename which will be passed to
-Storage component to start the saving sequence.
+=== UI Enhancements
 
-    public void backUpInvestigapptor(String fileName) {
-        raise(new InvestigapptorBackupEvent(investigapptor, fileName));
-    }
+[[UI-DetailsPane]]
+==== Details pane
 
-At the Storage component, the `handleInvestigapptorBackupEvent` will extract the filename and create a new
-xml by using the `backupInvestigapptor` method.
+This component is used by the `selectinvestigator` and `selectcase`(<<case-select>>) commands. The details pane makes use of JavaFx's `WebView` (an embedded browser) to render the data onto the display. The implementation for this can be found in link:{repoURL}/java/seedu/investigapptor/ui/BrowserPanel.java[BrowserPanel].
 
-    public void handleInvestigapptorBackupEvent(InvestigapptorBackupEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Backup command, saving to file"));
-        try {
-            backupInvestigapptor(event.data, event.fileName);
-        } catch (IOException e) {
-            raise(new DataSavingExceptionEvent(e));
-        }
-    }
-//end::backup[]
+Two HTML files, `/docs/InvestigatorDetailsPage.html` and `/docs/CaseDetailsPage.html` are created as templates for displaying the details of a single investigator and case respectively. `WebView` provides utility methods that can be used to load and display the HTML files.
+
+A `String` containing the URL or file path is passed to the `load` method with a query string appended to the back (e.g. “https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=John%20Doe”). This method can be used to load pages from third-party services (e.g. Google Search).
+
+[source, java]
+----
+public void loadPage(String url) {
+    Platform.runLater(() - > browser.getEngine().load(url));
+}
+----
+
+===== Example: Displaying case information
+
+The following sub-section shows how the query string is generated for the `CrimeCase` object.
+
+A URL query string is generated by deconstructing the `CrimeCase` object into its components (i.e. case name, description, investigator, start date, end date, status, and tags) as `String`. Components that might contain symbols such as “#” are encoded first before appending to the query string to prevent parsing error by the browser.
+
+[source, java]
+----
+encDescription = URLEncoder.encode(description, "UTF-8");
+encInvEmail = URLEncoder.encode(currentInvestigator.getEmail().value, "UTF-8");
+encInvAddress = URLEncoder.encode(currentInvestigator.getAddress().value, "UTF-8");
+encStartDate = URLEncoder.encode(startDate, "UTF-8");
+encEndDate = URLEncoder.encode(endDate, "UTF-8")
+----
+
+[source, java]
+----
+String caseDetailsPage = CASE_DETAILS_PAGE +
+    "?caseName=" + caseName +
+    "&description=" + encDescription +
+    "&tags=" + tagList +
+    "&invName=" + currentInvestigator.getName().fullName +
+    "&invRank=" + currentInvestigator.getRank().toString() +
+    "&invPhone=" + currentInvestigator.getPhone().value +
+    "&invEmail=" + encInvEmail +
+    "&invAddress=" + encInvAddress +
+    "&startDate=" + encStartDate +
+    "&endDate=" + encEndDate +
+    "&status=" + status;
+
+loadPage(caseDetailsPage)
+----
+
+Javascript code is included in the HTML file to parse the URL request string and populate the HTML file with the corresponding case details.
+
+===== Design Considerations
+
+====== Aspect: Implementation to view case details
+
+* **Alternative 1 (current choice):** Use HTML and Javascript with JavaFX `WebView` (embedded browser)
+** Pros: Easy to implement and design with basic HTML knowledge.
+** Cons: Passing of data to the HTML file has to be done with a request string, which can get a messy if the data is complex in structure. Loading data is not as efficient.
+* **Alternative 2:** Use only JavaFX
+** Pros: The view integrates more seamlessly with the application.
+** Cons: More troublesome to implement and requires JavaFX knowledge.
+
+**Reason for current choice:** As the data we have is simple, implementing and styling with HTML is easier.
+
+==== Modify interface theme/colour scheme
+
+It's easy to customize the look and feel of Investigapptor just by using CSS!
+
+The default style of the interface is generated by link:{repoURL}/blob/master/src/main/resources/view/LightTheme.css[LightTheme.css]. To start personalising it, you can create a new CSS file in the `/resources/view/` directory and replace the name of the file in the following line in link:{repoURL}/blob/master/src/main/resources/view/MainWindow.fxml[MainWindow.fxml]  with the name of your CSS file:
+
+-----
+<URL value="@LightTheme.css" />
+-----
+
+[TIP]
+You can take a look at link:{repoURL}/blob/master/src/main/resources/view/DarkTheme.css[DarkTheme.css] for reference on what elements you can change.
+
+[NOTE]
+The current version of Investigapptor does not provide users with the ability to set the theme from within the application. This is a feature that we wish to implement in future versions.
+
 
 == Documentation
 

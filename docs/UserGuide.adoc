@@ -1092,9 +1092,9 @@ PDF file which contains the information of a case or investigator.
 
 // tag::dataencryption[]
 ==== Encrypting data files `encryptdata` [Coming in v2.0]
-We plan to add data encryption to Investigapptor in the future, which will encrypt and protect the data stored
+We plan to implement data encryption for Investigapptor in the future, which will encrypt and protect the data stored
 in investigapptor.
-// end::dataencryption[]
+// end::dataencryption[]]
 
 == FAQ
 

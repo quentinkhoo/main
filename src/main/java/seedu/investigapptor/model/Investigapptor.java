@@ -73,7 +73,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         this.persons.setPersons(persons);
     }
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     public void setCrimeCases(List<CrimeCase> cases) throws DuplicateCrimeCaseException {
         this.cases.setCrimeCases(cases);
     }
@@ -212,7 +212,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
     //// case-level operations
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     /**
      * Adds a case to the investigapptor book.
      * Also checks the new case's tags and updates {@link #tags} with any new tags found,
@@ -230,7 +230,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         }
     }
 
-    //@@author pkaijun
+    //@@author leowweiching
     /**
      * Replaces the given case {@code target} in the list with {@code editedCase}.
      * {@code Investigapptor}'s tag list will be updated with the tags of {@code editedCase}.
@@ -254,7 +254,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
     }
     //@@author
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     /**
      * Removes {@code key} from this {@code Investigapptor}.
      *
@@ -429,7 +429,7 @@ public class Investigapptor implements ReadOnlyInvestigapptor {
         return persons.investigatorList();
     }
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     @Override
     public ObservableList<CrimeCase> getCrimeCaseList() {
         return cases.asObservableList();

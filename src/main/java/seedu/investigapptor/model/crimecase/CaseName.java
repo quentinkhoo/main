@@ -1,5 +1,5 @@
 package seedu.investigapptor.model.crimecase;
-//@@author leowweiching-reused
+//@@author leowweiching
 import static java.util.Objects.requireNonNull;
 import static seedu.investigapptor.commons.util.AppUtil.checkArgument;
 

@@ -31,7 +31,7 @@ import seedu.investigapptor.model.person.exceptions.PersonNotFoundException;
 import seedu.investigapptor.model.tag.Tag;
 import seedu.investigapptor.model.tag.exceptions.TagNotFoundException;
 import seedu.investigapptor.testutil.CrimeCaseBuilder;
-//@@author leowweiching-reused
+//@@author leowweiching
 public class AddCaseCommandTest {
 
     @Rule

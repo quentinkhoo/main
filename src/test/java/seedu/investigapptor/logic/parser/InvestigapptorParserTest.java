@@ -157,7 +157,7 @@ public class InvestigapptorParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_ALIAS + " 3") instanceof ExitCommand);
     }
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     @Test
     public void parseCommand_findCase() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
@@ -166,7 +166,7 @@ public class InvestigapptorParserTest {
         assertEquals(new FindCaseCommand(new CaseNameContainsKeywordsPredicate(keywords)), command);
     }
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     @Test
     public void parseCommand_findCaseAlias() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");

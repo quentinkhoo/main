@@ -24,7 +24,7 @@ import seedu.investigapptor.model.ModelManager;
 import seedu.investigapptor.model.UserPrefs;
 import seedu.investigapptor.model.crimecase.CaseNameContainsKeywordsPredicate;
 import seedu.investigapptor.model.crimecase.CrimeCase;
-//@@author leowweiching-reused
+//@@author leowweiching
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCaseCommand}.
  */

@@ -12,7 +12,7 @@ import seedu.investigapptor.commons.events.ui.SwapTabEvent;
 import seedu.investigapptor.logic.commands.exceptions.CommandException;
 import seedu.investigapptor.model.crimecase.CrimeCase;
 import seedu.investigapptor.model.crimecase.exceptions.CrimeCaseNotFoundException;
-//@@author leowweiching-reused
+//@@author leowweiching
 /**
  * Deletes a case identified using it's last displayed index from the investigapptor book.
  */

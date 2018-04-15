@@ -1,6 +1,5 @@
 package systemtests;
 
-//import static org.junit.Assert.assertFalse;
 import static seedu.investigapptor.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.investigapptor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.investigapptor.testutil.TypicalPersons.KEYWORD_MATCHING_TEAMA;
@@ -17,6 +16,7 @@ import seedu.investigapptor.logic.commands.RedoCommand;
 import seedu.investigapptor.logic.commands.UndoCommand;
 import seedu.investigapptor.model.Model;
 
+//@@author pkaijun
 public class FindInvestTagsCommandSystemTest extends InvestigapptorSystemTest {
 
     @Test

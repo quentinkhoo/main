@@ -41,7 +41,7 @@ public class XmlSerializableInvestigapptorTest {
     }
     */
 
-    //@@author leowweiching-reused
+    //@@author leowweiching
     @Test
     public void toModelType_invalidCrimeCaseFile_throwsIllegalValueException() throws Exception {
         XmlSerializableInvestigapptor dataFromFile = XmlUtil.getDataFromFile(INVALID_CRIMECASE_FILE,
